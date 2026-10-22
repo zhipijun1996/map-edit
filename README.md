@@ -10,6 +10,8 @@
 
 - 「模块库」提供 177 份可编辑参考：72 个原始 `.tres` 模块、51 份森林代码模块 / 变体、36 个工坊组合片段、18 条工坊连续路线。
 - 点击模块会生成自己的草稿副本；原版始终留在库中。
+- 模块库按平原、森林、通用、工坊分类，支持按「已接入正式流程 / 已接入开发试玩 / 未接入 / 待核实」筛选。接入判断绑定源码入口调用链；消费者变化会让旧结论失效，变为待核实，不把引用次数当接入证据。
+- 「修改原模块」保留原模块身份；「新增变体」明确创建新模块。右侧可以切换本次用途，导出的工程带 `changeRequest`、原模块目标、基线提交和对象增删改列表。PNG 也会显示修改用途与原模块 ID。编辑器不会自动把草稿写回游戏。
 - 左侧点击添加，画布拖动摆放；选中对象后调整尺寸、旋转、文字、轨道和机关目标。
 - 人物路线逐点绘制，填写每步动作。下方路线菜单可切换主路、支路、奖励和返回路线。
 - 直线 / 折线轨道逐点绘制；弧轨拖出曲线，再拖黄色控制点调整弧度。起点靠近物体中心会绑定，也可手动选择。
@@ -37,15 +39,18 @@ npm run check
 
 每份工程包含来源提交、路径、原数据与编辑平移量，完整清单见 `library/coverage.json`。工程的 JSON 结构独立于游戏存档 / Manifest，不会被直接当作已验证关卡运行。
 
+## 网页更新模块库
+
+模块库右上角的「更新模块库」会读取游戏 `main` 最新提交，以及编辑器仓库已生成的新库。目录和模块文件固定到同一编辑器提交，逐文件核对 SHA-256；加载失败不会替换当前库，也不会覆盖正在修改的草稿。
+
+若游戏已有新提交而新库尚未生成，网页提供「在 GitHub 运行同步」：进入后点击 **Run workflow**，保留 `source_ref=main` 即可。网页不保存写令牌，因此 GitHub 需要这一次确认。回到网页可自动检查生成进度或点击「再次检查并加载」。
+
+同步工作流会锁定一个游戏提交，完整下载新快照（不跳过已存在文件），用校验过的 Godot 4.7.2 提取原始数据、重新分类、验证，再提交模块库并发布 Pages。失败不提交半成品；出现尚未支持的新模块结构时保留已发布旧库，工作流给出错误。新增资源模块会自动枚举，代码工厂仍需对应提取适配器。接入证据与消费者指纹在 `library/integration-rules.json`，更新脚本不会自动重签旧证据。
+
 复建流程（需要项目指定的 Godot 二进制）：
 
 ```sh
-python3 tools/fetch_library.py
-python3 tools/prepare_extraction.py /tmp/map-notes-extract
-godot --headless --editor --path /tmp/map-notes-extract --import
-godot --headless --path /tmp/map-notes-extract --script extract_modules.gd
-python3 tools/build_library.py /tmp/map-notes-extract/extracted.json
-npm run check
+python3 tools/sync_library.py --ref main --godot /absolute/path/to/Godot_v4.7.2-stable_linux.x86_64
 ```
 
 `library/source/` 保留固定版本的只读源码与配置快照，便于审计 / 复建；不带游戏大体积美术。若更新游戏版本，须重新下载同一提交的索引与依赖，再重新提取，不只替换提交号。

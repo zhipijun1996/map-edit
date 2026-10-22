@@ -1,4 +1,5 @@
-import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,exampleDocument,validateDocument,pathPoint,progressAt,translateObject,objectBounds} from './model.js';
+import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,exampleDocument,validateDocument,pathPoint,progressAt,translateObject,objectBounds,makeRevision,objectChanges,changeRequest} from './model.js';
+import {LibraryClient,SYNC_WORKFLOW} from './library-client.js';
 const $=s=>document.querySelector(s), svg=$('#canvas'), NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Math.round(n*100)/100;
@@ -8,6 +9,8 @@ try{const raw=JSON.parse(localStorage.getItem(STORE));if(raw&&Array.isArray(raw.
 let doc=clone(saved.documents.find(d=>d.id===saved.activeId)??saved.documents[0]??exampleDocument());
 let selected=null,tool='select',undo=[],redo=[],gesture=null,pointers=new Map(),drawing=null,playing=false,time=0,lastFrame=0,saveTimer=null,toastTimer;
 let camera={x:0,y:0,w:1600,h:900},lastPanTool='select',libraryData=null,routeView='all';
+const libraryClient=new LibraryClient(location.href);
+let lastLibraryCheck=null;
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,3200);}
 function snapshot(){undo.push(clone(doc));if(undo.length>80)undo.shift();redo=[];updateHistory();}
 function persist(){
@@ -16,11 +19,30 @@ function persist(){
   const i=saved.documents.findIndex(d=>d.id===doc.id);if(i<0)saved.documents.push(safe);else saved.documents[i]=safe;
   try{localStorage.setItem(STORE,JSON.stringify(saved));$('#save-status').textContent='已自动保存到本机';}catch{$('#save-status').textContent='本机保存空间不足，请保存工程';}
 }
-function changed({inspector=false}={}){clearTimeout(saveTimer);$('#save-status').textContent='正在保存…';saveTimer=setTimeout(persist,250);render();if(inspector)renderInspector();updateHistory();}
+function changed({inspector=false}={}){clearTimeout(saveTimer);$('#save-status').textContent='正在保存…';saveTimer=setTimeout(persist,250);render();if(inspector)renderInspector();renderRevisionInfo();updateHistory();}
 function current(){return doc.objects.find(o=>o.id===selected);}
 function updateHistory(){$('#undo').disabled=!undo.length;$('#redo').disabled=!redo.length;$('#delete').disabled=!selected;$('#duplicate').disabled=!selected;}
 function loadDocument(d){if(drawing)finishDrawing();persist();doc=clone(d);selected=null;undo=[];redo=[];time=0;playing=false;$('#time').value=0;$('#play').textContent='▶ 演示';syncFields();setTool('select');fit();persist();}
-function syncFields(){$('#title').value=doc.title;$('#description').value=doc.description;$('#constraints').value=doc.constraints;routeView=doc.objects.find(o=>o.type==='route'&&o.sourceRoute==='main')?.id??doc.objects.find(o=>o.type==='route')?.id??'all';renderInspector();updateHistory();updateRouteOptions();}
+function syncFields(){$('#title').value=doc.title;$('#description').value=doc.description;$('#constraints').value=doc.constraints;routeView=doc.objects.find(o=>o.type==='route'&&o.sourceRoute==='main')?.id??doc.objects.find(o=>o.type==='route')?.id??'all';renderInspector();renderRevisionInfo();updateHistory();updateRouteOptions();}
+function integrationBadge(status){return `<span class="integration-badge ${esc(status?.usage??'unverified')}">${esc(status?.label??'接入状态待核实')}</span>`;}
+function renderRevisionInfo(){
+  const s=doc.source,op=doc.intent?.operation??(s?'modify_existing':'new_module'),changes=objectChanges(doc);
+  let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
+  if(s){
+    const latest=libraryClient.catalog?.modules.find(m=>m.id===s.moduleId)?.integration;
+    const status=s.integration??(latest?.checkedCommit===s.commit?latest:null);
+    html+=`<div class="revision-source">原模块：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'此旧草稿尚无接入审查信息，可从模块库查看最新版。')}</p><span>来源版本 ${esc(s.commit?.slice(0,8))}</span></div>`;
+    const latestCommit=libraryClient.catalog?.sourceCommit;
+    if(latestCommit&&latestCommit!==s.commit)html+='<p class="revision-warning">参考库已有新版本。本草稿保留旧基线，应用前需对比最新源码。</p>';
+    if(status?.evidence?.length)html+=`<details class="integration-evidence"><summary>查看接入依据</summary>${status.evidence.map(e=>`<a href="${esc('https://github.com/zhipijun1996/gunman-rush/blob/'+status.checkedCommit+'/'+e.path+'#L'+e.line)}" target="_blank" rel="noopener">${esc(e.path.split('/').at(-1))} ↗</a>`).join('')}<p>依据是来源版本的游戏入口调用链；不表示此修改稿已应用或通过物理验证。</p></details>`;
+  }
+  if(op==='new_variant')html+=field('新变体建议名称（可留空）','suggestedModuleId',doc.intent?.suggestedModuleId??'');
+  html+=`<p class="revision-state">${op==='modify_existing'?'保留原模块身份与引用。':op==='new_variant'?'保留原版，创建独立变体。':'创建新模块。'}本稿尚未写回游戏。</p>`;
+  if(changes)html+=`<div class="change-count">新增 ${changes.added.length} · 调整 ${changes.modified.length} · 删除 ${changes.removed.length}</div>`;
+  html+='</div>';$('#revision-info').innerHTML=html;
+  $('#revision-operation').onchange=e=>{snapshot();doc.intent={...doc.intent,operation:e.target.value};changed();};
+  const input=$('#revision-info [data-prop="suggestedModuleId"]');if(input)input.onchange=()=>{snapshot();doc.intent={...doc.intent,suggestedModuleId:input.value.slice(0,100)};changed();};
+}
 function updateRouteOptions(){const routes=doc.objects.filter(o=>o.type==='route');if(routeView!=='all'&&routeView!=='none'&&!routes.some(o=>o.id===routeView))routeView='all';$('#route-view').innerHTML=option('all','全部路线',routeView)+option('none','隐藏路线',routeView)+routes.map((o,i)=>option(o.id,o.label||`人物路线 ${i+1}`,routeView)).join('');}
 function setTool(next){if(drawing&&next!==tool)finishDrawing();tool=next;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===tool));svg.style.cursor=tool==='pan'?'grab':tool==='select'?'default':'crosshair';const hints={select:'点选物体调整 · 拖动移动 · 双指缩放',pan:'拖动画布移动 · 双指缩放',terrain:'在画布拖出地块 · 完成后继续绘制',route:'依次点击添加动作节点，点「完成绘制」结束',trackLine:'依次点击画轨道，点「完成绘制」结束',trackArc:'拖出弧形轨道，再拖中间控制点调整弧度'};$('#canvas-hint').textContent=hints[tool]??'';}
 function defs(){return `<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#c8cfbc" stroke-width=".65" opacity=".55"/></pattern><pattern id="soil" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M2 5l3-2m5 8l3-2" stroke="#a7af94" stroke-width="1" opacity=".5"/></pattern><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#7395a4" stroke-width="1.2"/></marker><marker id="rail-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L5 3L0 6" fill="none" stroke="#b49a66" stroke-width="1.2"/></marker></defs>`;}
@@ -199,11 +221,12 @@ function duplicateSelected(){const o=current();if(!o)return;snapshot();const cop
 function runUndo(reverse=false){finishDrawing();const source=reverse?redo:undo,target=reverse?undo:redo;if(!source.length)return;target.push(clone(doc));doc=source.pop();selected=null;syncFields();changed();}
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);}
 const filename=()=>doc.title.replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,80)||'关卡草图';
-function saveFile(){finishDrawing();persist();download(new Blob([JSON.stringify(doc,null,2)],{type:'application/json'}),filename()+'.mapnote.json');toast('工程已下载，可随时打开继续修改');}
+function saveFile(){finishDrawing();persist();const bundle={...doc,changeRequest:changeRequest(doc)};download(new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'}),filename()+'.mapnote.json');toast(doc.source?'工程已保存，包含修改用途、原模块身份和变更记录':'工程已下载，可随时打开继续修改');}
 function wrapText(text,max=58){const result=[];for(const line of text.split('\n')){if(!line){result.push('');continue;}let part='';for(const ch of line){part+=ch;if(part.length>=max){result.push(part);part='';}}if(part)result.push(part);}return result;}
 function exportSvg(){
   const bs=doc.objects.map(objectBounds),left=Math.min(0,...bs.map(b=>b.x))-65,top=Math.min(0,...bs.map(b=>b.y))-90,right=Math.max(doc.canvas.width,...bs.map(b=>b.x+b.w))+65,bottom=Math.max(doc.canvas.height,...bs.map(b=>b.y+b.h))+50;
-  const lines=wrapText([doc.description,doc.constraints?'制作时请保留：'+doc.constraints:''].filter(Boolean).join('\n'));
+  const request=changeRequest(doc),purpose=doc.source?`${request.operation==='modify_existing'?'修改原模块':'新增变体'}：${doc.source.moduleId} · 基线 ${doc.source.commit.slice(0,8)} · 尚未写回游戏`:'';
+  const lines=wrapText([purpose,doc.description,doc.constraints?'制作时请保留：'+doc.constraints:''].filter(Boolean).join('\n'));
   const w=right-left,h=bottom-top+90+lines.length*22;
   const notes=lines.map((line,i)=>`<text x="${left+35}" y="${bottom+45+i*22}" font-size="15" fill="#64725a">${esc(line)}</text>`).join('');
   return {w,h,text:`<svg xmlns="${NS}" width="${w}" height="${h}" viewBox="${left} ${top} ${w} ${h}"><style>text{font-family:Arial,"Microsoft YaHei",sans-serif}</style>${defs()}<rect x="${left}" y="${top}" width="${w}" height="${h}" fill="#f4f5eb"/><text x="${left+35}" y="${top+45}" font-size="25" font-weight="600" fill="#38634c">${esc(doc.title)}</text><text x="${right-35}" y="${top+44}" font-size="12" text-anchor="end" fill="#89967a">MAP NOTES / 设计草图</text>${contentMarkup(false)}<path d="M${left+35} ${bottom+12}H${right-35}" stroke="#cbd3be"/>${notes}<text x="${right-35}" y="${top+h-15}" text-anchor="end" font-size="11" fill="#9ba48d">示意位置 · 预期动作 · 正式制作需验证物理</text><metadata>${esc(JSON.stringify({schema:doc.schema,source:doc.source??null}))}</metadata></svg>`};
@@ -221,12 +244,42 @@ function showProjects(){
 }
 async function showLibrary(){
   dialog('项目模块库','<p>正在读取原项目模块…</p>');
-  try{if(!libraryData){const r=await fetch('./library/catalog.json');if(!r.ok)throw Error('加载失败');libraryData=await r.json();}
+  try{libraryData=await libraryClient.load();
     const cats=[...new Set(libraryData.modules.map(m=>m.category))];
-    dialog('项目模块库',`<p>${libraryData.modules.length} 份可编辑参考。原始布局自动转换，打开后生成自己的副本。用下方路线菜单切换主路、支路和返回路线。</p><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="中文名称 / 英文 ID / 机关"></label><label class="field">分类<select id="library-category"><option value="">全部</option>${cats.map(c=>option(c,c,'')).join('')}</select></label></div><div id="library-results"></div>`);
-    const list=()=>{const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value;const mods=libraryData.modules.filter(m=>(!cat||m.category===cat)&&JSON.stringify([m.title,m.id,m.tags]).toLowerCase().includes(q));$('#library-results').innerHTML=mods.map(m=>`<button class="module-card" data-module="${esc(m.id)}"><img src="${esc(m.thumbnail)}" alt="${esc(m.title)}布局预览" loading="lazy"><b>${esc(m.title)}</b><small>${esc(m.id)}</small><small>${esc(m.category)} · ${m.objectCount} 个对象</small></button>`).join('')||'<p>没有匹配的模块</p>';document.querySelectorAll('[data-module]').forEach(b=>b.onclick=async()=>{try{const m=libraryData.modules.find(m=>m.id===b.dataset.module),r=await fetch(m.file);if(!r.ok)throw Error('加载失败');const d=validateDocument(await r.json());d.id=uid();d.title+=' · 我的副本';$('#dialog').close();loadDocument(d);toast('已打开可修改副本');}catch{toast('模块打开失败，请刷新后重试');}});};
-    $('#library-search').oninput=list;$('#library-category').onchange=list;list();
+    dialog('项目模块库',`<div class="library-version"><span>${libraryData.modules.length} 份参考 · 来源 <code>${esc(libraryData.sourceCommit.slice(0,8))}</code></span><button id="update-library">↻ 更新模块库</button></div><p>选「修改原模块」保留原身份；选「新增变体」保留原版。接入状态说明原游戏的使用范围，不代表你的修改已应用。</p><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="中文名称 / 英文 ID / 机关"></label><label class="field">地区<select id="library-category"><option value="">全部地区</option>${cats.map(c=>option(c,c,'')).join('')}</select></label><label class="field">是否接入游戏<select id="library-integration"><option value="">全部状态</option><option value="formal">已接入 · 正式流程</option><option value="development">已接入 · 开发试玩</option><option value="not_integrated">未接入</option><option value="unverified">待核实</option></select></label></div><div id="library-results"></div>`);
+    const list=()=>{const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value,usage=$('#library-integration').value;const mods=libraryData.modules.filter(m=>(!cat||m.category===cat)&&(!usage||(m.integration?.usage??'unverified')===usage)&&JSON.stringify([m.title,m.id,m.tags]).toLowerCase().includes(q));$('#library-results').innerHTML=mods.map(m=>`<article class="module-card" data-module="${esc(m.id)}"><img src="${esc(libraryClient.url(m.thumbnail))}" alt="${esc(m.title)}布局预览" loading="lazy"><b>${esc(m.title)}</b><small>${esc(m.id)}</small><small>${esc(m.category)} · ${m.objectCount} 个对象</small>${integrationBadge(m.integration)}<div class="module-actions"><button data-edit-module="${esc(m.id)}">修改原模块</button><button data-variant-module="${esc(m.id)}">＋ 新增变体</button></div></article>`).join('')||'<p>没有匹配的模块</p>';
+      const open=async(id,operation)=>{try{const m=libraryData.modules.find(m=>m.id===id);const reference=validateDocument(await libraryClient.module(m));const d=makeRevision(reference,operation);$('#dialog').close();loadDocument(d);toast(operation==='modify_existing'?'已创建原模块修改稿，保留原身份':'已创建新变体草稿，原版不变');}catch(e){toast('模块打开失败：'+e.message);}};
+      document.querySelectorAll('[data-edit-module]').forEach(b=>b.onclick=()=>open(b.dataset.editModule,'modify_existing'));document.querySelectorAll('[data-variant-module]').forEach(b=>b.onclick=()=>open(b.dataset.variantModule,'new_variant'));
+    };
+    $('#library-search').oninput=list;$('#library-category').onchange=list;$('#library-integration').onchange=list;$('#update-library').onclick=checkLibraryUpdate;list();
   }catch{dialog('项目模块库','<p>模块库暂时无法加载。请检查网络后重试，你的本机草稿不受影响。</p>');}
+}
+async function checkLibraryUpdate(){
+  persist();dialog('更新模块库','<p id="library-update-status">正在检查游戏 main 与可用模块库…</p>');
+  try{
+    const result=await libraryClient.checkUpdate();lastLibraryCheck=result;libraryData=libraryClient.catalog;renderRevisionInfo();
+    showLibraryUpdateResult(result);
+  }catch(e){dialog('更新模块库',`<p>检查失败：${esc(e.message)}</p><p>当前模块库和你的草稿保留不变。</p><div class="dialog-actions"><button id="retry-library-update">重试检查</button><button id="back-library">返回模块库</button></div>`);$('#retry-library-update').onclick=checkLibraryUpdate;$('#back-library').onclick=showLibrary;}
+}
+function showLibraryUpdateResult(result){
+  const latest=result.isLatest;
+  dialog('更新模块库',`<div class="update-summary"><span class="integration-badge ${latest?'formal':'unverified'}">${latest?'已是最新项目版本':'项目有新提交，等待生成新库'}</span><p>游戏 main：<code>${esc(result.latest.slice(0,8))}</code><br>已加载模块库：<code>${esc(result.current.slice(0,8))}</code></p></div><p id="library-update-status">${latest?'已从 GitHub 重新读取并加载模块目录，打开的草稿保持原来的基线。':'需要用游戏源数据运行 Godot 提取。点击下方按钮，在 GitHub 页面点 Run workflow；保留 main 默认值即可。完成后这里可检查并加载新库。'}</p><p class="inline-help">GitHub Pages 是静态网页，启动生成任务需要 GitHub 确认。无需复制令牌；失败时保留旧库，不覆盖草稿。</p><div class="dialog-actions">${latest?'':`<a id="start-library-sync" class="button-link primary" href="${SYNC_WORKFLOW}" target="_blank" rel="noopener">在 GitHub 运行同步 ↗</a>`}<button id="refresh-library-update">再次检查并加载</button><button id="back-library">返回模块库</button></div>`);
+  $('#refresh-library-update').onclick=checkLibraryUpdate;$('#back-library').onclick=showLibrary;
+  if($('#start-library-sync'))$('#start-library-sync').onclick=()=>pollLibrarySync(0);
+}
+function pollLibrarySync(attempt){
+  if(attempt>=6)return;
+  setTimeout(async()=>{
+    if(!$('#dialog').open||!$('#library-update-status'))return;
+    try{
+      const result=await libraryClient.checkUpdate();lastLibraryCheck=result;libraryData=libraryClient.catalog;
+      if(result.isLatest){renderRevisionInfo();showLibraryUpdateResult(result);return;}
+      const run=await libraryClient.syncRun();
+      if(run?.status==='completed'&&run.conclusion==='failure')$('#library-update-status').textContent='最近一次同步失败，旧库已保留。可在 GitHub 工作流查看日志，修复后重新运行。';
+      else $('#library-update-status').textContent=run?.status==='in_progress'||run?.status==='queued'?'GitHub 正在生成 / 验证新库，完成后会自动加载。':'尚未检测到新库。请在 GitHub 点 Run workflow，也可稍后再次检查。';
+      pollLibrarySync(attempt+1);
+    }catch(e){if($('#library-update-status'))$('#library-update-status').textContent='自动检查暂时失败：'+e.message+'。可手动再次检查，草稿保留不变。';}
+  },20000);
 }
 function help(){dialog('随手画一段关卡',`<ol class="help-list"><li>点击素材盒里的物体，拖到你想放的位置。</li><li>选中物体，在右侧或「设置」里改大小、名称和说明；拖右下角方块也能缩放。</li><li>用「人物路线」逐点画，点「完成绘制」，再填写每一步要做的动作。</li><li>用「轨道」逐点画直线 / 折线；用「弧轨」拖出曲线，拖黄色点调整弧度。轨道起点靠近物体中心时自动绑定，也可在设置中指定。</li><li>点击「演示」或拖时间条，查看机关运动和人物预期路线。</li><li>「模块库」打开现有游戏模块的可编辑副本。</li><li>「导出图片」发给 Codex；「保存工程」用于换设备、备份或交给 Codex 读取结构。</li></ol><p><kbd>V</kbd> 选择 · <kbd>空格</kbd> 拖动画布 · <kbd>滚轮 / 双指</kbd> 缩放 · <kbd>Ctrl Z</kbd> 撤销 · <kbd>Delete</kbd> 删除</p><p>浏览器自动保存只在本机生效。草图中的动作是设计意图，正式关卡仍需在游戏里验证。</p>`);}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));

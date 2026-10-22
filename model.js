@@ -20,7 +20,31 @@ export function createObject(type,x,y,extra={}) {
   return o;
 }
 export function blankDocument(title='未命名关卡') {
-  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
+  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',intent:{operation:'new_module'},canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
+}
+export function makeRevision(reference,operation='modify_existing'){
+  if(!reference.source)throw Error('参考模块缺少来源');
+  const d=clone(reference);d.id=uid();d.intent={operation};
+  d.baselineObjects=clone(reference.objects);
+  d.title+=' · '+(operation==='modify_existing'?'修改稿':'新变体');
+  return d;
+}
+export function objectChanges(d){
+  if(!Array.isArray(d.baselineObjects))return null;
+  const before=new Map(d.baselineObjects.map(o=>[o.id,o])),after=new Map(d.objects.map(o=>[o.id,o]));
+  return {
+    added:[...after.keys()].filter(id=>!before.has(id)),
+    removed:[...before.keys()].filter(id=>!after.has(id)),
+    modified:[...after.keys()].filter(id=>before.has(id)&&JSON.stringify(before.get(id))!==JSON.stringify(after.get(id)))
+  };
+}
+export function changeRequest(d){
+  const operation=d.intent?.operation??(d.source?'modify_existing':'new_module');
+  const source=d.source?{repository:d.source.repository,path:d.source.path,moduleId:d.source.moduleId,baseCommit:d.source.commit,method:d.source.method??null,arguments:d.source.arguments??[]}:null;
+  return {version:1,operation,target:operation==='modify_existing'?source:null,derivedFrom:source,
+    preserveModuleIdentity:operation==='modify_existing',suggestedModuleId:d.intent?.suggestedModuleId??null,
+    objectChanges:objectChanges(d),applicationStatus:'not_applied',
+    instruction:operation==='modify_existing'?'修改 target 指定的原模块，保留模块身份及引用，不新增替代模块；先与最新源码比较。':operation==='new_variant'?'基于 derivedFrom 新增独立变体，不覆盖原模块。':'创建新模块。'};
 }
 export function exampleDocument(){
   const d=blankDocument('风铃渡口 · 一个空中小冒险');
@@ -47,6 +71,8 @@ const finite=v=>typeof v==='number'&&Number.isFinite(v)&&Math.abs(v)<1e7;
 export function validateDocument(raw){
   if(!raw || raw.schema!==SCHEMA || !Array.isArray(raw.objects) || raw.objects.length>10000) throw new Error('这不是支持的关卡工程文件');
   if(typeof raw.title!=='string' || raw.title.length>200 || !raw.canvas || !finite(raw.canvas.width)||!finite(raw.canvas.height)||raw.canvas.width<1||raw.canvas.height<1||raw.canvas.width>30000||raw.canvas.height>30000) throw new Error('画布或名称无效');
+  if(raw.intent && (!['modify_existing','new_variant','new_module'].includes(raw.intent.operation)|| (raw.intent.operation!=='new_module'&&!raw.source)))throw new Error('修改用途无效');
+  if(raw.baselineObjects && (!Array.isArray(raw.baselineObjects)||raw.baselineObjects.length>10000))throw new Error('修改基线无效');
   const ids=new Set();
   for(const o of raw.objects){
     if(!o || typeof o.id!=='string'||ids.has(o.id)||!TYPES[o.type]||![o.x,o.y,o.w,o.h,o.rotation??0].every(finite)||o.w<0||o.h<0)throw new Error('对象数据无效或 ID 重复');

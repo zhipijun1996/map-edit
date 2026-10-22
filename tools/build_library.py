@@ -10,6 +10,7 @@ import math
 import pathlib
 import sys
 from collections import Counter
+from integration_status import status_for
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 COMMIT = (ROOT/'library/source-commit.txt').read_text().strip()
@@ -260,11 +261,15 @@ def thumbnail(d):
 
 def write(d):
     normalize_canvas(d);identifier=d['source']['moduleId'];file=f'library/modules/{identifier}.json';thumb=f'library/thumbnails/{identifier}.svg'
+    old_category=d['source']['category']
+    d['source']['collection']=old_category
+    d['source']['category']='工坊' if d['source']['kind']=='foundry' else '森林' if d['source']['kind']=='forest' else '平原' if identifier.startswith('plains_') else '通用'
+    d['source']['integration']=status_for(identifier,COMMIT)
     encoded=json.dumps(d,ensure_ascii=False,separators=(',',':'))
     (ROOT/file).write_text(encoded);(ROOT/thumb).write_text(thumbnail(d))
     kinds=Counter(o['type'] for o in d['objects'])
     tags=[{'gear':'齿轮 锯轮','spike':'地刺','wallSpike':'墙刺','bell':'风铃','platform':'平台','hookBounce':'钩索 弹起','hookHang':'钩索 悬挂','route':'动作 路线','enemy':'怪物','reward':'奖励'}.get(k,k) for k in kinds]
-    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
+    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'collection':old_category,'integration':d['source']['integration'],'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
 
 for row in EXTRACTED:write(convert_resource(row) if row['kind']=='resource' else convert_forest(row))
 batch=json.loads((ROOT/'library/source/resources/foundry/batch.json').read_text())
@@ -291,10 +296,11 @@ for category,manifests in [('工坊组合片段',[a['manifest'] for a in batch['
         write(d)
 
 coverage={'sourceCommit':COMMIT,'schema':1,'counts':dict(Counter(m['category'] for m in CATALOG)),
+          'integrationCounts':dict(Counter(m['integration']['usage'] for m in CATALOG)),
           'total':len(CATALOG),'resourceModules':len(RESOURCES),'forestFactoryResults':sum(r['kind']=='forest' for r in EXTRACTED),
           'foundryPhrases':len(batch['accepted']),'foundryRoutes':len(batch['itineraries']),
           'scope':'All 72 authored .tres module resources; all finite standalone geometry factories listed in extract_modules.gd, including 51 forest results/variants; every accepted Foundry phrase and itinerary in the pinned batch.',
           'limits':['Does not enumerate infinitely many seeded whole maps or their generated inline connectors.','Standalone module geometry does not include enemies/Bosses placed by a full-stage encounter consumer.','Godot data factories are evaluated; no gameplay/physics acceptance is inferred.','Proposed catalogue entries with no build implementation are not fabricated.','Historical alternatives and current candidates are categorized; library inclusion does not mean production admission.']}
-(ROOT/'library/catalog.json').write_text(json.dumps({'schema':1,'sourceCommit':COMMIT,'modules':CATALOG},ensure_ascii=False,separators=(',',':')))
+(ROOT/'library/catalog.json').write_text(json.dumps({'schema':2,'sourceCommit':COMMIT,'sourceRepository':'zhipijun1996/gunman-rush','modules':CATALOG},ensure_ascii=False,separators=(',',':')))
 (ROOT/'library/coverage.json').write_text(json.dumps(coverage,ensure_ascii=False,indent=2))
 print(json.dumps(coverage,ensure_ascii=False,indent=2))

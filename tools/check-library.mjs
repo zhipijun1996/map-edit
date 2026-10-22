@@ -15,6 +15,11 @@ for(const module of catalog.modules){
   const bytes=fs.readFileSync(path.join(root,module.file));
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),module.contentSha256);
   const doc=validateDocument(JSON.parse(bytes));
+  assert(doc.source.integration && ['formal','development','not_integrated','unverified'].includes(doc.source.integration.usage));
+  assert.deepEqual(doc.source.integration,module.integration);
+  assert.equal(doc.source.integration.checkedCommit,catalog.sourceCommit);
+  assert([true,false,null].includes(module.integration.isIntegrated));
+  assert(['平原','森林','通用','工坊'].includes(module.category));
   assert.deepEqual(validateDocument(JSON.parse(JSON.stringify(doc))),doc);
   assert.equal(doc.objects.length,module.objectCount);
   assert(fs.existsSync(path.join(root,module.thumbnail)));

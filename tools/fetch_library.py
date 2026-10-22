@@ -1,4 +1,7 @@
-"""Fetch pinned authoring data only, without downloading the game's large art history."""
+"""Restore the PINNED snapshot. For a live update use tools/sync_library.py.
+
+Existing files are deliberately not overwritten by this restoration helper.
+"""
 import concurrent.futures
 import json
 import pathlib
