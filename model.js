@@ -1,3 +1,4 @@
+import {emptyRequirements,validateRequirements} from './capabilities.js';
 export const SCHEMA = 'gunman-rush-level-sketch/v1';
 export const TYPES = {
   terrain: {name:'地块 / 墙体',group:'地形',w:240,h:96}, platform:{name:'单向平台',group:'地形',w:180,h:18},
@@ -20,12 +21,13 @@ export function createObject(type,x,y,extra={}) {
   return o;
 }
 export function blankDocument(title='未命名关卡') {
-  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',intent:{operation:'new_module'},canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
+  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',capabilityRequirements:emptyRequirements(),intent:{operation:'new_module'},canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
 }
 export function makeRevision(reference,operation='modify_existing'){
   if(!reference.source)throw Error('参考模块缺少来源');
   const d=clone(reference);d.id=uid();d.intent={operation};
   d.baselineObjects=clone(reference.objects);
+  d.baselineCapabilityRequirements=validateRequirements(reference.capabilityRequirements);
   d.title+=' · '+(operation==='modify_existing'?'修改稿':'新变体');
   return d;
 }
@@ -43,11 +45,13 @@ export function changeRequest(d){
   const source=d.source?{repository:d.source.repository,path:d.source.path,moduleId:d.source.moduleId,baseCommit:d.source.commit,method:d.source.method??null,arguments:d.source.arguments??[]}:null;
   return {version:1,operation,target:operation==='modify_existing'?source:null,derivedFrom:source,
     preserveModuleIdentity:operation==='modify_existing',suggestedModuleId:d.intent?.suggestedModuleId??null,
-    objectChanges:objectChanges(d),applicationStatus:'not_applied',
+    objectChanges:objectChanges(d),capabilityRequirements:validateRequirements(d.capabilityRequirements),
+    capabilityChanges:d.source?{before:validateRequirements(d.baselineCapabilityRequirements??d.source.capabilityRequirements),after:validateRequirements(d.capabilityRequirements),changed:JSON.stringify(validateRequirements(d.baselineCapabilityRequirements??d.source.capabilityRequirements))!==JSON.stringify(validateRequirements(d.capabilityRequirements))}:null,applicationStatus:'not_applied',
     instruction:operation==='modify_existing'?'修改 target 指定的原模块，保留模块身份及引用，不新增替代模块；先与最新源码比较。':operation==='new_variant'?'基于 derivedFrom 新增独立变体，不覆盖原模块。':'创建新模块。'};
 }
 export function exampleDocument(){
   const d=blankDocument('风铃渡口 · 一个空中小冒险');
+  d.capabilityRequirements={version:1,status:'defined',allOf:['grapple','shot_recoil'],anyOfGroups:[],note:'设计示例要求；正式制作时验证通关路线。'};
   d.description='越过刺坑，钩住上方休整点，观察齿轮后落到摆渡平台。射击风铃，打开出口。';
   d.constraints='保留上方悬挂观察点；下方平台接住失误；风铃与出口开关联动。所有距离可按真实物理调整。';
   const add=(t,x,y,e)=>{const o=createObject(t,x,y,e);d.objects.push(o);return o;};
@@ -73,6 +77,9 @@ export function validateDocument(raw){
   if(typeof raw.title!=='string' || raw.title.length>200 || !raw.canvas || !finite(raw.canvas.width)||!finite(raw.canvas.height)||raw.canvas.width<1||raw.canvas.height<1||raw.canvas.width>30000||raw.canvas.height>30000) throw new Error('画布或名称无效');
   if(raw.intent && (!['modify_existing','new_variant','new_module'].includes(raw.intent.operation)|| (raw.intent.operation!=='new_module'&&!raw.source)))throw new Error('修改用途无效');
   if(raw.baselineObjects && (!Array.isArray(raw.baselineObjects)||raw.baselineObjects.length>10000))throw new Error('修改基线无效');
+  const capabilityRequirements=validateRequirements(raw.capabilityRequirements);
+  if(raw.baselineCapabilityRequirements)validateRequirements(raw.baselineCapabilityRequirements);
+  if(raw.source?.capabilityRequirements)validateRequirements(raw.source.capabilityRequirements);
   const ids=new Set();
   for(const o of raw.objects){
     if(!o || typeof o.id!=='string'||ids.has(o.id)||!TYPES[o.type]||![o.x,o.y,o.w,o.h,o.rotation??0].every(finite)||o.w<0||o.h<0)throw new Error('对象数据无效或 ID 重复');
@@ -90,7 +97,7 @@ export function validateDocument(raw){
     if(o.trackId && !raw.objects.some(t=>t.id===o.trackId&&t.type.startsWith('track')))throw new Error('物体绑定的轨道不存在');
     if(o.targetId&&!ids.has(o.targetId))throw new Error('机关关联的目标不存在');
   }
-  return clone({...raw,id:typeof raw.id==='string'?raw.id:uid(),description:String(raw.description??'').slice(0,20000),constraints:String(raw.constraints??'').slice(0,20000)});
+  return clone({...raw,capabilityRequirements,id:typeof raw.id==='string'?raw.id:uid(),description:String(raw.description??'').slice(0,20000),constraints:String(raw.constraints??'').slice(0,20000)});
 }
 export function pathPoint(track,t){
   const ps=track.points;

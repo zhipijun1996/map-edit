@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {emptyRequirements,validateRequirements,requirementSummary,evaluateRequirements} from '../capabilities.js';
+import {blankDocument,validateDocument,makeRevision,changeRequest} from '../model.js';
+const r={version:1,status:'defined',allOf:['grapple'],anyOfGroups:[['double_jump','wall_climb'],['shot_recoil','弹跳能力']],note:'主路线要求'};
+for(const route of [['grapple','double_jump','shot_recoil'],['grapple','wall_climb','弹跳能力']])assert.equal(evaluateRequirements(r,route).satisfied,true);
+for(const missing of [['double_jump','shot_recoil'],['grapple','shot_recoil'],['grapple','wall_climb']])assert.equal(evaluateRequirements(r,missing).satisfied,false);
+assert.equal(evaluateRequirements(emptyRequirements(),[]).satisfied,null);
+assert.equal(evaluateRequirements({...emptyRequirements(),status:'defined'},[]).satisfied,true);
+assert.equal(evaluateRequirements({...r,status:'partial'},['grapple','wall_climb','shot_recoil']).satisfied,null);
+assert.equal(requirementSummary(r),'钩索 且 （二段跳 或 蹬墙 / 攀墙） 且 （射击反冲 或 弹跳能力）');
+for(const invalid of [{...r,anyOfGroups:[[]]},{...r,allOf:['grapple','grapple']},{...r,status:'unspecified'},{...r,allOf:['a'.repeat(81)]},{...r,anyOfGroups:Array(21).fill(['jump'])}])assert.throws(()=>validateRequirements(invalid));
+const old=blankDocument();delete old.capabilityRequirements;assert.equal(validateDocument(old).capabilityRequirements.status,'unspecified');
+const catalog=JSON.parse(fs.readFileSync('library/catalog.json'));
+const forest=catalog.modules.find(m=>m.category==='森林'&&m.capabilityRequirements.allOf.includes('grapple'));
+const ref=JSON.parse(fs.readFileSync(forest.file)),d=makeRevision(ref);d.capabilityRequirements=r;
+const change=changeRequest(validateDocument(JSON.parse(JSON.stringify(d))));
+assert.deepEqual(change.objectChanges,{added:[],removed:[],modified:[]});assert(change.capabilityChanges.changed);assert.deepEqual(change.capabilityChanges.before,ref.capabilityRequirements);assert.deepEqual(change.capabilityRequirements,r);assert.equal(change.target.moduleId,forest.id);
+const variant=makeRevision(d,'new_variant');variant.capabilityRequirements.note='新的条件';assert(changeRequest(variant).capabilityChanges.changed);
+for(const m of catalog.modules){const doc=JSON.parse(fs.readFileSync(m.file));if(doc.source.kind==='foundry')assert(doc.source.capabilityEvidence.note.includes('验证配置'));if(doc.source.kind==='forest')assert.deepEqual(m.capabilityRequirements.allOf,doc.source.original.requires??[]);}
+console.log('Capability AND/OR groups, uncertainty, legacy drafts, validation and metadata-only revisions passed.');

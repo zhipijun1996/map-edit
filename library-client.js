@@ -1,3 +1,4 @@
+import {validateRequirements} from './capabilities.js';
 // Public reads only. A GitHub Pages page never contains a GitHub write token.
 export const GAME_REPO='zhipijun1996/gunman-rush';
 export const EDITOR_REPO='zhipijun1996/map-edit';
@@ -8,6 +9,7 @@ export function validateCatalog(data){
   const ids=new Set();
   for(const m of data.modules){
     if(!m||typeof m.id!=='string'||ids.has(m.id)||typeof m.title!=='string'||typeof m.category!=='string'||!/^\.\/library\/modules\/[a-zA-Z0-9_-]+\.json$/.test(m.file)||!/^\.\/library\/thumbnails\/[a-zA-Z0-9_-]+\.svg$/.test(m.thumbnail)||!/^[a-f0-9]{64}$/.test(m.contentSha256))throw Error('模块目录校验失败，保留当前库');
+    validateRequirements(m.capabilityRequirements);
     ids.add(m.id);
   }
   return data;

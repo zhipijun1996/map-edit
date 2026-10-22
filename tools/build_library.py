@@ -11,6 +11,7 @@ import pathlib
 import sys
 from collections import Counter
 from integration_status import status_for
+from capability_requirements import from_source
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 COMMIT = (ROOT/'library/source-commit.txt').read_text().strip()
@@ -265,11 +266,15 @@ def write(d):
     d['source']['collection']=old_category
     d['source']['category']='工坊' if d['source']['kind']=='foundry' else '森林' if d['source']['kind']=='forest' else '平原' if identifier.startswith('plains_') else '通用'
     d['source']['integration']=status_for(identifier,COMMIT)
+    requirements,evidence=from_source(d['source'],RESOURCES)
+    d['source']['capabilityRequirements']=requirements
+    d['source']['capabilityEvidence']=evidence
+    d['capabilityRequirements']=copy.deepcopy(requirements)
     encoded=json.dumps(d,ensure_ascii=False,separators=(',',':'))
     (ROOT/file).write_text(encoded);(ROOT/thumb).write_text(thumbnail(d))
     kinds=Counter(o['type'] for o in d['objects'])
     tags=[{'gear':'齿轮 锯轮','spike':'地刺','wallSpike':'墙刺','bell':'风铃','platform':'平台','hookBounce':'钩索 弹起','hookHang':'钩索 悬挂','route':'动作 路线','enemy':'怪物','reward':'奖励'}.get(k,k) for k in kinds]
-    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'collection':old_category,'integration':d['source']['integration'],'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
+    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'collection':old_category,'integration':d['source']['integration'],'capabilityRequirements':requirements,'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
 
 for row in EXTRACTED:write(convert_resource(row) if row['kind']=='resource' else convert_forest(row))
 batch=json.loads((ROOT/'library/source/resources/foundry/batch.json').read_text())
@@ -291,7 +296,7 @@ for category,manifests in [('工坊组合片段',[a['manifest'] for a in batch['
                 if o['type'] in ('entry','exit') and not (i==0 and o['type']=='entry' or i==len(manifest['nodes'])-1 and o['type']=='exit'):
                     o['x']+=o['w']/2-4;o['y']+=35-4;o.update(type='anchor',w=8,h=8,label='')
                 d['objects'].append(o)
-        d['description']='按原工坊 Manifest 的实际模块偏移和相位组合。能力条件：'+manifest['capability_profile']+'。这份编辑器草图不运行原输入回放。'
+        d['description']='按原工坊 Manifest 的实际模块偏移和相位组合。回放验证配置：'+manifest['capability_profile']+'。这份编辑器草图不运行原输入回放。'
         d['source']['originalValidation']='Original batch contains native replay evidence; no new physics validation is claimed by this editor.'
         write(d)
 
