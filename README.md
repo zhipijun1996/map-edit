@@ -2,7 +2,9 @@
 
 一个零依赖的网页关卡草图编辑器，为 Gunman Rush 记录关卡想法。
 
-在线入口：https://gunman-map-notes.silkyball18.chatgpt.site
+在线入口：https://zhipijun1996.github.io/map-edit/
+
+此前的 Sites 入口：https://gunman-map-notes.silkyball18.chatgpt.site
 
 打开就能摆地形、机关、敌人，画物体轨道和人物动作路线。手机和电脑共用同一个界面。无需安装、无需账户；不运行游戏物理。
 
@@ -23,7 +25,7 @@ python3 -m http.server 8080
 npm run check
 ```
 
-无需 npm install。当前在线版本使用 Sites 托管；GitHub 连接没有开启 Pages 的管理权限，因此未声称仓库 Pages 已部署。若后续在仓库 Settings → Pages 将 Source 设为 GitHub Actions，运行 `Deploy editor` 工作流即可发布到 `https://zhipijun1996.github.io/map-edit/`。部署仅上传静态页面与模块库，不上传工具和原项目源码副本。
+无需 npm install。仓库 Settings → Pages → Source 已设为 GitHub Actions；推送到 `main` 会自动执行 `Deploy editor` 工作流，也可在 Actions 中手动运行。工作流检查通过后发布到 `https://zhipijun1996.github.io/map-edit/`。部署仅上传静态页面与模块库，不上传工具和原项目源码副本。Sites 入口保留此前版本，后续以 GitHub Pages 为准。
 
 ## 模块库来源与覆盖
 
