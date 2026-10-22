@@ -39,7 +39,7 @@ function renderRevisionInfo(){
   }
   if(op==='new_variant')html+=field('新变体建议名称（可留空）','suggestedModuleId',doc.intent?.suggestedModuleId??'');
   html+=`<p class="revision-state">${op==='modify_existing'?'保留原模块身份与引用。':op==='new_variant'?'保留原版，创建独立变体。':'创建新模块。'}本稿尚未写回游戏。</p>`;
-  if(changes)html+=`<div class="change-count">新增 ${changes.added.length} · 调整 ${changes.modified.length} · 删除 ${changes.removed.length}${JSON.stringify(doc.capabilityRequirements)!==JSON.stringify(doc.baselineCapabilityRequirements??doc.source?.capabilityRequirements)?' · 能力要求已调整':''}</div>`;
+  if(changes)html+=`<div class="change-count">新增 ${changes.added.length} · 调整 ${changes.modified.length} · 删除 ${changes.removed.length}${JSON.stringify(doc.capabilityRequirements??emptyRequirements())!==JSON.stringify(doc.baselineCapabilityRequirements??doc.source?.capabilityRequirements??emptyRequirements())?' · 能力要求已调整':''}</div>`;
   html+='</div>';$('#revision-info').innerHTML=html;
   $('#revision-operation').onchange=e=>{snapshot();doc.intent={...doc.intent,operation:e.target.value};changed();};
   const input=$('#revision-info [data-prop="suggestedModuleId"]');if(input)input.onchange=()=>{snapshot();doc.intent={...doc.intent,suggestedModuleId:input.value.slice(0,100)};changed();};
