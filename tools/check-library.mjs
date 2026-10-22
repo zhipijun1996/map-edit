@@ -22,6 +22,8 @@ for(const module of catalog.modules){
   assert(['平原','森林','通用','工坊'].includes(module.category));
   assert.deepEqual(validateDocument(JSON.parse(JSON.stringify(doc))),doc);
   assert.deepEqual(doc.capabilityRequirements,module.capabilityRequirements);
+  assert.deepEqual(doc.difficulty,module.difficulty);
+  assert.deepEqual(doc.difficulty,doc.source.difficulty);
   assert.deepEqual(doc.capabilityRequirements,doc.source.capabilityRequirements);
   assert.equal(doc.objects.length,module.objectCount);
   assert(fs.existsSync(path.join(root,module.thumbnail)));

@@ -270,11 +270,13 @@ def write(d):
     d['source']['capabilityRequirements']=requirements
     d['source']['capabilityEvidence']=evidence
     d['capabilityRequirements']=copy.deepcopy(requirements)
+    d['difficulty']={'version':1,'scale':'gunman-rush/module-difficulty/v1','score':None,'note':''}
+    d['source']['difficulty']=copy.deepcopy(d['difficulty'])
     encoded=json.dumps(d,ensure_ascii=False,separators=(',',':'))
     (ROOT/file).write_text(encoded);(ROOT/thumb).write_text(thumbnail(d))
     kinds=Counter(o['type'] for o in d['objects'])
     tags=[{'gear':'齿轮 锯轮','spike':'地刺','wallSpike':'墙刺','bell':'风铃','platform':'平台','hookBounce':'钩索 弹起','hookHang':'钩索 悬挂','route':'动作 路线','enemy':'怪物','reward':'奖励'}.get(k,k) for k in kinds]
-    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'collection':old_category,'integration':d['source']['integration'],'capabilityRequirements':requirements,'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
+    CATALOG.append({'id':identifier,'title':d['title'],'category':d['source']['category'],'collection':old_category,'integration':d['source']['integration'],'capabilityRequirements':requirements,'difficulty':d['difficulty'],'file':'./'+file,'thumbnail':'./'+thumb,'objectCount':len(d['objects']),'tags':tags,'contentSha256':hashlib.sha256(encoded.encode()).hexdigest()})
 
 for row in EXTRACTED:write(convert_resource(row) if row['kind']=='resource' else convert_forest(row))
 batch=json.loads((ROOT/'library/source/resources/foundry/batch.json').read_text())

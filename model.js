@@ -1,4 +1,5 @@
 import {emptyRequirements,validateRequirements} from './capabilities.js';
+import {emptyDifficulty,validateDifficulty,difficultyChanges} from './difficulty.js';
 export const SCHEMA = 'gunman-rush-level-sketch/v1';
 export const TYPES = {
   terrain: {name:'地块 / 墙体',group:'地形',w:240,h:96}, platform:{name:'单向平台',group:'地形',w:180,h:18},
@@ -21,13 +22,14 @@ export function createObject(type,x,y,extra={}) {
   return o;
 }
 export function blankDocument(title='未命名关卡') {
-  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',capabilityRequirements:emptyRequirements(),intent:{operation:'new_module'},canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
+  return {schema:SCHEMA,id:uid(),title,description:'',constraints:'',capabilityRequirements:emptyRequirements(),difficulty:emptyDifficulty(),intent:{operation:'new_module'},canvas:{width:1600,height:900,units:'sketch',positionPrecision:'approximate'},objects:[],updatedAt:new Date().toISOString()};
 }
 export function makeRevision(reference,operation='modify_existing'){
   if(!reference.source)throw Error('参考模块缺少来源');
   const d=clone(reference);d.id=uid();d.intent={operation};
   d.baselineObjects=clone(reference.objects);
   d.baselineCapabilityRequirements=validateRequirements(reference.capabilityRequirements);
+  d.baselineDifficulty=validateDifficulty(reference.difficulty);
   d.title+=' · '+(operation==='modify_existing'?'修改稿':'新变体');
   return d;
 }
@@ -45,7 +47,7 @@ export function changeRequest(d){
   const source=d.source?{repository:d.source.repository,path:d.source.path,moduleId:d.source.moduleId,baseCommit:d.source.commit,method:d.source.method??null,arguments:d.source.arguments??[]}:null;
   return {version:1,operation,target:operation==='modify_existing'?source:null,derivedFrom:source,
     preserveModuleIdentity:operation==='modify_existing',suggestedModuleId:d.intent?.suggestedModuleId??null,
-    objectChanges:objectChanges(d),capabilityRequirements:validateRequirements(d.capabilityRequirements),
+    objectChanges:objectChanges(d),difficulty:validateDifficulty(d.difficulty),difficultyChanges:difficultyChanges(d),capabilityRequirements:validateRequirements(d.capabilityRequirements),
     capabilityChanges:d.source?{before:validateRequirements(d.baselineCapabilityRequirements??d.source.capabilityRequirements),after:validateRequirements(d.capabilityRequirements),changed:JSON.stringify(validateRequirements(d.baselineCapabilityRequirements??d.source.capabilityRequirements))!==JSON.stringify(validateRequirements(d.capabilityRequirements))}:null,applicationStatus:'not_applied',
     instruction:operation==='modify_existing'?'修改 target 指定的原模块，保留模块身份及引用，不新增替代模块；先与最新源码比较。':operation==='new_variant'?'基于 derivedFrom 新增独立变体，不覆盖原模块。':'创建新模块。'};
 }
@@ -78,6 +80,9 @@ export function validateDocument(raw){
   if(raw.intent && (!['modify_existing','new_variant','new_module'].includes(raw.intent.operation)|| (raw.intent.operation!=='new_module'&&!raw.source)))throw new Error('修改用途无效');
   if(raw.baselineObjects && (!Array.isArray(raw.baselineObjects)||raw.baselineObjects.length>10000))throw new Error('修改基线无效');
   const capabilityRequirements=validateRequirements(raw.capabilityRequirements);
+  const difficulty=validateDifficulty(raw.difficulty);
+  if(raw.baselineDifficulty!=null)validateDifficulty(raw.baselineDifficulty);
+  if(raw.source?.difficulty!=null)validateDifficulty(raw.source.difficulty);
   if(raw.baselineCapabilityRequirements)validateRequirements(raw.baselineCapabilityRequirements);
   if(raw.source?.capabilityRequirements)validateRequirements(raw.source.capabilityRequirements);
   const ids=new Set();
@@ -97,7 +102,7 @@ export function validateDocument(raw){
     if(o.trackId && !raw.objects.some(t=>t.id===o.trackId&&t.type.startsWith('track')))throw new Error('物体绑定的轨道不存在');
     if(o.targetId&&!ids.has(o.targetId))throw new Error('机关关联的目标不存在');
   }
-  return clone({...raw,capabilityRequirements,id:typeof raw.id==='string'?raw.id:uid(),description:String(raw.description??'').slice(0,20000),constraints:String(raw.constraints??'').slice(0,20000)});
+  return clone({...raw,capabilityRequirements,difficulty,id:typeof raw.id==='string'?raw.id:uid(),description:String(raw.description??'').slice(0,20000),constraints:String(raw.constraints??'').slice(0,20000)});
 }
 export function pathPoint(track,t){
   const ps=track.points;
