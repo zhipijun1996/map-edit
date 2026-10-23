@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "check": "node --check app.js && node --check model.js && node --check capabilities.js && node --check difficulty.js && node --check library-client.js && node tools/check-library.mjs && node tools/check-revisions.mjs && node tools/check-capabilities.mjs && node tools/check-difficulty.mjs && python3 tools/check_integration.py",
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "check:mapgen": "python3 -m unittest discover -s experiments/l4-mapgen -p 'test_*.py'"
   }
 }
