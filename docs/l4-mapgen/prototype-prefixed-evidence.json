@@ -1,0 +1,109 @@
+{
+  "reviewed_path": "/workspace/l4-prototype/mapgen.py",
+  "reviewed_sha256": "3a237eccf14b3820a3b973a3cf3cefe1090865960503ec71f868392a7ea7563a",
+  "review_status": "pre-fix snapshot; final reevaluation pending",
+  "observations": [
+    {
+      "id": "R1",
+      "method": "direct route_layout 3-room counterexample",
+      "input": {
+        "room_dimensions": [
+          3,
+          3
+        ],
+        "rooms": {
+          "a": [
+            0,
+            0
+          ],
+          "b": [
+            10,
+            0
+          ],
+          "c": [
+            5,
+            1
+          ]
+        },
+        "only_edge": [
+          "a",
+          "b"
+        ]
+      },
+      "observed": "route succeeds while its points touch unconnected c",
+      "contacts": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "R2",
+      "method": "valid monotonic-grant graph",
+      "input": {
+        "arcs_bidirectional": [
+          {
+            "from": "s",
+            "to": "r",
+            "cost": 1
+          },
+          {
+            "from": "s",
+            "to": "k",
+            "cost": 100
+          },
+          {
+            "from": "k",
+            "to": "r",
+            "cost": 100
+          },
+          {
+            "from": "r",
+            "to": "goal",
+            "cost": 1,
+            "requires": [
+              "k"
+            ]
+          }
+        ],
+        "grant_at_k": [
+          "k"
+        ],
+        "reward_at": "r"
+      },
+      "observed": {
+        "validation_errors": [],
+        "main_cost": 201,
+        "completion_detour": -199
+      },
+      "expected": {
+        "completion_detour": 0
+      }
+    },
+    {
+      "id": "signature_invariance",
+      "method": "rename every node ID and reverse both arrays on A seed 11 plains",
+      "observed": {
+        "topology_equal": true,
+        "experience_equal": true
+      }
+    }
+  ]
+}
