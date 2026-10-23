@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/workspace/pcg-research/prototype/factory/browser_review_check.py", line 50, in run
+    try:validate(submission,data)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/pcg-research/prototype/factory/core/feedback.py", line 18, in validate
+    check_catalog(catalog)
+  File "/workspace/pcg-research/prototype/factory/core/feedback.py", line 15, in check_catalog
+    if not isinstance(catalog,dict)or digest({k:v for k,v in catalog.items()if k!='catalog_sha256'})!=catalog.get('catalog_sha256'):raise FeedbackError('catalog_integrity')
+                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+prototype.factory.core.feedback.FeedbackError: catalog_integrity
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/pcg-research/prototype/factory/browser_review_check.py", line 72, in <module>
+    p=argparse.ArgumentParser();p.add_argument('url');p.add_argument('out');p.add_argument('--count',type=int,default=4);a=p.parse_args();run(a.url,a.out,a.count)
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/pcg-research/prototype/factory/browser_review_check.py", line 51, in run
+    except FeedbackError as e:assert str(e)=='synthetic_feedback_cannot_enter_real_store'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

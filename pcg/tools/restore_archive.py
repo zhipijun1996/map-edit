@@ -1,0 +1,38 @@
+"""Reassemble local Git archive parts and restore only hash-verified entries."""
+import argparse,hashlib,json,shutil,zipfile
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+def sha(p):
+ with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
+def restore(name,extract=False,prefix=''):
+ folder=ROOT/'archives'/name
+ if name not in('godot-runtime-v1','research-results-v1','review-delivery-v1','guided-landing-v1'):raise ValueError('Unknown archive')
+ manifest=json.loads((folder/'manifest.json').read_text());work=ROOT/'archives/_work';work.mkdir(exist_ok=True);archive=work/(name+'.zip')
+ if archive.exists():
+  if sha(archive)!=manifest['archive_sha256']:raise ValueError('Existing archive differs; retained')
+ else:
+  temp=archive.with_suffix('.zip.partial')
+  with temp.open('xb')as out:
+   for part in manifest['parts']:
+    p=folder/part['file']
+    if p.parent!=folder or p.stat().st_size!=part['bytes']or sha(p)!=part['sha256']:raise ValueError('Part checksum mismatch')
+    with p.open('rb')as f:shutil.copyfileobj(f,out)
+  if temp.stat().st_size!=manifest['archive_bytes']or sha(temp)!=manifest['archive_sha256']:raise ValueError('Combined checksum mismatch')
+  temp.rename(archive)
+ count=0
+ with zipfile.ZipFile(archive)as z:
+  index=json.loads(z.read('PCG-ARCHIVE-INDEX.json'))
+  for name,info in index.items():
+   if prefix and not name.startswith(prefix):continue
+   p=ROOT/name
+   if not p.resolve().is_relative_to(ROOT.resolve())or'..'in Path(name).parts:raise ValueError('Unsafe archive path')
+   if extract and p.exists():
+    if sha(p)!=info['sha256']:raise ValueError('Changed existing file retained: '+name)
+   else:
+    data=z.read(name)
+    if len(data)!=info['bytes']or hashlib.sha256(data).hexdigest()!=info['sha256']:raise ValueError('Entry checksum mismatch: '+name)
+    if extract:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+   count+=1
+ print(json.dumps(dict(archive=str(archive),verified_files=count,extracted=extract,sha256=manifest['archive_sha256'])))
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--extract',action='store_true');p.add_argument('--prefix',default='');a=p.parse_args();restore(a.name,a.extract,a.prefix)

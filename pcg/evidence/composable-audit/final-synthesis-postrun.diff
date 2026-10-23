@@ -1,0 +1,20 @@
+--- final-run-synthesis.py
++++ postrun-no-move-synthesis.py
+@@ -22,7 +22,7 @@
+         if op=='ground_jump':
+             plan += [gated('jump','grounded',min_after=5),command('jump_release',after=r.randint(8,12))]
+         elif op=='air_jump':
+-            plan += [gated('jump','airborne',min_after=wait+4),command('jump_release',after=r.randint(8,12))]
++            plan += [gated('jump','airborne',min_after=wait+4 if 'move' in caps else 3),command('jump_release',after=r.randint(8,12))]
+         elif op=='anchor_jump':
+             plan += [gated('jump','hook_hang',min_after=r.randint(2,5)),command('jump_release',after=r.randint(8,12))]
+         elif op=='recoil':
+@@ -70,7 +70,7 @@
+         if any(p[0]-24<=f['x']<=p[0]+p[2]+24 and p[1]-20<=f['y']<=p[1]+p[3]+20 for j,p in enumerate(probe['platforms']) if j in probe.get('wall_platform_indices',[])):continue
+         choices.append((i,f))
+     if not choices:return None
+-    i,f=choices[min(7,len(choices)-1)]
++    i,f=choices[min(7,len(choices)-1) if 'move' in probe['capabilities'] else 0]
+     x=round(f['x']/4)*4;y=round(f['y']/4)*4
+     c=copy.deepcopy(probe);c['id']=f'module-{probe["seed"]}-w{width}-c{clearance}'
+     left=x-width/2;top=y+18

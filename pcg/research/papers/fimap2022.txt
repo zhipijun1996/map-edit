@@ -1,0 +1,555 @@
+                           A General-Purpose Expressive Algorithm
+                               for Room-based Environments
+            Konstantinos Sfikas                                Antonios Liapis                         Georgios N. Yannakakis
+         Institute of Digital Games                        Institute of Digital Games                  Institute of Digital Games
+                Msida, Malta                                      Msida, Malta                                Msida, Malta
+       konstantinos.sfikas@um.edu.mt                      antonios.liapis@um.edu.mt                 georgios.yannakakis@um.edu.mt
+
+ABSTRACT                                                                   i.e. concrete, geometric designs that describe the actual boundaries
+This paper presents a generative architecture for general-purpose          of rooms and the placement of doors that connect them, while
+room layouts that can be treated as geometric definitions of dun-          respecting the constraints posed by the DS. This distinction between
+geons, mansions, shooter levels and more. The motivation behind            the topological and geometric characteristics of designed spaces
+this work is to provide a design tool for virtual environments that        has been proposed and utilized, in various forms, in the fields of
+combines aspects of controllability, expressivity and generality. To-      PCG [5, 12, 34] and evolutionary architectural design [3, 24, 29, 41],
+wards that end, a two-tier level representation is realized, with a        both of which have been an inspiration for this approach.
+graph-based design specification constraining and guiding the gen-             A secondary aspect of controllability is the designer’s ability to
+erated geometries, facilitated by constrained evolutionary search.         select a set of Behavioral Characterizations (BCs) which define the
+Expressivity is secured through quality-diversity search which can         search-space and characterize the algorithm’s expressive range. In
+provide the designer with a broad variety of level layouts to choose       this study we examine a specific pair of BCs, however the algo-
+from. Finally, the generator is general-purpose as it can produce          rithm’s implementation offers more options that the designer may
+layouts based on different types of static grid structures or as free-     choose from. The available set of BCs can also be easily expanded,
+form, curved structures through an adaptive Voronoi diagram that           thanks to the modular implementation of our framework.
+is evolved along with the level itself. The method is tested on a              Expressivity is another central aspect of our approach. It refers to
+variety of design specifications and grid types, and results show          the algorithm’s ability to generate a highly diverse set of solutions,
+that even with complex design constraints or malleable grids the           per run, i.e. to exhibit a large Expressive Range, as defined in [32].
+algorithm can produce a broad variety of levels.                           Importantly, this aspect cannot be addressed in isolation, but must
+                                                                           align with both aspects of controllability: (a) designer-imposed
+KEYWORDS                                                                   and other constraints and (b) designer-selected BCs. Constraint-
+                                                                           solving in itself can be efficiently addressed through declarative
+level generation, controllability, evolutionary algorithms, quality
+                                                                           programming [4, 27, 31], yet such approaches generate a single
+diversity search, constrained optimization
+                                                                           solution per run and there is no intuitive way of guaranteeing
+                                                                           diversity among generated solutions across runs. In order to address
+1   INTRODUCTION                                                           expressivity and constraint-solving as one problem, we follow the
+This paper addresses the problem of generating room-based en-              broad paradigm of PCG driven by Quality-Diversity (PCG-QD) [7]
+vironments that can apply to a broad range of games including              and implement a constraint-solving illumination algorithm [26],
+dungeon crawlers, horror games, first-person or top-down shooters          inspired by similar work [1, 8, 14, 20]. In combining controllability
+and many more. We especially focus on addressing how procedural            with constrained expressivity, our proposed methodology becomes
+content generation (PCG) can help level designers to clearly define        a powerful tool that can illuminate the feasible and infeasible parts
+their design goals and then efficiently explore the space of possible      of the solution space, thus providing the designer with a broad
+designs, thus gaining a deeper understanding of the problem at             understanding of the problem at hand.
+hand and being able to make well-informed decisions.                           Finally, generality is served in two different ways: First, our
+   Consequently, our proposed methodology combines aspects of              algorithm must be able to solve and explore a variety of problems,
+controllability, expressivity and generality. Controllability refers to    as long as their DS is of reasonable topological complexity. Apart
+two aspects. First, the designer’s ability to make specific requests       from the topological perspective, however, the generality of our
+in regard to the generated levels’ typology and have the algorithm         method also refers to its large geometric flexibility, which is mainly
+generate solutions that respect them. Second, the designer’s abil-         due to the use of a mutable Voronoi diagram [6] as a substrate
+ity to select the dimensions of diversity that should be explored.         for generated geometries. Furthermore, the underlying Voronoi
+Expressivity refers to the algorithm’s ability to generate diverse         diagram can be set to a structured and immutable arrangement,
+solutions, i.e. ones that are novel from past or concurrent solu-          such as a square or hex grid, thus serving some of the commonly
+tions [28]. Finally, generality refers to the flexibility of the content   requested stylistic constraints of a broad range of games.
+representation that makes it applicable to many different scenarios.
+   We incorporate controllability primarily by having the designer
+provide an abstract, topological definition of their desired outcome,      2    RELATED WORK
+the Design Specification (DS). The DS describes the number and size        Procedural Content Generation in games is a lively research field
+of rooms and their connections in an intuitive, visual way. Given          [18]. We focus below on approaches that are controllable on a high-
+a DS, the algorithm will generate a set of Design Implementations,         level in a way that constrains the low-level topological properties
+that are handled by the generator. These approaches were a major                                               1. ARCHIVE SELECTION
+inspiration for the proposed work.
+   The distinction between topological and geometric aspects of a
+level has been recognized and utilized in PCG in various ways. Dor-                           INFEASIBLE ARCHIVE                                    FEASIBLE ARCHIVE
+mans [5] makes the separation between missions (directed graphs
+
+
+
+
+                                                                                                                         2. PARENT SELECTION
+                                                                               FEASIBILITY
+that represent gameplay routes) and spaces (geometric layouts that
+
+
+
+
+                                                                                                                                                                              FITNESS
+align with missions). In that work, Dormans proposes a two-stage
+generation of levels, first generating missions via graph grammars
+and then spaces via shape grammars. Beyond shape grammars, more
+recent work has explored how to generate the low-level geometries
+through constraint solvers [11] and evolution [17]. Representing
+the high-level view of the level as a graph is common practice in
+PCG, indicatively optimizing the graphs via artificial evolution [13],                                                                         parent
+human-in-the-loop interfaces [12] or constraint solvers [34]. In
+                                                                                              5. PLACEMENT           3. MUTATION                           5. PLACEMENT
+other work, level segments were split based on a grid layout in case
+of equal-sized rooms as e.g. in Legends of Zelda (Nintendo, 1986),                                                                             offspring
+and the high-level progression between segments was learned from
+past examples [36] or optimized based on high-level path-based                               [ X, Y ]                                                              [ X, Y ]
+                                                                                                                     IS FEASIBLE?
+priorities [17]. Finally, Sonancia implemented a very different way
+of controlling the geometric level generation through the intended
+progression of tension between rooms from entrance to exit, which                                                   NO                          YES
+could be designer-provided [21] or evolved [22]. Interestingly, sim-
+ilar approaches can be found outside the context of games, in the                             4. EVALUATION:                                      4. EVALUATION:
+                                                                                              - BCs (X,Y)                                         - BCs (X,Y)
+field of evolutionary architectural design. In those cases, the topo-                         - FEASIBILITY SCORE                                 - FITNESS
+logical aspect does not represent a mission, but rather the connec-
+tivity graph of a house’s rooms. In an early example, Charman [3]
+proposed a constraint-solving system that generates architectural             Figure 1: A single iteration of the FI-MAP-Elites algorithm.
+layouts while solving room connectivity constraints. Expanding
+on Charman’s work, among others, Medjdoub and Yannou [24]
+propose the use of a Design Specification which includes a set of Di-         following paragraphs briefly describe all relevant algorithms and
+mensional Constraints (surface, dimensions, orientation of rooms)             conclude with an in-depth description of FI-MAP-Elites.
+and a set of Topological Constraints (such as adjacency between                  MAP-Elites is an illumination algorithm which explores all areas
+rooms). Their layout generation method first solves the topologi-             of a behavioral space with a selection pressure towards locally
+cal constraints and then optimizes the solution to best satisfy the           higher fitness [26]. Its operation is based on a discretization of the
+geometric constraints. Our proposed methodology has been largely              behavioral space into cells of equal size, each of which can store
+inspired by the concepts introduced there. Other relevant and more            a single individual whose Behavioral Characterizations (BCs) lie
+recent examples can be found in [23, 25, 29, 39–41]                           within that cell. In every step (evaluation), the algorithm randomly
+                                                                              selects an individual from the archive, mutates it and evaluates
+                                                                              the offspring’s fitness and BCs. It then places the offspring back in
+3     METHODOLOGY                                                             the archive at its corresponding coordinates: if that cell is already
+The paper introduces a hierarchical way of representing levels                occupied the fitter individual of the two survives in that cell. By
+(described in Sec. 3.2), and leverages a constrained quality-diversity        repeating this operation, the algorithm’s archive of solutions is
+(QD) algorithm in order to produce feasible, fit and diverse level            gradually expanded (coverage) and optimized (fitness).
+geometries. The constrained QD algorithm described in Sec. 3.1                   The Feasible-Infeasible two-population genetic algorithm (FI-
+relies on an initial population of random layouts (as described in            2Pop GA) [15] handles constrained optimization problems by retain-
+Sec. 3.3) which are then mutated (as described in Sec. 3.4) to improve        ing two populations. The first one contains only feasible individuals
+the quality and diversity of the population as discussed in Sec. 3.5.         and its selection pressure is the objective. The second one contains
+                                                                              only infeasible individuals and its selection pressure is a feasibility
+                                                                              score, calculated as the percentage of satisfied constraints. Individ-
+3.1    Algorithm                                                              uals are selected and evolved from both populations, with offspring
+Our proposed algorithm, Feasible-Infeasible Multidimensional                  placed on the corresponding population based on their feasibility.
+Archives of Phenotypic Elites (FI-MAP-Elites) is a hybrid of the MAP-         The FI-2Pop GA has been extensively used for level generation
+Elites [26] and FI-2Pop GA [15] algorithms. Its main goal is to com-          [19, 35] as it is inherently a constrained optimization problem.
+bine the illumination capabilities of the former with the constraint-            FI-MAP-Elites discretizes the behavioral space, similar to MAP-
+solving capabilities of the latter. It is strongly inspired by the Con-       Elites, but retains two archives of elites (one for feasible and one
+strained MAP-Elites [14] algorithm but operates in a slightly differ-         for infeasible elites). Cells of each archive store a single individual.
+ent way which can be beneficial for reasons explained later on. The           Importantly, the survival criterion for the feasible archive is the
+                                                                          2
+individual’s fitness, while for the infeasible archive it is its feasi-
+bility score, similar to FI-2Pop GA. In each iteration, FI-MAP-Elites                                  3    area: 5
+performs the following steps (shown in Fig. 1). First, an individual
+is selected from a random cell of either the feasible or the infeasi-                             area: 8
+ble archive, alternating between the two when both archives are
+                                                                                        4              1              2
+non-empty. An offspring of the selected individual is produced
+                                                                                       area: 5                   area: 5
+via mutation. If the offspring is feasible, it is evaluated (fitness &
+BCs) and placed in the feasible archive, otherwise it is evaluated
+(feasibility score & BCs) and placed in the infeasible archive.                                        5    area: 5
+
+   As mentioned earlier, FI-MAP-Elites is heavily inspired by the                    (a) Design Specification with 5               (b) L1
+Constrained MAP-Elites [14] algorithm, which allows two popu-                        rooms and 4 doors
+lations of individuals (a feasible and an infeasible one) in every
+cell of the archive. In its presented configuration, FI-MAP-Elites is
+almost equivalent to a version of Constrained MAP-Elites where                                         5
+the maximum population size (per population, per cell) was set to
+1: 1 feasible and 1 infeasible individual. However, FI-MAP-Elites                                      1 3
+offers extended functionality as (a) it allows the use of different BCs                          2 4
+and/or different feature map resolutions between the feasible and
+infeasible archives and (b) it can use specialized selection methods
+[30] to increase the algorithm’s overall performance. Nevertheless,
+these algorithmic options are not examined in this paper, as the                                 (c) L1 & L2                   (d) L1, L2 & L3
+main focus lies on the specific design problem’s particularities.
+                                                                              Figure 2: A Design Specification and the three layers of in-
+3.2    State Representation                                                   formation (L1, L2, L3) of a feasible Design Implementation.
+The levels generated by our approach form different regions that
+we identify as “rooms”; however, this could include any partition
+                                                                              special cases of the Voronoi diagram, where points have been pre-
+with hard boundaries and one way of accessing it, such as elevated
+                                                                              arranged accordingly (see Fig. 4). The L1 genotype consists only of
+terrain in Starcraft (Blizzard, 1998) or islands with bridges in Heroes
+                                                                              the points’ coordinates, while the calculated L1 phenotype includes
+of Might and Magic II (3DO, 1996). Different rooms are separated
+                                                                              the generated Voronoi diagram and the resulting adjacency between
+by walls, and two adjacent rooms can be connected with a door.
+                                                                              active cells. Cells that touch the bounding rectangle are treated as
+Importantly, the generator produces the level geometry (currently
+                                                                              inactive and omitted from the phenotype, so as to eliminate geo-
+as a top-down 2D layout) that adheres to a high-level specification
+                                                                              metric biases towards orthogonal boundaries. The L1 genotype can
+of the level. This dual representation, from the high-level Design
+                                                                              be mutated by changing coordinates of existing points, resulting in
+Specification to the geometric Design Implementation is described
+                                                                              a different Voronoi diagram. Adding or removing points has been
+below.
+                                                                              disabled in this study, for the sake of simplicity.
+3.2.1 Design Specification. A Design Specification (DS) is an ab-
+                                                                                 Layer 2 (L2). L2 describes the rooms’ placement on the 2D plane
+stract description of the layout that is to be generated. It contains
+                                                                              and their exact shape (as shown in Fig. 2c). The L2 genotype is
+an undirected graph whose vertices represent a set of rooms and
+                                                                              a dictionary that assigns the use of specific rooms of the DS to
+whose edges represent a direct connection between a pair of rooms
+                                                                              specific cells of the Voronoi diagram. The L2 phenotype consists of
+through a door. Each vertex (room) is also assigned with an area that
+                                                                              the rooms’ boundaries. Those are calculated by merging the regions
+this room should occupy. A DS is a critical part of the design con-
+                                                                              of cells that belong to the same room.
+straints and is utilized in various parts of our algorithmic approach,
+including the initialization, mutation and evaluation methods. An                Layer 3 (L3). L3 describes the walls and doors, as well as the
+example of a Design Specification is shown in Fig. 2a.                        resulting connectivity graph of the interior space (as shown in Fig.
+                                                                              2d). The L3 genotype represents the doors’ locations as a pair of
+3.2.2 Design Implementation. A Design Implementation (DI) is a                neighboring cells. The exact coordinates of each door are part of the
+geometry that matches the provided DS, produced by the generator.             L3 phenotype and lie in the mid-point of the line-segment shared
+It includes the specific geometric boundaries of each room, as well           between the two cells. The L3 phenotype also includes a computed
+as the exact placement of doors that connect them. A generated                connectivity graph that accounts for boundaries (walls) between
+DI can be feasible or infeasible, based on whether it satisfies the           rooms and between a room and the exterior, and doors that allow
+constraints posed by the DS and a few more, described in Sec. 3.5.1.          connections between adjacent rooms.
+    In our proposed algorithmic approach, a DI consists of three
+hierarchically dependent layers of information (shown in Fig. 2):             3.3    Random Initialization
+   Layer 1 (L1). L1 describes the Voronoi tessellation of a 2D rectan-        Random initialization is a critical part of the algorithm’s operation,
+gle, whose cells become the building blocks for the shape of rooms            as it generates the initial population which will be extended and
+and levels (as shown in Fig. 2b). Square and Hex grids are simply             optimized through mutation operators described in Section 3.4.
+                                                                          3
+Our random initialization process consists of a sequence of semi-
+stochastic operations that attempt to generate a feasible DI based
+on the DS, as described in the following steps:
+
+   Tessellation Definition (L1): First, a set of points that lie within
+the specified bounding rectangle is assigned, and the resulting tessel-
+lation and connectivity graph is calculated. The points’ coordinates
+can be random, (forming a generic Voronoi diagram), or structured
+to form a square or hex grid as shown in Fig. 4.
+
+    Room Placement (L2): The following steps are repeated until
+                                                                                  Figure 3: Destruction and repair stages of mutation.
+all rooms have been placed on the map. First, the algorithm selects
+a room in the DS that is not yet in the DI, prioritizing rooms with
+more connections. Then the room is assigned to a single cell that                 • Room Erosion (L2): Reduces a room’s area by iteratively re-
+is near already placed rooms that it connects to (according to the                  moving all cells whose removal does not break its coherence
+DS). If no such cell exists (e.g. for the first room), a free cell will             (connectivity between this room’s cells) and connectivity
+be selected at random. Starting from this first cell, the room’s area               (adjacency with connected rooms).
+is expanded using free adjacent cells chosen randomly, until the                  • Door Deletion (L3): Removes either 5% or 50% (selected
+room’s area falls within the specified error margin.                                with equal probability) of placed doors. At least one door
+                                                                                    will be removed, in either case.
+   Door Placement (L3): Finally, the algorithm finds all potential
+locations for door placement per connection in the DS and places a            3.4.2 Repair: The repair method attempts to bring a DI back to a
+door at one of them, at random. Proper locations include the lines            feasible state by sequentially applying all operations of the follow-
+of the shared boundary between connected rooms, whose length is               ing list (denoting the DI layer on which they operate).
+at least 0.5 units. This threshold is adjustable depending on the size             • Missing Rooms Repair (L2): Places any missing rooms
+of the door meshes and the player’s avatar.                                           back in the DI, using a single cell that is adjacent to their
+                                                                                      prescribed neighbors, if possible.
+3.4     Mutation                                                                   • Room Coherence Repair (L2): If any room consists of
+Mutation occurs in two stages (see Fig. 3): First, the destruction                    more than one (disconnected) sub-regions, this method will
+method randomly alters parts of the level without taking constraints                  keep one of them at random and remove the rest.
+into account. Then, the repair method attempts to bring the level                  • Room Connectivity Repair (L2): If any room connection
+back to a feasible state. The repair operations are semi-stochastic                   in the DS is not implemented in the DI (i.e. no cells of con-
+and do not guarantee feasibility, but increase the chances for it.                    nected rooms are adjacent to each other), this method will
+                                                                                      attempt to find the shortest path between the rooms and
+3.4.1 Destruction: The destruction method selects between 1 and                       expand them along the path until they become adjacent.
+3 operations from the following list (chosen at random) and applies                • Room Area Repair (L2): If any room’s area is very different
+them on the selected DI, generating an altered, usually infeasible,                   than that prescribed in the DS, this method will increase
+offspring. The destruction operators target specific DI layers, noted                 or reduce its area by either expanding to adjacent cells, or
+in parentheses. Note that L1 destruction operations are only applied                  safely removing cells without breaking its coherence and
+on Voronoi grids.                                                                     connectivity, until its area error is below 0.4 (details on the
+                                                                                      area error 𝐸𝐴 and how it is calculated are in Sec. 3.5.1).
+      • Points Offset (L1): Moves all points in a single random di-
+                                                                                   • Doors Repair (L3): This method deletes any misplaced or
+        rection by a distance 𝐷 = 𝑟 ·𝑊 , where 𝑟 is a random number
+                                                                                      redundant doors and then randomly places any missing ones.
+        within [0, 0.25] and 𝑊 is the bounding rectangle’s width.
+        Points falling outside the bounding rectangle are symmetri-           3.4.3 Mutation Example: Figure 3 shows an example mutation of
+        cally reinserted. This operation was found to aid constraint          a simplified DI. Starting from a feasible parent (Fig. 3 left), the
+        satisfaction, as it frees DIs from the grid’s boundaries.             destruction method applies two operations: (D1) a small percentage
+      • Points Noise (L1): Randomly selects a small percentage                of points are randomly moved, resulting in an area change for
+        of points and moves them towards different directions and             rooms 1 and 5 and a disconnect for room 2, (D2) room 3 is deleted.
+        distances. Points that fall outside the bounding rectangle are        Starting from the destroyed offspring (Fig. 3 middle), the repair
+        symmetrically reinserted.                                             method applies the following operations: (R1) room 3 is placed back
+      • Room Deletion (L2): Eliminates a single room from the DI,             in the level, occupying a single cell adjacent to room 1, (R2) the
+        by clearing all cells that belong to it.                              coherence of room 2 is repaired by deleting the isolated cell, (R3)
+      • Unsafe Room Expansion (L2): Expands a room’s area                     rooms 2 and 3 are expanded by one cell each, reaching an acceptable
+        using all of its surrounding cells, whether they be occupied          area, (R4) the misplaced door that used to connect rooms 1 and 3 is
+        or not.                                                               deleted and a new door is added, properly connecting rooms 1 and
+      • Safe Room Expansion (L2): Expands a room’s area, using                3. After all these operations have been applied, the result is a new
+        all of its unoccupied surrounding cells.                              feasible individual (Fig. 3 right).
+                                                                          4
+3.5    Evaluation
+A central part of any evolutionary algorithm is how content is eval-
+uated. In the case of constrained Quality-Diversity search, content
+evaluation covers a multitude of aspects: the constraints that need
+to be satisfied (see Sec. 3.5.1) and the feasibility score used to push
+infeasible individuals towards feasibility (see Sec. 3.5.2), the fitness
+function for determining quality of feasible individuals (see Sec.
+3.5.3), and the Behavioral Characterizations for determining the                       (a) Square grid           (b) Hex grid           (c) Voronoi grid
+dimensions of diversity explored by the algorithm (see Sec. 3.5.4).
+                                                                                   Figure 4: Three indicative spatial tessellations: Square grid,
+3.5.1 Constraints: A DI is feasible if all the following constraints
+                                                                                   Hex grid and Voronoi grid. In all three cases, cells that touch
+are satisfied: (1) all cells in the tessellation are connected, (2) at least
+                                                                                   the border are omitted as inactive (gray), while adjacency
+50% of cells are active (not on the borders, as shown in Fig. 4), (3)
+                                                                                   between active cells is marked with thin red lines.
+all prescribed rooms exist in the DI, i.e. at least one cell is assigned
+to each of them, (4) all rooms are coherent, i.e. all cells assigned to
+each room must be connected, (5) every connection between rooms                        (8) Pathways Score (L3): calculated as the ratio of current
+specified in the DS must exist as adjacent cells of these rooms in the                     pathways over 0.5 units wide, over the total pathways.
+DI. (6) every room’s area-error (𝐸𝐴 ) must be smaller than 0.4. For
+                                                                                   3.5.3 Fitness function: If all constraints of the DI are satisfied, we
+room 𝑖 its 𝐸𝐴 (𝑖) is calculated via Eq. (1), where 𝐴(𝑖) is the room’s
+                                                                                   calculate its feasible fitness which represents the precision of the
+area in the DI and 𝐴𝑃 (𝑖) is the room’s prescribed area in the DS, (7)
+                                                                                   rooms’ areas. It is calculated as the average area precision of all
+doors in the DI precisely satisfy the connectivity described in the
+                                                                                   rooms. For room 𝑖 its area precision is 𝑃𝐴 (𝑖) = 1 − 𝐸𝐴 (𝑖), where
+DS, and must be on walls spanning at least 0.5 units, (8) a room’s
+                                                                                   𝐸𝐴 (𝑖) is the room’s area error from Eq. (1).
+internal pathways between walls should be at least 0.5 units wide.
+                                    𝑚𝑖𝑛 (𝐴(𝑖),𝐴 (𝑖))                               3.5.4 Behavioral characterization: We use two Behavioral Char-
+                     𝐸𝐴 (𝑖) = 1 − 𝑚𝑎𝑥 (𝐴(𝑖),𝐴𝑝 (𝑖))                     (1)        acterizations (BCs) as measures of diversity among the generated
+                                                𝑝
+                                                                                   DIs. This results in a two-dimensional feature-map for the feasible
+3.5.2 Feasibility Score. If any of the constraints of the DI is not sat-           population (and another feature-map for the infeasible), which is
+isfied, the DI is infeasible and its feasibility score is calculated. The          useful for visualizing the archive of maps to a designer. Both BCs
+feasibility score is a way of calculating the proximity of a DI to being           are based on the notion of compactness (𝐶), a unit-less measure that
+feasible, and is used to determine elites in the infeasible population.            expresses the relation between a shape’s perimeter and its area [16].
+In FI-2Pop [15], this proximity is calculated as the percentage of                 The formula for compactness [16] is shown in Eq. (2), but each BC
+satisfied constraints. Given the complexity of the problem at hand,                uses this formula with different variables.
+however, and based on preliminary tests, we further provide a gra-
+dient for each constraint based on partial satisfaction in order to                                               𝐶 = 2𝜋𝐴
+                                                                                                                       Π2
+                                                                                                                                                           (2)
+assist the search for feasible DIs. The following list describes the               The BCs are as follows:
+conversion of the boolean constraints (Sec. 3.5.1) to fine-grained
+scores that capture the degree of satisfaction for each constraint.                   Plan Compactness. (𝐶𝑝 ) expresses the compactness of a level
+The feasibility score is calculated as the average of all those scores.            as a whole, accounting its external borders (walls). 𝐶𝑝 is calculated
+Note that if a constraint is satisfied, its score is 1.                            via Eq. (2), setting 𝐴 as the total area of all rooms and Π as the outer
+                                                                                   perimeter of the layout, disregarding borders between rooms.
+   (1) Connected Graph Score (L1): we assign 𝑠 = 1/𝑁𝑖 where
+       𝑁𝑖 is the number of islands (sub-graphs) of the tessellation.                  Average Room Compactness. (𝐶𝑟 ) expresses the average com-
+   (2) Active Cells Score (L1): if active cells are less than 50% of               pactness of each room. A room’s compactness is calculated via Eq.
+       total cells, then we assign 𝑠 = 𝑟 /0.5, where 𝑟 is the ratio of             (2), by setting 𝐴 as the total area of the room in the DI and Π as
+       active cells over all cells.                                                the room’s perimeter considering borders between rooms, doors,
+   (3) Rooms Existence Score (L2): calculated as the ratio of                      and the outer perimeter. Note that if a room (or the entire layout) is
+       existing rooms over the total number of rooms in the DS.                    missing from the DI, its compactness is 0; thus we can still calculate
+   (4) Rooms Coherence Score (L2): calculated as the ratio of                      these BCs for infeasible individuals.
+       coherent rooms over the total number of rooms in the DS.
+   (5) Connections Existence Score (L2): calculated as the ratio                   4    EXPERIMENT PROTOCOL
+       of satisfied room adjacencies in the DI over the total number               In order to evaluate our general-purpose generative algorithm, we
+       of connections in the DS.                                                   test it in a broad variety of design specifications including sym-
+   (6) Rooms Area Score (L2): calculated as the average area score                 metrical specifications that may be useful for multi-player games
+       of all rooms. For room 𝑖, its area score 𝑆𝐴 (𝑖) is 0 if the room            with two players, such as Starcraft, or two teams, such as Counter-
+       does not exist, 1 if 𝐸𝐴 (𝑖) > 0.4 and (1−𝐸𝐴 (𝑖))/0.6 otherwise;             Strike (Valve, 2000). Moreover, we test three different types of grid
+       𝐸𝐴 (𝑖) is described in Eq. (1).                                             structures in order to show the versatility of the algorithm but also
+   (7) Doors Score (L3): calculated as the ratio of current accurate               to assess how the grid structure (and its flexibility) impacts the
+       doors over the number of prescribed doors.                                  algorithm’s performance.
+                                                                               5
+                                                                                                                                             6 4 8 $ 5 (  * 5 , '
+                                                                                                                                                                                    '     '  
+          2              3                          3
+                                                                        1       2                & < & / (
+                             1                          1
+ 3                1                2                        2
+                                                                                                   6 7 $ 5
+                                                    4                           3   4
+          4              4
+ (a) Cycle graph      (b) Star graph           (c) Wheel graph      (d) Path graph               : + ( ( /
+
+
+          7                                                                                         3 $ 7 +
+                              8        6        7               8               7
+ 8                6                                                                                                                                + ( ;  * 5 , '
+                                                                    6                                                                                                               '     '  
+                                           5                                                     & < & / (
+      5                                                                     5
+              4                                                     4
+                                  4
+                                                                                                   6 7 $ 5
+                                                                    1
+ 1                3
+                              2       1         3               2               3                : + ( ( /
+          2
+(e) Double cycle graph       (f) Double star graph          (g) Double wheel graph                  3 $ 7 +
+
+
+Figure 5: Indicative examples of the examined graph struc-                                                                                  9 2 5 2 1 2 ,  * 5 , '
+                                                                                                                                                                                    '     '  
+tures, at order of 4 for Fig. 5a-5d and order of 8 for Fig. 5e-5g.
+                                                                                                 & < & / (
+
+
+                                                                                                   6 7 $ 5
+
+
+                                                                                                 : + ( ( /
+
+   We test three types of spatial tessellation, placing the points                                  3 $ 7 +
+within a boundary rectangle of 16×16 units; cells touching the
+border are disregarded as inactive (see Sec. 3.2). The Square grid
+is generated by arranging a set of 16×16 (256) points along an                                                                                                              
+orthogonal grid. The Hex grid tessellation is generated by arranging
+256 points along a triangular grid. For both Square and Hex grids,                          Figure 6: Expressive Range Analysis: Density plots (average
+the tessellation results in 196 active cells (square or hexagon) of                         coverage across 10 runs), after 219 evaluations, grouped by
+approximately 1 square unit area each. The Voronoi grid is generated                        grid type. The axes in each density plot are 𝐶𝑝 (𝑥) and 𝐶𝑟 (𝑦).
+by randomly placing 256 points within a boundary rectangle of
+16×16 units. The number of active cells, as well as their exact shape
+and size, are in this case dynamic and depend on the arrangement
+of points within the boundary. Contrary to the static Square and                            5       RESULTS
+Hex grids, the Voronoi grid is mutable (L1 mutation operations)                             Figure 6 shows the average coverage of the feasible archive (at a
+and its structure is co-evolved with the rest of the level.                                 resolution of 16×16 cells) for all 102 experiments across DS and
+   For each of the three tessellations, we use a set of Design Speci-                       grid types. This visualization is also valuable for expressive range
+fications of varying complexity, based on seven graph typologies                            analysis [32] since the PCG-QD protocol used here dynamically
+(showcased in Fig. 5) at certain ranges of order. The Cycle, Star,                          produces these as part of its standard operation. We measure cover-
+Wheel and Path graphs are examined in the order-range of 4 to 10,                           age as the ratio of occupied cells in the feasible feature map (as we
+while the Double Cycle, Double Star and Double Wheel graphs are                             are only interested in valid level layouts) over the total number of
+examined in the orders of 8 and 10 vertices, resulting to a total of                        cells (256 in this paper).
+34 different graphs. Every DS specifies the desired area per room                              We observe that the Square, Hex and Voronoi grids exhibit an
+(𝐴𝑝 ) in the same way as 𝐴𝑝 = 4 + 𝐷 𝑣 units, where 𝐷 𝑣 is the degree                        average coverage of 38%, 37% and 53% respectively. An interpreta-
+of the room’s vertex (i.e. the number of edges connecting to it).                           tion of this large difference between the two static grids and the
+   Based on the various DS graph structures, we have 34 experi-                             mutable one is that the Square and Hex grids have most probably
+ments per grid type (total of 102 experiments). For each experiment,                        reached the limits of their solution space which is naturally smaller
+we run 10 independent runs of the FI-MAP-Elites algorithm with an                           than that of the Voronoi grid, due to the geometric constraints
+archive-size of 16x16 cells for 219 (524, 288) evaluations and report                       that their fixed grids impose on the generated solutions. A quick
+the aggregated results from these 10 runs.                                                  glance at Table ?? can offer an intuitive understanding of those
+   The source code for all experiments, which can be used to repro-                         constraints, as well as the larger flexibility of the mutable Voronoi
+duce or expand on the results, can be found at https://github.com/                          grid at representing both circular shapes (high compactness) and
+konsfik/FI-MAP-Elites .                                                                     elongated or branching ones (low compactness).
+                                                                                        6
+                                  Cycle                                                                   Double Star
+
+
+
+
+Table 1: Sample levels for two design specifications of order 8, using Square (top), Hex (middle) and Voronoi (bottom) grids.
+Samples were selected among those with the highest and lowest 𝐶𝑝 values and the highest and lowest 𝐶𝑟 values, in that order.
+
+
+
+   Another indication that for Square and Hex grids the entire space          highest or lowest BC values) in order to showcase the diversity of
+of possible layouts (in terms of these BCs) has been discovered               the possible DIs for the same DS. We see that for high 𝐶𝑝 all layouts
+is that most independent runs cover the same cells in Fig. 6. In              are compact and have no holes or protruding walls; especially for
+comparison, for the Voronoi grid the discovered cells vary more               the Voronoi grid the layouts are almost circular. The opposite is true
+(especially in the borders of the possibility space) from run to run.         for low 𝐶𝑝 , since most rooms are corridors of minimal width and
+Observing the progress of coverage over the number of evaluations,            many holes, dead-ends, and protruding edges. Similar corridor-like
+we generally notice that for both Hex and Square grids coverage               rooms prevail for low 𝐶𝑟 but the layout has far fewer holes and a
+marginally increases after approximately 250, 000 evaluations, while          smaller footprint. Finally, for high 𝐶𝑟 we observe compact rooms
+for the Voronoi grid coverage continues to increase up to the end of          but as a footprint there are more jutting edges and a less circular
+the evolutionary run (524, 288 evaluations). While coverage keeps             layout in the case of Voronoi grids. Levels with high 𝐶𝑟 values seem
+increasing for the Voronoi grid, it is worth noting that the initial          the most intuitive as e.g. dungeon levels (for the Cycle graph) or
+discovery of feasible individuals is much more difficult for this             arena-style deathmatch FPS levels [2] (for the Double Star graph),
+tessellation than for the other two. We observed that on average,             which have two larger, central, arenas at rooms 1 and 6.
+the first feasible individual was discovered after 430, 102 and 4370
+evaluations for the Square, Hex and Voronoi grid, respectively.               6    DISCUSSION
+Specifically, feasible individuals were found during the random               As indicated in Section 5, our proposed methodology can support
+initialization (i.e. the first 100 evaluations) in 75%, 78% and 12%           all tested specifications, across all types of tessellations, generating
+of runs among experiments for the Square, Hex and Voronoi grid,               diverse sets of feasible solutions that approach the natural limits
+respectively. Both findings support that constraint satisfaction is           of the solution space. This is a clear indication that our proposed
+much easier for the Square and Hex grids than the Voronoi one,                algorithm exhibits a high degree of expressivity and thus satisfies
+despite the latter’s eventual superiority in terms of coverage of the         one of the main goals of this approach. Furthermore, the relation
+feasible space.                                                               between the problem’s complexity and the algorithm’s behavior, in
+   We don’t see particular differences between graph types in the DS          terms of computational performance, constraint-satisfaction and
+at the same order, with the Star connectivity faring slightly worse           diversification follows an expected pattern, where more complex
+in all three grid types. Interestingly, the Double Star usually reaches       specifications tend to be more difficult (and slow) to solve and
+higher coverage than the Star at the same order. We anticipate that           diversify. However, as the results showcase, the complexity of the
+the algorithm struggles to make a single central room with 9 or               tested specifications has not approached the practical limits of
+10 adjacent rooms without elongating it and thus lowering room                addressable problems, suggesting that the algorithm can be applied
+compactness. Fig. 6 corroborates this, as at high DS orders (9 and            to even more complex ones.
+10) in all graph types both lower and upper boundary for 𝐶𝑟 (the 𝑦                This study explored diversity only on simple compactness met-
+axis) are clipped without a similar sacrifice for 𝐶𝑝 (the 𝑥 axis).            rics. While our framework includes more BCs (e.g. based on walls’
+   To showcase the type of levels generated with the different grid           orthogonality and distances between rooms), finding and quanti-
+types and BCs, we show some example layouts generated for the                 fying BCs that are meaningful to designers is not an easy task. A
+Cycle and the Double Star at order 8 in Table ??. The four levels             possible way forward would be utilizing metrics of spatial evalu-
+shown are selected from the edges of the possibility space (with              ation from the field of visibility graph analysis [16]. For example,
+                                                                          7
+Through Vision [16, 38] can evaluate spatial regions in regard to                                In Proc. of the IEEE Conf. on Games.
+movement, while Visual Control [10, 16, 37] and Visual Control-                              [2] William Cachia, Antonios Liapis, and Georgios N. Yannakakis. 2015. Multi-level
+                                                                                                 evolution of shooter levels. In Proc. of the AIIDE Conf.
+lability [16, 37] can evaluate spatial regions in regard to Control                          [3] Philippe Charman. 1994. A constraint-based approach for the generation of floor
+[10]. Based on such a theory-driven approach, one may find more                                  plans. In Proc. of the IEEE Conf. on Tools with Artificial Intelligence. 555–561.
+                                                                                             [4] Kate Compton, Adam Smith, and Michael Mateas. 2012. Anza Island: Novel game-
+meaningful modes of diversification for specific types of games, in                              play using ASP. In Proc. of the FDG workshop on Procedural Content Generation in
+regards to elements of the levels’ usability and player-experience.                              Games.
+Such BCs would also be highly relevant to e.g. first-person shooters                         [5] Joris Dormans. 2010. Adventures in level design: Generating missions and spaces
+                                                                                                 for action adventure games. In Proc. of the FDG workshop on Procedural Content
+(FPS) where lines of sight and lines of fire are highly relevant.                                Generation in Games.
+   Another aspect that can be improved is the specialization of our                          [6] Steven Fortune. 1995. Voronoi diagrams and Delaunay triangulations. Computing
+methodology for the FPS and dungeon crawler genres, or even its                                  in Euclidean geometry (1995), 225–265.
+                                                                                             [7] Daniele Gravina, Ahmed Khalifa, Antonios Liapis, Julian Togelius, and Georgios N.
+expansion to other types of games, like Real Time Strategy (RTS)                                 Yannakakis. 2019. Procedural content generation through Quality-Diversity. In
+or even platformers. For example, in the context of FPS games,                                   Proc. of the IEEE Conf. on Games.
+                                                                                             [8] Daniele Gravina, Antonios Liapis, and Georgios N.. Yannakakis. 2016. Con-
+our proposed methodology can be improved by including more                                       strained surprise search for content generation. In Proc. of the IEEE Conf. on
+types of openings, such as windows and exterior doors, treating                                  Computational Intelligence and Games.
+walls as obstacles of a variant height, or even extending along the                          [9] Wim De Hert and Karel Crombecq. 2022. Dungeon Alchemist: AI-powered
+                                                                                                 dungeon generation. https://www.dungeonalchemist.com/. [Online; accessed 24
+𝑧-axis with multiple floors and stairs that connect them [2]. In                                 May 2022].
+the context of dungeons, the levels can be be extended to include                           [10] Bill Hillier and Julienne Hanson. 1984. The social logic of space. Cambridge
+interior elements, such as furniture and other items. Importantly,                               university press.
+                                                                                            [11] Ian Horswill and Leif Foged. 2012. Fast procedural level population with playa-
+this extension can be implemented as a discrete, automated step,                                 bility constraints. In Proc. of the AIIDE Conf.
+after the initial geometric diversification of the levels’ structure.                       [12] Daniel Karavolos, Anders J. Bouwer, and Rafael Bidarra. 2015. Mixed-initiative
+                                                                                                 design of game levels: Integrating mission and space into level generation. In
+An inspiring example of this type is Dungeon Alchemist [9], a level                              Proc. of the Foundations of Digital Games Conf.
+design tool that generates impressively detailed and feature-rich                           [13] Daniel Karavolos, Antonios Liapis, and Georgios N. Yannakakis. 2016. Evolving
+rooms given their user-specified boundaries. Representing maps                                   missions to create game spaces. In Proc. of the IEEE Conf. on Computational
+                                                                                                 Intelligence and Games.
+for RTS games is also an attainable goal. By excluding the L3 part                          [14] Ahmed Khalifa, Scott Lee, Andy Nealen, and Julian Togelius. 2018. Talakat:
+of the DI, and adding details including bases and resources, each                                Bullet hell generation through constrained map-elites. In Proc. of the Genetic and
+“room” of the DI can be treated as a region of strategic importance                              Evolutionary Computation Conf. 1047–1054.
+                                                                                            [15] Steven Orla Kimbrough, Gary J. Koehler, Ming Lu, and David Harlan Wood.
+in the map. Alternatively, by treating the DI as if it was a side-view                           2008. On a Feasible–Infeasible Two-Population (FI-2Pop) genetic algorithm for
+instead of a top-down view, and applying minor modifications in                                  constrained optimization: Distance tracing and no free lunch. European Journal
+                                                                                                 of Operational Research 190, 2 (2008), 310–327.
+the constraints and BCs, our methodology can also generate certain                          [16] Petros Koutsolampros, Kerstin Sailer, Tasos Varoudis, and Rosie Haslem. 2019.
+types of platformer levels. In this case the constraints must probably                           Dissecting visibility graph analysis: The metrics and their role in understanding
+be adapted to take into account gravity-related issues [33].                                     workplace human behaviour. In Proc. of the Intl. Space Syntax Symposium.
+                                                                                            [17] Antonios Liapis. 2017. Multi-segment evolution of dungeon game levels. In
+                                                                                                 Proc.of the Genetic and Evolutionary Computation Conf.
+7    CONCLUSION                                                                             [18] Antonios Liapis. 2020. 10 years of the PCG workshop: Past and future trends. In
+                                                                                                 Proc. of the FDG workshop on Procedural Content Generation in Games.
+This paper introduces a way of representing room-based layouts                              [19] Antonios Liapis, Georgios N. Yannakakis, and Julian Togelius. 2013. Towards a
+in a free-form, flexible way that can lend itself well to many types                             Generic Method of Evaluating Game Levels. In Proc. of the AIIDE Conf.
+of games set in square, hex, or ad-hoc spatial layouts. Through                             [20] Antonios Liapis, Georgios N Yannakakis, and Julian Togelius. 2015. Constrained
+                                                                                                 novelty search: A study on game content generation. Evolutionary computation
+the use of a constrained MAP-Elites algorithm, a designer can                                    23, 1 (2015), 101–129.
+control the generative output through a high-level, visual design                           [21] Phil Lopes, Antonios Liapis, and Georgios N. Yannakakis. 2015. Targeting horror
+                                                                                                 via level and soundscape generation. In Proc. of the AIIDE Conf.
+specification while also being able to see the full breadth of room                         [22] Phil Lopes, Antonios Liapis, and Georgios N. Yannakakis. 2016. Framing tension
+configurations laid out in a two-dimensional arrangement based on                                for game generation. In Proc. of the Intl. Conf. on Computational Creativity.
+chosen dimensions to explore. Results indicate that the algorithm                           [23] Chongyang Ma, Nicholas Vining, Sylvain Lefebvre, and Alla Sheffer. 2014. Game
+                                                                                                 Level Layout from Design Specification. Computer Graphics Forum 33 (05 2014),
+can handle a broad variety of design specifications and can create                               95–104.
+diverse, feasible levels in different grid formats. Future work aims to                     [24] Benachir Medjdoub and Bernard Yannou. 2000. Separating topology and geometry
+improve the algorithm’s controllability by allowing the designer to                              in space planning. Computer-aided design 32, 1 (2000), 39–61.
+                                                                                            [25] Paul Merrell, Eric Schkufza, and Vladlen Koltun. 2010. Computer-Generated
+control the output during evolution and to extend its applicability                              Residential Building Layouts. ACM Trans. Graph. 29, 6, Article 181 (dec 2010),
+to more game genres.                                                                             12 pages.
+                                                                                            [26] Jean-Baptiste Mouret and Jeff Clune. 2015. Illuminating search spaces by mapping
+                                                                                                 elites. arXiv preprint arXiv:1504.04909 (2015).
+ACKNOWLEDGMENT                                                                              [27] Kyungjin Park, Bradford Mott, Wookhee Min, Eric Wiebe, Kristy Elizabeth Boyer,
+                                                                                                 and James Lester. 2020. Generating game levels to develop computer science
+The research leading to these results has received funding from                                  competencies in game-based learning environments. In Proc. of the Intl. Conf. on
+the European Union H2020 Horizon Programme (2014-2020) under                                     Artificial Intelligence in Education. 240–245.
+grant agreement 952002, project PrismArch: Virtual reality aided                            [28] Graeme Ritchie. 2007. Some empirical criteria for attributing creativity to a
+                                                                                                 computer program. Minds and Machines 17 (2007), 76–99.
+design blending cross-disciplinary aspects of architecture in a multi-                      [29] Eugénio Rodrigues, Adélio Rodrigues Gaspar, and Álvaro Gomes. 2013. An
+simulation environment.                                                                          evolutionary strategy enhanced with a local search technique for the space
+                                                                                                 allocation problem in architecture, Part 1: Methodology. Computer-Aided Design
+                                                                                                 45, 5 (2013), 887–897.
+REFERENCES                                                                                  [30] Konstantinos Sfikas, Antonios Liapis, and Georgios N. Yannakakis. 2021. Monte
+ [1] Alberto Alvarez, Steve Dahlskog, Jose Font, and Julian Togelius. 2019. Empower-             Carlo Elites: Quality-diversity selection as a multi-armed bandit problem. In
+     ing quality diversity in dungeon design with interactive constrained MAP-Elites.
+                                                                                        8
+     Proc.of the Genetic and Evolutionary Computation Conf.                                   [36] Adam James Summerville, Morteza Behrooz, Michael Mateas, and Arnav Jhala.
+[31] Anthony J Smith and Joanna J Bryson. 2014. A logical approach to building dun-                2015. The learning of Zelda: Data-driven learning of level topology. In Proc. of
+     geons: Answer set programming for hierarchical procedural content generation                  the Foundations of Digital Games Conf.
+     in roguelike games. In Proceedings of the 50th Anniversary Convention of the AISB.       [37] Alasdair Turner. 2001. Depthmap: a program to perform visibility graph analysis.
+[32] Gillian Smith and Jim Whitehead. 2010. Analyzing the expressive range of a                    In Proc. of the Intl. Space Syntax Symposium.
+     level generator. In Proc. of the FDG workshop on Procedural Content Generation in        [38] Alasdair Turner. 2007. To move through space: Lines of vision and movement. In
+     Games.                                                                                        Proc. of the Intl. Space Syntax Symposium.
+[33] Gillian Smith, Jim Whitehead, Michael Mateas, Mike Treanor, Jameka March, and            [39] Tim Tutenel, Ruben M. Smelik, Ricardo Lopes, Klaas Jan de Kraker, and Rafael
+     Mee Cha. 2011. Launchpad: A Rhythm-Based Level Generator for 2-D Platformers.                 Bidarra. 2011. Generating consistent buildings: a semantic approach for integrat-
+     IEEE Trans. on Computational Intelligence and AI in Games 3, 1 (2011).                        ing procedural techniques. IEEE Transactions on Computational Intelligence and
+[34] Thomas Smith, Julian Padget, and Andrew Vidler. 2018. Graph-based generation                  AI in Games 3, 3 (2011), 274–288.
+     of action-adventure dungeon levels using Answer Set Programming. In Proc. of             [40] Roland van der Linden, Ricardo Lopes, and Rafael Bidarra. 2013. Designing
+     the FDG workshop on Procedural Content Generation in Games.                                   procedurally generated levels. In Proceedings of IDPv2 - Workshop on Artificial
+[35] Nathan Sorenson, Philippe Pasquier, and Steve R. DiPaola. 2011. A generic                     Intelligence in the Game Design Process, co-located with AIIDE 2013.
+     approach to challenge modeling for the procedural creation of video game levels.         [41] Samuel SY Wong and Keith CC Chan. 2009. EvoArch: An evolutionary algorithm
+     IEEE Trans. on Computational Intelligence and AI in Games 3, 3 (2011), 229–244.               for architectural layout design. Computer-Aided Design 41, 9 (2009), 649–667.
+
+
+
+
+                                                                                          9
+

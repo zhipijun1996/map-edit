@@ -1,4 +1,4 @@
-name: Deploy editor
+name: Deploy generation workspace and editor
 on:
   push:
     branches: [main]
@@ -25,12 +25,21 @@ jobs:
         with:
           node-version: '24'
       - run: npm run check
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check offline factory contracts
+        run: python3 -m unittest discover -s prototype/factory/tests -v
+        working-directory: pcg
+      - name: Verify generation videos and archived data
+        run: python3 tools/check_generation.py
       - name: Prepare static files
         run: |
           mkdir -p dist/library
           cp index.html style.css app.js model.js capabilities.js difficulty.js library-client.js dist/
           cp library/catalog.json library/coverage.json dist/library/
           cp -r library/modules library/thumbnails dist/library/
+          cp -r generation dist/generation
           touch dist/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

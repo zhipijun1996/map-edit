@@ -1,0 +1,38 @@
+--- preserved-search.py
++++ current-search.py
+@@ -13,7 +13,8 @@
+ 
+ def run(args):
+  out=ROOT/'results'/args.name;sim=Simulator(out);start=time.perf_counter();probes=[];labels=[]
+- for ci,caps in enumerate(Registry().combinations()):
++ combinations=[Registry().resolve(args.capabilities)] if args.capabilities is not None else list(Registry().combinations())
++ for ci,caps in enumerate(combinations):
+   words=Grammar(caps).derive(args.seed+ci,limit=args.words,max_depth=7)
+   if not words:words=[()]
+   for wi,word in enumerate(words):
+@@ -33,21 +34,21 @@
+  for c,r in zip(candidates,results):
+   if r['ok'] and intent_ok(c,r):good.append(dict(case=c,result=r,actual_word=list(actual_word(r)),descriptor=list(behavioral_descriptor(r)),geometry=fingerprint(c)))
+   else:reasons[r['reason'] if not r['ok'] else 'unrealized_geometry_word']+=1
+- # Keep one candidate per actual word + capability set + geometry. Wider support is an
++ # Keep one candidate per actual word + capability set. Wider support is an
+  # explicit parameter candidate, not a new action type.
+  archive={}
+  for e in good:
+   key=(tuple(e['case']['capabilities']),tuple(e['actual_word']))
+   quality=e['case']['synthesis']['landing_width']
+   if key not in archive or quality>archive[key]['case']['synthesis']['landing_width']:archive[key]=e
+- summary=dict(schema='pcg/composable-search/v2',seed=args.seed,words_per_combo=args.words,variants_per_word=args.variants,capability_combinations=16,
++ summary=dict(schema='pcg/composable-search/v2',seed=args.seed,words_per_combo=args.words,variants_per_word=args.variants,capability_combinations=len(combinations),
+   proposals=len(probes),geometry_candidates=len(candidates),settled_valid=len(good),unique_action_words=len({tuple(e['actual_word']) for e in good}),
+   unique_geometries=len({e['geometry'] for e in good}),archive_entries=len(archive),failure_reasons=reasons,wall_seconds=time.perf_counter()-start,
+   physics_calls=sim.calls,physics_cases=sim.cases,groups=[])
+- for ci,caps in enumerate(Registry().combinations()):
++ for ci,caps in enumerate(combinations):
+   ps=[p for p in probes if p['combo_index']==ci];cs=[c for c in candidates if c['combo_index']==ci];gs=[e for e in good if e['case']['combo_index']==ci]
+   summary['groups'].append(dict(combo=ci,capabilities=sorted(caps),proposals=len(ps),geometry_candidates=len(cs),settled_valid=len(gs),actual_words=len({tuple(e['actual_word']) for e in gs})))
+  (out/'summary.json').write_text(json.dumps(summary,indent=2));(out/'archive.json').write_text(json.dumps(list(archive.values())));(out/'valid.json').write_text(json.dumps(good))
+  print(json.dumps(summary,indent=2))
+ if __name__=='__main__':
+- p=argparse.ArgumentParser();p.add_argument('--seed',type=int,default=920100);p.add_argument('--words',type=int,default=8);p.add_argument('--variants',type=int,default=2);p.add_argument('--name',default='composable-calibration-v1');run(p.parse_args())
++ p=argparse.ArgumentParser();p.add_argument('--seed',type=int,default=920100);p.add_argument('--words',type=int,default=8);p.add_argument('--variants',type=int,default=2);p.add_argument('--name',default='composable-calibration-v1');p.add_argument('--capabilities',nargs='*',default=None,help='Explicit registered IDs; omit to run the 16 move+jump optional sets');run(p.parse_args())
