@@ -3,7 +3,7 @@
 The existing generator, regular gate and candidate registry stay authoritative.
 No failed room demand is repaired by dropping an exploration edge.
 """
-import argparse,json
+import argparse,json,subprocess
 from pathlib import Path
 from ..director import REPO
 from ..library import CandidateLibrary
@@ -36,12 +36,20 @@ def run(name):
         # One bounded adaptation pass and one predeclared independent holdout.
         # Both existing CLIs retain raw failures/source snapshots themselves.
         generated_name=name+'-compact';holdout_name=name+'-holdout'
-        generated=compact_fill(generated_name)
-        log.append(dict(stage='demand_fill',result=generated,run=generated_name))
-        write(out/'generation-log.json',log)
-        held=independent_holdout(holdout_name,generated_name)
-        log.append(dict(stage='existing_regular_gate_and_enrollment',run=holdout_name,result=held))
-        write(out/'generation-log.json',log)
+        try:
+            generated=compact_fill(generated_name)
+            log.append(dict(stage='demand_fill',result=generated,run=generated_name))
+            write(out/'generation-log.json',log)
+            held=independent_holdout(holdout_name,generated_name)
+            log.append(dict(stage='existing_regular_gate_and_enrollment',run=holdout_name,result=held))
+            write(out/'generation-log.json',log)
+        except (ValueError,RuntimeError,OSError,subprocess.SubprocessError) as error:
+            log.append(dict(stage='bounded_fill_failed',reason=str(error),evidence_runs=[generated_name,holdout_name]))
+            write(out/'generation-log.json',log)
+            write(out/'result.json',dict(status='unsatisfied',condition='compact_bell_generation_or_validation',
+                reason=str(error),director_feedback='Keep all exploration edges; revise only the unsupported local challenge.',
+                budget=dict(generator_calls=1,holdout_calls_at_most=1,retries=0),production_admitted=False))
+            return out
         found=library.find(spec)
     if not found:
         result=dict(status='unsatisfied',condition='656x624_compact_bell_regular_candidate',

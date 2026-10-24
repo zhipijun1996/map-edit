@@ -4,6 +4,8 @@
 
 当前为**可玩结构候选**，尚非内容成熟的区域。大部分仍是导航Cell，长梯井、重复跳台、地标与敌人内容不足；没有达到《空洞骑士》一个区域的探索品质。旧小motif及其技术PASS不作为本轮设计验收。媒体、公开入口与回执见 [`generation/maps/r2-full-v2/`](../../generation/maps/r2-full-v2/)。
 
+[公开整图与两条闭环视频](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-R2-FULL-01/d3e29ca31ba1dcaa304a9ccf745b3455d563cb73/ea8109a49fe6/report.html) · [完整手动地图](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-R2-FULL-01/d3e29ca31ba1dcaa304a9ccf745b3455d563cb73/ea8109a49fe6/)。公开14资产/8页面文件均核对完整字节；浏览器实际键鼠、地图切换与三视频加载通过，原900MiB托管门禁和旧预览检查通过。
+
 ## 输入与实际调用链
 
 输入是既有 `experiments/l4-mapgen/results/region-network-v2/runs.json` 的 `plains-R2-0`，SHA256 `9e45f846e8009d862478cd94d2a20f6698080cc64424445a783ffaaf0dea8d1b`。复用原Mission/Exploration及二维布局，没有另造拓扑或固定横向主线。
