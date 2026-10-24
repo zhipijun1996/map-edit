@@ -37,3 +37,18 @@ Map层新增地形为0，连接模块为0，短平台补路链为0。338个Modul
 CP-SAT布局使用45秒离线预算，8工作线程；保存的布局/需求/Module文档可准确重建，但限时多线程重新求解未保证逐位产出相同布局，不称Runtime45秒可接受。Runtime只实例化保存的Module及其真实机关；本轮未签整机帧率/内存预算，也未证明森林效果。所有物理成本见各批次 execution.json。
 
 依赖复用已有 OR-Tools 9.15.6755（Apache-2.0）；不引入第二套物理、奖励或路线搜索框架。新多端口Module留在隔离候选路径，待独立Module状态覆盖和人类内容评审后才可升级生产。在原CandidateLibrary增加隔离整图候选索引，不建立第二套库。完整整图通过后登记文档和原物理证据的哈希；仅精确匹配相同需求，通用关系不升级。`direct-contact-library-reuse-v1`在另一进程复用27/27份标准Module文档，Module生成调用0，再以真实Godot通过接缝。需求不同不命中此保守缓存；跨Map部分复用、通用进入状态和独立Module准入仍待扩展。已有候选库依然是生产资格的权威入口。
+
+
+## 查看与复现
+
+[整图与短视频](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-DIRECT-MODULE-01/91796f3eb43db1f82c514f33d7fb9b9b5dfb89db/9a565e1007ef/report.html) · [手动试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-DIRECT-MODULE-01/91796f3eb43db1f82c514f33d7fb9b9b5dfb89db/9a565e1007ef/)。新原生回环5855帧、主线6519帧逐字段一致；两份原生录像和连续40秒节选见 generation/maps/direct-module-v1。公网字节校验与浏览器回执随PUBLICATION保存。
+
+恢复原Godot runtime与官方引擎后，执行：
+
+```sh
+python pcg/tools/restore_archive.py direct-module-source-and-failures-v1 --extract
+python pcg/tools/restore_archive.py direct-module-run-payloads-v1 --extract
+python -m pcg.map_directed.direct_join.run --name fresh-direct-map --mode full
+```
+
+默认布局使用已保存的可重建结果；重新布局还需 pcg/requirements.txt 中的OR-Tools。初次发现已登记的候选证据缺失会拒绝，须先恢复原件，不能跳过哈希检查。候选索引沿用原库目录 map_directed/library/map-instances，标记为整图实例有限通过，独立Module与生产仍未准入。
