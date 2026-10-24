@@ -10,7 +10,9 @@
 
 L4 与 Module 联动研究：[L4研究报告](docs/l4-mapgen/report.md) · [区域探索修订](docs/l4-mapgen/region-exploration-revision.md) · [工作台](experiments/l4-mapgen/WORKBENCH.md)。PR #1 保留隔离实验，正式流程未改。
 
-Map 驱动库闭环 v1：[实现、验证与限制](docs/l4-mapgen/map-driven-library-v1.md)。已验证一次真实需求补缺、候选入库及整图三策略×四相位；生产准入与人工趣味未批准。媒体在 `generation/maps/map-directed-loop-v1/`。
+当前完整Map实验：[R2多环路真实落地与限制](docs/l4-mapgen/full-r2-playable-v1.md)，27场所/39连接，实际连续巡视覆盖74有向边，另有闭环视频与真实风铃库补缺；仍是内容不足的可玩结构候选。媒体在 `generation/maps/r2-full-v2/`。
+
+历史小motif技术闭环：[v1实现与证据](docs/l4-mapgen/map-driven-library-v1.md)。用户已指出其范围太小、安全连接过长；不作为完整区域的设计验收。
 
 ## 开始研究
 

@@ -4,7 +4,11 @@
 
 主入口：`prototype/factory/core/producer.py`。真实动作语法→运动构造→双档案变异→独立扰动/反例→人类观感评审。当前不是运行中无限生成器、完整地图或已证明的趣味库。真人试玩/正式批准仍为0；上一轮R已有1条整体正向视频反馈，原话见feedback/plains-round2-positive-v1.json。
 
-新增隔离 Map 闭环入口：`python3 -m pcg.map_directed.run`（仓库根运行），复用原 Module Generator / Engine / 合同，新增需求、库匹配与具体地图验证，见 [本轮报告](../docs/l4-mapgen/map-driven-library-v1.md)。仅小型分叉汇合 motif，通用自动拼装/正式生产准入仍关闭。
+当前完整Map入口：`python3 -m pcg.map_directed.r2_full.growth --name fresh-r2-reuse`，原R2平原Seed0全部27场所/39连接；复用既有库/生成器/物理验证，见[完整Map报告](../docs/l4-mapgen/full-r2-playable-v1.md)。74有向边已在实际连续巡视中覆盖；内容仍以导航Cell为主，长梯井和重复感待改，不代表区域品质/通用自动拼装/生产批准。
+
+本轮旧批次、全部冻结源和三段原生trace在 `r2-full-source-and-failures-v1`，用 `python3 pcg/tools/restore_archive.py r2-full-source-and-failures-v1 --extract` 恢复；仅校验不加extract。大量原始cases/compiled/input JSON另用 `python3 pcg/tools/restore_archive.py r2-full-run-payloads-v1 --extract` 恢复，逐文件索引见results/r2-run-payloads-index-v1.json。简要结果、库入库/复用日志、压缩物理输出及新媒体直接保留。原生AVI可重建，不入库。
+
+历史小motif入口：`python3 -m pcg.map_directed.run`，见[旧闭环报告](../docs/l4-mapgen/map-driven-library-v1.md)。用户已反馈范围过小、安全连接过长；旧原件保留。
 
 本轮媒体/实际试玩来源与恢复：[PUBLICATION](../generation/maps/map-directed-loop-v1/PUBLICATION.json)。`map-directed-source-and-failures-v1` 归档含各阶段冻结源和首失败；直接结果以 `results/map-directed-final-v1` 为完整新库闭环、`results/map-directed-loop-v2` 为跨进程库复用及媒体源。当前正式游戏未修改；下一步是人工评审、缩短安全连接并扩展多motif，不能把技术通过写成区域设计完成。
 
