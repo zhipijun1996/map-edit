@@ -2,6 +2,8 @@
 
 L4 随机大地图研究、算法实验与验证结果现统一在本仓库管理：[研究报告](docs/l4-mapgen/report.md) · [工作台运行说明](experiments/l4-mapgen/WORKBENCH.md)。主游戏作为固定需求、内容和操作输入，正式流程未改。
 
+最新方向修订：[区域探索与现有/新算法对照](docs/l4-mapgen/region-exploration-revision.md)。首轮固定横向主干不符合目标，已新增独立区域网 R2 实验；40 份抽象图/布局通过，真实新地图物理与探索趣味尚未验证。
+
 一个零依赖的网页关卡草图编辑器，为 Gunman Rush 记录关卡想法。
 
 在线入口：https://zhipijun1996.github.io/map-edit/

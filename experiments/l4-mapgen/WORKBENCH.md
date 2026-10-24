@@ -16,6 +16,8 @@ python3 -m http.server 8080
 
 打开 `http://localhost:8080/experiments/l4-mapgen/viewer.html`。工作台只读，含三阶段SVG、同Seed对照、失败原因、下载与真实旧游戏基线录像。当前在线Map Notes尚未部署这些文件；Pages工作流已补打包路径，合入/部署仍需独立执行，不以本地网页冒称上线。
 
+反馈后的独立区域网 R2：打开 `http://localhost:8080/experiments/l4-mapgen/viewer.html?dataset=region-network-v2`，可切换平原/森林与 20 个 Seed。R2 取消固定横向通关链；它是不同预算的探索方向实验，不能与首轮 A/B/C 直接质量排名。说明与新示意图见 [区域探索修订](../../docs/l4-mapgen/region-exploration-revision.md)。复现：`python3 experiments/l4-mapgen/region_network.py --seeds 20 --output /tmp/region-network-v2-rerun`。可选 `capture_region_network.py` 通过本地 Chromium 导出实际布局 SVG 和并排图，使用 `--url` 指定服务地址。
+
 复现完整240样本（新目录，避免覆盖保留证据）：
 
 ```bash
@@ -40,4 +42,4 @@ python3 experiments/l4-mapgen/validate_with_game.py --game /path/to/pinned-game 
 
 前两个是资料/必要条件检查，不给模块准入；第三个实际调用游戏已有设计validator，但投影仍是设计声明，不是物理。真实生成与Motor结果见 [Godot输入说明](godot/README.md)、`results/motor/receipt.json`。
 
-最小CI只跑当前Map Notes校验、21个Map组件/内容测试、原始证据hash和JS语法，不运行240完整搜索或游戏全部物理矩阵。Chromium可选本地检查：启动服务后 `python3 experiments/l4-mapgen/browser_check.py`，需要Playwright与Chromium；它不伪造游戏测试。
+最小CI只跑当前Map Notes校验、28个Map组件/内容/区域方向测试、原始证据hash和JS语法，不运行240完整搜索或游戏全部物理矩阵。Chromium可选本地检查：启动服务后 `python3 experiments/l4-mapgen/browser_check.py`，需要Playwright与Chromium；它不伪造游戏测试。

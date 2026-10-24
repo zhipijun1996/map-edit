@@ -13,6 +13,7 @@
   <div><h1>L4 地图生成对照实验</h1><p>同一 Seed，比较任务、探索与空间结构。</p></div>
   <label class="file-button">载入结果 JSON<input id="file-input" type="file" accept=".json,application/json"></label>
   <button id="reload" type="button">读取实验结果</button>
+  <a href="?dataset=region-network-v2">区域网 R2</a> · <a href="?dataset=v1">首轮 A/B/C</a>
 </header>
 <main>
   <p class="boundary" role="note"><strong>结构实验，未接真实游戏物理。</strong> 图中的房间与通路是布局代理，不表示已实例化游戏模块。图可达与空间求解成功不能证明物理可玩。</p>
@@ -23,7 +24,7 @@
     <span id="status" role="status" aria-live="polite">正在读取 ./results/benchmark.json…</span>
   </section>
   <section class="legend" aria-label="图例">
-    <span><i class="main"></i>主线</span><span><i class="reward"></i>奖励支路</span><span><i class="hidden"></i>隐藏路线</span><span><i class="shortcut"></i>捷径 / 返回</span><span><i class="lock"></i>能力锁</span><span><i class="boss"></i>Boss 目标</span><span class="muted">悬停查看摘要，点击节点或边查看数据。箭头表示有向边。</span>
+    <span><i class="main"></i>主线 / 区域入口</span><span><i style="background:#94a18b"></i>区域通路</span><span><i class="reward"></i>奖励支路</span><span><i class="hidden"></i>隐藏路线</span><span><i class="shortcut"></i>捷径 / 返回</span><span><i class="lock"></i>能力 / 状态锁</span><span><i class="boss"></i>Boss 目标</span><span class="muted">锁定捷径按状态锁着色。悬停查看摘要，点击查看数据。箭头表示有向边。</span>
   </section>
   <p id="provenance" class="provenance"></p>
   <div id="comparison" class="comparison" aria-label="算法并排对照"></div>
