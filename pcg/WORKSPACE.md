@@ -38,3 +38,7 @@ Godot素材与真实脚本由 `godot-runtime-v1` 完整保存870原件；恢复�
 ## 平原的新工作入口
 
 当前优先平原：只移动、普通单跳、反冲，以实际判断/动作链为多样性目标。`prototype/plains/{pilot,calibrate,produce}.py`执行有界离线生成；`PLAINS-REPORT.md`记录3代表/6技术候选及全部失败、原件绑定和新留出。先恢复`plains-generation-v1`再复跑；新平原worker恢复正式角色枪口，不能将旧worker的射击数据混作同一绑定。`results/plains-review-v1/playlist.json`明确每段对应哪一批验证。当前人类观感/试玩/批准为0，下一轮扩大真实机关/敌人关系与替代策略，避免仅换尺寸批量计数。
+
+## 后续交付格式
+
+必须执行[OUTPUT-CONTRACT.md](OUTPUT-CONTRACT.md)。plains和factory主生产器自动输出`modules/*.mapnote.json`及同版本SVG；raw review_cases仅供研究/回放，不作为地图接口。格式为现有Map Notes+generationContract；能力、难度、source.integration继续沿用旧格式。空间、端口有向对、状态、Macro组成与未知项显式表达；`assemblyInterface`默认拒绝未验证关系。

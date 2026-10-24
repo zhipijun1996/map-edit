@@ -115,6 +115,7 @@ def run(args):
   preflight=json.loads(Path(args.repair_job).read_text())
   if preflight.get('test_only')is not False or preflight.get('schema')!='pcg/factory-repair-job/v1':raise ValueError('stale_or_test_repair_job')
  engine=Engine(ROOT/'results'/args.name,args.batch_size);out=engine.out;archive=BehaviorArchive()
+ (out/'generation_parameters.json').write_text(json.dumps(vars(args),ensure_ascii=False,indent=2))
  if spec:(out/'region_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=2))
  policy=copy.deepcopy(POLICY);policy['requested_tier']=args.tier
  (out/'quality_policy.json').write_text(json.dumps(policy,indent=2))
@@ -195,6 +196,8 @@ def run(args):
  summary=dict(schema='pcg/factory-summary/v1',seed=args.seed,proposals=proposal_count,initial_candidate_policies=len(candidates),evaluated_policies=len(all_entries),rounds=rounds,feasible_behavior_cells=len(archive.feasible),infeasible_behavior_cells=len(archive.infeasible),holdout_finalists=len(finalists),awaiting_human_review=len(review_cases),rework=sum(x['admission']['status']=='rework'for x in catalog),approved_offline=0,human_feedback=0,physics_cases=engine.sim.cases,batches=len(engine.batches),batch_size=args.batch_size,wall_seconds=time.perf_counter()-start,source_snapshot_files=len(engine.hashes),unseen_phases_seed=args.seed+900000,limits=['Finite automated policy evidence only; no human fun or formal game/region admission.','Observed behavior cells, not a percentage of all possible gameplay.','Failure to find a lower-cost alternative does not prove necessity.'])
  for n,v in [('catalog',manifest),('summary',summary),('archive_history',archive.history),('rejections',rejections),('review_cases',{'cases':review_cases}),('search_cases',{'cases':[e['case']for e in all_entries.values()]}),('discovery_entries',list(all_entries.values()))]:
   (out/(n+'.json')).write_text(json.dumps(v,ensure_ascii=False,indent=2 if n in('summary','catalog','rejections')else None))
+ from contract.export import export as export_contracts
+ export_contracts(out/'review_cases.json',out/'modules',run=out)
  print(json.dumps(summary,ensure_ascii=False,indent=2));return out
 
 def main():

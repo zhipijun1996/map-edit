@@ -12,3 +12,5 @@
 方法和下一步见[MIGRATION-AND-NEXT.md](MIGRATION-AND-NEXT.md)。用户按A/B组编号直接聊天反馈即可，不强制操作或填网页。
 
 平原本轮：`generation/videos/plains-v1/`为正常速度原生录像；`results/plains-review-v1/`为3个代表的跨批证据绑定；`archives/plains-generation-v1`包含原始成功/失败及阶段源快照、录像日志和追加原敌人资产。报告`PLAINS-REPORT.md`。原A/B和旧归档保持原样。
+
+输出契约：`generation/contracts/plains-v1/`包含3个历史Module的契约化示例、1个未知连接Macro候选、同版本SVG与SHA索引；见OUTPUT-CONTRACT.md。`archives/module-contract-v1`保存适配过程及两次未完成物理运行。当前没有新增完整物理通过批次或开放拼装接口。

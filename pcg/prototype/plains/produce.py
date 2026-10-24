@@ -58,6 +58,9 @@ def run(name,calibration,holdout_seed=1240810,families=None):
  for i,c in enumerate(shown):c['title']=c['review_alias']=f'P{i+1:02}'
  summary=dict(schema='pcg/plains-summary/v1',finalists=len(cases),decision_signatures=len(groups),qualified=len(reviews),representatives=len(shown),physics_cases=engine.sim.cases,batches=len(engine.batches),wall_seconds=time.perf_counter()-started,human_video_feedback=0,human_playtests=0,approved_offline=0,limits=['Finite scripted policy and sampled perturbations, not human success rates','Counterfactuals are tested input policies, not an optimal-path proof','Variant count is not distinct gameplay count'])
  for filename,value in [('summary',summary),('catalog',catalog),('counterfactuals',alternatives),('heldout_entries',tested),('all_review_cases',dict(cases=reviews)),('review_cases',dict(cases=shown))]:(out/(filename+'.json')).write_text(json.dumps(value,ensure_ascii=False,indent=2 if filename in('summary','catalog')else None))
+ # Output-only adapter; raw search cases are research evidence, not interfaces.
+ from contract.export import export as export_contracts
+ export_contracts(out/'all_review_cases.json',out/'modules',run=out)
  print(json.dumps(summary,ensure_ascii=False,indent=2))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--calibration',default='plains-calibration-v2');p.add_argument('--holdout-seed',type=int,default=1240810);p.add_argument('--families');a=p.parse_args();run(a.name,a.calibration,a.holdout_seed,a.families.split(',')if a.families else None)

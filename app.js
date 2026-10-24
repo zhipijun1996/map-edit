@@ -1,3 +1,4 @@
+import {validateGenerationContract} from './module-contract.js';
 import {DIFFICULTY_LEVELS,validateDifficulty,difficultySummary,difficultyChanges} from './difficulty.js';
 import {ABILITIES,abilityName,emptyRequirements,requirementSummary} from './capabilities.js';
 import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,exampleDocument,validateDocument,pathPoint,progressAt,translateObject,objectBounds,makeRevision,objectChanges,changeRequest} from './model.js';
@@ -42,6 +43,7 @@ function renderRevisionInfo(){
   html+=`<p class="revision-state">${op==='modify_existing'?'保留原模块身份与引用。':op==='new_variant'?'保留原版，创建独立变体。':'创建新模块。'}本稿尚未写回游戏。</p>`;
   if(changes)html+=`<div class="change-count">新增 ${changes.added.length} · 调整 ${changes.modified.length} · 删除 ${changes.removed.length}${JSON.stringify(doc.capabilityRequirements??emptyRequirements())!==JSON.stringify(doc.baselineCapabilityRequirements??doc.source?.capabilityRequirements??emptyRequirements())?' · 能力要求已调整':''}</div>`;
   if(difficultyChanges(doc)?.changed)html+='<div class="change-count difficulty-change">难度评分已调整</div>';
+  if(doc.generationContract){let current=false;try{current=validateGenerationContract(doc).versionMatches;}catch{}const c=doc.generationContract;html+=`<div class="revision-warning" data-contract-state="${current?'current':'stale'}"><b>生成契约：${current?'当前内容版本':'已变更 / 证据不可沿用'}</b><br>${esc(c.contentVersion)}<p>静态检查、物理见证与正式接入分别记录。UNKNOWN 接口不可自动拼装；编辑后需重新导出和验证。</p><p>端口 ${c.ports?.length??0} · 有向关系 ${c.relations?.length??0} · 物理记录 ${c.validations?.filter(v=>v.kind==='physics').length??0}</p></div>`;}
   html+='</div>';$('#revision-info').innerHTML=html;
   $('#revision-operation').onchange=e=>{snapshot();doc.intent={...doc.intent,operation:e.target.value};changed();};
   const input=$('#revision-info [data-prop="suggestedModuleId"]');if(input)input.onchange=()=>{snapshot();doc.intent={...doc.intent,suggestedModuleId:input.value.slice(0,100)};changed();};
@@ -320,7 +322,7 @@ $('#route-view').onchange=()=>{routeView=$('#route-view').value;render();};
 function animate(now){if(playing){time+=(now-lastFrame)/1000;if(time>20)time=0;$('#time').value=time;$('#time-label').textContent=time.toFixed(1)+'s';render();}lastFrame=now;requestAnimationFrame(animate);}requestAnimationFrame(animate);
 $('#projects').onclick=showProjects;$('#library').onclick=showLibrary;$('#help').onclick=help;$('#dialog-close').onclick=()=>$('#dialog').close();
 $('#save-file').onclick=saveFile;$('#export').onclick=exportImage;$('#import').onclick=()=>$('#file-input').click();
-$('#file-input').onchange=async()=>{const file=$('#file-input').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error('文件超过 20 MB');const d=validateDocument(JSON.parse(await file.text()));d.id=uid();loadDocument(d);toast('工程已打开');}catch(e){toast('无法打开：'+e.message);}finally{$('#file-input').value='';}};
+$('#file-input').onchange=async()=>{const file=$('#file-input').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error('文件超过 20 MB');const d=validateDocument(JSON.parse(await file.text()));if(!d.generationContract)d.id=uid();loadDocument(d);toast('工程已打开');}catch(e){toast('无法打开：'+e.message);}finally{$('#file-input').value='';}};
 window.addEventListener('beforeunload',persist);
 window.addEventListener('keydown',e=>{
   if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||$('#dialog').open)return;

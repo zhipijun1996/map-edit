@@ -10,3 +10,5 @@
 - 生成/验证由程序运行。AI辅助设计、实现和分析；无实际模型调用/训练时不称AI在线生成。
 - `npm run check` 保护原编辑器；`cd pcg && python3 -m unittest discover -s prototype/factory/tests -v` 检查生成与反馈规则。Godot实验另有真实日志，不以合成测试替代。
 - `pcg/archives` 为版本化原件，`generation` 为可发布录像/结果；不覆盖既有批次，不提交Godot导入缓存或官方引擎二进制。
+
+- 后续交付Module/Macro沿用Map Notes `gunman-rush-level-sketch/v1`并附`generationContract`，执行`pcg/OUTPUT-CONTRACT.md`及`module-contract.js`检查。UNKNOWN不准入拼装；逐方向、状态和版本绑定，不能由单段见证推断回程/Macro/整图。

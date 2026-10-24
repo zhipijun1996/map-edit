@@ -15,3 +15,5 @@ description: 为动作生成和新机关核对真实Godot物理、能力资源�
 默认使用 `prototype/factory/core/engine.py` 的源冻结/批处理；失败保留。未知形状/机关明确拒绝推断，不用默认常数悄悄通过。
 
 平原实例（`pcg/PLAINS-REPORT.md`）：正式角色美术pivot也会决定实际枪口，worker与录像必须使用同样的正式表现，不能强制legacy皮肤后仍宣称真实射线。原damage列表包含对敌人的伤害，按target_id识别玩家受伤；保留所有提交。连续空中反冲需要实际空中命中事件和资源增长共同证实，不把落地回充冒称命中回充。
+
+证据接口约束：内容版本、route/端口有序对、能力配置、进入状态、运动方式、方法/覆盖、结果/失败与未验证项均需绑定。post-action第0帧不是进入快照；observedExit不是通用离开保证。反方向与Macro不得复用单模块单方向pass冒充通过。`assemblyInterface`需可信原件核验与显式覆盖选择，UNKNOWN默认拒绝，参见`pcg/OUTPUT-CONTRACT.md`。
