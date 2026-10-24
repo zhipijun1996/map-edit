@@ -1,0 +1,19 @@
+{
+  "schema": "pcg/region-spec/v1",
+  "version": 1,
+  "id": "mushroom_caverns",
+  "status": "proposed",
+  "name": "蕈灯地穴弹射蘑菇待实现提案",
+  "description": "bounce_mushroom和spore_current尚无真实执行组件。仅可离线读取提案，runtime必须拒绝，不能把钩点或移动平台重命名为蘑菇弹射。",
+  "mechanisms": {
+    "allowed": ["static_terrain", "one_way", "grapple_anchor", "bounce_mushroom", "spore_current"],
+    "required": ["bounce_mushroom"],
+    "forbidden": ["moving_saw"]
+  },
+  "capabilities": {"requires": ["move", "jump"], "preferred_challenge_capabilities": ["double_jump", "grapple"]},
+  "traversal": {"allow_repetition": true, "must_use_all_available": false, "min_actions": 2, "max_depth": 16, "preferred_actions": ["air_jump", "hook_hang"]},
+  "geometry": {"direction": "any", "min_goal_rise": 0},
+  "transform": {},
+  "generator_families": ["mushroom_bounce_chain"],
+  "motifs": ["bounce_mushroom", "spore_current", "cavern_light_landmarks"]
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>失序之钟 · Module 试玩评审</title><link rel="stylesheet" href="review.css"></head>
+<body><main>
+<header><p class="eyebrow">失序之钟 / MODULE FACTORY</p><h1>先玩，再评价。</h1><p>这里是通过本轮技术筛选、等待真人评审的候选。能通关不等于好玩，你的失败体验也有价值。</p><nav><a href="report.html">生产报告与技术边界</a><a href="catalog.json" download>质量档案</a><a href="data.json" download>源码与完整数据下载信息</a></nav></header>
+<div class="summary" id="summary">正在读取本轮候选…</div>
+<section class="game"><iframe id="game" title="真实 Godot 模块试玩" src="play/index.html" allow="fullscreen; gamepad" tabindex="0"></iframe></section>
+<p class="hint">点击游戏后操作：A/D 移动，空格跳跃，左键松开反冲，E / 右键钩索，R 重建。游戏内下拉框切换样例。Replay 是程序见证，不能代替亲自试玩评价。</p>
+<div class="review-grid"><section class="card"><p class="eyebrow">YOUR EXPERIENCE</p><h2 id="candidate">等待游戏加载</h2><p id="attempt">请亲自操作后填写。可以未通关，不要求无伤。</p>
+<form id="review-form">
+<div class="two"><label>你的代号<input id="reviewer" name="reviewer_code" pattern="[A-Za-z0-9_\-]{3,80}" minlength="3" maxlength="80" placeholder="例如 player_A；无需真实姓名" required></label><label>输入设备<select name="input_device"><option value="keyboard_mouse">键盘 + 鼠标</option><option value="gamepad">手柄</option><option value="touch">触屏</option></select></label></div>
+<label>平台动作游戏熟练度<select name="skill"><option value="1">1 · 刚接触</option><option value="2">2 · 有少量经验</option><option value="3" selected>3 · 经常玩</option><option value="4">4 · 熟练</option><option value="5">5 · 擅长高难挑战</option></select></label>
+<div class="ratings" id="ratings"></div>
+<fieldset><legend>你遇到了哪些问题？（可多选）</legend><div class="flags"><label><input type="checkbox" name="flag" value="boring">过程单调</label><label><input type="checkbox" name="flag" value="unreadable_landing">落点或路线难读</label><label><input type="checkbox" name="flag" value="unneeded_mechanic">机关或动作多余</label><label><input type="checkbox" name="flag" value="excessive_wait">等待太久</label><label><input type="checkbox" name="flag" value="unexpected_shortcut">发现意外捷径</label><label><input type="checkbox" name="flag" value="controls_issue">操作不顺手</label></div></fieldset>
+<label>哪一刻最有意思，或最想修改？<textarea name="notes" maxlength="2000" rows="3" placeholder="例如：第二次离墙后不知道下一步该去哪里。"></textarea></label>
+<label class="confirmation"><input id="confirmation" type="checkbox" required>我亲自操作过当前样例；评分是我的实际体验。</label>
+<button id="save" type="submit" disabled>保存当前评价</button><p id="feedback-status" role="status">评价保存在当前浏览器，不会自动上传。</p>
+</form></section>
+<aside class="card"><p class="eyebrow">REVIEW QUEUE</p><h2>本次已保存</h2><div id="saved">尚无评价。</div><button id="export" type="button" disabled>导出反馈 JSON</button><p>完成后把导出的文件发回，才能进入回收与返工流程。页面不会自动联系服务器，也不会自动批准模块。</p><hr><h3>评价提示</h3><p>趣味：你是否享受这个过程？<br>可读性：你能否看懂下一步？<br>公平性：失败原因是否清楚？<br>重玩意愿：你愿不愿再来一次？<br>难度：按你的实际感受填写。</p><details id="technical"><summary>提交后查看当前样例的技术结果</summary><div id="technical-result">先保存自己的评价，再查看自动测试结果，避免影响第一印象。</div></details></aside></div>
+<footer>研究候选 · 不是正式地图池 · 自动化测试不能代签真人趣味与设备验收</footer>
+</main><script src="review.js"></script></body></html>

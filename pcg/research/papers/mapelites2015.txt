@@ -1,0 +1,1607 @@
+                                    Illuminating search spaces by mapping elites
+                                         Jean-Baptiste Mouret1 and Jeff Clune2
+                                    1 Université Pierre et Marie Curie-Paris 6, CNRS UMR 7222, France
+                                    2 University of Wyoming, USA
+
+
+                                    Preprint – April 21, 2015
+
+
+                                       Nearly all science and engineering fields use search al-
+                                    gorithms, which automatically explore a search space to
+                                    find high-performing solutions: chemists search through the
+                                    space of molecules to discover new drugs; engineers search
+                                    for stronger, cheaper, safer designs, scientists search for
+                                    models that best explain data, etc. The goal of search al-
+                                    gorithms has traditionally been to return the single highest-
+                                    performing solution in a search space. Here we describe a
+                                    new, fundamentally different type of algorithm that is more
+                                    useful because it provides a holistic view of how high-
+arXiv:1504.04909v1 [cs.AI] 20 Apr 2015
+
+
+
+
+                                    performing solutions are distributed throughout a search                       Fig. 1. The MAP-Elites algorithm searches in a high-dimensional space
+                                    space. It creates a map of high-performing solutions at each                   to find the highest-performing solution at each point in a low-dimensional
+                                    point in a space defined by dimensions of variation that                       feature space, where the user gets to choose dimensions of variation of in-
+                                                                                                                   terest that define the low dimensional space. We call this type of algorithm
+                                    a user gets to choose. This Multi-dimensional Archive of                       an “illumination algorithm”, because it illuminates the fitness potential of
+                                    Phenotypic Elites (MAP-Elites) algorithm illuminates search                    each area of the feature space, including tradeoffs between performance
+                                    spaces, allowing researchers to understand how interest-                       and the features of interest. For example, MAP-Elites could search in the
+                                    ing attributes of solutions combine to affect performance,                     space of all possible robot designs (a very high dimensional space) to find
+                                    either positively or, equally of interest, negatively. For ex-                 the fastest robot (a performance criterion) for each combination of height
+                                                                                                                   and weight.
+                                    ample, a drug company may wish to understand how per-
+                                    formance changes as the size of molecules and their cost-
+                                    to-produce vary. MAP-Elites produces a large diversity of
+                                                                                                                   by human engineers3 : they have designed antennas that NASA
+                                    high-performing, yet qualitatively different solutions, which
+                                                                                                                   flew to space4 , found patentable electronic circuit designs3 , auto-
+                                    can be more helpful than a single, high-performing solu-
+                                                                                                                   mated scientific discovery5 , and created artificial intelligence for
+                                    tion. Interestingly, because MAP-Elites explores more of the
+                                                                                                                   robots6–15 . Because of their widespread use, improving search al-
+                                    search space, it also tends to find a better overall solution
+                                                                                                                   gorithms provides substantial benefits for society.
+                                    than state-of-the-art search algorithms. We demonstrate the
+                                    benefits of this new algorithm in three different problem do-                     Most search algorithms focus on finding one or a small set of
+                                    mains ranging from producing modular neural networks to                        high-quality solutions in a search space. What constitutes high-
+                                    designing simulated and real soft robots. Because MAP-                         quality is determined by the user, who specifies one or a few ob-
+                                    Elites (1) illuminates the relationship between performance                    jectives that the solution should score high on. For example, a
+                                    and dimensions of interest in solutions, (2) returns a set                     user may want solutions that are high-performing and low-cost,
+                                    of high-performing, yet diverse solutions, and (3) improves                    where each of those desiderata is quantifiably measured either by
+                                    the state-of-the-art for finding a single, best solution, it will              an equation or simulator. Traditional search algorithms include
+                                    catalyze advances throughout all science and engineering                       hill climbing, simulated annealing, evolutionary algorithms, gra-
+                                    fields.                                                                        dient ascent/descent, Bayesian optimization, and multi-objective
+                                                                                                                   optimization algorithms1, 2 . The latter return a set of solutions that
+                                                                                                                   represent the best tradeoffs between objectives16 .
+                                        Author’s Note: This paper is a preliminary draft of a paper that intro-
+                                                                                                                      A subset of optimization problems are challenging because
+                                    duces the MAP-Elites algorithm and explores its capabilities. Normally
+                                                                                                                   they require searching for optima in a function or system that is
+                                    we would not post such an early draft with only preliminary experimen-
+                                                                                                                   either non-differentiable or cannot be expressed mathematically,
+                                    tal data, but many people in the community have heard of MAP-Elites,
+                                                                                                                   typically because a physical system or a complex simulation is
+                                    are using it in their own papers, and have asked us for a paper that de-
+                                                                                                                   required. Such problems require “black box” optimization algo-
+                                    scribes it so that they can cite it, to help them implement MAP-Elites,
+                                                                                                                   rithms, which search for high-performing solutions armed only
+                                    and that describes the experiments we have already conducted with it.
+                                                                                                                   with the ability to determine the performance of a solution, but
+                                    We thus want to share both the details of this algorithm and what we
+                                                                                                                   without access to the evaluation function that determines that
+                                    have learned about it from our preliminary experiments. All of the ex-
+                                                                                                                   performance. On such problems, one cannot use optimization
+                                    periments in this paper will be redone before the final version of the paper
+                                                                                                                   methods that require calculating the gradient of the function,
+                                    is published, and the data are thus subject to change.
+                                                                                                                   such as gradient ascent/descent.
+                                                                                                                      A notorious challenge in black box optimization is the presence
+                                    1 Background and Motivation                                                    of local optima (also called local minima)1, 2 . A problem with most
+                                                                                                                   search algorithms of this class is that they try to follow a path that
+                                                                                                                   will lead to the best global solution by relying on the heuristic that
+                                    Every field of science and engineering makes use of search al-                 random changes to good solutions lead to better solutions. This
+                                    gorithms, also known as optimization algorithms, which seek to                 approach does not work for highly deceptive problems, however,
+                                    automatically find a high-quality solution or set of high-quality              because in such problems one has to cross low-performing valleys
+                                    solutions amongst a large space of possible solutions1, 2 . Such               to find the global optima, or even just to find better optima2 .
+                                    algorithms often find solutions that outperform those designed                    Because evolutionary algorithms are one of the most success-
+
+
+
+                                    Mouret and Clune                                                                                                                                arXiv | 1
+ful families of black-box search algorithms2, 3 , and because the             will decrease exponentially when the number of dimensions of
+work we build on comes from that community, here we adopt the                 the search space increases).
+language and metaphors of evolutionary computation. In that                     Here we present a new algorithm that, given N dimensions of
+parlance, a solution is an organism or phenotype or individual, the           variation of interest chosen by the user, searches for the highest-
+organism is described by a genome or genotype, and the actions                performing solution at each point in the space defined by those
+performed by that organism are the organism’s behavior. The per-              dimensions (Fig. 1). These dimensions are discretized, with the
+formance or quality of a solution is called its fitness, and the equa-        granularity a function of available computational resources. Note
+tion, simulation, etc. that returns that fitness value is the fitness         that the search space can be high-dimensional, or even of infinite
+function. The way of stochastically producing new solutions is                dimensions, but the feature space is low-dimensional by design.
+to take an existing solution and mutate its genome, meaning to                We call this algorithm the multi-dimensional archive of pheno-
+change the genome in some random way, and or to produce a                     typic elites, or MAP-Elites. It was used and briefly described in6 ,
+new solution descriptor by sampling portions of two parent de-                but this paper is the first to describe and explore its properties in
+scriptors, a process called crossover. Solutions that produce new             detail.
+offspring organisms are those that are selected, and such selection             The benefits of MAP-Elites include the following:
+is typically biased towards solutions with higher fitness2 .
+   To encourage a broad exploration of the search space,                        • Allowing users to create diversity in the dimensions of vari-
+many modern evolutionary algorithms encourage diversity                           ation they choose.
+through a variety of different techniques, including increas-
+                                                                                • Illuminating the fitness potential of the entire feature space,
+ing mutation rates when the rate of performance improve-
+                                                                                  not just the high-performing areas, revealing relationships
+ment stagnates1, 2, 17–19 , explicitly selecting for genetic diversity2, 20
+                                                                                  between dimensions of interest and performance.
+or behavioral diversity21–25 , or changing the structure of the
+population26 . Such diversity-promoting techniques often im-                    • Improved optimization performance; the algorithm often
+prove the quality of the solutions produced and the number of                     finds a better solution than the current state-of-the-art search
+different types of solutions explored, but search algorithms still                algorithms in complex search spaces because it explores
+tend to converge to one or a few good solutions early and cease                   more of the feature space, which helps it avoid local optima
+to make further progress2, 21, 25 .                                               and thus find different, and often better, fitness peaks.
+   An alternate idea proposed in recent years is to abandon the
+goal of improving performance altogether, and instead select                    • The search for a solution in any single cell is aided by the
+only for diversity in the feature space (also called the behavior                 simultaneous search for solutions in other cells. This paral-
+space): This algorithm, called Novelty Search, can perform bet-                   lel search is beneficial because (1) it may be more likely to
+ter than performance-driven search on deceptive problems21–24 .                   generate a solution for one cell by mutating a solution to
+The user defines how to measure the distance between behav-                       a more distant cell, a phenomenon called “goal switching”
+iors, and then Novelty Search seeks to produce as many different                  in a new paper that uses MAP-Elites37 , or (2) if it is more
+behaviors as possible according to this distance metric. The al-                  likely to produce a solution to a cell by crossing over two
+gorithm stops when an individual in the population solves the                     solutions from other cells. If either reason is true, MAP-
+objective (i.e. their performance is high enough). Because Nov-                   Elites should outperform a separate search conducted for
+elty Search does not work well with very large feature/behavioral                 each cell. There is evidence that supports this claim below,
+spaces27, 28 , there have been many proposals for combining selec-                and this specific experiment was conducted in Nguyen et al.
+tion for novelty and performance28–31 . The main focus of these                   201537 , which found that MAP-Elites does produce higher-
+hybrid algorithms remains finding the single best individual that                 performing solutions in each cell than separately searching
+solves a task, or a set of individuals that represent the best possi-             for a high-performing solution in each of those cells.
+ble tradeoff between competing objectives.
+                                                                                • Returning a large set of diverse, high-performing individ-
+   In the last few years, a few algorithms have been designed
+                                                                                  uals embedded in a map that describes where they are lo-
+whose goal is not to return one individual that performs well on
+                                                                                  cated in the feature space, which can be used to create new
+one objective, but a repertoire of individuals that each performs
+                                                                                  types of algorithms or improve the performance of existing
+well on a different, related objective14, 22, 32 . Along with research
+                                                                                  algorithms6 .
+into behavioral diversity and Novelty Search, such repertoire-
+gathering algorithms inspire the algorithm we present in this pa-
+per.                                                                          2 Optimization vs. Illumination Algorithms
+   While the exploration of search spaces is at the center of many
+discussions in optimization, we rarely see these search spaces be-            Optimization algorithms try to find the highest-performing solu-
+cause they are often too high-dimensional to be visualized. While             tion in a search space. Sometimes they are designed to return a
+the computer science literature offers plenty of options for dimen-           set of high-performing solutions, where members in the set are
+sionality reduction and visualization of high-dimensional data                also good on other objectives, and where the set represents the
+33–36
+      , such algorithms are “passive” in that they take a fixed data          solution on the Pareto front of tradeoffs between performance
+set and search for the best low-dimensional visualization of it.              and quality with respect to those other objectives. Optimization
+They do not tackle the issue of generating this data set. In other            algorithms are not traditionally designed to report the highest-
+words, they do not explore a high-dimensional space in such a                 performing solution possible in an area of the feature space that
+way as to reveal interesting properties about it to a user via a low-         cannot produce either the highest-performing solution overall, or
+dimensional visualization. Such exploration algorithms are nec-               a solution on the Pareto front.
+essary when the entire search space is too large to be simply visu-              A different kind of algorithm, which we call illumination algo-
+alized by a dimensionality reduction algorithm, but instead must              rithms, are designed to return the highest-performing solution
+be actively explored to learn interesting facts about it. For exam-           at each point in the feature space. They thus illuminate the fit-
+ple, to identify all the performance peaks in a large search space,           ness potential of each region of the feature space. In biological
+we must actively search for them. It is not enough to sample mil-             terms, they illuminate the phenotype-fitness map38 . Any illumi-
+lions of solutions and plot them, for the same reason as random               nation algorithm can also be used as an optimization algorithm,
+sampling is often not a good optimization algorithm: finding a                making illumination algorithms a superset of optimization algo-
+fitness peak by chance is very unlikely for large search spaces               rithms. MAP-Elites is an illumination algorithm. It is inspired
+(in most cases, the probability of finding the best possible fitness          by two previous illumination algorithms, Novelty Search + Local
+
+
+
+Mouret and Clune                                                                                                                         arXiv | 2
+  procedure MAP-E LITES A LGORITHM ( SIMPLE , DEFAULT VERSION )
+     (P ← ∅, X ← ∅)                            . Create an empty, N -dimensional map of elites: {solutions X and their performances P}
+     for iter = 1 → I do                                                                                           . Repeat for I iterations.
+         if iter < G then                                                                   . Initialize by generating G random solutions
+              x0 ← random solution()
+         else                                                               . All subsequent solutions are generated from elites in the map
+              x ← random selection(X )                                                       . Randomly select an elite x from the map X
+              x0 ← random variation(x)                        . Create x0 , a randomly modified copy of x (via mutation and/or crossover)
+         b0 ←feature descriptor(x0 )                              . Simulate the candidate solution x0 and record its feature descriptor b0
+          0                  0
+         p ←performance(x )                                                                               . Record the performance p0 of x0
+         if P(b0 ) = ∅ or P(b0 ) < p0 then                  . If the appropriate cell is empty or its occupants’s performance is ≤ p0 , then
+              P(b0 ) ← p0                          . store the performance of x0 in the map of elites according to its feature descriptor b0
+                  0      0
+              X (b ) ← x                                  . store the solution x0 in the map of elites according to its feature descriptor b0
+     return feature-performance map (P and X )
+
+                                   Fig. 2. A pseudocode description of the simple, default version of MAP-Elites.
+
+
+Competition (NS+LC)22 and the Multi-Objective Landscape Ex-                 measuring the behavior of the phenotype while it performs, ei-
+ploration algorithm (MOLE)32 . All three are described below.               ther in simulation or reality.
+                                                                               Note that there may be many levels of indirection between x
+                                                                            and bx . With direct encoding, each element in the genome specifies
+3 Details of the MAP-Elites algorithm                                       an independent component of the phenotype2, 7, 39 . In that case, it
+                                                                            is straightforward to map genotypes into phenotypes, and then
+MAP-Elites is quite simple, both conceptually and to implement.             measure performance and features (evaluating the phenotype in
+Pseudocode of the algorithm is in Fig. 2. First, a user chooses a           a simulator or the real world if necessary). An extra level of indi-
+performance measure f (x) that evaluates a solution x. For exam-            rection can occur with indirect encoding, also known as generative
+ple, if searching for robot morphologies, the performance mea-              or developmental encoding, in which information in the genome
+sure could be how fast the robot is. Second, the user chooses N             can be reused to affect many parts of the phenotype (also called
+dimensions of variation of interest that define a feature space of          pleiotropy); such encodings have been shown to improve regular-
+interest to the user. For robot morphologies, one dimension of in-          ity, performance, and evolvability2, 7, 8, 11–13, 39–42 . In other words, a
+terest could be how tall the robot is, another could be its weight, a       complex process can exist that maps genome x → to phenotype
+third could be its energy consumption per meter moved, etc. An              px → to features bx and performance f x.
+alternate example could be searching for chess programs, where                 MAP-Elites starts by randomly generating G genomes and de-
+the performance measure is the win percentage, and the dimen-               termining the performance and features of each. In a random or-
+sions of variation could be the aggressiveness of play, the speed           der, those genomes are placed into the cells to which they belong
+with which moves are selected, etc. A further example is evolv-             in the feature space (if multiple genomes map to the same cell, the
+ing drug molecules, where performance could be a drug’s effi-               highest-performing one per cell is retained). At that point the al-
+cacy and dimensions of variation could be the size of molecules,            gorithm is initialized, and the following steps are repeated until
+the cost to produce them, their perishability, etc.                         a termination criterion is reached. (1) A cell in the map is ran-
+   Each dimension of variation is discretized based on user prefer-         domly chosen and the genome in that cell produces an offspring
+ence or available computational resources. This granularity could           via mutation and/or crossover. (2) The features and performance
+be manually specified or automatically tuned to the available re-           of that offspring are determined, and the offspring is placed in
+sources, including starting with a coarse discretization and then           the cell if the cell is empty or if the offspring is higher-performing
+increasing the granularity as time and computation allow.                   than the current occupant of the cell, in which case that occupant
+   Given a particular discretization, MAP-Elites will search for the        is discarded.
+highest performing solution for each cell in the N -dimensional                The termination criterion can be many things, such as if a set
+feature space. For example, MAP-Elites will search for the fastest          amount of time expires, a fixed amount of computational re-
+robot that is tall, heavy, and efficient; the fastest robot that is tall,   sources are consumed, or some property of the archive is pro-
+heavy, and inefficient, the fastest robot that is tall, light, and effi-    duced. Examples of the latter could include a certain percentage
+cient, etc.                                                                 of the map cells being filled, average fitness in the map reaching
+   The search is conducted in the search space, which is the space          a specific level, or n solutions to a problem being discovered.
+of all possible values of x, where x is a description of a candidate           One can consider the archive, which is the set of descriptors in
+solution. In our example, the search space contains all possible            all the cells, as the traditional population in an evolutionary algo-
+descriptions of robot morphologies (note that we must search in             rithm. The difference is that in MAP-Elites each member of the
+the space of descriptions of robot morphologies; it is not possible         population is by definition diverse, at least according to the di-
+to search directly in the space of robot morphologies or directly           mensions of the feature space.
+in the feature space). We call the x descriptor a genome or genotype           The above description, for which pseudocode is provided in
+and the robot morphology the phenotype, or px . We have already             Fig. 2, is the default way to implement MAP-Elites. To encour-
+mentioned that a function f (x), called a fitness function, returns         age a more uniform exploration of the space at a coarse resolu-
+the performance of each x. A feature (a.k.a. behavior) function             tion, and then a more fine-grained search afterwards, we created
+b(x) must also exist or be defined that, for each x, determines x’s         a hierarchical version that starts with larger cells in the feature
+value in each of the N feature dimensions. In other words, b(x)             space that are then subdivided into smaller cells during search af-
+returns bx , which is an N -dimensional vector describing x’s fea-          ter predetermined numbers of evaluations have been performed
+tures. In our example, the first dimension of bx is the robot’s             (Methods). We further parallelized this algorithm to run on clus-
+height, the second dimension is its weight, and the third is its en-        ters of networked computers, by farming out batches of evalua-
+ergy consumption per meter moved, etc. Some elements of the                 tions to slave nodes, instead of performing each evaluation seri-
+feature vector may be directly measured in the phenotype (e.g.              ally (Methods). Section 8 contains ideas for additional, alternate
+height, weight), but others (e.g. energy consumption) require               possible variants of MAP-Elites.
+
+
+
+Mouret and Clune                                                                                                                            arXiv | 3
+  There are two things to note about MAP-Elites:                           calculations are O(n log(n))43 each generation. MAP-Elites
+  • It is not guaranteed that all cells in the feature space will be       only needs to look up the current occupant of the cell, which
+    filled, for two reasons. (1) There may be no genome x that             is O(1).
+    maps to a particular cell in the feature space. For example,         • Novelty Search contains both a current population and an
+    it may be impossible to have a robot of a certain height and           archive of previous solutions that serves as a memory of
+    weight due to physical laws. (2) The search algorithm may              which points in the feature space have been visited. Main-
+    fail to produce a genome that maps to a cell in the feature            taining both a population and an archive requires many ad-
+    space, even if such a genome exists.                                   ditional parameters that have to be chosen carefully or per-
+  • There are many genotypes that can be mapped to the same                formance can be detrimentally affected29 .
+    cell in the feature space, perhaps an infinite number. For ex-       • Given that Novelty Search rewards individuals that are dis-
+    ample, there are many robot blueprints that produce a robot            tant from each other in the feature space, having only a pop-
+    with the same height, weight, and energy consumption. For              ulation would lead to “cycling”, a phenomenon where the
+    that reason, and because it is not known a priori which                population moves from one area of the feature space to a new
+    genomes will map to which cells, it is not possible to search          area and back again, without any memory of where it has al-
+    directly in the feature space. Recall that there is, even with         ready explored. The archive in NS+LC limits, but does not
+    direct encodings, and especially with indirect encodings, a            eliminate, this phenomenon. MAP-Elites does away with the
+    complex mapping from genome x to the feature vector bx . If            archive vs. population distinction by having only an archive.
+    it is possible in a given problem to directly take steps in the        It thus avoids cycling and is always simultaneously focused
+    feature space, then MAP-Elites is unnecessary because one              on expanding into new niches (until there are none left) and
+    could simply perform exhaustive search in the feature space.           improving the performance of existing niches.
+    One can think of MAP-Elites as a way of trying to perform
+    such an exhaustive search in the feature space, but with the           It is thus quite easy to intuit what the selection pressure for
+    additional challenge of trying to find the highest-performing          MAP-Elites is over time. In contrast, the selection pressures
+    solution for each cell in that feature space.                          for Novelty Search are more dynamic and thus harder to un-
+                                                                           derstand, even for Novelty Search variants that have only an
+                                                                           archive and no population29 . For example, it is hard to pre-
+4 Differences between MAP-Elites and previous,                             dict how much search will be focused in each area of the fea-
+  related algorithms                                                       ture space, because a relatively sparse area during one era of
+                                                                           the search can become relatively crowded later on, and vice
+In 2011, Lehman and Stanley22 note that combining a selective              versa.
+pressure for feature diversity with one performance objective that         The dynamics of NS+LC are even more dynamic, complex,
+all of the different types of phenotypes compete on is akin to hav-        and unpredictable. One thing to keep in mind is that, while
+ing butterflies and bacteria compete with bears and badgers on             the performance of solutions in NS+LC is only judged ver-
+one performance criterion (e.g. speed). Doing so is unhelpful              sus neighbors, these relative performance scores are then
+for producing the fastest of each type of creature, given the dif-         competed globally within the (relative) performance objec-
+ferent speed scales these creatures exhibit. Instead, Lehman and           tive. Overall, therefore, NS+LC biases search towards under-
+Stanley propose encouraging diversity in the feature space, but            explored areas of the feature space (taking into account
+having each organism compete on performance only with other                the archive and the population), areas of the search space
+organisms that are near it in the feature space, an algorithm they         with the highest relative performance, and tradeoffs between
+call Novelty Search + Local Competition (NS+LC)22 . NS+LC accom-           these two objectives. An organism in an area that is bet-
+plishes these goals via a multi-objective algorithm with two ob-           ter than its neighbors, but where this gap is not as large
+jectives: (1) maximizing an organism’s performance relative to its         as elsewhere, will not be explored as often unless or until
+closest 15 neighbors (i.e. local competition, but note that these rel-     that larger performance gap elsewhere is reduced. The fo-
+ative scores are then entered into a global competition, the impli-        cus of the (relative) performance objective is thus complex
+cations of which are discussed below), and (2) maximizing a nov-           and ever-changing. The diversity objective is also complex
+elty objective, which rewards organisms the further they are in            and dynamic, because NS+LC does not only store one so-
+feature space from their 15 closest neighbors. Whereas normally            lution per cell. Many solutions can pile up in one area of
+evolutionary algorithms do not produce much diversity within               the space, creating a pressure to explore under-explored ar-
+one run, but instead have to perform multiple, independent runs            eas until those areas are more explored relative to the initial
+to showcase diversity8 , NS+LC produces a substantial amount of            area, creating a pressure to return to the initial area, and so
+different types of high performing creatures within one evolving           on.
+population22 .
+   NS+LC inspired us to create two algorithms that also seek to            For both objectives, thus, it is hard to intuit both the dy-
+find the highest performing solution at each point in a feature            namics themselves and what effects these dynamics have on
+space. The first was the Multi-Objective Landscape Exploration             search. MAP-Elites, in contrast, produces offspring by uni-
+(MOLE) algorithm32 and the second is MAP-Elites, the algorithm             formly sampling from the existing archive, such that the only
+presented in this paper. MOLE has two objectives: the first is             thing that changes over time is the number of cells that are
+performance, and the second for each organism to be as far from            filled and their performance. MAP-Elites thus embodies the
+other organisms as possible, where distance is measured in a fea-          main principle of illumination algorithms, which is to search
+ture space that a user specifies.                                          for the highest-performing solution at each point of the fea-
+   Both NS+LC and MOLE have similar goals to MAP-Elites: they              ture space, in a more simple, intuitive, and predictable way.
+search for the highest-performing solution at each point in a fea-       • In the default version of MAP-Elites, organisms only com-
+ture space. However, both are more complicated and, as will be             pete with the organism (the current occupant) in their cell, so
+shown in the results section, do not perform as well as MAP-               the range of features they compete with is fixed. In Novelty
+Elites empirically.                                                        Search and NS+LC, organisms compete with their nearest
+   Specific differences between MAP-Elites and NS+LC include:              neighbors in the feature space. Especially at the beginning of
+  • Novelty Search needs to compute the feature distance to ev-            the run before the archive fills up, that might mean that or-
+    ery other organism each generation; such nearest neighbor              ganisms are competing with others that have very different
+
+
+
+Mouret and Clune                                                                                                                arXiv | 4
+    features, which is contrary to the spirit of local competition       • Precision (opt-in reliability): For each run, if (and only if)
+    in the feature space.                                                  a run creates a solution in a cell, the average across all such
+                                                                           cells of the highest performing solution produced for that cell
+  Specific differences between MAP-Elites and MOLE include:                divided by the highest performing solution any algorithm
+                                                                           found for that cell. Section 9.4.2 provides the formal equa-
+  • MOLE features one global performance competition (via the
+                                                                           tion.
+    performance objective). Thus, a few high-performing indi-
+    viduals will dominate this objective, making it hard to rec-            This metric measures a different notion of reliability, which
+    ognize and keep a slightly better performing solution in a              is the trust we can have that, if an algorithm returns a solu-
+    low- or medium-performing region of the space. MAP-Elites               tion in a cell, that solution will be high-performing relative to
+    is better at recognizing and keeping any improvement to fit-            what is possible for that cell. To anthropomorphize, the al-
+    ness in any region of the space, no matter how the perfor-              gorithm gets to opt-in which cells it wishes to fill and thus
+    mance of that cell compares to other cells. As an example of            be measured on. The ideal illumination algorithm would
+    when MOLE might fail to reward an important innovation,                 have a perfect score of 1 for this criterion. Optimization al-
+    imagine a new solution in a medium-performing, densely                  gorithms should fare better on this criterion than global reli-
+    packed region of the space, that is higher-performing than              ability, because they will tend to explore only a few areas of
+    anything previously found in that cell. This new solution,              the feature space, but should produce high-performing so-
+    which represents the best performance yet found in that                 lutions in many cells in those areas. Note, however, that if
+    cell, would not be selected for because it is neither high-             an optimization algorithm starts in a low-performing region
+    performing versus other organisms in the population, nor                of the feature space and moves to a neighboring region, it is
+    would it be kept because it is diverse. Thus, the organism              expected that its relative performance in the cells it started
+    does not perform well in either of the MOLE objectives, yet             in will stay low, as optimization algorithms are not asked to
+    it is precisely what we truly want: the highest performing              improve performance in those cells. Thus, even ideal opti-
+    individual found so far in that area of the feature space.              mization algorithms are not expected to perform perfectly
+                                                                            on this criterion on average, although they may do so once
+  • Like Novelty Search, the diversity objective in MOLE has un-            in a while.
+    stable temporal dynamics. The population may rush to a rel-
+    atively unexplored area, fill it up, then rush off to a new rel-     • Coverage: Measures how many cells of the feature space a
+    atively unexplored area, and then rush back to the original            run of an algorithm is able to fill of the total number that are
+    area. It does not evenly search for improvements to all areas          possible to fill. The mathematical details are specified in sec-
+    of the map simultaneously.                                             tion 9.4.3. This measure does not include the performance of
+                                                                           the solutions in the filled cells. The ideal illumination algo-
+                                                                           rithm would score perfectly on this metric. The ideal opti-
+5 Criteria for Measuring the Algorithms                                    mization algorithm is not expected to perform well on this
+                                                                           criterion.
+There are many different ways to quantify the quality of illumi-
+nation algorithms and optimization algorithms. In this paper, we
+evaluate algorithms on the following quantifiable measures:            6 Experiments and Results
+
+  • Global Performance: For each run, the single highest-              We evaluated MAP-Elites in three different search spaces: neu-
+    performing solution found by that algorithm anywhere in            ral networks, simulated soft robot morphologies, and a real, soft
+    the search space divided by the highest performance possi-         robotic arm. The neural network search space is interesting be-
+    ble in that domain. If it is not known what the maximum            cause evaluations are fast, allowing us to draw high-resolution
+    theoretical performance is, as is the case for all of our do-      feature-space maps for a high-dimensional search space. The
+    mains, it can be estimated by dividing by the highest perfor-      experiments with both simulated and real soft robot are inter-
+    mance found by any algorithm in any run. This measure is           esting because soft robots are important, new design spaces
+    the traditional, most common way to evaluate optimization          where traditional design and control methods do not work well,
+    algorithms. One can also measure whether any illumination          if at all. Thus, we need advanced search algorithms to find
+    algorithm also performs well on this measurement. Both the         high-performing designs. The first two search spaces (neu-
+    ideal optimization algorithm and the ideal illumination al-        ral networks and simulated soft robots) are extremely high-
+    gorithm are expected to perform perfectly on this measure.         dimensional, demonstrating the ability of MAP-Elites to cre-
+                                                                       ate low-dimensional feature maps from high-dimensional search
+  • Global reliability: For each run, the average across all cells     spaces. The third, involving the soft robot arm, involves eval-
+    of the highest-performing solution the algorithm found for         uations that are performed directly on a real robot because the
+    each cell (0 if it did not produce a solution in that cell) di-    soft properties of the robot are too complex to simulate. This do-
+    vided by the best known performance for that cell as found         main demonstrates that MAP-Elites is also effective even in a low-
+    by any run of any algorithm. Cells for which no solution was       dimensional, challenging, real-world problem.
+    found by any run of any algorithm are not included in the
+    calculation (to avoid dividing by zero, and because it may
+    not be possible to fill such cells and algorithms thus should      6.1 Search space 1: neural networks
+    not be penalized for not doing so). Section 9.4.1 provides the
+                                                                       This problem domain is identical to one from Clune et al. 201332 ,
+    formal equation.
+                                                                       which itself is based on the domain from Kashtan and Alon
+    This measure assesses how reliable an algorithm is at find-        200544 . The following explanation of the domain is adapted from
+    ing the highest-performing solution for each cell in the map.      Clune et al. 201332 .
+    It is the most important measure we want an illumination              The problem involves a neural network that receives stimuli
+    algorithm to perform well on, and the ideal illumination al-       from an eight-pixel retina. Patterns shown on the retina’s left and
+    gorithm would perform perfectly on it. There is no reason          right halves may each contain an object (i.e. a pattern of interest).
+    to expect pure optimization algorithms, even ideal ones, to        Networks have to answer whether an object is present on both
+    perform well on this criterion.                                    the left and right sides of the retina32, 44 . Each network iteratively
+
+
+
+Mouret and Clune                                                                                                                   arXiv | 5
+sees all possible 256 input patterns and answers true (≥ 0) or false   early draft of the paper we do not yet have data to share because
+(< 0). Its performance is the percentage of correct answers.           the MOLE runs in that paper were at a lower resolution; we will
+   Because it has been shown that minimizing connection costs          add a fair comparison of MOLE to MAP-Elites in a future draft of
+promotes the evolution of modularity32 , it is interesting to vi-      this paper. We can report that the MOLE figures from Clune et al.
+sualize the relationship between network connection costs and          2013 required merging data from many (specifically, 30) different
+modularity. To do so, we can create a 2D feature space where the       runs of MOLE, meaning that across many MOLE runs we took
+first feature dimension (x axis) is connection cost (the sum of the    the highest-performing network found in each cell. The variance
+squared length of the connections in a network32 ), and the sec-       in these MOLE runs was high, such that many of the runs did not
+ond feature dimension is network modularity (computed using            find high-performing networks in large regions of the space; we
+an efficient approximation of Newman’s modularity score45 ). The       thus were only able to get a good picture of the fitness potential of
+resolution of the map is 512 × 512; the map is filled by the hierar-   each region by taking data from many different runs. That high
+chical version of MAP-Elites with 10,000 evaluations (Methods).        variance means that any individual MOLE run did not produce
+   For this domain, we compare MAP-Elites to three other algo-         a reliable, consistent, true picture of the fitness potential of each
+rithms: (1) a traditional, single-objective evolutionary algorithm     region of the space; such a picture only came into view with a
+with selection for performance only, which thus does not explic-       tremendous amount of computation spent on many MOLE runs.
+itly seek diversity in either feature dimension, (2) novelty search    In contrast, each individual MAP-Elites run produces a consistent
+with local competition (NS+LC) 22 , which is described above,          picture that looks similar to the result of merging many MOLE
+where novelty is measured in the same 2D feature space, and            runs. There is still variance between MAP-Elites runs, but it is
+(3) to random sampling. For these three control experiments, we        much smaller, meaning that each run of the algorithm is more
+record all the candidate solutions evaluated by the algorithm and      reliable.
+then keep the best one found per cell in the feature space (i.e.          We next investigated the assumption that elites are found by
+the elite performer for each cell), and report and plot these data.    mutating genomes nearby in the feature space, and found that
+Each treatment is allocated the same number of fitness evalua-         this assumption is largely true (Fig. 4, Left). Most organisms de-
+tions (Methods). For each treatment, 20 independent runs are per-      scend from nearby organisms, whether close neighbors, nearby
+formed, meaning 20 independent replicates that each start with a       neighbors, or more distant neighbors within the same region of
+different random number seed and thus have different stochastic        the space. None of the organisms we randomly sampled were
+events.                                                                produced by a parent more than halfway across the feature map.
+   The results reveal that MAP-Elites scores significantly higher      That said, many high-performing elites do descend, not from
+(p < 1×10−7 ) than the three control algorithms on all four criteria   immediate neighbors, but from a high-performing neighbor a
+described in section 5: global performance, global reliability, pre-   medium distance away. That fact shows that purely local search,
+cision, and coverage (Fig. 3, Top). Qualitatively, the difference in   which likely concentrates on one area of the feature space, may
+MAP-Elites vs. the controls is apparent in typical, example maps       not be the best way to discover high-performing solutions, and
+produced by each treatment (Fig. 3, Bottom). Overall, MAP-Elites       suggests that one reason MAP-Elites is able to find so many high-
+finds solutions that are more diverse and high-performing than         performing solutions is because collecting a large reservoir of
+traditional optimization algorithms (here called the “traditional      diverse, high-performing solutions makes it more likely to find
+EA”), novelty search with local competition, and random sam-           new, different, high-performing solutions.
+pling.                                                                    Looking at the direct parents of elites suggests that a relatively
+   It is surprising that, even when looking only at the best perfor-   local, but overlapping, search is taking place in each region of the
+mance overall (global performance), MAP-Elites outperforms the         map. However, looking at the entire lineage of four randomly
+traditional EA, which focuses explicitly on finding the single best-   chosen elites reveals that lineages frequently traverse long paths
+performing individual in the search space. That is likely because      through many different regions of the map (Fig. 4, right). These
+the retina problem is deceptive32 and this traditional evolutionary    lineages further underscore the benefit of simultaneously search-
+algorithm has no pressure for diversity, which is known to help        ing for high-performing organisms at each point in the map: do-
+with deception2 .                                                      ing so may provide stepping stones to high-performing solutions
+   While MAP-Elites significantly outperforms all controls on          in a region that may not have been discovered had search been
+both reliability and precision (opt-in reliability), the gap is much   trying to increase performance by searching only in that region.
+narrower for precision, as is to be expected. In terms of coverage,    This result was replicated in a recent study in a different domain
+random sampling was the second best of the algorithms in our           that investigated this issue with MAP-Elites in more depth37 .
+study. MAP-Elites likely outperforms it in this regard because
+mutations to members of a diverse population are more likely           6.2 Simulated soft, locomoting robot morphologies
+to fill new cells versus randomly generating genomes. That is
+especially true if cells are more likely to be filled by mutating a    Soft robots are made of soft, deformable materials; they open up
+nearby cell than by randomly sampling from the space of all pos-       new design spaces, allowing the creation of robots that can per-
+sible genotypes. Imagine, for example, that most randomly sam-         form tasks that traditional robots cannot46–49 . For example, they
+pled genotypes are in the center of a map. In that case, it would      can adapt their shape to their environment, which is useful in re-
+be unlikely to produce an organism in a corner by random sam-          stricted spaces like pipelines, caves, and blood arteries. They are
+pling. In contrast, MAP-Elites could slowly accumulate organ-          also safer to have around humans50 . However, they are harder
+isms in cells closer and closer to the corner, making it more likely   to design because their components have many more non-linear
+to eventually fill that corner. Random sampling likely produces        degrees of freedom48, 51 .
+more coverage than the traditional EA because the latter tends to         It has previously been shown that an evolutionary algorithm
+allocate new individuals as offspring of the highest-performing        with a modern, generative encoding (explained below) can pro-
+organisms found so far, focusing search narrowly at the expense        duce a diversity of soft robots morphologies that move in dif-
+of exploring the feature space. It is not clear why random sam-        ferent ways8 . However, the diversity of morphologies shown in
+pling produced more coverage than NS+LC, although this result          that paper and its accompanying video (https://youtu.be/
+needs to be tested across a wider range of parameters before its       z9ptOeByLA4) came from different runs of evolution. Within each
+robustness is known.                                                   run, most of the morphologies were similar. As is typical with
+   We can also report anecdotally that MAP-Elites performs much        evolutionary algorithms, in each run the search found a local op-
+better in this domain than the MOLE algorithm, which was pre-          timum and became stuck on it, spending most of the time explor-
+viously applied to this same domain and feature space32 . For this     ing the similar designs on that peak.
+
+
+
+Mouret and Clune                                                                                                                  arXiv | 6
+                Global performance                                Reliability                                    Precision                                Coverage
+         1.05                                             1.0                                    1.0                                        1.0
+         1.00
+                                                          0.8                                    0.8                                        0.8
+         0.95
+                                                          0.6                                    0.6                                        0.6
+         0.90
+         0.85                                             0.4                                    0.4                                        0.4
+         0.80                                             0.2                                    0.2                                        0.2
+         0.75                                             0.0                                    0.0                                        0.0
+                                  s
+               do NS A
+
+                    MA ling
+                      Sa C
+
+
+
+
+                                 s
+
+
+
+
+                                 s
+
+
+
+
+                                 s
+             nd NS EA
+
+
+
+
+             nd NS EA
+
+
+
+
+             nd NS EA
+                              lite
+
+
+
+
+                   MA ling
+
+
+
+
+                   MA ling
+
+
+
+
+                   MA ling
+                    Sa LC
+
+
+
+
+                    Sa LC
+
+
+
+
+                    Sa LC
+                               lE
+                  m +L
+
+
+
+
+                           lite
+
+
+
+
+                           lite
+
+
+
+
+                           lite
+                         mp
+                          na
+
+
+
+                        P-E
+
+
+
+                            l
+
+
+
+
+                            l
+
+
+
+
+                            l
+               om +
+
+
+
+
+               om +
+
+
+
+
+               om +
+                       mp
+
+
+
+
+                       mp
+
+
+
+
+                       mp
+                         na
+
+
+
+
+                         na
+
+
+
+
+                         na
+                       P-E
+
+
+
+
+                       P-E
+
+
+
+
+                       P-E
+       ion
+
+
+
+
+                     ion
+
+
+
+
+                     ion
+
+
+
+
+                     ion
+    dit
+
+
+
+
+                 dit
+
+
+
+
+                 dit
+
+
+
+
+                 dit
+ Tra
+
+
+
+
+             Tra
+
+
+
+
+             Tra
+
+
+
+
+             Tra
+                  n
+               Ra
+
+
+
+
+          Ra
+
+
+
+
+          Ra
+
+
+
+
+          Ra
+         5.0                                      0.950         5.0                                      0.92          5.0                                       0.84
+
+                                                  0.925                                                  0.90                                                    0.83
+         4.0                                                    4.0                                                    4.0                                       0.82
+                                                  0.900                                                  0.88
+                                                                                                                                                                 0.81
+                                                  0.875                                                  0.86
+         3.0                                                    3.0                                                    3.0
+                                                                                                                                                                 0.80
+                                                  0.850                                                  0.84
+                                                                                                                                                                 0.79
+         2.0                                      0.825
+                                                                2.0                                      0.82          2.0
+                                                                                                                                                                 0.78
+                                                                                                         0.80
+                                                  0.800
+         1.0                                                    1.0                                                    1.0                                       0.77
+                                                                                                         0.78
+                                                  0.775                                                                                                          0.76
+                                                                                                         0.76
+          0.0    1.0    2.0   3.0   4.0     5.0   0.750          0.0   1.0   2.0   3.0     4.0     5.0                  0.0   1.0     2.0     3.0   4.0    5.0   0.75
+
+
+
+                       (b) Traditional EA                         (c) Novelty Search + Local Competition                            (d) Random Sampling
+
+                                                                                                         1.000
+                                                                5.0
+                                                                                                         0.975
+                                                                                                         0.950
+                                                                4.0
+                                                                                                         0.925
+
+                                                                3.0                                      0.900
+                                                                                                         0.875
+
+                                                                2.0                                      0.850
+                                                                                                         0.825
+                                                                1.0                                      0.800
+                                                                                                         0.775
+                                                                 0.0   1.0   2.0   3.0     4.0     5.0   0.750
+
+
+
+                                                                             (e) MAP-Elites
+
+
+
+Fig. 3. MAP-Elites produces significantly higher-performing and more diverse solutions than control algorithms. Top: MAP-Elites significantly out-
+performs controls on global performance (finding the single highest-performing solution), reliability (average performance across all fillable cells),
+precision (average performance only of cells filled by the algorithm), and coverage (the number of cells filled). All of the metrics are normalized.
+Section 5 explains these metrics in more detail. In the box plot for each metric, the black line shows the median. Bottom: Example maps produced
+by a single run (the first one) of each treatment. As described in Clune et al. 201332 , the x-axis is connection cost, the y-axis is modularity, and heat
+map colors indicate normalized performance. These maps show that MAP-Elites illuminates more of the feature space, revealing the fitness potential
+of each area.
+
+
+   The morphologies evolved in Cheney et al.8 also rarely in-                            were also interested in morphologies of different sizes, which can
+cluded one of the four materials available, a stiff (dark blue) ma-                      also be added as a different dimension of variation to be explored
+terial analogous to bone. The authors (one of which is the last                          by MAP-Elites.
+author on this paper) tried many different parameters and envi-                            Here we test whether MAP-Elites can address the issues raised
+ronmental challenges to encourage the optimization algorithm to                          in the two previous paragraphs. Specifically, we test (1) whether
+use more of this material, but it rarely did. One could, of course,                      MAP-Elites can produce a large diversity of morphologies within
+explicitly include a term in the fitness function to reward the in-                      one run and (2) whether it can produce high-performing mor-
+clusion of this material, but that may cause evolution to over in-                       phologies for a range of levels of bone use and body size, and
+vest in it, and it is hard to know ahead of time how much material                       combinations thereof.
+to encourage the inclusion of to produce interesting, functional                           We adopt the same domain as Cheney et al. 20138 by evolving
+designs. The ideal would be to see the highest-performing crea-                          multi-material, soft robots in the Voxcad simulator52 . Robots are
+ture at each level of bone use, and thus learn how the use of bone                       specified in a space of 10 × 10 × 10 voxels, where each voxel is ei-
+affects both fitness and morphology design. That is exactly what                         ther empty or filled with one of four kinds of material: bone (dark
+MAP-Elites is designed for. The authors of Cheney et al. 2013                            blue, stiff), soft support tissue (light blue, deformable), muscles
+
+
+
+Mouret and Clune                                                                                                                                                        arXiv | 7
+Fig. 4. Most elites are found by mutating a parent genome that was nearby in the feature space, but the entire lineages of example elites reveals
+search paths that traverse large distances through the feature space. The data in these plots are from the neural network domain. As in Fig. 3
+and Fig. 3 of Clune et al.32 , the x-axis is connection cost and the y-axis is modularity. Left: For a random subset of elites from the neural network
+domain, we draw an arrow pointing at that elite that starts in the location of the parent that produced that elite. If there were no correlation between the
+location of an elite and its parent, there would be far more long arrows. Most elites are produced from parents within a range of distances in a nearby
+region (approximately 0.2 or less). The color of the beginning of each arrow denotes the performance of the parent, and the color toward the tip of
+the arrow denotes the performance of the elite. Note that many high-performing elites descend from other high-performing elites, but often not from
+direct neighboring cells. These data suggest that collecting high-performing elites in many different locations helps discover high-performing elites in
+new locations, which is likely why MAP-Elites is able to find so many different, high-performing solutions. Right: Example lineages tracing all of the
+descendants of four randomly selected final elites. For each of the four elites, a dashed line of a different color (green, orange, blue, or purple) starts at
+its randomly generated, generation 0 ancestor (red circle), which interestingly is the same for all four elites. Note that the colors and paths are harder to
+differentiate when the different lineages overlap. Each dashed line passes through the location in the feature space of each ancestor along the lineage
+of that elite and terminates at that elite’s location in the feature space. The color of arrows along each lineage denote the performance of the parent
+that was located at the tail end of the arrow and produced the offspring at arrowhead. The main conclusion is that the stepping stones that lead to a
+high-performing elite at a particular location in the feature space are distributed throughout the feature space, suggesting that MAP-Elites’ strategy of
+simultaneously rewarding high-performing organisms at each point in the space may help discover high-performing solutions in very different regions.
+
+
+that contract and expand in phase (green, cyclical volumetric ac-               implemented in the Sferesv2 60 evolutionary platform, which has
+tuation of 20%), and muscles that contract and expand in opposite               some departures from the original NEAT algorithm. Specifically,
+phase (red, counter-cyclical volumetric actuation of 20%).                      our direct encoding does not include crossover or genetic diver-
+   The material of each voxel is encoded with a compositional                   sity via speciation. See Mouret and Doncieux 201225 for a more
+pattern-producing network (CPPN)53 , an encoding based on de-                   detailed description of the Sferes version of NEAT.
+velopmental biology that causes robot phenotypes to be more                        Performance for these soft robots is defined as the distance cov-
+regular and high-performing7, 8, 11, 12, 53–57 . CPPNs are similar to           ered in 10 simulated seconds. The first (x-axis) dimension of the
+neural networks, but with evolvable activation functions (in this               feature space is the percentage of voxels that are the stiff bone
+paper, the functions can be sine, sigmoid, Gaussian, and linear)                (dark blue) material. The second feature-space dimension is the
+that allow the network to create geometric patterns in the pheno-               percentage of voxels filled. The resolution of the map is 128 × 128.
+types they encode. Because these activation functions are regu-                 We launched 10 runs for each treatment, but some had not com-
+lar mathematical functions, the phenotypes produced by CPPNs                    pleted in time to be included in this draft of the paper. We thus
+tend to be regular (e.g. a Gaussian function can create symme-                  include data only from runs that finished in our plots and statisti-
+try and a sine function can create repetition). CPPN networks are               cal analyses (7 for the EA treatment, 5 for the EA+Diversity treat-
+genomes that are run iteratively for each voxel in the workspace                ment, and 8 for the MAP-Elites treatment). In later drafts of this
+to determine whether that voxel is empty or full and, if full, which            paper we will report on a complete set of finished experiments,
+type of material is present. Specifically, for each voxel, the Carte-           which will also have a larger and consistent number of runs per
+sian (x, y, and z) coordinates of the voxel and its distance from the           treatment.
+center (d) are provided as inputs to the CPPN, and one CPPN out-                   Our two control algorithms are implemented in NSGA-II and
+put specifies whether a voxel is empty. If the voxel is not empty,              have been used in previous studies 25, 57 : (1) a single-objective evo-
+the maximum value of an additional four outputs (one per ma-                    lutionary algorithm optimizing performance only, which we refer
+terial type) determines the type of material for that voxel. This               to as the “traditional EA” or just “EA” for short, and (2) a two-
+method of separating the presence of a phenotypic component                     objective evolutionary algorithm that optimizes performance and
+and its parameters into separate CPPN outputs has been shown                    diversity, which we call EA+D. Diversity is measured for each
+to improve performance58, 59 . If there are multiple disconnected               individual as the average distance in the feature space to every
+voxel patches, only the most central patch is considered as the                 other individual. Both control treatments performed the same
+robot morphology. A lengthier explanation of CPPNs and how                      number of evaluations as MAP-Elites.
+they specify the voxels of the soft robots in this domain can be                   In this domain, MAP-Elites does a far better job than the con-
+found in Cheney et al. 20138 , from which some text in this de-                 trols of revealing the fitness potential of each area of the fea-
+scription of methods was derived.                                               ture space, which is the goal of illumination algorithms (Fig. 5).
+   While the soft robot morphologies are indirectly encoded by                  It has significantly higher reliability and coverage (p < 0.002),
+CPPNs, the CPPN networks themselves are directly encoded and                    and example maps highlight the tremendous difference in terms
+evolved according to the principles of the NEAT algorithm20 , as is             of exploring the feature space between the MAP-Elites illumina-
+customary for CPPNs7, 8, 11, 12, 53–56 . Here, the NEAT principles are          tion algorithm and the two control optimization algorithms, even
+
+
+
+Mouret and Clune                                                                                                                                  arXiv | 8
+though one has a diversity pressure.                                      gorithms to learn of this high-performing region of the space, but
+   In terms of global performance, while MAP-Elites has a higher          with MAP-Elites it jumps out visually in each map. Even within
+median value, there is no significant difference between it and the       this island, we can still see smooth gradients in the desired di-
+other treatments (p > 0.05). If one cared only about finding a sin-       mensions of variation, starting with sheets made entirely of mus-
+gle, high-performing solution, then there would thus be no sta-           cle and transitioning to sheets made mostly of bone. Space con-
+tistical difference between MAP-Elites and the two optimization           straints prevent showing all of the final elites, but we consistently
+algorithm controls. However, if one wanted a variety of different,        observed that one can start in nearly any location of the map and
+high-performing solutions, MAP-Elites produces far more.                  smoothly vary the designs found there in any direction. A second
+   MAP-Elites is significantly worse at precision than the two con-       example map is provided (Fig. 6, Bottom) to show that these find-
+trol algorithms (p < 0.01). This result is likely explained by the        ings are not limited to one run of MAP-Elites, but are consistently
+fact that the control algorithms allocate all of their evaluations to     found in each map: while the actual design themes are differ-
+very few cells, and thus find good solutions for those cells. In          ent from map to map, the fact that MAP-Elites provides smooth
+contrast, MAP-Elites has to distribute its evaluations across or-         changes in these themes according to the desired dimensions of
+ders of magnitude more cells, making it hard to always find a             variations is consistent.
+high-performing solution in each cell. Note that MAP-Elites is
+usually competing against itself in this regard: because there is so      6.3 Real soft robot arm
+little exploration by the control algorithms, they rarely produce
+the highest-performing solution across all runs of all treatments         While the previous section featured simulated soft robots, in this
+for a particular cell. Those instead tend to come from MAP-Elites.        section we test whether MAP-Elites can help find controllers for
+Thus, most low precision scores for MAP-Elites come when one              a real, physical, soft robot arm. The physics of this arm are quite
+run of MAP-Elites does not find as high-performing a solution in          complicated and difficult to simulate, making it necessary to per-
+a cell as another run of MAP-Elites. We hypothesize that if each          form all evaluations on the real robot. That limits the number
+run of MAP-Elites were given more evaluations (i.e. run longer),          of evaluations that can be performed, requiring a small feature
+it would catch up to, if not surpass, the controls in precision. That     space. This domain thus demonstrates that MAP-Elites is effec-
+is a beneficial, and rare, property for an evolutionary algorithm         tive even on a challenging, real-world problem with expensive
+to have: that it can benefit from additional computation because          evaluations and a small feature space.
+it does not get stuck on local optima and cease to innovate.                 We built a soft robotic arm (Fig. 7) by connecting 3 actuated
+   There is variance in the maps produced by independent runs             joints (dynamixel AX-18 servos) with highly compliant tubes
+of MAP-Elites. That reflects the fact that it is a stochastic search      (made of flexible, washing machine drain pipes). An external
+algorithm with historical contingency. The perfect illumination           camera tracked a red point at the end of the arm. A solution is
+algorithm would always find the highest-performing solution at            a set of 3 numbers specifying the angle of each of the 3 joints.
+each point in the map, and thus have no between-run variance.             Specifically, each servo can move between -150 and +150 steps
+However, while there are differences between the maps of differ-          (out of the possible range for AX-18s of -512 and + 512 steps,
+ent runs, they largely reveal the same overall pattern (Figs. 5 and       which covers all 360 degrees of rotation). When the arm is fully
+6).                                                                       extended and horizontal, the first servo from the base is at posi-
+   By looking at pictures and videos of the elites in the final map       tion 150, and the other two are at position 0.
+of individual runs, we observed that MAP-Elites does indeed pro-             The feature space is one-dimensional: the x-value of the red
+duce smooth changes across the chosen dimensions of variation             circle at the end of the arm (in the coordinates of the image from
+(Fig. 6). Consider the column of examples from the right side             the perspective of the camera). It is discretized into 64 cells. The
+of Fig. 6, Top, where the percent of voxels filled is roughly 75%.        performance function is to maximize the y-value of the end of the
+Starting at the bottom, with around 10% bone, there is a design           arm. The experiments thus attempt to discover the boundaries of
+with a red muscle hind leg, green muscle front leg, and no bone           the workspace of the robot, which is hard to compute analytically
+in the back connecting these legs (instead there is light blue soft       with a flexible robot.
+tissue). Sweeping up in that column, the percentage of bone is in-           We evaluated MAP-Elites and two controls: random sampling
+creased, predominantly in the back connecting the legs, and the           and a traditional grid search algorithm. In the random sampling
+soft tissue and amount of muscle in each leg is reduced to gradu-         control, each solution is determined by randomly choosing an
+ally increase the amount of dark blue bone. These same creatures          angle for each joint in the allowable range. The grid search al-
+visualized from the side (rightmost column of images in Fig. 6,           gorithm specifies, for each joint, eight points evenly distributed
+Top) shows that the basic biped locomotion pattern is preserved           within the range of allowable angles for that joint, and then tests
+despite these changes, going from (in the bottom) a fast, flexible        all combinations of the possible values for each joint. We repli-
+biped that resembles a rabbit, to a slow biped creature that re-          cated each experiment 10 times, except for grid search, which is
+sembles a turtle with a massive, heavy shell. MAP-Elites is thus          a deterministic algorithm and thus need only be run once. Each
+achieving its goal of providing the requested variation and pro-          MAP-Elites and random sampling experiment were allocated 640
+ducing a high-performing solution of each type. True to the mo-           evaluations; the grid search required 729 evaluations (9 × 9 × 9).
+tivation of illumination algorithms 22, 32 , finding the fastest, heavy      The results show that all three treatments find approximately
+shelled turtle does not preclude finding the fastest rabbit: in this      the correct boundary for high values of x (∼600 to ∼800). Our ob-
+case, they both can win the race.                                         servations of the robot revealed why this is a relatively easy task:
+   From these maps, one can also learn about the fitness potential        these points can be reached by setting the angles of the first and
+of different regions of the feature space. For example, the previ-        second joints (counting from the base) to put the third joint on the
+ous example showed that, holding the percentage of voxels filled          ground, and only changing the angle of this third joint. Because
+at 75%, the more bone in a creature, the slower it is. The full map       of the flexibility of the links, many different combinations of an-
+reveals that is generally true for almost all body sizes. The maps        gles for the first and second joint result in having the wrist on the
+also reveal an interesting, anomalous, long, skinny island of high        table.
+performance in the column where the percentage of voxels filled              Intermediate values of x (approximately 400-600) represent
+is roughly 7%. It turns out that column contains a variety of dif-        harder problems, because in this range there are fewer joint angle
+ferent solutions that are all one voxel wide. Some quirk of the           values that combine to reach near the maximum height. MAP-
+simulator allows these vertical sheet organisms to perform better         Elites outperforms both grid search and random sampling in this
+than creatures that are more than one voxel wide. It might take           region. Even when they are at their best, MAP-Elites tends to out-
+hundreds or thousands of runs with traditional optimization al-           perform these algorithms. For each control algorithm, there are
+
+
+
+Mouret and Clune                                                                                                                     arXiv | 9
+                Global performance                                   Reliability                                        Precision                                  Coverage
+        0.075                                               1.0                                          1.0                                     1.0
+        0.070
+                                                            0.8                                          0.8                                     0.8
+        0.065
+                                                            0.6                                          0.6                                     0.6
+        0.060
+        0.055                                               0.4                                          0.4                                     0.4
+        0.050                                               0.2                                          0.2                                     0.2
+        0.045                                               0.0                                          0.0                                     0.0
+                                   D
+
+                                   s
+                EA
+
+
+
+
+                                                                         +D
+
+
+
+
+                                                                                                                        +D
+
+
+
+
+                                                                                                                                                                   +D
+                                                                                   s
+
+
+
+
+                                                                                                                                  s
+
+
+
+
+                                                                                                                                                                                s
+                                                              EA
+
+
+
+
+                                                                                                            EA
+
+
+
+
+                                                                                                                                                       EA
+                               lite
+                          +
+
+
+
+
+                                                                               lite
+
+
+
+
+                                                                                                                              lite
+
+
+
+
+                                                                                                                                                                            lite
+                       EA
+
+
+
+
+                                                                   EA
+
+
+
+
+                                                                                                                   EA
+
+
+
+
+                                                                                                                                                              EA
+                            P-E
+
+
+
+
+                                                                            P-E
+
+
+
+
+                                                                                                                           P-E
+
+
+
+
+                                                                                                                                                                         P-E
+                              MA
+
+
+
+
+                                                                          MA
+
+
+
+
+                                                                                                                         MA
+
+
+
+
+                                                                                                                                                                     MA
+                                                    0.064                                                       0.064                                                     0.064
+         1.2                                                       1.2                                                        1.2
+                                                    0.056                                                       0.056                                                     0.056
+
+         1.0                                        0.048          1.0                                          0.048         1.0                                         0.048
+
+         0.8                                        0.040          0.8                                          0.040         0.8                                         0.040
+
+                                                    0.032                                                       0.032                                                     0.032
+         0.6                                                       0.6                                                        0.6
+                                                    0.024                                                       0.024                                                     0.024
+         0.4                                                       0.4                                                        0.4
+                                                    0.016                                                       0.016                                                     0.016
+         0.2                                                       0.2                                                        0.2
+                                                    0.008                                                       0.008                                                     0.008
+
+          0.0   0.2   0.4   0.6   0.8   1.0   1.2   0.000           0.0   0.2   0.4    0.6   0.8   1.0    1.2   0.000          0.0   0.2   0.4   0.6   0.8   1.0   1.2    0.000
+
+
+
+                                                    0.064                                                       0.064                                                     0.064
+         1.2                                                       1.2                                                        1.2
+                                                    0.056                                                       0.056                                                     0.056
+
+         1.0                                        0.048          1.0                                          0.048         1.0                                         0.048
+
+         0.8                                        0.040          0.8                                          0.040         0.8                                         0.040
+
+                                                    0.032                                                       0.032                                                     0.032
+         0.6                                                       0.6                                                        0.6
+                                                    0.024                                                       0.024                                                     0.024
+         0.4                                                       0.4                                                        0.4
+                                                    0.016                                                       0.016                                                     0.016
+         0.2                                                       0.2                                                        0.2
+                                                    0.008                                                       0.008                                                     0.008
+
+          0.0   0.2   0.4   0.6   0.8   1.0   1.2   0.000           0.0   0.2   0.4    0.6   0.8   1.0    1.2   0.000          0.0   0.2   0.4   0.6   0.8   1.0   1.2    0.000
+
+
+
+
+                             (a) EA                                                   (b) EA + D                                            (c) MAP-Elites
+
+
+Fig. 5. MAP-Elites does much better than a traditional evolutionary algorithm (EA) and an EA with diversity (EA+D) at finding high-performing solutions
+throughout a feature space. Data are from the simulated, soft robot morphologies problem domain. Top: MAP-Elites significantly outperforms the
+controls in global reliability and coverage (top, p < 0.002). Bottom: Qualitatively, example maps produced by two independent runs demonstrate
+MAP-Elites’ ability to both fill cells (coverage) and reveal the fitness potential of different areas of the feature space. Note the difference in feature-space
+exploration between the MAP-Elites illumination algorithm and the optimization algorithms.
+
+
+values in this region were their performance is especially poor.                               7 Discussion and Conclusion
+
+                                                                                               This paper introduces the term “illumination algorithms” for the
+   Lower values of x represent even harder challenges. Grid                                    class of algorithms that try to find the highest-performing solu-
+search found only a few points below 500, and thus provides a                                  tion at each point in a user-defined feature space. It also intro-
+less-informative (lower-resolution) picture than MAP-Elites does.                              duces a new illumination algorithm called MAP-Elites, which is
+To have good coverage of this low-x-value region (200-500), we                                 simpler to implement and understand than previous illumination
+would need to significantly increase the resolution (discretiza-                               algorithms, namely Novelty Search + Local Competition22 and
+tion) of grid search, which would require exponentially more                                   MOLE32 . Finally, the paper presents preliminary evidence show-
+evaluations. The rarity of high-performing solutions in this part                              ing that MAP-Elites tends to perform significantly better than
+of the feature space results in even lower performance for ran-                                control algorithms, either illumination algorithms or optimiza-
+dom sampling. MAP-Elites, in contrast, provides many high-                                     tion algorithms, on three different problem domains. Because of
+performing solutions for all values of x. These data are still                                 the preliminary nature of the experimental data, we do not wish
+too preliminary to provide reliable statistical results, but we plot                           for readers at this point to conclude anything for certain yet about
+them to show what we know to date about MAP-Elites and the                                     MAP-Elites’ empirical performance, but in many cases the data
+controls in this problem domain.                                                               suggest that MAP-Elites is a promising new illumination algo-
+
+
+
+Mouret and Clune                                                                                                                                                            arXiv | 10
+rithm that outperforms previous ones.                                      biasing towards cells who have empty adjacent cells, cells
+   Perhaps the best way to understand the benefits of illumination         near low-performing areas, cells near high-performing areas,
+algorithms versus optimization algorithms is to view the feature           etc. In preliminary experiments, such biases did not perform
+maps from the simulated soft robot domain (Fig. 5). Optimiza-              better than the default MAP-Elites.
+tion algorithms may return a high performing solution, but they
+do not teach us about how key features of a search space relate          • Including crossover. Crossover may be especially effective
+to performance. MAP-Elites and other illumination algorithms,              when restricted to occurring between organisms nearby in
+in contrast, map the entire feature space to inform users about            the feature space. Doing so allows different competing con-
+what is possible and the various tradeoffs between features and            ventions in the population (e.g. tall, skinny organisms being
+performance. Such phenotype-fitness maps, as they are known                crossed over only with other tall, skinny organisms, and the
+in biology38 , are interesting in their own right, and can also be         same for short, fat organisms). One could make crossover
+put to practical use. For example, a recent paper showed that the          only occur within a certain radius of an individual or as
+map can provide a repertoire of different, high-performing solu-           a probabilistic function of the distance between organisms
+tion that can initiate search for new behaviors in case an original        (leading to overlapping crossover zones), or only within cer-
+behavior no longer works (e.g. if a robot becomes damaged or               tain regions (more akin to an island model). Note that even
+finds itself in a new environment)6 .                                      with geographically restricted crossover, offspring could still
+   MAP-Elites is also a powerful optimization algorithm, putting           end up in different areas of the feature space than their par-
+aside its additional benefits regarding illuminating feature land-         ents (either due to the effects of mutation or crossover).
+scapes. It significantly outperformed or matched control algo-
+rithms according to the narrow question of which algorithm             9 Methods
+found the single, highest-performing solution in each run. As dis-
+cussed above, that could be because simultaneously searching for       9.1 Statistics
+a multitude of different, related stepping stones may be a much
+better way to reach any individual stepping stone than directly        The statistical test for all p values is a two-tailed Mann-Whitney
+searching only for a solution to that stepping stone37 .               U test.
+   For a similar reason, illumination algorithms like MAP-Elites
+may help evolutionary algorithms move closer to the open-ended         9.2 Hierarchical, Parallelized MAP-Elites
+evolution seen in the natural world, which produced a tremen-
+dous diversity of organisms (within one run). In nature, there         To first encourage a course-grained search, and then allow for in-
+are a multitude of different niches, and a species being good in       creased granularity, we created a hierarchical version of MAP-
+one niche does not preclude a different species from being good        Elites. It starts with larger cells and then subdivides those cells
+in another: i.e., that bears are stronger does not crowd out the       over time. In this hierarchical version of MAP-Elites, the sizes
+ability for butterflies to flourish in their own way22 . By simul-     of cells shrink during search, and thus the range of differences
+taneously rewarding a multitude of different types of creatures,       in features that an organism competes with changes, although it
+MAP-Elites captures some of that diversity-creating force of na-       is bounded to within a cell: competition is thus still restricted to
+ture. One drawback to MAP-Elites, however, is that it does not         solutions with similar features.
+allow the addition of new types of cells over time that did not           To make MAP-Elites run faster on a supercomputer containing
+exist in the original feature space. It thus, by definition, cannot    many networked computers, we created a batched, parallelized
+exhibit open-ended evolution. Nature, in contrast, creates new         version of hierarchical MAP-Elites. It farms out batches of eval-
+niches while filling others (e.g. beavers create new types of en-      uations to slave nodes and receives performance scores and be-
+vironments that other species can specialize on). Future work is       havioral descriptors back from these nodes. These optimizations
+required to explore how to create illumination algorithms that do      should not have any qualitative effect on the overall performance
+not just reveal the fitness potential of a predefined feature space,   of the algorithm. All of the experiments in this paper were con-
+but that report the highest-performing solutions at each point in      ducted with this hierarchical, paralleled version of MAP-Elites.
+an ever expanding feature space that is intelligently enlarged over
+time.                                                                  9.3 Experimental parameters
+   In conclusion, illumination algorithms, which find the highest-
+                                                                       Retina experiments. 20 replicates for each treatment.
+performing solution at each point in a user-defined feature space,
+                                                                         The MAP-Elites parameters are as follows:
+are valuable new tools to help us learn about complex search
+spaces. They illuminate the fitness potential of different combina-      • starting size of the map: 16 × 16
+tions of features of interest, and they can also serve as powerful
+optimization algorithms. MAP-Elites represents a simple, intu-           • final size of the map: 512 × 512
+itive, new, promising illumination algorithm that can serve these        • batch size: 2,000
+goals. It also captures some of the diversity generating power of
+nature because it simultaneously rewards the highest-performing          • number of iterations: 10,000
+solutions in a multitude of different niches.
+                                                                         • initial batch: 20,000
+
+8 Alternate variants of MAP-Elites                                       • resolution change program (4 changes):
+                                                                              – iteration 0: 64 × 64
+The following are alternate ways to implement MAP-Elites. Fu-
+                                                                              – iteration 1250: 128 × 128
+ture research is necessary to see whether, and on which types of
+problems, any of these variants is consistently better than the sim-          – iteration 2500: 256 × 256
+ple, default version of MAP-Elites used in this paper.                        – iteration 5000: 512 × 512
+  Possible variants of this algorithm include:
+                                                                         • feature 1: connection cost (see 32 )
+  • Storing more than one genome per feature cell to promote
+    diversity                                                            • feature 2: network modularity (see 32 )
+
+  • Biasing the choice of which cells produce offspring, such as         • performance: percent answers correct on retina problem32
+
+
+
+Mouret and Clune                                                                                                               arXiv | 11
+Soft robots experiments. The MAP-Elites parameters are as                We then define the global reliability G(m) of a map m as follows:
+follows:
+                                                                                                           1 X m(x, y)
+  • feature 1: percentage of bones                                                             G(m) =
+                                                                                                         n(M ) x,y M (x, y)
+  • feature 2: percentage of voxels filled
+                                                                         where x, y ∈ {[xmin , · · · , xmax ; ymin , · · · , ymax ]}, and n(M ) is
+  • performance: covered distance                                        the number of non-zero entries in M (i.e. the number of unique
+                                                                         cells that were filled by any run from any treatment).
+  • starting resolution: 64 × 64
+
+  • final resolution: 128 × 128                                          9.4.2 Precision (opt-in reliability)
+
+  • batch size: 1024                                                     Same as global reliability, but for each run, the normalized perfor-
+                                                                         mance is averaged only for the cells that were filled by that algo-
+  • initial batch: 4096                                                  rithm in that run. This measure addresses the following question:
+                                                                         when a cell is filled, how high-performing is the solution relative
+  • iterations: 1400                                                     to what is possible for that cell?
+                                                                            Mathematically, the opt-in reliability, or precision, P (m) of a
+Soft physical arm. 10 replicates for each treatment except for           map m is:
+the grid search, which is deterministic and thus requires only one                                        1 X m(x, y)
+run.                                                                                          P (m) =
+                                                                                                       n(m) x,y M (x, y)
+  For the grid search:
+                                                                         for x, y ∈ {[xmin , · · · , xmax ; ymin , · · · , ymax ]|filledm (x, y) = 1},
+  • total number of evaluations: 512
+                                                                         where filledm (x, y) is a binary matrix that has a 1 in an (x, y) cell
+  • discretization of the parameters: 8 steps                            if the algorithm produced a solution in that cell and 0 otherwise,
+                                                                         and where n(M ) is the number of non-zero entries in M (i.e. the
+  For the random sampling:                                               number of unique cells that were filled by any run from any treat-
+  • total number of evaluations: 420                                     ment).
+
+  • we report the best solution found in each of the 64 cells used       9.4.3 Coverage
+    by MAP-Elites
+                                                                         For a map m produced by one run of one algorithm, we count
+  For MAP-Elites:                                                        the number of non-empty (i.e. filled) cells in that map and divide
+  • total number of evaluations: 420                                     by the total number of cells that theoretically could be filled given
+                                                                         the domain (i.e. for which a genome exists in the search space that
+  • feature 1: x coordinate                                              maps to that feature-space cell). Unfortunately, we do not know
+                                                                         this total number of cells that theoretically could be filled for the
+  • fitness: maximize height (y coordinate)                              experimental domains in this paper. We approximate this number
+  • starting resolution: 64                                              by counting the number of unique cells that have been filled by
+                                                                         any run from any treatment. Using the notation of the previous
+  • final resolution: 64                                                 two sections, this number is n(FM ), where FM = filledM .
+
+  • batch size: 10
+                                                                         10 References
+  • initial batch: 120
+
+  • iterations: 30
+                                                                            1. S. J. Russell, P. Norvig, J. F Canny, J. M. Malik, and D. D. Edwards.
+                                                                               Artificial intelligence: a modern approach, volume 74. Prentice hall
+9.4 Quantifiable measurements of algorithm quality                             Englewood Cliffs, 1995.
+                                                                            2. D. Floreano and C. Mattiussi. Bio-inspired artificial intelligence:
+The notation in this section assumes a two-dimensional feature                 theories, methods, and technologies. The MIT Press, 2008.
+map (x and y), but can be generalized to any number of dimen-               3. J.R. Koza, Martin A Keane, Matthew J Streeter, William Mydlowec,
+sions.                                                                         Jessen Yu, and Guido Lanza. Genetic programming IV: Routine
+                                                                               human-competitive machine intelligence. Kluwer, 2003.
+                                                                            4. G.S. Hornby, J.D. Lohn, and D.S. Linden. Computer-automated
+9.4.1 Global reliability                                                       evolution of an x-band antenna for nasa’s space technology 5 mis-
+                                                                               sion. Evolutionary Computation, 19(1):1–23, 2011.
+Measures how close the highest performing solution found by the             5. M. Schmidt and H. Lipson. Distilling free-form natural laws from
+algorithm for each cell in the map is to the highest possible per-             experimental data. science, 324(5923):81–85, 2009.
+formance for that cell, averaged over all cells in the map. Because         6. A. Cully, J. Clune, D. Tarapore, and J-B. Mouret. Robots that can
+                                                                               adapt like natural animals. arXiv, 1407.3501, 2015.
+we do not know the highest performance possible for each cell,              7. J. Clune, K.O. Stanley, R.T. Pennock, and C. Ofria. On the per-
+we approximate it by setting it equal to the highest performance               formance of indirect encoding across the continuum of regularity.
+found for that cell by any run of any algorithm. Cells that have               IEEE Transactions on Evolutionary Computation, 15(4):346–367,
+never been filled by any algorithm are ignored. If an algorithm in             2011.
+a run does not produce a solution in a cell, the performance for            8. N. Cheney, R. MacCurdy, J. Clune, and H. Lipson. Unshackling
+                                                                               evolution: Evolving soft robots with multiple materials and a power-
+that algorithm for that cell is set to 0 because the algorithm found           ful generative encoding. In Proceedings of the Genetic and Evolu-
+zero percent of that cell’s potential.                                         tionary Computation Conference, pages 167–174, 2013.
+   We first define Mx,y as the best solution found across all runs of       9. G.S. Hornby, S. Takamura, T. Yamamoto, and M. Fujita. Au-
+all treatments at coordinates x, y. If M = m1 , · · · , mk is a vector         tonomous evolution of dynamic gaits with two quadruped robots.
+                                                                               IEEE Transactions on Robotics, 21(3):402–410, 2005.
+containing the final map from every run of every treatment, then
+                                                                           10. S Doncieux, N Bredeche, J Mouret, and A Eiben. Evolutionary
+                                                                               robotics: What, why, and where to. Name: Frontiers in Robotics
+                       Mx,y =     max          mi (x, y)                       and AI, 2(4), 2015.
+                                i∈[1,··· ,k]
+
+
+
+
+Mouret and Clune                                                                                                                         arXiv | 12
+ 11. J. Yosinski, J. Clune, D. Hidalgo, S. Nguyen, J.C. Zagal, and H. Lip-        learning. In Proceedings of the Genetic and Evolutionary Compu-
+     son. Evolving robot gaits in hardware: the hyperneat generative              tation Conference, 2015.
+     encoding vs. parameter optimization. In Proceedings of the Euro-         38. James J Bull, Richard H Heineman, and Claus O Wilke. The
+     pean Conference on Artificial Life, pages 890–897, 2011.                     phenotype-fitness map in experimental evolution of phages. PLoS
+ 12. S. Lee, J. Yosinski, K. Glette, H. Lipson, and J. Clune. Evolving            One, 6(11):e27796, 2011.
+     gaits for physical robots with the hyperneat generative encoding:        39. K.O. Stanley and R. Miikkulainen. A taxonomy for artificial embryo-
+     the benefits of simulation. In Applications of Evolutionary Comput-          geny. Artificial Life, 9(2):93–130, 2003.
+     ing. Springer, 2013.                                                     40. G.S. Hornby, H. Lipson, and J.B. Pollack. Generative representa-
+ 13. J. Clune, B.E. Beckmann, C. Ofria, and R.T. Pennock. Evolving co-            tions for the automated design of modular physical robots. IEEE
+     ordinated quadruped gaits with the HyperNEAT generative encod-               Transactions on Robotics and Automation, 19(4):703–719, 2003.
+     ing. In Proceedings of the IEEE Congress on Evolutionary Compu-          41. G.S. Hornby and J.B. Pollack. Creating high-level components with
+     tation, pages 2764–2771, 2009.                                               a generative representation for body-brain evolution. Artificial Life,
+ 14. Antoine Cully and J-B Mouret. Evolving a behavioral repertoire for           8(3):223–246, 2002.
+     a walking robot. Evolutionary computation, 2015.                         42. G.S. Hornby. Functional scalability through generative representa-
+ 15. H. Lipson and J.B. Pollack. Automatic design and manufacture of              tions: the evolution of table designs. Environment and Planning B,
+     robotic lifeforms. Nature, 406(6799):974–978, 2000.                          31(4):569–588, 2004.
+ 16. K. Deb. Multi-objective optimization using evolutionary algorithms,      43. Jerome H Friedman, Jon Louis Bentley, and Raphael Ari Finkel.
+     volume 16. Wiley, 2001.                                                      An algorithm for finding best matches in logarithmic expected time.
+ 17. J. Clune, S. Goings, B. Punch, and E. Goodman. Investigations                ACM Transactions on Mathematical Software (TOMS), 3(3):209–
+     in meta-gas: panaceas or pipe dreams? In Proceedings of the                  226, 1977.
+     Genetic and Evolutionary Computation Conference Workshops,               44. N. Kashtan and U. Alon. Spontaneous evolution of modularity and
+     pages 235–241. ACM, 2005.                                                    network motifs. Proceedings of the National Academy of Sciences,
+ 18. Ágoston E Eiben, Robert Hinterding, and Zbigniew Michalewicz.               102(39):13773, 2005.
+     Parameter control in evolutionary algorithms. Evolutionary Compu-        45. E. A. Leicht and M. E. J. Newman. Community structure in directed
+     tation, IEEE Transactions on, 3(2):124–141, 1999.                            networks. Physical review letters, pages 118703–118707, 2008.
+ 19. J. Clune, D. Misevic, C. Ofria, R.E. Lenski, S.F. Elena, and             46. Deepak Trivedi, Christopher D Rahn, William M Kier, and Ian D
+     R. Sanjuán. Natural selection fails to optimize mutation rates for          Walker. Soft robotics: Biological inspiration, state of the art, and
+     long-term adaptation on rugged fitness landscapes. PLoS Compu-               future research. Applied Bionics and Biomechanics, 5(3):99–117,
+     tational Biology, 4(9):e1000187, 2008.                                       2008.
+ 20. K.O. Stanley and R. Miikkulainen. Evolving neural networks               47. Filip Ilievski, Aaron D. Mazzeo, Robert F. Shepherd, Xin Chen, and
+     through augmenting topologies.           Evolutionary Computation,           George M. Whitesides. Soft robotics for chemists. Angewandte
+     10(2):99–127, 2002.                                                          Chemie, 123(8):1930–1935, 2011.
+ 21. J. Lehman and K.O. Stanley. Abandoning objectives: Evolution             48. Hod Lipson. Challenges and opportunities for design, simulation,
+     through the search for novelty alone. Evolutionary Computation,              and fabrication of soft robots. Soft Robotics, 1(1):21–27, 2014.
+     19(2):189–223, 2011.                                                     49. Cecilia Laschi, Matteo Cianchetti, Barbara Mazzolai, Laura
+ 22. J. Lehman and K.O. Stanley. Evolving a diversity of virtual crea-            Margheri, Maurizio Follador, and Paolo Dario. Soft robot arm in-
+     tures through novelty search and local competition. In Proceedings           spired by the octopus. Advanced Robotics, 26(7):709 – 727, 2012.
+     of the 13th annual conference on Genetic and evolutionary compu-         50. A. Bicchi and G. Tonietti. Fast and ”soft-arm” tactics [robot arm
+     tation, pages 211–218. ACM, 2011.                                            design]. Robotics Automation Magazine, IEEE, 11(2):22–33, June
+ 23. J. Lehman and K.O. Stanley. Novelty search and the problem with              2004.
+     objectives. In Genetic Programming Theory and Practice IX, pages         51. J. Hiller and H. Lipson. Automatic design and manufacture of soft
+     37–56. Springer, 2011.                                                       robots. Robotics, IEEE Transactions on, 28(2):457–466, 2012.
+ 24. J. Lehman and K.O. Stanley. Exploiting open-endedness to solve           52. Jonathan Hiller and Hod Lipson. Dynamic simulation of soft multi-
+     problems through the search for novelty. In Proceedings of Artificial        material 3d-printed objects. Soft Robotics, 1(1):88–101, 2014.
+     Life XI, volume 11, pages 329–336, 2008.                                 53. K.O. Stanley. Compositional pattern producing networks: A novel
+ 25. J.-B. Mouret and S. Doncieux. Encouraging behavioral diversity in            abstraction of development. Genetic Programming and Evolvable
+     evolutionary robotics: an empirical study. Evolutionary Computa-             Machines, 8(2):131–162, 2007.
+     tion, 1(20), 2012.                                                       54. K.O. Stanley, D.B. D’Ambrosio, and J. Gauci. A hypercube-based
+ 26. Darrell Whitley, Soraya Rana, and Robert B Heckendorn. The is-               encoding for evolving large-scale neural networks. Artificial life,
+     land model genetic algorithm: On separability, population size and           15(2):185–212, 2009.
+     convergence. Journal of Computing and Information Technology,            55. J. Gauci and K.O. Stanley. Autonomous evolution of topographic
+     7:33–48, 1999.                                                               regularities in artificial neural networks. Neural Computation,
+ 27. Joel Lehman and Kenneth O Stanley. Revising the evolutionary                 22(7):1860–1898, 2010.
+     computation abstraction: minimal criteria novelty search. In Pro-        56. Nicholas Cheney, Jeff Clune, and Hod Lipson. Evolved electro-
+     ceedings of the 12th annual conference on Genetic and evolution-             physiological soft robots. In ALIFE 14: The Fourteenth Conference
+     ary computation, pages 103–110. ACM, 2010.                                   on the Synthesis and Simulation of Living Systems, volume 14,
+ 28. G. Cuccu and F. Gomez. When novelty is not enough. In Ap-                    pages 222–229, 2014.
+     plications of Evolutionary Computation, pages 234–243. Springer,         57. D. Tarapore and J.-B. Mouret. Evolvability signatures of generative
+     2011.                                                                        encodings: beyond standard performance benchmarks. Informa-
+ 29. Gomes J., Mariano P., and A. L. Christensen. Devising effective              tion Sciences, page to appear, 2015.
+     novelty search algorithms: a comprehensive empirical study. In           58. Phillip Verbancsics and Kenneth O Stanley. Constraining connec-
+     Proceedings of the Genetic and Evolutionary Computation Confer-              tivity to encourage modularity in hyperneat. In Proceedings of the
+     ence, 2015.                                                                  13th annual conference on Genetic and evolutionary computation,
+ 30. Jean-Baptiste Mouret. Novelty-based multiobjectivization. In New             pages 1483–1490. ACM, 2011.
+     horizons in evolutionary robotics, pages 139–154. Springer, 2011.        59. J. Huizinga, J-B. Mouret, and J. Clune. Evolving neural networks
+ 31. Benjamin Inden, Yaochu Jin, Robert Haschke, Helge Ritter, and                that are both modular and regular: Hyperneat plus the connection
+     Bernhard Sendhoff. An examination of different fitness and novelty           cost technique. In Proceedings of the Genetic and Evolutionary
+     based selection methods for the evolution of neural networks. Soft           Computation Conference, pages 697–704, 2014.
+     Computing, 17(5):753–767, 2013.                                          60. Jean-Baptiste Mouret and Stéphane Doncieux.               Sferesv2:
+ 32. J. Clune, J-B. Mouret, and H. Lipson. The evolutionary origins of            Evolvin’in the multi-core world. In IEEE Congress on Evolutionary
+     modularity. Proceedings of the Royal Society B, 280(20122863),               Computation, 2010.
+     2013.
+ 33. Joshua B Tenenbaum, Vin De Silva, and John C Langford. A global
+     geometric framework for nonlinear dimensionality reduction. Sci-        11 Acknowledgements
+     ence, 290(5500):2319–2323, 2000.
+ 34. S. Haykin. Neural Networks: A Comprehensive Foundation. Pren-           Thanks to Roby Velez, Anh Nguyen, and Joost Huizinga for help-
+     tice Hall, 2nd edition, 1998.
+                                                                             ful discussions and comments on the manuscript.
+ 35. Teuvo Kohonen. Self-organizing maps, volume 30. Springer Sci-
+     ence & Business Media, 2001.
+ 36. David F Andrews. Plots of high-dimensional data. Biometrics,
+     pages 125–136, 1972.
+ 37. A. Nguyen, J. Yosinski, and J. Clune. Innovation engines: Au-
+     tomated creativity and improved stochastic optimization via deep
+
+
+
+
+Mouret and Clune                                                                                                                           arXiv | 13
+   used in arXiv
+
+
+
+                   triped                                  triped            triped
+                                                                                                                                     Same orgs,
+                                                                                                                           bipeds
+                                                                                                                                    from the side
+
+
+
+
+                                                                                                              fitness
+                                                  % bone
+
+
+
+                                                                      % voxels filled
+
+
+
+
+                                            two-arm
+                                   jumper                           biped     biped       biped
+                                             crawler
+
+
+
+   used in arXiv
+
+
+                                                                        3-legged triped
+                                                                         (muscle legs)                                  3-legged triped
+                                                                                                                         (muscle legs)
+                                                                                                              fitness
+                                                  % bone
+
+
+
+
+                                                                      % voxels filled
+
+
+
+
+Fig. 6. Example maps annotated with example organisms from different areas of the feature space. Within a map, MAP-Elites smoothly adapts
+a design theme along the desired dimensions of variation. Between maps, one can see that there is some variation between maps, both in the
+performance discovered at specific points, and in the types of solutions discovered. That said, in general each map generally paints the same overall
+picture of the performance capabilities of each region of the feature space. Note the different scale of the bottom color map. Additional example maps
+are shown in Fig. 5. Because videos do a better job of revealing the similarity and differences in these organisms, both in their body and their behavior,
+a future draft of the paper will include a video of these individuals.
+
+
+
+Mouret and Clune                                                                                                                             arXiv | 14
+               Global performance                        Reliability                         Precision                           Coverage
+          800                                 1.0                                1.0                                 1.0
+          780
+          760                                 0.8                                0.8                                 0.8
+          740
+          720                                 0.6                                0.6                                 0.6
+          700
+          680                                0.4                                 0.4                                 0.4
+          660                                 0.2                                0.2                                 0.2
+          640
+          620                                 0.0                                0.0                                 0.0
+                         s
+             MA g
+           om arch
+
+
+
+
+                                                         s
+
+
+
+
+                                                                                            s
+
+
+
+
+                                                                                                                                s
+                    lite
+
+
+
+
+                                              MA g
+
+
+
+
+                                                                                 MA g
+
+
+
+
+                                                                                                                     MA g
+                                               sam h
+
+
+
+
+                                                                                  sam h
+
+
+
+
+                                                                                                                      sam h
+                       n
+
+
+
+
+                                                    lite
+
+
+
+
+                                                                                       lite
+
+
+
+
+                                                                                                                           lite
+                                                       n
+
+
+
+
+                                                                                          n
+
+
+
+
+                                                                                                                              n
+                                                      rc
+
+
+
+
+                                                                                         rc
+
+
+
+
+                                                                                                                             rc
+                   pli
+
+
+
+
+                                                   pli
+
+
+
+
+                                                                                      pli
+
+
+
+
+                                                                                                                          pli
+                P-E
+
+
+
+                                                 sea
+
+
+
+
+                                                                                    sea
+
+
+
+
+                                                                                                                        sea
+                  e
+              sam
+
+
+
+
+                                                 P-E
+
+
+
+
+                                                                                    P-E
+
+
+
+
+                                                                                                                        P-E
+      Ra rid s
+
+
+
+
+                                            id
+
+
+
+
+                                                                               id
+
+
+
+
+                                                                                                                   id
+            G
+
+
+
+
+                                         Gr
+
+
+
+
+                                                                             Gr
+
+
+
+
+                                                                                                                 Gr
+                                                 om
+
+
+
+
+                                                                                    om
+
+
+
+
+                                                                                                                        om
+        nd
+
+
+
+
+                                              nd
+
+
+
+
+                                                                                  nd
+
+
+
+
+                                                                                                                      nd
+                                            Ra
+
+
+
+
+                                                                                Ra
+
+
+
+
+                                                                                                                   Ra
+
+
+
+
+Fig. 7. On a real, soft robot, MAP-Elites consistently finds high-performing solutions (higher y values) across the feature space (different x values)
+than controls.
+
+
+
+
+Mouret and Clune                                                                                                                         arXiv | 15
+

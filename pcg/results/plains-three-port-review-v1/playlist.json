@@ -1,0 +1,181 @@
+{
+  "schema": "pcg/plains-review/v1",
+  "samples": [
+    {
+      "alias": "T01-A-B",
+      "source_run": "results/plains-three-port-production-v1",
+      "candidate_uid": "fork-16f2471eed92/main",
+      "module_sha256": "52eaff246f1a30f5f210bd8a35647e0834c9821ea0e42951b2ebdba25590f965",
+      "layout_uid": "16f2471eed927b3b6c99a6bb950d6374b00239ab822af15c96f251e7b7b18714",
+      "route_id": "main",
+      "from_port": "A",
+      "to_port": "B",
+      "validation": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_focus": "主路 A→B：下层齿轮窗口"
+    },
+    {
+      "alias": "T01-A-C",
+      "source_run": "results/plains-three-port-production-v1",
+      "candidate_uid": "fork-16f2471eed92/upper",
+      "module_sha256": "2c55057f792ac188878a24ced4933da114eb165698cbbd82bceaa155aee59065",
+      "layout_uid": "16f2471eed927b3b6c99a6bb950d6374b00239ab822af15c96f251e7b7b18714",
+      "route_id": "upper",
+      "from_port": "A",
+      "to_port": "C",
+      "validation": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "review_focus": "上层出口 A→C：反冲击钟"
+    },
+    {
+      "alias": "T01-A-C-B",
+      "source_run": "results/plains-three-port-production-v1",
+      "candidate_uid": "fork-16f2471eed92/upper_rejoin",
+      "module_sha256": "c01d24b13c6aa20e372ac8796ba72030a1de479240fb7610b2eb56b08ad97106",
+      "layout_uid": "16f2471eed927b3b6c99a6bb950d6374b00239ab822af15c96f251e7b7b18714",
+      "route_id": "upper_rejoin",
+      "from_port": "A",
+      "to_port": "B",
+      "validation": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "review_focus": "支路汇合 A→C→B：同一场景连续完成"
+    },
+    {
+      "alias": "T02-A-C-B",
+      "source_run": "results/plains-three-port-production-v1",
+      "candidate_uid": "fork-f8ff73554745/upper_rejoin",
+      "module_sha256": "1bbeefae89abd8861947ba03dba30f5511de31ab77e18ea95c24508180c61b23",
+      "layout_uid": "f8ff73554745935736d94e981b48248cdd1a9af50a9583ef808bbdca09d5445d",
+      "route_id": "upper_rejoin",
+      "from_port": "A",
+      "to_port": "B",
+      "validation": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "review_focus": "第二候选 A→C→B：同类结构的参数变体"
+    }
+  ],
+  "selection": "Clean trial zero only; first selected layout main/upper/continuous rejoin, second selected layout continuous rejoin. No per-route phase selection.",
+  "human_video_feedback": 0,
+  "human_playtests": 0,
+  "approved_offline": 0
+}

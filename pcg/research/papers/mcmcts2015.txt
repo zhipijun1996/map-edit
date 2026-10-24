@@ -1,0 +1,399 @@
+                                 MCMCTS PCG 4 SMB:
+               Monte Carlo Tree Search to Guide Platformer Level Generation
+                              Adam Summerville1 , Shweta Philip, and Michael Mateas1
+                                        1
+                                          Expressive Intelligence Studio
+                                       University of California, Santa Cruz
+                      asummerv@ucsc.edu, sphilip@ucsc.edu, michaelm@soe.ucsc.edu
+
+
+
+                            Abstract                               broadly and the need to exploit promising avenues of the tree
+                                                                   by sampling deeply. It is an appealing technique because it
+     Markov chains are an enticing option for machine              is agnostic of the domain that it is searching, relying only on
+     learned generation of platformer levels, but offer poor
+                                                                   an evaluation function to determine a good end node from a
+     control for designers and are likely to produce un-
+     playable levels. In this paper we present a method for        bad one. Despite its success as an adversarial AI technique,
+     guiding Markov chain generation using Monte Carlo             it has seen little use in other roles.
+     Tree Search that we call Markov Chain Monte Carlo                We propose Markov Chain Monte Carlo Tree Search
+     Tree Search (MCMCTS). We demonstrate an example               (MCMCTS) as a method for level generation process that
+     use for this technique by creating levels trained on a cor-   uses the information learned from existing levels coupled
+     pus of levels from Super Mario Bros. We then present          with playability guarantees and designer control. Using
+     a player modeling study that was run with the hopes of        Markov chains trained on a corpus of levels from the origi-
+     using the data to better inform the generation of levels      nal Super Mario Bros. we can generate levels that feel like
+     in future work.                                               they could have come from the original series. The Markov
+                                                                   chain and MCTS work together, with the Markov chain
+                        Introduction                               supplying transmission probabilities that guide the search
+                                                                   in more probable directions and the MCTS pruning selec-
+Procedural Content Generation (PCG) is a field that has seen       tions that lead to unplayable or otherwise undesirable lev-
+a lot of work in the design and generation of levels for plat-     els. The properties that make MCTS useful as a game player
+former games. These have ranged from using modular de-             also make it useful as a level designer. A large component
+signer authored pieces (Shaker et al. 2011a) to trying to learn    of using PCG for level generation is random variation in
+relationships between sprites using techniques from com-           the produced artifacts, and the sampling of MCTS helps to
+puter vision (Guzdial and Riedl 2015). Markov chains are           ensure that generated levels will have variation. The bal-
+an appealing approach since they can be quickly trained on         ance between exploitation and exploration means that it is
+a corpus of levels and generate levels with similar proper-        less likely to explore areas of the search space that are un-
+ties. However, the main problem with using Markov chains           playable (e.g. levels that contain gaps too wide for the player
+to generate levels is that they offer little to no guarantees      to cross), but the exploration might find levels that are close
+about the levels that they generate. This makes it difficult       to unplayable (e.g. levels with gaps just wide enough for
+for a designer to rely on them, since the levels are just as       the player to cross). While we use a designer authored eval-
+likely to be unplayable as playable (Snodgrass and Ontañón       uation function to guide the search, the approach can eas-
+2013). A similar, but less severe problem, is that the designer    ily be adapted to other generation domains. In future work,
+has very few knobs to tweak the outcome of the generator,          the evaluation function could be automatically learned from
+with the two major ones being the length of historicity in the     player data, entirely eliminating the need for human au-
+chain and the training corpus.                                     thored design choices. Our contribution is a novel applica-
+   Monte Carlo Tree Search (MCTS) (Browne et al. 2012) is          tion of Monte Carlo Tree Search to Procedural Content Gen-
+a popular technique in the world of game AI and has seen ap-       eration by guiding a Markov chain generator for the creation
+plications in Poker (Van den Broeck, Driessens, and Ramon          of platformer levels.
+2009), Magic: The Gathering (Ward and Cowling 2009), and
+perhaps most notably Go (Gelly et al. 2012) where it has                                 Related Work
+pushed the level of play from equaling an advanced novice to
+mid professional levels. MCTS uses random sampling dur-            Markov chain generation of platformer levels has seen two
+ing the search process to find areas that seem promising, bal-     major approaches, the first looking at tile-to-tile transitions
+ancing the need to explore the possibility space by sampling       and the other looking at vertical slices of levels. Snodgrass
+                                                                   and Ontañón (Snodgrass and Ontañón 2013; 2014) have
+Copyright c 2015, Association for the Advancement of Artificial    mainly looked at the tile-to-tile transitions. This approach
+Intelligence (www.aaai.org). All rights reserved.                  has a couple of benefits, namely that it can produce very
+               Figure 1: A level block, split into the bigram state and the possible patterns that it can transition to
+
+
+novel levels. But this comes at a great cost in that a lot of                             Level Generation
+generated levels will be completely unplayable. A key prob-           To generate levels using Markov Chain Monte Carlo Tree
+lem of this approach is that empty tiles make up the vast             Search (MC-MCTS) we first need to learn a representation
+majority of tiles in platformer levels meaning that almost all        of the levels suitable for Markov chain generation. We will
+transitions are either to or from empty tiles. Another prob-          then use this representation at generation time, guided by
+lem of this approach is that it entirely washes over a key            Monte Carlo Tree Search to generate learned levels that have
+factor to platformer levels in that transitions are highly de-        desired properties.
+pendent on their height in a level, e.g. high tiles are more
+likely to be empty and low tiles are more likely to con-              Markov Chain Generation
+tain ground. Snodgrass combated this by learning multiple
+                                                                      For this work, we used the levels from Super Mario Bros.
+Markov chains by splitting the levels into multiple height
+                                                                      as the training corpus. We used screencaptured level images
+regimes.
+                                                                      produced by a fan on the internet (Albert 2014). To extract
+   The vertical level slices of Dahlskog et al. (Dahlskog, To-        the tile information we used the open source computer vi-
+gelius, and Nelson 2014) are much less likely to have prob-           sion library OpenCV2 (Bradski ) to find subimages in the
+lems with skies full of tiles and large gaps along the bottom         whole level image. While Super Mario Bros. contains 32
+due to the fact that the vertical slices inherently capture the       levels, a number of these are atypical and were excluded
+height content of the tiles. However, the use of vertical slices      from the corpus, namely the underwater levels, the ones that
+loses a large portion of novelty in that it can only ever pro-        take place on bridges with flying fish, and the boss levels,
+duce vertical slices that have been seen before, a problem            leaving us with a corpus of 20 levels. While the tile-to-tile
+that Snodgrass’s work does not have. A key issue with both            and vertical slice methods of platformer level representation
+approaches is that they do not expose many knobs to users.            both have their benefits and drawbacks, we chose the vertical
+The main way that a user can substantively change the out-            slice representation for this work due to the higher probabil-
+put of the chain is by editing the training corpus. They also         ity of not producing unplayable levels. During chain gener-
+come with no guarantee of playability, with over half of the          ation it is possible to reach what Snodgrass called an unseen
+levels produced by Snodgrass’s system being unable to be              state, i.e. one in which the history has never been seen be-
+completed.                                                            fore and as such no transmission probabilities are known.
+   While MCTS is a popular technique in the games com-                To avoid this, if a tile combination would lead to an unseen
+munity, it has mainly been used as a technique for game               state we exclude it from our transmission probability table.
+playing. However, Browne (Browne 2013) has proposed us-               We only consider 2 slices of history when generating the
+ing MCTS as a search technique for PCG. Within the field              level chain, but in an attempt to capture larger scale patterns
+of computational creativity, a system is deemed creative if           the tables can transition to larger than a single slice, with
+it can produce novel, high quality artifacts that are recog-          patterns up to 8 wide being used. See figure 1 for more de-
+nizable as being representative of the target domain (Ritchie         tail. While these patterns are rare due to their uniqueness,
+2007). Browne found that MCTS was able to find high qual-             the addition of recognizable large scale patterns helps speed
+ity solutions with high diversity, diversity being a proxy for        the rollout process and produces familiar, but novel levels.
+novelty.                                                                 The tile types we considered were:
+   MCTS has been used for story generation by Kartal et al.           • Solid - Any solid tile, including ground, hard blocks, or
+(Kartal, Koenig, and Guy 2013). They found that MCTS was                the tree tiles
+well-suited to story generation, particularly in realms with a        • Hidden Power Up - A breakable block that contains a
+high branching factor. Other search approaches quickly ran              power up instead of just being breakable
+out of memory without being able to search the possibility
+space in an efficient manner, but MCTS was able to gen-               • Breakable - A breakable block
+erate stories with a large number of possible player actions          • Question Mark Block - A question mark block, regardless
+(100+).                                                                 of its contents
+                                                (a) A level with moderate difficulty
+
+
+
+
+                                    (b) A level that made heavy use of the “underground” levels
+
+
+
+
+                                          (c) A hard level with a high density of enemies
+
+                          Figure 2: Screenshots of 3 generated levels being played in Infinite Mario
+
+
+• Enemy - An enemy, regardless of its type                           the ”moves” that can be made are the states that can be tran-
+• Bullet Cannon - The cannon that fires Bullet Bills                 sitioned into from a parent state. The successor states are
+                                                                     chosen with the probabilities learned from the above section
+• Pipe - A pipe, regardless of being a warp pipe, piranha            for both the Expansion and Rollout steps.
+   plant, or plain                                                      The most common Selection strategy for MCTS is Up-
+• Coin - A coin                                                      per Confidence bound 1 applied to Trees (UCT) introduced
+   For the purposes of this work we only considered the high         by Kocsis and Szepesvri (Kocsis and Szepesvári 2006). The
+level function of a block, as opposed to its most detailed           UCT formula for nodeqi is:
+categorization (e.g. we abstract over whether an enemy is a             U CTi = w ni + c ∗
+                                                                                   i         ln t
+                                                                                              ni
+Goomba or a Koopa Troopa). This allows for a more filled                Where
+out conditional probability table, at the expense of speci-
+ficity.                                                              • wi - The total score of node i - in game playing applica-
+                                                                       tions this is commonly the number of wins
+Markov Chain Monte Carlo Tree Search                                 • ni - The number of simulations considering node i
+MCTS operates in four steps:                                                                           √
+                                                                     • c - The exploration parameter. 2 theoretically, but used
+• Selection - Starting from the root node, the child with the          to tune exploration vs. exploitation in practice
+  most potential is chosen successively until a leaf node is         • t - The total number of simulations
+  found.
+                                                                        The main choices for a user of MCMCTS are how the
+• Expansion - While that node has untried moves, a move              score is calculated, the exploration parameter, and the num-
+  is chosen, at random, and applied                                  ber of rollouts performed. A higher number of rollouts will
+• Rollout - Moves are applied randomly until a terminal              better sample the space and produce a better end result, but
+  condition is met                                                   this comes at the cost of time. In order to keep the level gen-
+• Backpropagation - A score is calculated for the rollout            eration time under 30 seconds per level we limited the sys-
+  and applied successively to all parent nodes                       tem to 200 rollouts per “move”. We generated 320 vertical
+                                                                     slices per level, so we could sample up to 64,000 levels per
+   Standard Markov chain generation starts from a seed state         every generated level. The exploration parameter value mat-
+and randomly transitions to successor states. This process           ters most in its relative scaling compared
+repeats until a terminal condition is reached, be it a ter-                                                    √to the score value,
+                                                                     so we set it to the theoretically correct 2 and focused our
+minal state or some desired condition of the chain is met            attentions on the score.
+(e.g. length >= some threshold). From this description, it              The score function that we used was:
+is easy to see that standard Markov chain generation is di-             score = S + g + e + r
+rectly analogous to a single rollout in MCTS. While MCTS
+                                                                        where
+is typically considered in the style of an adversarial game
+playing AI, hence the parlance of “moves”, for our purposes          • S - Whether the level is solvable or not. If it is solvable
+  then it was set to 0, otherwise it was set to a large negative   about what would make levels more challenging or prefer-
+  number, -100,000 in this study.                                  able to different player types, but we used the tunable pa-
+                                                                   rameters of our system to model player challenge ratings and
+• g - The desirability of the level as a function of the number
+                                                                   preference based on their experience level. We then look at
+  of gaps.
+                                                                   predicting player experience level based on player perfor-
+• e - The desirability of the level as a function of the number    mance metrics.
+  of enemies.
+                                                                   Data Collection
+• r - The desirability of the level as a function of the number
+  of rewards (coins or power-ups).                                 We used our MCMCTS system to perform player modeling
+                                                                   based on the tunable parameters. We considered each of the
+   In theory, these functions could be anything or could be        three parameters in either a High or Low setting.The combi-
+learned via player testing. For the purposes of this work the      nations of these parameters result in 23 = 8 different variants
+desirability functions were quadratics that captured our hy-       of the game. The following table displays the detail of all the
+potheses about how desired difficulty of the level would af-       variants. Each variant is played as the first game marked by
+fect the desirability of the components. In general as diffi-      A and as the second game marked by B in a pair. In total,
+culty increased so did the desirability of gaps and enemies,       every game is played 16 times over the course of the exper-
+but due to the quadratic nature there was a point at which         iment. The only fixed feature was that only one power-up
+too many enemies and gaps would be undesirable to any-             was included in the levels.
+one. The opposite was true for the rewards, as they would
+decrease as difficulty increased. This score was then passed                  Controllable Features              Played as
+through a logistic function to produce a result in the range         Variants Gaps Enemies Rewards A B Total
+of 0-1.                                                                 1        Low       Low      Low        8 8        16
+                1
+   wd = 1+e−score    d                                                  2        Low       Low      High       8 8        16
+   Solvability was determined at a low level of fidelity for            3        High      Low      Low        8 8        16
+the purposes of speeding the MCTS search. Snodgrass used                4        High      Low      High       8 8        16
+Robin Baumgarten’s A* controller (Shaker et al. 2011b) to               5        High      High     Low        8 8        16
+determine whether a level can be completed or not, but it               6        High      High     High       8 8        16
+runs a full simulation of the Mario physics making it too               7        Low       High     Low        8 8        16
+slow for a sampling process that wants to be run thousands              8        Low       High     High       8 8        16
+of times in a short period of time. We created a simplistic
+A* Mario controller that operates on the tile level with dis-         A number of gameplay features were considered for the
+cretized physics extracted in a preprocessing step from the        purpose of modeling player experience. These features are
+actual Mario simulation. This simulation captures running          selected based on a previous study done on player expe-
+and jumping physics at fine enough fidelity to ensure that all     rience modeling which defined them to cover most of the
+jumps that the controller determines are fine will in fact be      behavioral dynamics of Super Mario Bros. (Pedersen, To-
+fine in the full-fledged simulation. However, the low level        gelius, and Yannakakis 2009). The features fell into a num-
+controller does not consider enemies at all, so it is possible     ber of different categories:
+for a section of enemies to be too dense for playability. In       • Time: There were around 10 features related to time. Each
+practice, this is of not much concern as the learned probabil-       player was allowed 3 attempts at a level. Completion time
+ities make such a section exceedingly unlikely and the score         represented the time the player took to complete the level
+function makes this unlikely as well. A sample of three lev-         in the last attempt. Total time represented the total time
+els generated by our system can be seen in figure 2. Level 2a        spent by the player on a particular level. There were other
+and 2b have the same difficulty, but show the variation that         features which represented time spent running, running
+can be achieved due to the wide range of levels used dur-            left and also running right. Some features record the time
+ing training the Markov chain. Level 2c is a harder difficulty       spend in each mode: Small Mode, Large Mode and Fire
+which results in a higher quantity of enemies.                       Mode. The levels in this experiment featured only two
+                                                                     modes, Small and Large Mode. Hence only data about
+                    Player Modeling                                  these two modes were recorded.
+Our intention is to move away from the hand authored scor-         • Jump: These features includes the number of times
+ing function and move towards a design that incorporates             a player pressed jump. Another feature called aimless
+feedback to better tune levels to a player’s desired difficulty      jumps logs the number of times the player jumped in the
+and skillset (e.g. do they enjoy levels with more/less jumps,        absence of an enemy or a gap.
+gaps, enemies, etc.). Towards this end we first used the gen-      • Death: These features record the different ways and the
+erator to generate levels as part of a player modeling ex-           number of times the player died during a game level.
+periment based on the work of Pedersen et al. (Pedersen,             There are eight different ways how a player could die in
+Togelius, and Yannakakis 2009), with the intention of using          the levels. A player can die by falling into a gap, by com-
+these player models as the basis for future work in gener-           ing in contact with a Goomba, a Green Turtle, a Red Tur-
+ating levels for specific players. We have our own intuition         tle, an Armored Turtle, a Jump Flower, a Bullet Bill or a
+  Chomp Flower. In our experiment, five out of the seven
+  enemies were included in the levels: Goombas, Green
+  Turtles, Red Turtles, Bullet Bills and Chomp Flowers.
+• Item: The features recorded under this category are re-
+  lated to the items that the player interacts with. Total
+  Coins represent the number of coins contained in each
+  level, as well as a feature which records the total num-
+  ber of coins collected by the player. Similarly, features
+  such as total coin blocks, total power blocks and total
+  empty blocks represent the number of blocks which con-
+  tain coins, power ups and nothing respectively. There are                Figure 3: Player rated challenge A vs. B
+  some features which also capture the percentage of these
+  blocks the player interacts with or destroys during the
+  course of the game.
+• Kill: As mentioned above there are five types of enemies
+  used in this experiment. These features recorded the num-
+  ber of enemies killed by the player for a given level. These
+  features also recorded the different methods by which the
+  player killed Marios enemies. Mario is capable of killing
+  enemies by stomping on them, by kicking shells at them,
+  and by throwing fire balls at them when in Fire Mode.
+  But as mentioned earlier, Fire mode was not included in
+  the levels, so this feature was always zero. Another fea-
+  ture represents the total number of enemies in a level.                 Figure 4: Player rated preference A vs. B
+• Miscellaneous: These features do not fall into any of the
+  categories mentioned above. They capture the number of
+  times the player switched from one mode to another, and        in data being collected for 128 levels. This paper analyzes
+  the number of times the player pressed a key to duck or to     the data for 64 pairs of games.
+  run.
+   As part of the experiment, each player played eight vari-                       Modeling Analysis
+ants of the level. After every pair of games the player was      We first wanted to verify that order had no effect on how
+asked to answer a series of questions. The experiment was        players rated challenge or preference. 3 shows the number
+planned such that every level variant was played as both the     of times levels were marked as challenging by the players in
+first in a pair (A) and the second in a pair (B) exactly eight   different orders.
+times. Note, this does not mean that they played level type         There is no statistically significant difference between
+1 twice consecutively, just that they played a certain level     playing a level first or second in terms of challenge rating,
+type and then another (randomly chosen) level type. This         but a larger sample size is needed for a definitive answer.
+was done to observe whether the player responses in the             Figure 4 shows which level the player would prefer to
+questionnaire by the order in which levels were presented.       play.
+This experiment closely follows the protocol in (Pedersen,          With no statistically meaningful relationship could be de-
+Togelius, and Yannakakis 2009), in which the questionnaire       termnined, we are satisfied that there was no strong relation-
+focused on challenge and preference. The following pair-         ship between the order in which levels were played. How-
+wise forced choice questions were asked to the players:          ever, a larger sample size would help fully settle this. We
+• Level A was more challenging/preferred over Level B            turn our focus to player experience modeling. We used the
+                                                                 data mining tool Weka (Hall et al. 2009) to learn a model for
+• Level B was more challenging/preferred over Level A
+                                                                 our dependent variables: challenge, preference, and player
+After playing four pairs of such levels, the player was asked    experience. Since we are trying to learn a binary dependent
+to describe their experience in playing platformer games in      variable we used logistic regression, and due to our limited
+the following categories:                                        sample size we used 10-fold cross-validation.
+• Beginner
+                                                                 Challenge
+• Intermediate
+                                                                 To determine whether the player voted for level A or B we
+• Expert                                                         looked at the difference between level A and B for each pa-
+   The participants were 16 students at University of Califor-   rameter which were either 1 (A was high, B was low), 0
+nia who volunteered for the experiment. Each student played      (A and B were the same), or -1 (A was low, B was high).
+the Java based Infinite Mario game and provided answers to       Our feature space considered the 3 difference parameters,
+the questionnaire. Each participant played 8 levels, resulting   and the 4 interaction terms. Experience level was also con-
+sidered as well as its interaction with the tunable parameters.
+We then performed exhaustive feature selection based on the                      Variable                     Odds Ratio     Direction
+Akaike information criterion (AIC), which only considered                   Number of Jumps                     1.08             +
+3 parameters.                                                           Time Spent Running Left                 1.03             +
+   Our model was able to successfully classify which level              Number of Aimless Jumps                 1.04             -
+was more challenge 72.66% of the time, with a Kappa statis-          Number of Enemies Killed by Shell          3.41             +
+tic of 0.45. A number of different guides for interpretation             Total Time Spent Large                 1.04             +
+of the Kappa statistic agree, but 0.45 is generally held in the         Total Number of Enemies                 1.04             +
+fair-to-good range, so we are relatively happy with this re-          Number of Green Koopas Killed             1.64             -
+sult.                                                                  Number of Bullet Bills Killed            1.42             +
+          Variable                  Odds Ratio     Direction           These are much less intuitive than the other model, but
+       Gaps Difference                7.91             +            mostly make sense. Beginner players are more likely to
+     Enemies Difference               1.80             +            make aimless jumps, whereas more advance players make
+ Experience * Gap Interaction         2.22             -            their jumps count. One might expect that running back-
+   Not surprisingly, both higher number of gaps and enemies         wards would show beginners’ cautiousness, but it seems that
+were important determinants for whether players found the           running backwards is more a mark of an advanced player
+level more challenging, with the number of gaps being the           making considered actions. Unsurprisingly, killing enemies,
+most significant determinant. Also of note is that gaps were        specifically by an advanced technique like using a shell or
+less important for experienced players.                             killing difficult enemies like Bullet Bills, is linked to being
+                                                                    a more advanced player. The most nonintuitive result is that
+                                                                    beginner players are more likely to kill Green Koopas, per-
+Preference                                                          haps because advanced players ignore them because they do
+Using the same logistic regression methodology as above,            not pose a threat. Ultimately, more data needs to be gathered
+we found a model with 4 parameters that was able to deter-          to better predict player performance.
+mine player preference 64.07% of them time with a kappa
+statistic of 0.28 which is considered fair, but not strong.
+                                                                               Conclusion and Future Work
+             Variable                    Odds Ratio     Direction   We have presented a novel method for guiding Markov chain
+       Rewards Difference                  1.35             +       platformer level generation via Monte Carlo Tree Search.
+ Experience * Rewards Interaction          3.71             -       This technique relies on using classic Markov chain state
+         Gaps Difference                   1.72             -       transitions as the “moves” for a Monte Carlo Tree Search
+ Experience * Enemies Interaction          1.37             -       and classic Markov chain generation as the “rollouts”. This
+                                                                    method provides the simplicity of Markov chain generation
+   Players tended to prefer levels with a higher number of          with a near guarantee of playability along with user and/or
+rewards and a lower number of gaps. Interestingly, more ex-         designer tunable score function to provide levels that meet
+perienced players were less likely to prefer higher number of       the design goals. We then use this level generation frame-
+rewards, and while the difference in enemies had no signif-         work as a testbed for player modeling, attempting to build
+icant effect on player preference, the interaction term with        on the work of Pedersen et al. (Pedersen, Togelius, and Yan-
+experience did. Most surprisingly, more experience players          nakakis 2009).
+were more likely to prefer levels with fewer enemies.                  Currently, our system uses a scoring function that we hand
+                                                                    tweaked. We would like to extend this evaluation function to
+Player Experience Level                                             incorporate player modeling. We would also like to use the
+Since the above models were based on self reported player           tool in a mixed initiative style by presenting levels to a de-
+experience level, we wanted to see how well we could clas-          signer that they can then rate, from that we could learn a
+sify player experience based on our models so as to not re-         scoring function that is attuned to a designer’s desires. Pre-
+quire players to report their skill level. Originally we wanted     liminary work in looking at how levels are rated based on the
+learn a model that could predict a player’s self-report of their    three tuned parameters shows that challenge is most strongly
+platforming skill as beginner, intermediate or expert based         associated with the number of gaps. Using a Pearson chi-
+on their gameplay features. Unfortunately none of the par-          square independence test it it is the only parameter that is
+ticipants self-identified as experts. As such we could only         statistically significant (p < 0.005) in determining whether
+try to classify whether they had low or medium experience           a player finds the level challenging. This leads us to believe
+playing platformer games. Our model was accurate 70.31%             that more work needs to be done to determine why the other
+of the time with a fair-good Kappa statistic of 0.41. Unlike        factors had no effect on player’s challenge ratings.
+challenge, the results are somewhat unintuitive. As above              On the Markov chain front we used the vertical slice style,
+we performed feature selection to produce a limited set of 7        but we would also like to experiment with the tile-to-tile
+features that had enough information gain. In this case being       transitions. Our belief is that we would find levels that are
++ means that the player is more skilled and − means more            more novel without running into the unplayability problems
+likely to be a beginner.                                            that Snodgrass encountered.
+                       References                               Van den Broeck, G.; Driessens, K.; and Ramon, J. 2009.
+Albert, I. 2014. Legend of Zelda Maps. http://ian-              Monte-Carlo tree search in poker using expected reward dis-
+albert.com/games/legend of zelda maps/.                         tributions. In Proceedings of the 1st Asian Conference on
+                                                                Machine Learning (ACML), Lecture Notes in Computer Sci-
+Bradski, G. OpenCV, year = 2000. Dr. Dobb’s Journal of          ence, 367–381. Springer.
+Software Tools.
+                                                                Ward, C., and Cowling, P. 2009. Monte carlo search applied
+Browne, C.; Powley, E.; Whitehouse, D.; Lucas, S.; Cowl-        to card selection in magic: The gathering. In Computational
+ing, P.; Rohlfshagen, P.; Tavener, S.; Perez, D.; Samoth-       Intelligence and Games, 2009. CIG 2009. IEEE Symposium
+rakis, S.; and Colton, S. 2012. A survey of monte carlo         on, 9–16.
+tree search methods. Computational Intelligence and AI in
+Games, IEEE Transactions on 4(1):1–43.
+Browne, C. 2013. UCT for PCG. In Proc. IEEE Conf.
+Comput. Intell. Games, 137–144.
+Dahlskog, S.; Togelius, J.; and Nelson, M. J. 2014. Linear
+levels through n-grams. In Proceedings of the 18th Interna-
+tional Academic MindTrek Conference.
+Gelly, S.; Kocsis, L.; Schoenauer, M.; Sebag, M.; Silver, D.;
+Szepesvári, C.; and Teytaud, O. 2012. The grand chal-
+lenge of computer go: Monte carlo tree search and exten-
+sions. Commun. ACM 55(3):106–113.
+Guzdial, M., and Riedl, M. O. 2015. Toward game level gen-
+eration from gameplay videos. In Proceedings of the FDG
+workshop on Procedural Content Generation in Games.
+Hall, M.; Frank, E.; Holmes, G.; Pfahringer, B.; Reutemann,
+P.; and Witten, I. H. 2009. The weka data mining software:
+An update. SIGKDD Explor. Newsl. 11(1):10–18.
+Kartal, B.; Koenig, J.; and Guy, S. 2013. Generating believ-
+able stories in large domains.
+Kocsis, L., and Szepesvári, C. 2006. Bandit based monte-
+carlo planning. In Proceedings of the 17th European Con-
+ference on Machine Learning, ECML’06, 282–293. Berlin,
+Heidelberg: Springer-Verlag.
+Pedersen, C.; Togelius, J.; and Yannakakis, G. N. 2009.
+Modeling player experience in super mario bros. In Pro-
+ceedings of the 5th International Conference on Computa-
+tional Intelligence and Games, CIG’09, 132–139. Piscat-
+away, NJ, USA: IEEE Press.
+Ritchie, G. 2007. Some empirical criteria for attributing
+creativity to a computer program. Minds and Machines
+17(1):67–99.
+Shaker, N.; Togelius, J.; Yannakakis, G.; Weber, B.;
+Shimizu, T.; Hashiyama, T.; Sorenson, N.; Pasquier, P.;
+Mawhorter, P.; Takahashi, G.; Smith, G.; and Baumgarten,
+R. 2011a. The 2010 mario ai championship: Level gener-
+ation track. Computational Intelligence and AI in Games,
+IEEE Transactions on 3(4):332–347.
+Shaker, N.; Togelius, J.; Yannakakis, G. N.; Weber, B. G.;
+Shimizu, T.; Hashiyama, T.; Sorenson, N.; Pasquier, P.;
+Mawhorter, P. A.; Takahashi, G.; Smith, G.; and Baum-
+garten, R. 2011b. The 2010 mario ai championship: Level
+generation track. IEEE Trans. Comput. Intellig. and AI in
+Games 3(4):332–347.
+Snodgrass, S., and Ontañón, S. 2013. Generating maps using
+markov chains.
+Snodgrass, S., and Ontañón, S. 2014. A hierarchical ap-
+proach to generating maps using markov chains.
+

@@ -1,3 +1,4 @@
+import {validateGenerationContract} from './module-contract.js';
 import {DIFFICULTY_LEVELS,validateDifficulty,difficultySummary,difficultyChanges} from './difficulty.js';
 import {ABILITIES,abilityName,emptyRequirements,requirementSummary} from './capabilities.js';
 import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,exampleDocument,validateDocument,pathPoint,progressAt,translateObject,objectBounds,makeRevision,objectChanges,changeRequest} from './model.js';
@@ -29,19 +30,21 @@ function syncFields(){$('#title').value=doc.title;$('#description').value=doc.de
 function integrationBadge(status){return `<span class="integration-badge ${esc(status?.usage??'unverified')}">${esc(status?.label??'接入状态待核实')}</span>`;}
 function renderRevisionInfo(){
   const s=doc.source,op=doc.intent?.operation??(s?'modify_existing':'new_module'),changes=objectChanges(doc);
-  let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
+  const generated=s?.kind==='generated';
+  let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${generated?option('new_module','生成候选草稿（未接入）',op)+option('new_variant','派生新变体',op):s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
   if(s){
     const latest=libraryClient.catalog?.modules.find(m=>m.id===s.moduleId)?.integration;
     const status=s.integration??(latest?.checkedCommit===s.commit?latest:null);
-    html+=`<div class="revision-source">原模块：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'此旧草稿尚无接入审查信息，可从模块库查看最新版。')}</p><span>来源版本 ${esc(s.commit?.slice(0,8))}</span></div>`;
+    html+=`<div class="revision-source">${generated?'来源候选':'原模块'}：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'此旧草稿尚无接入审查信息，可从模块库查看最新版。')}</p><span>来源版本 ${esc(s.commit?.slice(0,8))}</span></div>`;
     const latestCommit=libraryClient.catalog?.sourceCommit;
-    if(latestCommit&&latestCommit!==s.commit)html+='<p class="revision-warning">参考库已有新版本。本草稿保留旧基线，应用前需对比最新源码。</p>';
+    if(s.repository==='zhipijun1996/gunman-rush'&&latestCommit&&latestCommit!==s.commit)html+='<p class="revision-warning">参考库已有新版本。本草稿保留旧基线，应用前需对比最新源码。</p>';
     if(status?.evidence?.length)html+=`<details class="integration-evidence"><summary>查看接入依据</summary>${status.evidence.map(e=>`<a href="${esc('https://github.com/zhipijun1996/gunman-rush/blob/'+status.checkedCommit+'/'+e.path+'#L'+e.line)}" target="_blank" rel="noopener">${esc(e.path.split('/').at(-1))} ↗</a>`).join('')}<p>依据是来源版本的游戏入口调用链；不表示此修改稿已应用或通过物理验证。</p></details>`;
   }
   if(op==='new_variant')html+=field('新变体建议名称（可留空）','suggestedModuleId',doc.intent?.suggestedModuleId??'');
   html+=`<p class="revision-state">${op==='modify_existing'?'保留原模块身份与引用。':op==='new_variant'?'保留原版，创建独立变体。':'创建新模块。'}本稿尚未写回游戏。</p>`;
   if(changes)html+=`<div class="change-count">新增 ${changes.added.length} · 调整 ${changes.modified.length} · 删除 ${changes.removed.length}${JSON.stringify(doc.capabilityRequirements??emptyRequirements())!==JSON.stringify(doc.baselineCapabilityRequirements??doc.source?.capabilityRequirements??emptyRequirements())?' · 能力要求已调整':''}</div>`;
   if(difficultyChanges(doc)?.changed)html+='<div class="change-count difficulty-change">难度评分已调整</div>';
+  if(doc.generationContract){let current=false;try{current=validateGenerationContract(doc).versionMatches;}catch{}const c=doc.generationContract;html+=`<div class="revision-warning" data-contract-state="${current?'current':'stale'}"><b>生成契约：${current?'当前内容版本':'已变更 / 证据不可沿用'}</b><br>${esc(c.contentVersion)}<p>静态检查、物理见证与正式接入分别记录。UNKNOWN 接口不可自动拼装；编辑后需重新导出和验证。</p><p>端口 ${c.ports?.length??0} · 有向关系 ${c.relations?.length??0} · 物理记录 ${c.validations?.filter(v=>v.kind==='physics').length??0}</p></div>`;}
   html+='</div>';$('#revision-info').innerHTML=html;
   $('#revision-operation').onchange=e=>{snapshot();doc.intent={...doc.intent,operation:e.target.value};changed();};
   const input=$('#revision-info [data-prop="suggestedModuleId"]');if(input)input.onchange=()=>{snapshot();doc.intent={...doc.intent,suggestedModuleId:input.value.slice(0,100)};changed();};
@@ -320,7 +323,7 @@ $('#route-view').onchange=()=>{routeView=$('#route-view').value;render();};
 function animate(now){if(playing){time+=(now-lastFrame)/1000;if(time>20)time=0;$('#time').value=time;$('#time-label').textContent=time.toFixed(1)+'s';render();}lastFrame=now;requestAnimationFrame(animate);}requestAnimationFrame(animate);
 $('#projects').onclick=showProjects;$('#library').onclick=showLibrary;$('#help').onclick=help;$('#dialog-close').onclick=()=>$('#dialog').close();
 $('#save-file').onclick=saveFile;$('#export').onclick=exportImage;$('#import').onclick=()=>$('#file-input').click();
-$('#file-input').onchange=async()=>{const file=$('#file-input').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error('文件超过 20 MB');const d=validateDocument(JSON.parse(await file.text()));d.id=uid();loadDocument(d);toast('工程已打开');}catch(e){toast('无法打开：'+e.message);}finally{$('#file-input').value='';}};
+$('#file-input').onchange=async()=>{const file=$('#file-input').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error('文件超过 20 MB');const d=validateDocument(JSON.parse(await file.text()));if(!d.generationContract)d.id=uid();loadDocument(d);toast('工程已打开');}catch(e){toast('无法打开：'+e.message);}finally{$('#file-input').value='';}};
 window.addEventListener('beforeunload',persist);
 window.addEventListener('keydown',e=>{
   if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||$('#dialog').open)return;

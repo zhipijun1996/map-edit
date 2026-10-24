@@ -1,0 +1,41 @@
+{
+  "schema": "pcg/region-spec/v1",
+  "version": 1,
+  "id": "sky_islands",
+  "status": "research_only",
+  "name": "浮岛小岩块向上挑战研究输入",
+  "description": "这是结构研究配置，不是正式区域Bible或美术准入。实际几何必须由真实物理重新验证。",
+  "mechanisms": {
+    "allowed": ["static_terrain", "one_way", "wall_climb_surface", "grapple_anchor"],
+    "required": ["static_terrain", "wall_climb_surface"],
+    "forbidden": ["thorns", "moving_saw", "moving_platform"]
+  },
+  "capabilities": {
+    "requires": ["move", "jump"],
+    "preferred_challenge_capabilities": ["wall_climb", "double_jump", "grapple", "shot_recoil"]
+  },
+  "traversal": {
+    "allow_repetition": true,
+    "must_use_all_available": false,
+    "min_actions": 3,
+    "max_depth": 24,
+    "preferred_actions": ["wall_jump", "air_jump", "hook_hang", "hook_bounce", "recoil"]
+  },
+  "geometry": {
+    "direction": "upward",
+    "min_goal_rise": 120,
+    "small_rock": {"width": [32, 160], "height": [32, 160]},
+    "max_contiguous_height": 180,
+    "min_vertical_gap": 24,
+    "port_support_exceptions": {"max_width": 360, "max_height": 180}
+  },
+  "transform": {
+    "split_climb_walls": true,
+    "remove_pressure_floor": true,
+    "remove_forbidden_pressure_cells": true,
+    "contact_padding": 5,
+    "contact_x_tolerance": 9
+  },
+  "generator_families": ["thorn_wall", "sky_ascent", "hook_chain"],
+  "motifs": ["separate_small_rocks", "upward_route", "reusable_air_actions"]
+}

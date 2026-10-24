@@ -1,0 +1,179 @@
+[
+  {
+    "capabilities": [
+      "move",
+      "jump",
+      "shot_recoil",
+      "grapple"
+    ],
+    "word": [
+      "ground_jump",
+      "recoil",
+      "hook_hang",
+      "recoil"
+    ],
+    "accepted": false,
+    "expected": false,
+    "ok": true,
+    "reason": "unmet_action_precondition:recoil"
+  },
+  {
+    "capabilities": [
+      "move",
+      "jump",
+      "double_jump",
+      "grapple"
+    ],
+    "word": [
+      "ground_jump",
+      "air_jump",
+      "hook_hang",
+      "anchor_jump",
+      "air_jump"
+    ],
+    "accepted": true,
+    "expected": true,
+    "ok": true,
+    "reason": "State(mode='air', jumps=0, rounds=0, hooks=1, anchors=2, walls=1, used=frozenset({'jump', 'grapple', 'double_jump'}))"
+  },
+  {
+    "capabilities": [
+      "move",
+      "wall_climb"
+    ],
+    "word": [
+      "wall_contact",
+      "wall_jump"
+    ],
+    "accepted": true,
+    "expected": true,
+    "ok": true,
+    "reason": "State(mode='air', jumps=0, rounds=0, hooks=0, anchors=3, walls=0, used=frozenset({'wall_climb'}))"
+  },
+  {
+    "check": "wall_alternative_plan",
+    "plans": [
+      [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "wall_attach",
+            "min_after": 2,
+            "timeout": 100
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 1
+          },
+          "value": -1
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 5
+          },
+          "target_x": 0.0,
+          "deadband": 6
+        }
+      ],
+      [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "wall_attach",
+            "min_after": 2,
+            "timeout": 100
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 1
+          },
+          "value": -1
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 5
+          },
+          "target_x": 0.0,
+          "deadband": 6
+        }
+      ],
+      [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "wall_attach",
+            "min_after": 2,
+            "timeout": 100
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 1
+          },
+          "value": -1
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 5
+          },
+          "target_x": 0.0,
+          "deadband": 6
+        }
+      ]
+    ],
+    "note": "Original code initial goal-axis points left away from right-hand wall, and jump/axis flip are same frame"
+  },
+  {
+    "check": "custom_registry_fingerprint",
+    "claimed": "723571e6d31a1803edfa1586c668fdac6268465e28e607ec405687747b9d09cd",
+    "actual": "a24a9aacce77243f13ab8dd2cb3debc941947bee30d558c2e53c8f4fd59a3ec1",
+    "equal": false
+  }
+]
