@@ -45,3 +45,5 @@ cd pcg && python3 -m unittest discover -s prototype/factory/tests -v
 ```
 
 编辑器库绑定游戏74d8a06；当前生成物理绑定12f6cb0。两个版本均原样保留，不混用回执。正式游戏没有因本次迁移被改写，编辑器工程仍不自动回写游戏。
+
+本轮平原生成见[PLAINS-REPORT](pcg/PLAINS-REPORT.md)：仅单跳/反冲，围绕击钟同时抬升、真实命中回充后二次反冲、低顶棚后齿轮时机三种动作关系生成；[下载短视频](https://zhipijun1996.github.io/map-edit/generation/videos/plains-v1/all-samples.mp4)。技术候选尚待人类观感反馈。

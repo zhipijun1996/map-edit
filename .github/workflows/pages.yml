@@ -31,6 +31,9 @@ jobs:
       - name: Check offline factory contracts
         run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg
+      - name: Check plains decision contracts
+        run: python3 -m unittest discover -s prototype/plains/tests -v
+        working-directory: pcg
       - name: Verify generation videos and archived data
         run: python3 tools/check_generation.py
       - name: Prepare static files
