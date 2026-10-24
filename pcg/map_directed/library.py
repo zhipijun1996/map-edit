@@ -101,3 +101,52 @@ class CandidateLibrary:
         if len(reviewers)<POLICY['minimum_human_reviewers']:reasons.append('human_quality_review_missing')
         if not interface_eligible:reasons.append('canonical_assembly_interface_not_admitted')
         return reasons
+
+    def enroll_direct_instance(self,run):
+        """Index a quarantined whole-map candidate, never a generic Module pass.
+
+        This extends the existing candidate library. Canonical UNKNOWN routes
+        stay UNKNOWN; reusing the exact demand still requires a fresh Map test.
+        """
+        run=Path(run).resolve()
+        summary=json.loads((run/'summary.json').read_text())
+        if len(summary['rows'])!=14 or not summary['all_passed']:
+            raise ValueError('complete_direct_instance_validation_required')
+        from .direct_join.audit import audit
+        from .direct_join.canonical import reload_catalog
+        compiled=json.loads((run/'compiled.json').read_text());receipt=audit(compiled)
+        catalog=run/'module-library';loaded=reload_catalog(catalog)
+        if [m['content_version']for m in loaded]!=[m['content_version']for m in compiled['modules']]:
+            raise ValueError('validated_instance_does_not_match_module_catalog')
+        artifacts=[run/'summary.json',run/'compiled.json',run/'map-recipe.json',run/'physics/source_binding.json',run/'physics/batches.json',catalog/'source.json',catalog/'documents/manifest.json']
+        for batch in json.loads((run/'physics/batches.json').read_text()):
+            trace=run/'physics'/batch['gzip_path']
+            if file_sha(trace)!=batch['gzip_sha256']:raise ValueError('whole_map_trace_drift')
+            artifacts.append(trace)
+        identity=digest({'modules':[m['content_version']for m in loaded],'geometry':receipt['geometry_sha256']})
+        target=self.root/'map-instances'/identity/'record.json'
+        if target.exists():raise ValueError('immutable_direct_instance_record_exists')
+        record=dict(schema='map-notes/isolated-map-candidate/v1',technical_status='whole_map_instance_passed',
+            catalog=str(catalog.relative_to(REPO)),map_geometry_sha256=receipt['geometry_sha256'],
+            modules=[m['canonical_document']for m in loaded],
+            evidence=[dict(path=str(p.relative_to(REPO)),sha256=file_sha(p))for p in artifacts],
+            reuse_scope='exact demands only; independent general Module relations remain UNKNOWN; every assembled map is tested anew',
+            human_quality='awaiting_review',human_reviews=[],production_admitted=False)
+        target.parent.mkdir(parents=True);target.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+        return record
+
+    def find_direct_instance(self,specs):
+        from .direct_join.canonical import reload_catalog
+        for path in sorted((self.root/'map-instances').glob('*/record.json')):
+            record=json.loads(path.read_text())
+            if record['technical_status']!='whole_map_instance_passed' or record['production_admitted']:continue
+            for artifact in record['evidence']:
+                proof=(REPO/artifact['path']).resolve()
+                if not proof.is_relative_to(REPO)or file_sha(proof)!=artifact['sha256']:raise ValueError('direct_instance_evidence_drift')
+            catalog=(REPO/record['catalog']).resolve()
+            if not catalog.is_relative_to(REPO):raise ValueError('catalog_outside_repository')
+            modules=reload_catalog(catalog)
+            by={m['id']:m for m in modules}
+            if set(by)=={s['node_id']for s in specs}and all(by[s['node_id']]['spec']==s for s in specs):
+                return dict(modules=modules,record=str(path.relative_to(REPO)),scope=record['reuse_scope'])
+        return None

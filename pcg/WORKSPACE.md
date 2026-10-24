@@ -4,7 +4,7 @@
 
 主入口：`prototype/factory/core/producer.py`。真实动作语法→运动构造→双档案变异→独立扰动/反例→人类观感评审。当前不是运行中无限生成器、完整地图或已证明的趣味库。真人试玩/正式批准仍为0；上一轮R已有1条整体正向视频反馈，原话见feedback/plains-round2-positive-v1.json。
 
-当前完整Map入口：`python3 -m pcg.map_directed.r2_full.growth --name fresh-r2-reuse`，原R2平原Seed0全部27场所/39连接；复用既有库/生成器/物理验证，见[完整Map报告](../docs/l4-mapgen/full-r2-playable-v1.md)。74有向边已在实际连续巡视中覆盖；内容仍以导航Cell为主，长梯井和重复感待改，不代表区域品质/通用自动拼装/生产批准。
+最新直接拼接Map入口：`python3 -m pcg.map_directed.direct_join.run --name fresh-direct-map --mode full`。27个不同大小Module/39处零间隙接缝，Map新增地形0；实际整图见[直接拼接报告](../docs/l4-mapgen/direct-module-contact-v1.md)。旧r2_full导航填充版被用户否决，保留原件，不再作为当前交付。候选的通用关系和生产准入仍关闭，整图有限物理见证与人类趣味认可分开。恢复`direct-module-source-and-failures-v1`及`direct-module-run-payloads-v1`取得全部新失败、冻结源及大输入；结果和媒体清单按报告链接读取。
 
 本轮旧批次、全部冻结源和三段原生trace在 `r2-full-source-and-failures-v1`，用 `python3 pcg/tools/restore_archive.py r2-full-source-and-failures-v1 --extract` 恢复；仅校验不加extract。大量原始cases/compiled/input JSON另用 `python3 pcg/tools/restore_archive.py r2-full-run-payloads-v1 --extract` 恢复，逐文件索引见results/r2-run-payloads-index-v1.json。简要结果、库入库/复用日志、压缩物理输出及新媒体直接保留。原生AVI可重建，不入库。
 
