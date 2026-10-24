@@ -91,3 +91,9 @@ A增边0–2、B2–3、C最多4，预算未完全匹配；筛选分数还含枢
 下一可验收里程碑：从现有内容选固定多出口Macro集合，补内部端口transfer matrix、净空和真实低资源/相位/回程证明；随后将同一IR编译到游戏现有Manifest，复用Foundry/原Harness完成新地图接缝与完整路线。再统一边/搜索预算，对A/B/C作同真实内容消融、比较主路线/奖励深度/捷径价值及玩家探索评价。依此证据决定保留或替换算法，避免继续森林多代继承堆叠。[具体接口与分阶段开发路线](architecture.md)。
 
 最终成功标准尚未达成：本轮没有证明新图已经物理可玩、具有足够空间认知与设计感或适合长期肉鸽复玩；当前结果足以支持下一轮真实内容集成，而不足以批准正式替换。
+
+## 2026-10-24 整图效果补充
+
+已以最新合入main的游戏 `cd4989a68613e0b457cdfd5e252634dd57008505` 为只读输入，截取平原、森林默认v15、森林候选v18各3张4096×2304实际整图；同组Seed00/03/04、地图2。相机适应整图、HUD隐藏，未改生成/几何或搬运角色。原9例退出0、截图hash核对通过；另附新A/B/C的实际结构布局，明确未接入游戏。这里不覆盖前文f50fe基线的版本身份或验证结果。
+
+[截图索引与原图](../../experiments/l4-mapgen/results/whole-maps-20261024/README.md) · [平原对照](../../experiments/l4-mapgen/results/whole-maps-20261024/plains-comparison.png) · [森林默认对照](../../experiments/l4-mapgen/results/whole-maps-20261024/forest-comparison.png) · [森林v18候选](../../experiments/l4-mapgen/results/whole-maps-20261024/forest-v18-comparison.png)
