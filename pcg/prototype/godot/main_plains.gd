@@ -2,6 +2,7 @@ extends Node2D
 ## Plains review adapter: original physics and formal player muzzle; target-specific harm.
 const PLAINS_CELLS=preload("res://plains_cells.gd")
 var cells
+const LIFECYCLE=preload("res://plains_lifecycle.gd")
 const PLAYER_V3 = preload("res://scenes/player/player.tscn")
 const CAP_V3 = preload("res://capability_adapter.gd")
 const CONTEXT_V3 = preload("res://dynamic_context.gd")
@@ -101,7 +102,7 @@ func definition_for(case: Dictionary) -> PlatformingModuleDefinition:
 func rebuild(new_mode: String) -> void:
 	prepared=false
 	if is_instance_valid(world):
-		context.freeze();controller.router.clear("dynamic_lab_rebuild");controller.shoot_ability.clear_projectiles();world.free()
+		context.freeze();controller.router.clear("dynamic_lab_rebuild");await LIFECYCLE.dispose(get_tree(),world,controller)
 	mode=new_mode;frame=0;safe=true;finished=false;stable_frames=0;setup_error="";reward_visited=false;last_snapshot={};last_input_frame=0
 	case_data=cases[selection.selected]
 	var validation: Dictionary=CAP_V3.validate(case_data.get("capabilities",[]))
@@ -164,7 +165,8 @@ func rebuild(new_mode: String) -> void:
 	display=DRAW_V3.new();display.case_data=case_data;display.motor=motor;display.controller=controller;display.module=module;world.add_child(display)
 	cells=PLAINS_CELLS.new();cells.owner_runner=self;world.add_child(cells);cells.setup(case_data,world,controller,context)
 	telemetry_label.visible=false
-	ability_label.text="移动 · 普通单跳 · 反冲（空中一次；实际命中回充）"
+	ability_label.text="移动 · 普通单跳 · 反冲（空中一次；命中或落地由原组件回充）"
+	if not warnings.is_empty():ability_label.text+=" · "+"；".join(warnings)
 	ui.get_child(0).size.y=140
 	warmup_left=int(case_data.get("warmup_frames",4));prepared=true
 	context.running=true;world.process_mode=Node.PROCESS_MODE_PAUSABLE
@@ -200,10 +202,17 @@ func capture_dynamic_frame() -> void:
 	for platform: Dictionary in last_snapshot.get("moving_platforms",[]):phases.append(str(platform.id)+" %.2f"%float(platform.phase))
 	for saw: Dictionary in last_snapshot.get("saws",[]):phases.append(str(saw.id)+" %.2f"%float(saw.phase))
 	metric.text="%s %.1fs HP%.0f | %s | 稳定%d/6"%[mode,frame/60.,controller.actor_resources.health.current," / ".join(phases),mini(stable_frames,6)]
+	metric.text="%.1fs · HP%.0f · 空射%d · 稳定%d/6"%[frame/60.,controller.actor_resources.health.current,controller.action_resources.shot_charges,mini(stable_frames,6)]
+	if not finished and safe:
+		status.text="程序输入回放 · 观察目标、落点和齿轮窗口"
+		for event: Dictionary in cells.events:
+			if frame-int(event.frame)>24:continue
+			if event.type=="enemy_hit" and event.get("fired_airborne",false):status.text="空中命中确认 · 实际回充事件 · 第二发继续反冲 / 操作机关"
+			elif event.type=="bell_open":status.text="风铃命中确认 · 机关已开启（有持续时间）"
 	telemetry_label.text="实际相位：%s · 时钟%.2fs · HP%.0f · 伤害提交%d / 扣血%d / 回退%d · 无伤%s"%[" / ".join(phases) if not phases.is_empty() else "无动态机关",module.clock,controller.actor_resources.health.current,context.policy.records.size(),context.damage.size(),context.returns.size(),"保持" if safe else "未满足"]
 	frame+=1
 	publish_state()
-	if finished:context.freeze();controller.router.clear("dynamic_lab_finished")
+	if finished:context.freeze();controller.router.clear("dynamic_lab_finished");world.process_mode=Node.PROCESS_MODE_DISABLED
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode==KEY_R:

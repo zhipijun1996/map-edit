@@ -30,4 +30,31 @@ class Decisions(unittest.TestCase):
    r=self.fixture();r[field]=1;self.assertIn('forbidden_advanced_ability',purpose({},r)['reasons'])
  def test_common_random_numbers_and_no_mutation(self):
   c=proposals()[0];c['saws']=[dict(initial_phase=0)];c['enemies']=[dict(initial_idle_cooldown=0)];old=copy.deepcopy(c);a=instantiate(c,173,'mild',2);b=instantiate(c,173,'mild',2);self.assertEqual(a,b);self.assertEqual(c,old);self.assertNotEqual(a['saws'],c['saws'])
+class LongerDecisions(unittest.TestCase):
+ def test_sustained_control_reversal_not_braking_jitter(self):
+  frames=[dict(frame=i,grounded=True,shot_charges=1,accepted=[],axis=1 if i<5 else -1,real_velocity=[260 if i<5 else -260,0])for i in range(10)]
+  self.assertEqual(observed({},dict(frames=frames))['reversals'],1)
+  for f in frames:f['axis']=0
+  self.assertEqual(observed({},dict(frames=frames))['reversals'],0)
+ def test_gear_crossing_is_measured_not_named(self):
+  frames=[dict(frame=i,grounded=True,shot_charges=1,accepted=[],x=x,y=100)for i,x in enumerate((0,10,20))]
+  case=dict(saws=[dict(origin=[15,100],travel=[0,20],radius=8)])
+  self.assertEqual(observed(case,dict(frames=frames))['gear_crossings'],1)
+  for f in frames:f['y']=1000
+  self.assertEqual(observed(case,dict(frames=frames))['gear_crossings'],0)
+ def test_arrival_does_not_replace_long_chain_contract(self):
+  r=Decisions().fixture();c=dict(challenge_requirements=dict(min_ground_jumps=2,min_landings=2,min_gear_crossings=1))
+  result=purpose(c,r);self.assertFalse(result['ok']);self.assertIn('missing_min_ground_jumps',result['reasons']);self.assertIn('missing_min_landings',result['reasons'])
+ def test_each_shot_counterfactual_keeps_its_wait_and_targets_the_same_jump(self):
+  from prototype.plains.produce import alternative_cases
+  c=proposals()[0];original=next(p for p in c['control_plan']if p['op']=='shoot');alts=dict(alternative_cases(c));skip=alts['omit_shot_0'];replacement=skip['control_plan'][-1];self.assertEqual(replacement['op'],'wait');self.assertEqual(replacement['trigger'],original['trigger']);self.assertNotIn('direction',replacement)
+ def test_wrong_aim_and_no_enemy_do_not_keep_reactive_target_correction(self):
+  from prototype.plains.produce import alternative_cases
+  c=proposals()[0];c['enemies']=[dict(id='enemy')];c['latches']=[dict(id='bell')];c['control_plan'][-1]['aim_cell']=dict(kind='enemy',id='enemy');alts=dict(alternative_cases(c));self.assertTrue(all('aim_cell'not in p for p in alts['wrong_aim']['control_plan']));self.assertTrue(all('aim_cell'not in p for p in alts['no_enemy_same_shots']['control_plan']))
+ def test_phrase_probe_uses_only_plains_capabilities(self):
+  from prototype.plains.phrases import extend_probe
+  base=proposals()[0];base['platforms'].append([300,258,192,72]);base['exit_port']=[430,240]
+  for sign in (-1,1):
+   c=extend_probe(base,sign,6,12,0);self.assertEqual(c['capabilities'],CAPS);self.assertEqual(sum(x['op']=='jump'for x in c['control_plan']),2)
+
 if __name__=='__main__':unittest.main()

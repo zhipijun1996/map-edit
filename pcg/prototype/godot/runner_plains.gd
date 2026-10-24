@@ -1,10 +1,13 @@
 extends "res://runner_v3.gd"
 const CELLS=preload("res://plains_cells.gd")
 var cells
+const LIFECYCLE=preload("res://plains_lifecycle.gd")
+var cleanup_records: Array=[]
+var entry_capture: Dictionary={}
 
 func make_fixture(case: Dictionary) -> void:
 	if is_instance_valid(world):
-		controller.shoot_ability.clear_projectiles();world.free()
+		cleanup_records.append(await LIFECYCLE.dispose(self,world,controller))
 	await process_frame
 	world=Node2D.new();world.process_mode=Node.PROCESS_MODE_DISABLED;root.add_child(world)
 	var module:=PlatformingModule.new();module.definition=definition_for(case);module.authoring_debug=false
@@ -49,6 +52,77 @@ func make_fixture(case: Dictionary) -> void:
 
 	cells=CELLS.new();cells.owner_runner=self;world.add_child(cells);cells.setup(case,world,controller,context)
 
+func control_plan(frame: int) -> Array:
+	var requested: Array=[]
+	var command_budget:=16
+	while plan_index<plan.size() and plan_error.is_empty() and command_budget>0:
+		command_budget-=1
+		var command: Dictionary=plan[plan_index]
+		var trigger: Dictionary=command.get("trigger",{})
+		var age:=frame-previous_plan_frame
+		var key: Variant=command.get("noise_key",plan_index)
+		var jitter:=timing_error(key) if command.get("timing_noise",true) else 0
+		var earliest:=maxi(0,int(trigger.get("after",trigger.get("min_after",0)))+jitter)
+		var timeout:=int(trigger.get("timeout",3600))
+		if age>timeout:
+			plan_error="trigger_timeout/"+str(plan_index)+"/"+str(trigger.get("state","after"));break
+		if age<earliest:break
+		if trigger.has("state") and not condition_met(str(trigger.state)):break
+		var op: String=command.op
+		var direction:=point(command.get("direction",[0,0]))
+		if command.has("aim_target"):
+			var origin:=motor.global_position+Vector2(0,-6) if op=="grapple" else motor.global_position
+			direction=(point(command.aim_target)-origin).normalized()
+		if command.has("aim_cell"):direction=_cell_aim(command.aim_cell,direction)
+		var applied_aim:=aim_error(key) if op in ["shoot","grapple"] else 0.
+		if op in ["shoot","grapple"]:direction=disturbed_direction(direction,key)
+		var submitted_type:=""
+		if op=="axis":set_axis(float(command.get("value",0.)))
+		elif op=="settle":settling=true;settle_options=command
+		elif op!="wait":
+			submitted_type="shoot_release" if op=="shoot" else op
+			controller.router.request_action(StringName(submitted_type),direction)
+			requested.append({"type":submitted_type,"direction":[direction.x,direction.y],"plan_index":plan_index})
+		fired_commands.append({"index":plan_index,"frame":frame,"op":op,"state":str(controller.traversal.state),"grounded":motor.is_on_floor(),"position":[motor.position.x,motor.position.y],"direction":[direction.x,direction.y],"noise_key":key,"timing_error":jitter,"threshold":earliest,"aim_error_degrees":applied_aim})
+		previous_plan_frame=frame;plan_index+=1
+	if settling:
+		var center:=float(settle_options.get("target_x",settle_goal.get_center().x))
+		var deadband:=float(settle_options.get("deadband",minf(12,settle_goal.size.x*.15)))
+		set_axis(signf(center-motor.position.x) if absf(center-motor.position.x)>deadband else 0.)
+	return requested
+
+func _cell_aim(query: Dictionary, fallback: Vector2) -> Vector2:
+	var found:=false;var target:=Vector2.ZERO
+	if query.kind=="bell":
+		for latch: ShotLatch in cells.latches:
+			if str(latch.link_id)==str(query.id):target=latch.to_global(latch.bell_position);found=true;break
+	elif query.kind=="enemy":
+		for i: int in cells.enemies.size():
+			var actor: EnemyActor=cells.enemies[i]
+			if str(current_case.get("enemies",[])[i].id)==str(query.id) and not actor.health.terminal:
+				target=actor.motor.global_position;found=true;break
+	if not found:return fallback
+	# The original muzzle is offset from the body. Solve its bearing as a
+	# forward-model query; do not move the body or grant resources. The original
+	# Router/weapon still executes the shot and the original aim noise is applied.
+	var aim:=(target-motor.global_position).normalized()
+	var visual: CourierVisual=motor.get_node("CourierVisual")
+	for _iteration: int in 4:
+		aim=(target-visual.muzzle_position(aim)).normalized()
+	return aim
+
+func prepare_dynamic_frame() -> void:
+	# Observe the actual boundary BEFORE Router receives the first action.
+	# Module/dynamic nodes have already stepped at priorities -200/-100.
+	if warmup_left==0 and entry_capture.is_empty():
+		entry_capture=snapshot(-1,controller.router.axis,[])
+		entry_capture.merge(context.snapshot())
+		entry_capture.real_velocity=[motor.get_real_velocity().x,motor.get_real_velocity().y]
+		entry_capture.normal_velocity=[motor.normal_velocity.x,motor.normal_velocity.y]
+		entry_capture.plains=cells.snapshot()
+		entry_capture.sampling_point="before_first_router_input_after_dynamic_update"
+	super.prepare_dynamic_frame()
+
 func capture_dynamic_frame() -> void:
 	# Enemy damage is a successful player action, not player harm. Preserve all
 	# original commits in context; only the player's outcomes determine no-harm.
@@ -70,8 +144,16 @@ func capture_dynamic_frame() -> void:
 
 func run_case(case: Dictionary) -> Dictionary:
 	if case.get("capabilities",[])!=["move","jump","shot_recoil"]:return reject(case,"plains_requires_exact_move_jump_recoil")
+	for command: Dictionary in case.get("control_plan",[]):
+		if not command.has("aim_cell"):continue
+		var query: Dictionary=command.aim_cell
+		var known:=false
+		for spec: Dictionary in case.get("latches",[]) if query.get("kind")=="bell" else case.get("enemies",[]) if query.get("kind")=="enemy" else []:
+			if str(spec.id)==str(query.get("id","")):known=true
+		if not known:return reject(case,"unregistered_aim_target_cell")
+	entry_capture={}
 	var result: Dictionary=await super.run_case(case)
-	if cells!=null:result.plains=cells.snapshot()
+	if cells!=null and not result.get("rejected",false):result.plains=cells.snapshot();result.entry_snapshot=entry_capture
 	return result
 
 func _run() -> void:
@@ -85,10 +167,10 @@ func _run() -> void:
 	for case: Dictionary in data.cases:
 		results.append(await run_case(case));print("CASE_V3 ",case.get("id","")," ",results[-1].reason)
 		await process_frame
-	if is_instance_valid(world):controller.shoot_ability.clear_projectiles();world.free()
+	if is_instance_valid(world):cleanup_records.append(await LIFECYCLE.dispose(self,world,controller))
 	cells=null;context=null;controller=null;motor=null;world=null
 	for _cleanup_frame: int in 4:await process_frame
 	DirAccess.make_dir_recursive_absolute(output_path.get_base_dir())
 	var file:=FileAccess.open(output_path,FileAccess.WRITE)
-	file.store_string(JSON.stringify({"schema":"disordered-clock/physics-batch/v3","engine":Engine.get_version_info().string,"source_commit":"12f6cb006d7119598e3235f4ca4f7323e4c9d092","physics_hz":60,"scheduling":"module -200, moving -100, input -10, original controller 0, hazard 900, policy 1000, observer 1100","results":results}));file.close()
+	file.store_string(JSON.stringify({"schema":"disordered-clock/physics-batch/v3","engine":Engine.get_version_info().string,"source_commit":"12f6cb006d7119598e3235f4ca4f7323e4c9d092","physics_hz":60,"scheduling":"module -200, moving -100, input -10, original controller 0, hazard 900, policy 1000, observer 1100","results":results,"cleanup":cleanup_records}));file.close()
 	print("PCG_BATCH_V3_COMPLETE ",results.size());quit(0)

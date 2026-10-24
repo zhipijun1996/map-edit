@@ -12,12 +12,26 @@ def alternative_cases(base):
  for p in held['control_plan']:
   if p['op']=='jump_release':p['trigger']['after']=18
  out.append(('no_shoot_held_jump',held))
+ # Keep the exact skipped-shot delay; test every shot independently, then
+ # a longer ordinary jump for that stage. Omitting both shots is insufficient
+ # to detect a bypass of only the later challenge.
+ for ordinal,index in enumerate(i for i,p in enumerate(base['control_plan'])if p['op']=='shoot'):
+  skipped=copy.deepcopy(base);skipped['id']+=f'-omit-shot-{ordinal}'
+  skipped['control_plan'][index]=dict(op='wait',trigger=copy.deepcopy(base['control_plan'][index]['trigger']))
+  out.append((f'omit_shot_{ordinal}',skipped))
+  held=copy.deepcopy(skipped);held['id']+='-held-jump'
+  releases=[p for p in held['control_plan'][:index]if p['op']=='jump_release']
+  if releases:releases[-1]['trigger']['after']=18
+  out.append((f'omit_shot_{ordinal}_held_jump',held))
  if base.get('enemies'):
-  no=copy.deepcopy(base);no['id']+='-without-enemy';no['enemies']=[];out.append(('no_enemy_same_shots',no))
+  no=copy.deepcopy(base);no['id']+='-without-enemy';no['enemies']=[]
+  for p in no['control_plan']:
+   if p.get('aim_cell',{}).get('kind')=='enemy':p.pop('aim_cell')
+  out.append(('no_enemy_same_shots',no))
  if base.get('latches'):
   no=copy.deepcopy(base);no['id']+='-wrong-aim'
   for p in no['control_plan']:
-   if p['op']=='shoot':p['direction']=[-1,0]
+   if p['op']=='shoot':p['direction']=[-1,0];p.pop('aim_cell',None);p.pop('aim_target',None)
   out.append(('wrong_aim',no))
  if base.get('saws'):
   no=copy.deepcopy(base);no['id']+='-without-wait';no['control_plan']=[p for p in no['control_plan']if p.get('trigger',{}).get('dynamic',{}).get('kind')!='saw_phase'];out.append(('no_saw_observation',no))
@@ -45,7 +59,7 @@ def run(name,calibration,holdout_seed=1240810,families=None):
   uid,kind,trial=owners[c['id']];physical=bool(r.get('ok')and r.get('hp')==5 and not r.get('plains',{}).get('player_damage'))
   row=dict(uid=uid,kind=kind,trial=trial,physical_pass=physical,shots=r.get('shots',0),ticks=r.get('ticks',0),reason=r['reason'],evidence=ev);alternatives.append(row)
   # Missing the saw read may be a legitimate higher-risk strategy, not lower cost.
-  if physical and kind in('no_shoot','no_shoot_held_jump','no_enemy_same_shots'):shortcuts[uid].append(row)
+  if physical and(kind in('no_shoot','no_shoot_held_jump','no_enemy_same_shots')or kind.startswith('omit_shot_')):shortcuts[uid].append(row)
  catalog=[];reviews=[];representatives={}
  for selected_entry in selected:
   uid=identity(selected_entry['case']);h=held[uid];base=h['case'];stats=h['stats'];admission=gate(stats,shortcuts[uid],bool(base.get('saws')or base.get('enemies')),POLICY,requested_tier='regular')

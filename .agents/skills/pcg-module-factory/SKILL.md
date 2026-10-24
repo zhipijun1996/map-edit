@@ -18,3 +18,5 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 平原迭代：`prototype/plains/`是小型动作/压力关系生成器。Cell可为原EnemyActor/ShotLatch；让地形、机关、资源条件改变玩家的判断与动作顺序。实际落地后的安全恢复带可解耦连续难点，但须重新留出验证；不要把降低压力等同趣味提升。见`pcg/PLAINS-REPORT.md`。
 
 输出合同（用户明确要求）：后续交付复用Map Notes格式与`generationContract`，见`pcg/OUTPUT-CONTRACT.md`。主生产器已接`contract.export`；其他实验CLI交付前也须转换。原研究raw cases不是地图接口。运行`npm run check`与`tools/check-module-contracts.mjs`，未完整声明/验证的进入状态、端口方向、净空、变换、回程和Macro连接保留UNKNOWN；不得自动填落地回满。
+
+第二轮共性：新接收面/顶棚可能破坏前一段，先用已有身体轨迹过滤交叠，再真实整段重验；这不等于完整动作净空。逐枪省略反例要保留时间间隔，并分别测试延长普通跳跃，防止第二枪仅被动作词要求强行认定有价值。齿轮等待22/24反例可跳过时不宣称必要；保留原等待视频供节奏审核。见PLAINS-REVIEW-ROUND2.md。

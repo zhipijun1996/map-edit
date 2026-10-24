@@ -19,9 +19,29 @@ def observed(case,result):
    recent=[e for e in events if e['type']=='enemy_hit'and e['fired_airborne']and 0<=b['frame']-e['frame']<=2]
    if recent:refunds.append(b['frame']);timeline.append((b['frame'],'air_hit_refund'))
   if not a['grounded']and b['grounded']:timeline.append((b['frame'],'land_recover'))
+ # Only sustained, player-directed reversals are action features; braking
+ # jitter and automatic platform motion do not create new gameplay types.
+ last_sign=0;run_sign=0;run=0;reversals=0;gear_crossings=0;landings=0
+ for f in frames:
+  vx=f.get('real_velocity',[f.get('vx',0),0])[0];axis=f.get('axis',0)
+  sign=(1 if vx>80 else -1 if vx< -80 else 0)if abs(axis)>.5 and vx*axis>0 else 0
+  if sign and sign==run_sign:run+=1
+  elif sign:run_sign=sign;run=1
+  else:run=0
+  if sign and run==4:
+   if last_sign and sign!=last_sign:reversals+=1;timeline.append((f['frame'],'reverse_ground'if f['grounded']else'reverse_air'))
+   last_sign=sign
+ for a,b in zip(frames,frames[1:]):
+  if not a['grounded']and b['grounded']:landings+=1
+ for saw in case.get('saws',[]):
+  sx,sy=saw['origin'];travel=saw['travel'];radius=saw['radius']
+  for a,b in zip(frames,frames[1:]):
+   if 'x'not in a or 'x'not in b:continue
+   if (a['x']-sx)*(b['x']-sx)<=0 and abs(b['x']-a['x'])>1 and b['grounded']and sy-abs(travel[1])-radius-18<=b['y']<=sy+abs(travel[1])+radius+18:
+    gear_crossings+=1;timeline.append((b['frame'],'gear_window_cross'));break
  sequence=[t for _,t in sorted(timeline,key=lambda p:p[0])]
  continuous_two=any(all(not f['grounded']for f in frames if x<=f['frame']<=y)for x,y in zip(air_shots,air_shots[1:]))
- return dict(sequence=sequence,signature=digest(sequence)[:16],air_shots=len(air_shots),refunds=len(refunds),continuous_two_air_shots=continuous_two,opened_bells=sorted(set(e['id']for e in events if e['type']=='bell_open')),air_enemy_hits=sum(e['type']=='enemy_hit'and e.get('fired_airborne',False)for e in events))
+ return dict(reversals=reversals,gear_crossings=gear_crossings,landings=landings,ground_jumps=sum(e['type']=='ground_jump'for f in frames for e in f.get('accepted',[])),sequence=sequence,signature=digest(sequence)[:16],air_shots=len(air_shots),refunds=len(refunds),continuous_two_air_shots=continuous_two,opened_bells=sorted(set(e['id']for e in events if e['type']=='bell_open')),air_enemy_hits=sum(e['type']=='enemy_hit'and e.get('fired_airborne',False)for e in events))
 def purpose(case,result):
  behavior=observed(case,result);reasons=[]
  if not result.get('ok'):reasons.append(result.get('reason','not_stable'))
@@ -31,6 +51,8 @@ def purpose(case,result):
   if id not in behavior['opened_bells']:reasons.append('required_bell_not_opened')
  if case.get('enemies')and(behavior['refunds']<1 or not behavior['continuous_two_air_shots']):reasons.append('no_real_air_hit_refund_chain')
  if result.get('shots',0)<1:reasons.append('no_recoil_executed')
+ for key,actual in [('min_ground_jumps',behavior['ground_jumps']),('min_shots',result.get('shots',0)),('min_landings',behavior['landings']),('min_reversals',behavior['reversals']),('min_gear_crossings',behavior['gear_crossings'])]:
+  if actual<case.get('challenge_requirements',{}).get(key,0):reasons.append('missing_'+key)
  return dict(ok=not reasons,reasons=reasons,behavior=behavior)
 def instantiate(base,seed,level,trial):
  rng=random.Random(seed+trial*104729+{'clean':0,'mild':1000003,'moderate':2000006}[level]);c=copy.deepcopy(base)

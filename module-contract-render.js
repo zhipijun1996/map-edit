@@ -23,7 +23,7 @@ export function renderContractSvg(doc){
  for(const p of c.ports){const [x,yy]=p.position;art+=`<g data-port-id="${esc(p.id)}"><circle cx="${x}" cy="${yy}" r="10" fill="#fff" stroke="#1f635c" stroke-width="3"/><line x1="${x}" y1="${yy}" x2="${x+p.normal[0]*36}" y2="${yy+p.normal[1]*36}" stroke="#1f635c" stroke-width="3"/><text x="${x+12}" y="${yy-26}" font-weight="700">${esc(p.id)}</text></g>`;}
  let line=b.y+b.h+34;art+=text(left+25,line,'有向通行（path仅指列明条件/覆盖；UNKNOWN不提供给自动拼装）','font-weight="700"');line+=28;
  for(const rel of c.relations){const routes=rel.routeIds.map(id=>c.routes.find(r=>r.id===id)?.role).join(',');art+=text(left+25,line,`${rel.from} → ${rel.to} : ${rel.status} ${routes}`);line+=23;}
- art+=text(left+25,line+12,'奖励路线：'+(c.routes.some(r=>r.role==='reward')?'见上方金色标记':'UNKNOWN / 本候选未声明'))+text(left+25,line+38,'回程：'+(c.routes.some(r=>r.role==='return')?'见上方蓝色标记':'UNKNOWN / 未验证；不推断可回去'))+text(left+25,line+64,'接缝、进入状态、全状态净空未验证；设计候选，不是正式地图接入证明。');
+ art+=text(left+25,line+12,'奖励路线：'+(c.routes.some(r=>r.role==='reward')?'见上方金色标记':'UNKNOWN / 本候选未声明'))+text(left+25,line+38,'回程：'+(c.routes.some(r=>r.role==='return')?'见上方蓝色标记':'UNKNOWN / 未验证；不推断可回去'))+text(left+25,line+64,c.validations.some(v=>v.coverage?.entrySnapshot==='before_first_router_input_after_dynamic_update')?'已记录动作前状态；接缝、进入状态覆盖范围及完整净空仍未验证。':'接缝、进入状态、全状态净空未验证；设计候选，不是正式地图接入证明。');
  let lockY=line+98;for(const u of c.unlocks){art+=text(left+25,lockY,`条件锁 ${u.id}：命中触发器 → 门碰撞关闭 ${u.changes.openSeconds??'UNKNOWN'}s；开启前 ${u.before.status} / 开启后 ${u.after.status}`);lockY+=30;}
  return art+'</svg>';
 }

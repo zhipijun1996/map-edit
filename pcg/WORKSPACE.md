@@ -42,3 +42,7 @@ Godot素材与真实脚本由 `godot-runtime-v1` 完整保存870原件；恢复�
 ## 后续交付格式
 
 必须执行[OUTPUT-CONTRACT.md](OUTPUT-CONTRACT.md)。plains和factory主生产器自动输出`modules/*.mapnote.json`及同版本SVG；raw review_cases仅供研究/回放，不作为地图接口。格式为现有Map Notes+generationContract；能力、难度、source.integration继续沿用旧格式。空间、端口有向对、状态、Macro组成与未知项显式表达；`assemblyInterface`默认拒绝未验证关系。
+
+## 平原连续挑战第二轮
+
+最新见[PLAINS-REVIEW-ROUND2.md](PLAINS-REVIEW-ROUND2.md)：6技术候选/3代表，416次正式物理验证，额外30批360案例基础设施回归0错误。3段完整原生录像及841帧精确比对随generation/videos/plains-round2公开；人工观感/试玩/批准仍0。恢复plains-review-round2-v1可取得所有新失败、校准、原始轨迹、冻结源与录像。当前等待R01/R02/R03观感审核；齿轮等待必要性未证明，不再据此增加玩法计数；自动拼装仍关闭。

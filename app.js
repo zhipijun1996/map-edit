@@ -30,13 +30,14 @@ function syncFields(){$('#title').value=doc.title;$('#description').value=doc.de
 function integrationBadge(status){return `<span class="integration-badge ${esc(status?.usage??'unverified')}">${esc(status?.label??'接入状态待核实')}</span>`;}
 function renderRevisionInfo(){
   const s=doc.source,op=doc.intent?.operation??(s?'modify_existing':'new_module'),changes=objectChanges(doc);
-  let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
+  const generated=s?.kind==='generated';
+  let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${generated?option('new_module','生成候选草稿（未接入）',op)+option('new_variant','派生新变体',op):s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
   if(s){
     const latest=libraryClient.catalog?.modules.find(m=>m.id===s.moduleId)?.integration;
     const status=s.integration??(latest?.checkedCommit===s.commit?latest:null);
-    html+=`<div class="revision-source">原模块：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'此旧草稿尚无接入审查信息，可从模块库查看最新版。')}</p><span>来源版本 ${esc(s.commit?.slice(0,8))}</span></div>`;
+    html+=`<div class="revision-source">${generated?'来源候选':'原模块'}：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'此旧草稿尚无接入审查信息，可从模块库查看最新版。')}</p><span>来源版本 ${esc(s.commit?.slice(0,8))}</span></div>`;
     const latestCommit=libraryClient.catalog?.sourceCommit;
-    if(latestCommit&&latestCommit!==s.commit)html+='<p class="revision-warning">参考库已有新版本。本草稿保留旧基线，应用前需对比最新源码。</p>';
+    if(s.repository==='zhipijun1996/gunman-rush'&&latestCommit&&latestCommit!==s.commit)html+='<p class="revision-warning">参考库已有新版本。本草稿保留旧基线，应用前需对比最新源码。</p>';
     if(status?.evidence?.length)html+=`<details class="integration-evidence"><summary>查看接入依据</summary>${status.evidence.map(e=>`<a href="${esc('https://github.com/zhipijun1996/gunman-rush/blob/'+status.checkedCommit+'/'+e.path+'#L'+e.line)}" target="_blank" rel="noopener">${esc(e.path.split('/').at(-1))} ↗</a>`).join('')}<p>依据是来源版本的游戏入口调用链；不表示此修改稿已应用或通过物理验证。</p></details>`;
   }
   if(op==='new_variant')html+=field('新变体建议名称（可留空）','suggestedModuleId',doc.intent?.suggestedModuleId??'');
