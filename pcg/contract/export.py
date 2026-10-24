@@ -43,14 +43,14 @@ def collect(cases_path,run=None):
    input_case=read(inp)['cases'][ev['index']]
    # Compare the geometry, mechanics and action program independently of labels.
    for k,v in input_case.items():
-    if k not in('title','review_alias','noise')and case.get(k)!=v:raise ValueError('Export no longer matches simulated case: '+k)
+    if k not in('title','review_alias','review_warnings','noise')and case.get(k)!=v:raise ValueError('Export no longer matches simulated case: '+k)
    for p in [packed,inp,run/'source_binding.json',run/'batches.json',run/b['execution']]:artifacts.append(dict(path=str(p.relative_to(REPO)),sha256=sha(p)))
    if protocol:artifacts.append(dict(path=str((run/'protocol.json').relative_to(REPO)),sha256=sha(run/'protocol.json')))
    if result.get('module_definition_valid')is not True:raise ValueError('Physics case not a valid module')
   # Each raw calibration/holdout trial retains independent direction and failures.
   item=next((e for e in entries if e['uid']==case.get('factory_id')),None)
   enemy_defs={e['definition']:dimensions('resources/enemies/'+e['definition']+'.tres',r'collision_size = Vector2\(([^,]+), ([^)]+)\)')for e in case.get('enemies',[])}
-  rows.append(dict(case=case,generationMetadata=dict(seed=dict(status='known',value=catalog['seed'])if isinstance(catalog,dict)and catalog.get('schema')=='pcg/factory-catalog/v1'else None,parameters=params,producer='pcg/prototype/factory/core/producer.py'if isinstance(catalog,dict)and catalog.get('schema')=='pcg/factory-catalog/v1'else 'pcg/prototype/plains/produce.py'),geometryDefinitions=dict(player=body,bell=bell,enemies=enemy_defs),sourceRun=str(run.relative_to(REPO))if run else 'UNKNOWN',sourceCases=dict(path=str(cases_path.relative_to(REPO)),sha256=sha(cases_path)),protocol=protocol or 'UNKNOWN',binding=binding or 'UNKNOWN',result=result or 'UNKNOWN',inputCase=input_case or 'UNKNOWN',artifacts=artifacts,statistics=item['stats']if item else 'UNKNOWN',trialRows=item['rows']if item else []))
+  rows.append(dict(case=case,generationMetadata=dict(seed=dict(status='not_used',value=None,reason='Fixed Cartesian enumeration; holdout seed belongs to validation')if case.get('ports')else dict(status='known',value=catalog['seed'])if isinstance(catalog,dict)and catalog.get('schema')=='pcg/factory-catalog/v1'else None,parameters=params,producer='pcg/prototype/plains/three_port.py'if case.get('ports')else 'pcg/prototype/factory/core/producer.py'if isinstance(catalog,dict)and catalog.get('schema')=='pcg/factory-catalog/v1'else 'pcg/prototype/plains/produce.py'),geometryDefinitions=dict(player=body,bell=bell,enemies=enemy_defs),sourceRun=str(run.relative_to(REPO))if run else 'UNKNOWN',sourceCases=dict(path=str(cases_path.relative_to(REPO)),sha256=sha(cases_path)),protocol=protocol or 'UNKNOWN',binding=binding or 'UNKNOWN',result=result or 'UNKNOWN',inputCase=input_case or 'UNKNOWN',artifacts=artifacts,statistics=item['stats']if item else case.get('validation_summary','UNKNOWN'),trialRows=item['rows']if item else [],routePurpose=__import__('prototype.plains.three_port',fromlist=['port_purpose']).port_purpose(input_case,result)if case.get('ports')and result else 'UNKNOWN'))
  return rows
 
 def export(cases_path,out,run=None):

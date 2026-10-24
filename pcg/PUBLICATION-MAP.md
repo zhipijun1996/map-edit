@@ -16,3 +16,5 @@
 输出契约：`generation/contracts/plains-v1/`包含3个历史Module的契约化示例、1个未知连接Macro候选、同版本SVG与SHA索引；见OUTPUT-CONTRACT.md。`archives/module-contract-v1`保存适配过程及两次未完成物理运行。当前没有新增完整物理通过批次或开放拼装接口。
 
 第二轮平原：`generation/videos/plains-round2/`正常速度3段及17.27秒合集，841帧原生轨迹与物理见证精确匹配；`generation/contracts/plains-round2/`为同内容版本图/JSON，拼装未准入。`archives/plains-review-round2-v1`含完整失败/校准/416次正式验证/360次基础设施回归和源快照。见PLAINS-REVIEW-ROUND2.md。此段描述待随本次提交发布的内容，不提前宣称公网部署成功。
+
+三端口批次：`generation/contracts/plains-three-port-v1`两份Map Notes文档各3端口/6有序对/7路线，`generation/videos/plains-three-port-v1`四段及16.7秒合集，正式552次验证。原件在`archives/plains-three-port-v1`；报告PLAINS-THREE-PORT-REPORT.md。未知接缝/状态范围仍不准入拼装，T待人评。

@@ -16,7 +16,7 @@ def run():
    if 'native_trace'in c:
     t=c['native_trace'];p=folder/t['file'];assert p.stat().st_size==t['bytes']and sha(p)==t['sha256'];trace=json.loads(p.read_text());assert trace['module_sha256']==c['module_sha256']and len(trace['frames'])==t['frames']and t['max_position_error']==0 and t['cell_events_match_at_every_frame']
    if 'map_notes'not in c:continue
-   link=c['map_notes'];doc_path=(folder/link['file']).resolve();diagram=(folder/link['diagram']).resolve();assert doc_path.is_relative_to(ROOT/'generation')and diagram.is_relative_to(ROOT/'generation');assert sha(doc_path)==link['contentSha256']and sha(diagram)==link['diagramSha256'];doc=json.loads(doc_path.read_text());contract=doc['generationContract'];assert doc['id']==link['id']and contract['contentVersion']==link['contentVersion']and contract['generation']['source']['moduleSha256']==c['module_sha256']
+   link=c['map_notes'];doc_path=(folder/link['file']).resolve();diagram=(folder/link['diagram']).resolve();assert doc_path.is_relative_to(ROOT/'generation')and diagram.is_relative_to(ROOT/'generation');assert sha(doc_path)==link['contentSha256']and sha(diagram)==link['diagramSha256'];doc=json.loads(doc_path.read_text());contract=doc['generationContract'];assert doc['id']==link['id']and contract['contentVersion']==link['contentVersion'];source=contract['generation']['source'];assert source['moduleSha256']==c['module_sha256']or any(r['routeId']==link.get('routeId')and r['moduleSha256']==c['module_sha256']for r in source.get('routeCases',[]))
  for manifest in(ROOT/'pcg/archives').glob('*/manifest.json'):
   m=json.loads(manifest.read_text());total=0;whole=hashlib.sha256()
   for entry in m['parts']:

@@ -2,6 +2,7 @@
 
 本仓库现在以**离线自动生成高质量动作 Module**为主要任务：动作语法、真实Godot验证、质量多样性搜索、失败修复与短视频反馈。原Map Notes草图编辑器继续保留，作为设计与审阅工具。
 
+- [最新三端口Module短视频 T](https://zhipijun1996.github.io/map-edit/generation/videos/plains-three-port-v1/all-samples.mp4)（约16.7秒） · [实验报告](pcg/PLAINS-THREE-PORT-REPORT.md)
 - [生成研究与短视频下载](https://zhipijun1996.github.io/map-edit/generation/)
 - [最新平原连续挑战 R · MP4](https://zhipijun1996.github.io/map-edit/generation/videos/plains-round2/all-samples.mp4)（约17.3秒，正常速度） · [本轮报告](pcg/PLAINS-REVIEW-ROUND2.md)
 - [草图编辑器](https://zhipijun1996.github.io/map-edit/) · [编辑器原说明](docs/map-notes-editor.md)

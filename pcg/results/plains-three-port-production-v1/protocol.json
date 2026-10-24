@@ -1,0 +1,113 @@
+{
+  "schema": "pcg/plains-three-port-production/v1",
+  "scope": "Per-route sampled physics; no implicit bidirectionality, all-to-all or earned-state return guarantee",
+  "mode": "produce",
+  "source": "plains-three-port-calibration-v1",
+  "seed": 104301903,
+  "trials": 12,
+  "selected": [
+    {
+      "id": "fork-16f2471eed92",
+      "geometry_sha256": "16f2471eed927b3b6c99a6bb950d6374b00239ab822af15c96f251e7b7b18714",
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            648.317182305169,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            393.317182305169,
+            240
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ]
+    },
+    {
+      "id": "fork-f8ff73554745",
+      "geometry_sha256": "f8ff73554745935736d94e981b48248cdd1a9af50a9583ef808bbdca09d5445d",
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            665.3011590905471,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            410.3011590905471,
+            280
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ]
+    }
+  ],
+  "selection": "At most one per generated landing parent; rank minimum per-route calibration rate then layout ID; select two before fresh holdout",
+  "policy": {
+    "schema": "pcg/factory-policy/v1",
+    "version": 2,
+    "requested_tier": "regular",
+    "validation_trials": 12,
+    "clean_min": 0.9,
+    "regular": {
+      "mild_min": 0.85,
+      "moderate_min": 0.65
+    },
+    "precision_review": {
+      "mild_min": 0.7,
+      "moderate_min": 0.4
+    },
+    "minimum_human_reviewers": 2,
+    "scope": "Experimental engineering thresholds; not calibrated human difficulty or fun."
+  },
+  "reward_service": "UNKNOWN: not instantiated; upper route is a designated reward opportunity"
+}
