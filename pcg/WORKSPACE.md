@@ -6,6 +6,8 @@
 
 新增隔离 Map 闭环入口：`python3 -m pcg.map_directed.run`（仓库根运行），复用原 Module Generator / Engine / 合同，新增需求、库匹配与具体地图验证，见 [本轮报告](../docs/l4-mapgen/map-driven-library-v1.md)。仅小型分叉汇合 motif，通用自动拼装/正式生产准入仍关闭。
 
+本轮媒体/实际试玩来源与恢复：[PUBLICATION](../generation/maps/map-directed-loop-v1/PUBLICATION.json)。`map-directed-source-and-failures-v1` 归档含各阶段冻结源和首失败；直接结果以 `results/map-directed-final-v1` 为完整新库闭环、`results/map-directed-loop-v2` 为跨进程库复用及媒体源。当前正式游戏未修改；下一步是人工评审、缩短安全连接并扩展多motif，不能把技术通过写成区域设计完成。
+
 ## 恢复与运行
 
 在仓库根执行：

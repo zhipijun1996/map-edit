@@ -6,6 +6,8 @@
 
 **这是小型技术闭环，尚未证明高质量大区域生成。** 当前具体消费者只支持“三端口分叉汇合 + 后续上升”这一种 motif；连接段偏长，难度和趣味仍待人工评价。所有通用拼装与生产准入保持关闭。
 
+已发布：[真实 Godot 试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-GROWTH-01/0352e4cdbfb7b39d37a95c2cdd718bc8d2ba6cbe/60b9ad04ae26/) · [视频与整图](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-GROWTH-01/0352e4cdbfb7b39d37a95c2cdd718bc8d2ba6cbe/60b9ad04ae26/report.html)。公开浏览器实际三路及键盘输入通过，实际MP4可加载，原件14文件共约24.6MB完整SHA核对；人类操作/趣味/设备仍未签。
+
 ## 最新 main 与复用边界
 
 - 开始时检查并合入 map-edit `main@b9318cf82cdd182645b4b42137e5e8eaaeb75731`，合并提交 `9d308e4`。保留 main 新模块生成器、三端口输出契约、43 项契约检查和既有媒体；只解决 README、package scripts、Pages 打包三处冲突。
@@ -104,6 +106,10 @@ Director 负责主路短成本、可选高台、汇合休整、回访入口和�
 - `all-routes.mp4`：正常速度32.58秒，60fps；各片完整尝试后冻结1秒，拼接位置明确。
 - `manifest.json`：原生媒体与逐帧绑定。1760动作帧运动、资源、时钟、机关及事件精确；接缝首碰撞支撑排序的4/2/9处差异保留原ID并以同高相接平台+真实身体扫掠作限定几何等价，不声称全部字段逐字一致。
 - `play-v7/`：独立 Godot Web 包，复用原不可变68MB base和官方JS/WASM，新增包独立SHA；实际浏览器/公开发布结果以回执为准，不用旧入口冒充。
+
+公开托管遇到并保留真实失败：首次完整包+视频进Pages被原900MiB上限拒绝（run40106055137）。未提高上限、未删除旧预览；把新二进制/视频原件放到固定提交的非Pages `artifacts/`，Pages仅增加224900字节的薄加载器/图/说明。官方Engine启动前完整检查外部PCK的12085416字节及SHA256，再使用同一个已验证包；没有更换角色或地图。最终原门禁通过，site941019005字节，run40106639794发布成功。该外部资产加载器及其manifest是明确的独立托管方式，旧preview/整包重建检查原样保留。
+
+运行源 `0352e4c`、build `60b9ad04ae26`。公开三条回放分别539/538/683帧，与本轮具体地图一致；视频32.583333秒可实际加载。完整公开回执在 `pcg/results/map-directed-publication-v1/`、`pcg/results/map-directed-browser-public-v1/`。首次启动仍需约120MB的共享引擎/素材/新包，不承诺移动设备性能。
 
 ## 复现与最小检查
 
