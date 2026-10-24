@@ -10,6 +10,8 @@
 
 L4 与 Module 联动研究：[L4研究报告](docs/l4-mapgen/report.md) · [区域探索修订](docs/l4-mapgen/region-exploration-revision.md) · [工作台](experiments/l4-mapgen/WORKBENCH.md)。PR #1 保留隔离实验，正式流程未改。
 
+Map 驱动库闭环 v1：[实现、验证与限制](docs/l4-mapgen/map-driven-library-v1.md)。已验证一次真实需求补缺、候选入库及整图三策略×四相位；生产准入与人工趣味未批准。媒体在 `generation/maps/map-directed-loop-v1/`。
+
 ## 开始研究
 
 `pcg/`保留原研究程序的相对布局，可直接运行Python模块；并非只有报告或预制模块压缩包。

@@ -4,6 +4,8 @@
 
 主入口：`prototype/factory/core/producer.py`。真实动作语法→运动构造→双档案变异→独立扰动/反例→人类观感评审。当前不是运行中无限生成器、完整地图或已证明的趣味库。真人试玩/正式批准仍为0；上一轮R已有1条整体正向视频反馈，原话见feedback/plains-round2-positive-v1.json。
 
+新增隔离 Map 闭环入口：`python3 -m pcg.map_directed.run`（仓库根运行），复用原 Module Generator / Engine / 合同，新增需求、库匹配与具体地图验证，见 [本轮报告](../docs/l4-mapgen/map-driven-library-v1.md)。仅小型分叉汇合 motif，通用自动拼装/正式生产准入仍关闭。
+
 ## 恢复与运行
 
 在仓库根执行：

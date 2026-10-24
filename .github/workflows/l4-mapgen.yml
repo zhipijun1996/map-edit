@@ -7,6 +7,9 @@ on:
       - '.github/workflows/l4-mapgen.yml'
       - 'package.json'
       - 'library/**'
+      - 'pcg/map_directed/**'
+      - 'pcg/prototype/plains/engine.py'
+      - 'pcg/prototype/plains/synthesis.py'
   push:
     branches: ['research/l4-map-generator']
     paths:
@@ -14,6 +17,9 @@ on:
       - 'docs/l4-mapgen/**'
       - '.github/workflows/l4-mapgen.yml'
       - 'package.json'
+      - 'pcg/map_directed/**'
+      - 'pcg/prototype/plains/engine.py'
+      - 'pcg/prototype/plains/synthesis.py'
 permissions:
   contents: read
 jobs:
@@ -33,3 +39,8 @@ jobs:
       - run: npm run check:mapgen
       - run: python3 experiments/l4-mapgen/check_artifacts.py
       - run: node --check experiments/l4-mapgen/viewer.js
+      - run: python3 -m unittest discover -s pcg/map_directed/tests -v
+      - run: python3 -m unittest discover -s prototype/factory/tests -v
+        working-directory: pcg
+      - run: python3 -m unittest discover -s prototype/plains/tests -v
+        working-directory: pcg
