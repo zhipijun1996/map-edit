@@ -8,12 +8,13 @@ from pcg.tools.record_plains import event_key
 
 KEYS=('frame','x','y','vx','vy','grounded','axis','requested','shot_charges','shot_cooldown','jumps_used','jump_maximum','energy','hp','traversal_state','real_velocity','normal_velocity','module_clock','moving_platforms','saws','support_id','goal_stable_frames')
 
-def record(run_name,out_name,display=':103',families=None,route=None):
+def record(run_name,out_name,display=':103',families=None,route=None,case_id=None):
     source=ROOT/'results'/run_name;out=ROOT.parent/out_name
     if out.exists():raise ValueError('immutable_video_directory_exists')
     out.mkdir(parents=True);cases=json.loads((source/'review_cases.json').read_text())['cases']
     selected=[];seen=set()
     for c in cases:
+        if case_id and c['id']!=case_id:continue
         if c['family']in seen or families and c['family']not in families or route and c.get('route_spec',{}).get('id')!=route:continue
         seen.add(c['family']);selected.append(c)
     cases_path=out/'review_cases.json';cases_path.write_text(json.dumps(dict(cases=selected),ensure_ascii=False))
@@ -52,10 +53,11 @@ def record(run_name,out_name,display=':103',families=None,route=None):
         # Only disposable newly generated AVI duplicates are removed after MP4
         # and exact native trace validation, not source attempts or failures.
         avi.unlink()
-    manifest=dict(schema='pcg/video-review/v1',clips=clips,engine_sha256=file_sha(ENGINE),
+    if not selected:raise ValueError('recording_case_selection_empty')
+    manifest=dict(schema='pcg/video-review/v1',clips=clips,engine_sha256=file_sha(ENGINE),recording_source_files={str(p.relative_to(ROOT.parent)):file_sha(p)for p in [Path(__file__),HERE/'main.gd',HERE/'mechanics.gd']},
         cases_sha256=file_sha(cases_path),end_hold_seconds=1,human_video_observation='unreviewed',human_playtest='unreviewed',production_admitted=False)
     (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
     return out
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--run',required=True);p.add_argument('--out',required=True);p.add_argument('--display',default=':103');p.add_argument('--families',nargs='+');p.add_argument('--route');a=p.parse_args();record(a.run,a.out,a.display,a.families,a.route)
+    p=argparse.ArgumentParser();p.add_argument('--run',required=True);p.add_argument('--out',required=True);p.add_argument('--display',default=':103');p.add_argument('--families',nargs='+');p.add_argument('--route');p.add_argument('--case-id');a=p.parse_args();record(a.run,a.out,a.display,a.families,a.route,a.case_id)

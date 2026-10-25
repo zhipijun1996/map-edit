@@ -23,7 +23,11 @@ def ingest(record,root):
     write(path,value);return path
 
 def propose(request,observations):
-    source=json.loads((HERE/'ideas.json').read_text());out=[]
+    source=json.loads((HERE/'ideas.json').read_text());out=[];registered=FAMILIES
+    if request.get('content_kind')=='macro':
+        from .macro import FAMILY
+        idea=json.loads((HERE/'macro-proposal-v1.json').read_text());idea['rule']='workshop/macro/'+FAMILY
+        source=dict(sources=[],proposals=[idea]);registered=(FAMILY,)
     for idea in source['sources']+source['proposals']:
         family=idea['rule'].split('/')[-1]
         if request.get('family')and request['family']!=family:continue
@@ -33,10 +37,10 @@ def propose(request,observations):
         # new evidence must resolve the source observation.
         blocked=[s for s in signals if s.get('flag')in FLAGS and not s.get('resolved_by')]
         out.append(dict(id='proposal-'+digest(dict(idea=idea,request=request,signals=signals))[:20],source_id=idea['id'],novelty_family=family,
-            status='revision_required'if blocked else'executable_rule_requires_physics'if family in FAMILIES else'missing_generation_rule',
+            status='revision_required'if blocked else'executable_rule_requires_physics'if family in registered else'missing_generation_rule',
             source_type=idea['source_type'],idea=idea,feedback=signals,selection_weight=0 if blocked else 1,
             missing_conditions=[s.get('next_revision','new geometry/rule and independent evidence')for s in blocked],human_video_observation='unreviewed',human_playtest='unreviewed',production_admitted=False))
-    if request.get('family')not in FAMILIES and request.get('family'):
+    if request.get('family')not in registered and request.get('family'):
         return [dict(status='missing_generation_rule',requested=request['family'],missing_conditions=['No registered Cell/generator causal rule; do not substitute an existing room'],selection_weight=0)]
     return out
 

@@ -6,7 +6,7 @@ def sha(p):
  with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
 def restore(name,extract=False,prefix=''):
  folder=ROOT/'archives'/name
- if name not in('godot-runtime-v1','research-results-v1','review-delivery-v1','guided-landing-v1','plains-generation-v1','module-contract-v1','plains-review-round2-v1','plains-three-port-v1','map-directed-source-and-failures-v1','r2-full-source-and-failures-v1','r2-full-run-payloads-v1','direct-module-source-and-failures-v1','direct-module-run-payloads-v1','open-valley-sample-v1','valley-complete-v1','formal-style-v2','full-region-spatial-v1','content-ecosystem-v1','workshop-a1-first-v1','content-workshop-v1','content-workshop-a2-rework-v2'):raise ValueError('Unknown archive')
+ if name not in('godot-runtime-v1','research-results-v1','review-delivery-v1','guided-landing-v1','plains-generation-v1','module-contract-v1','plains-review-round2-v1','plains-three-port-v1','map-directed-source-and-failures-v1','r2-full-source-and-failures-v1','r2-full-run-payloads-v1','direct-module-source-and-failures-v1','direct-module-run-payloads-v1','open-valley-sample-v1','valley-complete-v1','formal-style-v2','full-region-spatial-v1','content-ecosystem-v1','workshop-a1-first-v1','content-workshop-v1','content-workshop-a2-rework-v2','content-workshop-macro-v1'):raise ValueError('Unknown archive')
  manifest=json.loads((folder/'manifest.json').read_text());work=ROOT/'archives/_work';work.mkdir(exist_ok=True);archive=work/(name+'.zip')
  if archive.exists():
   if sha(archive)!=manifest['archive_sha256']:raise ValueError('Existing archive differs; retained')

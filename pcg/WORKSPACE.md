@@ -1,5 +1,9 @@
 # 关卡生成工作区
 
+## 内容工坊续作：连续 Macro（2026-10-25）
+
+最新 [双宝箱回程 Macro](../docs/l4-mapgen/content-workshop-macro-v1.md) 在原六家族之上交付两个三端口空间接口；4 份组成 Module 仅为版本依赖，不增加家族。450 条新留出中 444 条目的通过，原 regular 门槛不变；完整循环48/50，漏接恢复另26/26。原候选库磁盘重检索2/2，新增连接地形0。三段原生审阅录像有18帧支撑碰撞ID顺序差异，严格比较失败保持原件，不计全字段精确录像。v2已获用户整体正向视频反馈；新Macro观感、实际试玩、生产准入与B整图仍未完成。恢复 `content-workshop-macro-v1` 获取全部新源码/失败/轨迹。
+
 ## 任务 A 内容工坊入口（2026-10-25）
 
 `prototype/workshop/` 在既有 PlainsEngine / CandidateLibrary 上增加六个因果玩法家族；每家族两种接口，另有既有 Map 100 高差需求的实际适配。**当前为 [content-workshop-v2](../docs/l4-mapgen/content-workshop-v2.md)**：旧 A2 静止登台绕法已撤回，库检索拒绝失效版本；新几何经过扩展反例与新留出。v1 原件保留。全部仍为未获人工观感/试玩/生产认可的候选。先交付 A1 的记录见 [任务 B 首次交接](../docs/l4-mapgen/task-a-first-handoff.md)。不包含 Map Director 或整图验收。

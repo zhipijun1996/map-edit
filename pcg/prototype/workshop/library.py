@@ -3,7 +3,7 @@
 Single-route callers retain their strict original behavior. They skip the new
 scoped status, rather than treating a group as one interchangeable route.
 """
-import copy,json,shutil
+import copy,json,shutil,subprocess
 from pcg.map_directed.library import CandidateLibrary,verified_document
 from pcg.map_directed.ecosystem.ideas import demand_key
 from ..factory.core.engine import file_sha
@@ -11,9 +11,24 @@ from ..factory.core.quality import module_hash
 from .experiments import REPO,write
 
 class WorkshopLibrary(CandidateLibrary):
+    def verify_components(self,document,doc):
+        gc=doc['generationContract']
+        if gc['kind']!='macro':return
+        dependencies=gc['generation']['source'].get('componentDocuments',[])
+        if len(dependencies)!=len(gc['composition']['components']):raise ValueError('macro_component_documents_missing')
+        paths=[]
+        for dependency in dependencies:
+            p=(REPO/dependency['path']).resolve()
+            if not p.is_relative_to(REPO)or file_sha(p)!=dependency['sha256']:raise ValueError('macro_component_evidence_drift')
+            paths.append(str(p))
+        result=subprocess.run(['node',str(REPO/'pcg/prototype/workshop/macro_export.mjs'),'--verify',str(document),*paths],capture_output=True,text=True,cwd=REPO,check=True)
+        if not json.loads(result.stdout)['versionMatches']:raise ValueError('macro_resolved_content_drift')
+
     def enroll_multi(self,cases,document,spec,qualities,artifacts):
         if not cases or any(q['status']!='awaiting_human_review'for q in qualities):raise ValueError('multi_route_quality_gate_not_passed')
         doc=verified_document(document);gc=doc['generationContract'];version=gc['contentVersion']
+        if version in self.withdrawn or any(p['contentVersion']in self.withdrawn for p in gc['composition']['components']):raise ValueError('candidate_or_component_technically_withdrawn')
+        self.verify_components(document,doc)
         declared={s['sourceCaseId']:s['moduleSha256']for s in gc['generation']['source']['routeCases']}
         if declared!={c['id']:module_hash(c)for c in cases}:raise ValueError('multi_route_case_binding_mismatch')
         for a in artifacts:
@@ -23,7 +38,7 @@ class WorkshopLibrary(CandidateLibrary):
         if dest.exists():raise ValueError('immutable_candidate_version_exists')
         dest.mkdir(parents=True);write(dest/'cases.json',dict(cases=cases));shutil.copy2(document,dest/'module.mapnote.json')
         record=dict(schema='map-notes/module-library-entry/v1',id=doc['id'],contentVersion=version,
-            technical_status='passed_scoped_multi_route',technical_scope='independent single-module route witnesses; no arbitrary-state or Map guarantee',
+            technical_status='passed_scoped_multi_route',content_kind=gc['kind'],technical_scope='whole local Macro route witnesses plus continuous excursion; no arbitrary-state or Map guarantee'if gc['kind']=='macro'else'independent single-module route witnesses; no arbitrary-state or Map guarantee',
             cases_sha256=file_sha(dest/'cases.json'),document_sha256=file_sha(dest/'module.mapnote.json'),
             demand_key=demand_key(spec),specification=spec,quality_gates=qualities,evidence=artifacts,
             human_quality='awaiting_review',human_reviews=[],production_admitted=False)
@@ -41,6 +56,8 @@ class WorkshopLibrary(CandidateLibrary):
             doc_path=p.parent/'module.mapnote.json';cases_path=p.parent/'cases.json'
             if file_sha(doc_path)!=rec['document_sha256']or file_sha(cases_path)!=rec['cases_sha256']:raise ValueError('multi_route_candidate_content_drift')
             doc=verified_document(doc_path);cases=json.loads(cases_path.read_text())['cases']
+            if any(p['contentVersion']in self.withdrawn for p in doc['generationContract']['composition']['components']):continue
+            self.verify_components(doc_path,doc)
             if doc['generationContract']['contentVersion']!=rec['contentVersion']:raise ValueError('multi_route_version_drift')
             if {r['sourceCaseId']:r['moduleSha256']for r in doc['generationContract']['generation']['source']['routeCases']}!={c['id']:module_hash(c)for c in cases}:raise ValueError('multi_route_case_binding_mismatch')
             for a in rec['evidence']:
