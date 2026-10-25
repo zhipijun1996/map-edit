@@ -166,3 +166,64 @@ class CandidateLibrary:
             if set(by)=={s['node_id']for s in specs}and all(by[s['node_id']]['spec']==s for s in specs):
                 return dict(modules=modules,record=str(path.relative_to(REPO)),scope=record['reuse_scope'])
         return None
+
+    def find_payload(self,spec,*,isolated_experiment=False):
+        """Per-Module retrieval from scoped Map witnesses, never UNKNOWN admission.
+
+        Current geometry/port/state constraints match exactly; prose/seed IDs
+        need not. Translation/adaptation is a new version requiring new physics.
+        A production caller cannot opt into these experimental payloads.
+        """
+        if not isolated_experiment:return []
+        from .ecosystem.ideas import demand_key
+        from .direct_join.canonical import reload_catalog
+        from pcg.prototype.factory.core.engine import ENGINE,PROJECT
+        found=[];key=demand_key(spec)
+        for path in sorted((self.root/'payloads'/key).glob('*/record.json')):
+            record=json.loads(path.read_text())
+            if record.get('status')!='validated_in_concrete_map' or record.get('production_admitted'):continue
+            for artifact in record['evidence']:
+                p=(REPO/artifact['path']).resolve()
+                if not p.is_relative_to(REPO)or file_sha(p)!=artifact['sha256']:raise ValueError('payload_evidence_drift')
+            binding=json.loads((REPO/record['physics_binding']).read_text())
+            if binding['engine_sha256']!=file_sha(ENGINE)or binding['source_index_sha256']!=file_sha(PROJECT/'source_provenance.json'):
+                raise ValueError('payload_physics_baseline_changed')
+            # Validate every frozen source, including the actual producer. A
+            # matching document alone cannot keep a stale experiment alive.
+            if any(file_sha(REPO/'pcg'/rel)!=sha for rel,sha in binding['source_files'].items()):
+                raise ValueError('payload_runtime_or_producer_changed')
+            modules=reload_catalog(REPO/record['catalog'])
+            module=next(m for m in modules if m['id']==record['node_id'])
+            if demand_key(module['spec'])!=key or module['content_version']!=record['contentVersion']:
+                raise ValueError('payload_demand_or_version_drift')
+            module['spec']=copy.deepcopy(spec)
+            found.append(dict(module=module,record=str(path.relative_to(REPO)),
+                scope='isolated concrete-instance reuse only; fresh whole-map physics mandatory'))
+        return found
+
+    def enroll_payloads(self,run):
+        """Extend this library with individually searchable whole-Map payloads.
+
+        Existing enrollment verifies gzip bytes, every route and all directed
+        graph edges. This index never upgrades the canonical UNKNOWN relations.
+        """
+        from .ecosystem.ideas import demand_key
+        run=Path(run).resolve()
+        parent=self.enroll_direct_instance(run)
+        compiled=json.loads((run/'compiled.json').read_text());records=[]
+        for module in compiled['modules']:
+            key=demand_key(module['spec']);version=module['content_version']
+            destination=self.root/'payloads'/key/version.removeprefix('sha256:')/'record.json'
+            record=dict(schema='map-notes/scoped-module-payload/v1',node_id=module['id'],
+                demand_key=key,contentVersion=version,status='validated_in_concrete_map',
+                design_contract=module['spec']['design_contract'],catalog=parent['catalog'],
+                physics_binding=str((run/'physics/source_binding.json').relative_to(REPO)),
+                evidence=parent['evidence'],human_quality='awaiting_review',human_reviews=[],
+                production_admitted=False,general_relations='UNKNOWN',
+                scope='Same hard demand in isolated experiment; every new assembly requires full physical validation')
+            if not destination.exists():
+                destination.parent.mkdir(parents=True)
+                destination.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+            elif json.loads(destination.read_text())['demand_key']!=key:raise ValueError('immutable_payload_collision')
+            records.append(str(destination.relative_to(REPO)))
+        return records

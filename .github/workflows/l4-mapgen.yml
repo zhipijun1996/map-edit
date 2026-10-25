@@ -14,6 +14,7 @@ on:
       - 'pcg/prototype/plains/valley_complete.py'
       - 'pcg/prototype/plains/room_modules.py'
       - 'pcg/prototype/plains/regional_macros.py'
+      - 'pcg/prototype/plains/rock_recoil.py'
   push:
     branches: ['research/l4-map-generator']
     paths:
@@ -28,6 +29,7 @@ on:
       - 'pcg/prototype/plains/valley_complete.py'
       - 'pcg/prototype/plains/room_modules.py'
       - 'pcg/prototype/plains/regional_macros.py'
+      - 'pcg/prototype/plains/rock_recoil.py'
 permissions:
   contents: read
 jobs:
@@ -50,6 +52,7 @@ jobs:
       - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/open-valley-final-v2/module-library/documents/manifest.json
       - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/valley-complete-release-v1/module-library/documents/manifest.json
       - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/full-region-phase-aware-calibration-v1/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/ecosystem-stability-v2/maps/0/module-library/documents/manifest.json
       - run: python3 -m unittest discover -s pcg/map_directed/tests -v
       - run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg
