@@ -1,3 +1,5 @@
+**R2真实整图里程碑**：见 [woven-region-v1](../docs/l4-mapgen/woven-region-v1.md)。固定Seed由既有R2驱动19个不同尺寸Macro、27直接接缝；25条冻结整图策略（12独立输入扰动）及全部50声明方向通过。19版本入隔离候选库，热库全复用后13条整图复验通过；配对实测两条回程节省4.90/11.35秒。四段正常速度原生录像13,822帧精确一致。仍只有一张物理拓扑，内容与空间语法有限，非最终区域规模/人类趣味/生产准入；正式游戏未改。原件与失败见 woven-region-v1 归档。
+
 # 关卡生成工作区
 
 **新增内容生态闭环**：见 [content-ecosystem-v1](../docs/l4-mapgen/content-ecosystem-v1.md)。`python3 -m pcg.map_directed.ecosystem.run --name fresh-ecosystem --batch` 复用既有 Director、CandidateLibrary、标准合同与真实 Harness，逐 Module 搜索/补缺/重新验整图/候选索引。固定批次生成调用 8/0/1，105 条连续整图策略通过（84 新相位），9 个候选版本；仍同一张八 Macro 双回环物理拓扑，不冒称多 Seed 探索多样性。16 个关系家族中7个仍为未实现提案；没有任意创意自主落地、生产准入或人工趣味批准。旧39 Macro压力样品仍不通过设计验收。恢复新 `content-ecosystem-v1` 获取全部失败/源/原始轨迹。
