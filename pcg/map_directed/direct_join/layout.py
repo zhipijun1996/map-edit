@@ -3,17 +3,19 @@ import argparse,json,time
 from pathlib import Path
 from pcg.map_directed.director import REPO
 
-def solve(name,seconds=45,seed=0):
+def solve(name,seconds=45,seed=0,graph=None,content_constraints=None):
  from ortools.sat.python import cp_model
  source=REPO/'experiments/l4-mapgen/results/region-network-v2/runs.json'
- graph=next(r for r in json.loads(source.read_text())['runs']if r['region']=='plains'and str(r['seed'])=='0')['exploration_graph']
+ graph=graph or next(r for r in json.loads(source.read_text())['runs']if r['region']=='plains'and str(r['seed'])=='0')['exploration_graph']
+ content_constraints=content_constraints or {}
  out=REPO/'pcg/results'/name
  if out.exists():raise ValueError('immutable_contact_layout_exists')
  out.mkdir(parents=True)
  m=cp_model.CpModel();rooms={};xs=[];ys=[]
  for node in graph['nodes']:
   key=node['id'];x=m.new_int_var(0,28,key+'/x');y=m.new_int_var(0,28,key+'/y')
-  w=m.new_int_var(2 if key in ['r5','r10','r6','r12'] else 1,6,key+'/w');h=m.new_int_var(3 if key in ['r5','r10','r6','r12'] else 2,5,key+'/h')
+  need=content_constraints.get(key,{})
+  w=m.new_int_var(need.get('min_w',2 if key in ['r5','r10','r6','r12'] else 1),need.get('max_w',6),key+'/w');h=m.new_int_var(need.get('min_h',3 if key in ['r5','r10','r6','r12'] else 2),need.get('max_h',5),key+'/h')
   r=m.new_int_var(2,36,key+'/r');b=m.new_int_var(2,34,key+'/b')
   m.add(r==x+w);m.add(b==y+h)
   xs.append(m.new_interval_var(x,w,r,key+'/xrange'));ys.append(m.new_interval_var(y,h,b,key+'/yrange'))
@@ -33,11 +35,12 @@ def solve(name,seconds=45,seed=0):
     m.add(a[0]+1<=b[4]).only_enforce_if(d);m.add(b[0]+1<=a[4]).only_enforce_if(d)
  maxx=m.new_int_var(1,36,'maxx');maxy=m.new_int_var(1,34,'maxy');m.add_max_equality(maxx,[r[4]for r in rooms.values()]);m.add_max_equality(maxy,[r[5]for r in rooms.values()])
  # Existing ideal points are a search hint only, not corridors or a fixed road.
- m.add(rooms['boss'][1]==0)
+ if 'boss' in rooms:m.add(rooms['boss'][1]==0)
  m.minimize((maxx+maxy)*1000+sum(r[2]+r[3]for r in rooms.values()))
  solver=cp_model.CpSolver();solver.parameters.max_time_in_seconds=seconds;solver.parameters.num_search_workers=8;solver.parameters.random_seed=seed
  start=time.perf_counter();status=solver.solve(m)
  result={'units':[448,192],'schema':'pcg/direct-room-contact-layout/v1','source_graph':graph,'status':solver.status_name(status),'wall_seconds':time.perf_counter()-start,'solver':'OR-Tools CP-SAT','seed':seed,'budget_seconds':seconds,'corridors':[]}
+ if content_constraints:result['content_constraints']=content_constraints
  if status in [cp_model.OPTIMAL,cp_model.FEASIBLE]:
   result['rooms']={k:{'x':solver.value(r[0]),'y':solver.value(r[1]),'w':solver.value(r[2]),'h':solver.value(r[3])}for k,r in rooms.items()}
   result['objective']=solver.objective_value

@@ -24,7 +24,7 @@ def requests(layout_path):
   seams.append(seam)
  # Choose carrier columns using the Module's actual other ports, avoiding
  # lift wells through another gallery. No geometry is authored here.
- issues=[]
+ issues=[];group_options={}
  for node,edges in top_edges.items():
   if not edges:continue
   room=rs[node];gallery_by_level={}
@@ -49,10 +49,38 @@ def requests(layout_path):
   if not candidates:
    issues.append(node);chosen=tuple(o[0]for o in options)
   else:chosen=min(candidates)[1]
+  if raw.get('physical_port_clearance'):
+   group_options[node]=[v for _,v in sorted(candidates)]
+   continue
   for s,c in zip(edges,chosen):
    lo,hi=s['overlap'];bearing=1 if c<=(lo+hi)/2 else-1
    point=[c+bearing*62,s['cut_y']]
    s.update(position=point,column_x=c,bearing=bearing,aperture=[c-96,s['cut_y']-80,192,160])
+ if raw.get('physical_port_clearance'):
+  # The old per-room greedy columns can put a bottom export directly under
+  # another lift's parked body. Search the SAME finite candidate columns
+  # jointly; no corridor/terrain/physics is synthesized here.
+  assigned={};expanded=0;order=sorted(group_options,key=lambda n:(len(group_options[n]),n))
+  vertical={s['id']:s for s in seams if s['kind']=='vertical'}
+  def compatible(s,x,t,y):
+   if not {s['a'],s['b']}&{t['a'],t['b']}:return True
+   return abs(x-y)>=256 if s['lower_module']==t['lower_module'] else abs(x-y)>=192
+  def search(index):
+   nonlocal expanded
+   expanded+=1
+   if expanded>25000:return False
+   if index==len(order):return True
+   node=order[index];edges=top_edges[node]
+   for values in group_options[node]:
+    if any(not compatible(s,x,vertical[eid],other)for s,x in zip(edges,values)for eid,other in assigned.items()):continue
+    assigned.update({s['id']:x for s,x in zip(edges,values)})
+    if search(index+1):return True
+    for s in edges:assigned.pop(s['id'])
+   return False
+  if not search(0):raise ValueError('module_lift_and_bottom_port_clearance_unsatisfied/'+','.join(order))
+  for s in vertical.values():
+   c=assigned[s['id']];lo,hi=s['overlap'];bearing=1 if c<=(lo+hi)/2 else-1
+   s.update(position=[c+bearing*62,s['cut_y']],column_x=c,bearing=bearing,aperture=[c-96,s['cut_y']-80,192,160])
  if issues:raise ValueError('module_columns_need_local_shape_revision/'+','.join(issues))
  for s in seams:
   for node,normal in [(s['a'],s['normal']),(s['b'],[-n for n in s['normal']])]:

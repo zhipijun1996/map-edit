@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
-def check(url,out,local_play=None,dependencies=None,expected_nodes=7,expected_platforms=96):
+def check(url,out,local_play=None,dependencies=None,expected_nodes=7,expected_platforms=96,expected_gates=0,expected_entry='west'):
     out=Path(out)
     if out.exists():raise ValueError('immutable_browser_result_exists')
     out.mkdir(parents=True);events=[]
@@ -30,8 +30,8 @@ def check(url,out,local_play=None,dependencies=None,expected_nodes=7,expected_pl
             page.goto(url,wait_until='domcontentloaded')
             page.wait_for_function('window.__r2ManualState?.manual_input_armed===true',timeout=120000)
             before=page.evaluate('window.__r2ManualState')
-            assert before['nodes']==expected_nodes and before['state_gates']==0 and before['platforms']==expected_platforms,before
-            assert before['visited_nodes']==['west'],before
+            assert before['nodes']==expected_nodes and before['state_gates']==expected_gates and before['platforms']==expected_platforms,before
+            assert before['visited_nodes']==[expected_entry],before
             page.screenshot(path=str(out/'ready.png'))
             page.locator('canvas').focus()
             page.keyboard.down('d')

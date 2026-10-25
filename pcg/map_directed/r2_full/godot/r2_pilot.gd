@@ -153,9 +153,11 @@ func tick(frame: int) -> Array:
 		# transfer. Observe that exact support, then use the original one-way
 		# drop action. The precise LOWER endpoint and its foot rays stay required.
 		var transit: Array = leg.target.get("allowed_transit_support_indices", [])
+		var edge_exit: Array = leg.target.get("walk_off_transit_support_indices", [])
+		var walk_off: bool = not edge_exit.is_empty() and host.touches_supports(edge_exit)
 		var above: bool = host.motor.global_position.y < float(leg.target.position[1]) - 1.0
 		var interval := ceili(host.motor.tuning.drop_through_duration * Engine.physics_ticks_per_second) + 2
-		if airborne_seen and host.motor.is_on_floor() and above and not transit.is_empty() and host.touches_supports(transit) and host.on_one_way_support() and frame - last_drop_frame >= interval:
+		if airborne_seen and host.motor.is_on_floor() and above and not walk_off and not transit.is_empty() and host.touches_supports(transit) and host.on_one_way_support() and frame - last_drop_frame >= interval:
 			if drop_attempts >= int(leg.get("maximum_drop_attempts", 8)):
 				stop("transit_drop_attempt_budget", frame); return requested
 			_request(&"drop_through", requested); drop_attempts += 1; last_drop_frame = frame

@@ -86,14 +86,14 @@ def generate(spec):
    rect={'left':[0,lo,16,hi-lo],'right':[W-16,lo,16,hi-lo],
          'top':[lo,0,hi-lo,16],'bottom':[lo,H-16,hi-lo,16]}[side]
    platform(rect)
- for side in ['left','right','top','bottom']:
+ for side in ([] if spec.get('boundary_policy')=='open' else ['left','right','top','bottom']):
   relevant=[p for p in ports.values()if (side=='left'and p['normal']==[-1,0])or(side=='right'and p['normal']==[1,0])or(side=='top'and p['normal']==[0,-1])or(side=='bottom'and p['normal']==[0,1])]
   holes=[(p['position'][1]-96,p['position'][1]+40)if side in ['left','right']else(p['column_x']-96,p['column_x']+96)for p in relevant]
   boundary(side,H if side in ['left','right']else W,holes)
  # Reuse the measured latest-main fork core on selected roles. It becomes an
  # explicit L2 child of this newly validated Macro, no old pass is inherited.
  core=None
- if key in {'r5','r10','r14','r12','r7','r6'}:
+ if spec.get('include_optional_core',True) and key in {'r5','r10','r14','r12','r7','r6'}:
   free=slices(base);slot=next(((a,b)for a,b in free if b-a>=600),None)
   if slot:
    source=ROOT/'results/plains-three-port-production-v1/review_cases.json'
@@ -111,7 +111,7 @@ def generate(spec):
    core=dict(source=str(source.relative_to(ROOT)),source_geometry='same recoil/bell/receiver; room floor and boundary are a new Macro version',
      entry=floor_target(80+dx,base,'core/entry'),exit=target(old['ports'][2]['position'][0]+dx,old['ports'][2]['position'][1]+dy,[pi],'core/reward',192),
      control_plan=plan)
- if core is None and not any(base-230 < level < base-20 for level in galleries):
+ if spec.get('include_optional_core',True) and core is None and not any(base-230 < level < base-20 for level in galleries):
   slot=next(((a,b)for a,b in slices(base)if b-a>=240),None)
   selected=ROOT/'results/direct-vertical-bell-v2/selected.json'
   if slot and selected.exists() and H>=384:
@@ -189,9 +189,12 @@ def routes(module):
   current=a
   for c in sorted(cols,key=lambda c:c['x'],reverse=d<0):
    if c['level']>level or not min(x,b['position'][0])<c['x']<max(x,b['position'][0]):continue
-   if level not in [base,c['level']]:raise ValueError('gallery_requires_crossing_nonserving_shaft/'+module['id'])
+   serving=level in [base,c['level']]
+   if not serving and module['spec'].get('boundary_policy')!='open':raise ValueError('gallery_requires_crossing_nonserving_shaft/'+module['id'])
    take=target_at(c['x']-d*96,level,'board/'+c['id']+'/'+str(d));end=target_at(c['x']+d*96,level,'cross/'+c['id']+'/'+str(d))
-   result+=walk(current,take);result.append(carrier(c,end,level,'cross',d));current=end
+   result+=walk(current,take)
+   result.append(carrier(c,end,level,'cross',d) if serving else dict(kind='jump',target=end,hold_ticks=20))
+   current=end
   result+=walk(current,b);return result
  outbound={};inbound={};center=module['center']
  for eid,p in module['ports'].items():
