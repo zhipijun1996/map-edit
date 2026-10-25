@@ -24,12 +24,13 @@ def prepare_review(run):
     if path.exists():raise ValueError('immutable_review_cases')
     write(path,dict(cases=reviews));return path
 
-def build(out_name):
+def build(out_name,selected=None,video_sources=None):
     out=ROOT.parent/out_name
     if out.exists():raise ValueError('immutable_delivery')
     modules=out/'modules';modules.mkdir(parents=True);entries=[];play=[];lineage=[]
     aliases=json.loads((HERE/'source-aliases.json').read_text())['aliases']
-    for run,allowed in SELECTED:
+    selection=selected or SELECTED
+    for run,allowed in selection:
         root=ROOT/'results'/run;manifest=json.loads((root/'modules/manifest.json').read_text());cases=json.loads((root/'review_cases.json').read_text())['cases']
         for item in manifest['modules']:
             if allowed and item['family']not in allowed:continue
@@ -43,13 +44,13 @@ def build(out_name):
     write(modules/'manifest.json',dict(schema='pcg/workshop-delivery/v1',modules=entries,distinct_families=len({e['family']for e in entries}),production_admitted=False))
     write(out/'review_cases.json',dict(cases=play));write(out/'source-lineage.json',dict(schema='pcg/idea-to-content-lineage/v1',records=lineage,original_sources='pcg/prototype/workshop/ideas.json',aliases='pcg/prototype/workshop/source-aliases.json',human_idea_is_not_approval=True))
     rows=[]
-    for run,_ in SELECTED:
+    for run,_ in selection:
         for e in json.loads((ROOT/'results'/run/'evaluations.json').read_text()):
             if run=='workshop-five-holdout-v1'and e['case']['family']in ['chase-landing','timed-cache']:continue
             rows.append(dict(id=e['case']['id'],family=e['case']['family'],rates={k:dict(trials=v['trials'],passed=v['purpose_valid'])for k,v in e['stats'].items()},quality=e['quality_gate'],source_run=run))
     write(out/'technical-results.json',dict(rows=rows,quality_policy='existing factory POLICY v2 regular',human_video_observation='unreviewed',human_playtest='unreviewed',production_admitted=False))
     videos=out/'videos';videos.mkdir();clips=[]
-    sources=[('a1-first-delivery',None),('five-families-v1',{'brake-under-ledge','air-refund'}),('fork-high-v1',None),('carrier-binding-v2',None),('gate-window-v2',None)]
+    sources=video_sources or [('a1-first-delivery',None),('five-families-v1',{'brake-under-ledge','air-refund'}),('fork-high-v1',None),('carrier-binding-v2',None),('gate-window-v2',None)]
     for source,allowed in sources:
         root=ROOT.parent/'generation/workshop'/source;m=json.loads((root/'manifest.json').read_text())
         for clip in m['clips']:

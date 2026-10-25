@@ -33,6 +33,7 @@ class WorkshopLibrary(CandidateLibrary):
         found=[]
         for p in sorted((self.root/'candidates').glob('*/record.json')):
             rec=json.loads(p.read_text())
+            if rec.get('contentVersion')in self.withdrawn:continue
             if rec.get('technical_status')!='passed_scoped_multi_route'or rec.get('production_admitted')or rec['demand_key']!=demand_key(spec):continue
             # ecosystem's coarse key drops prose `objective`. Here objective
             # contains mechanical coordinates: verify them after coarse lookup.

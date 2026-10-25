@@ -2,7 +2,7 @@
 
 ## 任务 A 内容工坊入口（2026-10-25）
 
-`prototype/workshop/` 在既有 PlainsEngine / CandidateLibrary 上增加六个因果玩法家族；每家族两种接口，另有既有 Map 100 高差需求的实际适配。原话版本化、失败反馈与修订、原状态回程/重试、接缝、标准合同和短视频见 [content-workshop-v1](../docs/l4-mapgen/content-workshop-v1.md)。全部仍为未获人工观感/试玩/生产认可的候选。先交付 A1 的记录见 [任务 B 首次交接](../docs/l4-mapgen/task-a-first-handoff.md)。不包含 Map Director 或整图验收。
+`prototype/workshop/` 在既有 PlainsEngine / CandidateLibrary 上增加六个因果玩法家族；每家族两种接口，另有既有 Map 100 高差需求的实际适配。**当前为 [content-workshop-v2](../docs/l4-mapgen/content-workshop-v2.md)**：旧 A2 静止登台绕法已撤回，库检索拒绝失效版本；新几何经过扩展反例与新留出。v1 原件保留。全部仍为未获人工观感/试玩/生产认可的候选。先交付 A1 的记录见 [任务 B 首次交接](../docs/l4-mapgen/task-a-first-handoff.md)。不包含 Map Director 或整图验收。
 
 **新增内容生态闭环**：见 [content-ecosystem-v1](../docs/l4-mapgen/content-ecosystem-v1.md)。`python3 -m pcg.map_directed.ecosystem.run --name fresh-ecosystem --batch` 复用既有 Director、CandidateLibrary、标准合同与真实 Harness，逐 Module 搜索/补缺/重新验整图/候选索引。固定批次生成调用 8/0/1，105 条连续整图策略通过（84 新相位），9 个候选版本；仍同一张八 Macro 双回环物理拓扑，不冒称多 Seed 探索多样性。16 个关系家族中7个仍为未实现提案；没有任意创意自主落地、生产准入或人工趣味批准。旧39 Macro压力样品仍不通过设计验收。恢复新 `content-ecosystem-v1` 获取全部失败/源/原始轨迹。
 

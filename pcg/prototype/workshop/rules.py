@@ -50,14 +50,14 @@ def timed(variant,window=None):
 def chase(variant):
     c=base('chase-landing-'+str(variant));c['family']='chase-landing'
     dx=variant*35
-    c['platforms'] += [[590+dx,288,220,100],[-200,650,1300,60]]
-    c['moving_platforms']=[dict(platform_id='chase-carrier',start=[340,450],finish=[560+dx,350],size=[144,22],travel_duration=1.4+variant*.2,dwell_duration=.15,initial_phase=0)]
-    c['latches']=[dict(id='carrier-bell',bell=[105,430],gate=[-100,100,10,10],open_seconds=0,ferry_id='chase-carrier',return_access=[370,370])]
-    x=680+dx;y=270
+    c['platforms'] += [[790+dx,288,220,100],[-200,650,1300,60]]
+    c['moving_platforms']=[dict(platform_id='chase-carrier',start=[330,450],finish=[480+dx,350],size=[144,22],travel_duration=1.4+variant*.2,dwell_duration=.15,initial_phase=0)]
+    c['latches']=[dict(id='carrier-bell',bell=[105,430],gate=[-100,100,10,10],open_seconds=0,ferry_id='chase-carrier',return_access=[490,290])]
+    x=880+dx;y=270
     plan=[cmd('axis',value=1),cmd('jump'),cmd('jump_release',8),cmd('shoot',10,aim_cell=dict(kind='bell',id='carrier-bell')),cmd('wait',6),
-          dict(op='wait',trigger=dict(dynamic=dict(kind='on_platform',id='chase-carrier'),timeout=180)),cmd('axis',value=0),cmd('wait',18),
-          cmd('axis',value=1),cmd('jump'),cmd('jump_release',12),cmd('shoot',6,aim_cell=dict(kind='bell',id='carrier-bell',receiver='access')),settle(x,6)]
-    c['rule_parameters']=dict(carrier_travel=[220+dx,-100],controls='original start/pause only; no new carrier behavior',passive_wait_must_not_finish=True)
+          dict(op='wait',trigger=dict(dynamic=dict(kind='on_platform',id='chase-carrier'),timeout=180)),cmd('axis',value=0),cmd('wait',36),
+          cmd('axis',value=1),wait_x(520+dx),cmd('jump'),cmd('jump_release',12),cmd('shoot',6,aim_cell=dict(kind='bell',id='carrier-bell',receiver='access')),settle(x,6)]
+    c['rule_parameters']=dict(carrier_travel=[150+dx,-100],controls='original start/pause only; no new carrier behavior',passive_wait_must_not_finish=True,static_dock_bypass_repair='receiver beyond static-dock recoil reach and beyond ordinary jump even from far endpoint',leading_edge_departure=520+dx)
     reward(c,x,y)
     return finish(c,x,y,plan)
 

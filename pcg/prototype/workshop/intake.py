@@ -47,15 +47,21 @@ def run(out_name):
     observations=[dict(id='technical-fork-shortcut-v1',type='technical_experiment',family='one-shot-two-routes',flag='unexpected_shortcut',
         source_run='workshop-counters-v1',evidence='ordinary-jump-180-20 reached high reward without a shot',next_revision='raise receiver above ordinary jump and retest both interfaces',
         resolved_by=dict(rule_revision='rules.py raised high ports to 232/212',counter_run='workshop-counters-v2',holdout_run='workshop-five-holdout-v1'))]
-    # Preserve the actual before/after prioritization using the same observation.
-    unresolved=copy.deepcopy(observations);unresolved[0].pop('resolved_by')
+    for p in sorted((ROOT/'feedback/workshop').glob('*.json')):
+        value=json.loads(p.read_text())
+        if value.get('type')=='technical_experiment'and value.get('family')in FAMILIES:observations.append(value)
+    # Preserve the actual before/after prioritization using the same observations.
+    unresolved=copy.deepcopy(observations)
+    for row in unresolved:row.pop('resolved_by',None)
     write(out/'observations.json',observations);write(out/'proposals-before-repair.json',propose({},unresolved));write(out/'proposals-after-repair.json',propose({},observations))
     links=[]
-    for run in ['workshop-a1-holdout-v1','workshop-five-holdout-v1']:
+    from pcg.map_directed.library import CandidateLibrary
+    withdrawn=CandidateLibrary().withdrawn
+    for run in ['workshop-a1-holdout-v1','workshop-five-holdout-v1','workshop-carrier-rework-v2/holdout','workshop-gate-window-v2']:
         root=ROOT/'results'/run;manifest=json.loads((root/'modules/manifest.json').read_text())
         for m in manifest['modules']:
             links.append(dict(family=m['family'],contentVersion=m['contentVersion'],document=str((root/'modules'/m['file']).relative_to(ROOT)),experiment=run,
-                source_ids=[r['id']for r in sources['sources']+sources['proposals']if r['rule'].endswith('/'+m['family'])],technical_status='passed_scoped',
+                source_ids=[r['id']for r in sources['sources']+sources['proposals']if r['rule'].endswith('/'+m['family'])],technical_status='withdrawn_after_counterexample'if m['contentVersion']in withdrawn else'passed_scoped',
                 video_observation='unreviewed',manual_playtest='unreviewed',production_admitted=False))
     write(out/'traceability.json',dict(schema='pcg/idea-to-content-lineage/v1',idea_revisions=paths,candidates=links,observations=observations,
         original_text_preserved=True,human_ideas_are_not_approval=True,online_model_service=False))

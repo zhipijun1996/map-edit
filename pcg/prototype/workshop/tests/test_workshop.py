@@ -35,6 +35,12 @@ class WorkshopBoundaryTests(unittest.TestCase):
     def test_technical_status_does_not_promote(self):
         reasons=CandidateLibrary.promotion_reasons(dict(technical_status='passed_scoped',human_reviews=[]))
         self.assertIn('human_quality_review_missing',reasons);self.assertIn('canonical_assembly_interface_not_admitted',reasons)
+    def test_withdrawal_blocks_even_otherwise_approved_record(self):
+        from pcg.map_directed.library import withdrawn_versions
+        versions=withdrawn_versions()
+        self.assertTrue(versions)
+        record=dict(contentVersion=next(iter(versions)),technical_status='passed_scoped',human_reviews=[dict(type='human_quality_review',reviewer=str(i),approved=True,artifact_sha256='a'*64)for i in range(2)])
+        self.assertIn('technical_counterexample_withdrawal',CandidateLibrary.promotion_reasons(record,interface_eligible=True))
 
 class PersistedContractTests(unittest.TestCase):
     @classmethod
@@ -59,6 +65,14 @@ class PersistedContractTests(unittest.TestCase):
             with self.assertRaises(ValueError):WorkshopLibrary(target).find_multi(spec)
 
 class MapDemandTests(unittest.TestCase):
+    def test_map_partial_capabilities_fail_closed(self):
+        from pcg.prototype.workshop.map_demand import request,adapt
+        spec=request()[1];spec['capabilities']['status']='partial'
+        self.assertEqual(adapt(spec)['status'],'unsatisfied')
+    def test_map_resource_state_cannot_be_ignored(self):
+        from pcg.prototype.workshop.map_demand import request,adapt
+        spec=request()[1];spec['resource_state']['entry']='airborne, zero air shots'
+        self.assertEqual(adapt(spec)['status'],'unsatisfied')
     def test_adapted_actual_map_demand_keeps_footprint(self):
         from pcg.prototype.workshop.map_demand import request,adapt
         from pcg.map_directed.library import fits
@@ -68,9 +82,16 @@ class MapDemandTests(unittest.TestCase):
         spec['space']['max_width']=899
         self.assertEqual(adapt(spec)['status'],'unsatisfied')
     def test_adapted_candidate_can_be_reloaded_from_disk(self):
-        root=ROOT/'results/workshop-map-demand-v4'
+        root=ROOT/'results/workshop-map-carrier-rework-v3'
         if not(root/'summary.json').exists():self.skipTest('restore content-workshop-v1 for persisted Map demand')
         spec=json.loads((root/'effective-map-demand.json').read_text());spec['relations']=[dict(**r,**{'from':r['from_port'],'to':r['to_port']})for r in spec['relations']]
         matches=CandidateLibrary(root/'holdout/library').find(spec);self.assertEqual(len(matches),1)
+    def test_withdrawn_a2_cannot_reenter_query(self):
+        root=ROOT/'results/workshop-carrier-binding-v2'
+        if not(root/'challenge-specifications.json').exists():self.skipTest('restore historical withdrawn candidates')
+        lib=CandidateLibrary(root/'library');specs=json.loads((root/'challenge-specifications.json').read_text())
+        for s in specs:
+            s['relations']=[dict(**r,**{'from':r['from_port'],'to':r['to_port']})for r in s['relations']]
+            self.assertEqual(lib.find(s),[])
 
 if __name__=='__main__':unittest.main()

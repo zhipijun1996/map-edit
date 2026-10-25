@@ -6,18 +6,19 @@ from .experiments import write
 from .evidence import GEOMETRY,counter_records,geometry_key
 from ..factory.core.engine import file_sha
 from ..factory.core.quality import digest
-from pcg.map_directed.library import verified_document
+from pcg.map_directed.library import CandidateLibrary,verified_document
 
 PHYSICAL=[k for k in GEOMETRY if k not in ['spawn','entry_port','exit_port','goal']]
 def physical(c):return digest({k:c.get(k,[])for k in PHYSICAL})
 
-def run(delivery='generation/workshop/v1'):
+def run(delivery='generation/workshop/v2'):
     repo=ROOT.parent;out=repo/delivery;manifest=json.loads((out/'modules/manifest.json').read_text());cases=[]
-    for run,allowed in SELECTED:
+    included={m['id']for m in manifest['modules']}
+    for run in sorted({m['source_run']for m in manifest['modules']}):
         for c in json.loads((ROOT/'results'/run/'review_cases.json').read_text())['cases']:
-            if not allowed or c['family']in allowed:cases.append((run,c))
+            if 'generated-'+(c.get('layout_uid')or c['factory_id'])in included:cases.append((run,c))
     fixtures=[];seen_inputs=set()
-    for name in ['workshop-transitions-holdout-v2','workshop-gate-return-window-v2','workshop-recovery-holdout-v1']:
+    for name in ['workshop-transitions-holdout-v2','workshop-gate-return-window-v2','workshop-carrier-return-held-v2','workshop-carrier-retry-held-v2']:
         root=ROOT/'results'/name;cs={c['id']:c for c in json.loads((root/'cases.json').read_text())['cases']}
         summary=json.loads((root/'summary.json').read_text())
         for row in summary['rows']:
@@ -37,10 +38,11 @@ def run(delivery='generation/workshop/v1'):
                 source_binding=dict(path=str((root/'source_binding.json').relative_to(repo)),sha256=file_sha(root/'source_binding.json')),
                 scope='continuous specified policy only; general transfer/return/assembly remain UNKNOWN'))
     for m in manifest['modules']:
+        if m['contentVersion']in CandidateLibrary().withdrawn:raise ValueError('delivery_contains_technically_withdrawn_version')
         doc=verified_document(out/'modules'/m['file'])
         if doc['generationContract']['contentVersion']!=m['contentVersion']or file_sha(out/'modules'/m['file'])!=m['sha256']:raise ValueError('delivery document drift')
     write(out/'continuous-evidence-bindings.json',dict(schema='pcg/scoped-continuous-evidence-bindings/v1',records=fixtures,universal_state_transfer='UNKNOWN',production_admitted=False))
-    records=[r for n in ['workshop-counters-v1','workshop-counters-v2','workshop-carrier-counters-v3','workshop-gate-counters-v3','workshop-enemy-exact-counters-v1']for r in counter_records(n)]
+    records=[r for n in ['workshop-counters-v1','workshop-counters-v2','workshop-carrier-rework-v2/standard','workshop-carrier-rework-v2/parked','workshop-carrier-endpoint-v2','workshop-gate-counters-v3','workshop-enemy-exact-counters-v1']for r in counter_records(n)]
     current={}
     for _,c in cases:
         for r in records:
@@ -57,4 +59,4 @@ def run(delivery='generation/workshop/v1'):
     return out/'audit.json'
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--delivery',default='generation/workshop/v1');a=p.parse_args();print(run(a.delivery))
+    p=argparse.ArgumentParser();p.add_argument('--delivery',default='generation/workshop/v2');a=p.parse_args();print(run(a.delivery))

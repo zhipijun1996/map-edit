@@ -9,7 +9,7 @@ def cases():
     out=[]
     for v in range(2):
         c=candidates('chase-landing',v)[0];retry=copy.deepcopy(c['control_plan'])
-        c['control_plan']=[cmd('axis',value=1),cmd('jump'),cmd('jump_release',8),cmd('shoot',10,direction=[-1,0]),wait_x(500),cmd('axis',value=0),ground(),cmd('wait',20),cmd('axis',value=-1),wait_x(450,-1),cmd('axis',value=0),ground(),cmd('jump'),cmd('jump_release',20),cmd('shoot',4,direction=[.6,.8]),cmd('axis',9,value=-1),wait_x(340,-1),cmd('axis',value=0),ground(),cmd('wait',20),cmd('axis',value=-1),cmd('jump'),cmd('jump_release',12),cmd('shoot',6,direction=[1,0]),wait_x(80,-1),cmd('axis',value=0),ground(),cmd('wait',20)]+retry
+        c['control_plan']=[cmd('axis',value=1),cmd('jump'),cmd('jump_release',8),cmd('shoot',10,direction=[-1,0]),wait_x(500),cmd('axis',value=0),ground(),cmd('wait',20),cmd('axis',value=-1),wait_x(450,-1),cmd('axis',value=0),ground(),cmd('jump'),cmd('jump_release',20),cmd('shoot',4,direction=[.6,.8]),cmd('axis',9,value=-1),wait_x(340,-1),cmd('axis',value=0),ground(),cmd('wait',20),cmd('axis',value=-1),cmd('jump'),cmd('jump_release',12),cmd('shoot',6,direction=[.98,.198997487421324]),wait_x(80,-1),cmd('axis',value=0),ground(),cmd('wait',20)]+retry
         c.update(id=c['id']+'-miss-recover-retry',max_frames=1600)
         out.append(c)
     return out
@@ -19,8 +19,8 @@ def run(name,noise=False,holdout=False):
     for c in cases():
         cs.append(c)
         if noise or holdout:
-            for i in range(12):cs.append(instantiate(c,261025941 if holdout else 26102501,'mild',i))
-    write(engine.out/'protocol.json',dict(calibration=not holdout,holdout_seed=261025941 if holdout else None,maximum_calibration_revisions=4,no_world_reset=True))
+            for i in range(12):cs.append(instantiate(c,261025945 if holdout else 26102501,'mild',i))
+    write(engine.out/'protocol.json',dict(calibration=not holdout,holdout_seed=261025945 if holdout else None,maximum_calibration_revisions=4,no_world_reset=True))
     write(engine.out/'cases.json',dict(cases=cs));rows=[]
     for c,r,e in engine.run(cs,'recovery-calibration'):
         frames=r.get('frames',[]);bottom=any(f['grounded']and abs(f['y']-632)<1 for f in frames)

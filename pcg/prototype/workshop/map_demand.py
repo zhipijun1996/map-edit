@@ -27,17 +27,20 @@ def adapt(spec):
     for key,value in [('required_family','chase-landing'),('region','plains'),('entry_y',420),('rise',100)]:
         if spec.get(key)!=value:conflicts.append(dict(field=key,requested=spec.get(key),supported=value))
     if spec['ports']['count']!=2 or spec['ports']['required_normals']!=[[-1,0],[1,0]]:conflicts.append(dict(field='ports',reason='unsupported directed interface'))
-    if spec['capabilities']['allOf']!=['move','jump','shot_recoil']or spec['capabilities']['anyOfGroups']:conflicts.append(dict(field='capabilities',reason='exact real base capability configuration required'))
+    if spec['capabilities'].get('status')!='defined'or spec['capabilities'].get('version')!=1 or spec['capabilities']['allOf']!=['move','jump','shot_recoil']or spec['capabilities']['anyOfGroups']:conflicts.append(dict(field='capabilities',reason='exact real base capability configuration required'))
+    original,supported=request()
+    for field in ['resource_state','return_conditions','boundary_policy','enclosing_walls']:
+        if spec.get(field)!=supported.get(field):conflicts.append(dict(field=field,reason='unsupported entry/return/boundary condition; no implicit resource reset or shell',supported=supported.get(field)))
     if spec['space']['max_width']<900 or spec['space']['max_height']<800:conflicts.append(dict(field='space',supported_minimum=[900,800]))
     if spec['risk_reward']['amount']!=0:conflicts.append(dict(field='reward',reason='this Map demands an unrewarded travel ascent'))
     if conflicts:return dict(status='unsatisfied',conflicts=conflicts,searched=dict(rule='chase-landing',candidates=1),negotiable=['explicit ports/space/rise revision; no replacement family'])
-    c=chase(0);c['id']='map-demand-active-ascent';c['platforms'][0]=[-60,438,300,100];c['platforms'][1]=[660,338,180,100];c['platforms'][2]=[-60,650,900,60]
+    c=chase(0);c['id']='map-demand-active-ascent';c['platforms'][0]=[0,438,240,100];c['platforms'][1]=[850,338,50,100];c['platforms'][2]=[0,650,900,60]
     # Disabled original motion-mode gate still has an authored extent. Keep it
     # in the actual requested footprint, rather than ignoring it during lookup.
-    c['latches'][0]['gate']=[-30,100,10,10]
-    c['exit_port']=[760,320];c['goal']=[735,316,50,8];c['control_plan'][-1]=settle(760,6)
+    c['latches'][0]['gate']=[10,100,10,10]
+    c['exit_port']=[875,320];c['goal']=[858,316,34,8];c['control_plan'][-1]=settle(875,6)
     c['reward_sites']=[];c['expected_reward']=0;c['map_specification']=copy.deepcopy(spec);c['idea_ids']=['human-A2-chase-landing']
-    c['rule_parameters']=dict(map_director_demand_id=spec['id'],rise=100,space=[900,800],landing=[760,320],reward=0,adaptations=['receiver height and width','shorter unused rear bank','safe ground footprint','exit target outside original moving envelope','horizontal commitment prevents ordinary carrier dismount bypass','no chest for unrewarded travel role'])
+    c['rule_parameters']=dict(map_director_demand_id=spec['id'],rise=100,space=[900,800],landing=[875,320],reward=0,adaptations=['receiver height and width','shorter unused rear bank','safe ground footprint','exit target outside original moving envelope','static-dock and far-endpoint ordinary-jump gaps','no chest for unrewarded travel role'])
     c['generation_rule']=dict(id='workshop/chase-landing-map-adapter',version=1,parameters=c['rule_parameters'])
     from pcg.map_directed.library import fits
     if not fits(c,spec):return dict(status='unsatisfied',conflicts=[dict(field='space/ports/capabilities',reason='materialized content exceeds the actual Map hard demand')],searched=dict(candidates=1),negotiable=['explicit footprint revision; no silent widening'])

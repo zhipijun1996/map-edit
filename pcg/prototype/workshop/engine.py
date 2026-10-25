@@ -10,7 +10,8 @@ HERE = Path(__file__).parent
 class WorkshopEngine(PlainsEngine):
     def __init__(self, out, batch_size=12):
         super().__init__(out, batch_size)
-        for p in sorted(HERE.rglob('*')):
+        files=list(HERE.rglob('*'))+[ROOT/'map_directed/library.py',ROOT/'contract/export.py']
+        for p in sorted(files):
             if p.suffix not in ('.py', '.gd', '.json', '.mjs', '.tscn'): continue
             rel = p.relative_to(ROOT).as_posix()
             self.hashes[rel] = file_sha(p)

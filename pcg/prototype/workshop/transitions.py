@@ -20,7 +20,7 @@ def fixtures():
         c.update(id=c['id']+'-roundtrip',goal=[55,416,50,8],transition_kind='thorn-roundtrip',max_frames=1000)
         out.append(c)
         c=candidates('chase-landing',variant)[0]
-        c['control_plan']=arrival(c)+[cmd('axis',value=-1),wait_x(575+variant*35,-1),ground(),wait_x(470+variant*10,-1),cmd('jump'),cmd('jump_release',8),cmd('shoot',8,direction=[.9886859966642595,.15]),settle(80,6)]
+        c['control_plan']=arrival(c)+[cmd('axis',value=-1),wait_x(285,-1),cmd('axis',value=0),ground(),cmd('wait',20),cmd('jump'),cmd('jump_release',20),cmd('shoot',4,direction=[.5,.8660254037844386]),cmd('axis',9,value=-1),settle(80,6)]
         c.update(id=c['id']+'-roundtrip',goal=[55,416,50,8],transition_kind='carrier-roundtrip',max_frames=1200)
         out.append(c)
         c=candidates('timed-cache',variant)[0];gate_x=c['latches'][0]['gate'][0]
@@ -54,14 +54,14 @@ def check(c,r):
         if shots_after:reasons.append('rejoin_not_a_distinct_drop_relation')
     return dict(ok=not reasons,reasons=reasons,causal=causal,visited_outbound_port=visited)
 
-def run(name,holdout=False,noise_calibration=False,families=None):
+def run(name,holdout=False,noise_calibration=False,families=None,holdout_seed=261025940):
     engine=WorkshopEngine(ROOT/'results'/name);bases=[c for c in fixtures()if not families or c['family']in families];cs=[]
     for c in bases:
         cs.append(c)
         if holdout or noise_calibration:
             for i in range(12):
-                v=instantiate(c,261025940 if holdout else 26102501,'mild',i);v['transition_kind']=c['transition_kind'];cs.append(v)
-    write(engine.out/'protocol.json',dict(version=2,prior_holdout='workshop-transitions-holdout-v1 failed 17/104; never relabeled as pass',scope='continuous same actor/resources/mechanisms/reward ledger; no scene reset between legs',holdout=holdout,seed=261025940 if holdout else 26102501,calibration_revisions_maximum=4,maximum_cases=len(cs),whole_map=False))
+                v=instantiate(c,holdout_seed if holdout else 26102501,'mild',i);v['transition_kind']=c['transition_kind'];cs.append(v)
+    write(engine.out/'protocol.json',dict(version=2,prior_holdout='workshop-transitions-holdout-v1 failed 17/104; never relabeled as pass',scope='continuous same actor/resources/mechanisms/reward ledger; no scene reset between legs',holdout=holdout,seed=holdout_seed if holdout else 26102501,calibration_revisions_maximum=4,maximum_cases=len(cs),whole_map=False))
     write(engine.out/'cases.json',dict(cases=cs));rows=[]
     for c,r,e in engine.run(cs,'transition-holdout'if holdout else'transition-calibration'):
         p=check(c,r);row=dict(id=c['id'],ok=p['ok'],check=p,reason=r['reason'],evidence=e,last=[r['frames'][-1][k]for k in ['x','y']]if r.get('frames')else None)
@@ -70,4 +70,4 @@ def run(name,holdout=False,noise_calibration=False,families=None):
     write(engine.out/'summary.json',dict(all_passed=all(r['ok']for r in rows),rows=rows,production_admitted=False,whole_map=False))
     return engine.out
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--holdout',action='store_true');p.add_argument('--noise-calibration',action='store_true');p.add_argument('--families',nargs='+');a=p.parse_args();run(a.name,a.holdout,a.noise_calibration,a.families)
+    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--holdout',action='store_true');p.add_argument('--noise-calibration',action='store_true');p.add_argument('--families',nargs='+');p.add_argument('--holdout-seed',type=int,default=261025940);a=p.parse_args();run(a.name,a.holdout,a.noise_calibration,a.families,a.holdout_seed)

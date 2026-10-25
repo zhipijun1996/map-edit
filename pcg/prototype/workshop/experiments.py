@@ -39,8 +39,8 @@ def counter_run(name,families,requested=None):
     write(engine.out/'summary.json',dict(cases=len(rows),cheap_successes=[r for r in rows if r['safe_stable']],all_failures_preserved=True,necessity_proof=False))
     print(engine.out,flush=True);return engine.out
 
-def produce(name,families,counters,requested=None):
-    out=ROOT/'results'/name;engine=WorkshopEngine(out);protocol=json.loads((HERE/'protocol.json').read_text());specs,bases=requested if requested is not None else source_cases(families)
+def produce(name,families,counters,requested=None,protocol_override=None):
+    out=ROOT/'results'/name;engine=WorkshopEngine(out);protocol=json.loads((HERE/(protocol_override or 'protocol.json')).read_text());specs,bases=requested if requested is not None else source_cases(families)
     write(out/'protocol.json',dict(protocol,holdout_seed=protocol['holdout_seed'],families=families,selection_frozen_before_holdout=True))
     write(out/'challenge-specifications.json',specs);write(out/'candidates.json',dict(cases=bases))
     entries=evaluate(engine,bases,protocol['holdout_seed'],12,'holdout')
