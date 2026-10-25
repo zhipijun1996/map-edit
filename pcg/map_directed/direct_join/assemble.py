@@ -54,6 +54,8 @@ def assemble_modules(graph,modules,seams):
     if kind=='latches'and raw.get('ferry_id'):value['ferry_id']=key+'/'+raw['ferry_id']
     if kind=='latches'and raw.get('return_access'):value['return_access']=[raw['return_access'][0]+dx,raw['return_access'][1]+dy]
     if kind=='enemies':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
+    if kind=='thorns':value['surface_id']=key+'/'+raw['surface_id'];value['platform_index']=localmap[key][int(raw['platform_index'])]
+    if kind=='hazards':value=[raw[0]+dx,raw[1]+dy,*raw[2:]]
     if kind=='reward_sites':
      value['id']=key+'/'+raw['id'];value['target']=translated_target(raw['target'],m)
      for field in ['required_bell','required_enemy']:
@@ -66,7 +68,8 @@ def assemble_modules(graph,modules,seams):
   dx,dy=m['spec']['placement'];result=[]
   for raw in values:
    v=copy.deepcopy(raw);v['target']=translated_target(v['target'],m)
-   for cmd in v.get('control_plan',[]):
+   if v.get('depleted_enemy'):v['depleted_enemy']=m['id']+'/'+v['depleted_enemy']
+   for cmd in v.get('control_plan',[])+v.get('depleted_plan',[]):
     if 'target_x'in cmd:cmd['target_x']+=dx
     if cmd.get('aim_cell'):cmd['aim_cell']['id']=m['id']+'/'+cmd['aim_cell']['id']
     q=cmd.get('trigger',{}).get('dynamic',{})
