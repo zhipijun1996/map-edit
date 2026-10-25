@@ -55,3 +55,6 @@ python -m pcg.map_directed.open_valley.run --name fresh-open-negatives --mode ne
 ```
 
 复用候选证据缺失时会拒绝，先恢复原件；不绕过哈希核验。生成日志、标准Module文档、全部失败、冻结源码和真实原始输出都在该归档。默认精确复用这个样品；不同需求的部分库匹配仍是后续工作。
+
+
+[整图、两段新短视频](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-OPEN-VALLEY-01/eec8561bf4080306f61f4a7a1978d8560160dae9/a894e0b1a182/report.html) · [Godot手动试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-OPEN-VALLEY-01/eec8561bf4080306f61f4a7a1978d8560160dae9/a894e0b1a182/)。公网字节校验和浏览器回执见交付目录PUBLICATION；源代码/候选/失败归档均在map-edit同一PR分支。

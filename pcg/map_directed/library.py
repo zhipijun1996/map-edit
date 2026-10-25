@@ -152,6 +152,10 @@ class CandidateLibrary:
         for path in sorted((self.root/'map-instances').glob('*/record.json')):
             record=json.loads(path.read_text())
             if record['technical_status']!='whole_map_instance_passed' or record['production_admitted']:continue
+            catalog=(REPO/record['catalog']).resolve()
+            if not catalog.is_relative_to(REPO):raise ValueError('catalog_outside_repository')
+            manifest=json.loads((catalog/'documents/manifest.json').read_text())
+            if {m['nodeId']for m in manifest['modules']}!={s['node_id']for s in specs}:continue
             for artifact in record['evidence']:
                 proof=(REPO/artifact['path']).resolve()
                 if not proof.is_relative_to(REPO)or file_sha(proof)!=artifact['sha256']:raise ValueError('direct_instance_evidence_drift')
