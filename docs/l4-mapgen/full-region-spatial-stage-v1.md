@@ -8,6 +8,8 @@
 
 `region_scale/design.py` → 原 PR #1 `region_network.construct(...,32)` → 原接触布局 `direct_join/layout.py` → `direct_join/director.requests` → 既有 `CandidateLibrary.find_direct_instance` → `regional_macros.generate` 对原 `room_modules.generate/routes` 的隔离内容适配 → 原 `canonical.export_reload` → 原 `assemble_modules/audit` → `CompleteEngine` / 原 PlayerMotor、Controller、资源和动态 Cell。
 
+隔离 Harness 把39份来源模块的精确对象扁平化为一个完整物理世界消费者，不是正式游戏中39个可流式加载实例的接入证明。
+
 没有另写任务图、探索图、物理模拟、模块格式或候选库。仍输出 Map Notes `gunman-rush-level-sketch/v1` 和 `generationContract`。独立端口关系、通用状态传递及完整动作净空仍为 UNKNOWN，有限整图轨迹不能替它们签署准入。
 
 - `direct_join/layout.solve` 增加可选输入图和内容尺寸约束，保留旧默认入口。首个固定蓝图得到 39 个变尺寸接触预约区域。
