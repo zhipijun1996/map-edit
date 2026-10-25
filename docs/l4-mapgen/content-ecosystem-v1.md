@@ -103,6 +103,8 @@ python3 -m pcg.tools.ecosystem_report \
 
 `generation/maps/ecosystem-v1` 提供实际整图 PNG、Mission/Exploration 职责图、结构化结果、正常速度录像及逐帧比对。视频由真实 Router 输入驱动，包含实际等待、购物和回程；不是人物轨迹动画。WebGL 手动消费者另跑移动、跳跃、射击、重试和整图视图 smoke。
 
+公网验收：[整图、A/B/C 视频与试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-CONTENT-ECOLOGY-01/5178f298fbacd818465baa0069a16b57a9ceb28a/dd49567442e5/report.html)。11 份不可变公开资产逐字节匹配；公网原键鼠 WebGL smoke 通过。3段录像为 1281 / 2107 / 1269 帧精确比对，时长 22.43 / 36.20 / 22.23 秒，包含末尾1秒完成画面。归档逐 SHA 校验13599份原件、2030份唯一内容，72,134,685字节。公开首次探测发生在 Pages 部署完成前，404/CSP失败保留；部署成功后新批次通过，不改写旧结果。
+
 ## 接下来仍要解决的产出目标
 
 1. 先实现提案中的新原型生产规则，重点是上下尖刺通道和主动射铃驱动平台；不能把本轮 9 个候选版本说成庞大的趣味库。
