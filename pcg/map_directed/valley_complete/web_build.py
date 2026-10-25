@@ -14,7 +14,7 @@ def build(cases,out,dependencies,game_tools):
  for p in Path(__file__).parent.glob('*'):
   if p.suffix in ['.gd','.tscn']:stage('valley_complete/'+p.name,p.read_text().replace('../r2_full/godot/','../r2/godot/'))
  case=json.loads((staging/'r2/cases.json').read_text())['cases'][0]
- case['extra_script']='res://valley_complete/mechanics.gd';case['automatic_shop_input']=False
+ case['extra_script']='res://valley_complete/formal_mechanics.gd'if case.get('formal_style_v2')else'res://valley_complete/mechanics.gd';case['automatic_shop_input']=False
  for key in ['require_parking','require_purchase','required_optional_challenges']:case.pop(key,None)
  data=json.dumps({'cases':[case]},ensure_ascii=False)
  stage('r2/cases.json',data);stage('modules_v3.json',data)
@@ -28,10 +28,18 @@ def build(cases,out,dependencies,game_tools):
  for value in mechanisms.values():
   if isinstance(value,dict)and value.get('texture'):
    path=value['texture'].removeprefix('res://');extra_names += [path,path+'.import']
+ if case.get('formal_style_v2'):
+  for record in json.loads((REPO/'pcg/research/formal-runtime-closure.json').read_text())['files']:extra_names.append(record['path'])
+  for record in json.loads((REPO/'pcg/research/formal-audio-additions.json').read_text())['files']:extra_names.append(record['path'])
+  # Formal source and imported textures are pinned to main. Some were not
+  # traversed by the historical lean pack's preload closure.
+  for record in json.loads((REPO/'pcg/research/formal-style-main-binding.json').read_text())['files']:
+   extra_names.append(record['path'])
+   if record['path'].endswith('.png'):extra_names.append(record['path']+'.import')
  for name in extra_names:
   stage(name,(project/name).read_bytes())
   if name.endswith('.import'):
-   for rel in set(re.findall(r'res://([^"\s]+\.ctex)',(project/name).read_text())):stage(rel,(project/rel).read_bytes())
+   for rel in set(re.findall(r'res://(\.godot/imported/[^"\s]+)',(project/name).read_text())):stage(rel,(project/rel).read_bytes())
  stage('resources/items/damage_blue.tres',(project/'resources/items/damage_blue.tres').read_bytes())
  from pcg.prototype.packaging_v3.overlay_pack import build as pack,BASE_URL,ENGINE_PREFIX
  result=pack(Path(dependencies)/'base.pck',out,main_scene='res://valley_complete/manual.tscn',base_url='https://zhipijun1996.github.io'+BASE_URL,engine_prefix='https://zhipijun1996.github.io'+ENGINE_PREFIX,extra_dir=staging)

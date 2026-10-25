@@ -48,3 +48,7 @@
 ### 开放风谷：正式 Tile、收益隔离与两个新动作关系
 
 同一PR增量：8个Module，原ShopService与宝箱回执，空中停车/敌人回充接力，5连续路线和20新相位通过；216局部闭门策略无绕过，两个小龛另用真实实体几何分离检查。收紧门后发现返程接收器和同位置动作被join_waypoints误删，代码与2个回归检查修复；旧失败全部保留。原生4380帧及最终经济回执一致。主游戏最新main默认v12，配置生成器时显式绑定其root_bell_mode，另取5 Seed和真实正式输入路线；旧默认v10不代表现状。仍是固定小区域，不能由精确缓存复用声称通用部分匹配；无Boss/战役、人类认可或生产准入。见docs/l4-mapgen/valley-complete-v1.md。
+
+## 2026-10-25 · 正式角色/移动平台接入与完整区域目标
+
+用户指出人物与移动平台仍旧、要求下一阶段超过正式地图规模。确认旧样品只装敌人、平台显式set_painted_enabled(false)。复用正式PlayerPresentationRuntime默认角色与原音效服务，补原PlayerFeedback依赖，安装MotionFeel/WeaponFeel，平台启用原UnderworldCarrierPaint。5路线重新Godot通过；新枪口与旧枪口不同，旧/新轨迹不完全相同，差异保留，不能直接续签旧结果。原生录像对比新物理。补Web动态音频/武器图集闭包。大图目标另列32核心地点、96–128内容预算；沿用PR#1 Director，3份39–41地点输出仍是未嵌入逻辑蓝图、实际Module0，严格不作可玩交付。40份旧默认图逐对象相同。见docs/l4-mapgen/full-region-goal-v1.md。

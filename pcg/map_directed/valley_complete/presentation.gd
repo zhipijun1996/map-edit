@@ -15,4 +15,5 @@ static func install(world: Node2D, module: PlatformingModule, data: Dictionary) 
 	UnderworldActors.install(world)
 	for child: Node in world.get_children():
 		if child is ShotLatch:child.set_region_presentation(true)
-	for ferry: ModuleMovingPlatform in module.moving_platforms:ferry.set_painted_enabled(false);ferry.queue_redraw()
+	for ferry: ModuleMovingPlatform in module.moving_platforms:
+		ferry.set_painted_enabled(data.get("formal_style_v2",false));ferry.queue_redraw()

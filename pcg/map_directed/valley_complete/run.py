@@ -14,7 +14,7 @@ from pcg.prototype.factory.core.quality import digest
 from ..library import CandidateLibrary
 
 class CompleteEngine(ValleyEngine):
- def __init__(self,out):
+ def __init__(self,out,formal_style=False):
   super().__init__(out)
   paths=list(Path(__file__).parent.glob('*'))+[REPO/'pcg/prototype/plains/valley_complete.py']
   art=REPO/'pcg/research/valley-current-art.json';paths.append(art)
@@ -22,8 +22,14 @@ class CompleteEngine(ValleyEngine):
    p=REPO/'pcg/prototype/godot'/record['path']
    if file_sha(p)!=record['sha256']:raise ValueError('current_main_art_drift/'+record['path'])
    paths.append(p)
+  for index in (['formal-style-main-binding.json','formal-audio-additions.json','formal-runtime-closure.json']if formal_style else []):
+   metadata=REPO/'pcg/research'/index;paths.append(metadata)
+   for record in json.loads(metadata.read_text())['files']:
+    p=REPO/'pcg/prototype/godot'/record['path']
+    if file_sha(p)!=record['sha256']:raise ValueError('formal_presentation_source_drift/'+record['path'])
+    paths.append(p)
   for p in paths:
-   if p.is_file()and p.suffix in ['.gd','.py','.json','.tscn','.png','.import']:
+   if p.is_file()and p.suffix in ['.gd','.py','.json','.tscn','.png','.import','.tres','.ogg']:
     rel=p.relative_to(REPO/'pcg').as_posix();self.hashes[rel]=file_sha(p);dest=self.out/'source_snapshot'/rel;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,dest)
   self.sim.runner_script=str(Path(__file__).with_name('runner.gd'))
   self.binding.update(runner=self.sim.runner_script,source_files=self.hashes,source_manifest_sha256=digest(self.hashes))
@@ -50,7 +56,7 @@ def case(c,places,name,reward=False,relay=False):
   v['pilot_program']=program;v['required_optional_challenges']=v.get('required_optional_challenges',[])+['relay/relay-cache']
  return v
 
-def run(name,mode):
+def run(name,mode,formal_style=False):
  out=REPO/'pcg/results'/name
  if out.exists():raise ValueError('immutable_run_exists')
  out.mkdir(parents=True);start=time.perf_counter()
@@ -68,6 +74,9 @@ def run(name,mode):
   case(c,['west','hollow','bell','east','arch','lookout','ridge','west'],'lower-reward-loop',True)]
  cases[1]['require_purchase']=True
  cases[1]['require_parking']=True
+ if formal_style:
+  for v in cases:
+   v['formal_style_v2']=True;v['extra_script']=str(Path(__file__).with_name('formal_mechanics.gd'))
  if mode=='main':cases=cases[:1]
  elif mode=='park':cases=cases[1:2]
  elif mode=='relay':cases=cases[2:3]
@@ -85,11 +94,11 @@ def run(name,mode):
     variants.append(trial)
   cases=variants
  write(out/'cases.json',dict(cases=cases));write(out/'protocol.json',dict(mode=mode,maximum_candidates=1,maximum_map_ticks=18000,retries=0,independent_holdout=[.07,.29,.59,.83],selection='fixed map, five continuous routes; complete original dynamic world',geometry_build_seconds=time.perf_counter()-start))
- engine=CompleteEngine(out/'physics');rows=[]
+ engine=CompleteEngine(out/'physics',formal_style=formal_style);rows=[]
  for v,r,ev in engine.run(cases,'complete-'+mode):
   f=r.get('pilot',{}).get('failure',{});row=dict(id=v['id'],ok=r['ok'],reason=r['reason'],ticks=r.get('ticks'),failure=f,extra=r.get('extra'),evidence=ev)
   rows.append(row);write(out/'summary.json',dict(rows=rows,all_passed=len(rows)==len(cases)and all(v['ok']for v in rows)))
   print(json.dumps(dict(id=v['id'],ok=r['ok'],ticks=r.get('ticks'),reason=r['reason'],leg=f.get('leg_id'),actual=f.get('actual',{}).get('position')),ensure_ascii=False),flush=True)
  return out
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--mode',choices=['main','park','relay','full','holdout'],default='full');a=p.parse_args();print(run(a.name,a.mode))
+ p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--mode',choices=['main','park','relay','full','holdout'],default='full');p.add_argument('--formal-style',action='store_true');a=p.parse_args();print(run(a.name,a.mode,a.formal_style))

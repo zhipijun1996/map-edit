@@ -1,5 +1,7 @@
 # 关卡生成工作区
 
+**当前目标已升级为超过正式单图规模的完整平原**，见[目标与状态](../docs/l4-mapgen/full-region-goal-v1.md)和`map_directed/region_scale/protocol.json`。32核心探索地点、96–128 Module内容预算；不以重复/拆碎或扩大空白达标。3个39–41地点的Director输出目前仅逻辑蓝图，实际Module=0、不可作为可玩地图交付。既有8 Module只作回归样品。人物/移动平台主要入口已改走正式安装器，`valley_complete.run --formal-style`可复现新样式验证；全游戏表现/战役迁移仍未完成。
+
 最新完整风谷小区域：`python -m pcg.map_directed.valley_complete.run --name fresh-valley --mode full`。8个Module直接拼装，3宝箱/商人，新增空中停靠和敌人回充接力；正式native32px Tile。5整图路线、20新相位、216局部闭门策略和两个宝箱几何隔离，见[本轮报告](../docs/l4-mapgen/valley-complete-v1.md)。主游戏正式v12已另跑5 Seed及live Harness，不以旧v10代表最新状态。恢复`valley-complete-v1`归档取得完整新证据。仍是固定小区域，无Boss/战役和多Seed品质准入。
 
 从独立研究工作区 f5daecb 迁入，布局保留以便复现；`prototype` 是可执行程序。`REPORT.md`、`COMPOSABLE-REPORT.md`、`DYNAMIC-REPORT.md`、`FACTORY-REPORT.md` 为历史阶段报告；其旧路径/提交是当时的证据，不重新盖章。

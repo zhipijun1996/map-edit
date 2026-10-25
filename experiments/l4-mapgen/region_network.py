@@ -94,14 +94,18 @@ def shortest_path(g, source, target, blocked_edges=frozenset(), initial_only=Tru
     return math.inf, []
 
 
-def sampled_points(rng, region):
+def sampled_points(rng, region, count=20):
+    if not 12 <= count <= 48: raise ValueError('regional_core_count_outside_12_48_budget')
     rx, ry = REGIONS[region]['radii']; points = []
+    if count != 20:
+        factor = math.sqrt(count/20)
+        rx, ry = math.ceil(rx*factor), math.ceil(ry*factor)
     for _ in range(6000):
         x = rng.next_int(2*rx+1)-rx; y = rng.next_int(2*ry+1)-ry
         if (x/rx)**2+(y/ry)**2 > 1: continue
         if any((x-a)**2+(y-b)**2 < 13**2 for a,b in points): continue
         points.append((x,y))
-        if len(points) == 20: return points
+        if len(points) == count: return points
     raise ValueError('point_sampling_budget_exhausted')
 
 
@@ -116,15 +120,15 @@ def hull_indices(points):
     return half(ordered)[:-1]+half(ordered[::-1])[:-1]
 
 
-def core_network(seed, region):
+def core_network(seed, region, core_count=20):
     rng = base.RandomStream(seed, 'regional-core', version=VERSION)
-    points = sampled_points(rng, region); ids = list(range(len(points)))
+    points = sampled_points(rng, region, core_count); ids = list(range(len(points)))
     edges = triangulate(points)
     if len(components(ids, edges)) != 1 or articulation_nodes(ids, edges):
         raise ValueError('initial_proximity_network_not_biconnected')
     # Remove edges only if a room cannot become a regional bottleneck. This is
     # not a spanning tree followed by ornamental leaf rewards.
-    target_edges = 26 + rng.next_int(3)
+    target_edges = round(core_count*1.3) + rng.next_int(3)
     ordered = sorted(rng.shuffle(edges), key=lambda e: -math.dist(points[e[0]], points[e[1]]))
     for edge in ordered:
         if len(edges) <= target_edges: break
@@ -135,8 +139,8 @@ def core_network(seed, region):
     return rng, points, edges
 
 
-def construct(seed, region):
-    rng, points, pairs = core_network(seed, region)
+def construct(seed, region, core_count=20):
+    rng, points, pairs = core_network(seed, region, core_count)
     g = {'entry': '', 'goal': 'boss', 'initial_abilities': REGIONS[region]['abilities'][:],
          'nodes': [], 'edges': [], 'branches': [], 'rewrite_log': [], 'core_nodes': [f'r{i}' for i in range(len(points))]}
     for i, point in enumerate(points):
@@ -280,8 +284,8 @@ def validate_region_intent(g):
     return sorted(set(errors))
 
 
-def generate(seed,region,embedding_attempts=4):
-    start=time.perf_counter();g=construct(str(seed),region);errors,proof=base.validate_graph(g)
+def generate(seed,region,embedding_attempts=4,core_count=20):
+    start=time.perf_counter();g=construct(str(seed),region,core_count);errors,proof=base.validate_graph(g)
     notes=diagnostics(g);direction_errors=validate_region_intent(g);catalog=base.default_catalog()
     errors+=direction_errors
     layout=base.embed(g,'R2/'+str(seed),catalog,region,attempts=embedding_attempts) if not errors else {'ok':False,'reason':'invalid_logic'}
