@@ -5,7 +5,7 @@ from pcg.map_directed.director import REPO
 
 UNIT=(512,288)
 def requests(layout_path):
- raw=json.loads(Path(layout_path).read_text());unit=raw.get('units',UNIT);g=copy.deepcopy(raw['source_graph'])
+ raw=json.loads(Path(layout_path).read_text());unit=raw.get('units',UNIT);g=copy.deepcopy(raw['source_graph']);floor_margin=raw.get('content_floor_margin',64)
  axis=raw.get('column_widths',[unit[0]]*40);prefix=[0]
  for value in axis:prefix.append(prefix[-1]+value)
  rs={k:{'x':prefix[v['x']],'y':v['y']*unit[1],'w':prefix[v['x']+v['w']]-prefix[v['x']],'h':v['h']*unit[1]}for k,v in raw['rooms'].items()}
@@ -13,7 +13,8 @@ def requests(layout_path):
  for e in g['edges']:
   a,b=rs[e['from']],rs[e['to']];fr,to=e['from'],e['to']
   if a['x']+a['w']==b['x']or b['x']+b['w']==a['x']:
-   normal=[1,0]if a['x']<b['x']else[-1,0];point=[max(a['x'],b['x']),min(a['y']+a['h'],b['y']+b['h'])-64]
+   normal=[1,0]if a['x']<b['x']else[-1,0];point=[max(a['x'],b['x']),min(a['y']+a['h'],b['y']+b['h'])-floor_margin]
+   if point[1]<max(a['y'],b['y'])+raw.get('port_head_clearance',0):raise ValueError('side_contact_headroom_unsatisfied/'+e['id'])
    seam=dict(id=e['id'],a=fr,b=to,position=point,normal=normal,kind='side',aperture=[point[0]-24,point[1]-96,48,136])
   elif a['y']+a['h']==b['y']or b['y']+b['h']==a['y']:
    normal=[0,1]if a['y']<b['y']else[0,-1];low=max(a['x'],b['x']);high=min(a['x']+a['w'],b['x']+b['w'])
@@ -31,7 +32,7 @@ def requests(layout_path):
   for s in seams:
    if s['kind']!='side'or node not in [s['a'],s['b']]:continue
    level=s['position'][1]-room['y']
-   if level!=room['h']-64:gallery_by_level.setdefault(level,set()).add(-1 if s['position'][0]==room['x']else 1)
+   if level!=room['h']-floor_margin:gallery_by_level.setdefault(level,set()).add(-1 if s['position'][0]==room['x']else 1)
   own=[];counts={-1:0,1:0}
   for level,sides in sorted(gallery_by_level.items(),reverse=True):
    if sides=={-1}:own.append(room['x']+128+256*counts[-1]);counts[-1]+=1
@@ -98,4 +99,5 @@ def requests(layout_path):
    capabilities={'version':1,'status':'defined','allOf':['move','jump','shot_recoil'],'anyOfGroups':[]},
    forbidden=['L4 connector terrain','stair-pad chain','undeclared ports','post-placement navigation fill'],
    budget={'generator_candidates':1,'unbounded_retry':False}))
+  if floor_margin!=64:result[-1]['floor_margin']=floor_margin
  return g,result,seams

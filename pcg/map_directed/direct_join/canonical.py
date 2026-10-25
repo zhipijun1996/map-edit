@@ -37,6 +37,15 @@ def reload_catalog(out):
   loaded=[[o['x'],o['y'],o['w'],o['h']]for o in static]
   if loaded!=case['platforms']:raise ValueError('canonical_static_source_mismatch')
   case['platforms']=loaded;case['one_way_platform_indices']=[o['sourceIndex']for o in static if o['type']=='platform']
+  # Hazard faces are part of the canonical physical payload, not annotations.
+  for i,thorn in enumerate(case.get('thorns',[])):
+   obj=by[doc['id']+'/thorn-'+str(i)]
+   if obj['hostId']!=doc['id']+'/platform-'+str(thorn['platform_index']) or obj['sourceId']!=thorn['surface_id']:
+    raise ValueError('canonical_thorn_host_or_identity_mismatch')
+   p=loaded[thorn['platform_index']];face=thorn['face'];offset=thorn['start_offset'];depth=thorn['depth'];length=thorn['length']
+   rect={'top':[p[0]+offset,p[1]-depth,length,depth],'bottom':[p[0]+offset,p[1]+p[3],length,depth],
+     'left':[p[0]-depth,p[1]+offset,depth,length],'right':[p[0]+p[2],p[1]+offset,depth,length]}[face]
+   if [obj[k]for k in ['x','y','w','h']]!=rect:raise ValueError('canonical_thorn_geometry_mismatch')
   case['saws']=[];case['moving_platforms']=[];case['latches']=[];case['enemies']=[];m['boundary_gates']=[]
   if 'reward_sites' in case:case['reward_sites']=[];case['shop_sites']=[]
   for o in doc['objects']:

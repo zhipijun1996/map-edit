@@ -100,3 +100,5 @@ python3 -m pcg.prototype.workshop.production_loop --name fresh-production --cycl
 分组/总览是明确标注的原速节选：只剪模块间边界和稳定领取后的尾部等待。完整原片与精确比较证据始终可以逐项下载；不能把剪辑当整图连续录像。所有视频的人工观感待评。
 
 `content-workshop-creative20-v1`归档包含本轮全部选中与落选实验、输入输出原字节/gzip、冻结源码、校准/留出/反例/失败、旧和新录像trace及真实模型调用失败回执。可重建AVI不重复入库。独立SHA清单、分片/整包SHA和验证命令与既有归档工具一致。保护编辑器的npm检查、原工坊测试、Map测试和factory测试均通过，测试不替代真实物理证据。
+
+最新B基线 `f023a014b4442c6aa68eaf2a7555fc5aaea1a515` 已合并到任务A分支，四处文档/忽略规则/归档名单冲突均保留双方新增内容。合并后工坊、factory、Map与npm检查通过；新20再次新进程磁盘重检索20/20，0新物理调用，870保护文件无漂移。[联调检查](../../generation/workshop/creative20-v1/integration-checks/summary.json)不等于B已把新20放进整图。原ccae6f9录像和证据版本未改。

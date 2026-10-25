@@ -1,3 +1,5 @@
+**R2真实整图里程碑**：见 [woven-region-v1](../docs/l4-mapgen/woven-region-v1.md)。固定Seed由既有R2驱动19个不同尺寸Macro、27直接接缝；25条冻结整图策略（12独立输入扰动）及全部50声明方向通过。19版本入隔离候选库，热库全复用后13条整图复验通过；配对实测两条回程节省4.90/11.35秒。四段正常速度原生录像13,822帧精确一致。仍只有一张物理拓扑，内容与空间语法有限，非最终区域规模/人类趣味/生产准入；正式游戏未改。原件与失败见 woven-region-v1 归档。
+
 # 关卡生成工作区
 
 ## 大模型创意工坊：20种新动作关系（2026-10-25）
@@ -11,6 +13,8 @@
 ## 任务 A 内容工坊入口（2026-10-25）
 
 `prototype/workshop/` 在既有 PlainsEngine / CandidateLibrary 上增加六个因果玩法家族；每家族两种接口，另有既有 Map 100 高差需求的实际适配。**当前为 [content-workshop-v2](../docs/l4-mapgen/content-workshop-v2.md)**：旧 A2 静止登台绕法已撤回，库检索拒绝失效版本；新几何经过扩展反例与新留出。v1 原件保留。全部仍为未获人工观感/试玩/生产认可的候选。先交付 A1 的记录见 [任务 B 首次交接](../docs/l4-mapgen/task-a-first-handoff.md)。不包含 Map Director 或整图验收。
+
+**内容驱动整图第一轮，尚未超过正式图趣味目标**：见 [content-routes-v1](../docs/l4-mapgen/content-routes-v1.md)。用户已否决上一轮“到处走”的观感，原话与版本绑定见 `feedback/woven-region-boring-v1.json`。保留19 Macro多环路骨架，15份父内容复用、4份需求适配；真实限时击铃反冲、敌人命中回充、尖刺净空与敌人死亡后的连续回程。21整图策略（8独立输入扰动）/50声明方向通过；19份热库复用后5整图复验。主线走路策略43.12%→39.03%，其他路线改善有限，不能据测试通过宣布整图更好玩。正式当前v12已重新5 Seed生成和1 live路线；生态、内容配方、地标、容错与流程仍领先。录像与三方对照在 `generation/maps/content-routes-review-v1`，全部失败/源/标准Module/候选记录恢复 `content-routes-v1`归档。人工认可0、生产准入关闭；下一步是内容配方/教学恢复/地貌共同驱动，不先扩大空地图。
 
 **新增内容生态闭环**：见 [content-ecosystem-v1](../docs/l4-mapgen/content-ecosystem-v1.md)。`python3 -m pcg.map_directed.ecosystem.run --name fresh-ecosystem --batch` 复用既有 Director、CandidateLibrary、标准合同与真实 Harness，逐 Module 搜索/补缺/重新验整图/候选索引。固定批次生成调用 8/0/1，105 条连续整图策略通过（84 新相位），9 个候选版本；仍同一张八 Macro 双回环物理拓扑，不冒称多 Seed 探索多样性。16 个关系家族中7个仍为未实现提案；没有任意创意自主落地、生产准入或人工趣味批准。旧39 Macro压力样品仍不通过设计验收。恢复新 `content-ecosystem-v1` 获取全部失败/源/原始轨迹。
 
