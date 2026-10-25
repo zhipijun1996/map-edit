@@ -34,7 +34,11 @@ def check(url,out,local_play=None,dependencies=None,expected_nodes=7,expected_pl
             assert before['visited_nodes']==['west'],before
             page.screenshot(path=str(out/'ready.png'))
             page.locator('canvas').focus()
-            page.keyboard.down('d');page.keyboard.down('Space');page.wait_for_timeout(80)
+            page.keyboard.down('d')
+            # Loading/compiling the public WebGL resources can delay frame
+            # delivery. Observe actual movement while held, not an 80ms pulse.
+            page.wait_for_function('start=>window.__r2ManualState.position[0]>start+5',arg=before['position'][0],timeout=10000)
+            page.keyboard.down('Space');page.wait_for_timeout(80)
             page.keyboard.up('Space');page.keyboard.up('d')
             moved=page.evaluate('window.__r2ManualState')
             assert moved['position'][0]>before['position'][0]+5,(before,moved)
