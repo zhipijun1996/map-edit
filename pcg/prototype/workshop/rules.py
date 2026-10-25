@@ -33,8 +33,11 @@ def thorn(variant):
     reward(c,x,y)
     return finish(c,x,y,launch()+[settle(x,6)])
 
-def timed(variant,window=.55):
+def timed(variant,window=None):
     c=base('timed-cache-'+str(variant));c['family']='timed-cache'
+    # gate_window.py: measured 26/31 ticks after actual hit + 6 ticks margin,
+    # rounded upwards to 3 ticks. Independently revalidate each solved window.
+    if window is None:window=.55 if variant==0 else .65
     left=460+variant*20;right=730+variant*40;surface=438-variant*10
     c['platforms'] += [[left,surface,right-left,100],[250,80,right-250+30,160],[right,240,30,surface-240],[-200,680,1200,60]]
     c['latches']=[dict(id='short-bell',bell=[190,405],gate=[left-20,240,20,surface-240],open_seconds=window,return_access=[right-60,350])]
@@ -49,7 +52,7 @@ def chase(variant):
     dx=variant*35
     c['platforms'] += [[590+dx,288,220,100],[-200,650,1300,60]]
     c['moving_platforms']=[dict(platform_id='chase-carrier',start=[340,450],finish=[560+dx,350],size=[144,22],travel_duration=1.4+variant*.2,dwell_duration=.15,initial_phase=0)]
-    c['latches']=[dict(id='carrier-bell',bell=[105,430],gate=[-500,-500,10,10],open_seconds=0,ferry_id='chase-carrier',return_access=[370,370])]
+    c['latches']=[dict(id='carrier-bell',bell=[105,430],gate=[-100,100,10,10],open_seconds=0,ferry_id='chase-carrier',return_access=[370,370])]
     x=680+dx;y=270
     plan=[cmd('axis',value=1),cmd('jump'),cmd('jump_release',8),cmd('shoot',10,aim_cell=dict(kind='bell',id='carrier-bell')),cmd('wait',6),
           dict(op='wait',trigger=dict(dynamic=dict(kind='on_platform',id='chase-carrier'),timeout=180)),cmd('axis',value=0),cmd('wait',18),
@@ -129,4 +132,6 @@ def generate(spec):
     keys=['region','capabilities','ports','space','entry_y','rise','risk_reward','boundary_policy','enclosing_walls','objective','relations','resource_state','return_conditions','difficulty']
     for index,s in enumerate(supported):
         if all(spec.get(k)==s.get(k)for k in keys):return dict(status='requires_physics',cases=candidates(family,index),matched_specification=s['id'],production_admitted=False)
-    return dict(status='unsatisfied',conflicts=[dict(field=k,reason='outside_registered_generation_domain',requested=spec.get(k),supported=[s.get(k)for s in supported])for k in keys if not any(spec.get(k)==s.get(k)for s in supported)],searched=dict(interfaces=[s['id']for s in supported],geometry_candidates=len(supported),unbounded_search=False),negotiable=['one of the explicit supported interfaces; no automatic substitutions'])
+    conflicts=[dict(field=k,reason='outside_registered_generation_domain',requested=spec.get(k),supported=[s.get(k)for s in supported])for k in keys if not any(spec.get(k)==s.get(k)for s in supported)]
+    if not conflicts:conflicts=[dict(field='coupled_constraints',reason='individually_supported_values_do_not_form_a_supported_interface')]
+    return dict(status='unsatisfied',conflicts=conflicts,searched=dict(interfaces=[s['id']for s in supported],geometry_candidates=len(supported),unbounded_search=False),negotiable=['one of the explicit supported interfaces; no automatic substitutions'])

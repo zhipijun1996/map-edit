@@ -5,6 +5,7 @@ from .engine import WorkshopEngine,ROOT,HERE
 from .rules import FAMILIES,candidates,specifications,generate
 from .evaluate import purpose,evaluate
 from .counterexamples import alternatives
+from .evidence import counter_records,geometry_key
 from ..factory.core.quality import module_hash,digest,gate,POLICY
 from ..factory.core.engine import file_sha
 from pcg.contract.export import collect
@@ -25,8 +26,8 @@ def source_cases(families):
             cases.append(c)
     return specs,cases
 
-def counter_run(name,families):
-    engine=WorkshopEngine(ROOT/'results'/name);specs,bases=source_cases(families);rows=[]
+def counter_run(name,families,requested=None):
+    engine=WorkshopEngine(ROOT/'results'/name);specs,bases=requested if requested is not None else source_cases(families);rows=[]
     cs=[c for base in bases for c in alternatives(base)]
     write(engine.out/'protocol.json',dict(scope='counterexample search only',maximum_cases=len(cs),source_protocol=json.loads((HERE/'protocol.json').read_text()),necessity_proof=False))
     for c,r,e in engine.run(cs,'counterexample'):
@@ -38,14 +39,18 @@ def counter_run(name,families):
     write(engine.out/'summary.json',dict(cases=len(rows),cheap_successes=[r for r in rows if r['safe_stable']],all_failures_preserved=True,necessity_proof=False))
     print(engine.out,flush=True);return engine.out
 
-def produce(name,families,counters):
-    out=ROOT/'results'/name;engine=WorkshopEngine(out);protocol=json.loads((HERE/'protocol.json').read_text());specs,bases=source_cases(families)
+def produce(name,families,counters,requested=None):
+    out=ROOT/'results'/name;engine=WorkshopEngine(out);protocol=json.loads((HERE/'protocol.json').read_text());specs,bases=requested if requested is not None else source_cases(families)
     write(out/'protocol.json',dict(protocol,holdout_seed=protocol['holdout_seed'],families=families,selection_frozen_before_holdout=True))
     write(out/'challenge-specifications.json',specs);write(out/'candidates.json',dict(cases=bases))
     entries=evaluate(engine,bases,protocol['holdout_seed'],12,'holdout')
-    counter_rows=json.loads((ROOT/'results'/counters/'counterexamples.json').read_text());reviews=[];enrolled=[]
+    counter_runs=counters.split(',')
+    counter_rows=[r for run in counter_runs for r in counter_records(run)];reviews=[];enrolled=[]
+    write(out/'bound-counterexamples.json',counter_rows)
     for e in entries:
-        base=e['case'];shortcut=any(r['base_id']==base['id']and r['safe_stable']for r in counter_rows)
+        base=e['case'];bound=[r for r in counter_rows if r['base_id']==base['id']and r['geometry_sha256']==geometry_key(base)]
+        if len(bound)<18:raise ValueError('counterexample_geometry_coverage_missing/'+base['id'])
+        shortcut=any(r['safe_stable']for r in bound)
         e['quality_gate']=gate(e['stats'],shortcut,bool(base.get('moving_platforms')or base.get('enemies')))
         if not e['witness']or e['quality_gate']['status']!='awaiting_human_review':continue
         w=e['witness'];c=copy.deepcopy(w['case']);c['factory_id']=digest(base);c['factory_evidence']=w['evidence']
@@ -66,7 +71,7 @@ def produce(name,families,counters):
             if c.get('ports'):continue # multi-route catalog remains scoped, no single-route enrollment lie
             doc=out/'modules'/('generated-'+c['factory_id']+'.mapnote.json')
             entry=next(e for e in entries if digest(e['case'])==c['factory_id'])
-            artifacts=[dict(path=str(p.relative_to(REPO)),sha256=file_sha(p))for p in [out/'evaluations.json',out/'protocol.json',ROOT/'results'/counters/'counterexamples.json']]
+            artifacts=[dict(path=str(p.relative_to(REPO)),sha256=file_sha(p))for p in [out/'evaluations.json',out/'protocol.json',out/'bound-counterexamples.json']]
             record=library.enroll(c,doc,entry['quality_gate'],artifacts);enrolled.append(record)
         # Reconstruct the library object and read disk records/documents/physics.
         # Queries use existing CandidateLibrary.find; this is not a cache count.

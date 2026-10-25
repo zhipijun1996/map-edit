@@ -1,5 +1,9 @@
 # 关卡生成工作区
 
+## 任务 A 内容工坊入口（2026-10-25）
+
+`prototype/workshop/` 在既有 PlainsEngine / CandidateLibrary 上增加六个因果玩法家族；每家族两种接口，另有既有 Map 100 高差需求的实际适配。原话版本化、失败反馈与修订、原状态回程/重试、接缝、标准合同和短视频见 [content-workshop-v1](../docs/l4-mapgen/content-workshop-v1.md)。全部仍为未获人工观感/试玩/生产认可的候选。先交付 A1 的记录见 [任务 B 首次交接](../docs/l4-mapgen/task-a-first-handoff.md)。不包含 Map Director 或整图验收。
+
 **新增内容生态闭环**：见 [content-ecosystem-v1](../docs/l4-mapgen/content-ecosystem-v1.md)。`python3 -m pcg.map_directed.ecosystem.run --name fresh-ecosystem --batch` 复用既有 Director、CandidateLibrary、标准合同与真实 Harness，逐 Module 搜索/补缺/重新验整图/候选索引。固定批次生成调用 8/0/1，105 条连续整图策略通过（84 新相位），9 个候选版本；仍同一张八 Macro 双回环物理拓扑，不冒称多 Seed 探索多样性。16 个关系家族中7个仍为未实现提案；没有任意创意自主落地、生产准入或人工趣味批准。旧39 Macro压力样品仍不通过设计验收。恢复新 `content-ecosystem-v1` 获取全部失败/源/原始轨迹。
 
 **真实整图阶段已接入，设计验收仍未通过**：见[阶段报告](../docs/l4-mapgen/full-region-spatial-stage-v1.md)。39 Macro / 55 接缝，核心90方向的12条连续巡回、两条进场和回程及12个独立相位样本已验证；6处奖励职责和16个奖励/捷径方向仍未完成，候选库拒绝入库。不能把这张薄楼板压力样品当新正式关卡。`region_scale.feedback`提供真实失败到现有端口列求解的有界反馈；`region_scale.materialize/verify`复用已有生成、标准输出和Harness。下一步是地貌/挑战先行的Macro与奖励补缺，目标并未降级。

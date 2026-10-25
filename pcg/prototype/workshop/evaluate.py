@@ -10,7 +10,7 @@ def purpose(c,r):
     if any(r.get(k,0)for k in ['air_jumps','wall_jumps','grapples']):reasons.append('forbidden_ability')
     family=c['family'];route=c.get('route_spec',{}).get('id','main')
     if route not in ['return','recovery','rejoin'] and r.get('shots',0)<1:reasons.append('no_recoil')
-    expected=c.get('expected_reward',0 if route in ['low','return','recovery','rejoin']else c['reward_sites'][0]['amount'])
+    expected=c.get('expected_reward',0 if route in ['low','return','recovery','rejoin']or not c['reward_sites']else c['reward_sites'][0]['amount'])
     if r.get('workshop',{}).get('coins',0)<expected:reasons.append('reward_not_actually_claimed')
     if family=='chase-landing':
         supported=[f for f in frames if f.get('support_id')=='chase-carrier']

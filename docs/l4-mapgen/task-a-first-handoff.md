@@ -27,7 +27,7 @@ pcg/toolchain/Godot_v4.7.2-stable_linux.x86_64 --headless --editor --path pcg/pr
 python3 -m pcg.prototype.workshop.experiments counters --name workshop-a1-new-counters --families thorn-slot
 python3 -m pcg.prototype.workshop.experiments produce --name workshop-a1-new-holdout --families thorn-slot --counters workshop-a1-new-counters
 # 可操作的隔离 Godot 样品（移动、跳跃、鼠标释放射击、Retry）。
-pcg/toolchain/Godot_v4.7.2-stable_linux.x86_64 --path pcg/prototype/godot pcg/prototype/workshop/main.tscn -- --cases-json "$PWD/generation/workshop/a1-first-delivery/review_cases.json"
+pcg/toolchain/Godot_v4.7.2-stable_linux.x86_64 --path pcg/prototype/godot "$PWD/pcg/prototype/workshop/main.tscn" -- --cases-json "$PWD/generation/workshop/a1-first-delivery/review_cases.json"
 ```
 
 程序接口：`pcg.prototype.workshop.rules.generate(spec)` 接收同版 Challenge Specification；示例输入在交付目录 `challenge-specifications.json`。注册表决定实现能力，输入 `implemented=true` 无效。超出明确的空间/端口/能力/收益域返回 `unsatisfied + conflicts + searched + negotiable`，不得替换为平台房。当前两份硬需求可执行适配，任意尺寸、镜像、旋转和通用入口状态未开放。
