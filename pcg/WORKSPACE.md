@@ -2,6 +2,8 @@
 
 # 关卡生成工作区
 
+**内容驱动整图第一轮，尚未超过正式图趣味目标**：见 [content-routes-v1](../docs/l4-mapgen/content-routes-v1.md)。用户已否决上一轮“到处走”的观感，原话与版本绑定见 `feedback/woven-region-boring-v1.json`。保留19 Macro多环路骨架，15份父内容复用、4份需求适配；真实限时击铃反冲、敌人命中回充、尖刺净空与敌人死亡后的连续回程。21整图策略（8独立输入扰动）/50声明方向通过；19份热库复用后5整图复验。主线走路策略43.12%→39.03%，其他路线改善有限，不能据测试通过宣布整图更好玩。正式当前v12已重新5 Seed生成和1 live路线；生态、内容配方、地标、容错与流程仍领先。录像与三方对照在 `generation/maps/content-routes-review-v1`，全部失败/源/标准Module/候选记录恢复 `content-routes-v1`归档。人工认可0、生产准入关闭；下一步是内容配方/教学恢复/地貌共同驱动，不先扩大空地图。
+
 **新增内容生态闭环**：见 [content-ecosystem-v1](../docs/l4-mapgen/content-ecosystem-v1.md)。`python3 -m pcg.map_directed.ecosystem.run --name fresh-ecosystem --batch` 复用既有 Director、CandidateLibrary、标准合同与真实 Harness，逐 Module 搜索/补缺/重新验整图/候选索引。固定批次生成调用 8/0/1，105 条连续整图策略通过（84 新相位），9 个候选版本；仍同一张八 Macro 双回环物理拓扑，不冒称多 Seed 探索多样性。16 个关系家族中7个仍为未实现提案；没有任意创意自主落地、生产准入或人工趣味批准。旧39 Macro压力样品仍不通过设计验收。恢复新 `content-ecosystem-v1` 获取全部失败/源/原始轨迹。
 
 **真实整图阶段已接入，设计验收仍未通过**：见[阶段报告](../docs/l4-mapgen/full-region-spatial-stage-v1.md)。39 Macro / 55 接缝，核心90方向的12条连续巡回、两条进场和回程及12个独立相位样本已验证；6处奖励职责和16个奖励/捷径方向仍未完成，候选库拒绝入库。不能把这张薄楼板压力样品当新正式关卡。`region_scale.feedback`提供真实失败到现有端口列求解的有界反馈；`region_scale.materialize/verify`复用已有生成、标准输出和Harness。下一步是地貌/挑战先行的Macro与奖励补缺，目标并未降级。
