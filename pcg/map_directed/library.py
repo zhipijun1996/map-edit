@@ -1,5 +1,6 @@
 """Versioned candidate records. No automatic promotion into production."""
 import copy
+import gzip
 import json
 from pathlib import Path
 import shutil
@@ -110,7 +111,7 @@ class CandidateLibrary:
         """
         run=Path(run).resolve()
         summary=json.loads((run/'summary.json').read_text())
-        if len(summary['rows'])!=14 or not summary['all_passed']:
+        if not summary['rows'] or not summary['all_passed']:
             raise ValueError('complete_direct_instance_validation_required')
         from .direct_join.audit import audit
         from .direct_join.canonical import reload_catalog
@@ -118,11 +119,22 @@ class CandidateLibrary:
         catalog=run/'module-library';loaded=reload_catalog(catalog)
         if [m['content_version']for m in loaded]!=[m['content_version']for m in compiled['modules']]:
             raise ValueError('validated_instance_does_not_match_module_catalog')
-        artifacts=[run/'summary.json',run/'compiled.json',run/'map-recipe.json',run/'physics/source_binding.json',run/'physics/batches.json',catalog/'source.json',catalog/'documents/manifest.json']
+        cases={v['id']:v for v in json.loads((run/'cases.json').read_text())['cases']}
+        observed=set();seen=set()
+        artifacts=[run/'summary.json',run/'cases.json',run/'compiled.json',run/'map-recipe.json',run/'physics/source_binding.json',run/'physics/batches.json',catalog/'source.json',catalog/'documents/manifest.json']
         for batch in json.loads((run/'physics/batches.json').read_text()):
             trace=run/'physics'/batch['gzip_path']
             if file_sha(trace)!=batch['gzip_sha256']:raise ValueError('whole_map_trace_drift')
+            for result in json.loads(gzip.decompress(trace.read_bytes()))['results']:
+                if not result['ok'] or result['id']not in cases:raise ValueError('actual_map_trace_not_passed')
+                seen.add(result['id']);legs={v['id']:v for v in cases[result['id']]['pilot_program']}
+                for witness in result['pilot']['legs']:
+                    leg=legs[witness['id']]
+                    if witness.get('ok')and leg.get('edge_terminal'):observed.add((leg['edge_id'],leg['edge_from'],leg['edge_to']))
             artifacts.append(trace)
+        graph=compiled['exploration_graph']
+        expected={(e['id'],e['from'],e['to'])for e in graph['edges']}|{(e['id'],e['to'],e['from'])for e in graph['edges']if e['bidirectional']}
+        if seen!=set(cases)or not expected<=observed:raise ValueError('actual_map_directed_edge_coverage_incomplete')
         identity=digest({'modules':[m['content_version']for m in loaded],'geometry':receipt['geometry_sha256']})
         target=self.root/'map-instances'/identity/'record.json'
         if target.exists():raise ValueError('immutable_direct_instance_record_exists')

@@ -25,7 +25,7 @@ func tick(frame: int) -> Array:
 	if ferry == null: stop("missing_actual_carrier", frame); return requested
 	var on_carrier: bool = host.context.support_id() == str(transfer.id)
 	if on_carrier: board_seen = true
-	var phase := fposmod(host.context.module.clock / ferry.definition.period() + ferry.definition.initial_phase, 1.0)
+	var phase := fposmod((ferry.motion_clock if ferry.bell_controlled else host.context.module.clock) / ferry.definition.period() + ferry.definition.initial_phase, 1.0)
 	var base_level: float = ferry.definition.start.y - ferry.definition.size.y / 2.0 - 18.0
 	var boarding_phase := 0.0 if absf(float(transfer.source_level) - base_level) < 4.0 else .5
 	if carrier_stage == "waiting":

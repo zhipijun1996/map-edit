@@ -12,13 +12,13 @@ for(const module of input.modules){
  const raw=structuredClone(module.case);raw.factory_id='direct-'+module.id;
  const row={case:raw,result:UNKNOWN,inputCase:UNKNOWN,protocol:UNKNOWN,binding:UNKNOWN,artifacts:[],sourceRun:UNKNOWN,
  sourceCases:{path:input.sourcePath,sha256:input.sourceSha},statistics:UNKNOWN,trialRows:[],
- generationMetadata:{producer:'pcg/prototype/plains/room_modules.py',seed:{status:'not_used',value:null,reason:'Deterministic demand materialization'},parameters:{request:module.spec.id,producerSha256:input.generatorSha,rawPayloadVersion:module.content_version}},
+ generationMetadata:{producer:input.producer||'pcg/prototype/plains/room_modules.py',seed:{status:'not_used',value:null,reason:'Deterministic demand materialization'},parameters:{request:module.spec.id,producerSha256:input.generatorSha,rawPayloadVersion:module.content_version}},
  geometryDefinitions:input.geometryDefinitions};
  const doc=moduleDocument(row,input.sourceCommit),gc=doc.generationContract,id=doc.id;
- doc.title='直接拼接 · '+module.id;doc.description='独立Module完整几何；Map只作刚性摆放，接缝无填充。当前为隔离实验候选，通用状态关系未知。';
+ doc.title=(module.spec.boundary_policy==='open'?'风谷地形 · ':'直接拼接 · ')+module.id;doc.description='独立Module完整几何；Map只作刚性摆放，接缝无填充。当前为隔离实验候选，通用状态关系未知。';
  doc.objects=doc.objects.filter(o=>!['entry','exit','route'].includes(o.type));gc.routes=[];gc.validations=[];
  for(const [i,raw]of module.case.latches.entries()){
-  doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics={kind:'shot_latch',openSeconds:raw.open_seconds};
+  doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics={kind:'shot_latch',openSeconds:raw.open_seconds,...(raw.starts_ferry?{startsFerry:raw.starts_ferry}:{})};
   doc.objects.find(o=>o.id===id+'/bell-'+i).sourceId=raw.id;
  }
  for(const [i,gate]of module.boundary_gates.entries()){

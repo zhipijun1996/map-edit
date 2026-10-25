@@ -15,6 +15,11 @@ def compile_map(layout_path, library_modules=None):
  if {m['id']for m in modules}!={s['node_id']for s in specs}:raise ValueError('module_catalog_does_not_cover_map_demands')
  for m in modules:
   if m['spec']!=next(s for s in specs if s['node_id']==m['id']):raise ValueError('stale_module_demand_binding/'+m['id'])
+ return assemble_modules(graph,modules,seams)
+
+
+def assemble_modules(graph,modules,seams):
+ """Shared exact-object placer; bounding boxes need not form closed rooms."""
  by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards']}
  shared={}
  for seam in seams:
@@ -45,6 +50,7 @@ def compile_map(layout_path, library_modules=None):
      for field in ['start','finish']:value[field]=[raw[field][0]+dx,raw[field][1]+dy]
      value['platform_id']=key+'/'+raw['platform_id']
     if kind=='latches':value['id']=key+'/'+raw['id'];value['bell']=[raw['bell'][0]+dx,raw['bell'][1]+dy];value['gate']=[raw['gate'][0]+dx,raw['gate'][1]+dy,*raw['gate'][2:]]
+    if kind=='latches'and raw.get('starts_ferry'):value['starts_ferry']=key+'/'+raw['starts_ferry']
     other[kind].append(value)
  # Validate every physical contact, including the coincident actor-center Port.
  nodes={};edges={};gates=[];seamproof=[]

@@ -5,7 +5,7 @@ from ..director import REPO
 from ..run import write
 
 
-def build(cases_file,out,dependencies,game_tools, direct_join=False):
+def build(cases_file,out,dependencies,game_tools, direct_join=False, open_valley=False):
     sys.path.insert(0,str(game_tools))
     from pcg.prototype.packaging_v3.overlay_pack import build as pack,BASE_URL,ENGINE_PREFIX
     out=Path(out);staging=out.parent/(out.name+'-resources')
@@ -38,6 +38,15 @@ def build(cases_file,out,dependencies,game_tools, direct_join=False):
         case['title']='风铃平原 · 27个Module直接拼接 · 多路线与回环'
         case['extra_script']='res://direct_join/challenge_extra.gd'
         case.pop('required_optional_challenges',None)
+    if open_valley:
+        valley=root.parent/'open_valley'
+        for name in ['manual.gd','manual.tscn','presentation.gd','mechanics.gd']:
+            stage('open_valley/'+name,(valley/name).read_text().replace('../r2_full/godot/','../r2/godot/').replace('../r2_full/','../r2/'))
+        direct=root.parent/'direct_join'
+        stage('direct_join/challenge_extra.gd',(direct/'challenge_extra.gd').read_text().replace('../r2_full/','../r2/'))
+        case['title']='风铃平原 · 回声风谷 · 空中击铃与反冲'
+        case['extra_script']='res://open_valley/mechanics.gd'
+        case.pop('required_optional_challenges',None)
     data=json.dumps({'cases':[case]},ensure_ascii=False,separators=(',',':'))
     stage('r2/cases.json',data);stage('modules_v3.json',data)
     for asset in ['assets/plains_v3/hero/weapon.png','assets/plains_v3/hero/idle_run.png',
@@ -45,13 +54,14 @@ def build(cases_file,out,dependencies,game_tools, direct_join=False):
         for relative in [asset,asset+'.import']:stage(relative,(project/relative).read_bytes())
         for imported in set(re.findall(r'res://([^"\s]+\.ctex)',(project/(asset+'.import')).read_text())):
             stage(imported,(project/imported).read_bytes())
-    result=pack(Path(dependencies)/'base.pck',out,main_scene='res://direct_join/manual.tscn'if direct_join else'res://r2/godot/r2_manual_scene.tscn',
+    result=pack(Path(dependencies)/'base.pck',out,main_scene='res://open_valley/manual.tscn'if open_valley else'res://direct_join/manual.tscn'if direct_join else'res://r2/godot/r2_manual_scene.tscn',
         base_url='https://zhipijun1996.github.io'+BASE_URL,
         engine_prefix='https://zhipijun1996.github.io'+ENGINE_PREFIX,extra_dir=staging)
     html=out/'index.html';page=html.read_text()
     page=page.replace('PCG overlay packaging proof','完整 R2 风铃平原 · 多环路手动探索')
     page=page.replace('Packaging proof only · frozen base + independent overlay','A/D 移动 · Space 单跳 · 鼠标松开射击 · S 下穿 · M 整图 · R 重试')
     if direct_join:page=page.replace('完整 R2 风铃平原 · 多环路手动探索','风铃平原 · Module直接拼接 · 多路线地图')
+    if open_valley:page=page.replace('完整 R2 风铃平原 · 多环路手动探索','风铃平原 · 回声风谷 · 射击反冲')
     html.write_text(page)
     result.update(cases_source=str(Path(cases_file).relative_to(REPO)),
         cases_source_sha256=hashlib.sha256(Path(cases_file).read_bytes()).hexdigest(),

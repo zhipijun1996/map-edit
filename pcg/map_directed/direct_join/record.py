@@ -6,7 +6,7 @@ from ..run import write
 from pcg.prototype.factory.core.engine import ENGINE,PROJECT,file_sha
 
 
-def run(physics_run,index,out,display=':104'):
+def run(physics_run,index,out,display=':104',renderer=None):
     physics_run=Path(physics_run);out=Path(out)
     if out.exists():raise ValueError('immutable_movie_output_exists')
     out.mkdir(parents=True)
@@ -18,8 +18,9 @@ def run(physics_run,index,out,display=':104'):
     if not reference['ok']:raise ValueError('cannot_sign_failed_movie_as_pass')
     case=dict(original);case['recorded_frames']=[{k:f[k]for k in ['frame','axis','requested','plan_index']}for f in reference['frames']]
     cases=out/'replay-cases.json';write(cases,{'cases':[case]})
+    renderer=Path(renderer).resolve()if renderer else Path(__file__).parent/'visual.gd'
     sources={}
-    for p in list(Path(__file__).parent.rglob('*.gd'))+list((Path(__file__).parent.parent/'r2_full').rglob('*.gd')):
+    for p in list(Path(__file__).parent.rglob('*.gd'))+list((Path(__file__).parent.parent/'r2_full').rglob('*.gd'))+list(renderer.parent.rglob('*.gd')):
         rel=p.relative_to(REPO).as_posix();sources[rel]=file_sha(p)
         target=out/'source_snapshot'/rel;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
     write(out/'movie-source.json',dict(files=sources,engine_sha256=file_sha(ENGINE),case_sha256=file_sha(cases),
@@ -27,7 +28,7 @@ def run(physics_run,index,out,display=':104'):
     trace=out/'native-trace.json';avi=out/'native.avi'
     command=[str(ENGINE),'--path',str(PROJECT),'--resolution','1280x720','--audio-driver','Dummy',
         '--write-movie',str(avi.resolve()),'--fixed-fps','60','--script',
-        str(Path(__file__).parent/'visual.gd'),'--','--cases-json',str(cases.resolve()),
+        str(renderer),'--','--cases-json',str(cases.resolve()),
         '--case','0','--movie','--trace-json',str(trace.resolve())]
     write(out/'command.json',command)
     with (out/'engine.log').open('w')as log:
@@ -62,4 +63,5 @@ def run(physics_run,index,out,display=':104'):
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--index',type=int,required=True)
     p.add_argument('--out',type=Path,required=True);p.add_argument('--display',default=':104')
-    a=p.parse_args();run(a.run.resolve(),a.index,a.out.resolve(),a.display)
+    p.add_argument('--renderer',type=Path)
+    a=p.parse_args();run(a.run.resolve(),a.index,a.out.resolve(),a.display,a.renderer)
