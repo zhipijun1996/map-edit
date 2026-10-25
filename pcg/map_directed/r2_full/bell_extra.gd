@@ -17,12 +17,17 @@ func setup(data: Dictionary, world: Node2D, controller: PlayerController, dynami
 
 func capture(frame: int, value: Dictionary) -> void:
 	super.capture(frame, value)
+	for node: Dictionary in optional:
+		if node.get("required_enemy", "") != "" and value.get("plains_events_delta", []).any(func(event: Dictionary) -> bool: return event.get("type", "") == "enemy_hit" and event.get("id", "") == node.required_enemy and event.get("fired_airborne", false)):
+			node.enemy_hit_observed = true
 	if not actor.motor.is_on_floor(): return
 	for node: Dictionary in optional:
 		var service: SimpleRoomReward = services[str(node.id)]
 		if service.claimed: continue
 		var bells: Array = value.get("plains", {}).get("bells", [])
 		var hit := bells.any(func(bell: Dictionary) -> bool: return str(bell.get("id", "")) == str(node.required_bell) and int(bell.get("open_count", 0)) > 0)
+		if node.get("required_enemy", "") != "":
+			hit = bool(node.get("enemy_hit_observed", false))
 		var raw: Array = node.target.region
 		if not hit or not Rect2(raw[0], raw[1], raw[2], raw[3]).has_point(actor.motor.position): continue
 		var receipt := service.claim(context.lifetime.token(),StringName("r2_map:" + str(node.id)))

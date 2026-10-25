@@ -20,7 +20,7 @@ def compile_map(layout_path, library_modules=None):
 
 def assemble_modules(graph,modules,seams):
  """Shared exact-object placer; bounding boxes need not form closed rooms."""
- by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards']}
+ by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards','reward_sites','shop_sites']}
  shared={}
  for seam in seams:
   if seam['kind']=='vertical':
@@ -51,6 +51,14 @@ def assemble_modules(graph,modules,seams):
      value['platform_id']=key+'/'+raw['platform_id']
     if kind=='latches':value['id']=key+'/'+raw['id'];value['bell']=[raw['bell'][0]+dx,raw['bell'][1]+dy];value['gate']=[raw['gate'][0]+dx,raw['gate'][1]+dy,*raw['gate'][2:]]
     if kind=='latches'and raw.get('starts_ferry'):value['starts_ferry']=key+'/'+raw['starts_ferry']
+    if kind=='latches'and raw.get('ferry_id'):value['ferry_id']=key+'/'+raw['ferry_id']
+    if kind=='latches'and raw.get('return_access'):value['return_access']=[raw['return_access'][0]+dx,raw['return_access'][1]+dy]
+    if kind=='enemies':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
+    if kind=='reward_sites':
+     value['id']=key+'/'+raw['id'];value['target']=translated_target(raw['target'],m)
+     for field in ['required_bell','required_enemy']:
+      if raw.get(field):value[field]=key+'/'+raw[field]
+    if kind=='shop_sites':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
     other[kind].append(value)
  # Validate every physical contact, including the coincident actor-center Port.
  nodes={};edges={};gates=[];seamproof=[]
@@ -60,11 +68,13 @@ def assemble_modules(graph,modules,seams):
    v=copy.deepcopy(raw);v['target']=translated_target(v['target'],m)
    for cmd in v.get('control_plan',[]):
     if 'target_x'in cmd:cmd['target_x']+=dx
+    if cmd.get('aim_cell'):cmd['aim_cell']['id']=m['id']+'/'+cmd['aim_cell']['id']
     q=cmd.get('trigger',{}).get('dynamic',{})
     if q.get('kind')=='actor_x':q['value']+=dx
     elif 'id'in q:q['id']=m['id']+'/'+q['id']
    if 'carrier_transfer'in v:
     c=v['carrier_transfer'];c['id']=m['id']+'/'+c['id'];c['source_level']+=dy;c['destination_level']+=dy;c['target_x']+=dx
+    if c.get('park_bell'):c['park_bell']=m['id']+'/'+c['park_bell']
    result.append(v)
   return result
  for m in modules:

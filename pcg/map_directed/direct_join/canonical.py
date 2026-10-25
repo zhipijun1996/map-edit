@@ -11,6 +11,11 @@ def export_reload(modules,out,producer='pcg/prototype/plains/room_modules.py'):
  bell=re.search(r'bell_rectangle.size = Vector2\(([^,]+), ([^)]+)\)',(project/'scripts/world/shot_latch.gd').read_text())
  definitions={'player':{'size':[24,36],'source':{'path':'pcg/prototype/godot/scenes/player/player.tscn','sha256':file_sha(project/'scenes/player/player.tscn')}},
  'bell':{'size':list(map(float,bell.groups())),'source':{'path':'pcg/prototype/godot/scripts/world/shot_latch.gd','sha256':file_sha(project/'scripts/world/shot_latch.gd')}},'enemies':{}}
+ for name in {e['definition']for m in modules for e in m['case'].get('enemies',[])}:
+  path=project/'resources/enemies'/str(name+'.tres')
+  size=re.search(r'collision_size = Vector2\(([^,]+), ([^)]+)\)',path.read_text())
+  if not size:raise ValueError('enemy_collision_definition_missing/'+name)
+  definitions['enemies'][name]={'size':list(map(float,size.groups())),'source':{'path':str(path.relative_to(REPO)),'sha256':file_sha(path)}}
  write(source,{'modules':modules});bundle=dict(modules=modules,sourcePath=str(source.relative_to(REPO)),sourceSha=file_sha(source),
   generatorSha=file_sha(REPO/producer),producer=producer,sourceCommit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),geometryDefinitions=definitions)
  write(out/'bundle.json',bundle)
@@ -32,7 +37,8 @@ def reload_catalog(out):
   loaded=[[o['x'],o['y'],o['w'],o['h']]for o in static]
   if loaded!=case['platforms']:raise ValueError('canonical_static_source_mismatch')
   case['platforms']=loaded;case['one_way_platform_indices']=[o['sourceIndex']for o in static if o['type']=='platform']
-  case['saws']=[];case['moving_platforms']=[];case['latches']=[];m['boundary_gates']=[]
+  case['saws']=[];case['moving_platforms']=[];case['latches']=[];case['enemies']=[];m['boundary_gates']=[]
+  if 'reward_sites' in case:case['reward_sites']=[];case['shop_sites']=[]
   for o in doc['objects']:
    track=by.get(o.get('trackId'))
    if o['type']=='gear':
@@ -42,9 +48,17 @@ def reload_catalog(out):
    elif o['type']=='bell':
     gate=by[o['targetId']];case['latches'].append(dict(id=o['sourceId'],bell=[o['x']+o['w']/2,o['y']+o['h']/2],gate=[gate[k]for k in ['x','y','w','h']],open_seconds=gate['mechanics']['openSeconds'],prompt=next(v['prompt']for v in module['case']['latches']if v['id']==o['sourceId'])))
     if gate['mechanics'].get('startsFerry'):case['latches'][-1]['starts_ferry']=gate['mechanics']['startsFerry']
+    if gate['mechanics'].get('ferryId'):case['latches'][-1]['ferry_id']=gate['mechanics']['ferryId']
+    if gate['mechanics'].get('returnAccess'):case['latches'][-1]['return_access']=gate['mechanics']['returnAccess']
+   elif o['type']=='enemy':
+    enemy=dict(id=o['sourceId'],definition=o['definition'],position=[o['x']+o['w']/2,o['y']+o['h']/2])
+    if o.get('mechanics',{}).get('initialIdleCooldown') is not None:enemy['initial_idle_cooldown']=o['mechanics']['initialIdleCooldown']
+    case['enemies'].append(enemy)
+   elif o['type']=='reward'and o.get('mechanics',{}).get('kind')in ['chest','merchant']:
+    case['reward_sites'if o['mechanics']['kind']=='chest'else'shop_sites'].append(copy.deepcopy(o['mechanics']['source']))
    elif o['type']=='gate'and o.get('mechanics',{}).get('kind')=='boundary_gate':
     v=o['mechanics'];m['boundary_gates'].append(dict(id=o['sourceId'],edge_id=v['edgeId'],bounds=[o[k]for k in ['x','y','w','h']],direction=v['direction'],switch=v['switch'],one_way=v['oneWay'],owner_module=v['owner'],source='module-generated boundary gate',from_module=v['from'],to_module=v['to']))
-  for kind in ['platforms','one_way_platform_indices','saws','moving_platforms','latches']:
+  for kind in ['platforms','one_way_platform_indices','saws','moving_platforms','latches','enemies']+(['reward_sites','shop_sites']if 'reward_sites'in module['case']else[]):
    if case[kind]!=module['case'][kind]:raise ValueError('canonical_physical_payload_mismatch/'+m['id']+'/'+kind)
   if m['boundary_gates']!=module['boundary_gates']:raise ValueError('canonical_module_gate_mismatch')
   m['content_version']=entry['contentVersion'];m['canonical_document']={'path':str(doc_path.relative_to(REPO)),'sha256':entry['sha256'],'id':doc['id'],'contentVersion':entry['contentVersion']}

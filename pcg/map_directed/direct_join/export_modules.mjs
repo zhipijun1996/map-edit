@@ -18,8 +18,12 @@ for(const module of input.modules){
  doc.title=(module.spec.boundary_policy==='open'?'风谷地形 · ':'直接拼接 · ')+module.id;doc.description='独立Module完整几何；Map只作刚性摆放，接缝无填充。当前为隔离实验候选，通用状态关系未知。';
  doc.objects=doc.objects.filter(o=>!['entry','exit','route'].includes(o.type));gc.routes=[];gc.validations=[];
  for(const [i,raw]of module.case.latches.entries()){
-  doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics={kind:'shot_latch',openSeconds:raw.open_seconds,...(raw.starts_ferry?{startsFerry:raw.starts_ferry}:{})};
+  doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics={kind:'shot_latch',openSeconds:raw.open_seconds,...(raw.starts_ferry?{startsFerry:raw.starts_ferry}:{}),...(raw.ferry_id?{ferryId:raw.ferry_id}:{}),...(raw.return_access?{returnAccess:raw.return_access}:{})};
   doc.objects.find(o=>o.id===id+'/bell-'+i).sourceId=raw.id;
+ }
+ for(const [i,raw]of(module.case.enemies??[]).entries())doc.objects.find(o=>o.id===id+'/enemy-'+i).mechanics={initialIdleCooldown:raw.initial_idle_cooldown};
+ for(const [family,sites]of [['chest',module.case.reward_sites??[]],['merchant',module.case.shop_sites??[]]]){
+  for(const raw of sites){const position=raw.target?.position??raw.position;doc.objects.push({id:id+'/'+family+'/'+raw.id,type:'reward',x:position[0]-21,y:position[1]-16,w:42,h:34,rotation:0,label:family,sourceId:raw.id,mechanics:{kind:family,source:raw}});}
  }
  for(const [i,gate]of module.boundary_gates.entries()){
   const [x,y,w,h]=gate.bounds;

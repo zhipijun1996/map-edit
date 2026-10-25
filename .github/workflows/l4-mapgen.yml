@@ -11,6 +11,7 @@ on:
       - 'pcg/prototype/plains/engine.py'
       - 'pcg/prototype/plains/synthesis.py'
       - 'pcg/prototype/plains/open_landforms.py'
+      - 'pcg/prototype/plains/valley_complete.py'
   push:
     branches: ['research/l4-map-generator']
     paths:
@@ -22,6 +23,7 @@ on:
       - 'pcg/prototype/plains/engine.py'
       - 'pcg/prototype/plains/synthesis.py'
       - 'pcg/prototype/plains/open_landforms.py'
+      - 'pcg/prototype/plains/valley_complete.py'
 permissions:
   contents: read
 jobs:
@@ -42,6 +44,7 @@ jobs:
       - run: python3 experiments/l4-mapgen/check_artifacts.py
       - run: node --check experiments/l4-mapgen/viewer.js
       - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/open-valley-final-v2/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/valley-complete-release-v1/module-library/documents/manifest.json
       - run: python3 -m unittest discover -s pcg/map_directed/tests -v
       - run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg

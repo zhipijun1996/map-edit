@@ -1,9 +1,15 @@
 """Native full-world movies from real Router inputs; exact frame comparison."""
 import argparse,gzip,hashlib,json,os,subprocess,shutil
+from pcg.tools.record_plains import event_key
 from pathlib import Path
 from ..director import REPO
 from ..run import write
 from pcg.prototype.factory.core.engine import ENGINE,PROJECT,file_sha
+
+def semantic(value):
+    if isinstance(value,dict):return {k:semantic(v)for k,v in event_key(value).items()}
+    if isinstance(value,list):return [semantic(v)for v in value]
+    return value
 
 
 def run(physics_run,index,out,display=':104',renderer=None):
@@ -40,9 +46,10 @@ def run(physics_run,index,out,display=':104',renderer=None):
         'energy','hp','traversal_state','real_velocity','normal_velocity','module_clock','moving_platforms','saws',
         'support_id','goal_stable_frames','plains','plains_events_delta','player_damage_delta']
     for left,right in zip(native['frames'],reference['frames']):
-        different=[k for k in keys if left.get(k)!=right.get(k)]
+        different=[k for k in keys if semantic(left.get(k))!=semantic(right.get(k))]
         if different:comparison['mismatches'].append(dict(frame=left['frame'],fields=different))
     log=(out/'engine.log').read_text()
+    if semantic(native.get('extra'))!=semantic(reference.get('extra')):comparison['mismatches'].append(dict(frame='final',fields=['extra/economy-and-mechanisms']))
     comparison['passed']=completed.returncode==0 and native['ok'] and len(native['frames'])==len(reference['frames'])and not comparison['mismatches']and'ERROR:'not in log and'SCRIPT ERROR'not in log
     comparison['fields']=keys;write(out/'comparison.json',comparison)
     if not comparison['passed']:raise ValueError('native_movie_does_not_match_bound_physics; evidence retained')
