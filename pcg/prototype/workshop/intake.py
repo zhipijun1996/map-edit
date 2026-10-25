@@ -24,6 +24,10 @@ def ingest(record,root):
 
 def propose(request,observations):
     source=json.loads((HERE/'ideas.json').read_text());out=[];registered=FAMILIES
+    if request.get('production_recipe'):
+        from .production_recipes import RECIPES
+        request=copy.deepcopy(request);request['family']=request['production_recipe']
+        source=dict(sources=[],proposals=json.loads((HERE/'production-proposals-v1.json').read_text())['proposals']);registered=RECIPES
     if request.get('content_kind')=='macro':
         from .macro import FAMILY
         idea=json.loads((HERE/'macro-proposal-v1.json').read_text());idea['rule']='workshop/macro/'+FAMILY
@@ -31,7 +35,7 @@ def propose(request,observations):
     for idea in source['sources']+source['proposals']:
         family=idea['rule'].split('/')[-1]
         if request.get('family')and request['family']!=family:continue
-        signals=[o for o in observations if o.get('family')==family]
+        signals=[o for o in observations if o.get('family')==family or o.get('production_recipe')==family]
         # An unresolved cheap route / boring observation changes selection. A
         # changed title or seed cannot clear it: explicit geometry revision and
         # new evidence must resolve the source observation.

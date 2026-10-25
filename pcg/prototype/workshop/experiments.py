@@ -39,21 +39,27 @@ def counter_run(name,families,requested=None):
     write(engine.out/'summary.json',dict(cases=len(rows),cheap_successes=[r for r in rows if r['safe_stable']],all_failures_preserved=True,necessity_proof=False))
     print(engine.out,flush=True);return engine.out
 
-def produce(name,families,counters,requested=None,protocol_override=None):
-    out=ROOT/'results'/name;engine=WorkshopEngine(out);protocol=json.loads((HERE/(protocol_override or 'protocol.json')).read_text());specs,bases=requested if requested is not None else source_cases(families)
+def produce(name,families,counters,requested=None,protocol_override=None,engine=None,purpose_fn=None,library_root=None,canonical_witnesses=None,counter_decisions=None,export_script=None):
+    out=ROOT/'results'/name;engine=engine or WorkshopEngine(out);protocol=json.loads((HERE/(protocol_override or 'protocol.json')).read_text());specs,bases=requested if requested is not None else source_cases(families)
     write(out/'protocol.json',dict(protocol,holdout_seed=protocol['holdout_seed'],families=families,selection_frozen_before_holdout=True))
     write(out/'challenge-specifications.json',specs);write(out/'candidates.json',dict(cases=bases))
-    entries=evaluate(engine,bases,protocol['holdout_seed'],12,'holdout')
+    if canonical_witnesses is not None:
+        for base in bases:
+            w=canonical_witnesses.get(base['id'])
+            if not w or geometry_key(w['case'])!=geometry_key(base)or w['case']['control_plan']!=base['control_plan']or not(purpose_fn or purpose)(w['case'],w['result'])['ok']:raise ValueError('canonical_witness_not_exact_counter_tested_case')
+    entries=evaluate(engine,bases,protocol['holdout_seed'],12,'holdout',purpose_fn=purpose_fn)
     counter_runs=counters.split(',')
     counter_rows=[r for run in counter_runs for r in counter_records(run)];reviews=[];enrolled=[]
     write(out/'bound-counterexamples.json',counter_rows)
+    if counter_decisions is not None:write(out/'counter-decisions.json',counter_decisions)
     for e in entries:
         base=e['case'];bound=[r for r in counter_rows if r['base_id']==base['id']and r['geometry_sha256']==geometry_key(base)]
         if len(bound)<18:raise ValueError('counterexample_geometry_coverage_missing/'+base['id'])
-        shortcut=any(r['safe_stable']for r in bound)
+        if counter_decisions is not None and any(r['id']not in counter_decisions for r in bound):raise ValueError('counter_design_classification_missing')
+        shortcut=any(r['safe_stable']and(counter_decisions is None or counter_decisions[r['id']]['invalidates_design'])for r in bound)
         e['quality_gate']=gate(e['stats'],shortcut,bool(base.get('moving_platforms')or base.get('enemies')))
         if not e['witness']or e['quality_gate']['status']!='awaiting_human_review':continue
-        w=e['witness'];c=copy.deepcopy(w['case']);c['factory_id']=digest(base);c['factory_evidence']=w['evidence']
+        w=canonical_witnesses[base['id']]if canonical_witnesses is not None else e['witness'];c=copy.deepcopy(w['case']);c['factory_id']=digest(base);c['factory_evidence']=w['evidence']
         c['recorded_frames']=[dict(frame=f['frame'],axis=f['axis'],requested=f['requested'])for f in w['result']['frames']]
         c['validation_summary']=e['stats'];c['module_sha256']=module_hash(c)
         c['review_alias']=base['id'];reviews.append(c)
@@ -61,21 +67,22 @@ def produce(name,families,counters,requested=None,protocol_override=None):
     if reviews:
         rows=collect(out/'review_cases.json',out)
         for row in rows:
-            row['workshopPurpose']=purpose(row['case'],row['result'])
+            row['workshopPurpose']=(purpose_fn or purpose)(row['case'],row['result'])
             if row['case'].get('ports'):row['routePurpose']=row['workshopPurpose']
         bundle=dict(rows=rows,sourceCommit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip())
         write(out/'source-bundle.json',bundle)
-        subprocess.run(['node',str(HERE/'export.mjs'),str(out/'source-bundle.json'),str(out/'modules')],check=True,cwd=REPO)
-        library=CandidateLibrary(out/'library');manifest=json.loads((out/'modules/manifest.json').read_text())
+        subprocess.run(['node',str(export_script or HERE/'export.mjs'),str(out/'source-bundle.json'),str(out/'modules')],check=True,cwd=REPO)
+        library=CandidateLibrary(library_root or out/'library');manifest=json.loads((out/'modules/manifest.json').read_text())
         for c in reviews:
             if c.get('ports'):continue # multi-route catalog remains scoped, no single-route enrollment lie
             doc=out/'modules'/('generated-'+c['factory_id']+'.mapnote.json')
             entry=next(e for e in entries if digest(e['case'])==c['factory_id'])
             artifacts=[dict(path=str(p.relative_to(REPO)),sha256=file_sha(p))for p in [out/'evaluations.json',out/'protocol.json',out/'bound-counterexamples.json']]
+            if counter_decisions is not None:artifacts.append(dict(path=str((out/'counter-decisions.json').relative_to(REPO)),sha256=file_sha(out/'counter-decisions.json')))
             record=library.enroll(c,doc,entry['quality_gate'],artifacts);enrolled.append(record)
         # Reconstruct the library object and read disk records/documents/physics.
         # Queries use existing CandidateLibrary.find; this is not a cache count.
-        reloaded=CandidateLibrary(out/'library');queries=[]
+        reloaded=CandidateLibrary(library_root or out/'library');queries=[]
         for spec in specs:
             query=copy.deepcopy(spec);query['relations']=[dict(**r,**{'from':r['from_port'],'to':r['to_port']})for r in spec['relations']]
             matches=reloaded.find(query)if spec['ports']['count']==2 else[]

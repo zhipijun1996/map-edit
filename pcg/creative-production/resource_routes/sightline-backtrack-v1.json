@@ -1,0 +1,22 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "resource-routes/sightline-backtrack/v1",
+  "title": "离目标探身开锁，再折返",
+  "source_type": "llm_subagent_proposal",
+  "author_task": "/root/resource_routes_creator",
+  "mechanism": "先观察出口左侧长门和右侧被石挡住的铃；向右越过挡视石，取得真正射线后开永久门，再折返向左领取宝箱。",
+  "supported_cells_and_resources": "ShotLatch永久门；普通跳/移动/射击。允许在探身端地面射击；不把空中动作词当必要。",
+  "cheap_falsifiers": "绕过挡视石直接开门、跳过长门、不开铃折返",
+  "ports": {
+    "count": 2,
+    "reverse": "UNKNOWN"
+  },
+  "budget": {
+    "interfaces": 1,
+    "controls_per_interface": 4,
+    "cycles_per_batch": 4
+  },
+  "success": "真实Godot无伤稳定到达/领取，因果事件与实际帧满足；≥18同几何反例，原regular校准与独立holdout",
+  "status": "proposal",
+  "human_fun": "unreviewed"
+}

@@ -11,6 +11,17 @@ from ..factory.core.quality import module_hash
 from .experiments import REPO,write
 
 class WorkshopLibrary(CandidateLibrary):
+    def find_single_exact(self,spec):
+        """Keep original store/verification, then honor full mechanical demand."""
+        def signature(value):
+            v=copy.deepcopy(value)
+            for k in ['id','budget','map_seed']:v.pop(k,None)
+            for rel in v.get('relations',[]):
+                rel.pop('from',None);rel.pop('to',None)
+            return v
+        query=copy.deepcopy(spec)
+        query['relations']=[dict(**r,**{'from':r['from_port'],'to':r['to_port']})for r in spec['relations']]
+        return [m for m in self.find(query)if signature(m['case'].get('map_specification',{}))==signature(spec)]
     def verify_components(self,document,doc):
         gc=doc['generationContract']
         if gc['kind']!='macro':return

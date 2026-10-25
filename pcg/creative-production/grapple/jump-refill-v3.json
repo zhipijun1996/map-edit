@@ -1,0 +1,46 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "grapple/jump-refill",
+  "title": "耗尽二跳后触环复跳",
+  "source_type": "llm_subagent_proposal",
+  "source_task": "/root/grapple_creator",
+  "status": "implemented_requires_full_physics",
+  "observation_decision": "先用二跳够到挂环，接触后把恢复的二跳留给离环后的高台。",
+  "causal_hypothesis": "真实接触恢复额外air_jump；离挂anchor_jump后仍要再次air_jump，但弹药不补充。",
+  "terrain": "入口420，第一跳满24帧、二跳满24帧后钩0高环；接触前双跳已耗尽，环后550/50宽260岸超出anchor_jump单段够取范围。原40高环版本已撤回。",
+  "capabilities": [
+    "move",
+    "jump",
+    "grapple",
+    "double_jump"
+  ],
+  "resources": "原Traversal.restore_air_actions仅恢复二跳与grapple；不恢复airShots。实际Godot资源字段验证。",
+  "reward": "最高台箱",
+  "failure_return": "下落代价与无伤出口分别检验；反向与连续回程UNKNOWN，不宣称通用重试。",
+  "cheap_counterexamples": [
+    "省略接触前二跳",
+    "省略恢复后二跳",
+    "直接双跳",
+    "满按12/24/36/48帧单跳后在0/4/8帧抛钩；旧40高环已被这个扩展反例推翻，v3撤回"
+  ],
+  "difference_from_existing": "恢复可重用跳跃资源而非恢复枪弹，必须观测接触前后实际remaining_jumps。",
+  "parent_family": "original grapple hang/bounce",
+  "implementation": {
+    "path": "pcg/prototype/creative_batches/grapple/recipes_v7.py",
+    "engine": "existing WorkshopEngine and Godot 4.7.2",
+    "interfaces": 1,
+    "controls_max": 4,
+    "checker": "actual events/states/resources and safe rewarded stable exit; same-core alternatives allowed",
+    "counterexamples_min": 18
+  },
+  "human_fun": "unreviewed",
+  "manual_play": "unreviewed",
+  "production_approval": false,
+  "revision": 3,
+  "actual_failed_predecessors": [
+    "pcg/results/workshop-creative-grapple-production-v1",
+    "pcg/results/workshop-creative-grapple-production-v2",
+    "pcg/results/workshop-creative-grapple-production-v3",
+    "pcg/results/workshop-creative-grapple-production-v4"
+  ]
+}

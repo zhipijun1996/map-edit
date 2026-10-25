@@ -1,0 +1,48 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "enemy-world/absorber-bell",
+  "title": "敌身吸弹后露铃",
+  "source_type": "llm_subagent_proposal",
+  "producer_task": "/root/enemy_world_creator",
+  "status": "proposal_not_verified",
+  "observation_and_decision": "观察门铃与玩家射线之间的3HP哨兵；从受保护射击位击败敌人后，第四枪才穿过原敌人占位命中远铃并打开出口。",
+  "causal_relationship": "真实敌人被前3枪吸收，远铃必须在死亡后才被命中；不是命中回充。",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": {
+    "enemy_hp": 3,
+    "air_shots": "original single air charge; ground/hit recovery only",
+    "cooldown": "original actual ability",
+    "no_synthetic_projectiles": true
+  },
+  "cells": [
+    "original PlainsCells",
+    "original EnemyActor plains_sentry",
+    "original ShotLatch",
+    "original SimpleRoomReward"
+  ],
+  "terrain": "远铃位于窄水平射孔末端，地形限制换射线绕敌；门阻断目标。",
+  "reward": "visible original SimpleRoomReward chest at stable exit; actual transaction required",
+  "failure_cost": "player damage/unstable landing rejects; no HP reset during case",
+  "return_status": "UNKNOWN",
+  "recovery_status": "UNKNOWN",
+  "cheap_counters": [
+    "越过敌身直接射铃",
+    "地面预射远铃",
+    "省掉第一枪",
+    "只打敌人不打铃",
+    "高跳斜射铃",
+    "等待敌人移开"
+  ],
+  "distinction_from_existing": "not an air-refund rise, recoil slot, carrier chase, timed same-shot gate crossing, brake pocket or high/low fork",
+  "implementation": {
+    "source_directory": "pcg/prototype/creative_batches/enemy_world/",
+    "max_interfaces": 1,
+    "max_control_candidates_per_interface": 4,
+    "physics": "WorkshopEngine original Godot",
+    "release_requirement": "exact clean, 6 mild screen, >=18 same-geometry counters, regular calibration and independent holdout; unsupported mechanism reported"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "enemy-world/telegraph-underpass",
+  "title": "诱导上射后下穿",
+  "source_type": "llm_subagent_proposal",
+  "producer_task": "/root/enemy_world_creator",
+  "status": "proposal_not_verified",
+  "observation_and_decision": "先登上可见诱敌台令哨兵锁定高位方向，再落回低通道趁恢复期通过其底部近身危险区。",
+  "causal_relationship": "真实telegraph锁定高位、实际attack发射，再出现完整身体下穿；反例直接低走若安全则淘汰。",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": {
+    "enemy_hp": 3,
+    "air_shots": "original single air charge; ground/hit recovery only",
+    "cooldown": "original actual ability",
+    "no_synthetic_projectiles": true
+  },
+  "cells": [
+    "original PlainsCells",
+    "original EnemyActor plains_sentry",
+    "original ShotLatch",
+    "original SimpleRoomReward"
+  ],
+  "terrain": "上下两层开口共享近身窄带；高诱敌台与低通道之间必须真正转移。",
+  "reward": "visible original SimpleRoomReward chest at stable exit; actual transaction required",
+  "failure_cost": "player damage/unstable landing rejects; no HP reset during case",
+  "return_status": "UNKNOWN",
+  "recovery_status": "UNKNOWN",
+  "cheap_counters": [
+    "直接低走",
+    "原地等待再走",
+    "低位射击",
+    "普通跳直穿",
+    "不等发射立即落",
+    "一直留在高台"
+  ],
+  "distinction_from_existing": "not an air-refund rise, recoil slot, carrier chase, timed same-shot gate crossing, brake pocket or high/low fork",
+  "implementation": {
+    "source_directory": "pcg/prototype/creative_batches/enemy_world/",
+    "max_interfaces": 1,
+    "max_control_candidates_per_interface": 4,
+    "physics": "WorkshopEngine original Godot",
+    "release_requirement": "exact clean, 6 mild screen, >=18 same-geometry counters, regular calibration and independent holdout; unsupported mechanism reported"
+  }
+}

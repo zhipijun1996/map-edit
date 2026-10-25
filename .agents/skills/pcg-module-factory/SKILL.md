@@ -5,6 +5,16 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 适用：新增生成算法、修复搜索、提高产量或行为多样性。先读 `pcg/WORKSPACE.md`，在 `pcg/` 运行模块CLI。
 
+## 持续生产入口
+
+用户要求持续生成新 Module 时，执行 [固定生产循环](references/production-loop.md)，不要为每个样品重新组织整套实验。程序入口：`python3 -m pcg.prototype.workshop.production_loop --name workshop-new-batch --cycles 4`。它复用原 Engine、regular 评价器、标准导出与 CandidateLibrary。
+
+Codex 负责提出和实现新因果规则；程序负责规则域内的动作/几何搜索、反例、校准、独立留出和入库。创意外层使用 [pcg-creative-producer](../pcg-creative-producer/SKILL.md) 的实际 Codex 会话或授权子代理；当前没有独立在线模型服务，不承诺单独运行循环程序能自主发明任意新机制。规则耗尽必须输出 needs_design，并将未实现创意和下一步缺口交回设计环节，不能继续换 Seed 冒充新内容。
+
+每轮先静态合同预检、clean 与少量 mild 筛选、廉价解法，再做完整校准和留出。小样通过不是技术准入；沿用原 regular 门槛。发布见证必须在留出前固定为反例测试过的精确几何/敌人相位，留出统计单独描述父候选扰动范围。相同规则源码的失败持久化，后续进程跳过；标题和 Seed 不清除失败。运行整个冻结轮次期间，不编辑其源码。
+
+衡量新候选/独立动作家族/复用/拒绝/耗时，不能用验证次数当产量。先做 Module；Macro、通用回程或接缝只有需求需要时才扩展，不能让每个新原型都承担整图级工作。
+
 1. 明确支持的能力/区域/挑战家族与不可变物理基线。动作词可重复，动作数量不是道具库存；未注册机制拒绝而非改名替代。
 2. 写实验protocol，固定候选预算、共同相位/噪声、选择规则、指标与新holdout seed。比较组具有相同上限，记录实际唯一候选数；不足预算不得冒充满配。
 3. 用 `core.engine.Engine` 分批执行实际Godot。保留完整输入/输出/失败/gzip原字节SHA和源快照，不只成功截图。

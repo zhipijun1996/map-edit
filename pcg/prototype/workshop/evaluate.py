@@ -61,11 +61,15 @@ def instantiate(c,seed,level,trial):
     v['id']+=f'-{level}-{trial}'
     if level!='clean':v['noise']=dict(seed=rng.randrange(2**30),timing_frames=1 if level=='mild'else 3,aim_degrees=2 if level=='mild'else 6)
     for e in v.get('enemies',[]):e['initial_idle_cooldown']=rng.uniform(0,.6)
+    for saw in v.get('saws',[]):saw['initial_phase']=rng.random()
+    controlled={l['ferry_id']for l in v.get('latches',[])if l.get('ferry_id')}
+    for platform in v.get('moving_platforms',[]):
+        if platform['platform_id']not in controlled:platform['initial_phase']=rng.random()
     # Controlled platforms start at their authored parked dock; phase of their
     # later movement is affected by the independently disturbed real hit time.
     return v
 
-def evaluate(engine,cases,seed,trials,stage):
+def evaluate(engine,cases,seed,trials,stage,purpose_fn=None):
     entries=[]
     for base in cases:
         rows=[];witness=None
@@ -75,7 +79,7 @@ def evaluate(engine,cases,seed,trials,stage):
             for i in range(trials if level!='clean'or dynamic else 1):
                 v=instantiate(base,seed,level,i);expanded.append(v);labels[v['id']]=(level,i)
         for c,r,e in engine.run(expanded,stage):
-            level,trial=labels[c['id']];p=purpose(c,r)
+            level,trial=labels[c['id']];p=(purpose_fn or purpose)(c,r)
             rows.append(dict(level=level,trial=trial,purpose=p,safe_stable=bool(r['ok']),evidence=e))
             if level=='clean' and p['ok']and witness is None:
                 witness=dict(case=c,result=r,evidence=e)

@@ -1,0 +1,71 @@
+{
+  "schema": "pcg/content-technical-withdrawal/v1",
+  "id": "production-loop-v1-published-phase-binding-v1",
+  "reason": "The published exact witness was selected from the first held enemy phase instead of the clean/counter-tested phase fixed before holdout. Original base enemy cooldown is 0.6; published held clean-0 uses 0.4197450621205079. The original v2 protocol explicitly says not to publish the v1 versions. Their exact-phase counterexample certification is therefore invalid.",
+  "contentVersions": [
+    "sha256:25ef720f41d2bcddd255233dc1f68b37a187bfb227af4cd054714e1160d9b599",
+    "sha256:e75f16e0ef67f23ce94319b280fbf79d9d1e384a29c25709bbc47b6cb1acaed7"
+  ],
+  "source_task": "/root/novelty_critic",
+  "source_type": "actual_codex_subagent_read_only_evidence_review",
+  "source_run": "pcg/results/workshop-production-loop-v1/round-00",
+  "evidence": {
+    "version_sources": [
+      {
+        "path": "pcg/results/workshop-production-loop-v1/round-00/modules/generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba.mapnote.json",
+        "sha256": "5ff12bea0b79eba7748f214f8253dc03c27ac6c4010f770617a65ba4b558c9f0"
+      },
+      {
+        "path": "pcg/results/workshop-production-loop-v1/round-00/modules/generated-93386f9cb63da991ec94091a678e5ee1df5db7589074e45d7fa3b9c23123c95e.mapnote.json",
+        "sha256": "700a8987599b48608a9c336d95c8a7366507fa4eb47f4bfcc472d92631720bdf"
+      }
+    ],
+    "counter_tested_candidates": {
+      "path": "pcg/results/workshop-production-loop-v1/round-00/candidates.json",
+      "sha256": "7106b96d4aeb1d48b21cd6d23349333af3c8ba0e62aa62f212cefc1dbd4752cb"
+    },
+    "published_review_cases": {
+      "path": "pcg/results/workshop-production-loop-v1/round-00/review_cases.json",
+      "sha256": "8af5e9821637a1c3ed79d5849737ba7f8b2b17f48231a5b14dcb25b65f1a2754"
+    },
+    "counterexample_bindings": {
+      "path": "pcg/results/workshop-production-loop-v1/round-00/bound-counterexamples.json",
+      "sha256": "92525f53a68d2243951f112e56a2adb57584bdc5a7c291e18bf954ff9269b182"
+    },
+    "selection_before_holdout": {
+      "path": "pcg/results/workshop-production-loop-v1/round-00/selection-before-holdout.json",
+      "sha256": "ef1c9b7edb2fc90bd7b2922693f6c2509925f0d201535cf9b57be3089609e1af"
+    },
+    "original_v2_protocol": {
+      "path": "pcg/prototype/workshop/production-protocol-v2.json",
+      "sha256": "b0a84ad85101693338e4759a1a6875fa62b45e83f0ebde70188c0b3ece7e2b14"
+    },
+    "original_v2_protocol_statement": "workshop-production-loop-v1 chose first held enemy phase as published witness: do not publish its versions",
+    "phase_comparison": [
+      {
+        "counter_tested_base_case": "refund-turnback-0-20-0.5",
+        "published_case": "refund-turnback-0-20-0.5-clean-0",
+        "base_enemy_initial_idle_cooldowns": [
+          0.6
+        ],
+        "published_enemy_initial_idle_cooldowns": [
+          0.4197450621205079
+        ]
+      },
+      {
+        "counter_tested_base_case": "refund-turnback-1-20-0.5",
+        "published_case": "refund-turnback-1-20-0.5-clean-0",
+        "base_enemy_initial_idle_cooldowns": [
+          0.6
+        ],
+        "published_enemy_initial_idle_cooldowns": [
+          0.4197450621205079
+        ]
+      }
+    ]
+  },
+  "resolution": "Use a new version whose published exact clean case/phase is fixed and counter-tested before independent holdout, as specified by production-protocol-v2.",
+  "withdrawal_scope": "Withdraw these two published v1 technical evidence bindings only. This does not claim their trajectories are physically impossible or withdraw unrelated lawful phase alternatives.",
+  "human_approval": false,
+  "physics_run_by_notice_author": false
+}
