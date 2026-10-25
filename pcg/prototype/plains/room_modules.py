@@ -13,7 +13,7 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 def generate(spec):
- key=spec['node_id'];W,H=spec['space']['core_bounds'][2:];base=H-64
+ key=spec['node_id'];W,H=spec['space']['core_bounds'][2:];base=H-spec.get('floor_margin',64)
  ports={p['id']:copy.deepcopy(p)for p in spec['ports']}
  platforms=[];one_way=[];saws=[];latches=[];carriers=[];floors={};columns=[]
  def platform(rect,one=False):
@@ -162,7 +162,7 @@ def generate(spec):
 
 def routes(module):
  """Build input policies over the Module's existing landforms, never geometry."""
- base=module['spec']['space']['core_bounds'][3]-64;cols=module['columns'];case=module['case'];floors=module['floors']
+ base=module['spec']['space']['core_bounds'][3]-module['spec'].get('floor_margin',64);cols=module['columns'];case=module['case'];floors=module['floors']
  def target_at(x,y,label):
   for lo,hi,i in floors[y]:
    if lo+12<=x<=hi-12:return dict(id=module['id']+'/'+label,position=[x,y],region=[x-10,y-5,20,10],support_indices=[i],grounded=True)
