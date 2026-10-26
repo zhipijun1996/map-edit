@@ -74,3 +74,7 @@ Godot素材与真实脚本由 `godot-runtime-v1` 完整保存870原件；恢复�
 ## 三端口最新入口
 
 [PLAINS-THREE-PORT-REPORT.md](PLAINS-THREE-PORT-REPORT.md)：`prototype/plains/three_port.py`生成同几何A/B/C分支；`three_port_produce.py`完成校准/独立留出。2候选，每个6有向对/7路线，正式552次物理；742帧原生视频精确匹配。新T视频待评，奖励服务/通用回程保证/接缝/拼装仍未完成。恢复plains-three-port-v1可取得完整失败与源；不是14个Module，不将参数变体算新玩法。
+
+## 最新 Module 库接入完整 Map（2026-10-26）
+
+见[实验报告](../docs/l4-mapgen/latest-library-map-integration-v1.md)。已同步main54d0cfc及内容6de70fb：94版本/82平原候选，121/121源路线；三个Seed实际21原版本，整图7/12（1/4、4/4、2/4），仅一张四路线全过。没有生产/人类趣味认可、没有通用回程/路口准入。固定双分流测试图未代替既有Mission生成器。源/所有失败/原库证据在catalog-feed-source-and-runs-v1，实际截图/原生影片/公网字节核验在catalog-feed-media-v1；PCK以可精确重建的父包增量保存。

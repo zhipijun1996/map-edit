@@ -41,7 +41,9 @@ def build(cases,out,game_tools):
  payload=json.loads(Path(cases).read_text());case=payload['cases'][0]
  case['extra_script']='res://map_directed/catalog_feed/manual_extra.gd';case['automatic_shop_input']=False
  files['r2/cases.json']=json.dumps({'cases':[case]},ensure_ascii=False).encode();files['modules_v3.json']=files['r2/cases.json']
- files['project.godot']=files['project.godot'].decode().replace('res://shape_search/manual.tscn','res://map_directed/catalog_feed/manual.tscn').encode()
+ for key in ['project.godot','pcg_overlay_boot.gd']:
+  files[key]=files[key].decode().replace('res://shape_search/manual.tscn','res://map_directed/catalog_feed/manual.tscn').encode()
+ assert b'res://map_directed/catalog_feed/manual.tscn'in files['pcg_overlay_boot.gd']
  p=out/'overlay.pck';m=write_pack(p,files);name='overlay.'+m['sha256'][:12]+'.pck';p.rename(out/name);m['pack']=name
  verify=Pack(out/name)
  for k,b in files.items():assert verify.read(k)==b

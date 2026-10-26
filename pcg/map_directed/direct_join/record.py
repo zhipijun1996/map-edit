@@ -12,7 +12,7 @@ def semantic(value):
     return value
 
 
-def run(physics_run,index,out,display=':104',renderer=None):
+def run(physics_run,index,out,display=':104',renderer=None,resolution='1280x720'):
     physics_run=Path(physics_run);out=Path(out)
     if out.exists():raise ValueError('immutable_movie_output_exists')
     out.mkdir(parents=True)
@@ -32,7 +32,7 @@ def run(physics_run,index,out,display=':104',renderer=None):
     write(out/'movie-source.json',dict(files=sources,engine_sha256=file_sha(ENGINE),case_sha256=file_sha(cases),
         physics_run=str(physics_run.relative_to(REPO)),physics_binding_sha256=file_sha(physics_run/'physics/source_binding.json')))
     trace=out/'native-trace.json';avi=out/'native.avi'
-    command=[str(ENGINE),'--path',str(PROJECT),'--resolution','1280x720','--audio-driver','Dummy',
+    command=[str(ENGINE),'--path',str(PROJECT),'--resolution',resolution,'--audio-driver','Dummy',
         '--write-movie',str(avi.resolve()),'--fixed-fps','60','--script',
         str(renderer),'--','--cases-json',str(cases.resolve()),
         '--case','0','--movie','--trace-json',str(trace.resolve())]
@@ -61,7 +61,7 @@ def run(physics_run,index,out,display=':104',renderer=None):
     if probe['streams'][0]['avg_frame_rate']!='60/1':raise ValueError('wrong_movie_frame_rate')
     write(out/'manifest.json',dict(schema='pcg/full-r2-native-video/v1',case_id=case['id'],
         file=mp4.name,bytes=mp4.stat().st_size,sha256=file_sha(mp4),duration=float(probe['format']['duration']),
-        physics_hz=60,playback_speed=1,native_trace_sha256=file_sha(trace),comparison=comparison,
+        physics_hz=60,playback_speed=1,resolution=[probe['streams'][0]['width'],probe['streams'][0]['height']],native_trace_sha256=file_sha(trace),comparison=comparison,
         scope='Complete real route at normal speed; boot/warmup and one final second retained, read-only full-map minimap',
         human_fun='unverified',human_playtests=0))
     print(json.dumps(dict(out=str(out),frames=len(native['frames']),duration=probe['format']['duration'],exact=True)),flush=True)
@@ -71,4 +71,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--index',type=int,required=True)
     p.add_argument('--out',type=Path,required=True);p.add_argument('--display',default=':104')
     p.add_argument('--renderer',type=Path)
-    a=p.parse_args();run(a.run.resolve(),a.index,a.out.resolve(),a.display,a.renderer)
+    p.add_argument('--resolution',default='1280x720')
+    a=p.parse_args();run(a.run.resolve(),a.index,a.out.resolve(),a.display,a.renderer,a.resolution)
