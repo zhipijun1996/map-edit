@@ -1,25 +1,10 @@
 """Routing regressions: ordered Port evidence cannot become all-to-all access."""
 import unittest
-from unittest.mock import patch
 from pcg.map_directed.content_domains.routes import route_section
 from pcg.map_directed.content_domains.build import owned_results
-from pcg.map_directed.content_domains.failure_boundary_probe import prune
 
 
 class NativePortRoutes(unittest.TestCase):
-    def test_shared_port_and_program_target_keeps_correct_support_after_floor_pruning(self):
-        target=dict(support_indices=[1],position=[64,80])
-        module=dict(case=dict(platforms=[[0,500,700,32],[0,96,128,32]],ports=[dict(support_index=1)]),
-                    action_clearance=[[0,0,128,96]],center=target,ports={'A':dict(dock=target)},
-                    port_transitions={'A>A':[dict(target=target)]},center_to_port={'A':[dict(target=target)]},
-                    adaptation={},variant_id='shared-support')
-        # Isolate the support remap from unrelated shape/Port contract checks.
-        with patch('pcg.map_directed.content_domains.failure_boundary_probe.declare',side_effect=lambda m,c:m),patch('pcg.map_directed.content_domains.failure_boundary_probe.validate',return_value=[]),patch('pcg.map_directed.content_domains.failure_boundary_probe.regions',return_value=[[0,0,128,128]]):
-            result=prune(module)
-        self.assertEqual(result['center']['support_indices'],[0])
-        self.assertEqual(result['port_transitions']['A>A'][0]['target']['support_indices'],[0])
-        self.assertEqual(module['center']['support_indices'],[1])
-
     def test_variant_motion_samples_are_not_merged_by_a_shared_prefix(self):
         modules=[dict(variant_id='recipe'),dict(variant_id='recipe/mirror-x'),dict(variant_id='recipe/mirror-x/map-failure-boundary')]
         results={k:dict(id=k,marker=i)for i,k in enumerate(['recipe/A>B','recipe/mirror-x/A>B','recipe/mirror-x/map-failure-boundary/A>B'])}

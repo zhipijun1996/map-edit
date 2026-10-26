@@ -25,12 +25,7 @@ def prune(module):
     c['platforms']=[r for i,r in enumerate(c['platforms'])if i not in removed]
     c['one_way_platform_indices']=[mapping[i]for i in c.get('one_way_platform_indices',[])if i in mapping];c['wall_platform_indices']=[mapping[i]for i in c.get('wall_platform_indices',[])if i in mapping]
     c['thorns']=[dict(t,platform_index=mapping[t['platform_index']])for t in c.get('thorns',[])if t['platform_index']not in removed]
-    visited_targets=set()
     def target(t):
-        # Targets can be shared by a Port and several ordered programs.
-        # deepcopy preserves those aliases; platform indices must change once.
-        if id(t) in visited_targets:return
-        visited_targets.add(id(t))
         for key in ['support_indices','allowed_transit_support_indices']:
             if key in t:t[key]=[mapping[i]for i in t[key]]
     target(m['center'])

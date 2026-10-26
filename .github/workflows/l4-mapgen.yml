@@ -78,7 +78,7 @@ jobs:
           python3 - <<'PY'
           import hashlib,json
           from pcg.tools.restore_archive import open_parts,ROOT
-          for archive_name,prefix in [('block-grid-v1','results/block-grid-evaluation-2-v1/module-library/documents/'),('same-graph-landforms-v1','results/graph-landforms-evaluation-v1/module-library/documents/')]:
+          for archive_name,prefix in [('block-grid-v1','results/block-grid-evaluation-2-v1/module-library/documents/'),('same-graph-landforms-v1','results/graph-landforms-evaluation-v1/module-library/documents/'),('content-domains-v1','results/content-domains-region-scale-v1/module-library/documents/'),('content-domains-v1','results/content-domains-inventory-v3/module-library/documents/')]:
               with open_parts(archive_name) as archive:
                   index=json.loads(archive.read('PCG-ARCHIVE-INDEX.json'))
                   for name,info in index.items():
@@ -92,6 +92,8 @@ jobs:
           PY
           node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/block-grid-evaluation-2-v1/module-library/documents/manifest.json
           node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/graph-landforms-evaluation-v1/module-library/documents/manifest.json
+          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-domains-region-scale-v1/module-library/documents/manifest.json
+          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-domains-inventory-v3/module-library/documents/manifest.json
       - run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg
       - run: python3 -m unittest discover -s prototype/plains/tests -v
