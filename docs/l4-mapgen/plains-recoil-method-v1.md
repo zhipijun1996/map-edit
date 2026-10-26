@@ -81,3 +81,5 @@ python3 -m pcg.prototype.creative_batches.plains_workshop.produce_v1 --name fres
 该入口当前注册两条有界适配配方；其他关系按其具体已实现规则处理。输入超出能力、空间、端口、资源或回程支持域时返回冲突与可协商条件，不替换成普通房间。完整原库检索与标准文档的SHA验证继续由原CandidateLibrary/WorkshopLibrary承担。
 
 接下来内容工作依次补安全教学、反冲控制练习、已教动作的世界组合、可选奖励与真实回程恢复。配方接受B现有平原需求，由B负责探索拓扑、空间布局、接缝与整图验收。最终目标是一块内容充实、可探索的反冲平原；本轮库归拢和四个小试件只是这个目标的内容基础。
+
+[干净检出复用证明](../../generation/workshop/plains-recoil-v1/clean-checkout-proof.json)：单独git worktree不含本机忽略实验目录，按上面两个归档命令恢复后，44版本/32平原视图、单需求和4个多路线记录全部重检索通过，0新物理调用。旧15的187文件最小原件闭包随本批保存，完整历史源码仍在原归档。
