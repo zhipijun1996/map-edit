@@ -54,7 +54,7 @@
 
 ## 运行与复用
 
-仓库根、恢复原Godot运行环境后：
+运行代码在`content/task-a-workshop`分支；main同步网页审阅资料。切到该分支，在仓库根恢复原Godot运行环境后：
 
 ```sh
 python3 -m pcg.prototype.creative_batches.plains50_catalog --list
