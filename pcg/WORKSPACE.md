@@ -2,6 +2,10 @@
 
 # 关卡生成工作区
 
+## 当前任务：多口的空间选择与创意先行（2026-10-26）
+
+用户认可上一批实现总体，同时指出多口像强加安全口；现在优先构思能服务后续地图分叉的局部空间节点，允许部分单向。环岛只是例子，不默认开始实现或批量生成。执行 [pcg-multiport-junction](../.agents/skills/pcg-multiport-junction/SKILL.md)。逐字来源/解释见`feedback/workshop/multiport-spatial-choice-feedback-v1.json`；15份现有多口的设计审查在`creative-production/curation/multiport-junction-audit-v1.json`，原技术记录不改。先读不同空间创意`creative-production/junction-ideas-v1.json`，原平台只支持两点往返，真正圆轨迹需新Cell。旧“从A有2/3出口”是当批数量/技术条件，不是新路口设计准则；UNKNOWN反向不算已证单向。此次仅审查、skill和概念输出，物理/新候选/生产准入均不增加。
+
 ## 最新交付：新增50平原Module，含7三口/4四口（2026-10-26）
 
 见 [报告](../docs/l4-mapgen/plains50-v1.md)、[50件清单/21组审阅/运行命令](../generation/workshop/plains50-v1/README.md)。原库44→94，平原候选32→82；新增39双口/7三口/4四口，69路线逐路过原regular，所有3/4口分别有2/3真实出口。21审阅组+29有效适配不等于50新家族。8623 Harness案例含失败/接缝；留出1969/2022，未编造人类成功率。新进程原库复用、55多口矛盾需求拒绝与两零增面积接缝试件均有回执。新的平原视图`plains_workshop/catalog_v2.py`、统一手玩/回放`creative_batches/plains50_catalog.py`。归档`content-workshop-plains50-v1`保存全部新raw；旧记录不覆盖。先读最终AI审查与本批失败，D02/D03/D04/D05完整设计仍有缺口。网页当前索引包含所有94版本并能按端口筛选；main已通过PR #5发布（54d0cfc），真实公网更新94/平原82/四口4和31主审影片字节核对通过，回执`generation/workshop/plains50-v1/publication-v1.json`。人工/生产批准仍待真实反馈。共享物理/质量门槛/候选库框架未改。

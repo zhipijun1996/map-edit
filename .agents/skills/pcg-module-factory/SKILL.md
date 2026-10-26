@@ -11,6 +11,8 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 ## 持续生产入口
 
+多端口职责先用 [pcg-multiport-junction](../pcg-multiport-junction/SKILL.md) 设计：在同一可兼容进入状态下形成有意义的去向选择，端口数和恢复路线不替代空间构思。按fork/merge/interchange等真实需求决定有向关系；可以部分单向，不强制全互通或固定A出2/3口。意图单向不等于已证单向，未验反向仍UNKNOWN。创意/缺口明确后才进入本skill的原技术管线。
+
 用户要求持续生成新 Module 时，执行 [固定生产循环](references/production-loop.md)，不要为每个样品重新组织整套实验。程序入口：`python3 -m pcg.prototype.workshop.production_loop --name workshop-new-batch --cycles 4`。它复用原 Engine、regular 评价器、标准导出与 CandidateLibrary。
 
 用户要求先积累、AI去重、再人工审核时，外层按 [批次生产协议](../pcg-creative-producer/references/batch-production-v1.md) 调度；不用每个点子等待人工批准。仍先过原技术门槛再入候选库；AI分组不会修改物理结论、删除候选或替人类批准。
