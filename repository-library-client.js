@@ -16,7 +16,7 @@ export function repositoryEntry(record,doc,row={},previous={}){
   const caps=[...(requirements?.allOf??[]),...(requirements?.anyOfGroups??[]).flat()];
   const advanced=caps.some(c=>['grapple','wall_climb','double_jump'].includes(c));
   const scope=row.selected_for_plains_candidates?'plains':row.selection_reason==='reserved_for_later_abilities'?'advanced':row.selection_reason==='pacing_held'?'held':advanced?'advanced':'unclassified';
-  return {id:'repo-'+hex,moduleId:doc.id,contentVersion:version,title:previous.title??doc.title,category:doc.source?.category??'平原',collection:'本仓库内容',file:`./library/workshop/modules/${hex}.json`,thumbnail:`./library/workshop/thumbnails/${hex}.svg`,sourcePath:ROOT+hex+'/module.mapnote.json',recordPath:ROOT+hex+'/record.json',contentSha256:record.document_sha256,objectCount:doc.objects.length,capabilityRequirements:requirements,difficulty:doc.difficulty,integration:doc.source?.integration,scope,contentRole:row.content_role??'UNKNOWN',tags:[doc.generationContract.kind,row.family??doc.generationContract.generation?.parameters?.family??'',SCOPE_NAMES[scope]]};
+  return {id:'repo-'+hex,moduleId:doc.id,contentVersion:version,title:previous.title??row.title??doc.title,portCount:doc.generationContract.ports.length,category:doc.source?.category??'平原',collection:'本仓库内容',file:`./library/workshop/modules/${hex}.json`,thumbnail:`./library/workshop/thumbnails/${hex}.svg`,sourcePath:ROOT+hex+'/module.mapnote.json',recordPath:ROOT+hex+'/record.json',contentSha256:record.document_sha256,objectCount:doc.objects.length,capabilityRequirements:requirements,difficulty:doc.difficulty,integration:doc.source?.integration,scope,contentRole:row.content_role??'UNKNOWN',tags:[doc.generationContract.kind,row.family??doc.generationContract.generation?.parameters?.family??'',SCOPE_NAMES[scope]]};
 }
 export function validateRepositoryCatalog(data){
   if(data?.schema!=='map-notes/repository-module-library/v1'||data.repository!==EDITOR_REPO||!SHA.test(data.sourceCommit)||typeof data.updateRef!=='string'||!data.updateRef||data.updateRef.length>200||!Array.isArray(data.modules)||data.modules.length>10000)throw Error('本仓库模块目录格式无效，保留现有库');
@@ -24,6 +24,7 @@ export function validateRepositoryCatalog(data){
   for(const m of data.modules){
     const hex=m.contentVersion?.replace(/^sha256:/,'');
     if(!HASH.test(hex)||m.id!=='repo-'+hex||ids.has(m.id)||typeof m.moduleId!=='string'||typeof m.title!=='string'||!HASH.test(m.contentSha256)||m.file!==`./library/workshop/modules/${hex}.json`||m.thumbnail!==`./library/workshop/thumbnails/${hex}.svg`||m.sourcePath!==ROOT+hex+'/module.mapnote.json'||m.recordPath!==ROOT+hex+'/record.json'||!Object.hasOwn(SCOPE_NAMES,m.scope))throw Error('本仓库模块条目校验失败，保留现有库');
+    if(m.portCount!==undefined&&(!Number.isInteger(m.portCount)||m.portCount<2))throw Error('模块端口数量无效');
     if(typeof m.category!=='string')throw Error('模块分类无效');
     validateRequirements(m.capabilityRequirements);validateDifficulty(m.difficulty);
     ids.add(m.id);
@@ -87,7 +88,8 @@ export class RepositoryLibraryClient extends LibraryClient{
     const notices=await concurrent(tree.tree.filter(x=>x.type==='blob'&&/^pcg\/feedback\/content-withdrawals\/[a-zA-Z0-9_-]+\.json$/.test(x.path)),x=>this.json(base+x.path));
     const withdrawn=new Set();
     for(const n of notices){if(n.schema!=='pcg/content-technical-withdrawal/v1'||!Array.isArray(n.contentVersions))throw Error('撤回记录格式无效，保留现有库');for(const v of n.contentVersions)withdrawn.add(v);}
-    const view=await this.responseJSON(base+'generation/workshop/plains-recoil-v1/catalog.json',true);
+    const view=await this.responseJSON(base+'generation/workshop/plains-recoil-current/catalog.json',true)
+      ?? await this.responseJSON(base+'generation/workshop/plains-recoil-v1/catalog.json',true);
     const curated=new Map((view?.rows??[]).map(x=>[x.contentVersion,x]));
     const old=new Map((previous?.modules??[]).map(x=>[x.contentVersion,x]));const docs=new Map();let completed=0,active=true;
     let entries;
