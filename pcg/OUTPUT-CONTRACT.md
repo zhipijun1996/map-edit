@@ -128,3 +128,7 @@ npm run check
 新物理批`plains-contract-production-v1`在首批12个输出后因Godot退出资源ERROR被拒；v2使用**同一seed93007211与原选择规则**做基础设施重试，首批接受、第二批退出ERROR后停止。错误原样保留，没有修改物理、退出检查或再抽幸运种子；本次没有新的完整通关批次可报告，也未把这些不完整运行当生产通过。交付使用既有3个Module的有界证据来验证输出适配，不重新盖章。
 
 版本化归档`module-contract-v1`保留本轮适配过程、失败日志、两次不完整物理运行及源快照。它与此前真实平原/原角色归档共同复现；公开Module JSON和SVG在`generation/contracts/plains-v1`。
+
+## 可选 Block 拼接扩展（2026-10-26）
+
+新实验可声明 `generationContract.space.blockGrid`，沿用全部既有身份、方向关系、状态、真实证据和准入规则，详见[Graph + Block + Module增量契约](../docs/l4-mapgen/graph-block-module-contract-v1.md)。128px Block只约束布局和预留形状，不要求矩形外墙，不取代32px美术Tile、真实碰撞或动作净空。Port须位于所拥有Block的实际边界中心；锚点与角色staging位置分开。原有无Block文档保持原行为，不能自动转成Block合格模块。

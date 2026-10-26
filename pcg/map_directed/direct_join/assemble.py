@@ -103,9 +103,22 @@ def assemble_modules(graph,modules,seams):
   if posa!=posb or pa['normal']!=[-v for v in pb['normal']]:raise ValueError('modules_do_not_plug_exactly/'+e['id'])
   ta=translated_target(pa['dock'],a);tb=translated_target(pb['dock'],b)
   if s['kind']=='side':
-   target=dict(id='seam/'+e['id'],position=posa,region=[posa[0]-4,posa[1]-5,8,10],grounded=True,support_indices=sorted(set(ta['support_indices']+tb['support_indices'])))
+   oa=pa.get('crossing_offset',[0,0]);ob=pb.get('crossing_offset',[0,0])
+   if oa!=ob:raise ValueError('seam_standing_height_mismatch/'+e['id'])
+   cross=[posa[i]+oa[i]for i in range(2)]
+   target=dict(id='seam/'+e['id'],position=cross,region=[cross[0]-4,cross[1]-5,8,10],grounded=True,support_indices=sorted(set(ta['support_indices']+tb['support_indices'])))
    forward=[dict(kind='walk',target=target),dict(kind='walk',target=tb)]
    reverse=[dict(kind='walk',target=target),dict(kind='walk',target=ta)]if e['bidirectional']else[]
+  elif s['kind']=='vertical_ledge':
+   if pa.get('grid',{}).get('profile')!='vertical-recoil-128/v1'or pb.get('grid',{}).get('profile')!=pa['grid']['profile']:raise ValueError('unsupported_vertical_port_profile')
+   def transfer(source,dest):
+    if dest['position'][1]>source['position'][1]:return [dict(kind='walk',target=dest)]
+    rise=source['position'][1]-dest['position'][1];dx=dest['position'][0]-source['position'][0]
+    if not 0<rise<=128 or abs(dx)>128:raise ValueError('vertical_recoil_outside_verified_recipe_domain')
+    direction=1 if dx>0 else -1
+    plan=[dict(op='axis',value=0,trigger=dict(after=0)),dict(op='jump',trigger=dict(after=0)),dict(op='jump_release',trigger=dict(after=8)),dict(op='shoot',direction=[-direction*.6,.8],trigger=dict(after=2)),dict(op='settle',target_x=dest['position'][0],deadband=4,trigger=dict(after=8))]
+    return [dict(kind='module',target=dest,control_plan=plan,budget_ticks=900)]
+   forward=transfer(ta,tb);reverse=transfer(tb,ta)if e['bidirectional']else[]
   else:
    if ta['position']!=tb['position']or ta['support_indices']!=tb['support_indices']:raise ValueError('shared_landing_not_identical/'+e['id'])
    forward=[dict(kind='walk',target=tb)];reverse=[dict(kind='walk',target=ta)]if e['bidirectional']else[]

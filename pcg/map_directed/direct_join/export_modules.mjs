@@ -41,20 +41,25 @@ for(const module of input.modules){
  gc.ports=Object.values(module.ports).map((p,i)=>{
   const marker={id:id+'/port-'+p.id,type:i===0?'entry':'exit',x:p.position[0]-12,y:p.position[1]-18,w:24,h:36,rotation:0,label:p.id,note:'接触面上的角色中心点'};
   doc.objects.push(marker);
-  return {id:p.id,objectId:marker.id,position:p.position,normal:p.normal,
+  return {id:p.id,objectId:marker.id,position:p.position,normal:p.normal,...(p.grid?{grid:{...p.grid,stagingPosition:p.dock.position}}:{}),
    connection:{status:'source_derived',region:{x:p.aperture[0],y:p.aperture[1],w:p.aperture[2],h:p.aperture[3]}},
    support:{objectId:id+'/platform-'+p.dock.support_indices[0],face:'top',status:'source_derived'},
    motion:{ingress:{directions:UNKNOWN,modes:UNKNOWN},egress:{directions:UNKNOWN,modes:UNKNOWN}},
    preconditions:{ingress:unknownState(),egress:unknownState()},seamIds:['seam-'+p.id],routeRoles:[]};
  });
  gc.relations=gc.ports.flatMap(a=>gc.ports.filter(b=>b.id!==a.id).map(b=>({from:a.id,to:b.id,status:UNKNOWN,routeIds:[],conditions:UNKNOWN,note:'Actual whole-map instance evidence is separate; no universal independent relation inferred'})));
+ if(module.block_grid&&module.independent_evidence){
+  gc.generation.parameters.independentStagingEvidence=module.independent_evidence;
+  for(const pair of gc.relations)pair.stagingDirectionEvidence={status:module.port_to_center[pair.from]&&module.center_to_port[pair.to]?'passed_scoped':'UNKNOWN',source:module.independent_evidence,scope:'Staging checkpoints only; boundary state and whole-map proof are separate'};
+ }
  gc.space.seams=Object.values(module.ports).map(p=>({id:'seam-'+p.id,portId:p.id,region:{x:p.aperture[0],y:p.aperture[1],w:p.aperture[2],h:p.aperture[3]},status:'source_derived',allowedOverlap:p.kind==='vertical'?['exact_shared_landing','actor_body']:['actor_body','touching_floor_faces']}));
  gc.space.occupancy.objectIds=doc.objects.filter(o=>!['entry','exit','route'].includes(o.type)).map(o=>o.id);
  gc.space.actionClearance.regions=[];gc.space.actionClearance.coverage=UNKNOWN;
+ if(module.block_grid){gc.space.blockGrid=structuredClone(module.block_grid);gc.space.actionClearance.regions=module.action_clearance.map(([x,y,w,h])=>({x,y,w,h}));gc.space.actionClearance.coverage=module.block_grid.action_coverage;gc.space.actionClearance.status='partial';}
  gc.unlocks=[];
  gc.generation.parameters.moduleSourceVersion=module.content_version;
  gc.generation.parameters.policyBinding={sha256:sha(JSON.stringify({out:module.center_to_port,in:module.port_to_center})),scope:'A policy is a calibration candidate, not inferred physics'};
- const extents=[...doc.objects.map(o=>({x:o.x,y:o.y,w:Math.max(.000001,o.w),h:Math.max(.000001,o.h)})),...gc.space.dynamicEnvelopes.filter(e=>e.region!==UNKNOWN).map(e=>e.region)];
+ const extents=[...doc.objects.map(o=>({x:o.x,y:o.y,w:Math.max(.000001,o.w),h:Math.max(.000001,o.h)})),...gc.space.dynamicEnvelopes.filter(e=>e.region!==UNKNOWN).map(e=>e.region),...gc.space.actionClearance.regions];
  const bx=Math.min(...extents.map(r=>r.x)),by=Math.min(...extents.map(r=>r.y));
  gc.space.bounds={x:bx,y:by,w:Math.max(...extents.map(r=>r.x+r.w))-bx,h:Math.max(...extents.map(r=>r.y+r.h))-by};
  doc.canvas.width=gc.space.bounds.w;doc.canvas.height=gc.space.bounds.h;

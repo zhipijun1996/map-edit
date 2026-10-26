@@ -120,7 +120,7 @@ def hull_indices(points):
     return half(ordered)[:-1]+half(ordered[::-1])[:-1]
 
 
-def core_network(seed, region, core_count=20):
+def core_network(seed, region, core_count=20, edge_factor=1.3):
     rng = base.RandomStream(seed, 'regional-core', version=VERSION)
     points = sampled_points(rng, region, core_count); ids = list(range(len(points)))
     edges = triangulate(points)
@@ -128,7 +128,8 @@ def core_network(seed, region, core_count=20):
         raise ValueError('initial_proximity_network_not_biconnected')
     # Remove edges only if a room cannot become a regional bottleneck. This is
     # not a spanning tree followed by ornamental leaf rewards.
-    target_edges = round(core_count*1.3) + rng.next_int(3)
+    if not 1<=edge_factor<=2:raise ValueError('regional_edge_factor_outside_1_2')
+    target_edges = round(core_count*edge_factor) + rng.next_int(3)
     ordered = sorted(rng.shuffle(edges), key=lambda e: -math.dist(points[e[0]], points[e[1]]))
     for edge in ordered:
         if len(edges) <= target_edges: break
@@ -139,8 +140,10 @@ def core_network(seed, region, core_count=20):
     return rng, points, edges
 
 
-def construct(seed, region, core_count=20):
-    rng, points, pairs = core_network(seed, region, core_count)
+def construct(seed, region, core_count=20, *, reward_expeditions=2, reward_return_modes=None, core_edge_factor=1.3, approach_steps=(4,8),reuse_perimeter_anchors=False):
+    if not 0<=reward_expeditions<=8:raise ValueError('reward_expedition_count_outside_budget')
+    if reward_return_modes is not None and (len(reward_return_modes)!=reward_expeditions or any(k not in ['foldback','loop_back','merge']for k in reward_return_modes)):raise ValueError('unsupported_reward_return_mode')
+    rng, points, pairs = core_network(seed, region, core_count,core_edge_factor)
     g = {'entry': '', 'goal': 'boss', 'initial_abilities': REGIONS[region]['abilities'][:],
          'nodes': [], 'edges': [], 'branches': [], 'rewrite_log': [], 'core_nodes': [f'r{i}' for i in range(len(points))]}
     for i, point in enumerate(points):
@@ -157,7 +160,7 @@ def construct(seed, region, core_count=20):
             if entry == prep: continue
             cost, path = shortest_path(g, f'r{entry}', f'r{prep}')
             centers = [points[int(n[1:])] for n in path]
-            if 4 <= len(path)-1 <= 8 and abs(points[entry][1]-points[prep][1]) >= yspan*.35:
+            if approach_steps[0] <= len(path)-1 <= approach_steps[1] and abs(points[entry][1]-points[prep][1]) >= yspan*.35:
                 candidates.append((entry,prep,path,cost))
     if not candidates: raise ValueError('no_compact_multilevel_entry_prep_pair')
     entry, prep, path, cost = rng.choice(candidates)
@@ -188,7 +191,7 @@ def construct(seed, region, core_count=20):
     # long challenge arms and discovery-opened return edges. The core remains.
     available = [(hull[i], hull[(i+1)%len(hull)]) for i in range(len(hull)) if entry not in [hull[i],hull[(i+1)%len(hull)]] and prep not in [hull[i],hull[(i+1)%len(hull)]]]
     occupied = [tuple(n['ideal']) for n in g['nodes']]
-    for bi in range(2):
+    for bi in range(reward_expeditions):
         fitted = None
         for a,b in rng.shuffle(available):
             ax,ay = points[a]; bx,by = points[b]; dx,dy = bx-ax,by-ay; length=math.hypot(dx,dy)
@@ -205,21 +208,28 @@ def construct(seed, region, core_count=20):
                 if fitted: break
             if fitted:break
         if fitted is None: raise ValueError('reward_expedition_spatial_budget')
-        a,b,curve=fitted; available.remove((a,b)); chain=[]; flag=f'expedition_return_{bi}'
+        a,b,curve=fitted
+        if not reuse_perimeter_anchors:available.remove((a,b))
+        chain=[]; flag=f'expedition_return_{bi}'
         for j,point in enumerate(curve):
             nid=f'exp{bi}_{j}'; last=j==len(curve)-1; chain.append(nid)
             g['nodes'].append({'id':nid,'role':'reward' if last else 'challenge',
                 'label': ('隐蔽奖励' if bi else '深处奖励') if last else f'进阶挑战 {bi+1}.{j+1}',
-                'ideal':list(point),'grants':[],'opens':[flag] if last else [],'reward':[18,30][bi] if last else 0,
+                'ideal':list(point),'grants':[],'opens':[flag] if last else [],'reward':[18,30][bi%2] if last else 0,
                 'risk':2+bi,'intent':'optional expedition, distinct rejoin and earned fast return'})
-        route=[f'r{a}']+chain+[f'r{b}']
+        mode=reward_return_modes[bi]if reward_return_modes is not None else None
+        if mode in ['foldback','merge']:g['nodes'][-1]['opens']=[]
+        hidden=bool(bi)if reward_return_modes is None else bi%3==2
+        route=[f'r{a}']+chain+([f'r{b}']if mode in [None,'merge']else[])
         for j,(u,v) in enumerate(zip(route,route[1:])):
-            base.add_edge(g,u,v,purpose='hidden_route' if bi and j==0 else 'reward_challenge',
-                          switch='hidden_route_known' if bi and j==0 else None,
+            base.add_edge(g,u,v,purpose='hidden_route' if hidden and j==0 else 'reward_challenge',
+                          switch='hidden_route_known' if hidden and j==0 else None,
                           requires=['grapple' if region=='forest' else 'shot_recoil'] if j==0 else [],
-                          cost=2+bi*.4,bidirectional=not (j==len(route)-2))
-        base.add_edge(g,chain[-1],f'r{a}',purpose='return_shortcut',switch=flag,cost=.7,bidirectional=False)
-        g['branches'].append({'id':f'expedition_{bi}','nodes':chain,'entry':f'r{a}','rejoin':f'r{b}','reward':chain[-1]})
+                          cost=2+bi*.4,bidirectional=True if mode=='foldback'else not (j==len(route)-2))
+        if mode in [None,'loop_back']:base.add_edge(g,chain[-1],f'r{a}',purpose='return_shortcut',switch=flag,cost=.7,bidirectional=False)
+        branch={'id':f'expedition_{bi}','nodes':chain,'entry':f'r{a}','rejoin':f'r{b}'if mode in [None,'merge']else f'r{a}','reward':chain[-1]}
+        if mode:branch['kind']=mode
+        g['branches'].append(branch)
         occupied.extend(curve)
     g['mission_policy']={'entry':g['entry'],'boss_forecourt':prep_id,'goal':'boss',
         'main_route':'not_authored; shortest routes measured after regional network generation',

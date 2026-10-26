@@ -33,6 +33,14 @@ def reload_catalog(out):
   doc_path=out/'documents'/entry['file'];doc=json.loads(doc_path.read_text());by={o['id']:o for o in doc['objects']}
   if file_sha(doc_path)!=entry['sha256']:raise ValueError('canonical_module_file_drift')
   m=copy.deepcopy(module);case=m['case']
+  if m.get('block_grid'):
+   gc=doc['generationContract']
+   if gc['space'].get('blockGrid')!=m['block_grid']:raise ValueError('canonical_block_grid_mismatch')
+   clear=[[r[k]for k in ['x','y','w','h']]for r in gc['space']['actionClearance']['regions']]
+   if clear!=m['action_clearance']:raise ValueError('canonical_block_action_space_mismatch')
+   for key,p in m['ports'].items():
+    actual=next(v for v in gc['ports']if v['id']==key)
+    if actual['position']!=p['position']or actual['normal']!=p['normal']or actual.get('grid')!={**p['grid'],'stagingPosition':p['dock']['position']}:raise ValueError('canonical_grid_port_mismatch')
   static=sorted((o for o in doc['objects']if isinstance(o.get('sourceIndex'),int)),key=lambda o:o['sourceIndex'])
   loaded=[[o['x'],o['y'],o['w'],o['h']]for o in static]
   if loaded!=case['platforms']:raise ValueError('canonical_static_source_mismatch')

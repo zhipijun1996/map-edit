@@ -25,12 +25,26 @@ def compatible_state(a,b,abilities,state=None):
         if not state.get('grounded')or state.get('air_shots',0)<c['required_air_shots']or state.get('speed',float('inf'))>c['maximum_entry_speed']:return False
     return True
 
-def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None):
+def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None,require_blocks=False):
     started=time.perf_counter();rng=random.Random(seed);abilities=abilities or ['move','jump','shot_recoil']
     adjacent={n['id']:[]for n in graph['nodes']}
     for e in graph['edges']:
         adjacent[e['from']].append((e,e['to']));adjacent[e['to']].append((e,e['from']))
     candidates={k:[m for m in v if compatible_state(m,m,abilities,entry_state)]for k,v in domains.items()}
+    if require_blocks:
+        from ..block_grid.contracts import validate as validate_blocks,placed_cells,same_profile
+        rejected=[]
+        for key,values in candidates.items():
+            clean=[]
+            for m in values:
+                errors=validate_blocks(m)
+                if errors:rejected.append(dict(node=key,variant=m['variant_id'],errors=errors))
+                else:clean.append(m)
+            candidates[key]=clean
+        sizes={m['block_grid']['size']for vs in candidates.values()for m in vs}
+        if len(sizes)>1:raise ValueError('mixed_block_sizes_in_one_map')
+        if any(not vs for vs in candidates.values()):
+            return dict(status='unsatisfied',reason='no_block_compatible_candidate',expanded=0,budget=budget,rejected=rejected,modules=[])
     for values in candidates.values():rng.shuffle(values)
     selected={};positions={};expanded=0;rejects={};trace=[];examples=[]
     def reject(reason):rejects[reason]=rejects.get(reason,0)+1
@@ -91,6 +105,11 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             if any(intersects(translated(a,p),b)for a in mc for b in solid_theirs)or any(intersects(a,translated(b,q))for a in solid_ours for b in oc):return 'actual_action_space_blocked'
         return None
     def geometry(m,p):
+        if require_blocks:
+            try:ours=placed_cells(m,p)
+            except ValueError:reject('placement_not_block_aligned');return False
+            for key,other in selected.items():
+                if ours&placed_cells(other,positions[key]):reject('block_occupancy_overlap');return False
         for key,other in selected.items():
             q=positions[key]
             # Conservative whole-union broad phase. No actual constraint is
@@ -127,6 +146,7 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
                 if peer not in selected:continue
                 other=selected[peer];a=m['ports'][e['id']];b=other['ports'][e['id']]
                 if a['normal']!=[-x for x in b['normal']]:reject('port_normal');valid=False;break
+                if require_blocks and not same_profile(a,b):reject('seam_profile_mismatch');valid=False;break
                 if not compatible_state(m,other,abilities):reject('motion_or_capability_condition');valid=False;break
                 expected=[positions[peer][i]+b['position'][i]-a['position'][i]for i in range(2)]
                 if a.get('aperture')and b.get('aperture'):
@@ -150,7 +170,7 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
         expanded=expanded,budget=budget,wall_seconds=time.perf_counter()-started,rejections=rejects,trace=trace,
         rejection_examples=examples,placements={k:dict(position=positions[k],variant=selected[k]['variant_id'],shape_sha256=selected[k]['source_shape_sha256'])for k in selected}if ok else{},
         consumes=['actual canonical-derived collider rectangles and closed gates','saw sweep envelopes','actual local ports and apertures','capability/motion requirements','measured body action samples'],
-        topology_sha256=digest(graph),source_placement_hints=False)
+        topology_sha256=digest(graph),source_placement_hints=False,block_grid_required=require_blocks)
     if ok:
         modules=[]
         for n in graph['nodes']:

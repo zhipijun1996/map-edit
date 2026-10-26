@@ -133,7 +133,7 @@ def build(out,seed):
         return c
     raise ValueError('bounded_reentrant_shape_search_unsatisfied')
 
-def prepare_cases(c):
+def prepare_cases(c,protect_approach=False):
     lower=c['exploration_graph']['reward_routes'][-1];last=lower['reward']
     requests=[('main',logical_route(c,[c['exploration_graph']['goal']]),[]),('middle-reward-return',logical_route(c,['C1b','L1','L0','R0']),['C1b']),('lower-reward-return',logical_route(c,[last,lower['rejoin'],'L1','R0']),[last]),('all-declared-directions',edge_cover_route(c),['C1b',last])]
     cases=[]
@@ -152,7 +152,10 @@ def prepare_cases(c):
                 eid=leg['edge_id'];fr,to=leg['edge_from'],leg['edge_to'];m=by[to];port=c['nodes'][to]['ports'][eid]['target'];x,y=port['position']
                 for mover in m['case']['moving_platforms']:
                     envelope=sweeps(dict(case=dict(saws=[],moving_platforms=[mover])))[0]
-                    if not intersects([x-12,y-18,24,36],translated(envelope,m['spec']['placement'])):continue
+                    check=[x-12,y-18,24,36]
+                    if protect_approach:
+                        plane=c['nodes'][to]['ports'][eid]['position'];center=c['nodes'][to]['center']['position'];a,b=min(x,plane[0],center[0]),max(x,plane[0],center[0]);check=[a-12,y-18,b-a+24,36]
+                    if not intersects(check,translated(envelope,m['spec']['placement'])):continue
                     safe=copy.deepcopy(c['nodes'][fr]['ports'][eid]['target']);pid=to+'/'+mover['platform_id']
                     guard=dict(id=leg['id']+'-dynamic-seam-guard',kind='module',target=safe,edge_id=eid,edge_from=fr,edge_to=to,edge_terminal=False,budget_ticks=300,
                         control_plan=[dict(op='axis',value=0,trigger=dict(after=0)),dict(op='wait',trigger=dict(dynamic=dict(kind='platform_phase',id=pid,window=[.78,.805]),timeout=240)),dict(op='settle',target_x=safe['position'][0],deadband=4,trigger=dict(after=0))])
