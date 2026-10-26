@@ -2,6 +2,10 @@
 
 # 关卡生成工作区
 
+## 当前优先：先修清D03/D04取舍与漏洞，保留用户D05改案（2026-10-26）
+
+最新用户要求原话见`feedback/workshop/idea-sources/human-d03-d04-clarify-and-repair/v1.json`；[D03/D04修订](../docs/l4-mapgen/d03-d04-design-repair-v2.md)将玩家取舍与软锁/免费改位等方案漏洞分开。当前是设计逻辑修订，几何/真实物理仍NOT_RUN，不得当作已完成Module。D05最新用户改案为`human-d05-bell-carrier-catch`：跳起左下击铃，人物右上反冲、平台右移接人，再起跳到岸；先原型验证核心关系，不能替换成普通等台。此前J06/J03仍因无聊暂扣。
+
 ## 当前反馈：J06/J03无聊，停止作为优选创意（2026-10-26）
 
 用户原话见`feedback/workshop/junction-boring-observation-v1.json`，明确否决这两种实现。四版本保留技术证据，优选平原86→82、总库98不变；重新生成视图须应用profile.design_holds，不能由旧发布清单重新选中。见[复盘](../docs/l4-mapgen/junction-design-regression-v1.md)。原五案D02—D05的具体动作/后果耦合应成为选案依据；先建立可玩核心与地貌构图，再适配端口/尺寸。此轮无新Module或物理实验，不擅自将问题替换为增加射击/危险数量。
