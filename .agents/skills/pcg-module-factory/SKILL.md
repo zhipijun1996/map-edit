@@ -5,6 +5,10 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 适用：新增生成算法、修复搜索、提高产量或行为多样性。先读 `pcg/WORKSPACE.md`，在 `pcg/` 运行模块CLI。
 
+## 当前平原入口
+
+本阶段按 [反冲平原配方流程](../pcg-creative-producer/references/plains-recoil-workflow.md) 收窄能力与内容职责。原库视图：`python3 -m pcg.prototype.creative_batches.plains_workshop.catalog_v1`。两个已试验的有界适配配方接收完整需求：`python3 -m pcg.prototype.creative_batches.plains_workshop.produce_v1 --name new-plains-demand --specifications demands.json`；`--examples` 输出格式。其他家族仍按现有具体生成规则处理；统一入口不宣称任意需求可生成。
+
 ## 持续生产入口
 
 用户要求持续生成新 Module 时，执行 [固定生产循环](references/production-loop.md)，不要为每个样品重新组织整套实验。程序入口：`python3 -m pcg.prototype.workshop.production_loop --name workshop-new-batch --cycles 4`。它复用原 Engine、regular 评价器、标准导出与 CandidateLibrary。

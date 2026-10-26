@@ -5,6 +5,10 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 先读 `AGENTS.md`、`pcg/WORKSPACE.md`、`pcg/OUTPUT-CONTRACT.md`，并使用 `pcg-module-factory`、`pcg-physics-contract`、`pcg-video-review`。这是模型主持的内容生产流程，不是随机模板替代模型，也不是无人值守的在线服务。
 
+## 当前优先：反冲平原
+
+用户已整体正向评价20项，当前收窄为平原，特殊能力仅反冲（保留移动/普通单跳）。先执行 [平原内容配方流程](references/plains-recoil-workflow.md) 与 `pcg/prototype/creative_batches/plains_workshop/profile-v1.json`，读取最新反馈；钩索/墙跳/二跳内容留作其他区域，不继续为数量扩展。能力兼容与反冲教学职责分别评估。
+
 ## 两个循环
 
 外层由实际大模型会话工作：读人类原话、Map Challenge Specification、现有家族与持久失败 → 提出因果假设 → 判断 Cell/规则缺口 → 在隔离路径实现 → 看实验轨迹修订。内层使用 `pcg.prototype.workshop.production_loop.run`，由程序有界搜索几何和控制、做原 Godot 验证和导出。规则用尽返回 `needs_design` 给外层；禁止重置 Seed、改标题或把不支持的创意替换为普通房间。

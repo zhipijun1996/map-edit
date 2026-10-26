@@ -2,6 +2,10 @@
 
 # 关卡生成工作区
 
+## 当前优先：反冲平原与可持续配方（2026-10-26）
+
+用户已整体正向评价新20项。见 [库现状与方法](../docs/l4-mapgen/plains-recoil-method-v1.md)、[平原视图](../generation/workshop/plains-recoil-v1/catalog.json)。共享库已归拢为44版本，平原优选32候选版本；新20里11项三能力兼容、9项高级能力留后，兼容项不全是反冲课。当前仅move/jump/shot_recoil；教学、练习、组合、奖励、同世界回程恢复分别验收。新方法首试两条旧规则×两新空间，4/4通过原门槛，新进程4/4复用0物理调用；不是方法稳定性或盲空间泛化通过。优先补安全首课和配方跨需求适应，接B现有平原流程，不继续按数量扩高级玩法。归档content-workshop-plains-method-v1提供新原件与旧15依赖闭包；旧20只需恢复results前缀，不覆盖当前源码。
+
 ## 大模型创意工坊：20种新动作关系（2026-10-25）
 
 最新 [20种新玩法报告](../docs/l4-mapgen/content-workshop-creative20-v1.md) 与 [视频/标准Module目录](../generation/workshop/creative20-v1/README.md)。使用用户授权的当前Codex会话与子代理实际提出、实现和反驳创意，原生产循环执行参数搜索/真实Godot验证；[创意生产者skill](../.agents/skills/pcg-creative-producer/SKILL.md) 固定了可续作的方法。20种均为新关系，不计旧六家族、尺寸适配、普通电梯或Macro拆分；598/610独立留出安全稳定，沿用原regular门槛。新20原库入库及新进程检索，未编造在线API成功或无人值守服务。恢复 `content-workshop-creative20-v1` 后运行 `python3 -m pcg.prototype.creative_batches.catalog_v4 --list` / `--play 1`。人工趣味/试玩/生产准入待评，其他接口与B整图UNKNOWN。长等待双台转乘因模型视频节奏复审暂扣；撤桥下坠录像32处support_id差异严格失败，review-only，未放宽比较。
