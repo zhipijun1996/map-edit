@@ -1,8 +1,9 @@
 """Exact new Cell fields must survive the existing canonical output adapter."""
-import copy,json,tempfile,unittest
+import copy,json,tempfile,unittest,subprocess
 from pathlib import Path
 from pcg.map_directed.director import REPO
-from pcg.map_directed.direct_join.canonical import export_reload
+from pcg.map_directed.direct_join.canonical import reload_catalog
+from pcg.prototype.factory.core.engine import file_sha
 
 class CatalogRoundtrip(unittest.TestCase):
     def test_native_cell_parameters_survive_roundtrip(self):
@@ -16,7 +17,15 @@ class CatalogRoundtrip(unittest.TestCase):
         for key,p in m['ports'].items():
             x,y=p['position'];p['id']=key;p['aperture']=[x-48,y-64,96,128];p['dock']={'support_indices':[0]};p['kind']='side'
         m['center_to_port']={};m['port_to_center']={}
-        # A real producer path/hash is required by the existing exporter.
+        # This is an output-only synthetic contract fixture, not physics. The
+        # lean CI intentionally has no imported Godot project. Exercise the
+        # same JS exporter and strict reloader without reading runtime assets.
         with tempfile.TemporaryDirectory(dir=REPO/'pcg')as tmp:
-            out=export_reload([m],Path(tmp),producer='pcg/map_directed/catalog_feed/adapt.py')[0]
+            tmp=Path(tmp);source=tmp/'source.json';source.write_text(json.dumps({'modules':[m]}))
+            origin=dict(path=str(Path(__file__).relative_to(REPO)),sha256=file_sha(__file__))
+            definitions=dict(player=dict(size=[24,36],source=origin),bell=dict(size=[28,28],source=origin),enemies={})
+            bundle=dict(modules=[m],sourcePath=str(source.relative_to(REPO)),sourceSha=file_sha(source),producer=origin['path'],generatorSha=origin['sha256'],sourceCommit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),geometryDefinitions=definitions)
+            (tmp/'bundle.json').write_text(json.dumps(bundle))
+            subprocess.run(['node',str(REPO/'pcg/map_directed/direct_join/export_modules.mjs'),str(tmp/'bundle.json'),str(tmp/'documents')],cwd=REPO,check=True,capture_output=True)
+            out=reload_catalog(tmp)[0]
         self.assertEqual(out['case']['latches'],c['latches']);self.assertEqual(out['case']['saws'],c['saws']);self.assertEqual(out['case']['ports'],c['ports'])
