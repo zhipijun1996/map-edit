@@ -9,7 +9,7 @@ from pcg.prototype.factory.core.quality import digest
 
 def walk(c,p,label):return dict(kind='walk',target=target(c,p,label),budget_ticks=360)
 def jump(c,p,label,direction,vertical=.8):return recoil(c,p,label,direction,vertical)
-def make(family,platforms,oneways,center,ports,paths):
+def make(family,platforms,oneways,center,ports,paths,reserved_cells=(),estimate_clearance=True):
     c=base('landform-'+family);c.update(family='graph_landform_'+family,platforms=platforms,one_way_platform_indices=oneways,
         wall_platform_indices=[],reward_sites=[],shop_sites=[],control_plan=[],max_frames=2400,trace_all=False)
     ps={k:port(c,k,cell,edge,dock)for k,cell,edge,dock in ports}
@@ -20,7 +20,7 @@ def make(family,platforms,oneways,center,ports,paths):
         center_to_port=outbound,port_to_center=inbound,boundary_gates=[],action_clearance=[],functional_roles=['traversal'],
         motion_contract=dict(mode='grounded_dock',capabilities=['move','jump','shot_recoil'],entry_grounded=True,required_air_shots=1,maximum_entry_speed=1),
         spec=dict(id='graph-landform-demand/'+family,node_id=family,node=dict(id=family,role='challenge'),placement=[0,0],boundary_policy='open',space=dict(core_bounds=[0,-512,max(p[0]+p[2]for p in platforms),2304]),ports=list(ps.values())),
-        adaptation=dict(added_map_geometry=0,recipe=family,source_physics_inherited=False),variant_id=family,
+        adaptation=dict(added_map_geometry=0,recipe=family,source_physics_inherited=False,explicit_empty_reservations=list(map(list,reserved_cells))),variant_id=family,
         selection_family=family,source_shape_sha256=digest(platforms))
     # Reserve conservative motion envelopes, clipped to own x-span. Actual
     # independent traces later replace these estimates before Map search.
@@ -28,12 +28,13 @@ def make(family,platforms,oneways,center,ports,paths):
     width=max(width,max(r[0]+r[2]for r in platforms))
     for direction,program in [('in',inbound),('out',outbound)]:
         for key,legs in program.items():
+            if not estimate_clearance:continue
             prev=ps[key]['dock']['position']if direction=='in'else center
             for leg in legs:
                 p=leg['target']['position'];x=max(0,min(prev[0],p[0])-16);right=min(width,max(prev[0],p[0])+16)
                 top=min(prev[1],p[1])-220 if leg['kind']=='module'else min(prev[1],p[1])-32
                 m['action_clearance'].append([x,top,right-x,max(prev[1],p[1])+20-top]);prev=p
-    cells=set().union(*(raster(r)for r in regions(m)))
+    cells=set().union(*(raster(r)for r in regions(m)));cells.update(map(tuple,reserved_cells))
     if not connected(cells):raise ValueError('recipe_disconnected_reservation/'+family)
     m=declare(m,cells);errors=validate(m)
     if errors:raise ValueError((family,errors))

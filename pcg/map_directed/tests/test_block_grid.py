@@ -1,6 +1,6 @@
 """Contract/search failures, never synthetic substitutes for Godot evidence."""
 import copy,unittest
-from pcg.map_directed.block_grid.contracts import anchor,declare,validate,state_entails
+from pcg.map_directed.block_grid.contracts import anchor,declare,validate,state_entails,joined_block_origin,placed_cells
 from pcg.map_directed.shape_search.search import search
 from pcg.map_directed.block_grid.policy import branch_review,load,review
 from pcg.map_directed.director import regional
@@ -13,6 +13,24 @@ def unit(key,edge,cells):
     return declare(m,cells)
 
 class BlockGrid(unittest.TestCase):
+    def test_direct_join_owns_adjacent_cells_not_two_overlapping_port_blocks(self):
+        a=unit('a','E',[[0,0]]);b=unit('b','W',[[0,0]])
+        origin=joined_block_origin([0,0],a['ports']['e'],b['ports']['e'])
+        self.assertEqual(origin,[1,0])
+        self.assertFalse(placed_cells(a,[0,0])&placed_cells(b,[128,0]))
+        self.assertEqual(a['ports']['e']['position'],[b['ports']['e']['position'][0]+128,b['ports']['e']['position'][1]])
+
+    def test_nonlevel_ports_and_local_grid_origins_close_in_integer_coordinates(self):
+        # A exits its upper-right cell; B enters its lower-left cell. Local
+        # grid origins are independent of the Module placement origin.
+        a=dict(normal=[1,0],grid=dict(cell=[3,-2]));b=dict(normal=[-1,0],grid=dict(cell=[0,2]))
+        pose=joined_block_origin([5,7],a,b,[128,-128],[-128,128])
+        self.assertEqual(pose,[11,1])
+        pa=anchor([3,-2],'E',origin=[128,-128]);pb=anchor([0,2],'W',origin=[-128,128])
+        self.assertEqual([pa[i]+[5,7][i]*128 for i in range(2)],[pb[i]+pose[i]*128 for i in range(2)])
+        up=dict(normal=[0,-1],grid=dict(cell=[2,0]));down=dict(normal=[0,1],grid=dict(cell=[1,3]))
+        self.assertEqual(joined_block_origin([0,0],up,down),[1,-4])
+
     def test_reserved_empty_block_rejects_even_without_collider_overlap(self):
         a=unit('a','E',[[0,0],[0,1],[1,1]]);b=unit('b','W',[[0,0],[0,1]])
         g=dict(nodes=[dict(id='a'),dict(id='b')],edges=[dict(id='e',**{'from':'a','to':'b'})])
@@ -23,6 +41,21 @@ class BlockGrid(unittest.TestCase):
     def test_internal_face_cannot_be_renamed_as_a_boundary_port(self):
         a=unit('a','E',[[0,0],[1,0]])
         self.assertIn('port_not_on_shape_boundary/e',validate(a))
+
+    def test_shared_coarse_air_keeps_exact_body_and_dynamic_conflicts_closed(self):
+        a=unit('a','E',[[0,0],[0,1],[1,1]]);b=unit('b','W',[[0,0],[0,1]])
+        a['action_clearance']=[[144,200,24,36]]
+        b['case']['platforms'].append([0,160,128,8])
+        g=dict(nodes=[dict(id='a'),dict(id='b')],edges=[dict(id='e',**{'from':'a','to':'b'})])
+        domains={'a':[a],'b':[b]}
+        self.assertEqual(search(g,domains,'air',require_blocks=True)['status'],'unsatisfied')
+        self.assertEqual(search(g,domains,'air',require_blocks=True,allow_shared_air=True)['status'],'feasible')
+        b['case']['platforms'][-1][1]=210
+        self.assertEqual(search(g,domains,'blocked',require_blocks=True,allow_shared_air=True)['status'],'unsatisfied')
+        b['case']['platforms'][-1][1]=160
+        b['case']['saws']=[dict(origin=[24,218],travel=[0,0],radius=20)]
+        r=search(g,domains,'swept',require_blocks=True,allow_shared_air=True)
+        self.assertEqual(r['status'],'unsatisfied');self.assertIn('foreign_occupancy_blocks_action',r['rejections'])
 
     def test_grid_is_configurable_but_does_not_allow_half_block_placements(self):
         self.assertEqual(anchor([2,1],'N',256),[640,256])

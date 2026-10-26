@@ -95,6 +95,7 @@ def assemble_modules(graph,modules,seams):
   s=m['spec'];n=s['node'];nodes[m['id']]=dict(id=m['id'],center=translated_target(m['center'],m),
     ports={},center_to_port={eid:legs(v,m)for eid,v in m['center_to_port'].items()},port_to_center={eid:legs(v,m)for eid,v in m['port_to_center'].items()},
     role=n['role'],label=n.get('label',m['id']),opens=n.get('opens',[]),reward=n.get('reward',0),
+    port_transitions={pair:legs(v,m)for pair,v in m.get('port_transitions',{}).items()},center_port=m.get('center_port'),
     module_content_version=m['content_version'],core_visit_program=legs(m.get('core_visit_program',[]),m),
     core_reward_target=translated_target(m['core']['exit'],m)if m.get('core')else None)
  for e,s in zip(graph['edges'],seams):
@@ -110,8 +111,11 @@ def assemble_modules(graph,modules,seams):
    forward=[dict(kind='walk',target=target),dict(kind='walk',target=tb)]
    reverse=[dict(kind='walk',target=target),dict(kind='walk',target=ta)]if e['bidirectional']else[]
   elif s['kind']=='vertical_ledge':
-   if pa.get('grid',{}).get('profile')!='vertical-recoil-128/v1'or pb.get('grid',{}).get('profile')!=pa['grid']['profile']:raise ValueError('unsupported_vertical_port_profile')
+   if pa.get('grid',{}).get('profile')not in ['vertical-recoil-128/v1','vertical-recoil-128/v2']or pb.get('grid',{}).get('profile')!=pa['grid']['profile']:raise ValueError('unsupported_vertical_port_profile')
    def transfer(source,dest):
+    if pa['grid']['profile']=='vertical-recoil-128/v2':
+     from ..content_domains.vertical import transfer as v2_transfer
+     return v2_transfer(source,dest,posa)
     if dest['position'][1]>source['position'][1]:return [dict(kind='walk',target=dest)]
     rise=source['position'][1]-dest['position'][1];dx=dest['position'][0]-source['position'][0]
     if not 0<rise<=128 or abs(dx)>128:raise ValueError('vertical_recoil_outside_verified_recipe_domain')

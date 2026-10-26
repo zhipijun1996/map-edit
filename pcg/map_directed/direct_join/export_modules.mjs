@@ -56,9 +56,10 @@ for(const module of input.modules){
  gc.space.occupancy.objectIds=doc.objects.filter(o=>!['entry','exit','route'].includes(o.type)).map(o=>o.id);
  gc.space.actionClearance.regions=[];gc.space.actionClearance.coverage=UNKNOWN;
  if(module.block_grid){gc.space.blockGrid=structuredClone(module.block_grid);gc.space.actionClearance.regions=module.action_clearance.map(([x,y,w,h])=>({x,y,w,h}));gc.space.actionClearance.coverage=module.block_grid.action_coverage;gc.space.actionClearance.status='partial';}
+ gc.generation.parameters.orderedPortPrograms=Object.entries(module.port_transitions??{}).map(([pair,program])=>({pair,policySha256:sha(JSON.stringify(program)),source:module.transition_sources?.[pair]??UNKNOWN,evidence:module.independent_evidence??UNKNOWN,scope:'Concrete ordered policy only; universal conditions remain UNKNOWN'}));
  gc.unlocks=[];
  gc.generation.parameters.moduleSourceVersion=module.content_version;
- gc.generation.parameters.policyBinding={sha256:sha(JSON.stringify({out:module.center_to_port,in:module.port_to_center})),scope:'A policy is a calibration candidate, not inferred physics'};
+ gc.generation.parameters.policyBinding={sha256:sha(JSON.stringify({out:module.center_to_port,in:module.port_to_center,portTransitions:module.port_transitions??{},transitionOptions:module.transition_options??{}})),scope:'A policy is a calibration candidate, not inferred physics'};
  const extents=[...doc.objects.map(o=>({x:o.x,y:o.y,w:Math.max(.000001,o.w),h:Math.max(.000001,o.h)})),...gc.space.dynamicEnvelopes.filter(e=>e.region!==UNKNOWN).map(e=>e.region),...gc.space.actionClearance.regions];
  const bx=Math.min(...extents.map(r=>r.x)),by=Math.min(...extents.map(r=>r.y));
  gc.space.bounds={x:bx,y:by,w:Math.max(...extents.map(r=>r.x+r.w))-bx,h:Math.max(...extents.map(r=>r.y+r.h))-by};

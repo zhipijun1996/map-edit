@@ -93,3 +93,9 @@ def state_entails(ensures,requires):
             if not isinstance(have,dict)or not state_entails(have,want):return False
         elif have!=want:return False
     return True
+
+def joined_block_origin(origin,a,b,a_grid_origin=(0,0),b_grid_origin=(0,0),size=128):
+    """Exact integer grid join: B origin = A origin + A cell - B cell + nA."""
+    if a['normal']!=[-v for v in b['normal']]:raise ValueError('opposed_grid_normals_required')
+    if any(type(v)is not int for v in origin):raise ValueError('integer_block_origin_required')
+    return [origin[i]+a['grid']['cell'][i]-b['grid']['cell'][i]+a['normal'][i]+a_grid_origin[i]//size-b_grid_origin[i]//size for i in range(2)]

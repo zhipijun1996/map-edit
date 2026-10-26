@@ -111,22 +111,27 @@ def make_case(compiled,steps,name,goal=None,required_rewards=None):
         eid,fr,to=step['edge_id'],step['from'],step['to'];edge=compiled['edges'][eid]
         path=edge['forward_waypoints']if edge['from']==fr else edge['reverse_waypoints']
         if not path:raise ValueError('missing_declared_physical_direction/'+eid+'/'+fr)
-        section=join_waypoints(nodes[fr]['center_to_port'][eid],path,nodes[to]['port_to_center'][eid])
+        if any(n.get('port_transitions')for n in nodes.values()):
+            from ..content_domains.routes import route_section
+            section=join_waypoints(route_section(compiled,steps,ordinal))
+        else:section=join_waypoints(nodes[fr]['center_to_port'][eid],path,nodes[to]['port_to_center'][eid])
         for index,waypoint in enumerate(section):
             leg=copy.deepcopy(waypoint);leg.update(id=f'{ordinal:03d}-{eid}-{index:03d}',edge_id=eid,
                 edge_from=fr,edge_to=to,edge_terminal=index==len(section)-1,budget_ticks=360)
             program.append(leg)
         visited.append(to)
     goal=goal or visited[-1]
-    case.update(id='r2-full-'+name,goal=copy.deepcopy(nodes[goal]['center']['region']),
-        exit_port=copy.deepcopy(nodes[goal]['center']['position']),pilot_program=program,
+    goal_target=nodes[goal]['ports'][steps[-1]['edge_id']]['target']if steps and nodes[goal].get('port_transitions')else nodes[goal]['center']
+    case.update(id='r2-full-'+name,goal=copy.deepcopy(goal_target['region']),
+        exit_port=copy.deepcopy(goal_target['position']),pilot_program=program,
         map_budget_ticks=min(36000,max(3600,len(program)*90)),noise={},
         extra_script=str(REPO/'pcg/map_directed/r2_full/state_extra.gd'),extra_required=True)
+    from ..content_domains.routes import ingress_target
     gates=copy.deepcopy(compiled['gate_specs'])
     for gate in gates:
         gate['bounds']=[gate['x'],gate['y'],gate['w'],gate['h']]
     case['gate_specs']=gates
-    case['r2_semantics']={'nodes':[dict(id=k,target=v['center'],opens=v['opens'],reward=v['reward'],label=v['label'])for k,v in nodes.items()],
+    case['r2_semantics']={'nodes':[dict(id=k,target=(ingress_target(compiled,k,steps)if v.get('port_transitions')else v['center']),opens=v['opens'],reward=v['reward'],label=v['label'])for k,v in nodes.items()],
         'required_nodes':list(dict.fromkeys(visited)),'required_rewards':required_rewards or[],
         'source_graph_sha256':compiled['source']['graph_sha256'],'full_nodes':len(nodes),'full_edges':len(compiled['edges']),
         'logical_route':steps,'quality_scope':compiled['status']}

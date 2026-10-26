@@ -65,7 +65,7 @@ def reload_catalog(out):
    elif o['type']=='platform'and track:
     a,b=track['points'];case['moving_platforms'].append(dict(platform_id=o['sourceId'],start=[a['x'],a['y']],finish=[b['x'],b['y']],size=[o['w'],o['h']],travel_duration=track['duration'],dwell_duration=track['dwell'],initial_phase=track['initialPhase']))
    elif o['type']=='bell':
-    gate=by[o['targetId']];case['latches'].append(dict(id=o['sourceId'],bell=[o['x']+o['w']/2,o['y']+o['h']/2],gate=[gate[k]for k in ['x','y','w','h']],open_seconds=gate['mechanics']['openSeconds'],prompt=next(v['prompt']for v in module['case']['latches']if v['id']==o['sourceId'])))
+    gate=by[o['targetId']];case['latches'].append(dict(id=o['sourceId'],bell=[o['x']+o['w']/2,o['y']+o['h']/2],gate=[gate[k]for k in ['x','y','w','h']],open_seconds=gate['mechanics']['openSeconds'],prompt=next(v.get('prompt','')for v in module['case']['latches']if v['id']==o['sourceId'])))
     if gate['mechanics'].get('startsFerry'):case['latches'][-1]['starts_ferry']=gate['mechanics']['startsFerry']
     if gate['mechanics'].get('ferryId'):case['latches'][-1]['ferry_id']=gate['mechanics']['ferryId']
     if gate['mechanics'].get('returnAccess'):case['latches'][-1]['return_access']=gate['mechanics']['returnAccess']

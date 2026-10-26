@@ -1,5 +1,5 @@
 """Bounded CSP: actual port poses, collider unions and measured action space."""
-import copy,random,time
+import copy,random,time,math
 from .catalog import rect_bounds
 from pcg.prototype.factory.core.quality import digest
 
@@ -25,14 +25,14 @@ def compatible_state(a,b,abilities,state=None):
         if not state.get('grounded')or state.get('air_shots',0)<c['required_air_shots']or state.get('speed',float('inf'))>c['maximum_entry_speed']:return False
     return True
 
-def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None,require_blocks=False):
+def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None,require_blocks=False,allow_shared_air=False):
     started=time.perf_counter();rng=random.Random(seed);abilities=abilities or ['move','jump','shot_recoil']
     adjacent={n['id']:[]for n in graph['nodes']}
     for e in graph['edges']:
         adjacent[e['from']].append((e,e['to']));adjacent[e['to']].append((e,e['from']))
     candidates={k:[m for m in v if compatible_state(m,m,abilities,entry_state)]for k,v in domains.items()}
     if require_blocks:
-        from ..block_grid.contracts import validate as validate_blocks,placed_cells,same_profile
+        from ..block_grid.contracts import validate as validate_blocks,placed_cells,same_profile,joined_block_origin
         rejected=[]
         for key,values in candidates.items():
             clean=[]
@@ -46,35 +46,56 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
         if any(not vs for vs in candidates.values()):
             return dict(status='unsatisfied',reason='no_block_compatible_candidate',expanded=0,budget=budget,rejected=rejected,modules=[])
     for values in candidates.values():rng.shuffle(values)
-    selected={};positions={};expanded=0;rejects={};trace=[];examples=[]
+    selected={};positions={};grid_positions={};expanded=0;rejects={};trace=[];examples=[]
     def reject(reason):rejects[reason]=rejects.get(reason,0)+1
-    displacement_cache={}
+    displacement_cache={};chain_displacements={}
     def remaining_chains_possible():
         # A chain between two placed anchors has a known remaining port delta.
         # Reject impossible intervals before enumerating every geometric pose.
         for anchor in selected:
             for first,neighbor in adjacent[anchor]:
                 if neighbor in selected:continue
-                key=neighbor;incoming=first;parts=[];seen=set()
+                key=neighbor;incoming=first;parts=[];part_keys=[];seen=set()
                 while key not in selected and len(adjacent[key])==2 and key not in seen:
                     seen.add(key);outgoing,peer=next((e,p)for e,p in adjacent[key]if e['id']!=incoming['id'])
                     ck=(key,incoming['id'],outgoing['id'])
                     if ck not in displacement_cache:
                         values=[[m['ports'][outgoing['id']]['position'][i]-m['ports'][incoming['id']]['position'][i]for i in range(2)]for m in candidates[key]]
                         if not values:return False
-                        displacement_cache[ck]=([min(v[i]for v in values)for i in range(2)],[max(v[i]for v in values)for i in range(2)])
-                    parts.append(displacement_cache[ck]);key=peer;incoming=outgoing
+                        displacement_cache[ck]=([min(v[i]for v in values)for i in range(2)],[max(v[i]for v in values)for i in range(2)],set(map(tuple,values)))
+                    parts.append(displacement_cache[ck]);part_keys.append(ck);key=peer;incoming=outgoing
                 if key in selected and parts:
                     a=selected[anchor]['ports'][first['id']]['position'];b=selected[key]['ports'][incoming['id']]['position']
                     desired=[positions[key][i]+b[i]-positions[anchor][i]-a[i]for i in range(2)]
                     if any(desired[i]<sum(p[0][i]for p in parts)-.01 or desired[i]>sum(p[1][i]for p in parts)+.01 for i in range(2)):return False
+                    if require_blocks:
+                        signature=tuple(part_keys)
+                        if signature not in chain_displacements:
+                            possible={(0,0)}
+                            for part in parts:
+                                possible={(a+c,b+d)for a,b in possible for c,d in part[2]}
+                                if len(possible)>4096:possible=None;break
+                            chain_displacements[signature]=possible
+                        possible=chain_displacements[signature]
+                        if possible is not None and tuple(desired)not in possible:return False
         return True
-    local_cache={};pair_cache={}
+    local_cache={};pair_cache={};hard_cell_cache={}
+    def hard_cells(m,p):
+        from ..block_grid.contracts import regions,raster
+        key=id(m)
+        if key not in hard_cell_cache:
+            g=m['block_grid'];step=math.gcd(g['size'],32);hard_cell_cache[key]=set().union(*(raster(r,step,g['origin'])for r in regions(dict(m,action_clearance=[]))))
+        g=m['block_grid'];step=math.gcd(g['size'],32);dx,dy=[round((p[i]+g['origin'][i])/step)for i in range(2)]
+        return {(x+dx,y+dy)for x,y in hard_cell_cache[key]}
     def local(m):
         k=id(m)
         if k not in local_cache:
             rects=closed_solids(m);dynamic=sweeps(m);clearance=m['action_clearance']
-            a=rect_bounds(rects+dynamic+clearance)
+            extra=[]
+            if allow_shared_air:
+                from ..block_grid.contracts import regions
+                extra=regions(dict(m,action_clearance=[]))
+            a=rect_bounds(rects+dynamic+clearance+extra)
             local_cache[k]=(rects,dynamic,clearance,[a[0],a[1],a[2]-a[0],a[3]-a[1]])
         return local_cache[k]
     def pair_reason(m,p,other,q):
@@ -100,6 +121,13 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
         foreign_ours=[r for i,r in enumerate(rects)if i not in shared_ours]
         if any(intersects(translated(a,p),b)for a in md for b in foreign_theirs)or any(intersects(a,translated(b,q))for a in foreign_ours for b in od):return 'dynamic_sweep_into_neighbor'
         if mode=='shape_action':
+            if allow_shared_air:
+                from ..block_grid.contracts import regions
+                # A shared coarse Block is only a broad-phase candidate. Body
+                # samples must still avoid ALL foreign solids, hazards and
+                # full dynamic envelopes, including foreign one-way supports.
+                foreign_a=regions(dict(m,action_clearance=[]));foreign_b=regions(dict(other,action_clearance=[]))
+                if any(intersects(translated(a,p),translated(b,q))for a in mc for b in foreign_b)or any(intersects(translated(a,p),translated(b,q))for a in foreign_a for b in oc):return 'foreign_occupancy_blocks_action'
             solid_theirs=[r for i,r in enumerate(theirs)if i not in other['case']['one_way_platform_indices']]
             solid_ours=[r for i,r in enumerate(rects)if i not in m['case']['one_way_platform_indices']]
             if any(intersects(translated(a,p),b)for a in mc for b in solid_theirs)or any(intersects(a,translated(b,q))for a in solid_ours for b in oc):return 'actual_action_space_blocked'
@@ -109,7 +137,12 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             try:ours=placed_cells(m,p)
             except ValueError:reject('placement_not_block_aligned');return False
             for key,other in selected.items():
-                if ours&placed_cells(other,positions[key]):reject('block_occupancy_overlap');return False
+                shared=ours&placed_cells(other,positions[key])
+                if shared:
+                    material=hard_cells(m,p)&hard_cells(other,positions[key])if allow_shared_air else shared
+                    if allow_shared_air and not material:continue
+                    if len(examples)<12:examples.append(dict(reason='block_occupancy_overlap',node=m['id'],peer=other['id'],variant=m['variant_id'],peer_variant=other['variant_id'],shared_cells=sorted(map(list,shared)),material_cells=sorted(map(list,material)),position=p,peer_position=positions[key]))
+                    reject('block_occupancy_overlap');return False
         for key,other in selected.items():
             q=positions[key]
             # Conservative whole-union broad phase. No actual constraint is
@@ -141,14 +174,18 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             if expanded>=budget:return False
             expanded+=1
             if expanded>budget:return False
-            pose=None;valid=True
+            pose=None;grid_pose=None;valid=True
             for e,peer in adjacent[key]:
                 if peer not in selected:continue
                 other=selected[peer];a=m['ports'][e['id']];b=other['ports'][e['id']]
                 if a['normal']!=[-x for x in b['normal']]:reject('port_normal');valid=False;break
                 if require_blocks and not same_profile(a,b):reject('seam_profile_mismatch');valid=False;break
                 if not compatible_state(m,other,abilities):reject('motion_or_capability_condition');valid=False;break
-                expected=[positions[peer][i]+b['position'][i]-a['position'][i]for i in range(2)]
+                if require_blocks:
+                    block_size=m['block_grid']['size'];candidate_grid=joined_block_origin(grid_positions[peer],b,a,other['block_grid']['origin'],m['block_grid']['origin'],block_size)
+                    if grid_pose is not None and grid_pose!=candidate_grid:reject('grid_cycle_closure');valid=False;break
+                    grid_pose=candidate_grid;expected=[v*block_size for v in candidate_grid]
+                else:expected=[positions[peer][i]+b['position'][i]-a['position'][i]for i in range(2)]
                 if a.get('aperture')and b.get('aperture'):
                     u=translated(a['aperture'],expected);v=translated(b['aperture'],positions[peer])
                     if min(u[0]+u[2],v[0]+v[2])-max(u[0],v[0])<24 or min(u[1]+u[3],v[1]+v[3])-max(u[1],v[1])<36:
@@ -159,22 +196,26 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             if pose is None:
                 if selected:reject('disconnected_frontier');continue
                 pose=[0,0]
+                if require_blocks:grid_pose=[0,0]
             if not geometry(m,pose):continue
             selected[key]=m;positions[key]=pose
+            if require_blocks:grid_positions[key]=grid_pose
             if len(trace)<200:trace.append(dict(event='place',node=key,variant=m['variant_id'],position=pose))
             if recurse():return True
-            selected.pop(key);positions.pop(key)
+            selected.pop(key);positions.pop(key);grid_positions.pop(key,None)
             if len(trace)<200:trace.append(dict(event='backtrack',node=key))
         return False
     ok=recurse();result=dict(schema='pcg/shape-search-layout/v1',seed=seed,mode=mode,status='feasible'if ok else'budget_exhausted'if expanded>=budget else'unsatisfied',
         expanded=expanded,budget=budget,wall_seconds=time.perf_counter()-started,rejections=rejects,trace=trace,
         rejection_examples=examples,placements={k:dict(position=positions[k],variant=selected[k]['variant_id'],shape_sha256=selected[k]['source_shape_sha256'])for k in selected}if ok else{},
         consumes=['actual canonical-derived collider rectangles and closed gates','saw sweep envelopes','actual local ports and apertures','capability/motion requirements','measured body action samples'],
-        topology_sha256=digest(graph),source_placement_hints=False,block_grid_required=require_blocks)
+        topology_sha256=digest(graph),source_placement_hints=False,block_grid_required=require_blocks,shared_air_only=allow_shared_air,block_origins=grid_positions.copy()if ok and require_blocks else{},coordinate_system='integer Block origins; pixels only for narrow-phase geometry'if require_blocks else'legacy pixel origins')
     if ok:
         modules=[]
         for n in graph['nodes']:
-            m=copy.deepcopy(selected[n['id']]);m['spec']['placement']=positions[n['id']];modules.append(m)
+            m=copy.deepcopy(selected[n['id']]);m['spec']['placement']=positions[n['id']]
+            if require_blocks:m['spec']['block_placement']=grid_positions[n['id']]
+            modules.append(m)
         result['modules']=modules
         result['layout_signature']=digest({k:dict(position=[round(x,3)for x in positions[k]],variant=selected[k]['variant_id'])for k in sorted(selected)})
     return result
