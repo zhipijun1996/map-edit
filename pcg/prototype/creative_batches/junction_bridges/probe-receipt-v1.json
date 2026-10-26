@@ -1,0 +1,152 @@
+{
+  "schema": "pcg/junction-bridges-probe-receipt/v1",
+  "idea_id": "J03",
+  "actual_model_author": "/root/junction_j03_impl",
+  "scope": "bounded real-Godot calibration probes only; root performs original regular calibration/independent holdout/enrollment",
+  "source_files": [
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/probe_v1.py",
+      "sha256": "a274fece31d399503f20022346bbf1e898d5a9515863208fd8c5796dec2077e9"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/probe_v2.py",
+      "sha256": "67d976a743c2dea1dde5a6343092ef79ff33838c5bb3c0979defb9b98b688b01"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/probe_v3.py",
+      "sha256": "9a751742e971fa84c7506207ec6e45fbb6e049e5edfc31af61ad46c1bb6dcd71"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/protocol-v1.json",
+      "sha256": "2d09a7baa90c88c33dc689399c26c4bb6af8d0c143b621a1028c30bbca035c05"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/rules_v1.py",
+      "sha256": "139ee359c0ff604a13b1e1078d5cd9ecb84cc631877575950f672ebbb4f9d4fb"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/rules_v2.py",
+      "sha256": "ffccbeb4c47dcc5acd48c48aebe839e770221351f1ea454256ebde879969a32a"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/junction_bridges/rules_v3.py",
+      "sha256": "0cdf0ae0561134bd819e29311852708ba75d3c191416dc1bc75799ed8d443542"
+    }
+  ],
+  "experiments": [
+    {
+      "run": "pcg/results/junction-bridges-probe-v1",
+      "summary": {
+        "path": "pcg/results/junction-bridges-probe-v1/summary.json",
+        "sha256": "e47a0d3a47fd9a37acbe5c6b5bf790e0c1ef174a0586880913f5024a0f0882e7"
+      },
+      "source": "rules_v1.py",
+      "level": "authored clean",
+      "actual_cases": 14,
+      "passed": 10,
+      "failures": [
+        {
+          "id": "junction-bridges-0-lower-to-upper",
+          "reasons": [
+            "frame_budget",
+            "destination_elevation_not_stably_reached",
+            "no_actual_elevation_transfer"
+          ],
+          "observed_minimum_y": 256.242370605469
+        },
+        {
+          "id": "junction-bridges-0-descend-then-lift",
+          "reasons": [
+            "frame_budget",
+            "destination_elevation_not_stably_reached",
+            "no_actual_elevation_transfer"
+          ],
+          "observed_minimum_y": 241.925277709961
+        },
+        {
+          "id": "junction-bridges-1-lower-to-upper",
+          "reasons": [
+            "frame_budget",
+            "destination_elevation_not_stably_reached",
+            "no_actual_elevation_transfer"
+          ],
+          "observed_minimum_y": 246.242446899414
+        },
+        {
+          "id": "junction-bridges-1-descend-then-lift",
+          "reasons": [
+            "frame_budget",
+            "destination_elevation_not_stably_reached",
+            "no_actual_elevation_transfer"
+          ],
+          "observed_minimum_y": 211.925231933594
+        }
+      ]
+    },
+    {
+      "run": "pcg/results/junction-bridges-probe-v2",
+      "summary": {
+        "path": "pcg/results/junction-bridges-probe-v2/summary.json",
+        "sha256": "51e996f3ebe512eaee34f2dc3ab745ca85052f5f56de6b979475290e54dd92e1"
+      },
+      "source": "rules_v2.py",
+      "level": "authored clean",
+      "actual_cases": 14,
+      "passed": 14,
+      "failures": []
+    },
+    {
+      "run": "pcg/results/junction-bridges-mild-probe-v2",
+      "summary": {
+        "path": "pcg/results/junction-bridges-mild-probe-v2/summary.json",
+        "sha256": "a2503dab37e0e540d181e7871bd754c4db1cf470eab1df68c4a4ed35621f13fc"
+      },
+      "source": "rules_v2.py",
+      "level": "mild ±1 tick/±2 degree",
+      "actual_cases": 84,
+      "passed": 84,
+      "failures": []
+    },
+    {
+      "run": "pcg/results/junction-bridges-moderate-lifts-probe-v3",
+      "summary": {
+        "path": "pcg/results/junction-bridges-moderate-lifts-probe-v3/summary.json",
+        "sha256": "e6773a034fc84112710975f929731b3f20594f7cfea9ddc43d166f51eea3d71a"
+      },
+      "source": "rules_v3.py",
+      "level": "moderate ±3 tick/±6 degree; ascent and continuous ascent only",
+      "actual_cases": 24,
+      "passed": 24,
+      "failures": []
+    }
+  ],
+  "actual_probe_cases": 136,
+  "maximum_probe_cases": 220,
+  "source_versions": 3,
+  "maximum_source_versions": 3,
+  "final_rules": "pcg.prototype.creative_batches.junction_bridges.rules_v3",
+  "final_interfaces": 2,
+  "programs_per_interface": 7,
+  "unique_directed_pairs_per_interface": 6,
+  "continuous_program": {
+    "from_port": "A",
+    "via_ports": [
+      "D"
+    ],
+    "to_port": "B",
+    "actual_world_reset": false,
+    "resources": "original actual ground recovery only"
+  },
+  "failure_interpretation": "v1 released jump at12 and delayed recoil to18; actual maximum ascent insufficient for 260/280 high bank. v2 holds jump20 and releases/shoots together; actual geometry and gate unchanged. Source files are retained separately.",
+  "choice_evidence": {
+    "upper": "A→B and A→D share supported movement until upper takeoff threshold left-45; choose jump or continue drop",
+    "lower": "C→D and C→B share supported movement until ascent shaft; choose continue low or brake then jump/recoil up",
+    "ports": "A/B upper west/east; C/D lower west/east. Internal recovery ledge is not a fifth port.",
+    "rewards": "none; destinations remain useful without treasure",
+    "unverified": "unlisted pairs, generic ingress/outgoing state, transforms, seams, whole-map and human approval UNKNOWN"
+  },
+  "new_enrollment_by_this_agent": 0,
+  "human_video_observation": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false
+}

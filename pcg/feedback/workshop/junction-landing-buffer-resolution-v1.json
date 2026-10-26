@@ -1,0 +1,34 @@
+{
+  "schema": "pcg/technical-feedback-resolution/v1",
+  "prior_feedback": {
+    "path": "pcg/feedback/workshop/plains50-ports-woven-bridge-interchange-objective-fix-v1.json",
+    "sha256": "c2a0957d0923ea7dbd1f92f68ba19b5029142280f5ced16d34d5e376c9f22972"
+  },
+  "resolution_type": "audited_observer_interpretation_not_geometry_fix",
+  "source_rule_unchanged": true,
+  "actual_result": {
+    "original_failed_run": "workshop-junction-bridges-production-v1",
+    "incorrect_refutations": 5,
+    "actual_cause": "original observer samples before landing, original Controller consumes buffered ground jump after landing",
+    "raw_counts_preserved": true,
+    "shared_harness_changed": false,
+    "original_gate_changed": false,
+    "audit": {
+      "path": "pcg/prototype/creative_batches/junction_bridges/landing-buffer-audit-v1.json",
+      "sha256": "eb82315e5a6f678b66b8059c1b917792547d30e21a8efadbe6b9dd2f8082048b"
+    },
+    "repair": {
+      "path": "pcg/prototype/creative_batches/junctions/landing_buffer_v1.py",
+      "sha256": "692a64268b52a43e0e552c1743f24793ff39988c9696457450fc142c6d5ba58b"
+    },
+    "retest": "workshop-junction-bridges-production-v2; interface0 only; same geometry/control/independent seed"
+  },
+  "new_accepted_version": "sha256:115f754a1ce97b0567c5390e315471ab946b3e8c67ace056ff9e473959e09fe9",
+  "reference": {
+    "path": "pcg/creative-production/junction-implementation-cycle-v1.json",
+    "sha256": "27fd3203b35b5425bf75387ba698d4b370fa717749786f86f855cb6b882bb165"
+  },
+  "next_revision": "Do not reject plain ground-buffer jumps or force a gunshot. Preserve observer raw fields, audit any new signature rather than generalizing this narrow correction.",
+  "human_approval": "UNKNOWN",
+  "production_admitted": false
+}

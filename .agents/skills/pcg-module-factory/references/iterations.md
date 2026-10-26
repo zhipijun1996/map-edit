@@ -157,3 +157,7 @@ source/protocol/失败/原件见`docs/l4-mapgen/plains50-v1.md`和归档`content
 新增pcg-multiport-junction skill，接原creative/factory流程：先明确fork/merge/interchange等局部职责，再给空间构图、共同选择过程、端口后续通路与有向意图。静态T形与共享支撑可以成立，串联中途口若有真实外接也可成为选择；地区名字、宝箱差异或增加恢复口都不能单独替代构图。
 
 本轮仅六案创意及概念图，48有序意图的物理证据全UNKNOWN。J01环岛缺原平台未有的环绕Cell，J02–J06可先用原构件白盒但均缺生成规则/验证；推荐先比较J06和J03。npm94份编辑器检查与factory26测试通过；未开Godot实验/未入库，原94版本未变。来源/逐版审查/方法与创意见pcg/creative-production/multiport-method-receipt-v1.json。
+
+### 多端口真实路口首轮（2026-10-26）
+
+J06共享落点的高来岸/西低廊/东阶地，与J03上下双廊的直行/换层，分别适配两种空间。4新候选、24路线原regular校准/独立留出全部通过（600/600留出）；2精确等面积接缝试件102/102，通用接缝仍UNKNOWN。原库94→98，平原82→86，2空间语法不计4新家族。J03宽接口第一次被5个合法落地缓冲跳的observer误标挡住：原raw/Harness/质量门槛保留，审原Controller顺序后以隔离真实支撑/资源/速度签名解释、冻结后只重验未留出的接口0。真实失败/拒绝保留，不能用移除替代走法或降门槛解决。6短片2267帧严格一致，来源、原库跨进程查询/拒绝、AI审查及边界见generation/workshop/junctions-v1/manifest.json和junction-implementation-cycle-v1.json。下一步由人工看视频，B按实际摆放验证；未实现环岛、通用进入动量/单向证明/整图。

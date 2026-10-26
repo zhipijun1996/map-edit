@@ -1,0 +1,215 @@
+{
+  "schema": "map-notes/module-library-entry/v1",
+  "id": "generated-bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+  "contentVersion": "sha256:3adef88ab9ffd3a5b90b08c68d5b06138a5176f42b2a534b1a2c85947e6bca82",
+  "technical_status": "passed_scoped_multi_route",
+  "content_kind": "module",
+  "technical_scope": "independent single-module route witnesses; no arbitrary-state or Map guarantee",
+  "cases_sha256": "931eea4fb3c1b7b271fe31a5a5b46f58dbeb4a6bc094641bd51a8ce34ff20301",
+  "document_sha256": "7077c3b6908ef0ef867b0dee5e36e699dfbaa2a17ac380464a07ac2650d7fdf9",
+  "demand_key": "4ac98740feb388afde0e15589787675859a9fc7fb6c253785f0a5f3cc0cf0f81",
+  "specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "junction/J06/0",
+    "source_type": "model_authored_challenge_spec",
+    "region": "plains",
+    "required_family": "windgap-junction",
+    "objective": {
+      "recipe": "windgap-junction",
+      "interface": 0,
+      "junction_role": "fork_with_directional_merge",
+      "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "branch_ports": [
+        {
+          "id": "A",
+          "position": [
+            40,
+            162
+          ],
+          "support_index": 0,
+          "normal": [
+            -1,
+            0
+          ],
+          "map_role": "west_upper_external"
+        },
+        {
+          "id": "B",
+          "position": [
+            40,
+            702
+          ],
+          "support_index": 1,
+          "normal": [
+            -1,
+            0
+          ],
+          "map_role": "west_lower_external"
+        },
+        {
+          "id": "C",
+          "position": [
+            990,
+            422
+          ],
+          "support_index": 5,
+          "normal": [
+            1,
+            0
+          ],
+          "map_role": "east_external"
+        }
+      ]
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 3,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "route_id": "a-b"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "a-c"
+      },
+      {
+        "from_port": "B",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "b-c"
+      },
+      {
+        "from_port": "C",
+        "to_port": "B",
+        "role": "return",
+        "route_id": "c-b"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "a-b-c"
+      }
+    ],
+    "space": {
+      "max_width": 1800,
+      "max_height": 1400,
+      "max_port_span_x": 1500
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "risk_reward": {
+      "mandatory_damage": false,
+      "reward_sites": []
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "original supported scene capture before input",
+      "exit": "stable observation only"
+    },
+    "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+    "budget": {
+      "generator_candidates": 1,
+      "director_revisions": 0
+    }
+  },
+  "quality_gates": [
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/evaluations.json",
+      "sha256": "a1cc24e45a5fc6efd092ecaee5ed8a4318e5d10ad352c8befa2a7760ae91736a"
+    },
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/calibration-evaluations.json",
+      "sha256": "e7f02d33732ff81abb2ebfb0acfc95f8d59b3edf49fb9cab661f8d9d99fc152d"
+    },
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/protocol.json",
+      "sha256": "20123b8383d4787f4fa29e1914d43567e2c9f390276e6bccb70ceafbd824e77d"
+    },
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/bound-counterexamples.json",
+      "sha256": "03edbd3fded30a8a73652a143776cd3d069b6a2c989b8d34e17c935693577d83"
+    },
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/counter-decisions.json",
+      "sha256": "0421ba1bfd226f8d0b97952fa69019ac0f8d93ab136987b2509c0dab135e560c"
+    },
+    {
+      "path": "pcg/results/workshop-junction-windgap-production-v1/windgap-junction/selection-before-holdout.json",
+      "sha256": "c2fbba395610c9b179a66cf1ecd1efc2ed87453f28d7efb126e7d98b2bde1441"
+    }
+  ],
+  "human_quality": "awaiting_review",
+  "human_reviews": [],
+  "production_admitted": false
+}

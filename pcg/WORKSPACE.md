@@ -2,7 +2,11 @@
 
 # 关卡生成工作区
 
-## 当前任务：多口的空间选择与创意先行（2026-10-26）
+## 当前任务：真实多口路口实现（2026-10-26）
+
+已完成J06双岸会合风口与J03交织双桥各两种空间接口，4新候选入原库（94→98；平原82→86）。24路线原regular校准/独立留出各600/600；2精确等面积接缝试件102/102，通用seam仍UNKNOWN。6段正常速度原生视频2267帧严格一致；20有条件path/16UNKNOWN，不宣称单向已证。J03旧observer误标合法落地buffer造成的5次错误反例拒绝保持原件，以隔离分类解释后重验接口0；原物理/Harness/门槛不改。见[交付](../generation/workshop/junctions-v1/README.md)、[报告](../docs/l4-mapgen/junction-modules-v1.md)、`creative-production/junction-implementation-cycle-v1.json`。`prototype/creative_batches/junctions/`复用原多口调度/WorkshopEngine/原库；query_v1提供精确需求检索及具体冲突。环岛/任意进入状态/通用拼装/B整图未完成，人工趣味和生产准入仍待评。恢复归档content-workshop-junctions-v1后可复跑全部新原件。
+
+## 前轮：多口的空间选择与创意先行（2026-10-26）
 
 用户认可上一批实现总体，同时指出多口像强加安全口；现在优先构思能服务后续地图分叉的局部空间节点，允许部分单向。环岛只是例子，不默认开始实现或批量生成。执行 [pcg-multiport-junction](../.agents/skills/pcg-multiport-junction/SKILL.md)。逐字来源/解释见`feedback/workshop/multiport-spatial-choice-feedback-v1.json`；15份现有多口的设计审查在`creative-production/curation/multiport-junction-audit-v1.json`，原技术记录不改。先读不同空间创意`creative-production/junction-ideas-v1.json`，原平台只支持两点往返，真正圆轨迹需新Cell。旧“从A有2/3出口”是当批数量/技术条件，不是新路口设计准则；UNKNOWN反向不算已证单向。此次仅审查、skill和概念输出，物理/新候选/生产准入均不增加。
 

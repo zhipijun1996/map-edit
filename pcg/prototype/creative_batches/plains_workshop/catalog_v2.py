@@ -11,10 +11,11 @@ from pcg.prototype.factory.core.engine import file_sha
 from .catalog_v1 import capability_conflicts
 from pcg.prototype.workshop.library import WorkshopLibrary
 
-def snapshot(manifest_path):
+def snapshot(manifest_path,additional_manifests=None):
     profile=read(HERE/'profile-v1.json');view=original_snapshot(profile)
-    manifest=read(manifest_path);registered={r['contentVersion']:r for r in manifest['modules']}
-    if len(registered)!=len(manifest['modules']):raise ValueError('duplicate_published_version')
+    manifest=read(manifest_path);batches=[(Path(manifest_path),manifest)]+[(Path(p),read(p))for p in (additional_manifests or [])]
+    published=[r for _,batch in batches for r in batch['modules']];registered={r['contentVersion']:r for r in published}
+    if len(registered)!=len(published):raise ValueError('duplicate_published_version')
     allowed=set(profile['allowed_tested_capabilities']);seen=set()
     for row in view['rows']:
         item=registered.get(row['contentVersion'])
@@ -23,13 +24,15 @@ def snapshot(manifest_path):
         if file_sha(record_path)!=item['record_sha256']or file_sha(doc_path)!=item['document_sha256']:raise ValueError('published_candidate_binding_drift')
         if row['selection_reason'] in ['technical_withdrawal','outside_scoped_candidate_store','tested_capabilities_missing']or row['additional_capabilities']or not set(row['tested_capabilities'])<=allowed:raise ValueError('published_candidate_not_plains_qualified')
         if not row['tested_capabilities']:raise ValueError('missing_actual_tested_configuration')
-        row.update(selected_for_plains_candidates=True,selection_reason='version_bound_published_candidate_batch',content_role=item['content_role'],video_observation='unreviewed_new_version',publication_batch=manifest['id'],title=item['name'])
+        batch_id=next(batch['id']for _,batch in batches if item in batch['modules'])
+        row.update(selected_for_plains_candidates=True,selection_reason='version_bound_published_candidate_batch',content_role=item['content_role'],video_observation='unreviewed_new_version',publication_batch=batch_id,title=item['name'])
     if seen!=set(registered):raise ValueError('published_version_not_in_original_candidate_store')
     view.update(profile='plains-recoil-v2',published_batch=str(Path(manifest_path).resolve().relative_to(REPO)),published_batch_sha256=file_sha(manifest_path),selected_candidate_versions=sum(r['selected_for_plains_candidates']for r in view['rows']))
+    if additional_manifests:view['published_batches']=[dict(path=str(p.resolve().relative_to(REPO)),sha256=file_sha(p))for p,_ in batches]
     return view
 
-def query(spec,manifest_path):
-    profile=read(HERE/'profile-v1.json');view=snapshot(manifest_path)
+def query(spec,manifest_path,additional_manifests=None):
+    profile=read(HERE/'profile-v1.json');view=snapshot(manifest_path,additional_manifests)
     conflicts=capability_conflicts(spec,profile)
     required=['required_family','ports','space','relations','region','objective','resource_state','return_conditions']
     if not isinstance(spec,dict):spec={}
@@ -56,7 +59,7 @@ def query(spec,manifest_path):
     return dict(status='unsatisfied',conflicts=conflicts,searched=dict(candidate_versions=len(allowed),library_versions=view['library_versions'],capabilities=profile['allowed_tested_capabilities']),negotiable=['explicit published interface','new bounded rule adaptation and original physical gate'],generator_called=False,new_physics_cases=0,production_admitted=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--manifest',type=Path,default=REPO/'generation/workshop/plains50-v1/manifest.json');p.add_argument('--out',type=Path);p.add_argument('--query',type=Path);a=p.parse_args();value=query(read(a.query),a.manifest)if a.query else snapshot(a.manifest)
+    p=argparse.ArgumentParser();p.add_argument('--manifest',type=Path,default=REPO/'generation/workshop/plains50-v1/manifest.json');p.add_argument('--additional-manifest',type=Path,action='append',default=[]);p.add_argument('--out',type=Path);p.add_argument('--query',type=Path);a=p.parse_args();value=query(read(a.query),a.manifest,a.additional_manifest)if a.query else snapshot(a.manifest,a.additional_manifest)
     if a.out:write_new(a.out,value)
     else:print(json.dumps(value,ensure_ascii=False,indent=2))
     if value.get('status')=='unsatisfied':raise SystemExit(2)
