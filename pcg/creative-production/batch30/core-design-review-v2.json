@@ -1,0 +1,228 @@
+{
+  "schema": "pcg/core-experience-review/v2",
+  "reviewer": "/root/core_critic",
+  "source_type": "actual_independent_current_codex_review",
+  "scope": "Current prototypes only. Not candidate admission, human observation, fun approval, or full technical validation.",
+  "new_physics_cases": 0,
+  "human_video_observation": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false,
+  "method": {
+    "D03": "Re-read prior review; actually inspected18 extracted frames at0.5second cadence fromv5 MP4 plus raw same-world1HP comparison results.",
+    "D04": "Read api_v3 and actual old api-clean results/frames; no D04 video inspected. Current full/final loop counter results still pending.",
+    "D05": "Actually inspected22 extracted frames at0.25second cadence from5.266667sec MP4 plus full251frame native state timeline. Not a claim of human play or continuous movie watching."
+  },
+  "evidence_bindings": [
+    {
+      "path": "generation/workshop/plains30-v1/prototypes/D03-v5-core/finite-enemy-routes.mp4",
+      "sha256": "3e781b24df79c5b2971b487c263f145e1a2feccf051a1dbbe909b15d16948efd"
+    },
+    {
+      "path": "generation/workshop/plains30-v1/prototypes/D03-v5-core/finite-enemy-routes.trace.json",
+      "sha256": "b7c3710be8d2dd1cae673b3654c5efbf44dfa88e51fd25c75986ee91a12f7d87"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d03-c2-comparison-v1/summary.json",
+      "sha256": "b739b6c3dcc035d8e1db41fa7785aa0c9f216e20b4e93719b8b6d01966f949e3"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d03-c2-comparison-v1/physics/0000-remaining-HP-same-world.output.json.gz",
+      "sha256": "7ef5413d5baf9f592a6a4d41b167f751921f65a5b3a0e7c751cfb252730be7e8"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-api-clean-v1/summary.json",
+      "sha256": "41269d2b8d0533464660bd24fab3531e4e188c1ec0978de85c5c3dfe9cb2afb5"
+    },
+    {
+      "path": "generation/workshop/batch30-d05-v1/core-demo/bell-carrier-catch.mp4",
+      "sha256": "410a5905018a8237ea7d4039e5953f6b041126ba1d6e7f93eb49c4691a5dd530"
+    },
+    {
+      "path": "generation/workshop/batch30-d05-v1/core-demo/bell-carrier-catch.trace.json",
+      "sha256": "451a98fb41b57b8cee756333414d9c73f27685c0bcd8ea76856ad7e56d6dcde8"
+    },
+    {
+      "path": "generation/workshop/batch30-d05-v1/core-demo/manifest.json",
+      "sha256": "bcf3edf824827effecc6bc44c4fbfffc765c63de919468a31c7ad3d23462be92"
+    }
+  ],
+  "samples": [
+    {
+      "proposal": "PR-D03",
+      "status": "causal_resource_consequence_demonstrated; final_v8_geometry/robustness_pending",
+      "mechanics": "Actual finite enemy HP supports air refill, remains depleted/dead across later travel; actual staged alternative survives exhaustion. Distinct from ordinary walking.",
+      "same_world_one_HP_comparison": [
+        {
+          "id": "b30-d03-state-comparison-v1-remaining_one_air",
+          "safe_stable": false,
+          "reason": "frame_budget",
+          "actual_shots": 6,
+          "actual_jumps": 2,
+          "ticks": 2400,
+          "coins": 12,
+          "final_enemy": [
+            {
+              "dead": true,
+              "hp": 0.0,
+              "id": "plains_sentry",
+              "state": "recovery",
+              "x": 92.6000061035156,
+              "y": 422.0
+            }
+          ],
+          "final_support": "Platform3"
+        },
+        {
+          "id": "b30-d03-state-comparison-v1-remaining_one_staged",
+          "safe_stable": true,
+          "reason": "settled_goal",
+          "actual_shots": 7,
+          "actual_jumps": 4,
+          "ticks": 428,
+          "coins": 24,
+          "final_enemy": [
+            {
+              "dead": false,
+              "hp": 1.0,
+              "id": "plains_sentry",
+              "state": "idle",
+              "x": 92.6000061035156,
+              "y": 422.0
+            }
+          ],
+          "final_support": "Platform2"
+        }
+      ],
+      "interpretation": "This closes the old forced-kill-only evidence gap: one naturally remainingHP does not complete the tested west-air route, while staged route claims both rewards with enemy still1HP. One failed finite policy is not a proof no other1HP air route exists.",
+      "remaining": [
+        {
+          "id": "D03-choice-visibility",
+          "severity": "design_revision",
+          "finding": "Current v5 entry framing cannot show both high destinations before commitment; right reward can sit under UI. A route selection requires readable alternatives.",
+          "repair": "Presentation-only overview showing actor, actual shared enemy HP, both rewards and stage route silhouettes before departure; re-record final source with strict trace comparison."
+        },
+        {
+          "id": "D03-allocation-dominance",
+          "severity": "evidence_gap",
+          "finding": "Equal12coin rewards and nearer east bank may favor spending hits east. Existence of two destinations alone does not establish both allocations useful.",
+          "repair": "Produce per-side air versus staged actual shots/jumps/time/risk table on final geometry, and preserve different onward port roles without claiming geography alone proves fun."
+        },
+        {
+          "id": "D03-final-binding",
+          "severity": "technical_pending",
+          "finding": "Viewed video isv5, comparison usesv6 geometry/v7 control, implementation is nowv8; these are prototypes and cannot serve as finalv8 candidate evidence.",
+          "repair": "Rebind final geometry to new calibrated/held routes and representative MP4."
+        }
+      ]
+    },
+    {
+      "proposal": "PR-D04",
+      "status": "real_state_consequence_in_old_clean_prototypes; independent_complete_task_falsifier_pending",
+      "observed_old_clean_costs": [
+        {
+          "id": "b30-d04-api1-i0-middle-outbound-c0",
+          "actual_shots": 2,
+          "actual_jumps": 1,
+          "ticks": 145,
+          "coins": 0,
+          "safe_stable": true
+        },
+        {
+          "id": "b30-d04-api1-i0-reward-reward-out-c0",
+          "actual_shots": 3,
+          "actual_jumps": 2,
+          "ticks": 367,
+          "coins": 12,
+          "safe_stable": true
+        },
+        {
+          "id": "b30-d04-api1-i0-middle-return-middle-c0",
+          "actual_shots": 3,
+          "actual_jumps": 2,
+          "ticks": 286,
+          "coins": 0,
+          "safe_stable": true
+        },
+        {
+          "id": "b30-d04-api1-i0-reward-reward-return-c0",
+          "actual_shots": 7,
+          "actual_jumps": 6,
+          "ticks": 701,
+          "coins": 12,
+          "safe_stable": true
+        }
+      ],
+      "mechanics": "Old actual programs park the same carrier, later stand on it and return without resetting world; direct return and reward detour have materially different real actions. This is not J03-style pure walking.",
+      "remaining": [
+        {
+          "id": "D04-goal-definition",
+          "severity": "critical_evidence_gap",
+          "finding": "A required final carrier x-range is a world-state contract, not independent proof reward access requires that park. Midpark may still reach C and return with adapted controls.",
+          "repair": "Run adaptive midpark→east edge→low-angle under-bridge→C→A policies using fixture_task_outcome that ignores final park, then compare same task shots/jumps/ticks. Reject a cheaper dominating outcome rather than automatically rejecting missing authored words."
+        },
+        {
+          "id": "D04-true-choice",
+          "severity": "design_review_pending",
+          "finding": "Reward route oldclean costs7shots/6jumps701frames against direct3shots/2jumps286frames, but they have different external reward outcomes; counts alone do not prove a balanced meaningful choice.",
+          "repair": "Show both future paths in one normal-speed readable composition; compare alternative ways of claiming the same12coins/return task."
+        },
+        {
+          "id": "D04-current-video",
+          "severity": "not_reviewed",
+          "finding": "No D04 video inspected in this review; cannot claim pacing, visual readability or art quality.",
+          "repair": "Provide strict current carrier-stop and full-return clips after frozen qualification."
+        }
+      ]
+    },
+    {
+      "proposal": "human-d05-bell-carrier-catch",
+      "status": "needs_core_revision_before_adaptation_or_admission",
+      "observed_first_shot_frame": 108,
+      "observed_first_postshot_ground": {
+        "frame": 147,
+        "x": 768.709655761719,
+        "y": 351.925262451172,
+        "grounded": true,
+        "support_id": "Platform2",
+        "shot_charges": 1
+      },
+      "observed_first_postshot_carrier_ground": {
+        "frame": 167,
+        "x": 855.376281738281,
+        "y": 420.925140380859,
+        "grounded": true,
+        "support_id": "catch-deck",
+        "shot_charges": 1
+      },
+      "finding": "The actual first postshot landing is static Platform2, which already restores shot charge. Only later does the moving carrier receive the player. This fails the requested interception-first experience despite later genuine carrier support and a successful exit.",
+      "positive": "Real mounted receiver travels with actual carrier; shot111start and197stop events are airborne, no fake player trajectory evident. It is more than static walking, but the fixed island currently substitutes for the central catch.",
+      "remaining": [
+        {
+          "id": "D05-static-roof-receives-first",
+          "severity": "blocks_core_experience",
+          "finding": "Firstshot108, carrierstart111, staticPlatform2landing147/charge1, carrierlanding167/charge1. Existing purpose only finds any later carrier support and therefore misses the substitution.",
+          "repair": "Keep old failure and revise actual geometry so the first supported body after the first airshot is catch-deck. Check first real0→1 ammo restoration occurs there. Remove/reshape/reposition the roof without creating direct bank bypass; no body/resource writes."
+        },
+        {
+          "id": "D05-counter-meaning",
+          "severity": "required_counter_search",
+          "finding": "Standing-ground-start/riding may bypass the intended chase; previous30 fixed programs failing does not exclude adapted ride-and-launch.",
+          "repair": "Test active grounded-start ride launch across later carrier positions and extra-shot/no-catch policies at actual target bank. Compare same reward+stable exit rather than requiring a mandatory word."
+        },
+        {
+          "id": "D05-mount-readability",
+          "severity": "presentation_revision",
+          "finding": "Bell is visibly120units above the deck but has no clear structural tie in sampled footage. Player can mistake it for a fixed overhead bell.",
+          "repair": "Presentation-only mast/line or matching motion cue linking original bell receiver and deck; preserve original collision and strict trace."
+        },
+        {
+          "id": "D05-recovery",
+          "severity": "not_proven_here",
+          "finding": "Static lower terrain exists, but this review has no demonstrated same-world missed-catch→retry continuous witness.",
+          "repair": "Keep world/carrier phase/resources, show actual retry or safe exit with original mechanisms."
+        }
+      ]
+    }
+  ],
+  "batch_guidance": "Do not count these prototypes as30 delivery progress or assume new family from titles. D03/D04 have actual relational content; D05 must remove the fixed first-landing substitution. Human fun staysUNKNOWN."
+}

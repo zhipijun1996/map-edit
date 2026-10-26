@@ -1,0 +1,652 @@
+{
+  "schema": "pcg-d04-probe-receipt/v1",
+  "status": "core-executable-final-registration-awaits-root-full-calibration-heldout-counter-review",
+  "owned_path": "pcg/prototype/creative_batches/batch30_d04",
+  "budget": {
+    "initial-and-v2": 188,
+    "bounded-repair-v3": 60
+  },
+  "total_cases": 248,
+  "holdout_used": false,
+  "source_hashes": {
+    "pcg/prototype/creative_batches/batch30_d04/rules_v5.py": "6e50a4cfb9ac2cfd5780c87ba89763a2b3e5c3b0a1ef30ad95d747db915b70d2",
+    "pcg/prototype/creative_batches/batch30_d04/rules_v7.py": "98ad88f7aa3f1464b285099b06be9e2dba941b2bf2d633489b3a2e800eaf1790",
+    "pcg/prototype/creative_batches/batch30_d04/api_v3.py": "d8ff37b4f5398c7c6da751780d6b438935019b7d0e966138670cf03b559f10d3",
+    "pcg/prototype/creative_batches/batch30_d04/adaptive_counters_v1.py": "f5f2599abe08256b7004440f5807d2a507f6f5e645c73490dbf475a922d76bee",
+    "pcg/prototype/creative_batches/batch30_d04/protocol-v1.json": "a0d82daccb6301d339812f61d623f7757de7b0c3539a8ccd0033ce1fea5e4cfc",
+    "pcg/prototype/creative_batches/batch30_d04/protocol-v2.json": "95ae91494788e421695831268dfc442e2830dff8685e44290c48c6fd3f7a4608"
+  },
+  "interfaces": [
+    0,
+    1
+  ],
+  "entrypoint": "pcg.prototype.creative_batches.batch30_d04.api_v3",
+  "recipes": [
+    "park-for-return"
+  ],
+  "normal_routes": [
+    "A->B",
+    "A->C via B"
+  ],
+  "continuous_fixture_routes": [
+    "A->B->A",
+    "A->B->C(reward12)->A"
+  ],
+  "fixtures_are_module_routes": false,
+  "module_enrollments": 0,
+  "human_fun_review": "NOT_REVIEWED",
+  "production_approval": "NOT_APPROVED",
+  "full_validation": "ROOT_OWNS_PENDING",
+  "limitations": [
+    "Final v7 return controls have only clean checks; do not infer robust return from them.",
+    "Original 96 small-noise candidates passed only78 and were not promoted.",
+    "Two grounded ray misses are finite observations, not a proof of no far-side retiming.",
+    "Adaptive counters are source-only and UNEXECUTED; root must run against actual task ignoring desired park.",
+    "Existing ordinary alternatives are permitted when world result/task remain and cost is genuinely greater."
+  ],
+  "adaptive_counter_program": {
+    "path": "pcg/prototype/creative_batches/batch30_d04/adaptive_counters_v1.py",
+    "cases_per_interface": 16,
+    "total_cases": 32,
+    "physics_status": "UNEXECUTED",
+    "comparator": "api_v3.fixture_task_outcome",
+    "requires_actual_reward": 12,
+    "goal": "actual original A",
+    "final_park_ignored": true
+  },
+  "runs": [
+    {
+      "path": "pcg/results/workshop-batch30-d04-api-clean-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 8,
+      "reported_passed": 8,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "d79cc62b693280fcdd937bbb0183b43bcbb6b39f5d9d7e36aaff1ed9c77b9137",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-api-clean-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-api-clean",
+          "stage": "d04-api-clean",
+          "cases": 8,
+          "raw_output_sha256": "f094072647fd2e3b58979cbcadc06bdc1f34072eb01d64ba999e65f3315b2f08",
+          "raw_output_bytes": 6366650,
+          "gzip_path": "physics/0000-d04-api-clean.output.json.gz",
+          "gzip_sha256": "23a468bb55bb57cd3b6c3b35057fde687764bc36f29c68539fd2f970e4104688",
+          "execution": "physics/0000-d04-api-clean.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-api-noise-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 96,
+      "reported_passed": 78,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "f144af733f45ff05b0cc7d27f86addae9149ebdefc29ea20e64ec98cb68a2f7f",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-api-noise-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "6e5eec5b3337bd6cc8326a6f0d552e495ad45995ac9b1832117bad3c958fadfc",
+          "raw_output_bytes": 3071039,
+          "gzip_path": "physics/0000-d04-api-noise.output.json.gz",
+          "gzip_sha256": "aca5b7c5e3bb6cb8198a2ed18047291834375f81d3cd1041015b4527d9f24359",
+          "execution": "physics/0000-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0001-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "ed601f9515924b160941f0ab1e2e2723e64bd0556a6f52c4c4a00e23a422e3c7",
+          "raw_output_bytes": 9883297,
+          "gzip_path": "physics/0001-d04-api-noise.output.json.gz",
+          "gzip_sha256": "05f31f7baf05766d35c88c54f25261616ccf055483cb09f118a8f8f4832c2b9f",
+          "execution": "physics/0001-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0002-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "814c0733b9747e0a1ccc0ee1e5b4093eae6a47de277734b2f52da6817eba9621",
+          "raw_output_bytes": 21845336,
+          "gzip_path": "physics/0002-d04-api-noise.output.json.gz",
+          "gzip_sha256": "edf3fd2eec2656e3a271fae41eb44cd3bb44808efc4cb671911b2a3086521e37",
+          "execution": "physics/0002-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0003-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "3bd217a7079d7f18d0aa274022833f5fbc2db754d544376517c0b215403bb465",
+          "raw_output_bytes": 22418107,
+          "gzip_path": "physics/0003-d04-api-noise.output.json.gz",
+          "gzip_sha256": "d311ce8f725a776dd8a86597c307badc6092db3c042ae9f0ca50ab65533cf5a8",
+          "execution": "physics/0003-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0004-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "341428708b72ef88db04f7b8e595be1e42ba92d4b83fcdad9ecb166dfff6654a",
+          "raw_output_bytes": 8115812,
+          "gzip_path": "physics/0004-d04-api-noise.output.json.gz",
+          "gzip_sha256": "355b167af6e3e7150864bf861391f2024cc6fc601d6620e3dc57dcac42105b2f",
+          "execution": "physics/0004-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0005-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "7365a675dc807ae1a5afcd42b2b27c64859a4707e06fe866584e8c3eca6dddae",
+          "raw_output_bytes": 9940932,
+          "gzip_path": "physics/0005-d04-api-noise.output.json.gz",
+          "gzip_sha256": "c7d587c9d7172d3138439da341a5ed75d1cbdc05ebe638563bd9494faa72e13d",
+          "execution": "physics/0005-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0006-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "5490fc10ca8f328d6d0df1bc877b03516ce16ecb9f3d750232aaecc4a76acd41",
+          "raw_output_bytes": 17559257,
+          "gzip_path": "physics/0006-d04-api-noise.output.json.gz",
+          "gzip_sha256": "8b89608670be5f5884ee5bfd1e58aa498806bd44f0af6bf5afe567914859be6d",
+          "execution": "physics/0006-d04-api-noise.execution.json"
+        },
+        {
+          "batch": "0007-d04-api-noise",
+          "stage": "d04-api-noise",
+          "cases": 12,
+          "raw_output_sha256": "fb027e57dafc47af04070ee131e0ab078632988626be849b5e33ecc3c290b5b2",
+          "raw_output_bytes": 20413017,
+          "gzip_path": "physics/0007-d04-api-noise.output.json.gz",
+          "gzip_sha256": "2863149736bf077effbc751be951bbc7aee6c0ce7d552fdf740e218cab6f9006",
+          "execution": "physics/0007-d04-api-noise.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-full-loop-counters-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 14,
+      "reported_passed": 1,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "5792137421fdc8866c50852d1b92ae0ac9469295870d4cf253450614eac21249",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-full-loop-counters-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-full-loop-counter",
+          "stage": "d04-full-loop-counter",
+          "cases": 12,
+          "raw_output_sha256": "d54ff37392ab884002fb5ffea0fbae488bf3f467d054f35e8ff650946fef7f04",
+          "raw_output_bytes": 16846049,
+          "gzip_path": "physics/0000-d04-full-loop-counter.output.json.gz",
+          "gzip_sha256": "b73e7dc678f95972a5823728462b819ff7e67d32ff1b5ded90365b10f41905e9",
+          "execution": "physics/0000-d04-full-loop-counter.execution.json"
+        },
+        {
+          "batch": "0001-d04-full-loop-counter",
+          "stage": "d04-full-loop-counter",
+          "cases": 2,
+          "raw_output_sha256": "d4928c98b2cd6862ef2f52a70f2f82d648d3c766b77c6578bdb54055cac1f30c",
+          "raw_output_bytes": 2786519,
+          "gzip_path": "physics/0001-d04-full-loop-counter.output.json.gz",
+          "gzip_sha256": "9a982a99bd6e48d04230df50c12934aba2e366c7e378956e1b65cc716a3e7b4c",
+          "execution": "physics/0001-d04-full-loop-counter.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-ground-rays-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 2,
+      "reported_passed": 0,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "d6acd7d72fe61cb98561cc2cef54472186c912ec525cc41d5a09afd6e73952ff",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-ground-rays-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-ground-ray-counter",
+          "stage": "ground-ray-counter",
+          "cases": 2,
+          "raw_output_sha256": "0a66848d508e659a5ccde509926c18c7753496f9b940cd5fe6a88da9f59ea75b",
+          "raw_output_bytes": 493836,
+          "gzip_path": "physics/0000-ground-ray-counter.output.json.gz",
+          "gzip_sha256": "5d16c0d2b7f2187ce0ba0b066930b141f707efbeea9c7e159320f4c051998f88",
+          "execution": "physics/0000-ground-ray-counter.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-i1-probe-v5",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "946856a4fe8843db85143747cc0573cf1fc900a0bd8461256985c70481dd6a52",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-i1-probe-v5/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "db79c4963801d6634e1244f91cce9c857b8cd9c982f6868f19ba309ca748c9f3",
+          "raw_output_bytes": 2611876,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "3d33932b5df69b21821b8846555d0d04b03530d71cd82d3d7a0eaff9ae0510ea",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-probe-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "a227319b9c2f236534ae13b8465957a637a16b064140af7247fbc38e7e0fdff8",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-probe-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "ebdbd88e649f8edf0162733dc8f1e424d10bd39431cbb5869b3b490afcf5639a",
+          "raw_output_bytes": 1231,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "26ace5a928ef54f44401ad4d479b3c46258873e90fadaef6f6096b30dde57f15",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-probe-v2",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "11907e5b74b12a774a2a2136777e4379845e6b7052160aa5e2fca4b53fe1d0ac",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-probe-v2/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "5df6cab12b00d09659696e291080a6d9057239382ae5c914a457a8d19759726e",
+          "raw_output_bytes": 1231,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "a1525aed8e9f4cd0b5001eef4ebd41d7f2bc3fa07185022f69473e1a00c6bf68",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-probe-v3",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "c0c55b1a1cd59cff31fd00f78c0dcd77dac5984987eddd47f13f87fee4bcb5a5",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-probe-v3/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "1ded9d9ee1b19ed38aabe6d52460e436f2aa4d97bcd21ec4d52b68c92362a9f6",
+          "raw_output_bytes": 12308669,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "901336faa6d3159ad60c16b8bee2bd6f27c6d40024a4041885bbf6d8b7f8924b",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-probe-v4",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "25fdaf25895ceabb09ebdbcf8a6345abff55415a797c75d953103f113c79150a",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-probe-v4/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "ba249888826b3833eae7709fa2bea205126f4c6d5ee6dc9e62bba246c4174d53",
+          "raw_output_bytes": 2228822,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "655a057ee9dab75d79809f1ba04d9c82a333985c638030355193427982f88e7a",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-middle-return-probe-v5",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "b1381e49b81b4fd9b9f8c6a7f51531d4a1b78870c19f9a1c0daaf03d404ded5d",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-middle-return-probe-v5/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "d669218feffa14b271b4537d55ab4751b2e8b97b6041c78acbc0302401237434",
+          "raw_output_bytes": 2228821,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "4d8eafa1d646e758f783849d09560ce12c121ea74f6fcc1f7d4c7bb0a3f5f3e2",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-outbound-probe-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "3279aa1e8482708717ead57e884412c7cb5e58465ad9db43dd27b6e000e84e79",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-outbound-probe-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "486dce1509e3e3dfddd5f09e38318dfb4387be86ea69069ba1a650fb321c57ce",
+          "raw_output_bytes": 3466499,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "7b009e258e1cd93cef26f6888d6eca3b8af41e3868aa85e9f3026ac3193cc054",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-out-probe-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "393c4a0290f481e42e74836bdab5d9bcde987fbe7c28b2669c86a736355f1535",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-out-probe-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "f34e4e39171ba6e99b662138de6394614ea5078883ae0a92d6909cda6cc5503b",
+          "raw_output_bytes": 7725437,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "8e5ddb187b8994b16c0317d060168cf5fd343ee6bcc2617fc52ce48175107743",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-out-probe-v2",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "bbff9e19e425186ae8b2fa119178fefc08aa2bdabc40e8e3cb3c1cb130e15126",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-out-probe-v2/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "c71bddb1a930dea96dd80a41a16617d478cf97d4fc69f0030132a608d4ccadee",
+          "raw_output_bytes": 3018817,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "eec459176dc14424927a102e28c90bb976d7bcee20ef0272a5dde654f8efb96c",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-return-i1-probe-v5",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "2b5437c7b4144cad17f0f3b11e92d8ef3f55e2768c904ac18a0e119d890f231a",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-return-i1-probe-v5/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "727e2df76f4c882cb2470ac0fc0d124164ece4a135749461f7648f407c41a6fe",
+          "raw_output_bytes": 5391723,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "88a24428c9962e0de84e44b347e92ed6bfd641cd8f02ab6d249ef84133a7fc2a",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-return-probe-v2",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "8a0981737a5ed1a08359716b763a054dae97261cc0f1c3d10d15d096c73b37f0",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-return-probe-v2/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "89f0142cc0cd27ffb8f389b7dd8cc12626b665cd44e3bc54f58a6e4ea92b876e",
+          "raw_output_bytes": 1231,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "4b104a2a375b6db359310ce21d9d1d946eac8ff6cd27d7a56e5833f36b6a5fd9",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-return-probe-v3",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "3d12e2c89da33179cff8cdea7eedf28955c171acf75d8919d2039a2e0283bdfa",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-return-probe-v3/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "20557f9af18ad323589f21a2814fa0b6170aa20d84af3fbfd02711f0008a7102",
+          "raw_output_bytes": 11718214,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "0541df1344d760de6c8540c9533499c6306add77a12f7fb0a5a4ac8f4709c139",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-return-probe-v4",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "7891bfd7e30ed9ccc617e0433456be5ef9a31e66eb9f4100772f28e210637473",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-return-probe-v4/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "c0aa28ccc08153dfce49a8c155790c377125c194773fe538ce122389c663534f",
+          "raw_output_bytes": 13291538,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "46233fa75f16f2081f366cec01ae01af8ee52aa9d9826294c0587f266496a84c",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-reward-return-probe-v5",
+      "cycle": "initial-and-v2",
+      "actual_cases": 4,
+      "reported_passed": null,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "d07f1ea75477fc6ee328675b66246b523faa3aaa24ca9222a1e5c01625ffcf46",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-reward-return-probe-v5/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-d04-core-probe",
+          "stage": "d04-core-probe",
+          "cases": 4,
+          "raw_output_sha256": "083e6c2e241b43504c9d2c1db8b4c639158c81e850d9cb5396b4af91033271ef",
+          "raw_output_bytes": 6030120,
+          "gzip_path": "physics/0000-d04-core-probe.output.json.gz",
+          "gzip_sha256": "38454815384001c2c9abb9010958befc679978240af9411b5a97d5eb47f65b18",
+          "execution": "physics/0000-d04-core-probe.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-v5-control3-screen-v1",
+      "cycle": "initial-and-v2",
+      "actual_cases": 12,
+      "reported_passed": 12,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "f8c1603019ae6907738a769b121ef6e074bd274b184699d93382e23fb3177119",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-v5-control3-screen-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-existing-control3-screen",
+          "stage": "existing-control3-screen",
+          "cases": 12,
+          "raw_output_sha256": "625f347b9e23242639b13a834c87c7eee80a61eed4520cb94492285ef6095219",
+          "raw_output_bytes": 12231830,
+          "gzip_path": "physics/0000-existing-control3-screen.output.json.gz",
+          "gzip_sha256": "979b25391baf04a447d30ace2bd0b3b84571ed4ab85ffc0e7322323148aa02b5",
+          "execution": "physics/0000-existing-control3-screen.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-v6-control-clean-v1",
+      "cycle": "bounded-repair-v3",
+      "actual_cases": 4,
+      "reported_passed": 1,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "b602437865d11676f397ecea1576768e636070824f3bbf693651e7928c8e6294",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-v6-control-clean-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-v6-return-control-clean",
+          "stage": "v6-return-control-clean",
+          "cases": 4,
+          "raw_output_sha256": "bf7df0553b9ecc5edb94dddafbb0573e427ae8e563bb342e2d7c193ce5ed5f31",
+          "raw_output_bytes": 9729841,
+          "gzip_path": "physics/0000-v6-return-control-clean.output.json.gz",
+          "gzip_sha256": "d379fba8efd58654c45f2ef6f045b2c83483a5ddbb680e8c9757d02e28f9f441",
+          "execution": "physics/0000-v6-return-control-clean.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-v6-control-noise-v1",
+      "cycle": "bounded-repair-v3",
+      "actual_cases": 48,
+      "reported_passed": 21,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "c230e20d85a4f2c62c24adad0a6843c3a5cb560cbe91f36c32cadca940c93031",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-v6-control-noise-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-v6-return-control-noise",
+          "stage": "v6-return-control-noise",
+          "cases": 12,
+          "raw_output_sha256": "2d8a26ff27955c3ae5c840041a4d669cf45606a34fac6c778ee42969641cd999",
+          "raw_output_bytes": 29478068,
+          "gzip_path": "physics/0000-v6-return-control-noise.output.json.gz",
+          "gzip_sha256": "886b3b0d3c105fb62228227343573b20ac024cddde729f6f0b776be6ef004376",
+          "execution": "physics/0000-v6-return-control-noise.execution.json"
+        },
+        {
+          "batch": "0001-v6-return-control-noise",
+          "stage": "v6-return-control-noise",
+          "cases": 12,
+          "raw_output_sha256": "135044d8fe1fc4ba63370f08acfb408cf346536960803f6ce448059ce6d5d2d3",
+          "raw_output_bytes": 34530838,
+          "gzip_path": "physics/0001-v6-return-control-noise.output.json.gz",
+          "gzip_sha256": "5bd273a45e732bf0920d2d85824a632e4a6c4d1945ae109863137836188a15d8",
+          "execution": "physics/0001-v6-return-control-noise.execution.json"
+        },
+        {
+          "batch": "0002-v6-return-control-noise",
+          "stage": "v6-return-control-noise",
+          "cases": 12,
+          "raw_output_sha256": "7696e9bfeeb5b2de324f62d7b44f15cfead3fc20d51ca6c5989f345dad03db22",
+          "raw_output_bytes": 9360600,
+          "gzip_path": "physics/0002-v6-return-control-noise.output.json.gz",
+          "gzip_sha256": "2c84810a0797d675fe49287cb4aa182dde31708e8902bcd397e3c303d5da7594",
+          "execution": "physics/0002-v6-return-control-noise.execution.json"
+        },
+        {
+          "batch": "0003-v6-return-control-noise",
+          "stage": "v6-return-control-noise",
+          "cases": 12,
+          "raw_output_sha256": "fe6505b979a649307a0e28d0df2594cc6c42b2c7a8b7c8455b5d69cf9670c306",
+          "raw_output_bytes": 21897729,
+          "gzip_path": "physics/0003-v6-return-control-noise.output.json.gz",
+          "gzip_sha256": "0872a2057b8bbb09530116f15d40920f683485c6183e9d32bc3012c59fd3f3e5",
+          "execution": "physics/0003-v6-return-control-noise.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-v7-control-clean-i1-v1",
+      "cycle": "bounded-repair-v3",
+      "actual_cases": 4,
+      "reported_passed": 3,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "c0f2cd6e79d87dc53d1f64b1bc3f5341e62e67bcafabce4fc853a035e8f3c446",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-v7-control-clean-i1-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-v7-return-control-clean",
+          "stage": "v7-return-control-clean",
+          "cases": 4,
+          "raw_output_sha256": "526e94469c06ae663137f47f8541a76895e1f5a629c204ba00fe068c4ac19d7c",
+          "raw_output_bytes": 4850053,
+          "gzip_path": "physics/0000-v7-return-control-clean.output.json.gz",
+          "gzip_sha256": "01693573365fb4d8c9841396c734e45347b37df102784f6757a3867e8cdd28b2",
+          "execution": "physics/0000-v7-return-control-clean.execution.json"
+        }
+      ]
+    },
+    {
+      "path": "pcg/results/workshop-batch30-d04-v7-control-clean-v1",
+      "cycle": "bounded-repair-v3",
+      "actual_cases": 4,
+      "reported_passed": 4,
+      "summary_interpretation": "success is the local historical check, not production admission",
+      "batches_sha256": "b7a4d4f07df406a8bb5e18efb68fa9e6453973ca5d02880205dd9941a9535527",
+      "source_binding_path": "pcg/results/workshop-batch30-d04-v7-control-clean-v1/source_binding.json",
+      "raw_batches": [
+        {
+          "batch": "0000-v7-return-control-clean",
+          "stage": "v7-return-control-clean",
+          "cases": 4,
+          "raw_output_sha256": "7a2c2aa54eaa8845d4fdc3b385b0a688018dc5fff596715d06c8514cb20c6260",
+          "raw_output_bytes": 2267540,
+          "gzip_path": "physics/0000-v7-return-control-clean.output.json.gz",
+          "gzip_sha256": "9e31ff9c255069bbd65cf148546d07e3f25923c707ae8fa326283eb87ecbf65d",
+          "execution": "physics/0000-v7-return-control-clean.execution.json"
+        }
+      ]
+    }
+  ]
+}

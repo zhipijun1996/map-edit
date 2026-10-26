@@ -1,0 +1,22 @@
+{
+ "schema":"pcg/d05-moving-missed-catch-validation/v2",
+ "prior":"protocol-v3.json",
+ "previous_actual_cases":528,
+ "previous_moving_holdout_cases":0,
+ "maximum_actual_cases":472,
+ "combined_fixture_budget":1000,
+ "reason":"Moving v1 104screen retained0. Actual long A-to-moving-bell shots miss or stop too far past original dock under6degree noise. All original failures remain.",
+ "repair_domain":"After actual returnA, walk on original bank to a closer visible firing point before observing the actual incoming carrier and pausing it. Geometry, query implementation, original physics, capability/resource and strict task check unchanged.",
+ "controls":[{"id":0,"shore_x":185,"incoming_x":[365,390]},{"id":1,"shore_x":205,"incoming_x":[365,390]},{"id":2,"shore_x":220,"incoming_x":[365,390]},{"id":3,"shore_x":205,"incoming_x":[390,420]}],
+ "calibration_seed":261029120,
+ "holdout_seed":261029121,
+ "seed_policy":"Same calibration seed as moving v1; no seed reset. Moving held seed121 has never run or been inspected.",
+ "screen":"2interfaces x4controls x(clean1+mild6+moderate6)=104; retain clean1,mild>=5/6,moderate>=4/6",
+ "full_calibration":"Original evaluate12 clean/mild/mod samples for retained controls, maximum288",
+ "selection":"Original regular passing per-interface control with highest min mild/mod, then average, then lowest control ID; freeze before held, no held fallback",
+ "holdout":"Original regular36 each selected interface, max72; untouched moving held121",
+ "expected_maximum_new":464,
+ "strict_purpose":"Unchanged moving_v1: initial started-carrier lower-floor miss, real stairs/A, actual dock pause then true first-catch/refill retry and stable rewardB",
+ "scope":"Recovery only; no new Module count or physics mechanism",
+ "production_admitted":false
+}

@@ -2,6 +2,14 @@
 
 # 关卡生成工作区
 
+## 当前执行：修订核心优先，新增30平原Module（2026-10-26）
+
+当前8/30新增候选：D05追接、C01换脚桥、D04修订停台、C02空中气闸各两份需求，见`generation/workshop/plains30-v1/manifest-progress-8-v2.json`与README。总库98→108含旧D04另2份有效技术记录但因更省取奖绕法设计暂扣，不计8；原J06/J03四版暂扣不变。D03两次full各1498案例未达原regular，不计候选；当前r3真实perch缩短第二射距，协议v8先注册。C03/C04在开发，不能当库存。人工观感/试玩/生产准入UNKNOWN。
+
+双门Cell最终`batch30_cell/runner_v3.gd`+`main_v3.tscn`：117Harness+3native=120，恰一开一关、玩家/敌人完整身体防夹，原弹丸/资源/生命周期。原话、12设计卡、预算与失败在`creative-production/batch30/`。D04r2四完整回程另320case通过；D05两类所选恢复过cal/held，992是含失败谱系成本。两套真实C01→D05连续试件保留原实体精确并集，163实际运行，不新增Module/不签通用装配。C01视频2帧support_id及接缝片同类差异strict失败，明确review-only；其他已发布核心片严格核对通过。
+
+统一`batch30_runtime/produce_v2.py`复用原`plains50_ports.produce_v2`/evaluate/produce/store；gateB和移动铃由隔离输出adapter映射，canonical exporter支持2口显式有向路线。无新物理/候选库/Map生成器。核心原件含失败在`content-workshop-plains30-core-v1/v2`、C02在`content-workshop-plains30-c02-v1`；按需`restore_archive.py NAME --extract --prefix results/精确run/`，不要覆盖新工作源。空间整理见storage-eviction-v1与snapshot-storage-dedup-v1：字节核验归档副本/冻结快照重复存储已释放，完整压缩raw和归档保留。
+
 ## 当前优先：先修清D03/D04取舍与漏洞，保留用户D05改案（2026-10-26）
 
 最新用户要求原话见`feedback/workshop/idea-sources/human-d03-d04-clarify-and-repair/v1.json`；[D03/D04修订](../docs/l4-mapgen/d03-d04-design-repair-v2.md)将玩家取舍与软锁/免费改位等方案漏洞分开。当前是设计逻辑修订，几何/真实物理仍NOT_RUN，不得当作已完成Module。D05最新用户改案为`human-d05-bell-carrier-catch`：跳起左下击铃，人物右上反冲、平台右移接人，再起跳到岸；先原型验证核心关系，不能替换成普通等台。此前J06/J03仍因无聊暂扣。

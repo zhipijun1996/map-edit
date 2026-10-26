@@ -25,7 +25,7 @@ def counter_cases(c):
     for row in rows:row['family']=c['family']
     return rows
 
-def run(name,only=None,interfaces=None,*,recipe_module=None,export_script=None,protocol_config=None,extra_sources=None,outcome_checker=None):
+def run(name,only=None,interfaces=None,*,recipe_module=None,export_script=None,protocol_config=None,extra_sources=None,outcome_checker=None,runner_script=None,preflight_fn=None,counter_classifier=None):
     """Reuse this orchestration for registered local recipes; original defaults stay frozen."""
     rules=recipe_module or recipes
     exporter=Path(export_script or HERE/'export_v1.mjs')
@@ -42,10 +42,10 @@ def run(name,only=None,interfaces=None,*,recipe_module=None,export_script=None,p
     write(root/'protocol.json',dict(schema='pcg/plains50-multiport-protocol/v1',recipes=requested,calibration_seed=calibration_seed,holdout_seed=holdout_seed,seed_stride=1009,maximum_source_revisions=config['maximum_source_revisions'],maximum_cases_per_proposal=maximum_cases,screen_mild=6,screen_minimum_valid=5,regular_policy='original unchanged',minimum_counters_per_route=18,canonical_witness='clean exact input fixed before holdout',selection='all declared outlets must qualify; optional via routes are still individually qualified',human_approval='UNKNOWN'))
     for recipe in requested:
         index=rules.RECIPES.index(recipe)
-        started=time.perf_counter();engine=WorkshopEngine(root/recipe,extra_sources=[Path(__file__),Path(rules.__file__),exporter]+list(extra_sources or []))
+        started=time.perf_counter();engine=WorkshopEngine(root/recipe,extra_sources=[Path(__file__),Path(rules.__file__),exporter]+list(extra_sources or []),runner_script=runner_script)
         sources=[c for i in wanted_interfaces for c in rules.layouts(recipe,i)];specs=[next(c['map_specification']for c in sources if c['interface']==i)for i in wanted_interfaces]
         write(engine.out/'protocol.json',dict(schema='pcg/content-workshop-protocol/v1',calibration_seed=calibration_seed+index*1009,holdout_seed=holdout_seed+index*1009,maximum_actual_cases=maximum_cases,selection='single authored geometry/program per interface/route; clean/mild+counter gate; original regular calibration then independent holdout'))
-        write(engine.out/'source-candidates.json',dict(cases=sources));static_preflight(engine,sources)
+        write(engine.out/'source-candidates.json',dict(cases=sources));(preflight_fn or static_preflight)(engine,sources)
         clean={};screen=[]
         for c,r,e in engine.run(sources,'clean-screen'):
             p=rules.purpose(c,r);screen.append(dict(id=c['id'],level='clean',ok=p['ok'],purpose=p,evidence=e))
@@ -61,7 +61,7 @@ def run(name,only=None,interfaces=None,*,recipe_module=None,export_script=None,p
             if wanted!=got:chosen=[c for c in chosen if c['interface']!=interface]
         decisions={};counter_rows=[]
         for c,r,e in engine.run([v for c in chosen for v in alt_fn(c)],'counterexample'):
-            cp=rules.purpose(c,r);outcome=outcome_fn(c,r);invalid=outcome['ok']and not cp['ok'];decisions[c['id']]=dict(safe_stable=bool(r['ok']),same_external_outcome=outcome,invalidates_design=invalid,design_check=cp,evidence=e)
+            cp=rules.purpose(c,r);outcome=outcome_fn(c,r);classification=counter_classifier(c,r,cp,outcome,clean.get(c['id'].split('-counter-')[0],{}).get('result'))if counter_classifier else {};invalid=classification.get('invalidates_design',outcome['ok']and not cp['ok']);decisions[c['id']]=dict(safe_stable=bool(r['ok']),same_external_outcome=outcome,invalidates_design=invalid,design_check=cp,counter_classification=classification,evidence=e)
             counter_rows.append(dict(id=c['id'],base_id=c['id'].split('-counter-')[0],kind=c['counterexample_kind'],safe_stable=bool(r['ok']),invalidates_design=invalid,evidence=e))
         write(engine.out/'counterexamples.json',counter_rows)
         bad={r['base_id']for r in counter_rows if r['invalidates_design']}
