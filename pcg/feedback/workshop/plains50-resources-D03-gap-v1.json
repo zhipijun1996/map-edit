@@ -1,0 +1,131 @@
+{
+  "schema": "pcg/unsupported-proposal-gap/v1",
+  "id": "plains50-resources-D03-gap-v1",
+  "proposal": "PR-D03",
+  "type": "technical_experiment",
+  "status": "needs_generation_rule",
+  "source_task": "/root/plains50_resources",
+  "mechanism_probe_cases": 4,
+  "actual_observations": [
+    {
+      "id": "plains50-D03-finite-health-d14",
+      "accepted_shots": 2,
+      "stable_exit": true,
+      "hp": 5.0,
+      "observed_air_refunds": 2,
+      "enemies": [
+        {
+          "dead": false,
+          "hp": 1.0,
+          "id": "plains_sentry",
+          "state": "idle",
+          "x": 92.6000061035156,
+          "y": 422.0
+        }
+      ],
+      "evidence": {
+        "batch": "0000-resource-probe",
+        "index": 0,
+        "output": "physics/0000-resource-probe.output.json.gz",
+        "raw_output_sha256": "484b3dd9676bb9ddb12e2033ced0f5bad3369e71ce305c333fd399146940cff2"
+      }
+    },
+    {
+      "id": "plains50-D03-finite-health-d18",
+      "accepted_shots": 3,
+      "stable_exit": true,
+      "hp": 5.0,
+      "observed_air_refunds": 3,
+      "enemies": [
+        {
+          "dead": true,
+          "hp": 0.0,
+          "id": "plains_sentry",
+          "state": "recovery",
+          "x": 92.6000061035156,
+          "y": 422.0
+        }
+      ],
+      "evidence": {
+        "batch": "0000-resource-probe",
+        "index": 1,
+        "output": "physics/0000-resource-probe.output.json.gz",
+        "raw_output_sha256": "484b3dd9676bb9ddb12e2033ced0f5bad3369e71ce305c333fd399146940cff2"
+      }
+    },
+    {
+      "id": "plains50-D03-finite-health-d22",
+      "accepted_shots": 3,
+      "stable_exit": true,
+      "hp": 5.0,
+      "observed_air_refunds": 3,
+      "enemies": [
+        {
+          "dead": true,
+          "hp": 0.0,
+          "id": "plains_sentry",
+          "state": "recovery",
+          "x": 92.6000061035156,
+          "y": 422.0
+        }
+      ],
+      "evidence": {
+        "batch": "0000-resource-probe",
+        "index": 2,
+        "output": "physics/0000-resource-probe.output.json.gz",
+        "raw_output_sha256": "484b3dd9676bb9ddb12e2033ced0f5bad3369e71ce305c333fd399146940cff2"
+      }
+    },
+    {
+      "id": "plains50-D03-finite-health-d26",
+      "accepted_shots": 3,
+      "stable_exit": true,
+      "hp": 5.0,
+      "observed_air_refunds": 2,
+      "enemies": [
+        {
+          "dead": false,
+          "hp": 1.0,
+          "id": "plains_sentry",
+          "state": "idle",
+          "x": 92.6000061035156,
+          "y": 422.0
+        }
+      ],
+      "evidence": {
+        "batch": "0000-resource-probe",
+        "index": 3,
+        "output": "physics/0000-resource-probe.output.json.gz",
+        "raw_output_sha256": "484b3dd9676bb9ddb12e2033ced0f5bad3369e71ce305c333fd399146940cff2"
+      }
+    }
+  ],
+  "source_files": [
+    {
+      "path": "pcg/prototype/creative_batches/plains50_resources/d03_probe_v1.py",
+      "sha256": "3dbd87822a22aedf36471d4f1322861d12d09f5843af6aad9c0f46cde8e7fcc0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-plains50-D03-resource-probe-v1/source_binding.json",
+      "sha256": "01884854e718c8989b1b8b6d4de0aad8f469212138ddeecf7fc807d73c9543c2"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-D03-resource-probe-v1/probe-results.json",
+      "sha256": "97cf5ba745eaf5f2da29d5f6f6277f88cec3090f178075ae9d6ec9ba03ecbdbf"
+    }
+  ],
+  "searched": "4 native timings14/18/22/26 on original air-refund geometry, same real enemy within each case; no shared two-route scene produced",
+  "missing_conditions": [
+    "One persistent scene combining two optional reward paths and shared three-hit enemy life.",
+    "Each fast path actual required hit/recovery cost and alternative behavior after enemy death.",
+    "Continuous attempt/retry/return without resetting enemyHP/resources/mechanisms."
+  ],
+  "next_revision": "Implement the complete local shared-world two-route rule before claiming PR-D03; independently test untouched rewards and main exit after killing enemy. Mechanism probes do not meet the proposal.",
+  "not_substituted_by": "low-ray-recoil-return is a separately named proposal, not D03 completion",
+  "calibration": "NOT_RUN",
+  "holdout": "NOT_RUN",
+  "candidate_enrollment": "NOT_RUN",
+  "production_admitted": false
+}

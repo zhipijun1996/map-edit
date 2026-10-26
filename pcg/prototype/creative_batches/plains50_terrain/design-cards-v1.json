@@ -1,0 +1,246 @@
+{
+  "schema": "pcg/design-proposals/v1",
+  "cards": [
+    {
+      "id": "plains50-terrain/terrain-slot",
+      "title": "窄道接收岸适配",
+      "observation": "入口可见上下荆棘与远岸宝箱，观察完整身体通道。",
+      "decision": "选择起跳点与反冲方向，让身体穿过中间开口并落在指定宽岸。",
+      "causality": "反向射击增加水平位移；岩体和荆棘限制身体扫掠。",
+      "cells": [
+        "原岩体",
+        "原荆棘",
+        "原反冲",
+        "原奖励事务"
+      ],
+      "resources": "单空中枪；只有真实落地恢复。",
+      "terrain": "上岩底刺、下岩顶刺与不同高差/宽度接收岸，无外框。",
+      "reward": "入口可见远岸宝箱，真实支持接触后领取。",
+      "recovery": "下方安全地面可接住失误；返回完整路线UNKNOWN，不传送。",
+      "direction": "仅前向已请求，回程UNKNOWN。",
+      "cheap": [
+        "普通跳",
+        "越顶",
+        "省略枪",
+        "从地面绕行"
+      ],
+      "difference": "旧G01的明确空间适配，不计新家族。",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_terrain",
+      "status": "rule_requires_real_physics",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "spatial_demands": [
+        {
+          "id": "slot-low-approach",
+          "parameters": {
+            "recipe": "terrain-slot",
+            "interface": 0,
+            "front": 482,
+            "top": 428,
+            "landing_width": 230
+          }
+        },
+        {
+          "id": "slot-wide-exit",
+          "parameters": {
+            "recipe": "terrain-slot",
+            "interface": 1,
+            "front": 508,
+            "top": 442,
+            "landing_width": 260
+          }
+        }
+      ],
+      "human_fun": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-terrain/terrain-brake",
+      "title": "先落过檐，再刹入侧袋",
+      "observation": "入口上岸外沿下方能看见宝箱凹槽，但岩唇挡住直落。",
+      "decision": "承诺先越唇下落，低于实体后反冲制动返向落入凹槽。",
+      "causality": "同一枪先制动向右运动再产生返向位移，身体必须从岩底下穿过。",
+      "cells": [
+        "原岩体",
+        "原反冲",
+        "原奖励事务"
+      ],
+      "resources": "单空中枪，实际落地恢复。",
+      "terrain": "不同岩唇和凹槽高差/宽度，凹槽出口左侧，无额外边框。",
+      "reward": "凹槽可见宝箱，落稳真实领取。",
+      "recovery": "下方低安全层接失误；完整返程未验证。",
+      "direction": "高入口→低左出口，与普通向右跨越不同；回程UNKNOWN。",
+      "cheap": [
+        "绕岩左缘",
+        "直接落转无枪",
+        "长跳越檐",
+        "提前射击"
+      ],
+      "difference": "旧G02需求适配，不新增家族。",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_terrain",
+      "status": "rule_requires_real_physics",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "spatial_demands": [
+        {
+          "id": "brake-short-pocket",
+          "parameters": {
+            "recipe": "terrain-brake",
+            "interface": 0,
+            "lip": 254,
+            "top": 450,
+            "x": 112,
+            "width": 112
+          }
+        },
+        {
+          "id": "brake-deep-pocket",
+          "parameters": {
+            "recipe": "terrain-brake",
+            "interface": 1,
+            "lip": 248,
+            "top": 464,
+            "x": 102,
+            "width": 120
+          }
+        }
+      ],
+      "human_fun": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-terrain/landing-reload-relay",
+      "title": "必须留一次真实落地补枪",
+      "observation": "两个连续空腔，中间唯一高处安全岸与终岸奖励同时可见。",
+      "decision": "先把第一枪花在过第一空腔，主动落中岸恢复，再用新的一枪跨第二空腔；不能只延长一段飞行。",
+      "causality": "单空中枪限制连飞，真实中岸接触恢复使第二次反冲可执行。",
+      "cells": [
+        "原单空中枪资源",
+        "原地面恢复",
+        "原普通跳",
+        "原荆棘",
+        "原岩体",
+        "原奖励事务"
+      ],
+      "resources": "不增加枪上限；第一枪消耗与落地后恢复均由原组件执行。",
+      "terrain": "两个窄道横向相接，中岸支撑有足够身体宽度；低恢复层距终岸过大，不能直接跳上。",
+      "reward": "终岸宝箱提前可见，中岸不伪装额外奖励。",
+      "recovery": "允许落到低层保命，短重试/回程尚UNKNOWN；不自动重置。",
+      "direction": "左入口→右出口；不同第二岸高度是两需求。",
+      "cheap": [
+        "省略任一枪",
+        "单枪直接终岸",
+        "不落中岸",
+        "低地面绕行"
+      ],
+      "difference": "将选择落地变成资源续航条件；属于跨越关系的组合假设，独立critic决定是否新家族。",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_terrain",
+      "status": "rule_requires_real_physics",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "spatial_demands": [
+        {
+          "id": "reload-level-relay",
+          "parameters": {
+            "recipe": "landing-reload-relay",
+            "interface": 0,
+            "first_front": 480,
+            "first_top": 438,
+            "second_front": 945,
+            "second_top": 438
+          }
+        },
+        {
+          "id": "reload-rising-relay",
+          "parameters": {
+            "recipe": "landing-reload-relay",
+            "interface": 1,
+            "first_front": 500,
+            "first_top": 442,
+            "second_front": 985,
+            "second_top": 426
+          }
+        }
+      ],
+      "human_fun": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-terrain/pocket-reload-climb",
+      "title": "入袋取稳，再转向高出口",
+      "observation": "先看到檐下宽凹槽，右上方另一岸显示继续出口。",
+      "decision": "先下落制动进凹槽，真实落地恢复后选向上反冲离开；不能把去程反向输入当返回证明。",
+      "causality": "第一枪制动入袋，落地补给把下降问题变成下一段上升问题。",
+      "cells": [
+        "原反冲",
+        "原落地资源恢复",
+        "原岩体",
+        "原奖励事务"
+      ],
+      "resources": "两枪必须隔真实支持接触，不设置枪资源。",
+      "terrain": "高入口岩唇、下侧袋、侧上终岸构成不同高度接口。",
+      "reward": "终岸可见宝箱，凹槽承担资源恢复而非假奖励。",
+      "recovery": "失足低层保命；连续完整恢复和反向路线未验。",
+      "direction": "先右→左下，再右上，通用回程UNKNOWN。",
+      "cheap": [
+        "入口直接反冲终岸",
+        "跳过凹槽",
+        "无枪落转",
+        "省略任一枪"
+      ],
+      "difference": "G02接一个真实地面恢复后的攀升，是组合候选，不冒称独立新家族。",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_terrain",
+      "status": "rule_requires_real_physics",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "spatial_demands": [
+        {
+          "id": "pocket-rising-departure",
+          "parameters": {
+            "recipe": "pocket-reload-climb",
+            "interface": 0,
+            "lip": 250,
+            "pocket_top": 450,
+            "pocket_x": 105,
+            "final_front": 430,
+            "final_top": 330
+          }
+        },
+        {
+          "id": "pocket-side-departure",
+          "parameters": {
+            "recipe": "pocket-reload-climb",
+            "interface": 1,
+            "lip": 258,
+            "pocket_top": 464,
+            "pocket_x": 112,
+            "final_front": 450,
+            "final_top": 348
+          }
+        }
+      ],
+      "human_fun": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false
+    }
+  ]
+}

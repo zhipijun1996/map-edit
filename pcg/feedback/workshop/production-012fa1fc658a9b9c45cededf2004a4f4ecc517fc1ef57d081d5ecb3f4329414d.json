@@ -1,0 +1,24 @@
+{
+  "schema": "pcg/production-rule-feedback/v1",
+  "type": "technical_experiment",
+  "production_recipe": "adverse-refund-reversal",
+  "rule_source_sha256": "c4f896df272db183da04882ba082c80005832b0dad3428a89b3c5ad39a792ac1",
+  "failure_key": "012fa1fc658a9b9c45cededf2004a4f4ecc517fc1ef57d081d5ecb3f4329414d",
+  "flag": "controls_issue",
+  "stage": "partial_interface_calibration_failed",
+  "source_run": "pcg/results/workshop-plains50-new-resource-production-v1/round-00",
+  "failures": [
+    {
+      "specification": "plains50-new/adverse-refund-reversal/1",
+      "calibration_moderate": "7/12 below original regular; no holdout executed for that old interface"
+    }
+  ],
+  "scope": "Blocks rerunning the old coupled two-interface compilation; first accepted version remains valid and separately retrievable.",
+  "next_revision": "Use production_adverse_v2 only for explicit wider receiving footprint. Original geometry query remains unsatisfied; do not rename or lower threshold.",
+  "resolved_by": {
+    "new_source": "pcg/prototype/creative_batches/plains50_new_relations/production_adverse_v2.py",
+    "new_specification": "plains50-new/adverse-refund-reversal/1-wide",
+    "new_version": "sha256:fa1ab9221e4c254370bb56fa7f09bd1e5c364e46ddac8c1be739a31634f49afb"
+  },
+  "production_admitted": false
+}

@@ -1,0 +1,1065 @@
+{
+  "schema": "pcg/plains50-enemy-publication/v1",
+  "versions": 8,
+  "existing_relationships": 4,
+  "new_action_families_claimed": 0,
+  "full_production_physics_cases": 944,
+  "pilot_physics_cases": 28,
+  "total_real_physics_cases": 972,
+  "strict_video_representatives": 4,
+  "held_purpose_passes": 284,
+  "held_trials": 288,
+  "calibration_purpose_passes": 280,
+  "calibration_trials": 288,
+  "cheap_counterexamples": 190,
+  "shared_physics_or_harness_modified": false,
+  "library": "pcg/map_directed/library",
+  "modules": [
+    {
+      "id": "E01",
+      "title": "引敌开门 · 近接口",
+      "recipe": "attack-relay",
+      "interface": 0,
+      "contentVersion": "sha256:47a74c8bf9487f1fd05592152dd78e93312ff9785b9f229ae1aa7909e9dc8618",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/attack-relay/d0/r2",
+        "region": "plains",
+        "required_family": "enemy-attack-relay",
+        "objective": {
+          "recipe": "attack-relay",
+          "relationship": "actual native enemy attack commitment supplies a short gate opening",
+          "derived_resource_sha256": "not_used",
+          "spatial_demand": {
+            "entry_x": 80,
+            "exit_x": 460,
+            "floor_width": 850,
+            "ceiling_width": 400
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/47a74c8bf9487f1fd05592152dd78e93312ff9785b9f229ae1aa7909e9dc8618/module.mapnote.json",
+        "sha256": "a5b317d4fd8345e62ff30c6aceab6eaa44e70057e472e0e65223ae6ae349d031"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/47a74c8bf9487f1fd05592152dd78e93312ff9785b9f229ae1aa7909e9dc8618/record.json",
+        "sha256": "0851be2d378400a9f2dface743c4795491090135c15f817f94dfc395f6aa1151"
+      },
+      "case_id": "p50-enemy-r2-attack-relay-d0-c0",
+      "case_sha256": "18b77477c0571891abca624f74579df87728631d3e62a147b18bcd3821bbfdf7",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-attack-relay/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": true,
+      "video": {
+        "id": "p50-enemy-r2-attack-relay-d0-c0",
+        "family": "enemy-attack-relay",
+        "file": "enemy-attack-relay.mp4",
+        "sha256": "9ecc55186a840d9882cc2384ac43424038ed8d58203073bdcf3b37a29bb0a2d5",
+        "bytes": 156621,
+        "duration": 3.816667,
+        "frames_exact": 164,
+        "exact_fields": [
+          "frame",
+          "x",
+          "y",
+          "vx",
+          "vy",
+          "grounded",
+          "axis",
+          "requested",
+          "shot_charges",
+          "shot_cooldown",
+          "jumps_used",
+          "jump_maximum",
+          "energy",
+          "hp",
+          "traversal_state",
+          "real_velocity",
+          "normal_velocity",
+          "module_clock",
+          "moving_platforms",
+          "saws",
+          "support_id",
+          "goal_stable_frames"
+        ],
+        "cell_events_exact": true,
+        "reward_and_carrier_state_exact": true,
+        "case_sha256": "e9e1c0b2e11142ea312e34602e651cd86a5e296a600b90d6d2df7830a9af4318",
+        "physics_binding_sha256": "33f6c86d0db87450377151a22aad91f776822bf1571ae760892b42972d5ceeab",
+        "physics_run": "pcg/results/workshop-plains50-enemy-r2-attack-relay/round-00",
+        "native_trace_sha256": "cab45a5606bc821a80c238099efe102ee28de9243685cc691b1ecc0f6bad7db0",
+        "speed": 1,
+        "human_fun": "unreviewed",
+        "public_path": "generation/workshop/plains50-enemy-v1/videos/enemy-attack-relay.mp4"
+      },
+      "group_video_not_a_recording_for_this_exact_adapter": false,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E02",
+      "title": "引敌开门 · 远/低接口",
+      "recipe": "attack-relay",
+      "interface": 1,
+      "contentVersion": "sha256:bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/attack-relay/d1/r2",
+        "region": "plains",
+        "required_family": "enemy-attack-relay",
+        "objective": {
+          "recipe": "attack-relay",
+          "relationship": "actual native enemy attack commitment supplies a short gate opening",
+          "derived_resource_sha256": "not_used",
+          "spatial_demand": {
+            "entry_x": 110,
+            "exit_x": 520,
+            "floor_width": 980,
+            "ceiling_width": 470
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff/module.mapnote.json",
+        "sha256": "841c805f2e6c8e1ca72a9c287e39103d2cf9978a73b646e674d8fbb9f67c42b6"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff/record.json",
+        "sha256": "5f6f9883848f14d1fad1cd52342b2c7199a09f5933fb536bd8373dec3af3d566"
+      },
+      "case_id": "p50-enemy-r2-attack-relay-d1-c0",
+      "case_sha256": "b41357fca154b43f2e8590620c3bc2d3d5cb96bcd1439d12fc686b34b2ed4b78",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-attack-relay/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": false,
+      "video": null,
+      "group_video_not_a_recording_for_this_exact_adapter": true,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E03",
+      "title": "清除吸弹射界 · 近接口",
+      "recipe": "clear-sightline",
+      "interface": 0,
+      "contentVersion": "sha256:2e69026fb65a79c09aa2b0ac25d2bac5161087107dc9605dd861a79ef06d3c0f",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/clear-sightline/d0/r2",
+        "region": "plains",
+        "required_family": "enemy-clear-sightline",
+        "objective": {
+          "recipe": "clear-sightline",
+          "relationship": "original 3HP enemy absorbs shots and prevents contact-safe passage; actual defeat clears the only bell sightline",
+          "geometry_revision": "near-range and horizontal initial shots",
+          "spatial_demand": {
+            "entry_x": 90,
+            "exit_x": 480,
+            "bell_x": 245,
+            "gate_x": 320,
+            "floor_width": 850
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/2e69026fb65a79c09aa2b0ac25d2bac5161087107dc9605dd861a79ef06d3c0f/module.mapnote.json",
+        "sha256": "ddeb3c88fe4c1095ceca6acef0a7e6d228518264c390ee3221937a0cefa0aee2"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/2e69026fb65a79c09aa2b0ac25d2bac5161087107dc9605dd861a79ef06d3c0f/record.json",
+        "sha256": "f17d1c430779e56cae23c7fa68637888be96ee89ca5bfc04dba465eca3aa4478"
+      },
+      "case_id": "p50-enemy-r2-clear-sightline-d0-c1",
+      "case_sha256": "819a9e6d95c123f8c97dff56983ff30a97c359b79874ea421e9ebde2ecbf90f7",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-clear-sightline/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": true,
+      "video": {
+        "id": "p50-enemy-r2-clear-sightline-d0-c1",
+        "family": "enemy-clear-sightline",
+        "file": "enemy-clear-sightline.mp4",
+        "sha256": "db68cb49648e364ee31f0a6d699e6d851757c14a457a01f8eaae65fbd2baf3b9",
+        "bytes": 223165,
+        "duration": 4.25,
+        "frames_exact": 190,
+        "exact_fields": [
+          "frame",
+          "x",
+          "y",
+          "vx",
+          "vy",
+          "grounded",
+          "axis",
+          "requested",
+          "shot_charges",
+          "shot_cooldown",
+          "jumps_used",
+          "jump_maximum",
+          "energy",
+          "hp",
+          "traversal_state",
+          "real_velocity",
+          "normal_velocity",
+          "module_clock",
+          "moving_platforms",
+          "saws",
+          "support_id",
+          "goal_stable_frames"
+        ],
+        "cell_events_exact": true,
+        "reward_and_carrier_state_exact": true,
+        "case_sha256": "e1a7e6af685fd60b5d4084c13a845c248b2722abd651ce74aec4112bf5d18a6e",
+        "physics_binding_sha256": "eaf25874f9c34f44c351d7d2a7f615b1c438b98ddc147b1222f93ef1ea49d14f",
+        "physics_run": "pcg/results/workshop-plains50-enemy-r2-clear-sightline/round-00",
+        "native_trace_sha256": "875cbb446d30a3111735cdf023985d09202e1cc8a55cb8c57d9e9a165f59cbf9",
+        "speed": 1,
+        "human_fun": "unreviewed",
+        "public_path": "generation/workshop/plains50-enemy-v1/videos/enemy-clear-sightline.mp4"
+      },
+      "group_video_not_a_recording_for_this_exact_adapter": false,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E04",
+      "title": "清除吸弹射界 · 远/低接口",
+      "recipe": "clear-sightline",
+      "interface": 1,
+      "contentVersion": "sha256:e49f2d38b96ea2813057f24f1f6aab11b40d3c6da6a20b007681ed61c6284a20",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/clear-sightline/d1/r2",
+        "region": "plains",
+        "required_family": "enemy-clear-sightline",
+        "objective": {
+          "recipe": "clear-sightline",
+          "relationship": "original 3HP enemy absorbs shots and prevents contact-safe passage; actual defeat clears the only bell sightline",
+          "geometry_revision": "near-range and horizontal initial shots",
+          "spatial_demand": {
+            "entry_x": 90,
+            "exit_x": 560,
+            "bell_x": 265,
+            "gate_x": 355,
+            "floor_width": 1000
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/e49f2d38b96ea2813057f24f1f6aab11b40d3c6da6a20b007681ed61c6284a20/module.mapnote.json",
+        "sha256": "d390acbb29ac743e1a4eb5644c6c36a89fdd570896500ff6100b8eda12d0fabe"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/e49f2d38b96ea2813057f24f1f6aab11b40d3c6da6a20b007681ed61c6284a20/record.json",
+        "sha256": "65cd7bc641a0a6abca04ce17c60a20ae86e3f1438f16ba35a1b7d0394e6bd2cc"
+      },
+      "case_id": "p50-enemy-r2-clear-sightline-d1-c1",
+      "case_sha256": "152be0fd99408118ae9b71dc3ee3acb366515215e4799e0267c5fd519da84e22",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-clear-sightline/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": false,
+      "video": null,
+      "group_video_not_a_recording_for_this_exact_adapter": true,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E05",
+      "title": "保留活体供电 · 近接口",
+      "recipe": "live-enemy-sensor",
+      "interface": 0,
+      "contentVersion": "sha256:610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/live-enemy-sensor/d0/r2",
+        "region": "plains",
+        "required_family": "enemy-sensor-hold",
+        "objective": {
+          "role": "shoot enemy into live occupancy zone, maintain actual door energization until crossing; killing is not an artificial checker ban",
+          "spatial_demand": {
+            "entry_x": 60,
+            "exit_x": 620,
+            "floor_width": 1040
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa/module.mapnote.json",
+        "sha256": "b7e35be179f080f231bd15175d98e0e8b455b31e4933128ce7c9fcfc89dca326"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa/record.json",
+        "sha256": "9f0af17f3578890e50f2cab14cd29b5fca759754d62eb00d394f491bc9e2dd3c"
+      },
+      "case_id": "p50-enemy-r2-live-enemy-sensor-d0-c0",
+      "case_sha256": "1d7f83481833073ca22039f0050acad77a10aed64b0cfc68a8100d6d9942f006",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-live-enemy-sensor/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": true,
+      "video": {
+        "id": "p50-enemy-r2-live-enemy-sensor-d0-c0",
+        "family": "enemy-sensor-hold",
+        "file": "enemy-sensor-hold.mp4",
+        "sha256": "2391c46cd30082db2d26d40a6870306a83b418dd1ccc55645565095e881e7b72",
+        "bytes": 188365,
+        "duration": 3.183333,
+        "frames_exact": 126,
+        "exact_fields": [
+          "frame",
+          "x",
+          "y",
+          "vx",
+          "vy",
+          "grounded",
+          "axis",
+          "requested",
+          "shot_charges",
+          "shot_cooldown",
+          "jumps_used",
+          "jump_maximum",
+          "energy",
+          "hp",
+          "traversal_state",
+          "real_velocity",
+          "normal_velocity",
+          "module_clock",
+          "moving_platforms",
+          "saws",
+          "support_id",
+          "goal_stable_frames"
+        ],
+        "cell_events_exact": true,
+        "reward_and_carrier_state_exact": true,
+        "case_sha256": "07ac699ab08f80764f69d3f39c353ed0dbb60ad9f7ec22edc9eb49ae3218fc5b",
+        "physics_binding_sha256": "9a6480acb1ccd89673413f32d7f8ae58c00476565525e5a3f05d57f6a6bba1d9",
+        "physics_run": "pcg/results/workshop-plains50-enemy-r2-live-enemy-sensor/round-00",
+        "native_trace_sha256": "fd30423bba99dff9834745564cc40a892d8a51e157bc9708fa9df8a82811abdb",
+        "speed": 1,
+        "human_fun": "unreviewed",
+        "public_path": "generation/workshop/plains50-enemy-v1/videos/enemy-sensor-hold.mp4"
+      },
+      "group_video_not_a_recording_for_this_exact_adapter": false,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E06",
+      "title": "保留活体供电 · 远/低接口",
+      "recipe": "live-enemy-sensor",
+      "interface": 1,
+      "contentVersion": "sha256:2c5246ef3fbb352dbc46090e0627b6154fb6eba98576eba4d365fa1484864ef9",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/live-enemy-sensor/d1/r2",
+        "region": "plains",
+        "required_family": "enemy-sensor-hold",
+        "objective": {
+          "role": "shoot enemy into live occupancy zone, maintain actual door energization until crossing; killing is not an artificial checker ban",
+          "spatial_demand": {
+            "entry_x": 100,
+            "exit_x": 720,
+            "floor_width": 1200
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/2c5246ef3fbb352dbc46090e0627b6154fb6eba98576eba4d365fa1484864ef9/module.mapnote.json",
+        "sha256": "026e50a5a623d2b32bb7d9bc47f8318e0cc78bb23a7b6e52e683930cbe7925b1"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/2c5246ef3fbb352dbc46090e0627b6154fb6eba98576eba4d365fa1484864ef9/record.json",
+        "sha256": "ca59a633451c6ccac35ad6262781ba79f0301713f6903f9f5b3fc89d8ea05c2e"
+      },
+      "case_id": "p50-enemy-r2-live-enemy-sensor-d1-c0",
+      "case_sha256": "e4fd5810ada95b922f17a02c80011d94d37144cf6085612c3b070a8d86cd5c08",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-live-enemy-sensor/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": false,
+      "video": null,
+      "group_video_not_a_recording_for_this_exact_adapter": true,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E07",
+      "title": "击退腾出落位 · 近接口",
+      "recipe": "displace-landing",
+      "interface": 0,
+      "contentVersion": "sha256:881c3c38531a177fdd0008ef8007b07db1b2595a6a04346f8d4d2ef3c40aa565",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/displace-landing/d0/r2",
+        "region": "plains",
+        "required_family": "enemy-displace-landing",
+        "objective": {
+          "recipe": "displace-landing",
+          "relationship": "Actual enemy-body knockback clears the landing footprint; defeat is an allowed substitute if it truly clears that footprint",
+          "physical_repair": "real left top thorns leave only a body-sized safe landing beside actual enemy",
+          "spatial_demand": {
+            "entry_x": 170,
+            "entry_y": 190,
+            "exit_x": 208,
+            "entry_bank_width": 350
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 190,
+        "rise": -230,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/881c3c38531a177fdd0008ef8007b07db1b2595a6a04346f8d4d2ef3c40aa565/module.mapnote.json",
+        "sha256": "450f51287a1530a541c7cf9baf0c04720eecf6251807475d2a309f017e0f6799"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/881c3c38531a177fdd0008ef8007b07db1b2595a6a04346f8d4d2ef3c40aa565/record.json",
+        "sha256": "2375ffaa0fd72b6d94049d41864b07768b1d22c9b46c78668ba3386ac9476d0f"
+      },
+      "case_id": "p50-enemy-r2-displace-landing-d0-c0",
+      "case_sha256": "be083a101c9e7170478760b50d65c2e627f7fa473de682f05bf47bdbe5387b21",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-displace-landing/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": true,
+      "video": {
+        "id": "p50-enemy-r2-displace-landing-d0-c0",
+        "family": "enemy-displace-landing",
+        "file": "enemy-displace-landing.mp4",
+        "sha256": "4cec15f25d8249c80c9b542de7156e015e5b12831ef9f7d15a8a8ac8caed66b6",
+        "bytes": 96729,
+        "duration": 2.383333,
+        "frames_exact": 78,
+        "exact_fields": [
+          "frame",
+          "x",
+          "y",
+          "vx",
+          "vy",
+          "grounded",
+          "axis",
+          "requested",
+          "shot_charges",
+          "shot_cooldown",
+          "jumps_used",
+          "jump_maximum",
+          "energy",
+          "hp",
+          "traversal_state",
+          "real_velocity",
+          "normal_velocity",
+          "module_clock",
+          "moving_platforms",
+          "saws",
+          "support_id",
+          "goal_stable_frames"
+        ],
+        "cell_events_exact": true,
+        "reward_and_carrier_state_exact": true,
+        "case_sha256": "635330643853ca3365a6fbd0a6f71d4c1d65e08a4ac674e6a64da72377d0f774",
+        "physics_binding_sha256": "eaf25874f9c34f44c351d7d2a7f615b1c438b98ddc147b1222f93ef1ea49d14f",
+        "physics_run": "pcg/results/workshop-plains50-enemy-r2-displace-landing/round-00",
+        "native_trace_sha256": "df50712c21e0b818ae46c741b41206d8bfbbf985a967e98a8a79c8dbefebb882",
+        "speed": 1,
+        "human_fun": "unreviewed",
+        "public_path": "generation/workshop/plains50-enemy-v1/videos/enemy-displace-landing.mp4"
+      },
+      "group_video_not_a_recording_for_this_exact_adapter": false,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    },
+    {
+      "id": "E08",
+      "title": "击退腾出落位 · 远/低接口",
+      "recipe": "displace-landing",
+      "interface": 1,
+      "contentVersion": "sha256:46296acaa278c9c654fd133af7fa61fc81345ed573e93aa7a9b5fc98618d30e5",
+      "port_count": 2,
+      "relations": "entry→exit only; reverse/state/seams UNKNOWN",
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/enemy/displace-landing/d1/r2",
+        "region": "plains",
+        "required_family": "enemy-displace-landing",
+        "objective": {
+          "recipe": "displace-landing",
+          "relationship": "Actual enemy-body knockback clears the landing footprint; defeat is an allowed substitute if it truly clears that footprint",
+          "physical_repair": "real left top thorns leave only a body-sized safe landing beside actual enemy",
+          "spatial_demand": {
+            "entry_x": 170,
+            "entry_y": 240,
+            "exit_x": 208,
+            "entry_bank_width": 350
+          },
+          "source_relationship": "existing family, demand adaptation not new family",
+          "campaign": "plains50-v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 240,
+        "rise": -180,
+        "space": {
+          "max_width": 1500,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/46296acaa278c9c654fd133af7fa61fc81345ed573e93aa7a9b5fc98618d30e5/module.mapnote.json",
+        "sha256": "f70d2ddaeb269b329ad6fbdae36775fc6d0c6af12b9403b78b6e25135d414e39"
+      },
+      "record": {
+        "path": "pcg/map_directed/library/candidates/46296acaa278c9c654fd133af7fa61fc81345ed573e93aa7a9b5fc98618d30e5/record.json",
+        "sha256": "ee21e94ac5d3f9a5270962caa33958ed41554449f8af7577ee5ef78eaee30e1a"
+      },
+      "case_id": "p50-enemy-r2-displace-landing-d1-c0",
+      "case_sha256": "18187aa0c64ac767fa146949e03090790905423e3f4710515a4251b449217ac6",
+      "source_run": "pcg/results/workshop-plains50-enemy-r2-displace-landing/round-00",
+      "main_scene": "pcg/prototype/creative_batches/enemy_world/main_v2.tscn",
+      "video_representative": false,
+      "video": null,
+      "group_video_not_a_recording_for_this_exact_adapter": true,
+      "human_fun": "UNKNOWN",
+      "production_admitted": false
+    }
+  ],
+  "persistent_retrieval": [
+    {
+      "specification": "plains50/enemy/attack-relay/d0/r2",
+      "contentVersion": "sha256:47a74c8bf9487f1fd05592152dd78e93312ff9785b9f229ae1aa7909e9dc8618",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/attack-relay/d1/r2",
+      "contentVersion": "sha256:bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/clear-sightline/d0/r2",
+      "contentVersion": "sha256:2e69026fb65a79c09aa2b0ac25d2bac5161087107dc9605dd861a79ef06d3c0f",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/clear-sightline/d1/r2",
+      "contentVersion": "sha256:e49f2d38b96ea2813057f24f1f6aab11b40d3c6da6a20b007681ed61c6284a20",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/live-enemy-sensor/d0/r2",
+      "contentVersion": "sha256:610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/live-enemy-sensor/d1/r2",
+      "contentVersion": "sha256:2c5246ef3fbb352dbc46090e0627b6154fb6eba98576eba4d365fa1484864ef9",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/displace-landing/d0/r2",
+      "contentVersion": "sha256:881c3c38531a177fdd0008ef8007b07db1b2595a6a04346f8d4d2ef3c40aa565",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    },
+    {
+      "specification": "plains50/enemy/displace-landing/d1/r2",
+      "contentVersion": "sha256:46296acaa278c9c654fd133af7fa61fc81345ed573e93aa7a9b5fc98618d30e5",
+      "generator_called": false,
+      "physical_cases": 0,
+      "from_existing_candidate_store": true,
+      "wrong_exit_demand_rejected": true
+    }
+  ],
+  "new_physics_in_retrieval": 0,
+  "original_quality": "regular unchanged",
+  "human_fun": "UNKNOWN",
+  "production_admitted": false
+}

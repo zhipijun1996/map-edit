@@ -7,6 +7,8 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 ## 当前优先：反冲平原
 
+最新已完成用户50件目标：`generation/workshop/plains50-v1/manifest.json`、`pcg/creative-production/curation/plains50-final-ai-review-v1.json`、`pcg/creative-production/plains50-receipt-v1.json`。新增39双口/7三口/4四口，21审阅组+29适配不是50新家族。继续工作先读本批新失败和方向/资源缺口；旧campaign-v2的未完成状态不能覆盖新回执。双口配方400、多口900为本批运行前预算，后者仍逐路执行原门槛；不是事后降低。新版注册视图`plains_workshop/catalog_v2.py`与统一`plains50_catalog.py`读取原库。下一批根据新需求继续，不把已完成50计作再次新增。
+
 用户已整体正向评价20项，当前收窄为平原，特殊能力仅反冲（保留移动/普通单跳）。先执行 [平原内容配方流程](references/plains-recoil-workflow.md) 与 `pcg/prototype/creative_batches/plains_workshop/profile-v1.json`，读取最新反馈；钩索/墙跳/二跳内容留作其他区域，不继续为数量扩展。能力兼容与反冲教学职责分别评估。
 
 ## 两个循环

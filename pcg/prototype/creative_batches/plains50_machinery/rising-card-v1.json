@@ -1,0 +1,212 @@
+{
+  "schema": "pcg/causal-design-card/v1",
+  "id": "plains50-machinery/rising-side-exit",
+  "source_type": "actual_current_codex_subagent_proposal",
+  "source_task": "/root/plains50_machinery",
+  "status": "executable_rule_requires_physics",
+  "observation": "停在地面的宽上升台、台上方带刺岩顶，以及侧上方可见宝箱。",
+  "decision": "站上台后射铃启动，读剩余头部净空和侧洞高度，选择离台时机；空中同枪暂停台并反冲入洞。",
+  "causality": "一次枪改变载台运行与人物运动；上升逐步改变可用净空和落点高度。",
+  "cells": [
+    "Original ModuleMovingPlatform controlled start/pause",
+    "Original ShotLatch receivers",
+    "Original thorns and rock",
+    "Original actor recoil and reward"
+  ],
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": "Only native resources and grounded recovery; never reset at seam.",
+  "terrain": "入口侧真实岩屏遮住两接收器，避免岸上提前停台静态跳板；顶部荆棘阻止一直乘到最高处。两份不同侧岸高度/距离/屋顶需求。",
+  "reward": "侧岸宝箱从入口可见，真实支持接触后才领取。",
+  "recovery": "低处安全地面保留，但完整连续恢复/回程未验UNKNOWN，不声称自动恢复到入口。",
+  "direction_difference": "仅entry→exit拟验证；其他方向UNKNOWN。",
+  "cheap_solutions": [
+    "岸上提前启停后静态登台",
+    "直接普通跳/反冲到侧岸",
+    "一直站台自动完成",
+    "跳过空中停台枪",
+    "越顶避开全部上升承载"
+  ],
+  "difference": "A2载台应用；与追台/下降台差别为承载造成净空持续减少。是否独立新家族由批次critic判，不自行计新家族。",
+  "demands": [
+    {
+      "schema": "map-notes/challenge-specification/v1",
+      "id": "plains50/machinery/rising-side/i0/v1",
+      "region": "plains",
+      "required_family": "rising-side-exit",
+      "objective": {
+        "relationship": "activate real lift, read shrinking headroom, choose an airborne pause/recoil into a side receiver",
+        "interface": 0,
+        "receiver": [
+          760,
+          220,
+          240,
+          100
+        ],
+        "shore_screen": [
+          210,
+          100,
+          60,
+          250
+        ],
+        "roof": [
+          275,
+          20,
+          240,
+          90
+        ],
+        "initial_motion": "parked",
+        "no_new_platform_behaviour": true,
+        "return_conditions": "UNKNOWN"
+      },
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "ports": {
+        "count": 2,
+        "required_normals": [
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "relations": [
+        {
+          "from_port": "entry",
+          "to_port": "exit",
+          "role": "reward"
+        }
+      ],
+      "entry_y": 420,
+      "rise": 218,
+      "space": {
+        "max_width": 1900,
+        "max_height": 1500,
+        "max_port_span_x": 1200
+      },
+      "boundary_policy": "open",
+      "enclosing_walls": false,
+      "risk_reward": {
+        "amount": 8,
+        "mandatory_damage": false
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resource_state": {
+        "reset_between_components": false,
+        "entry": "original supported resources",
+        "exit": "observed only"
+      },
+      "return_conditions": "UNKNOWN",
+      "budget": {
+        "generator_candidates": 4,
+        "director_revisions": 0
+      }
+    },
+    {
+      "schema": "map-notes/challenge-specification/v1",
+      "id": "plains50/machinery/rising-side/i1/v1",
+      "region": "plains",
+      "required_family": "rising-side-exit",
+      "objective": {
+        "relationship": "activate real lift, read shrinking headroom, choose an airborne pause/recoil into a side receiver",
+        "interface": 1,
+        "receiver": [
+          790,
+          205,
+          230,
+          100
+        ],
+        "shore_screen": [
+          210,
+          100,
+          60,
+          250
+        ],
+        "roof": [
+          275,
+          10,
+          260,
+          85
+        ],
+        "initial_motion": "parked",
+        "no_new_platform_behaviour": true,
+        "return_conditions": "UNKNOWN"
+      },
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "ports": {
+        "count": 2,
+        "required_normals": [
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "relations": [
+        {
+          "from_port": "entry",
+          "to_port": "exit",
+          "role": "reward"
+        }
+      ],
+      "entry_y": 420,
+      "rise": 233,
+      "space": {
+        "max_width": 1900,
+        "max_height": 1500,
+        "max_port_span_x": 1200
+      },
+      "boundary_policy": "open",
+      "enclosing_walls": false,
+      "risk_reward": {
+        "amount": 8,
+        "mandatory_damage": false
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resource_state": {
+        "reset_between_components": false,
+        "entry": "original supported resources",
+        "exit": "observed only"
+      },
+      "return_conditions": "UNKNOWN",
+      "budget": {
+        "generator_candidates": 4,
+        "director_revisions": 0
+      }
+    }
+  ]
+}
