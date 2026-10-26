@@ -11,4 +11,4 @@ func rebuild(new_mode:String)->void:
 	if is_instance_valid(labels):labels.visible=false
 	display.camera.zoom=Vector2(.9,.9)
 	ability_label.text="A/D 移动 · 空格单跳 · 鼠标松开反冲 · S 下穿 · M 整图 · R 重试"
-	(ui.get_child(0).get_child(0).get_child(0)as Label).text="最新内容库双分流整图 · 隔离实验 / 尚未通过所有路线"
+	(ui.get_child(0).get_child(0).get_child(0)as Label).text=str(original.get("preview_title","最新内容库双分流整图 · 隔离实验 / 尚未通过所有路线"))

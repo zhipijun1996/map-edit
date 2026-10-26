@@ -31,6 +31,20 @@ def target(c,point,label):
 
 def leg(c,point,plan,label):return dict(kind='module',target=target(c,point,label),control_plan=copy.deepcopy(plan),budget_ticks=min(3600,c.get('max_frames',1600)+180))
 
+def apply_reward_request(module,request):
+    """New canonical variant, never filter a frozen source case in place."""
+    m=copy.deepcopy(module);c=m['case'];old=copy.deepcopy(c.get('reward_sites',[]))
+    count=request['max_reward_sites'];value=request['value']
+    if c.get('expected_reward')is not None and c['expected_reward']!=value:raise ValueError('intrinsic_reward_objective_requires_new_recipe')
+    if count not in [0,1]or count and len(old)!=1:raise ValueError('reward_request_needs_new_site_recipe')
+    c['reward_sites']=old if count else[]
+    if count:c['reward_sites'][0]['amount']=value
+    m.setdefault('adaptation',{})['reward_change']=dict(parent_version=m['source_version'],original_sites=old,request=copy.deepcopy(request),
+        source_physics_inherited=False,requires_fresh_whole_map_verification=True)
+    m['spec']['risk_reward']=copy.deepcopy(request)
+    m['content_version']='sha256:'+digest(dict(case=c,ports=m['ports'],inbound=m['port_to_center'],outbound=m['center_to_port']))
+    return m
+
 def exterior(item,node,padding=0,fork=False):
     old=item['cases'][0];c=copy.deepcopy(old);version=item['record']['contentVersion'];fs=samples();allframes=[f for source in item['cases']for f in fs.get((version,source['id']),[])]
     if not allframes:raise ValueError('source_clean_witness_missing')

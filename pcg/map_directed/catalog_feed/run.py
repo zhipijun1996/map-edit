@@ -30,7 +30,7 @@ def probe(name):
         rows.append(row);write(out/'rows.json',rows);print(json.dumps(row,ensure_ascii=False),flush=True)
     write(out/'summary.json',dict(rows=rows,passed=sum(r['ok']for r in rows),total=len(rows),versions=len(items),scope='Fresh clean finite source-route checks under current formal avatar; not independent quality admission or whole-map proof',production_admitted=False));return out
 
-def map_run(name,seed,source=None,held=False):
+def map_run(name,seed,source=None,held=False,physical_diagnostic=False):
     from .build import generate,cases_for
     out=REPO/'pcg/results'/name
     if out.exists():raise ValueError('immutable_run_exists')
@@ -60,6 +60,12 @@ def map_run(name,seed,source=None,held=False):
             c.setdefault('shop',{});c.setdefault('unresolved_rewards',[])
             write(out/'compiled.json',c);write(out/'selection.json',selection)
         else:c,branches=generate(out,seed)
+        from .design_review import review
+        intent=review(c);write(out/'design-review.json',intent)
+        if not intent['ok']and not physical_diagnostic:
+            write(out/'summary.json',dict(status='design_rejected',design_errors=intent['errors'],physics='NOT_RUN',target_met=False,production_admitted=False,
+                scope='Do not spend more physics/video budget presenting a rejected content-joining fixture as an exploration Map'))
+            return out
         cs=cases_for(c,branches)
         if held:
             rng=random.Random(str(protocol['holdout_seed'])+seed)
@@ -70,9 +76,9 @@ def map_run(name,seed,source=None,held=False):
         for case,r,ev in engine.run(cs,'catalog-map'):
             row=dict(id=case['id'],ok=r['ok'],reason=r['reason'],ticks=r.get('ticks'),shots=r.get('shots'),pilot=r.get('pilot'),extra=r.get('extra'),evidence=ev);rows.append(row);write(out/'rows.json',rows)
             print(json.dumps(dict(id=row['id'],ok=row['ok'],reason=row['reason'],ticks=row['ticks'],leg=(r.get('pilot',{}).get('failure')or{}).get('leg_id')),ensure_ascii=False),flush=True)
-        write(out/'summary.json',dict(all_passed=all(r['ok']for r in rows),passed=sum(r['ok']for r in rows),total=len(rows),rows=rows,seconds=time.perf_counter()-start,human_fun='unreviewed',production_admitted=False))
+        write(out/'summary.json',dict(all_passed=all(r['ok']for r in rows),passed=sum(r['ok']for r in rows),total=len(rows),rows=rows,seconds=time.perf_counter()-start,design_passed=intent['ok'],physical_diagnostic=physical_diagnostic,target_met=False,human_fun='unreviewed',production_admitted=False))
     except Exception as error:write(out/'failure.json',dict(error=str(error),traceback=traceback.format_exc()));raise
     return out
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--map',action='store_true');p.add_argument('--seed',default='catalog-cal-0');p.add_argument('--source');p.add_argument('--held',action='store_true');a=p.parse_args();print(map_run(a.name,a.seed,a.source,a.held)if a.map else probe(a.name))
+    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--map',action='store_true');p.add_argument('--seed',default='catalog-cal-0');p.add_argument('--source');p.add_argument('--held',action='store_true');p.add_argument('--physical-diagnostic',action='store_true',help='Explicitly run physics on design-rejected fixtures for technical regression only');a=p.parse_args();print(map_run(a.name,a.seed,a.source,a.held,a.physical_diagnostic)if a.map else probe(a.name))
