@@ -3,6 +3,7 @@ import {DIFFICULTY_LEVELS,validateDifficulty,difficultySummary,difficultyChanges
 import {ABILITIES,abilityName,emptyRequirements,requirementSummary} from './capabilities.js';
 import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,exampleDocument,validateDocument,pathPoint,progressAt,translateObject,objectBounds,makeRevision,objectChanges,changeRequest} from './model.js';
 import {LibraryClient,SYNC_WORKFLOW} from './library-client.js';
+import {RepositoryLibraryClient,SCOPE_NAMES} from './repository-library-client.js';
 const $=s=>document.querySelector(s), svg=$('#canvas'), NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Math.round(n*100)/100;
@@ -13,6 +14,8 @@ let doc=clone(saved.documents.find(d=>d.id===saved.activeId)??saved.documents[0]
 let selected=null,tool='select',undo=[],redo=[],gesture=null,pointers=new Map(),drawing=null,playing=false,time=0,lastFrame=0,saveTimer=null,toastTimer;
 let camera={x:0,y:0,w:1600,h:900},lastPanTool='select',libraryData=null,routeView='all';
 const libraryClient=new LibraryClient(location.href);
+const repositoryLibraryClient=new RepositoryLibraryClient(location.href);
+let librarySource='game';
 let lastLibraryCheck=null;
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,3200);}
 function snapshot(){undo.push(clone(doc));if(undo.length>80)undo.shift();redo=[];updateHistory();}
@@ -143,7 +146,7 @@ function field(label,key,value,type='text',options={}){
 function option(value,label,active){return `<option value="${esc(value)}" ${value===active?'selected':''}>${esc(label)}</option>`;}
 function renderInspector(){
   const o=current();
-  if(!o){$('#selection').innerHTML='<div class="empty-selection"><div class="symbol">↖</div><b>把想法摆到画布上</b><p>点击左侧素材添加物体。<br>选中物体后，在这里调整大小、轨道和说明。</p></div>'+(doc.source?`<div class="source-note">来自原项目模块：${esc(doc.source.moduleId)}<br>打开后可自由修改；原版保留在模块库。<br><a href="${esc('https://github.com/zhipijun1996/gunman-rush/blob/'+doc.source.commit+'/'+doc.source.path)}" target="_blank" rel="noopener">查看原模块 ↗</a></div>`:'');return;}
+  if(!o){$('#selection').innerHTML='<div class="empty-selection"><div class="symbol">↖</div><b>把想法摆到画布上</b><p>点击左侧素材添加物体。<br>选中物体后，在这里调整大小、轨道和说明。</p></div>'+(doc.source?`<div class="source-note">来自原项目模块：${esc(doc.source.moduleId)}<br>打开后可自由修改；原版保留在模块库。<br><a href="${esc('https://github.com/'+(doc.source.repository??'zhipijun1996/gunman-rush')+'/blob/'+doc.source.commit+'/'+doc.source.path)}" target="_blank" rel="noopener">查看原模块 ↗</a></div>`:'');return;}
   let html=`<div class="selected-card"><div class="selection-label">${esc(TYPES[o.type].name)}<span class="tag">已选中</span></div>${field('名称 / 标注','label',o.label)}`;
   if(!o.points){html+=`<div class="field-row">${field('宽度','w',fmt(o.w),'number',{min:4})}${field('高度','h',fmt(o.h),'number',{min:4})}</div><div class="field-row">${field('水平位置','x',fmt(o.x),'number')}${field('垂直位置','y',fmt(o.y),'number')}</div>${field('旋转角度','rotation',o.rotation??0,'number')}`;
     if(!['entry','exit','note'].includes(o.type)){
@@ -269,18 +272,41 @@ function showProjects(){
   document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{const d=saved.documents.find(d=>d.id===b.dataset.openDraft);$('#dialog').close();loadDocument(d);});
   document.querySelectorAll('[data-delete-draft]').forEach(b=>b.onclick=()=>{if(!confirm('删除这份本机草稿？已导出的工程文件不受影响。'))return;const id=b.dataset.deleteDraft;saved.documents=saved.documents.filter(d=>d.id!==id);if(doc.id===id){doc=blankDocument();syncFields();fit();}persist();showProjects();});
 }
-async function showLibrary(){
-  dialog('项目模块库','<p>正在读取原项目模块…</p>');
-  try{libraryData=await libraryClient.load();
+async function showLibrary(source=librarySource){
+  if(!['game','repository'].includes(source))source=librarySource;
+  librarySource=source;const repository=source==='repository',client=repository?repositoryLibraryClient:libraryClient;
+  dialog('项目模块库','<p>正在读取模块…</p>');
+  try{
+    libraryData=await client.load();
     const cats=[...new Set(libraryData.modules.map(m=>m.category))];
-    dialog('项目模块库',`<div class="library-version"><span>${libraryData.modules.length} 份参考 · 来源 <code>${esc(libraryData.sourceCommit.slice(0,8))}</code></span><button id="update-library">↻ 更新模块库</button></div><p>选「修改原模块」保留原身份；选「新增变体」保留原版。接入状态说明原游戏的使用范围，不代表你的修改已应用。</p><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="中文名称 / 英文 ID / 机关"></label><label class="field">地区<select id="library-category"><option value="">全部地区</option>${cats.map(c=>option(c,c,'')).join('')}</select></label><label class="field">是否接入游戏<select id="library-integration"><option value="">全部状态</option><option value="formal">已接入 · 正式流程</option><option value="development">已接入 · 开发试玩</option><option value="not_integrated">未接入</option><option value="unverified">待核实</option></select></label><label class="field">模块难度<select id="library-difficulty"><option value="">全部难度</option><option value="unrated">未评分</option>${DIFFICULTY_LEVELS.map(level=>option(String(level.score),`${level.score} · ${level.name}`,'')).join('')}</select></label></div><div id="library-results"></div>`);
-    const list=()=>{const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value,usage=$('#library-integration').value,difficulty=$('#library-difficulty').value;const mods=libraryData.modules.filter(m=>(!cat||m.category===cat)&&(!usage||(m.integration?.usage??'unverified')===usage)&&(!difficulty||(difficulty==='unrated'?m.difficulty?.score==null:m.difficulty?.score===Number(difficulty)))&&JSON.stringify([m.title,m.id,m.tags,requirementSummary(m.capabilityRequirements),difficultySummary(m.difficulty)]).toLowerCase().includes(q));$('#library-results').innerHTML=mods.map(m=>`<article class="module-card" data-module="${esc(m.id)}"><img src="${esc(libraryClient.url(m.thumbnail))}" alt="${esc(m.title)}布局预览" loading="lazy"><b>${esc(m.title)}</b><small>${esc(m.id)}</small><small>${esc(m.category)} · ${m.objectCount} 个对象</small>${integrationBadge(m.integration)}<small class="module-difficulty">${esc(difficultySummary(m.difficulty))}</small><small class="module-abilities">${esc(requirementSummary(m.capabilityRequirements))}</small><div class="module-actions"><button data-edit-module="${esc(m.id)}">修改原模块</button><button data-variant-module="${esc(m.id)}">＋ 新增变体</button></div></article>`).join('')||'<p>没有匹配的模块</p>';
-      const open=async(id,operation)=>{try{const m=libraryData.modules.find(m=>m.id===id);const reference=validateDocument(await libraryClient.module(m));const d=makeRevision(reference,operation);$('#dialog').close();loadDocument(d);toast(operation==='modify_existing'?'已创建原模块修改稿，保留原身份':'已创建新变体草稿，原版不变');}catch(e){toast('模块打开失败：'+e.message);}};
-      document.querySelectorAll('[data-edit-module]').forEach(b=>b.onclick=()=>open(b.dataset.editModule,'modify_existing'));document.querySelectorAll('[data-variant-module]').forEach(b=>b.onclick=()=>open(b.dataset.variantModule,'new_variant'));
+    const scopeFilter=repository?`<label class="field">内容范围<select id="library-scope"><option value="">全部仓库内容</option>${Object.entries(SCOPE_NAMES).map(([id,name])=>option(id,name,'')).join('')}</select></label>`:'';
+    dialog('项目模块库',`<div class="library-source-switch"><button id="show-game-library" class="${repository?'':'selected'}">主游戏参考</button><button id="show-repository-library" class="${repository?'selected':''}">本仓库 Module</button></div><div class="library-version"><span>${libraryData.modules.length} 份${repository?' Module / Macro':'参考'} · 来源 <code>${esc(libraryData.sourceCommit.slice(0,8))}</code></span><button id="update-library">↻ ${repository?'更新仓库 Module':'更新游戏参考'}</button></div><p id="repository-library-notice" role="status">${repository?'打开可编辑副本，原版本保留。候选的适用范围和正式接入状态分别标注。':'选「修改原模块」保留原身份；选「新增变体」保留原版。接入状态说明原游戏的使用范围，不代表你的修改已应用。'}</p><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="中文名称 / 英文 ID / 机关"></label><label class="field">地区<select id="library-category"><option value="">全部地区</option>${cats.map(c=>option(c,c,'')).join('')}</select></label><label class="field">是否接入游戏<select id="library-integration"><option value="">全部状态</option><option value="formal">已接入 · 正式流程</option><option value="development">已接入 · 开发试玩</option><option value="not_integrated">未接入</option><option value="unverified">待核实</option></select></label><label class="field">模块难度<select id="library-difficulty"><option value="">全部难度</option><option value="unrated">未评分</option>${DIFFICULTY_LEVELS.map(level=>option(String(level.score),`${level.score} · ${level.name}`,'')).join('')}</select></label>${scopeFilter}</div><div id="library-results"></div>`);
+    const list=()=>{
+      const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value,usage=$('#library-integration').value,difficulty=$('#library-difficulty').value,scope=$('#library-scope')?.value;
+      const mods=libraryData.modules.filter(m=>(!scope||m.scope===scope)&&(!cat||m.category===cat)&&(!usage||(m.integration?.usage??'unverified')===usage)&&(!difficulty||(difficulty==='unrated'?m.difficulty?.score==null:m.difficulty?.score===Number(difficulty)))&&JSON.stringify([m.title,m.id,m.moduleId,m.tags,requirementSummary(m.capabilityRequirements),difficultySummary(m.difficulty)]).toLowerCase().includes(q));
+      $('#library-results').innerHTML=mods.map(m=>`<article class="module-card" data-module="${esc(m.id)}">${repository?`<a class="module-preview" href="${esc(client.thumbnail(m))}" target="_blank" rel="noopener" title="查看完整布局">`:""}<img src="${esc(repository?client.thumbnail(m):client.url(m.thumbnail))}" alt="${esc(m.title)}布局预览" loading="lazy">${repository?"</a>":""}<b>${esc(m.title)}</b><small>${esc(m.moduleId??m.id)}</small><small>${esc(m.category)} · ${m.objectCount} 个对象${repository?' · '+esc(SCOPE_NAMES[m.scope]):''}</small>${integrationBadge(m.integration)}<small class="module-difficulty">${esc(difficultySummary(m.difficulty))}</small><small class="module-abilities">${esc(requirementSummary(m.capabilityRequirements))}</small><div class="module-actions">${repository?`<button data-repository-module="${esc(m.id)}">打开编辑副本</button>`:`<button data-edit-module="${esc(m.id)}">修改原模块</button><button data-variant-module="${esc(m.id)}">＋ 新增变体</button>`}</div></article>`).join('')||'<p>没有匹配的模块</p>';
+      const open=async(id,operation)=>{try{const m=libraryData.modules.find(m=>m.id===id);const reference=validateDocument(await client.module(m));const d=makeRevision(reference,operation);$('#dialog').close();loadDocument(d);toast(repository?'已打开仓库 Module 的编辑副本，原版本保留':operation==='modify_existing'?'已创建原模块修改稿，保留原身份':'已创建新变体草稿，原版不变');}catch(e){toast('模块打开失败：'+e.message);}};
+      document.querySelectorAll('[data-edit-module]').forEach(b=>b.onclick=()=>open(b.dataset.editModule,'modify_existing'));document.querySelectorAll('[data-variant-module]').forEach(b=>b.onclick=()=>open(b.dataset.variantModule,'new_variant'));document.querySelectorAll('[data-repository-module]').forEach(b=>b.onclick=()=>open(b.dataset.repositoryModule,'new_variant'));
     };
-    $('#library-search').oninput=list;$('#library-category').onchange=list;$('#library-integration').onchange=list;$('#library-difficulty').onchange=list;$('#update-library').onclick=checkLibraryUpdate;list();
-  }catch{dialog('项目模块库','<p>模块库暂时无法加载。请检查网络后重试，你的本机草稿不受影响。</p>');}
+    for(const selector of ['#library-search','#library-category','#library-integration','#library-difficulty','#library-scope'])if($(selector))$(selector)[selector==='#library-search'?'oninput':'onchange']=list;
+    $('#update-library').onclick=repository?updateRepositoryModules:checkLibraryUpdate;
+    $('#show-game-library').onclick=()=>showLibrary('game');$('#show-repository-library').onclick=()=>showLibrary('repository');list();
+  }catch(e){dialog('项目模块库',`<p>模块库暂时无法加载：${esc(e.message)}</p><p>你的本机草稿保留不变。</p><div class="dialog-actions"><button id="retry-library">重试</button>${repository?'<button id="fetch-repository-library">从仓库更新</button>':''}</div>`);$('#retry-library').onclick=()=>showLibrary(source);if($('#fetch-repository-library'))$('#fetch-repository-library').onclick=updateRepositoryModules;}
 }
+async function updateRepositoryModules(){
+  persist();dialog('更新仓库 Module','<p id="repository-update-status" role="status">正在读取本仓库新增的 Module…</p>');
+  try{
+    if(!repositoryLibraryClient.catalog){try{await repositoryLibraryClient.load();}catch{}}
+    const result=await repositoryLibraryClient.checkUpdate((done,total)=>{if($('#repository-update-status'))$('#repository-update-status').textContent=`正在更新 ${done} / ${total}…`;});
+    await showLibrary('repository');
+    const message=`已更新：共 ${result.total} 份${result.added?'，新增 '+result.added+' 份':''}${result.removed?'，移除 '+result.removed+' 份已撤回或删除内容':''}。`;
+    if($('#repository-library-notice'))$('#repository-library-notice').textContent=message+' 打开编辑副本后，原版本与现有草稿保留。';toast(message);
+  }catch(e){
+    if(repositoryLibraryClient.catalog){await showLibrary('repository');if($('#repository-library-notice'))$('#repository-library-notice').textContent='更新失败：'+e.message+'。现有模块库和草稿保留，可点击更新重试。';}
+    else{dialog('更新仓库 Module',`<p>更新失败：${esc(e.message)}</p><p>现有草稿保留不变。</p><button id="retry-repository-update">重试更新</button>`);$('#retry-repository-update').onclick=updateRepositoryModules;}
+  }
+}
+
 async function checkLibraryUpdate(){
   persist();dialog('更新模块库','<p id="library-update-status">正在检查游戏 main 与可用模块库…</p>');
   try{
@@ -321,7 +347,7 @@ $('#play').onclick=()=>{finishDrawing();playing=!playing;$('#play').textContent=
 $('#time').oninput=()=>{playing=false;$('#play').textContent='▶ 演示';time=Number($('#time').value);$('#time-label').textContent=time.toFixed(1)+'s';render();};
 $('#route-view').onchange=()=>{routeView=$('#route-view').value;render();};
 function animate(now){if(playing){time+=(now-lastFrame)/1000;if(time>20)time=0;$('#time').value=time;$('#time-label').textContent=time.toFixed(1)+'s';render();}lastFrame=now;requestAnimationFrame(animate);}requestAnimationFrame(animate);
-$('#projects').onclick=showProjects;$('#library').onclick=showLibrary;$('#help').onclick=help;$('#dialog-close').onclick=()=>$('#dialog').close();
+$('#projects').onclick=showProjects;$('#library').onclick=()=>showLibrary(librarySource);$('#update-repository-modules').onclick=updateRepositoryModules;$('#help').onclick=help;$('#dialog-close').onclick=()=>$('#dialog').close();
 $('#save-file').onclick=saveFile;$('#export').onclick=exportImage;$('#import').onclick=()=>$('#file-input').click();
 $('#file-input').onchange=async()=>{const file=$('#file-input').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error('文件超过 20 MB');const d=validateDocument(JSON.parse(await file.text()));if(!d.generationContract)d.id=uid();loadDocument(d);toast('工程已打开');}catch(e){toast('无法打开：'+e.message);}finally{$('#file-input').value='';}};
 window.addEventListener('beforeunload',persist);
