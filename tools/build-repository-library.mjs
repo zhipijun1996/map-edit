@@ -42,6 +42,9 @@ function names(){
   // Current public names take priority over all historical display labels.
   for(const clip of read('generation/workshop/creative20-v1/manifest.json').clips)
     result.set(clip.contentVersion,clip.name);
+  if(fs.existsSync(path.join(root,'generation/workshop/plains50-v1/manifest.json')))
+    for(const module of read('generation/workshop/plains50-v1/manifest.json').modules)
+      result.set(module.contentVersion,module.name);
   return result;
 }
 function withdrawnVersions(){
@@ -69,7 +72,7 @@ function main(){
   // A check compares artifacts with their sources. A later commit alone does
   // not invalidate the original build stamp, and --check never invokes git.
   const sourceCommit=old?.sourceCommit??execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
-  const view=read('generation/workshop/plains-recoil-v1/catalog.json');
+  const view=read(fs.existsSync(path.join(root,'generation/workshop/plains-recoil-current/catalog.json'))?'generation/workshop/plains-recoil-current/catalog.json':'generation/workshop/plains-recoil-v1/catalog.json');
   const curated=new Map(view.rows.map(row=>[row.contentVersion,row]));
   if(curated.size!==view.rows.length)throw Error('Duplicate plains curation version');
   const titles=names(),withdrawn=withdrawnVersions(),modules=[],files=new Map();
