@@ -1,0 +1,52 @@
+{
+  "schema": "map-notes/mission-graph/v1",
+  "entry": "west",
+  "goal": "east",
+  "objectives": [
+    {
+      "id": "reach_east",
+      "location": "east",
+      "role": "main"
+    },
+    {
+      "id": "recognize_wind_bell",
+      "location": "lookout",
+      "role": "landmark"
+    },
+    {
+      "id": "bell_cache",
+      "location": "bell/reward",
+      "role": "optional",
+      "requires": [
+        "shot_recoil"
+      ],
+      "reward": 8
+    },
+    {
+      "id": "bridge_cache",
+      "location": "arch",
+      "role": "optional",
+      "reward": 12
+    },
+    {
+      "id": "trade_cache_coins",
+      "location": "lookout",
+      "role": "optional",
+      "price": 8,
+      "item": "damage_blue"
+    }
+  ],
+  "spatial_intent": [
+    "upper ridge / lower hollow fork and east reunion",
+    "shared open valley, visible lower reward from upper route",
+    "bell-to-arch return shortcut"
+  ],
+  "scope": "Isolated eight-Macro, two-loop plains pilot; no actual boss encounter",
+  "gate_design": {
+    "west": "protect upper entrance; lower detour remains legal",
+    "ridge": "protect receiving cliff; lower detour remains legal",
+    "arch": "sealed optional treasure, bridge below is intentionally ungated",
+    "bell": "sealed optional treasure and upper return shortcut"
+  },
+  "content_policy": "Source-owned rock; actual recoil; timed sealed treasure; real reward and shop; no lift dependency"
+}

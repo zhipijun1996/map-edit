@@ -50,3 +50,21 @@ topologies. Same-catalog AABB and shape-only ablations test feasibility and
 constraint contribution; they cannot establish human enjoyment. Historic
 19-Macro runs and the formal game differ in content budget and are context,
 not fair physical-time controls. Human quality approval remains outstanding.
+
+Frozen inputs and output recovery: restore `shape-search-calibration-v1`,
+`shape-search-source-v1`, and `shape-search-results-v1` with the existing
+`pcg/tools/restore_archive.py`. The base runtime and parent source catalog
+also require the existing `godot-runtime-v1` and `content-ecosystem-v1` archives.
+Large transient PCK files are removed locally only after exact archive and
+public-byte verification; restoring the results archive restores those bytes.
+Media copies are under `pcg/results/shape-search-review-payload-v1/shape-search-v1`.
+
+To reconstruct missing native presentation additions, take the corresponding
+`physics/source_snapshot` and `physics/source_binding.json` from eval0 in the
+source archive. For each `source_files` entry, verify the snapshot SHA, copy
+only missing files to `pcg/<relative path>`, and reject an existing different
+file. This includes the exact source images/audio and `.import` metadata.
+Then run the official Godot import once. Never overwrite changed protected
+sources or substitute a different runtime baseline to make a replay pass.
+See `docs/l4-mapgen/real-shape-search-v1.md` for the complete negative result,
+paired controls, archive identities and public deliverables.
