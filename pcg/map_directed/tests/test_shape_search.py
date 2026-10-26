@@ -44,6 +44,16 @@ class ShapeSearchChecks(unittest.TestCase):
         b=template('b',[[-10,-1,4,2]],[0,0],[-1,0])
         r=search(self.graph(),{'a':[a],'b':[b]},'fixed')
         self.assertEqual(r['status'],'unsatisfied');self.assertEqual(r['rejections']['dynamic_sweep_into_neighbor'],1)
+    def test_carrier_full_sweep_is_checked_beyond_initial_pose(self):
+        a=template('a',[[0,20,10,10]],[30,0],[1,0]);a['case']['moving_platforms']=[dict(start=[12,0],finish=[24,0],size=[4,4])]
+        b=template('b',[[-8,-1,4,2]],[0,0],[-1,0])
+        r=search(self.graph(),{'a':[a],'b':[b]},'fixed')
+        self.assertEqual(r['status'],'unsatisfied');self.assertEqual(r['rejections']['dynamic_sweep_into_neighbor'],1)
+    def test_shared_landing_is_not_counted_as_foreign_carrier_obstruction(self):
+        a=template('a',[[0,20,10,10]],[30,0],[1,0]);b=template('b',[[-30,20,10,10]],[0,0],[-1,0])
+        for m in [a,b]:m['ports']['e']['shared_landing_index']=0
+        a['case']['moving_platforms']=[dict(start=[2,25],finish=[8,25],size=[4,4])]
+        self.assertEqual(search(self.graph(),{'a':[a],'b':[b]},'fixed')['status'],'feasible')
     def test_port_alignment_does_not_override_actor_aperture(self):
         a=template('a',[[0,20,10,10]],[30,0],[1,0]);b=template('b',[[0,20,10,10]],[0,0],[-1,0])
         a['ports']['e']['aperture']=[20,-20,20,40];b['ports']['e']['aperture']=[-10,-20,20,40]

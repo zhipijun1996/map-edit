@@ -7,7 +7,8 @@ from pcg.prototype.factory.core.quality import digest
 
 @functools.lru_cache(maxsize=1)
 def samples():
-    p=REPO/'pcg/results/catalog-feed-source-probe-v1';rows=json.loads((p/'rows.json').read_text());cache={};out={}
+    latest=REPO/'pcg/results/catalog-feed-source-probe-v3'
+    p=latest if (latest/'summary.json').exists()else REPO/'pcg/results/catalog-feed-source-probe-v1';rows=json.loads((p/'rows.json').read_text());cache={};out={}
     for row in rows:
         if not row['ok']:continue
         e=row['evidence'];path=p/'physics'/e['output']

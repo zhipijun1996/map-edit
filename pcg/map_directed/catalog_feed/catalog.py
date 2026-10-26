@@ -6,7 +6,8 @@ from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import module_hash
 
 def load():
-    view=json.loads((REPO/'generation/workshop/plains-recoil-v1/catalog.json').read_text());withdrawn=withdrawn_versions();items=[]
+    current=REPO/'generation/workshop/plains-recoil-current/catalog.json'
+    view=json.loads((current if current.exists()else REPO/'generation/workshop/plains-recoil-v1/catalog.json').read_text());withdrawn=withdrawn_versions();items=[]
     names={e['contentVersion']:e['title']for e in json.loads((REPO/'library/workshop/catalog.json').read_text())['modules']}
     for row in view['rows']:
         root=(REPO/row['record']).parent;r=json.loads((root/'record.json').read_text());doc=json.loads((root/'module.mapnote.json').read_text())

@@ -1,0 +1,85 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "map_seed": "task-a-map-demand-01",
+  "region": "plains",
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "No advanced movement ability"
+  },
+  "resource_state": {
+    "entry": "grounded at a supported safe port; exact snapshot must be captured before input",
+    "exit": "stable landing; observed resources do not imply arbitrary-state guarantees",
+    "reset_between_components": false
+  },
+  "adaptation": {
+    "allowed": [
+      "translation",
+      "explicit separately versioned connector Cell"
+    ],
+    "forbidden": [
+      "scaling",
+      "rotation",
+      "implicit mirrored traversal",
+      "invented ports",
+      "removing required exploration routes"
+    ]
+  },
+  "validation": {
+    "engine": "Godot 4.7.2",
+    "method": "existing PlainsEngine and exact-instance continuous map runner",
+    "requires_whole_map_validation": true
+  },
+  "budget": {
+    "director_revisions": 1,
+    "generator_calls": 2,
+    "unbounded_search": false
+  },
+  "id": "bell-terrace-ascent",
+  "objective": "After rejoining, ascend 100 world units to the bell terrace with one jump/recoil relation.",
+  "ports": {
+    "count": 2,
+    "required_normals": [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "relations": [
+    {
+      "from": "entry",
+      "to": "exit",
+      "role": "main"
+    }
+  ],
+  "difficulty": {
+    "intent": "one short action after supported recovery",
+    "human_score": null,
+    "evidence": "UNKNOWN"
+  },
+  "risk_reward": {
+    "optional": false,
+    "amount": 0,
+    "mandatory_damage": false
+  },
+  "space": {
+    "max_width": 900,
+    "max_height": 800,
+    "max_port_span_x": 900
+  },
+  "entry_y": 420,
+  "rise": 100,
+  "require_bell": true,
+  "required_family": "bell_lift"
+}

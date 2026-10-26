@@ -12,6 +12,9 @@ def sweeps(m):
     result=[]
     for s in m['case'].get('saws',[]):
         x,y=s['origin'];tx,ty=s['travel'];r=s['radius'];result.append([x-abs(tx)-r,y-abs(ty)-r,2*(abs(tx)+r),2*(abs(ty)+r)])
+    for platform in m['case'].get('moving_platforms',[]):
+        a,b=platform['start'],platform['finish'];w,h=platform['size']
+        result.append([min(a[0],b[0])-w/2,min(a[1],b[1])-h/2,abs(a[0]-b[0])+w,abs(a[1]-b[1])+h])
     return result
 def compatible_state(a,b,abilities,state=None):
     state=state or dict(grounded=True,air_shots=1,speed=0)
@@ -66,15 +69,22 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
         if mode=='aabb':
             a=rect_bounds(rects);b=rect_bounds(theirs)
             return 'bounding_box_overlap'if intersects([a[0],a[1],a[2]-a[0],a[3]-a[1]],[b[0],b[1],b[2]-b[0],b[3]-b[1]])else None
+        shared_ours=set();shared_theirs=set()
         for i,a in enumerate(rects):
             for j,b in enumerate(theirs):
                 if not intersects(a,b):continue
                 shared_a={eid for eid,port in m['ports'].items()if port.get('shared_landing_index')==i}
                 shared_b={eid for eid,port in other['ports'].items()if port.get('shared_landing_index')==j}
-                if shared_a&shared_b and all(abs(x-y)<.01 for x,y in zip(a,b)):continue
+                if shared_a&shared_b and all(abs(x-y)<.01 for x,y in zip(a,b)):
+                    shared_ours.add(i);shared_theirs.add(j);continue
                 if len(examples)<12:examples.append(dict(reason='actual_shape_overlap',node=m['id'],peer=other['id'],rect=a,peer_rect=b,position=p,peer_position=q))
                 return 'actual_shape_overlap'
-        if any(intersects(translated(a,p),b)for a in md for b in theirs)or any(intersects(a,translated(b,q))for a in rects for b in od):return 'dynamic_sweep_into_neighbor'
+        # An explicitly identical shared landing is already the Module's own
+        # collider. It is deduplicated by the assembler; do not classify that
+        # same collider a second time as a foreign obstruction.
+        foreign_theirs=[r for i,r in enumerate(theirs)if i not in shared_theirs]
+        foreign_ours=[r for i,r in enumerate(rects)if i not in shared_ours]
+        if any(intersects(translated(a,p),b)for a in md for b in foreign_theirs)or any(intersects(a,translated(b,q))for a in foreign_ours for b in od):return 'dynamic_sweep_into_neighbor'
         if mode=='shape_action':
             solid_theirs=[r for i,r in enumerate(theirs)if i not in other['case']['one_way_platform_indices']]
             solid_ours=[r for i,r in enumerate(rects)if i not in m['case']['one_way_platform_indices']]

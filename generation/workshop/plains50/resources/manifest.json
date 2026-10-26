@@ -1,0 +1,1549 @@
+{
+  "schema": "pcg/plains50-resource-delivery/v1",
+  "owner": "/root/plains50_resources",
+  "candidate_versions": 8,
+  "recipe_relationships": 4,
+  "new_action_families": "not_self_admitted; three adapted existing families, low-ray relation awaits independent grouping",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "physical_godot_cases": 1190,
+  "physics_budget_by_recipe": {
+    "sightline_backtrack": 382,
+    "trapdoor_commit": 218,
+    "ordered_target_transaction": 234,
+    "low_ray_recoil_return": 352,
+    "D03_mechanism_only": 4
+  },
+  "raw_runs": [
+    {
+      "path": "pcg/results/workshop-plains50-resources-probe-v1",
+      "physics_cases": 24
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-production-v1",
+      "physics_cases": 554
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-lowray-probe-v1",
+      "physics_cases": 8
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-lowray-production-v1",
+      "physics_cases": 112
+    },
+    {
+      "path": "pcg/results/workshop-plains50-D03-resource-probe-v1",
+      "physics_cases": 4
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-sightline-production-v2",
+      "physics_cases": 256
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-lowray-probe-v2",
+      "physics_cases": 8
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-lowray-production-v2",
+      "physics_cases": 224
+    },
+    {
+      "path": "pcg/results/workshop-plains50-resources-reuse-v1",
+      "physics_cases": 0
+    }
+  ],
+  "design_cards": {
+    "path": "pcg/prototype/creative_batches/plains50_resources/design-cards-v1.json",
+    "sha256": "1852ffea527f876c2aad73eb8cc8714eb9b143e48e94e155192f70f162b4c9af"
+  },
+  "D03_gap": {
+    "path": "pcg/feedback/workshop/plains50-resources-D03-gap-v1.json",
+    "sha256": "477d2742aa8173bdce2582a352e6f8fb238a9a6392fcd73f10040c3ecdf057e5"
+  },
+  "persistent_retrieval": {
+    "path": "pcg/results/workshop-plains50-resources-reuse-v1/receipt.json",
+    "sha256": "daf925916ef32366fef34cfd58b31e98d55a0e20ae152b4666e7c95129564d48"
+  },
+  "rows": [
+    {
+      "id": "P50-R01A",
+      "title": "先去东侧看清，开门后向西 · 接口1",
+      "family": "sightline-backtrack",
+      "interface": 0,
+      "contentVersion": "sha256:577021d1f4e0cbc095633b1d9961cd7ddfe638f0b4ee7bc3852b0981c758e992",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/sightline-backtrack/i0",
+        "region": "plains",
+        "required_family": "sightline-backtrack",
+        "objective": {
+          "relationship": "leave exit direction to expose remote shot ray, permanently unlock west route, then backtrack",
+          "screen": [
+            140,
+            -500,
+            100,
+            890
+          ],
+          "peek_x": 370,
+          "exit_x": -455
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/577021d1f4e0cbc095633b1d9961cd7ddfe638f0b4ee7bc3852b0981c758e992/module.mapnote.json",
+        "sha256": "d8cc9e3317f5d96db588b490aa5c5108b221dcb4fb02dd25cbe5c1b28d748561"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/577021d1f4e0cbc095633b1d9961cd7ddfe638f0b4ee7bc3852b0981c758e992/case.json",
+        "sha256": "439edd751c0a8cacc9c931c0eeb4f753867eea5a2ab2f5e37d37b14743aa4ef3"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/577021d1f4e0cbc095633b1d9961cd7ddfe638f0b4ee7bc3852b0981c758e992/record.json",
+        "sha256": "c0bca254f9011e55bb1e03e375d5a1d0fb4eb0e388c4dbd0686090e53302bba9"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-sightline-production-v2/round-00",
+      "case_id": "p50-resource-sightline-backtrack-i0-r2-c0",
+      "review_alias": "p50-resource-sightline-backtrack-i0-r2-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": {
+        "path": "generation/workshop/plains50/resources/sightline-i0/sightline-backtrack.mp4",
+        "sha256": "ca48541520786fbf06d85e6f54738a97316b14ceb5498070d1fa76c48dd7674d",
+        "duration": 5.65,
+        "strict_comparison": "passed",
+        "review_only": false,
+        "manifest": {
+          "path": "generation/workshop/plains50/resources/sightline-i0/manifest.json",
+          "sha256": "1859d3f3c0b55d8c73a6cf554e34631fc93b5436a40a54ad22d69deff59cbe86"
+        },
+        "frames_exact": 274
+      },
+      "play_scene": "pcg/prototype/workshop/main.tscn"
+    },
+    {
+      "id": "P50-R01B",
+      "title": "先去东侧看清，开门后向西 · 接口2",
+      "family": "sightline-backtrack",
+      "interface": 1,
+      "contentVersion": "sha256:ebfdac3d0305ad37fd402338fab879df54461776d65e0a1b6c3d340eb044633a",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/sightline-backtrack/i1",
+        "region": "plains",
+        "required_family": "sightline-backtrack",
+        "objective": {
+          "relationship": "leave exit direction to expose remote shot ray, permanently unlock west route, then backtrack",
+          "screen": [
+            140,
+            -500,
+            150,
+            890
+          ],
+          "peek_x": 410,
+          "exit_x": -365
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/ebfdac3d0305ad37fd402338fab879df54461776d65e0a1b6c3d340eb044633a/module.mapnote.json",
+        "sha256": "a32d7e2d0f72bcd500aae8faf55edf2aba5bacb54852920adb1209e8dfd7091b"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/ebfdac3d0305ad37fd402338fab879df54461776d65e0a1b6c3d340eb044633a/case.json",
+        "sha256": "dc8b1f6781f244c46020c9ca80e0ae755e0d7c1c153798b906807f8016ec3667"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/ebfdac3d0305ad37fd402338fab879df54461776d65e0a1b6c3d340eb044633a/record.json",
+        "sha256": "59c1342661bde2da76145bffae85e68744aec87fb1a0c83b883989f1c4ce89e8"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-sightline-production-v2/round-00",
+      "case_id": "p50-resource-sightline-backtrack-i1-r2-c0",
+      "review_alias": "p50-resource-sightline-backtrack-i1-r2-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": "UNKNOWN; first-interface clip only illustrates shared relation, does not prove this exact version",
+      "play_scene": "pcg/prototype/workshop/main.tscn"
+    },
+    {
+      "id": "P50-R02A",
+      "title": "撤掉脚下桥，承诺进入下层 · 接口1",
+      "family": "trapdoor-commit",
+      "interface": 0,
+      "contentVersion": "sha256:6d96e4e0357cce34df80c8af7af83bf71b82b6e32bfe4245b73b1370e619446e",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/trapdoor-commit/i0",
+        "region": "plains",
+        "required_family": "trapdoor-commit",
+        "objective": {
+          "relationship": "open own real support bridge and commit into lower reward route",
+          "bridge": [
+            240,
+            438,
+            210,
+            20
+          ],
+          "shaft_drop": 340,
+          "lower_width": 210
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -340,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/6d96e4e0357cce34df80c8af7af83bf71b82b6e32bfe4245b73b1370e619446e/module.mapnote.json",
+        "sha256": "eb366889d56c51158860f64429fa13d8b971fd7b59a7e0bc96812ba40445c5a6"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/6d96e4e0357cce34df80c8af7af83bf71b82b6e32bfe4245b73b1370e619446e/case.json",
+        "sha256": "a7f7c208f2b7036730fc3fafafb3c153ba9859ee8c1e4f0e9acb5664416850e6"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/6d96e4e0357cce34df80c8af7af83bf71b82b6e32bfe4245b73b1370e619446e/record.json",
+        "sha256": "580f885f24e0a210e6af699a982ba71f20cd445f40a9c27ce41255f931b88b9f"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-production-v1/round-01",
+      "case_id": "p50-resource-trapdoor-commit-i0-c0",
+      "review_alias": "p50-resource-trapdoor-commit-i0-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": {
+        "path": "generation/workshop/plains50/resources/trapdoor-i0/trapdoor-commit.mp4",
+        "sha256": "9c767ef66fddb525b435989215771e6d037a284da5e8ec5645b642311401a678",
+        "duration": 2.966667,
+        "strict_comparison": "failed",
+        "review_only": true,
+        "manifest": {
+          "path": "generation/workshop/plains50/resources/trapdoor-i0/manifest.json",
+          "sha256": "aa37b50eafd04ab1c7ba41474bd3ad7430c55e38fd38c8da6ccfc3e536008f40"
+        },
+        "frames_exact": 0
+      },
+      "play_scene": "pcg/prototype/workshop/main.tscn"
+    },
+    {
+      "id": "P50-R02B",
+      "title": "撤掉脚下桥，承诺进入下层 · 接口2",
+      "family": "trapdoor-commit",
+      "interface": 1,
+      "contentVersion": "sha256:7bf07d9995b15b58a84a045c6d251891a472f5521c1cfa19dff87caa823ab269",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/trapdoor-commit/i1",
+        "region": "plains",
+        "required_family": "trapdoor-commit",
+        "objective": {
+          "relationship": "open own real support bridge and commit into lower reward route",
+          "bridge": [
+            240,
+            438,
+            230,
+            20
+          ],
+          "shaft_drop": 220,
+          "lower_width": 230
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -220,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/7bf07d9995b15b58a84a045c6d251891a472f5521c1cfa19dff87caa823ab269/module.mapnote.json",
+        "sha256": "f452f266d9bd36056f5fae4ed9c9cf0106fa3d18a6b93fdb08bb63396943f784"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/7bf07d9995b15b58a84a045c6d251891a472f5521c1cfa19dff87caa823ab269/case.json",
+        "sha256": "2ff17cca61cd137b79a05f0bb47f8a0f134f7c97d31c62295b25d64782521375"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/7bf07d9995b15b58a84a045c6d251891a472f5521c1cfa19dff87caa823ab269/record.json",
+        "sha256": "d0384208a2c7f4bd15338f6fd1ebcc9192514076c0e21e16007afc5b49ba6888"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-production-v1/round-01",
+      "case_id": "p50-resource-trapdoor-commit-i1-c0",
+      "review_alias": "p50-resource-trapdoor-commit-i1-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": "UNKNOWN; first-interface clip only illustrates shared relation, does not prove this exact version",
+      "play_scene": "pcg/prototype/workshop/main.tscn"
+    },
+    {
+      "id": "P50-R03A",
+      "title": "先留进度，再把第二枪送对铃 · 接口1",
+      "family": "ordered-target-transaction",
+      "interface": 0,
+      "contentVersion": "sha256:c039ba1584292368b14ab7c033d27f1ccd3830f6c56018d522cfb545995cddd2",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/ordered-target-transaction/i0",
+        "region": "plains",
+        "required_family": "ordered-target-transaction",
+        "objective": {
+          "relationship": "two simultaneously visible projectile receivers commit noncommuting persistent gate state; partial first progress remains",
+          "first": [
+            20,
+            350
+          ],
+          "second": [
+            140,
+            430
+          ],
+          "landing": [
+            310,
+            280,
+            220,
+            70
+          ],
+          "both_entry_visible": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 158,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 16,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/c039ba1584292368b14ab7c033d27f1ccd3830f6c56018d522cfb545995cddd2/module.mapnote.json",
+        "sha256": "f39acb7873e3bfc8ad9dcf25199dbd94a0b4f0735514e747e5fd9c2cc2d1e6e4"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/c039ba1584292368b14ab7c033d27f1ccd3830f6c56018d522cfb545995cddd2/case.json",
+        "sha256": "a133c7537eb8cd89a946dd3215cf39dc03864d648f849fdbc1e9b6470632a8ed"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/c039ba1584292368b14ab7c033d27f1ccd3830f6c56018d522cfb545995cddd2/record.json",
+        "sha256": "245ea406915c6aa2c8b07982ba5bc780ca863674c6dde206726516a762a8269c"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-production-v1/round-02",
+      "case_id": "p50-resource-ordered-target-transaction-i0-c0",
+      "review_alias": "p50-resource-ordered-target-transaction-i0-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": {
+        "path": "generation/workshop/plains50/resources/order-i0/ordered-target-transaction.mp4",
+        "sha256": "e8e60aa3711c9ff97dc2ac4d0ca0a90e95e5da34a44702bbbf75bec0bfb54b85",
+        "duration": 2.383333,
+        "strict_comparison": "passed",
+        "review_only": false,
+        "manifest": {
+          "path": "generation/workshop/plains50/resources/order-i0/manifest.json",
+          "sha256": "836c0651585361bb580bb6120c627a9d114f2623e75985098cf778a0a72bb7c6"
+        },
+        "frames_exact": 78
+      },
+      "play_scene": "pcg/prototype/creative_batches/creative_catalog/main-sequence-portable-v1.tscn"
+    },
+    {
+      "id": "P50-R03B",
+      "title": "先留进度，再把第二枪送对铃 · 接口2",
+      "family": "ordered-target-transaction",
+      "interface": 1,
+      "contentVersion": "sha256:9bd1cff9a906b2b2b0b50acad9fe7fa1d2de013b16be3047ffdf1f7d1f0e97d3",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/ordered-target-transaction/i1",
+        "region": "plains",
+        "required_family": "ordered-target-transaction",
+        "objective": {
+          "relationship": "two simultaneously visible projectile receivers commit noncommuting persistent gate state; partial first progress remains",
+          "first": [
+            20,
+            350
+          ],
+          "second": [
+            140,
+            430
+          ],
+          "landing": [
+            320,
+            310,
+            220,
+            70
+          ],
+          "both_entry_visible": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 128,
+        "space": {
+          "max_width": 2300,
+          "max_height": 1800,
+          "max_port_span_x": 1100
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 16,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/9bd1cff9a906b2b2b0b50acad9fe7fa1d2de013b16be3047ffdf1f7d1f0e97d3/module.mapnote.json",
+        "sha256": "a9a6c3bfad6021faffbf38cc1905e8a82ae87d19d3ec6a5fe89fc13c57e060f8"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/9bd1cff9a906b2b2b0b50acad9fe7fa1d2de013b16be3047ffdf1f7d1f0e97d3/case.json",
+        "sha256": "d68fc73e2d10bc8249d80466a38b2024635223d07b0089a0a7fdb151f3646d1a"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/9bd1cff9a906b2b2b0b50acad9fe7fa1d2de013b16be3047ffdf1f7d1f0e97d3/record.json",
+        "sha256": "b50586a62ef09d4811dfeeb0fb2258179680669dca76fff29b6f208c45226560"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-production-v1/round-02",
+      "case_id": "p50-resource-ordered-target-transaction-i1-c0",
+      "review_alias": "p50-resource-ordered-target-transaction-i1-c0",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": false,
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": "UNKNOWN; first-interface clip only illustrates shared relation, does not prove this exact version",
+      "play_scene": "pcg/prototype/creative_batches/creative_catalog/main-sequence-portable-v1.tscn"
+    },
+    {
+      "id": "P50-R04A",
+      "title": "低射界开锁后回升落位 · 接口1",
+      "family": "low-ray-recoil-return",
+      "interface": 0,
+      "contentVersion": "sha256:e53e91571f0d510282fe3242c7547937f97a29487140e028ae19561c1c0a2629",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/low-ray-recoil-return/i0",
+        "region": "plains",
+        "required_family": "low-ray-recoil-return",
+        "objective": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 520,
+          "wall_bottom": 500,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 405
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 162,
+        "rise": -340,
+        "space": {
+          "max_width": 2400,
+          "max_height": 1800,
+          "max_port_span_x": 1000
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/e53e91571f0d510282fe3242c7547937f97a29487140e028ae19561c1c0a2629/module.mapnote.json",
+        "sha256": "e51c4b39d571dd32aadad08deeb9306d8ef33480b1e4348be1f4c7e1f0008f6c"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/e53e91571f0d510282fe3242c7547937f97a29487140e028ae19561c1c0a2629/case.json",
+        "sha256": "0365a8fed3ff4e8454ae1c5eedaf8afc13122c8dea4d9a661b521bf7dd02ebc6"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/e53e91571f0d510282fe3242c7547937f97a29487140e028ae19561c1c0a2629/record.json",
+        "sha256": "52b90f72af6eceed3a8a2b900e2f1b1f76d1262205f006bf56099beb7c463b8f"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-lowray-production-v2/round-00",
+      "case_id": "p50-resource-lowray-v2-i0-d34",
+      "review_alias": "p50-resource-lowray-v2-i0-d34",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 10,
+          "safe_stable": 10,
+          "rate": 0.8333333333333334,
+          "wilson95": [
+            0.5519636426153274,
+            0.9530358523851776
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": "pending_independent_ai_curation",
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": {
+        "path": "generation/workshop/plains50/resources/lowray-overview-i0/low-ray-recoil-return.mp4",
+        "sha256": "624caa5b7ba68cfc7592bd2ac98bd0947c5b096195b0ea29411f15a57e4c57e7",
+        "duration": 2.716667,
+        "strict_comparison": "passed",
+        "review_only": false,
+        "manifest": {
+          "path": "generation/workshop/plains50/resources/lowray-overview-i0/manifest.json",
+          "sha256": "b54c047da0fc2ea4f95d2f582f4e5890695db1aa76777e173397ad1f9a34fd79"
+        },
+        "frames_exact": 98
+      },
+      "play_scene": "pcg/prototype/creative_batches/plains50_resources/main_lowray_overview_v1.tscn"
+    },
+    {
+      "id": "P50-R04B",
+      "title": "低射界开锁后回升落位 · 接口2",
+      "family": "low-ray-recoil-return",
+      "interface": 1,
+      "contentVersion": "sha256:12ca61f568f3fae222e73f137638d0f19dec00a3a1881f68292188294ab3c9bd",
+      "kind": "module",
+      "portCount": 2,
+      "tested_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/low-ray-recoil-return/i1",
+        "region": "plains",
+        "required_family": "low-ray-recoil-return",
+        "objective": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 570,
+          "wall_bottom": 540,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 430
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 162,
+        "rise": -390,
+        "space": {
+          "max_width": 2400,
+          "max_height": 1800,
+          "max_port_span_x": 1000
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "document": {
+        "path": "pcg/map_directed/library/candidates/12ca61f568f3fae222e73f137638d0f19dec00a3a1881f68292188294ab3c9bd/module.mapnote.json",
+        "sha256": "74b30943cd32fce9330296c24fd253a2c13841b7d5768f11b9613a33cfcf2748"
+      },
+      "source_case": {
+        "path": "pcg/map_directed/library/candidates/12ca61f568f3fae222e73f137638d0f19dec00a3a1881f68292188294ab3c9bd/case.json",
+        "sha256": "9889d1a3b2484fab5e65d3a1b76ec9fbde14780754f0779bb545179fd6c7ca41"
+      },
+      "library_record": {
+        "path": "pcg/map_directed/library/candidates/12ca61f568f3fae222e73f137638d0f19dec00a3a1881f68292188294ab3c9bd/record.json",
+        "sha256": "631af83031d83d1b890a4b92e273fb3e993142b5aea911d7c560d415ec4b28e6"
+      },
+      "source_run": "pcg/results/workshop-plains50-resources-lowray-production-v2/round-00",
+      "case_id": "p50-resource-lowray-v2-i1-d34",
+      "review_alias": "p50-resource-lowray-v2-i1-d34",
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 10,
+          "safe_stable": 10,
+          "rate": 0.8333333333333334,
+          "wilson95": [
+            0.5519636426153274,
+            0.9530358523851776
+          ]
+        }
+      },
+      "independent_holdout": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "technical_status": "passed_scoped",
+      "technical_scope": "finite single-module policies and perturbations; general assembly stays blocked",
+      "new_family_claim": "pending_independent_ai_curation",
+      "assembly": "UNKNOWN; new placement/continuous Map evidence required",
+      "human_video_observation": "unreviewed",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "video": "UNKNOWN; first-interface clip only illustrates shared relation, does not prove this exact version",
+      "play_scene": "pcg/prototype/creative_batches/plains50_resources/main_lowray_overview_v1.tscn"
+    }
+  ],
+  "video_summary": {
+    "representative_clips": 4,
+    "exact_clips": 3,
+    "review_only_clips": 1,
+    "trapdoor_strict_differences": "34 support_id differences, no comparator relaxation",
+    "lowray_old_camera": "Original camera clip retained in lowray-i0; new overview clip includes real receiver and is separately strict-compared."
+  },
+  "unknowns": [
+    "General reverse relations, post-failure retry and continuous recovery remain UNKNOWN unless separately stated in original contract.",
+    "PR-D03 complete persistent scarce-enemy two-route generator is missing.",
+    "World assembly/Map validation and human fun/production approval are not implied."
+  ],
+  "production_admitted": false
+}

@@ -1,0 +1,187 @@
+{
+  "schema": "map-notes/module-library-entry/v1",
+  "id": "generated-6922690459755e84f0b1e744fa55f64660163f47702201d2101d12abccb359fe",
+  "contentVersion": "sha256:ab5d60871a3261241a2057352c88a469f988728f8b94a92728b7a0da0336d345",
+  "technical_status": "passed_scoped_multi_route",
+  "content_kind": "module",
+  "technical_scope": "independent single-module route witnesses; no arbitrary-state or Map guarantee",
+  "cases_sha256": "2409efc5e44ffdb65c327a00de93629c3f1721dc3d7f8ef2930615f2ecad1c52",
+  "document_sha256": "7b33e00d0415bca8d58eae17a673a7c79af03e0dfd44ddc8d65584188cca7e3a",
+  "demand_key": "07e3348fbe63a76ff9cf93b9fec3c741c813f1789308e7632ce7c0c10ba17dbd",
+  "specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "plains50/ports/thorn-branch/0",
+    "source_type": "model_authored_challenge_spec",
+    "region": "plains",
+    "required_family": "thorn-slot",
+    "objective": {
+      "recipe": "thorn-branch",
+      "interface": 0,
+      "physical_layout_sha256": "6922690459755e84f0b1e744fa55f64660163f47702201d2101d12abccb359fe",
+      "branch_ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "support_index": 0,
+          "normal": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "B",
+          "position": [
+            580,
+            412
+          ],
+          "support_index": 1,
+          "normal": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "C",
+          "position": [
+            -150,
+            662
+          ],
+          "support_index": 4,
+          "normal": [
+            -1,
+            0
+          ]
+        }
+      ]
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 3,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          -1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "reward",
+        "route_id": "reward"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "lower-exit"
+      }
+    ],
+    "space": {
+      "max_width": 2000,
+      "max_height": 1400,
+      "max_port_span_x": 1300
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "risk_reward": {
+      "mandatory_damage": false,
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            580,
+            412
+          ],
+          "region": [
+            550,
+            407,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ]
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "original fresh scene at selected supported port; captured before input",
+      "exit": "observed stable only"
+    },
+    "return_conditions": "Only explicit reward-rejoin route retains actor/world; arbitrary returns UNKNOWN",
+    "budget": {
+      "generator_candidates": 4,
+      "director_revisions": 0
+    }
+  },
+  "quality_gates": [
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/evaluations.json",
+      "sha256": "41ee9934d39ea2db632cbe67232d0142e8c2307ac166c6e1757651f3970dc731"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/calibration-evaluations.json",
+      "sha256": "973dd1b146c4e712f8e0123d06a96e99ab6d3e0e5624da6d65549a007cbc95d6"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/protocol.json",
+      "sha256": "4c217a933d981d1e0d220a9c96f4c265870e05f0f6512aaa40af579734fd108f"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/bound-counterexamples.json",
+      "sha256": "09f7a48fbbfb15766623c1127e396b9663c64272d622940bb9a43e4de1c4998f"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/counter-decisions.json",
+      "sha256": "d7283ac4a8ef8c7a048b7fb4c4f8e866a9981f94097577bca95dfbd3e5a48dd8"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-ports-production-v1/thorn-branch/selection-before-holdout.json",
+      "sha256": "006bb18b3be49c811a8ecdc32949f9493fe9c1d948b296833b1e2cb0ce5404db"
+    }
+  ],
+  "human_quality": "awaiting_review",
+  "human_reviews": [],
+  "production_admitted": false
+}

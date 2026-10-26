@@ -1,0 +1,186 @@
+{
+  "schema": "map-notes/module-library-entry/v1",
+  "id": "generated-f608e889e50720d179e97848d478aca0a69b5fa740f1d7ea2a04ddcdd02b141d",
+  "contentVersion": "sha256:a8b3f205807da9b0bc08d76ffa3c62fbfb99033bf0abe941c6e371a41754f8e6",
+  "technical_status": "passed_scoped_multi_route",
+  "content_kind": "module",
+  "technical_scope": "independent single-module route witnesses; no arbitrary-state or Map guarantee",
+  "cases_sha256": "e0a5f2769004b3b6f89c35383ebd67bcc1fddad6041bff9b9401d21a19900a9f",
+  "document_sha256": "e679d778fa154b3550721ee58350d914fdeaed1bc80cfefb5b93e01351018521",
+  "demand_key": "960a636120bb7fbf223516f507ac1e83e6134fd53f23b59d4bc60a9dd17e164f",
+  "specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "plains50/machinery/carrier-safe-branch/3port/v1",
+    "source_type": "parent_map_interface_work_order",
+    "region": "plains",
+    "required_family": "chase-landing",
+    "objective": {
+      "recipe": "carrier-safe-branch",
+      "physical_layout_sha256": "f608e889e50720d179e97848d478aca0a69b5fa740f1d7ea2a04ddcdd02b141d",
+      "branch_ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            905,
+            270
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            1030,
+            632
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        }
+      ]
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 3,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "reward",
+        "route_id": "reward"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "safe-lower-exit"
+      }
+    ],
+    "space": {
+      "max_width": 1900,
+      "max_height": 1300,
+      "max_port_span_x": 1300
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "risk_reward": {
+      "mandatory_damage": false,
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            905,
+            270
+          ],
+          "region": [
+            875,
+            265,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ]
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "authored fresh original supported source A; actual entry snapshot bound",
+      "exit": "observed stable only"
+    },
+    "return_conditions": "B→A/B→C/C→A/C→B UNKNOWN; no implicit all-to-all connectivity",
+    "budget": {
+      "generator_candidates": 1,
+      "director_revisions": 0
+    }
+  },
+  "quality_gates": [
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/evaluations.json",
+      "sha256": "798a79f3c7a2c1daedb426d4fc261952429387198c1812449c6f2a3787dfbb4d"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/calibration-evaluations.json",
+      "sha256": "442fcf145a7a087f40d867f9cf31dd7acaf2f65c971501339523c9194b115dc0"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/protocol.json",
+      "sha256": "d1e79c8a223aa3bad25d08a3e8351f917754b60715fa4efa443089b8ffa19d26"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/bound-counterexamples.json",
+      "sha256": "80d8b0d09c0d87bbbe6aebc6bfc6fdef00ab3271507b1e1d861b9b91f1cc1295"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/counter-decisions.json",
+      "sha256": "d0c182ddec05884a35aa283ba923d5b83f3f21dff8287cb6294d35f39cf5b40a"
+    },
+    {
+      "path": "pcg/results/workshop-plains50-machinery-branch-production-v1/carrier-safe-branch/selection-before-holdout.json",
+      "sha256": "cb57b41fc5b4f65ab78bc2315b947b4aa3b4db4e3c6d3b834b63345df07497df"
+    }
+  ],
+  "human_quality": "awaiting_review",
+  "human_reviews": [],
+  "production_admitted": false
+}

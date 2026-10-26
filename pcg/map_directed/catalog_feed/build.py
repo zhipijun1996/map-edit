@@ -67,7 +67,7 @@ def generate(out,seed):
         for s in range(2):
             F='F'+str(s);J='J'+str(s);nodes.extend([dict(id=F,role='junction',label='反冲高低分流'),dict(id=J,role='junction',label='岩体汇合')])
             jm=gate_join(macros[s],J);drop=int(jm['ports']['lo']['position'][1]-jm['ports']['hi']['position'][1]-300)
-            fm=exterior(deep_fork(fork,drop),F,0,True);pool=eligible[:];rng.shuffle(pool);pool.sort(key=lambda x:x['record']['contentVersion']in used);buckets={};groups=None
+            fm=exterior(deep_fork(fork,drop),F,0,True);pool=eligible[:];rng.shuffle(pool);pool.sort(key=lambda x:(x['record']['contentVersion']in used,x['row'].get('publication_batch')!='plains50-v1'));buckets={};groups=None
             numeric={};shared_ok=set();lower_ok=set();hi_last={};lo_last={}
             for x in pool:
                 key=x['record']['contentVersion']
@@ -164,7 +164,7 @@ def generate(out,seed):
             m['content_version']='sha256:'+__import__('pcg.prototype.factory.core.quality',fromlist=['digest']).digest(dict(case=c,ports=m['ports']))
         write(out/'precanonical.json',dict(graph=graph,modules=modules));modules=export_reload(modules,out/'module-library',producer='pcg/map_directed/catalog_feed/adapt.py')
         c=assemble_modules(graph,modules,[dict(id=e['id'],kind=next(m for m in modules if m['id']==e['from'])['ports'][e['id']]['kind'])for e in edges]);c.update(shop={},unresolved_rewards=[]);write(out/'compiled.json',c);write(out/'assembly-audit.json',audit(c))
-        write(out/'selection.json',dict(source_library_versions=44,plains_selected=32,interfaces_considered=len(eligible),latest_selected_versions=sorted(set(assignments.values())|{fork['record']['contentVersion']}|{x['record']['contentVersion']for x in macros}),assignments=assignments,branches=branches,legacy_structural_junctions=0,added_map_geometry=0,arbitrary_reverse_routes='UNKNOWN; no reverse inference'))
+        write(out/'selection.json',dict(source_library_versions=len(items),plains_selected=sum(x['row']['selected_for_plains_candidates']for x in items),interfaces_considered=len(eligible),latest_selected_versions=sorted(set(assignments.values())|{fork['record']['contentVersion']}|{x['record']['contentVersion']for x in macros}),assignments=assignments,branches=branches,legacy_structural_junctions=0,added_map_geometry=0,arbitrary_reverse_routes='UNKNOWN; no reverse inference',junction_design='Experimental concrete placement only; no multiport design approval inferred'))
         return c,branches
     raise ValueError('bounded_library_geometry_search_unsatisfied')
 
@@ -180,6 +180,6 @@ def cases_for(c,branches):
         v['presentation_areas']=[dict(id=k,identity='windmill_plateau'if k.startswith('J')else'repair_gallery',position=n['center']['position'])for k,n in c['nodes'].items()]
         v['presentation_keep_clear']=[[r[0]+m['spec']['placement'][0],r[1]+m['spec']['placement'][1],r[2],r[3]]for m in c['modules']for r in m['action_clearance']]
         for leg in v['pilot_program']:
-            if leg['kind']=='module':leg['entry']=dict(grounded=True,required_air_shots=1)
+            if leg['kind']=='module':leg['entry']=dict(grounded=True,required_air_shots=1,maximum_shot_cooldown=0)
         cases.append(v)
     return cases

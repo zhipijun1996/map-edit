@@ -1,0 +1,861 @@
+{
+  "schema": "pcg/causal-design-cards/v1",
+  "cards": [
+    {
+      "id": "plains50-machinery/chase-landing",
+      "status": "executable_recipe_requires_physics",
+      "source_type": "actual_codex_subagent_proposal",
+      "source_task": "/root/plains50_machinery",
+      "required_cells": "Original Godot actor, ShotLatch, ModuleMovingPlatform, saw/reward; existing isolated CarrierDockLatch only for dual-service",
+      "required_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "resources": "Original real jump/air-shot/cooldown and ground recovery; no seam reset",
+      "observation": "看到宝箱高岸、启动铃和会离开的落脚台。",
+      "decision": "何时在空中击铃启动台，如何追上并选择离台/暂停时机。",
+      "causality": "同一空中枪改变玩家运动并切换原真实载台；两次实际承载和空中启停是目标。",
+      "terrain": "两份新接收岸前沿/高度/宽度需求；入口不是等电梯的安全完成路径。",
+      "reward": "接收岸可见宝箱，真实落稳接触后领取。",
+      "recovery": "已有低处安全地面只声明局部失误落地；连续重试/回程UNKNOWN。",
+      "directions": "仅entry→exit实测；反方向UNKNOWN。",
+      "cheap_solutions": "无射击、普通跳、岸上提前启停、被动站台、跳过承载。",
+      "difference": "原chase关系的两个新接收岸接口，非新家族。",
+      "map_demands": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/chase-landing/i0/v1",
+          "region": "plains",
+          "required_family": "chase-landing",
+          "objective": {
+            "relationship": "chase-landing",
+            "interface": 0,
+            "receiver": [
+              905,
+              270
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                805,
+                288,
+                210,
+                100
+              ],
+              [
+                -200,
+                650,
+                1300,
+                60
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 150,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/chase-landing/i1/v1",
+          "region": "plains",
+          "required_family": "chase-landing",
+          "objective": {
+            "relationship": "chase-landing",
+            "interface": 1,
+            "receiver": [
+              950,
+              266
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                850,
+                284,
+                240,
+                100
+              ],
+              [
+                -200,
+                650,
+                1300,
+                60
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 154,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "plains50-machinery/evacuate-rejoin",
+      "status": "executable_recipe_requires_physics",
+      "source_type": "actual_codex_subagent_proposal",
+      "source_task": "/root/plains50_machinery",
+      "required_cells": "Original Godot actor, ShotLatch, ModuleMovingPlatform, saw/reward; existing isolated CarrierDockLatch only for dual-service",
+      "required_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "resources": "Original real jump/air-shot/cooldown and ground recovery; no seam reset",
+      "observation": "台将穿过旋转危险，玩家可提前看到高避险岛和远岸。",
+      "decision": "先离台到岛，再根据同一台的位置重接；选择落岛及离岛点。",
+      "causality": "反冲使角色离开持续运动的危险支撑；短暂稳定后重接同一实体。",
+      "terrain": "窄高岛与宽低岛两接口，并各有新远岸前沿/高度需求。",
+      "reward": "岛上宝箱先可见，实际落岛后领取；远岸为真实稳定出口。",
+      "recovery": "失误无自动传送/补能；原伤害恢复保持，连续无伤恢复UNKNOWN。",
+      "directions": "entry→exit已计划验证；回程和重新进场状态UNKNOWN。",
+      "cheap_solutions": "一直待台、跳过岛、直接越岸、提前/延迟登台。",
+      "difference": "同台离开/重接关系的两份空间适配，非新家族。",
+      "map_demands": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/evacuate-rejoin/i0/v1",
+          "region": "plains",
+          "required_family": "evacuate-rejoin",
+          "objective": {
+            "relationship": "evacuate-rejoin",
+            "interface": 0,
+            "receiver": [
+              1450,
+              420
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                660,
+                245,
+                150,
+                60
+              ],
+              [
+                1335,
+                438,
+                235,
+                100
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/evacuate-rejoin/i1/v1",
+          "region": "plains",
+          "required_family": "evacuate-rejoin",
+          "objective": {
+            "relationship": "evacuate-rejoin",
+            "interface": 1,
+            "receiver": [
+              1465,
+              412
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                645,
+                250,
+                175,
+                60
+              ],
+              [
+                1350,
+                430,
+                220,
+                100
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 8,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "plains50-machinery/moving-ray-window",
+      "status": "executable_recipe_requires_physics",
+      "source_type": "actual_codex_subagent_proposal",
+      "source_task": "/root/plains50_machinery",
+      "required_cells": "Original Godot actor, ShotLatch, ModuleMovingPlatform, saw/reward; existing isolated CarrierDockLatch only for dual-service",
+      "required_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "resources": "Original real jump/air-shot/cooldown and ground recovery; no seam reset",
+      "observation": "能看见沿射线移动的挡板和门后的宝箱。",
+      "decision": "根据挡板真实相位判断何时开枪，让弹丸穿窗并让身体利用反冲过门。",
+      "causality": "同一枪的射线受真实运动碰撞体遮挡，反冲决定身体过门；平台不能被当载台。",
+      "terrain": "两份不同接收岸深度和后墙前沿需求，改变过门后的完整身体落点。",
+      "reward": "门后可见宝箱，落地真实接触领取。",
+      "recovery": "原门防夹保持；延迟离开/门后返回仍UNKNOWN不外推。",
+      "directions": "entry→exit；反向未验UNKNOWN。",
+      "cheap_solutions": "地面提前射、无射击、任意相位盲跳、使用挡板作载台、延迟枪绕过相位。",
+      "difference": "原moving-ray关系在两种接收空间的适配，不算新家族。",
+      "map_demands": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/moving-ray-window/i0/v1",
+          "region": "plains",
+          "required_family": "moving-ray-window",
+          "objective": {
+            "relationship": "moving-ray-window",
+            "interface": 0,
+            "receiver": [
+              680,
+              420
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                460,
+                438,
+                285,
+                100
+              ],
+              [
+                250,
+                80,
+                525,
+                160
+              ],
+              [
+                745,
+                240,
+                30,
+                198
+              ],
+              [
+                -200,
+                680,
+                1200,
+                60
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 12,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/moving-ray-window/i1/v1",
+          "region": "plains",
+          "required_family": "moving-ray-window",
+          "objective": {
+            "relationship": "moving-ray-window",
+            "interface": 1,
+            "receiver": [
+              645,
+              420
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                400,
+                100
+              ],
+              [
+                460,
+                438,
+                255,
+                100
+              ],
+              [
+                250,
+                80,
+                495,
+                160
+              ],
+              [
+                715,
+                240,
+                30,
+                198
+              ],
+              [
+                -200,
+                680,
+                1200,
+                60
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 12,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "plains50-machinery/carrier-dual-service",
+      "status": "executable_recipe_requires_physics",
+      "source_type": "actual_codex_subagent_proposal",
+      "source_task": "/root/plains50_machinery",
+      "required_cells": "Original Godot actor, ShotLatch, ModuleMovingPlatform, saw/reward; existing isolated CarrierDockLatch only for dual-service",
+      "required_capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "resources": "Original real jump/air-shot/cooldown and ground recovery; no seam reset",
+      "observation": "平台停在Dock可打开远门，但门后还有必须靠台的空缺。",
+      "decision": "先把台当持续钥匙过门，再何时放弃开门职责释放台供运输。",
+      "causality": "同一实际平台承担互相冲突的钥匙/运输职责，原铃启动暂停；不能提前当作静止跳板绕过。",
+      "terrain": "两份新终岸前沿/高度/宽度需求，保留真实Dock传感和门前后交接。",
+      "reward": "终岸可见奖励，必须实际稳定到达领取。",
+      "recovery": "保留原门防夹和机关状态，未知回程和未测恢复不声明。",
+      "directions": "entry→exit；返向/任意门相位进场UNKNOWN。",
+      "cheap_solutions": "不释台直接反冲、门前提前访问副铃、错误停位、提前放台跳过开门职责。",
+      "difference": "原平台双职责关系的两个需求适配，不计新家族。",
+      "map_demands": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/carrier-dual-service/i0/v1",
+          "region": "plains",
+          "required_family": "carrier-dual-service",
+          "objective": {
+            "relationship": "carrier-dual-service",
+            "interface": 0,
+            "receiver": [
+              1675,
+              438,
+              260,
+              100
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                1280,
+                100
+              ],
+              [
+                1675,
+                438,
+                260,
+                100
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/machinery/carrier-dual-service/i1/v1",
+          "region": "plains",
+          "required_family": "carrier-dual-service",
+          "objective": {
+            "relationship": "carrier-dual-service",
+            "interface": 1,
+            "receiver": [
+              1640,
+              428,
+              240,
+              100
+            ],
+            "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+            "requested_geometry": [
+              [
+                -160,
+                438,
+                1280,
+                100
+              ],
+              [
+                1640,
+                428,
+                240,
+                100
+              ]
+            ],
+            "only_special_ability": "shot_recoil"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 10,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1600,
+            "max_port_span_x": 1900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 8,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 1,
+            "director_revisions": 0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -2,10 +2,18 @@ extends RefCounted
 ## Reuse A's actual native world Cells; no replacement player/mechanism physics.
 const EW=preload("../../prototype/creative_batches/enemy_world/world_cells_binding_v1.gd")
 const DOCK=preload("../../prototype/creative_batches/machinery/dock_binding_v11.gd")
+const SLIDE=preload("../../prototype/creative_batches/plains50_new_relations/sliding_support_v1.gd")
 static func masked(data:Dictionary)->Dictionary:
-	var v:Dictionary=DOCK.masked(EW.masked(data));v.latches=v.latches.filter(func(s:Dictionary)->bool:return not s.has("sequence_offset"));return v
+	var v:Dictionary=DOCK.masked(EW.masked(data));v.latches=v.latches.filter(func(s:Dictionary)->bool:return not s.has("sequence_offset")and not s.has("sliding_support"));return v
 static func install(owner,data:Dictionary)->void:
 	EW.install(owner,data);DOCK.install(owner,data)
+	for spec:Dictionary in data.get("latches",[]):
+		if not spec.has("sliding_support"):continue
+		var latch:=SLIDE.new();latch.link_id=str(spec.id);latch.formal_presentation=true;latch.stop_clock=float(spec.sliding_support.stop_clock);owner.world.add_child(latch)
+		latch.setup(owner.controller,owner.context.lifetime,Vector2(spec.bell[0],spec.bell[1]),Rect2(spec.gate[0],spec.gate[1],spec.gate[2],spec.gate[3]))
+		for platform:ModuleMovingPlatform in owner.context.module.moving_platforms:
+			if str(platform.definition.platform_id)==str(spec.ferry_id):latch.bind_motion(platform)
+		latch.opened.connect(owner.cells._bell_open.bind(latch,str(spec.id)));owner.cells.latches.append(latch)
 	for spec:Dictionary in data.get("latches",[]):
 		if not spec.has("sequence_offset"):continue
 		var latch:=ShotLatch.new();latch.link_id=str(spec.id);latch.formal_presentation=true;latch.open_seconds=float(spec.get("open_seconds",0))
