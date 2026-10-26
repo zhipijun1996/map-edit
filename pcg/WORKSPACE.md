@@ -78,3 +78,6 @@ Godot素材与真实脚本由 `godot-runtime-v1` 完整保存870原件；恢复�
 ## 最新 Module 库接入完整 Map（2026-10-26）
 
 见[实验报告](../docs/l4-mapgen/latest-library-map-integration-v1.md)。已同步main54d0cfc及内容6de70fb：94版本/82平原候选，121/121源路线；三个Seed实际21原版本，整图7/12（1/4、4/4、2/4），仅一张四路线全过。没有生产/人类趣味认可、没有通用回程/路口准入。固定双分流测试图未代替既有Mission生成器。源/所有失败/原库证据在catalog-feed-source-and-runs-v1，实际截图/原生影片/公网字节核验在catalog-feed-media-v1；PCK以可精确重建的父包增量保存。
+
+
+**岩井回环空间原型v1**：见[完整报告](../docs/l4-mapgen/contact-grammar-v1.md)。三Seed 12/16实例、13/18零间隙接缝，37/37（12常规、18新扰动、7回归），每图2箱48币；两段真实原生录像3187帧严格一致。仅一种有限3/4层空间文法，5父版本，尚无128网格迁移、人工趣味/正式生产准入。旧25/30及28/35失败保留；恢复contact-grammar-v1归档。

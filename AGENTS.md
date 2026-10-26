@@ -12,3 +12,6 @@
 - `pcg/archives` 为版本化原件，`generation` 为可发布录像/结果；不覆盖既有批次，不提交Godot导入缓存或官方引擎二进制。
 
 - 后续交付Module/Macro沿用Map Notes `gunman-rush-level-sketch/v1`并附`generationContract`，执行`pcg/OUTPUT-CONTRACT.md`及`module-contract.js`检查。UNKNOWN不准入拼装；逐方向、状态和版本绑定，不能由单段见证推断回程/Macro/整图。
+
+
+**岩井回环空间原型v1**：见[完整报告](docs/l4-mapgen/contact-grammar-v1.md)。三Seed 12/16实例、13/18零间隙接缝，37/37（12常规、18新扰动、7回归），每图2箱48币；两段真实原生录像3187帧严格一致。仅一种有限3/4层空间文法，5父版本，尚无128网格迁移、人工趣味/正式生产准入。旧25/30及28/35失败保留；恢复contact-grammar-v1归档。

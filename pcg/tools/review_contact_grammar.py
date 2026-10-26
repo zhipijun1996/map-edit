@@ -47,7 +47,7 @@ def diagram(c,traces,path):
         fill='#547773'if i not in c['case']['one_way_platform_indices']else'#bd9859'
         parts.append(f'<rect x="{p[0]}" y="{p[1]}" width="{p[2]}" height="{p[3]}" fill="{fill}" stroke="#a8c4b4" stroke-width="2"/>')
     for i,(name,points)in enumerate(traces.items()):
-        if 'all-declared' in name:continue
+        if name not in ['full-region-main','full-region-middle-reward-return','full-region-lower-reward-return']:continue
         points=' '.join(f'{a:.1f},{b:.1f}'for a,b in points)
         parts.append(f'<polyline points="{points}" stroke="{colors[i%4]}" stroke-width="4" opacity=".8" fill="none"><title>{html.escape(name)}</title></polyline>')
     for key,node in c['nodes'].items():
