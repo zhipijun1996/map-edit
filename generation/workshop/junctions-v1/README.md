@@ -1,5 +1,7 @@
 # 可玩多端口路口 · 首轮
 
+> 当前状态：用户已否决J06/J03，认为无聊且缺设计感。四份版本保留为技术试件，已从平原优选暂扣；下文是历史技术交付记录，不代表体验认可。[原话与版本绑定](../../../pcg/feedback/workshop/junction-boring-observation-v1.json)。
+
 4份新候选、2种空间语法，各响应两种空间需求。原库94→98，平原候选82→86。全部使用真实Godot角色与原Cell；没有新增Map Generator。技术通过后进入候选库，人工趣味、实际试玩与生产认可尚未完成。
 
 [完整清单与版本](manifest.json) · [实现报告与限制](../../../docs/l4-mapgen/junction-modules-v1.md) · [独立模型设计审查](../../../pcg/creative-production/curation/junction-implementation-review-v1.md) · [生产/失败/复用回执](../../../pcg/creative-production/junction-implementation-cycle-v1.json)
@@ -38,7 +40,7 @@
 
 ```sh
 python3 pcg/tools/restore_archive.py godot-runtime-v1 --extract
-python3 pcg/tools/restore_archive.py content-workshop-junctions-v1 --extract
+python3 pcg/tools/restore_archive.py content-workshop-junctions-v1 --extract --prefix results/
 python3 -m pcg.prototype.creative_batches.plains50_catalog --manifest generation/workshop/junctions-v1/manifest.json --list
 python3 -m pcg.prototype.creative_batches.plains50_catalog --manifest generation/workshop/junctions-v1/manifest.json --play J03-1 --route lower-to-upper
 ```

@@ -7,7 +7,9 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 ## 当前优先：反冲平原
 
-**多端口的新优先级**：用户已指出旧多口偏向“挑战＋额外安全口”。所有三/四口创意、改造与Map路口请求先执行 [pcg-multiport-junction](../pcg-multiport-junction/SKILL.md)：先输出不同空间构图、共同选择点、端口地域职责和有向意图，再接原工坊。环岛仅是试例；不默认全连通，也不默认所有三/四口都从A出2/3口。旧批次出口数量达标不等于新设计标准达标。最新原话/设计反馈见`pcg/feedback/workshop/multiport-spatial-choice-feedback-v1.json`，旧15版侧边审查见`pcg/creative-production/curation/multiport-junction-audit-v1.json`。本轮范围为重审、方法与创意，未授权把具体示例直接变成实现任务。
+最新人工否定见`pcg/feedback/workshop/junction-boring-observation-v1.json`：J06/J03的四份实现无聊，暂扣于优选之外。原五案D02—D05的价值在具体动作/后果的耦合；不以最低实现成本选静态几何来代替。先冻结不可丢失的体验与地貌，单份可玩原型表现出来后才做接口适配/完整批次。物理通过与模型接口审查不能替代体验实现，详见多端口skill的纠偏段。无需新增逐件人工批准流程，仍在已授权范围内推进。
+
+**多端口的新优先级**：用户已指出旧多口偏向“挑战＋额外安全口”。所有三/四口创意、改造与Map路口请求先执行 [pcg-multiport-junction](../pcg-multiport-junction/SKILL.md)：先输出不同空间构图、共同选择点、端口地域职责和有向意图，再接原工坊。环岛仅是试例；不默认全连通，也不默认所有三/四口都从A出2/3口。旧批次出口数量达标不等于新设计标准达标。原空间需求见`pcg/feedback/workshop/multiport-spatial-choice-feedback-v1.json`，旧15版侧边审查见`pcg/creative-production/curation/multiport-junction-audit-v1.json`。用户后已授权实际实现；首次J06/J03落地受到上述明确否定，不再把审查阶段的范围或模型结论当作当前状态。
 
 最新已完成用户50件目标：`generation/workshop/plains50-v1/manifest.json`、`pcg/creative-production/curation/plains50-final-ai-review-v1.json`、`pcg/creative-production/plains50-receipt-v1.json`。新增39双口/7三口/4四口，21审阅组+29适配不是50新家族。公网发布回执在`generation/workshop/plains50-v1/publication-v1.json`。继续工作先读本批新失败和方向/资源缺口；旧campaign-v2的未完成状态不能覆盖新回执。双口配方400、多口900为本批运行前预算，后者仍逐路执行原门槛；不是事后降低。新版注册视图`plains_workshop/catalog_v2.py`与统一`plains50_catalog.py`读取原库。下一批根据新需求继续，不把已完成50计作再次新增。
 

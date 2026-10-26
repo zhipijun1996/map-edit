@@ -27,6 +27,14 @@ def snapshot(manifest_path,additional_manifests=None):
         batch_id=next(batch['id']for _,batch in batches if item in batch['modules'])
         row.update(selected_for_plains_candidates=True,selection_reason='version_bound_published_candidate_batch',content_role=item['content_role'],video_observation='unreviewed_new_version',publication_batch=batch_id,title=item['name'])
     if seen!=set(registered):raise ValueError('published_version_not_in_original_candidate_store')
+    # A technical publication must not erase subsequent human design feedback.
+    holds={h['contentVersion']:h for h in profile.get('design_holds',[])}
+    for row in view['rows']:
+        hold=holds.get(row['contentVersion'])
+        if hold:
+            source=hold['feedback']
+            if file_sha(path(source['path']))!=source['sha256']:raise ValueError('design_hold_feedback_drift')
+            row.update(selected_for_plains_candidates=False,selection_reason='pacing_held',content_role='design_rejected_technical_specimen',video_observation='human_negative_boring',design_hold_reason=hold['reason'],design_feedback=source)
     view.update(profile='plains-recoil-v2',published_batch=str(Path(manifest_path).resolve().relative_to(REPO)),published_batch_sha256=file_sha(manifest_path),selected_candidate_versions=sum(r['selected_for_plains_candidates']for r in view['rows']))
     if additional_manifests:view['published_batches']=[dict(path=str(p.resolve().relative_to(REPO)),sha256=file_sha(p))for p,_ in batches]
     return view
@@ -43,7 +51,7 @@ def query(spec,manifest_path,additional_manifests=None):
         v=copy.deepcopy(value)
         for key in ['id','budget','map_seed']:v.pop(key,None)
         return v
-    matches=[];allowed={r['contentVersion']for r in view['rows']if r['selected_for_plains_candidates']}
+    matches=[];held_matches=[];allowed={r['contentVersion']for r in view['rows']if r['selected_for_plains_candidates']};holds={r['contentVersion']:r for r in view['rows']if r.get('design_feedback')}
     if not conflicts:
         if type(spec['ports'].get('count'))is not int:conflicts.append(dict(field='ports.count',reason='integer required'))
         else:
@@ -54,8 +62,9 @@ def query(spec,manifest_path,additional_manifests=None):
                 # Original coarse lookup is only a prefilter. Every complete
                 # mechanical constraint is compared, including extra requests.
                 if hit['record']['contentVersion']in allowed and signature(spec)==signature(stored):matches.append(hit['record']['contentVersion'])
+                elif hit['record']['contentVersion']in holds and signature(spec)==signature(stored):held_matches.append(holds[hit['record']['contentVersion']])
     if matches:return dict(status='supported_candidate',versions=matches,generator_called=False,new_physics_cases=0,assembly='UNKNOWN pending actual placement and entry/seam proof',production_admitted=False)
-    if not conflicts:conflicts=[dict(field='full_challenge_specification',reason='no exact published candidate; unknown or additional mechanics cannot be inferred')]
+    if not conflicts:conflicts=([dict(field='human_design_feedback',reason='technical match held after human rejection of gameplay; redesign required',contentVersion=r['contentVersion'],feedback=r['design_feedback'])for r in held_matches]if held_matches else[dict(field='full_challenge_specification',reason='no exact published candidate; unknown or additional mechanics cannot be inferred')])
     return dict(status='unsatisfied',conflicts=conflicts,searched=dict(candidate_versions=len(allowed),library_versions=view['library_versions'],capabilities=profile['allowed_tested_capabilities']),negotiable=['explicit published interface','new bounded rule adaptation and original physical gate'],generator_called=False,new_physics_cases=0,production_admitted=False)
 
 if __name__=='__main__':

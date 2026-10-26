@@ -2,7 +2,11 @@
 
 # 关卡生成工作区
 
-## 当前任务：真实多口路口实现（2026-10-26）
+## 当前反馈：J06/J03无聊，停止作为优选创意（2026-10-26）
+
+用户原话见`feedback/workshop/junction-boring-observation-v1.json`，明确否决这两种实现。四版本保留技术证据，优选平原86→82、总库98不变；重新生成视图须应用profile.design_holds，不能由旧发布清单重新选中。见[复盘](../docs/l4-mapgen/junction-design-regression-v1.md)。原五案D02—D05的具体动作/后果耦合应成为选案依据；先建立可玩核心与地貌构图，再适配端口/尺寸。此轮无新Module或物理实验，不擅自将问题替换为增加射击/危险数量。
+
+## 历史：真实多口路口实现（2026-10-26）
 
 已完成J06双岸会合风口与J03交织双桥各两种空间接口，4新候选入原库（94→98；平原82→86）。24路线原regular校准/独立留出各600/600；2精确等面积接缝试件102/102，通用seam仍UNKNOWN。6段正常速度原生视频2267帧严格一致；20有条件path/16UNKNOWN，不宣称单向已证。J03旧observer误标合法落地buffer造成的5次错误反例拒绝保持原件，以隔离分类解释后重验接口0；原物理/Harness/门槛不改。见[交付](../generation/workshop/junctions-v1/README.md)、[报告](../docs/l4-mapgen/junction-modules-v1.md)、`creative-production/junction-implementation-cycle-v1.json`。`prototype/creative_batches/junctions/`复用原多口调度/WorkshopEngine/原库；query_v1提供精确需求检索及具体冲突。环岛/任意进入状态/通用拼装/B整图未完成，人工趣味和生产准入仍待评。恢复归档content-workshop-junctions-v1后可复跑全部新原件。
 
