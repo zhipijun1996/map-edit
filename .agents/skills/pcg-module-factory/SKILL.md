@@ -13,6 +13,8 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 用户要求持续生成新 Module 时，执行 [固定生产循环](references/production-loop.md)，不要为每个样品重新组织整套实验。程序入口：`python3 -m pcg.prototype.workshop.production_loop --name workshop-new-batch --cycles 4`。它复用原 Engine、regular 评价器、标准导出与 CandidateLibrary。
 
+用户要求先积累、AI去重、再人工审核时，外层按 [批次生产协议](../pcg-creative-producer/references/batch-production-v1.md) 调度；不用每个点子等待人工批准。仍先过原技术门槛再入候选库；AI分组不会修改物理结论、删除候选或替人类批准。
+
 Codex 负责提出和实现新因果规则；程序负责规则域内的动作/几何搜索、反例、校准、独立留出和入库。创意外层使用 [pcg-creative-producer](../pcg-creative-producer/SKILL.md) 的实际 Codex 会话或授权子代理；当前没有独立在线模型服务，不承诺单独运行循环程序能自主发明任意新机制。规则耗尽必须输出 needs_design，并将未实现创意和下一步缺口交回设计环节，不能继续换 Seed 冒充新内容。
 
 每轮先静态合同预检、clean 与少量 mild 筛选、廉价解法，再做完整校准和留出。小样通过不是技术准入；沿用原 regular 门槛。发布见证必须在留出前固定为反例测试过的精确几何/敌人相位，留出统计单独描述父候选扰动范围。相同规则源码的失败持久化，后续进程跳过；标题和 Seed 不清除失败。运行整个冻结轮次期间，不编辑其源码。

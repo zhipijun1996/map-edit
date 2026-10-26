@@ -2,6 +2,12 @@
 
 # 关卡生成工作区
 
+## 当前续作：批次生产、AI去重、人工集中审核（2026-10-26）
+
+执行 [批次方法](../docs/l4-mapgen/plains-batch-production-v1.md) 与 `.agents/skills/pcg-creative-producer/references/batch-production-v1.md`，续作账本 `creative-production/plains-campaign-v2.json`。每轮模型5张创意卡，缺规则/Cell就隔离实现，原Godot门槛通过后入原候选库；默认累计20个新增技术候选版本后AI按实际决策/因果分组，再给人工代表短视频。原库复用不算新增，适配不算新家族；重复仅折叠，不删除或当技术撤回。会话外不持续运行。最新反馈：D01被否决为已有基础反冲关系，停止作为新创意；D02-D05只有设计正向意见，未获试玩/生产批准。现有32平原版本做第一轮AI批次，D02进入有界实现；具体完成/失败必须读新cycle回执，计划数量不算完成。
+
+首轮实际回执：`creative-production/plains-campaign-v2-cycle-001.json`。32版本AI分18审阅组、6适配、8折叠；18段不同代表影片有两段review-only，G06低路影片未找到。D02首版17真实案例发现岸上预停→静态跳台绕法，完整校准/留出NOT_RUN，新增入库0；先读`feedback/workshop/descending-carrier-prepark-v1.json`再修订。原库44版本保留。新失败原件用`content-workshop-plains-batch-v1`归档恢复。
+
 ## 当前优先：反冲平原与可持续配方（2026-10-26）
 
 用户已整体正向评价新20项。见 [库现状与方法](../docs/l4-mapgen/plains-recoil-method-v1.md)、[平原视图](../generation/workshop/plains-recoil-v1/catalog.json)。共享库已归拢为44版本，平原优选32候选版本；新20里11项三能力兼容、9项高级能力留后，兼容项不全是反冲课。当前仅move/jump/shot_recoil；教学、练习、组合、奖励、同世界回程恢复分别验收。新方法首试两条旧规则×两新空间，4/4通过原门槛，新进程4/4复用0物理调用；不是方法稳定性或盲空间泛化通过。优先补安全首课和配方跨需求适应，接B现有平原流程，不继续按数量扩高级玩法。归档content-workshop-plains-method-v1提供新原件与旧15依赖闭包；旧20只需恢复results前缀，不覆盖当前源码。

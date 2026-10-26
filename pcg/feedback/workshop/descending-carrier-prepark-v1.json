@@ -1,0 +1,125 @@
+{
+  "schema": "pcg/production-rule-feedback/v1",
+  "id": "descending-carrier-prepark-v1",
+  "type": "technical_experiment",
+  "source_task": "/root/machinery_creator",
+  "production_recipe": "descending-carrier",
+  "design_id": "PR-D02",
+  "flag": "unneeded_mechanic",
+  "stage": "rejected_before_full_validation",
+  "status": "needs_design",
+  "reason": "Three identical-geometry shore-start/pre-park policies reach a safe stable rewarded exit with zero moving-platform-supported frames. Continuous descending carriage and on-deck position regulation can be bypassed.",
+  "physics_cases": 17,
+  "probe_cases": 4,
+  "cheap_counterexamples": 13,
+  "new_candidates": 0,
+  "calibration": "NOT_RUN",
+  "holdout": "NOT_RUN",
+  "enrollment": "NOT_RUN",
+  "production_admitted": false,
+  "technical_withdrawal": false,
+  "withdrawal_reason": "No candidate version was enrolled or published.",
+  "falsifiers": [
+    {
+      "id": "descending-carrier-v1-r305-a510-counter-shore-prepark-110-downward",
+      "hp": 5.0,
+      "coins": 8,
+      "moving_supported_frames": 0,
+      "moving_supported_drop": 0,
+      "evidence": {
+        "batch": "0000-cheap-policy",
+        "index": 8,
+        "output": "physics/0000-cheap-policy.output.json.gz",
+        "raw_output_sha256": "866532a9193411094862b67bb0f531f1ed0d8a6f1744b3d36f29ca6a4daec53c"
+      }
+    },
+    {
+      "id": "descending-carrier-v1-r305-a510-counter-shore-prepark-130-downward",
+      "hp": 5.0,
+      "coins": 8,
+      "moving_supported_frames": 0,
+      "moving_supported_drop": 0,
+      "evidence": {
+        "batch": "0000-cheap-policy",
+        "index": 10,
+        "output": "physics/0000-cheap-policy.output.json.gz",
+        "raw_output_sha256": "866532a9193411094862b67bb0f531f1ed0d8a6f1744b3d36f29ca6a4daec53c"
+      }
+    },
+    {
+      "id": "descending-carrier-v1-r305-a510-counter-shore-prepark-150-downward",
+      "hp": 5.0,
+      "coins": 8,
+      "moving_supported_frames": 0,
+      "moving_supported_drop": 0,
+      "evidence": {
+        "batch": "0001-cheap-policy",
+        "index": 0,
+        "output": "physics/0001-cheap-policy.output.json.gz",
+        "raw_output_sha256": "b28e507af93d898cea9903f335f08c1c642ec263ca6b5364de946fe7feadc54e"
+      }
+    }
+  ],
+  "accepted_same_core_alternative": {
+    "id": "descending-carrier-v1-r305-a510-counter-rear-board-360",
+    "moving_supported_frames": 149,
+    "moving_supported_drop": 231.25,
+    "note": "Rear boarding without a negative movement command is legitimate and must not be rejected by action-word identity.",
+    "first_shot_ground_recoil_multiplier": 0.55,
+    "observed_first_shot_relative_dx": -84.04617309570295,
+    "evidence": {
+      "batch": "0000-cheap-policy",
+      "index": 3,
+      "output": "physics/0000-cheap-policy.output.json.gz",
+      "raw_output_sha256": "866532a9193411094862b67bb0f531f1ed0d8a6f1744b3d36f29ca6a4daec53c"
+    }
+  },
+  "next_revision": "Address the entry-bank start/pause line of sight and the reachability of every useful pre-parked deck position. Do not repair this by requiring reverse-axis commands or rejecting rear boarding. Any new geometry needs new cheap policies, unchanged regular calibration and independent holdout.",
+  "stop_reason": "Parent ended this bounded first revision after actual falsification; second revision unused.",
+  "source_files": [
+    {
+      "path": "pcg/prototype/creative_batches/descending_carrier/probe_v1.py",
+      "sha256": "2d6efe70cffaebdaf40c657a8d79be4e4d11c521f1219a0ecf061562148554c3"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/descending_carrier/counters_v1.py",
+      "sha256": "6721c674d34ea0eceb9351eea1387be828c50c8ff6322bd63fbd3af1e5f4b728"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/descending_carrier/protocol-v1.json",
+      "sha256": "cac09dfdaed91ee311a9e4d5ad3a6950adf46f3c3d9dfeacdd5a9940a1c14174"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-descending-carrier-probe-v1/summary.json",
+      "sha256": "44131be3f9d5eadf1e202f6f6d9b1b2ec21264b5d65f56fb7b3a70f15b9a0a92"
+    },
+    {
+      "path": "pcg/results/workshop-descending-carrier-probe-v1/source_binding.json",
+      "sha256": "e041e594ed04c0116cc0f5553f78c4fab6e3e664014444ca15c15f7d44de193c"
+    },
+    {
+      "path": "pcg/results/workshop-descending-carrier-probe-v1/batches.json",
+      "sha256": "c04c8fd66e95b166e9232010f3235b28f9dd62036919e2ccd8f6dd1e2f5055b1"
+    },
+    {
+      "path": "pcg/results/workshop-descending-carrier-counters-v1/summary.json",
+      "sha256": "f99f1c0cf81019e1467babd2982573c92d2ca2b2326577ee7a888441e7b7a611"
+    },
+    {
+      "path": "pcg/results/workshop-descending-carrier-counters-v1/source_binding.json",
+      "sha256": "b7e905178f6a844d8cc3dd292a52499d725e55806f1b94bc189ebd4a812e9f7f"
+    },
+    {
+      "path": "pcg/results/workshop-descending-carrier-counters-v1/batches.json",
+      "sha256": "0f4ee4641164cc8b95f774ca13cf412322f0ba667672db18d2788914ca92bf6d"
+    }
+  ],
+  "archive": {
+    "path": "pcg/archives/content-workshop-plains-batch-v1/manifest.json",
+    "sha256": "a47d45e8fc3b5adac6b5d30ef4f5f2a31d5b80b03a4257f07d223665d4e9fc3e"
+  },
+  "archive_sha256": "3ba1048d9e69362c44899d39b0f5bbe48240dc1870dd8f756bd8ed1f5c14d881",
+  "human_design_review": "positive proposal feedback only; not physics/fun/production approval"
+}
