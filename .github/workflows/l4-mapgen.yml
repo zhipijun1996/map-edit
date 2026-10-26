@@ -17,6 +17,9 @@ on:
       - 'pcg/prototype/plains/rock_recoil.py'
       - 'pcg/prototype/plains/woven_landforms.py'
       - 'pcg/prototype/plains/content_routes.py'
+      - 'pcg/prototype/plains/block_modules.py'
+      - 'module-block-grid.js'
+      - 'module-contract.js'
   push:
     branches: ['research/l4-map-generator']
     paths:
@@ -34,6 +37,9 @@ on:
       - 'pcg/prototype/plains/rock_recoil.py'
       - 'pcg/prototype/plains/woven_landforms.py'
       - 'pcg/prototype/plains/content_routes.py'
+      - 'pcg/prototype/plains/block_modules.py'
+      - 'module-block-grid.js'
+      - 'module-contract.js'
 permissions:
   contents: read
 jobs:
@@ -65,6 +71,24 @@ jobs:
             node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/shape-search-evaluation-${seed}-v1/module-library/documents/manifest.json
           done
       - run: python3 -m unittest discover -s pcg/map_directed/tests -v
+      - name: Check a real Block map's persisted Module contracts
+        run: |
+          python3 - <<'PY'
+          import hashlib,json
+          from pcg.tools.restore_archive import open_parts,ROOT
+          prefix='results/block-grid-evaluation-2-v1/module-library/documents/'
+          with open_parts('block-grid-v1') as archive:
+              index=json.loads(archive.read('PCG-ARCHIVE-INDEX.json'))
+              for name,info in index.items():
+                  if not name.startswith(prefix): continue
+                  target=ROOT/name
+                  assert target.resolve().is_relative_to(ROOT.resolve())
+                  data=archive.read(info.get('archive_entry',name))
+                  assert len(data)==info['bytes'] and hashlib.sha256(data).hexdigest()==info['sha256']
+                  if target.exists(): assert target.read_bytes()==data
+                  else: target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+          PY
+          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/block-grid-evaluation-2-v1/module-library/documents/manifest.json
       - run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg
       - run: python3 -m unittest discover -s prototype/plains/tests -v

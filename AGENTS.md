@@ -15,3 +15,5 @@
 
 
 **岩井回环空间原型v1**：见[完整报告](docs/l4-mapgen/contact-grammar-v1.md)。三Seed 12/16实例、13/18零间隙接缝，37/37（12常规、18新扰动、7回归），每图2箱48币；两段真实原生录像3187帧严格一致。仅一种有限3/4层空间文法，5父版本，尚无128网格迁移、人工趣味/正式生产准入。旧25/30及28/35失败保留；恢复contact-grammar-v1归档。
+
+**Graph + Block128 + Module第一版**：见[分析与真实证据](docs/l4-mapgen/graph-block-module-v1.md)和[增量契约](docs/l4-mapgen/graph-block-module-contract-v1.md)。128网格/实际轮廓/边界中心Port接入原CSP、标准Module文档与Godot Harness，三个有限Seed 33/33整图，16/16精确需求热库复用后5/5重验；Map补平台0。当前仅两种拓扑，0与1同摆放，仍有重复岩井，未证明更有趣。完整44节点蓝图仍NOT_RUN物理，5 Port枢纽/主要道具/实际Boss/人类分钟未打通，不作生产准入。恢复block-grid-v1归档。
