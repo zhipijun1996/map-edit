@@ -1,0 +1,37 @@
+{
+  "schema": "pcg/production-proposals/v1",
+  "proposals": [
+    {
+      "id": "production-proposal/refund-turnback",
+      "source_type": "codex_assisted_proposal",
+      "rule": "workshop/production/refund-turnback",
+      "parent_family": "air-refund",
+      "confirmed_new_action_family": false,
+      "observation_and_decision": "入口左上有箱，敌人位于身后下方。决定先命中取得额外空中资源，随后改变瞄准方向，折返到箱子。",
+      "causality": "第一次命中确实回充，但反冲先把人推离目标；第二枪消耗这份资源，反转水平运动并抬升落点。",
+      "cells_and_resources": "原 EnemyActor、PlayerController、弹丸、air-hit refund、单次普通跳、原冷却及地面恢复；无新增资源写入。",
+      "terrain": "高岸在入口左上，避免初次上升撞底；两种接口的落点分别[30,100]、[-10,80]。下方保留原岸及低岸。",
+      "reward": "可见16金币箱，原SimpleRoomReward受支持接触后实际提交。",
+      "failure_recovery": "敌人具有真实攻击威胁，失败可能损失生命；遗漏第二枪的反例实际受伤，未宣称无伤重试。通用返回与连续重试UNKNOWN，不向要求这些保证的需求返回已满足。",
+      "directions": "入口至左上箱，出口朝左；反向及一般进入状态未验证。",
+      "cheap_solutions": "普通跳、只打一枪直接向左/上、逐枪省略；必须实际命中回充并在空中发生水平反转。",
+      "experience_difference": "相对原朝右连续上升，回充收益先制造远离目标的运动问题，再通过返身解决；仍按air-refund父家族计，不自动新增家族。"
+    },
+    {
+      "id": "production-proposal/bell-floor-drop",
+      "source_type": "codex_assisted_proposal",
+      "rule": "workshop/production/bell-floor-drop",
+      "parent_family": "proposed_shot_opens_support",
+      "confirmed_new_action_family": false,
+      "observation_and_decision": "透过可开启地板看到下方箱子，空中向上射铃，借向下反冲穿过撤去的支撑。",
+      "causality": "同一枪打开水平ShotLatch地板并向下反冲。",
+      "cells_and_resources": "原ShotLatch的水平矩形碰撞、原弹丸、普通跳及射击；没有新门行为。",
+      "terrain": "厚侧岸形成可读竖井，底部接收箱，上部可开支撑。",
+      "reward": "可见10金币原奖励事务。",
+      "failure_recovery": "底部有原实体恢复岸；未验证通用回程。",
+      "directions": "仅提出从上到下，未宣称可逆。",
+      "cheap_solutions": "关键反例：站在地板上先射铃，是否不用跳和空中反冲就能落到箱子。",
+      "experience_difference": "把反冲与撤去脚下支撑相连的提案；实际被地面提前射击反例否决，未入库。"
+    }
+  ]
+}

@@ -10,16 +10,24 @@ const input=JSON.parse(fs.readFileSync(process.argv[2]));const out=process.argv[
 fs.mkdirSync(out,{recursive:true});const entries=[];
 for(const module of input.modules){
  const raw=structuredClone(module.case);raw.factory_id='direct-'+module.id;
+ // Explicit map-instance ports below replace the original standalone Macro
+ // interface. Retain its complete declaration as provenance, never infer its
+ // reverse relations for the newly assembled instance.
+ const sourcePorts=raw.ports;delete raw.ports;
  const row={case:raw,result:UNKNOWN,inputCase:UNKNOWN,protocol:UNKNOWN,binding:UNKNOWN,artifacts:[],sourceRun:UNKNOWN,
  sourceCases:{path:input.sourcePath,sha256:input.sourceSha},statistics:UNKNOWN,trialRows:[],
  generationMetadata:{producer:input.producer||'pcg/prototype/plains/room_modules.py',seed:{status:'not_used',value:null,reason:'Deterministic demand materialization'},parameters:{request:module.spec.id,producerSha256:input.generatorSha,rawPayloadVersion:module.content_version}},
  geometryDefinitions:input.geometryDefinitions};
  const doc=moduleDocument(row,input.sourceCommit),gc=doc.generationContract,id=doc.id;
+ if(sourcePorts)gc.generation.parameters.sourceStandalonePorts=sourcePorts;
+ for(const [i,s]of(module.case.saws??[]).entries())doc.objects.find(o=>o.id===id+'/saw-'+i).mechanics={sourceFields:s};
  doc.title=(module.spec.boundary_policy==='open'?'风谷地形 · ':'直接拼接 · ')+module.id;doc.description='独立Module完整几何；Map只作刚性摆放，接缝无填充。当前为隔离实验候选，通用状态关系未知。';
  doc.objects=doc.objects.filter(o=>!['entry','exit','route'].includes(o.type));gc.routes=[];gc.validations=[];
  for(const [i,raw]of module.case.latches.entries()){
   doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics={kind:'shot_latch',openSeconds:raw.open_seconds,...(raw.starts_ferry?{startsFerry:raw.starts_ferry}:{}),...(raw.ferry_id?{ferryId:raw.ferry_id}:{}),...(raw.return_access?{returnAccess:raw.return_access}:{})};
   doc.objects.find(o=>o.id===id+'/bell-'+i).sourceId=raw.id;
+  // Preserve new source-owned Cell configuration through canonical roundtrip.
+  doc.objects.find(o=>o.id===id+'/gate-'+i).mechanics.sourceFields=raw;
  }
  for(const [i,raw]of(module.case.enemies??[]).entries())doc.objects.find(o=>o.id===id+'/enemy-'+i).mechanics={initialIdleCooldown:raw.initial_idle_cooldown};
  for(const [family,sites]of [['chest',module.case.reward_sites??[]],['merchant',module.case.shop_sites??[]]]){

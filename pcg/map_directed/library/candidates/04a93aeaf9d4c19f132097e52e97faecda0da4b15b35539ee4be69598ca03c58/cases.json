@@ -1,0 +1,5336 @@
+{
+  "cases": [
+    {
+      "id": "gate-brake-macro-1-outbound-clean-0",
+      "family": "gate-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          480,
+          438,
+          160,
+          100
+        ],
+        [
+          250,
+          80,
+          550,
+          160
+        ],
+        [
+          -200,
+          920,
+          720,
+          60
+        ],
+        [
+          270,
+          650,
+          110,
+          45
+        ],
+        [
+          320,
+          790,
+          100,
+          45
+        ],
+        [
+          640,
+          438,
+          130,
+          100
+        ],
+        [
+          585,
+          670,
+          100,
+          65
+        ],
+        [
+          520,
+          920,
+          480,
+          60
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        635,
+        652
+      ],
+      "goal": [
+        610,
+        648,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            190,
+            405
+          ],
+          "gate": [
+            460,
+            240,
+            20,
+            198
+          ],
+          "open_seconds": 0.65,
+          "return_access": [
+            590,
+            350
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "gate-cache",
+          "position": [
+            620,
+            420
+          ],
+          "region": [
+            590,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        },
+        {
+          "id": "brake-cache",
+          "position": [
+            635,
+            652
+          ],
+          "region": [
+            605,
+            647,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": false,
+      "rule_parameters": {
+        "recipe": "gate-brake-return",
+        "version": 1,
+        "variant": 1,
+        "internal_seam_x": 640,
+        "lower_seam_x": 520,
+        "added_connector_area": 0
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 205
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 617
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 660
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 875
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 635,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/macro/gate-brake-return",
+        "version": 1,
+        "component": "gate"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            620,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "B",
+          "position": [
+            635,
+            652
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 7
+        }
+      ],
+      "idea_ids": [
+        "human-A3-short-gate",
+        "codex-brake-under-ledge-v1"
+      ],
+      "layout_uid": "c8d0967d9ad10a3827fbfad2b327fcd227e761204862d9d79a3ff114a458bba0",
+      "route_spec": {
+        "id": "outbound",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "reward",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "expected_reward": 22,
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/macro/gate-brake-return/1",
+        "source_type": "content_workshop_interface_fixture",
+        "region": "plains",
+        "content_kind": "macro",
+        "required_family": "gate-brake-return",
+        "objective": {
+          "outbound": "air shot opens gate; claim visible cache; fall outside lip and brake into second cache",
+          "return_path": "descend to lower bank, jump two authored shelves, recoil up to original shore",
+          "ordered_rewards": [
+            12,
+            10
+          ],
+          "interface": 1
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "positions": [
+            [
+              80,
+              420
+            ],
+            [
+              620,
+              420
+            ],
+            [
+              635,
+              652
+            ]
+          ],
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -232,
+        "space": {
+          "max_width": 1200,
+          "max_height": 900,
+          "max_port_span_x": 555
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 22,
+          "mandatory_damage": false
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources; exact pre-input capture",
+          "exit": "observed stable only; universal transfer UNKNOWN"
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "return_conditions": "continuous A-C-B-A specimen required; universal-state return UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "factory_id": "8ec8d2864917cce25d24b9a602873bcc5b3173231d0f34ba97a1c7e2c22d7151",
+      "factory_evidence": {
+        "batch": "0027-holdout",
+        "index": 1,
+        "output": "physics/0027-holdout.output.json.gz",
+        "raw_output_sha256": "fb05746e47b68a2367b7ce8bb34e09a9888b673ca3d347c053d7548a4fdeffdf"
+      },
+      "review_alias": "gate-brake-macro-1-outbound",
+      "validation_summary": "See evaluations.json",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 30,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 3,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 38,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.881819546222687,
+                0.471587121486664
+              ],
+              "plan_index": 4,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.98868602514267,
+                0.150000005960464
+              ],
+              "plan_index": 13,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 183,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 205,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 209,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 217,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 218,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 219,
+          "axis": 0.0,
+          "requested": []
+        }
+      ],
+      "module_sha256": "86274f9e04624f2f4bbe887d9f8391b86633c2ca59eca2a347ab0f0111aec2dd"
+    },
+    {
+      "id": "gate-brake-macro-1-cache-clean-0",
+      "family": "gate-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          480,
+          438,
+          160,
+          100
+        ],
+        [
+          250,
+          80,
+          550,
+          160
+        ],
+        [
+          -200,
+          920,
+          720,
+          60
+        ],
+        [
+          270,
+          650,
+          110,
+          45
+        ],
+        [
+          320,
+          790,
+          100,
+          45
+        ],
+        [
+          640,
+          438,
+          130,
+          100
+        ],
+        [
+          585,
+          670,
+          100,
+          65
+        ],
+        [
+          520,
+          920,
+          480,
+          60
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        620,
+        420
+      ],
+      "goal": [
+        595,
+        416,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            190,
+            405
+          ],
+          "gate": [
+            460,
+            240,
+            20,
+            198
+          ],
+          "open_seconds": 0.65,
+          "return_access": [
+            590,
+            350
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "gate-cache",
+          "position": [
+            620,
+            420
+          ],
+          "region": [
+            590,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        },
+        {
+          "id": "brake-cache",
+          "position": [
+            635,
+            652
+          ],
+          "region": [
+            605,
+            647,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": false,
+      "rule_parameters": {
+        "recipe": "gate-brake-return",
+        "version": 1,
+        "variant": 1,
+        "internal_seam_x": 640,
+        "lower_seam_x": 520,
+        "added_connector_area": 0
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 205
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 620,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/macro/gate-brake-return",
+        "version": 1,
+        "component": "gate"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            620,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "B",
+          "position": [
+            635,
+            652
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 7
+        }
+      ],
+      "idea_ids": [
+        "human-A3-short-gate",
+        "codex-brake-under-ledge-v1"
+      ],
+      "layout_uid": "c8d0967d9ad10a3827fbfad2b327fcd227e761204862d9d79a3ff114a458bba0",
+      "route_spec": {
+        "id": "cache",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "reward",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "expected_reward": 12,
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/macro/gate-brake-return/1",
+        "source_type": "content_workshop_interface_fixture",
+        "region": "plains",
+        "content_kind": "macro",
+        "required_family": "gate-brake-return",
+        "objective": {
+          "outbound": "air shot opens gate; claim visible cache; fall outside lip and brake into second cache",
+          "return_path": "descend to lower bank, jump two authored shelves, recoil up to original shore",
+          "ordered_rewards": [
+            12,
+            10
+          ],
+          "interface": 1
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "positions": [
+            [
+              80,
+              420
+            ],
+            [
+              620,
+              420
+            ],
+            [
+              635,
+              652
+            ]
+          ],
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -232,
+        "space": {
+          "max_width": 1200,
+          "max_height": 900,
+          "max_port_span_x": 555
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 22,
+          "mandatory_damage": false
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources; exact pre-input capture",
+          "exit": "observed stable only; universal transfer UNKNOWN"
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "return_conditions": "continuous A-C-B-A specimen required; universal-state return UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "factory_id": "89a8145c455d822137fa136cbdc20bf2aabed14dd30d1559d1ccf0b4389e3d0c",
+      "factory_evidence": {
+        "batch": "0029-holdout",
+        "index": 2,
+        "output": "physics/0029-holdout.output.json.gz",
+        "raw_output_sha256": "9c855f919945c50d05cf80f5b90607c25b6b7d98fe482feb0620f624ab226dfc"
+      },
+      "review_alias": "gate-brake-macro-1-cache",
+      "validation_summary": "See evaluations.json",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 30,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 3,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 38,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.881819546222687,
+                0.471587121486664
+              ],
+              "plan_index": 4,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": []
+        }
+      ],
+      "module_sha256": "94cc90071298668a493fec0387a221ff9f5d05c3892a48956feecf4ed5bb9abd"
+    },
+    {
+      "id": "gate-brake-macro-1-descent-clean-0",
+      "family": "gate-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          480,
+          438,
+          160,
+          100
+        ],
+        [
+          250,
+          80,
+          550,
+          160
+        ],
+        [
+          -200,
+          920,
+          720,
+          60
+        ],
+        [
+          270,
+          650,
+          110,
+          45
+        ],
+        [
+          320,
+          790,
+          100,
+          45
+        ],
+        [
+          640,
+          438,
+          130,
+          100
+        ],
+        [
+          585,
+          670,
+          100,
+          65
+        ],
+        [
+          520,
+          920,
+          480,
+          60
+        ]
+      ],
+      "spawn": [
+        620,
+        420
+      ],
+      "entry_port": [
+        620,
+        420
+      ],
+      "exit_port": [
+        635,
+        652
+      ],
+      "goal": [
+        610,
+        648,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            190,
+            405
+          ],
+          "gate": [
+            460,
+            240,
+            20,
+            198
+          ],
+          "open_seconds": 0.65,
+          "return_access": [
+            590,
+            350
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "gate-cache",
+          "position": [
+            620,
+            420
+          ],
+          "region": [
+            590,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        },
+        {
+          "id": "brake-cache",
+          "position": [
+            635,
+            652
+          ],
+          "region": [
+            605,
+            647,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": false,
+      "rule_parameters": {
+        "recipe": "gate-brake-return",
+        "version": 1,
+        "variant": 1,
+        "internal_seam_x": 640,
+        "lower_seam_x": 520,
+        "added_connector_area": 0
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 660
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 875
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 635,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/macro/gate-brake-return",
+        "version": 1,
+        "component": "gate"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            620,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "B",
+          "position": [
+            635,
+            652
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 7
+        }
+      ],
+      "idea_ids": [
+        "human-A3-short-gate",
+        "codex-brake-under-ledge-v1"
+      ],
+      "layout_uid": "c8d0967d9ad10a3827fbfad2b327fcd227e761204862d9d79a3ff114a458bba0",
+      "route_spec": {
+        "id": "descent",
+        "from_port": "C",
+        "to_port": "B",
+        "role": "reward",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "expected_reward": 22,
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/macro/gate-brake-return/1",
+        "source_type": "content_workshop_interface_fixture",
+        "region": "plains",
+        "content_kind": "macro",
+        "required_family": "gate-brake-return",
+        "objective": {
+          "outbound": "air shot opens gate; claim visible cache; fall outside lip and brake into second cache",
+          "return_path": "descend to lower bank, jump two authored shelves, recoil up to original shore",
+          "ordered_rewards": [
+            12,
+            10
+          ],
+          "interface": 1
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "positions": [
+            [
+              80,
+              420
+            ],
+            [
+              620,
+              420
+            ],
+            [
+              635,
+              652
+            ]
+          ],
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -232,
+        "space": {
+          "max_width": 1200,
+          "max_height": 900,
+          "max_port_span_x": 555
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 22,
+          "mandatory_damage": false
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources; exact pre-input capture",
+          "exit": "observed stable only; universal transfer UNKNOWN"
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "return_conditions": "continuous A-C-B-A specimen required; universal-state return UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "factory_id": "1d89dcf797dc8d66578f027abaa8552ef33111ed7c0d3cb90e2f6a774a0124f7",
+      "factory_evidence": {
+        "batch": "0031-holdout",
+        "index": 3,
+        "output": "physics/0031-holdout.output.json.gz",
+        "raw_output_sha256": "0dc0b726e68c343fbce7c5ee2050fa64646dfa5fa47b5cd037720ec72fdfe6a4"
+      },
+      "review_alias": "gate-brake-macro-1-descent",
+      "validation_summary": "See evaluations.json",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.98868602514267,
+                0.150000005960464
+              ],
+              "plan_index": 4,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 0.0,
+          "requested": []
+        }
+      ],
+      "module_sha256": "9ceead6b84b0724e61185a24b2399b60eae043bcf0d298cb8154af8606acd288"
+    },
+    {
+      "id": "gate-brake-macro-1-return-clean-0",
+      "family": "gate-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          480,
+          438,
+          160,
+          100
+        ],
+        [
+          250,
+          80,
+          550,
+          160
+        ],
+        [
+          -200,
+          920,
+          720,
+          60
+        ],
+        [
+          270,
+          650,
+          110,
+          45
+        ],
+        [
+          320,
+          790,
+          100,
+          45
+        ],
+        [
+          640,
+          438,
+          130,
+          100
+        ],
+        [
+          585,
+          670,
+          100,
+          65
+        ],
+        [
+          520,
+          920,
+          480,
+          60
+        ]
+      ],
+      "spawn": [
+        635,
+        652
+      ],
+      "entry_port": [
+        635,
+        652
+      ],
+      "exit_port": [
+        80,
+        420
+      ],
+      "goal": [
+        55,
+        416,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            190,
+            405
+          ],
+          "gate": [
+            460,
+            240,
+            20,
+            198
+          ],
+          "open_seconds": 0.65,
+          "return_access": [
+            590,
+            350
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "gate-cache",
+          "position": [
+            620,
+            420
+          ],
+          "region": [
+            590,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        },
+        {
+          "id": "brake-cache",
+          "position": [
+            635,
+            652
+          ],
+          "region": [
+            605,
+            647,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": false,
+      "rule_parameters": {
+        "recipe": "gate-brake-return",
+        "version": 1,
+        "variant": 1,
+        "internal_seam_x": 640,
+        "lower_seam_x": 520,
+        "added_connector_area": 0
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 540,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 545
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 500,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 505
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 400,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 14
+          },
+          "target_x": 335,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 4
+          },
+          "direction": [
+            0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 9
+          },
+          "target_x": 80,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/macro/gate-brake-return",
+        "version": 1,
+        "component": "gate"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            620,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "B",
+          "position": [
+            635,
+            652
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 7
+        }
+      ],
+      "idea_ids": [
+        "human-A3-short-gate",
+        "codex-brake-under-ledge-v1"
+      ],
+      "layout_uid": "c8d0967d9ad10a3827fbfad2b327fcd227e761204862d9d79a3ff114a458bba0",
+      "route_spec": {
+        "id": "return",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "expected_reward": 10,
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/macro/gate-brake-return/1",
+        "source_type": "content_workshop_interface_fixture",
+        "region": "plains",
+        "content_kind": "macro",
+        "required_family": "gate-brake-return",
+        "objective": {
+          "outbound": "air shot opens gate; claim visible cache; fall outside lip and brake into second cache",
+          "return_path": "descend to lower bank, jump two authored shelves, recoil up to original shore",
+          "ordered_rewards": [
+            12,
+            10
+          ],
+          "interface": 1
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "positions": [
+            [
+              80,
+              420
+            ],
+            [
+              620,
+              420
+            ],
+            [
+              635,
+              652
+            ]
+          ],
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "reward"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -232,
+        "space": {
+          "max_width": 1200,
+          "max_height": 900,
+          "max_port_span_x": 555
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 22,
+          "mandatory_damage": false
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources; exact pre-input capture",
+          "exit": "observed stable only; universal transfer UNKNOWN"
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "return_conditions": "continuous A-C-B-A specimen required; universal-state return UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "factory_id": "70c743ea041a469588893029d26d55f8aa933777b9fddaae8285a6fb77b0a7d8",
+      "factory_evidence": {
+        "batch": "0033-holdout",
+        "index": 4,
+        "output": "physics/0033-holdout.output.json.gz",
+        "raw_output_sha256": "e3dc47379f8580514e20e6b477c544cad1dde84d36d580c44f7c616a3c016d2e"
+      },
+      "review_alias": "gate-brake-macro-1-return",
+      "validation_summary": "See evaluations.json",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 9,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 93,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 10,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 113,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 13,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 140,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 15,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 160,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 18,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 185,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 19,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 205,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.5,
+                0.866025388240814
+              ],
+              "plan_index": 20,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 209,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 217,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 218,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 219,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 220,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 221,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 222,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 223,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 224,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 225,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 226,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 227,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 228,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 229,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 230,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 231,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 232,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 233,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 234,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 235,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 236,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 237,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 238,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 239,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 240,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 241,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 242,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 243,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 244,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 245,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 246,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 247,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 248,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 249,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 250,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 251,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 252,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 253,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 254,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 255,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 256,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 257,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 258,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 259,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 260,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 261,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 262,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 263,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 264,
+          "axis": 0.0,
+          "requested": []
+        }
+      ],
+      "module_sha256": "d263c5802e2ba557db10326de78fbc04dfc31e68dc41bd0649ed9c326bb62160"
+    }
+  ]
+}

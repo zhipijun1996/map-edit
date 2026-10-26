@@ -1,0 +1,45 @@
+{
+  "schema": "pcg/content-idea-sources/v1",
+  "sources": [
+    {
+      "id": "human-A1-thorn-slot",
+      "source_type": "human_idea",
+      "source_revision": 1,
+      "original_text": "A1：尖刺窄通道反冲\n\n上下岩壁带尖刺，中间存在可读的空中通道。\n玩家跳入空中，利用合适方向的射击反冲通过。\n提前能看到宝箱，形成明确的冒险动机。\n\n要求：\n- 验证真实角色身体净空，而非只检查中心点。\n- 检查普通跳跃、越顶和其他简单绕行。\n- 有合理操作容错，不能依靠一串极窄时机的固定按键。\n- 失败恢复与奖励成本相匹配。",
+      "interpretation": "用略向下的左射获得向右略向上的短爆发；上下危险面限定身高带。可见宝箱是受支持接触的真实金币事务。有限省略/跳跃/越顶搜索不证明唯一解。",
+      "hypothesis": "方向选择比连续逐帧按键重要；上下岩体同时约束普通大跳与低处绕行",
+      "rule": "workshop/thorn-slot",
+      "status": "executable_rule_requires_independent_physics",
+      "human_approval": "UNKNOWN"
+    },
+    {
+      "id": "human-A2-chase-landing",
+      "source_type": "human_idea",
+      "source_revision": 1,
+      "original_text": "A2：射铃控制移动落点\n\n射击既改变人物运动，又启动、暂停或影响移动平台。\n重点是主动追赶、稳定位置、选择离台时机或进入侧向通路。\n\n要求：\n- 不退化成长时间站着等待升降机。\n- 使用原有真实承载、惯性、碰撞和射击机制。\n- 明确区分现有启动/暂停能力与尚需开发的新平台行为。\n- 测试错过落点、重新尝试和回程。",
+      "interpretation": "原 ShotLatch.bind_motion 支持启动/暂停；第一枪追赶已释放载台，短承载后第二枪暂停并侧向离台。没有实现任意路径重定向、加速平台或新惯性。",
+      "hypothesis": "一次瞄准同时决定人物反冲和未来支撑位置，玩家需要主动截获落点",
+      "rule": "workshop/chase-landing",
+      "status": "executable_rule_requires_independent_physics",
+      "missing_conditions": ["任意新平台行为需新增正式 Cell 并重新验证"],
+      "human_approval": "UNKNOWN"
+    },
+    {
+      "id": "human-A3-short-gate",
+      "source_type": "human_idea",
+      "source_revision": 1,
+      "original_text": "A3：短时风铃门\n\n玩家在空中击中风铃，利用同一枪的反冲穿过短暂开启的门。\n\n要求：\n- 门时间根据实际弹丸飞行、人物运动和身体通过时间求解。\n- 不把“一瞬”直接解释成一帧操作。\n- 检查地面提前射击、越门和其他低成本绕行。\n- 保留必要的防夹行为。\n- 玩家延迟离开或门重新关闭时，仍有经过验证的恢复或返回方式。",
+      "interpretation": "先用真实弹丸命中和24×36身体穿门时间测定窗口；采用原防夹与返回侧射击接收器。窗口以秒计，不能宣称一帧技巧。",
+      "hypothesis": "同一枪的后坐力把人物送过由它自身打开的短门，探索延迟后仍可自行重开",
+      "rule": "workshop/timed-cache",
+      "status": "executable_rule_requires_independent_physics",
+      "human_approval": "UNKNOWN"
+    }
+  ],
+  "proposals": [
+    {"id":"codex-brake-pocket-v1","source_type":"codex_assisted_proposal","rule":"workshop/brake-under-ledge","novelty_family":"brake-under-ledge","decision":"先读悬檐与凹槽，再决定何时由下落改为水平刹车转向","coupling":"向右射击同时消除下落速度并把身体推入左侧凹槽","required_cells":["rock","recoil","chest"],"failure":"错过凹槽落到下方安全岸；继续通路与回程需实测","return_difference":"取宝后主动离开凹槽下落，不能把原动作倒放当回程","falsifiers":["普通转身下落同样到达","可从上方直接走到宝箱"],"difference":"考验制动与负方向位移，不是向上或向前加速","human_fun":"unreviewed"},
+    {"id":"codex-one-shot-fork-v1","source_type":"codex_assisted_proposal","rule":"workshop/one-shot-two-routes","novelty_family":"one-shot-two-routes","decision":"观察高处金币与远处低岸，将本次空中唯一一枪花在升高或横移","coupling":"反冲方向决定不同端口；真实落地才恢复空中弹药","required_cells":["rock","recoil","chest"],"failure":"下方安全地面承接未命中落点，不能自动传送补资源","return_difference":"高路取宝后下落汇入低路，动作关系改变","falsifiers":["无需选择即可同一腾空取得两个端口","两个名义路线实际相同"],"difference":"有可见收益与落点取舍的三端口内容","human_fun":"unreviewed"},
+    {"id":"codex-enemy-credit-v1","source_type":"codex_assisted_proposal","rule":"workshop/air-refund","novelty_family":"air-refund","decision":"敌人既是会攻击的威胁，也是第二次反冲的资源机会","coupling":"第一发空中伤害真正提交并回充一发，冷却结束后续枪到远高岸","required_cells":["enemy","rock","recoil","chest"],"failure":"漏打或漏接落到下方安全岸；敌人相位独立采样","return_difference":"离开高岸下降不需要再次借敌人；未知关系不默认通过","falsifiers":["回充实际来自落地","无敌人命中也能两枪或普通跳到达"],"difference":"资源来源与战斗威胁耦合，和纯反冲升高分开","human_fun":"unreviewed"}
+  ],
+  "approval_policy": "Human idea is not human approval. Technical, video observation, playtest and production are separate. No online model service or training is claimed."
+}

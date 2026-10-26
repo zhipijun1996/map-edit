@@ -52,6 +52,8 @@ def reload_catalog(out):
    track=by.get(o.get('trackId'))
    if o['type']=='gear':
     a,b=track['points'];case['saws'].append(dict(source_id=o['sourceId'],origin=[(a['x']+b['x'])/2,(a['y']+b['y'])/2],travel=[(b['x']-a['x'])/2,(b['y']-a['y'])/2],radius=o['w']/2,period=track['duration'],initial_phase=track['initialPhase']))
+    if o.get('mechanics',{}).get('sourceFields'):
+     source=copy.deepcopy(o['mechanics']['sourceFields']);source.update(case['saws'][-1]);case['saws'][-1]=source
    elif o['type']=='platform'and track:
     a,b=track['points'];case['moving_platforms'].append(dict(platform_id=o['sourceId'],start=[a['x'],a['y']],finish=[b['x'],b['y']],size=[o['w'],o['h']],travel_duration=track['duration'],dwell_duration=track['dwell'],initial_phase=track['initialPhase']))
    elif o['type']=='bell':
@@ -59,6 +61,10 @@ def reload_catalog(out):
     if gate['mechanics'].get('startsFerry'):case['latches'][-1]['starts_ferry']=gate['mechanics']['startsFerry']
     if gate['mechanics'].get('ferryId'):case['latches'][-1]['ferry_id']=gate['mechanics']['ferryId']
     if gate['mechanics'].get('returnAccess'):case['latches'][-1]['return_access']=gate['mechanics']['returnAccess']
+    if gate['mechanics'].get('sourceFields'):
+     raw=copy.deepcopy(gate['mechanics']['sourceFields'])
+     for name in ['id','bell','gate','open_seconds']:raw[name]=case['latches'][-1][name]
+     case['latches'][-1]=raw
    elif o['type']=='enemy':
     enemy=dict(id=o['sourceId'],definition=o['definition'],position=[o['x']+o['w']/2,o['y']+o['h']/2])
     if o.get('mechanics',{}).get('initialIdleCooldown') is not None:enemy['initial_idle_cooldown']=o['mechanics']['initialIdleCooldown']

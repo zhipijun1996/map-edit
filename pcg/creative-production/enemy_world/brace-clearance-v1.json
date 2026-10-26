@@ -1,0 +1,48 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "enemy-world/brace-clearance",
+  "title": "背墙连射清除窄道",
+  "source_type": "llm_subagent_proposal",
+  "producer_task": "/root/enemy_world_creator",
+  "status": "proposal_not_verified",
+  "observation_and_decision": "观察低顶单身位窄道里的3HP哨兵，选择背靠左侧实体石壁地面连射三枪；反冲由真实墙阻挡，敌人击退最终受右墙约束，死亡解除接触封锁。",
+  "causal_relationship": "必须真实三次命中/敌人死亡，完整身体无伤穿过原占位；没有空中回充需求。",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": {
+    "enemy_hp": 3,
+    "air_shots": "original single air charge; ground/hit recovery only",
+    "cooldown": "original actual ability",
+    "no_synthetic_projectiles": true
+  },
+  "cells": [
+    "original PlainsCells",
+    "original EnemyActor plains_sentry",
+    "original ShotLatch",
+    "original SimpleRoomReward"
+  ],
+  "terrain": "连续地板、低于普通跳越敌人的顶棚；入口左壁与敌人右壁是反冲和击退约束。",
+  "reward": "visible original SimpleRoomReward chest at stable exit; actual transaction required",
+  "failure_cost": "player damage/unstable landing rejects; no HP reset during case",
+  "return_status": "UNKNOWN",
+  "recovery_status": "UNKNOWN",
+  "cheap_counters": [
+    "不射击直走",
+    "普通跳越",
+    "只打一枪",
+    "只打两枪",
+    "先空中越过",
+    "原地等待"
+  ],
+  "distinction_from_existing": "not an air-refund rise, recoil slot, carrier chase, timed same-shot gate crossing, brake pocket or high/low fork",
+  "implementation": {
+    "source_directory": "pcg/prototype/creative_batches/enemy_world/",
+    "max_interfaces": 1,
+    "max_control_candidates_per_interface": 4,
+    "physics": "WorkshopEngine original Godot",
+    "release_requirement": "exact clean, 6 mild screen, >=18 same-geometry counters, regular calibration and independent holdout; unsupported mechanism reported"
+  }
+}

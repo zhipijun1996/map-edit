@@ -1,6 +1,6 @@
 """CSP regressions independent of old result archives or a Godot install."""
 import copy,unittest
-from pcg.map_directed.shape_search.search import search
+from pcg.map_directed.shape_search.search import search,closed_solids
 
 def template(key,rects,port,normal,clearance=()):
     return dict(id=key,variant_id=key+'/a',source_shape_sha256='fixture',case=dict(platforms=rects,one_way_platform_indices=[]),
@@ -9,6 +9,14 @@ def template(key,rects,port,normal,clearance=()):
         spec=dict(placement=[99999,99999]))
 
 class ShapeSearchChecks(unittest.TestCase):
+    def test_motion_control_dummy_gate_is_not_a_collider(self):
+        m=template('a',[[0,0,10,10]],[10,0],[1,0])
+        m['case']['latches']=[dict(gate=[20,0,5,20],ferry_id='actual-carrier'),dict(gate=[30,0,5,20],starts_ferry='other-carrier')]
+        self.assertEqual(closed_solids(m),[[0,0,10,10],[30,0,5,20]])
+    def test_budget_is_a_hard_bound_even_after_backtracking(self):
+        a=template('a',[[0,0,20,20]],[10,0],[1,0]);b=template('b',[[0,0,20,20]],[0,0],[-1,0])
+        r=search(self.graph(),{'a':[a]*10,'b':[b]*10},'fixed',budget=4)
+        self.assertEqual(r['status'],'budget_exhausted');self.assertEqual(r['expanded'],4)
     def graph(self):return dict(nodes=[dict(id='a'),dict(id='b')],edges=[dict(id='e',**{'from':'a','to':'b'})])
     def test_interlocking_actual_shapes_are_not_rejected_by_bounds(self):
         a=template('a',[[0,0,10,30],[10,20,20,10]],[30,0],[1,0])

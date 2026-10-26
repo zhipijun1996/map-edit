@@ -53,11 +53,21 @@ def assemble_modules(graph,modules,seams):
     if kind=='latches'and raw.get('starts_ferry'):value['starts_ferry']=key+'/'+raw['starts_ferry']
     if kind=='latches'and raw.get('ferry_id'):value['ferry_id']=key+'/'+raw['ferry_id']
     if kind=='latches'and raw.get('return_access'):value['return_access']=[raw['return_access'][0]+dx,raw['return_access'][1]+dy]
+    if kind=='latches':
+     for field in ['occupancy','carrier_dock']:
+      if raw.get(field):
+       r=raw[field]['rect'];value[field]['rect']=[r[0]+dx,r[1]+dy,*r[2:]]
+     if raw.get('carrier_dock'):value['carrier_dock']['platform_id']=key+'/'+raw['carrier_dock']['platform_id']
+     if raw.get('attack_relay'):value['attack_relay']['enemy_id']=key+'/'+raw['attack_relay']['enemy_id']
+     if raw.get('sequence_gate'):
+      r=raw['sequence_gate'];value['sequence_gate']=[r[0]+dx,r[1]+dy,*r[2:]]
     if kind=='enemies':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
     if kind=='thorns':value['surface_id']=key+'/'+raw['surface_id'];value['platform_index']=localmap[key][int(raw['platform_index'])]
     if kind=='hazards':value=[raw[0]+dx,raw[1]+dy,*raw[2:]]
     if kind=='reward_sites':
      value['id']=key+'/'+raw['id'];value['target']=translated_target(raw['target'],m)
+     if raw.get('position'):value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
+     if raw.get('region'):value['region']=[raw['region'][0]+dx,raw['region'][1]+dy,*raw['region'][2:]]
      for field in ['required_bell','required_enemy']:
       if raw.get(field):value[field]=key+'/'+raw[field]
     if kind=='shop_sites':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
@@ -72,6 +82,7 @@ def assemble_modules(graph,modules,seams):
    for cmd in v.get('control_plan',[])+v.get('depleted_plan',[]):
     if 'target_x'in cmd:cmd['target_x']+=dx
     if cmd.get('aim_cell'):cmd['aim_cell']['id']=m['id']+'/'+cmd['aim_cell']['id']
+    if cmd.get('trigger',{}).get('enemy_state'):cmd['trigger']['enemy_state']['id']=m['id']+'/'+cmd['trigger']['enemy_state']['id']
     q=cmd.get('trigger',{}).get('dynamic',{})
     if q.get('kind')=='actor_x':q['value']+=dx
     elif 'id'in q:q['id']=m['id']+'/'+q['id']

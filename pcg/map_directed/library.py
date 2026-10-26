@@ -10,6 +10,14 @@ from .composition import rect_bounds
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import POLICY, digest,module_hash
 
+def withdrawn_versions():
+    versions=set()
+    for path in sorted((REPO/'pcg/feedback/content-withdrawals').glob('*.json')):
+        notice=json.loads(path.read_text())
+        if notice.get('schema')!='pcg/content-technical-withdrawal/v1':raise ValueError('unknown_content_withdrawal_schema')
+        versions.update(notice['contentVersions'])
+    return versions
+
 
 def fits(case,spec):
     bounds=rect_bounds(case)
@@ -46,11 +54,15 @@ class CandidateLibrary:
     def __init__(self,root=None):
         self.root=Path(root or REPO/'pcg/map_directed/library').resolve()
         if not self.root.is_relative_to(REPO):raise ValueError('candidate_library_must_stay_in_workspace_repository')
+        # Technical counterexamples can revoke reuse without rewriting immutable
+        # old records or pretending that a new human review took place.
+        self.withdrawn=withdrawn_versions()
 
     def find(self,spec):
         found=[]
         for p in sorted((self.root/'candidates').glob('*/record.json')):
             record=json.loads(p.read_text())
+            if record.get('contentVersion')in self.withdrawn:continue
             if record['technical_status']!='passed_scoped' or record['production_admitted']:continue
             case_path=p.parent/'case.json';doc_path=p.parent/'module.mapnote.json'
             if file_sha(case_path)!=record['case_sha256'] or file_sha(doc_path)!=record['document_sha256']:
@@ -74,6 +86,7 @@ class CandidateLibrary:
     def enroll(self,case,doc,quality,artifacts):
         if quality.get('status')!='awaiting_human_review':raise ValueError('technical_quality_gate_not_passed')
         document=verified_document(doc);version=document['generationContract']['contentVersion']
+        if version in self.withdrawn:raise ValueError('candidate_version_technically_withdrawn')
         verify_case_binding(case,document)
         for artifact in artifacts:
             p=(REPO/artifact['path']).resolve()
@@ -97,6 +110,7 @@ class CandidateLibrary:
         # Existing factory policy remains authoritative; no AI-authored approval
         # can substitute for actual external human review evidence.
         reasons=[]
+        if record.get('contentVersion')in withdrawn_versions():reasons.append('technical_counterexample_withdrawal')
         if record.get('technical_status')!='passed_scoped':reasons.append('technical_validation_missing')
         reviewers={r.get('reviewer') for r in record.get('human_reviews',[]) if r.get('type')=='human_quality_review' and r.get('approved') and r.get('artifact_sha256')}
         if len(reviewers)<POLICY['minimum_human_reviewers']:reasons.append('human_quality_review_missing')
@@ -152,6 +166,7 @@ class CandidateLibrary:
         for path in sorted((self.root/'map-instances').glob('*/record.json')):
             record=json.loads(path.read_text())
             if record['technical_status']!='whole_map_instance_passed' or record['production_admitted']:continue
+            if any(m.get('contentVersion')in self.withdrawn for m in record.get('modules',[])):continue
             catalog=(REPO/record['catalog']).resolve()
             if not catalog.is_relative_to(REPO):raise ValueError('catalog_outside_repository')
             manifest=json.loads((catalog/'documents/manifest.json').read_text())
@@ -181,6 +196,7 @@ class CandidateLibrary:
         found=[];key=demand_key(spec)
         for path in sorted((self.root/'payloads'/key).glob('*/record.json')):
             record=json.loads(path.read_text())
+            if record.get('contentVersion')in self.withdrawn:continue
             if record.get('status')!='validated_in_concrete_map' or record.get('production_admitted'):continue
             for artifact in record['evidence']:
                 p=(REPO/artifact['path']).resolve()
