@@ -30,6 +30,7 @@ def inspect(run):
                 accepted_chests=[e['id']for e in events if e['type']=='chest_claim'and e['accepted']]))
     expected={(e['id'],e['from'],e['to'])for e in g['edges']}|{(e['id'],e['to'],e['from'])for e in g['edges']if e['bidirectional']}
     attempts=json.loads((run/'search-attempts.json').read_text())if(run/'search-attempts.json').exists()else[]
+    attempts=[v.get('search',v)for v in attempts]
     result=dict(seed=g['seed'],run=str(run),modules=len(c['modules']),seams=len(c['seams']),
         cycle_rank=len(g['edges'])-len(g['nodes'])+1,directed_edges_covered=len(covered&expected),directed_edges_expected=len(expected),
         chests=len(c['case']['reward_sites']),currency=sum(v['amount']for v in c['case']['reward_sites']),
