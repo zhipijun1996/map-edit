@@ -21,3 +21,5 @@ description: 生成简单可下载短视频，按编号回收观感反馈并指�
 三端口迭代：同一多端口Module可有多个路线视频：同时绑定文档版本、routeId及独立原始案例SHA。显示所有实际端口并避免目标框遮住Port ID；版式改动保留旧片，重新逐帧核对，不重调留出几何。 参见pcg/PLAINS-THREE-PORT-REPORT.md。
 
 Macro回程实例：`docs/l4-mapgen/content-workshop-macro-v1.md` 的三段原生录像真实完成，但静态接缝首个支撑碰撞ID有18帧顺序差异；严格比较器仍失败，0段计为全字段精确录像。审阅片可保留并公开全部差异，不冒充已解决或放宽比对。原始失败与固定单案例进程复查都在`content-workshop-macro-v1`归档。
+
+平原50实例：`generation/workshop/plains50-v1/index.html`给21审阅组31条主队列影片，每片按case SHA精确绑定版本/route并经raw GitHub和Pages公网下载SHA复核（publication-v1.json）。21组中撤桥只review-only；另外timed连续汇回仅1帧normal_velocity/support_id不同，仍严格失败，不能因位置和金币一致改标exact。低铃镜头不可见用隔离overview scene纯表现修订，原物理trace SHA保持完全相同且98帧严格通过。15适配没有自己的影片，代表只解释共享玩法，不替它们充当版本录像证明。
