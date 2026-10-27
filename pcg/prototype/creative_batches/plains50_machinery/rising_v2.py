@@ -81,4 +81,4 @@ if __name__=='__main__':
         for c,r,ev in e.run([c for i in [0,1]for c in candidates(i)],'rising-side-probe'):
             q=purpose(c,r);rows.append(dict(id=c['id'],ok=q['ok'],purpose=q,evidence=ev));print(c['id'],r.get('reason'),q,flush=True)
         (e.out/'summary.json').write_text(json.dumps(rows,indent=2))
-    else:run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'map_directed/library',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra_sources())
+    else:run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'module_library/store',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra_sources())

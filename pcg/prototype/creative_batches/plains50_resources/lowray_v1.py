@@ -51,7 +51,7 @@ def compiler(req):
  return dict(status='requires_physics',specifications=specs,cases=cs)
 def main():
  p=argparse.ArgumentParser();p.add_argument('mode',choices=['probe','produce']);p.add_argument('--name',required=True);a=p.parse_args()
- if a.mode=='produce':run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'map_directed/library',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__))
+ if a.mode=='produce':run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'module_library/store',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__))
  else:
   engine=WorkshopEngine(ROOT/'results'/a.name,extra_sources=[Path(__file__)]);rows=[]
   for c,r,e in engine.run([c for i in [0,1]for c in candidates(i)],'probe'):

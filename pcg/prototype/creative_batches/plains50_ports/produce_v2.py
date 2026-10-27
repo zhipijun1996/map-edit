@@ -67,10 +67,10 @@ def run(name,only=None,interfaces=None):
         versions=[]
         if selected:
             rel=str(engine.out.relative_to(ROOT/'results'));selected_specs=[s for s in specs if any(c['map_specification']['id']==s['id']for c in selected)]
-            produce(rel,[selected[0]['family']],rel,requested=(selected_specs,selected),protocol_override=str(engine.out/'protocol.json'),engine=engine,purpose_fn=recipes.purpose,library_root=ROOT/'map_directed/library',canonical_witnesses=clean,counter_decisions=decisions,export_script=HERE/'export_v1.mjs')
+            produce(rel,[selected[0]['family']],rel,requested=(selected_specs,selected),protocol_override=str(engine.out/'protocol.json'),engine=engine,purpose_fn=recipes.purpose,library_root=ROOT/'module_library/store',canonical_witnesses=clean,counter_decisions=decisions,export_script=HERE/'export_v1.mjs')
             reviews=json.loads((engine.out/'review_cases.json').read_text())['cases'];held=json.loads((engine.out/'evaluations.json').read_text())
             manifest=json.loads((engine.out/'modules/manifest.json').read_text())if (engine.out/'modules/manifest.json').exists()else dict(modules=[])
-            lib=WorkshopLibrary(ROOT/'map_directed/library')
+            lib=WorkshopLibrary(ROOT/'module_library/store')
             for item in manifest['modules']:
                 cs=[c for c in reviews if c['layout_uid']==item['id'].removeprefix('generated-')]
                 original=[c for c in selected if c['layout_uid']==item['id'].removeprefix('generated-')]
@@ -78,7 +78,7 @@ def run(name,only=None,interfaces=None):
                 qualities=[e['quality_gate']for e in held if any(c['factory_id']==digest(e['case'])for c in cs)]
                 artifacts=[dict(path=str(p.relative_to(REPO)),sha256=file_sha(p))for p in [engine.out/'evaluations.json',engine.out/'calibration-evaluations.json',engine.out/'protocol.json',engine.out/'bound-counterexamples.json',engine.out/'counter-decisions.json',engine.out/'selection-before-holdout.json']]
                 record=lib.enroll_multi(cs,engine.out/'modules'/item['file'],cs[0]['map_specification'],qualities,artifacts)
-                found=WorkshopLibrary(ROOT/'map_directed/library').find_multi(cs[0]['map_specification']);assert any(m['record']['contentVersion']==record['contentVersion']for m in found)
+                found=WorkshopLibrary(ROOT/'module_library/store').find_multi(cs[0]['map_specification']);assert any(m['record']['contentVersion']==record['contentVersion']for m in found)
                 versions.append(record['contentVersion'])
         row=dict(recipe=recipe,versions=versions,new_modules=len(versions),actual_physics_cases=engine.sim.cases,wall_seconds=time.perf_counter()-started,calibration_routes=len(entries),known_counter_refutations=[r['id']for r in counter_rows if r['invalidates_design']],failed_screen_routes=[c['id']for c in sources if c['id']not in clean or sum(v['ok']for v in screen if v['id']==c['id']and v['level']=='mild')<5],human_quality='unreviewed',production_admitted=False)
         assert row['actual_physics_cases']<=900,'predeclared case budget exceeded'

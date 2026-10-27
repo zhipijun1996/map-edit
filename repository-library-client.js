@@ -5,9 +5,9 @@ import {validateDocument} from './model.js';
 import {validateGenerationContract} from './module-contract.js';
 import {renderContractSvg} from './module-contract-render.js';
 
-export const REPOSITORY_MODULES_REF='content/task-a-workshop';
+export const REPOSITORY_MODULES_REF='main';
 const HASH=/^[a-f0-9]{64}$/,SHA=/^[a-f0-9]{40}$/;
-const ROOT='pcg/map_directed/library/candidates/';
+const ROOT='pcg/module_library/store/candidates/';
 export const SCOPE_NAMES={plains:'反冲平原候选',advanced:'后续能力储备',held:'节奏暂扣',unclassified:'待整理'};
 export function repositoryEntry(record,doc,row={},previous={}){
   const version=record.contentVersion,hex=version?.replace(/^sha256:/,'');
@@ -82,7 +82,7 @@ export class RepositoryLibraryClient extends LibraryClient{
     const base=`https://raw.githubusercontent.com/${EDITOR_REPO}/${tip.sha}/`;
     const tree=await this.json(`https://api.github.com/repos/${EDITOR_REPO}/git/trees/${tip.sha}?recursive=1`);
     if(tree.truncated||!Array.isArray(tree.tree))throw Error('仓库目录不完整，保留现有库');
-    const sources=tree.tree.filter(x=>x.type==='blob'&&/^pcg\/map_directed\/library\/candidates\/[a-f0-9]{64}\/record\.json$/.test(x.path));
+    const sources=tree.tree.filter(x=>x.type==='blob'&&/^pcg\/module_library\/store\/candidates\/[a-f0-9]{64}\/record\.json$/.test(x.path));
     if(!sources.length&&previous?.modules.length)throw Error('该版本尚未发布仓库模块，保留现有库');
     if(sources.length>10000)throw Error('仓库模块数量超过支持范围');
     const notices=await concurrent(tree.tree.filter(x=>x.type==='blob'&&/^pcg\/feedback\/content-withdrawals\/[a-zA-Z0-9_-]+\.json$/.test(x.path)),x=>this.json(base+x.path));

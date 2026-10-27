@@ -63,7 +63,7 @@ def run(out_name):
     for row in unresolved:row.pop('resolved_by',None)
     write(out/'observations.json',observations);write(out/'proposals-before-repair.json',propose({},unresolved));write(out/'proposals-after-repair.json',propose({},observations))
     links=[]
-    from pcg.map_directed.library import CandidateLibrary
+    from pcg.module_library.library import CandidateLibrary
     withdrawn=CandidateLibrary().withdrawn
     for run in ['workshop-a1-holdout-v1','workshop-five-holdout-v1','workshop-carrier-rework-v2/holdout','workshop-gate-window-v2']:
         root=ROOT/'results'/run;manifest=json.loads((root/'modules/manifest.json').read_text())

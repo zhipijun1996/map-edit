@@ -13,7 +13,7 @@ from pcg.prototype.workshop.experiments import write
 from pcg.prototype.workshop.evidence import geometry_key
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import digest
-from pcg.map_directed.library import verified_document
+from pcg.module_library.library import verified_document
 HERE=Path(__file__).parent
 REPO=ROOT.parent
 SOURCES=[('investment-four-port','106e4362c8388feceff422dc98e9c5105569c546ff8f284f6d822fc75d7517a0','C','D'),('thorn-three-port','ab5d60871a3261241a2057352c88a469f988728f8b94a92728b7a0da0336d345','B','C')]
@@ -23,7 +23,7 @@ def binding(path):return dict(path=str(path.relative_to(REPO)),sha256=file_sha(p
 def specimens():
  out=[]
  for label,version,seam_port,final_port in SOURCES:
-  root=ROOT/'map_directed/library/candidates'/version
+  root=ROOT/'module_library/store/candidates'/version
   document=root/'module.mapnote.json';doc=verified_document(document);assert doc['generationContract']['contentVersion']=='sha256:'+version
   cs=json.loads((root/'cases.json').read_text())['cases'];original=next(c for c in cs if c['route_spec']['id']=='reward')
   ports={p['id']:p for p in original['ports']};sp=ports[seam_port];target=ports[final_port];i=sp['support_index'];old=original['platforms'][i][:];sx=sp['position'][0]

@@ -9,11 +9,11 @@ RUNS=['workshop-plains50-terrain-adapt-v1/round-00','workshop-plains50-terrain-a
 TITLES={'slot-low-approach':'窄道：较高接收岸','slot-wide-exit':'窄道：宽出口岸','brake-short-pocket':'过檐刹入：短侧袋','brake-deep-pocket':'过檐刹入：深侧袋','reload-level-relay':'落地补枪：水平接力','reload-rising-relay':'落地补枪：抬升接力','column-low-exit':'柱底救回：低侧岸','column-wide-turn':'柱底救回：宽转折'}
 
 def inventory():
- modules=[];retrieved=[];lib=WorkshopLibrary(ROOT/'map_directed/library');video_files=list((REPO/'generation/workshop/plains50-terrain-v1/videos').glob('*/manifest.json'))
+ modules=[];retrieved=[];lib=WorkshopLibrary(ROOT/'module_library/store');video_files=list((REPO/'generation/workshop/plains50-terrain-v1/videos').glob('*/manifest.json'))
  for run in RUNS:
   source=ROOT/'results'/run;cs=json.loads((source/'review_cases.json').read_text())['cases'];manifest=json.loads((source/'modules/manifest.json').read_text());cal=json.loads((source/'calibration-evaluations.json').read_text());held=json.loads((source/'evaluations.json').read_text())
   for item in manifest['modules']:
-   version=item['contentVersion'];dest=ROOT/'map_directed/library/candidates'/version.removeprefix('sha256:');record=json.loads((dest/'record.json').read_text());case=json.loads((dest/'case.json').read_text());spec=case['map_specification'];matches=lib.find_single_exact(spec)
+   version=item['contentVersion'];dest=ROOT/'module_library/store/candidates'/version.removeprefix('sha256:');record=json.loads((dest/'record.json').read_text());case=json.loads((dest/'case.json').read_text());spec=case['map_specification'];matches=lib.find_single_exact(spec)
    assert any(m['record']['contentVersion']==version for m in matches),'missing persistent exact retrieval '+version
    retrieved.append(dict(specification=spec['id'],version=version,match_versions=[m['record']['contentVersion']for m in matches],generator_called=False,physics_cases=0))
    witness=next(c for c in cs if c['factory_id']==item['id'].removeprefix('generated-'));base_id=witness['review_alias'];key=next(k for k in TITLES if '-'+k+'-control-'in base_id)

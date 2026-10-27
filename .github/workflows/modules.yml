@@ -1,0 +1,46 @@
+name: Independent Module workshop
+on:
+  pull_request:
+    paths:
+      - 'pcg/module_library/**'
+      - 'pcg/prototype/**'
+      - 'pcg/contract/**'
+      - 'pcg/tools/restore_archive.py'
+      - 'archive/mapgen-failed/**'
+      - 'tools/**'
+      - '*.js'
+      - 'package.json'
+      - 'AGENTS.md'
+      - 'pcg/WORKSPACE.md'
+      - '.agents/skills/**'
+      - '.github/workflows/modules.yml'
+  push:
+    branches: [main, research/l4-map-generator]
+    paths:
+      - 'pcg/module_library/**'
+      - 'pcg/prototype/**'
+      - 'archive/mapgen-failed/**'
+      - '.github/workflows/modules.yml'
+permissions:
+  contents: read
+jobs:
+  independent-module-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm run check
+      - name: Restore Module evidence only
+        run: python3 pcg/tools/restore_archive.py module-library-evidence-v1 --extract
+      - run: npm run check:modules
+      - run: python3 -m pcg.module_library.audit --records-only
+      - run: python3 -m unittest discover -s prototype/factory/tests -v
+        working-directory: pcg
+      - run: python3 -m unittest discover -s prototype/plains/tests -v
+        working-directory: pcg

@@ -5,7 +5,7 @@ validation is still mandatory; this is a transport optimization, not physics.
 """
 import argparse,json,sys
 from pathlib import Path
-from pcg.map_directed.run import write
+from pcg.module_library.paths import write
 from pcg.prototype.factory.core.engine import file_sha
 
 def build(play,out,game_tools):

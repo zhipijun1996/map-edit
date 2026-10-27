@@ -10,6 +10,7 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
+from pcg.module_library.paths import evidence_path
 
 REPO = Path(__file__).resolve().parents[3]
 PCG = REPO / 'pcg'
@@ -29,7 +30,7 @@ def read(path):
 def repository_file(value):
     if not isinstance(value, str):
         raise ValueError('repository file path required')
-    path = (REPO / value).resolve()
+    path = evidence_path(value)
     if not path.is_relative_to(REPO) or not path.is_file():
         raise ValueError('missing or outside-repository file: ' + value)
     return path

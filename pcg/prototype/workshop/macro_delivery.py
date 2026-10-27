@@ -6,7 +6,7 @@ from .experiments import REPO,write
 from .library import WorkshopLibrary
 from .intake import propose
 from ..factory.core.engine import file_sha
-from pcg.map_directed.library import verified_document
+from pcg.module_library.library import verified_document
 
 def deliver(out_name):
     run=ROOT/'results/workshop-macro-holdout-v2';retry=ROOT/'results/workshop-macro-retry-held-v2';out=REPO/out_name

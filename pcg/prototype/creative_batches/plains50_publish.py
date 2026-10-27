@@ -3,7 +3,7 @@ import argparse,collections,json,shutil,subprocess
 from pathlib import Path
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import module_hash
-from pcg.map_directed.library import withdrawn_versions,verified_document
+from pcg.module_library.library import withdrawn_versions,verified_document
 
 REPO=Path(__file__).resolve().parents[3]
 BASELINE=REPO/'pcg/creative-production/curation/plains50-baseline-v1.json'
@@ -56,7 +56,7 @@ def publish(out,expected):
             version=row.get('contentVersion')
             if version:meta.setdefault(version,[]).append((row,p))
     candidates=[]
-    for p in sorted((REPO/'pcg/map_directed/library/candidates').glob('*/record.json')):
+    for p in sorted((REPO/'pcg/module_library/store/candidates').glob('*/record.json')):
         record=read(p);version=record['contentVersion']
         if version in baseline or version in withdrawn:continue
         if record['technical_status']not in ['passed_scoped','passed_scoped_multi_route']or record.get('production_admitted'):raise ValueError('not_scoped_candidate')

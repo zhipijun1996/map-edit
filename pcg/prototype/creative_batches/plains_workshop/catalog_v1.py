@@ -5,7 +5,7 @@ and scoped physics remain authoritative. Query never turns UNKNOWN into pass.
 """
 import argparse,json
 from pathlib import Path
-from pcg.map_directed.library import CandidateLibrary,withdrawn_versions
+from pcg.module_library.library import CandidateLibrary,withdrawn_versions
 from pcg.prototype.workshop.library import WorkshopLibrary
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.creative_batches.catalog_v1 import REPO,path,read,write_new

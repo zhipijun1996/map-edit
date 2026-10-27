@@ -6,7 +6,7 @@ from pathlib import Path
 from pcg.prototype.workshop.engine import ROOT
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import digest
-from pcg.map_directed.library import CandidateLibrary
+from pcg.module_library.library import CandidateLibrary
 HERE=Path(__file__).parent
 old=ROOT/'results/workshop-creative-resource-routes-v4/round-01'
 new=ROOT/'results/workshop-creative-resource-routes-sequence-export-v3'

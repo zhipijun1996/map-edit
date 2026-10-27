@@ -107,8 +107,8 @@ def compiler(request):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('mode',choices=['probe','produce']);p.add_argument('--name',required=True);p.add_argument('--recipes',nargs='+',choices=RECIPES,default=RECIPES);a=p.parse_args()
- extra=[HERE/'protocol-v1.json',LEGACY/'runner-v2.gd',LEGACY/'export-v4.mjs']
- if a.mode=='produce':run(a.name,[dict(recipe=r)for r in a.recipes],len(a.recipes),library_root=ROOT/'map_directed/library',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra,runner_script=LEGACY/'runner-v2.gd',export_script=LEGACY/'export-v4.mjs')
+ extra=[HERE/'protocol-module-isolated-v1.json',LEGACY/'runner-v2.gd',LEGACY/'export-v4.mjs']
+ if a.mode=='produce':run(a.name,[dict(recipe=r)for r in a.recipes],len(a.recipes),library_root=ROOT/'module_library/store',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra,runner_script=LEGACY/'runner-v2.gd',export_script=LEGACY/'export-v4.mjs')
  else:
   engine=WorkshopEngine(ROOT/'results'/a.name,extra_sources=[Path(__file__)]+extra,runner_script=LEGACY/'runner-v2.gd');rows=[]
   for c,r,e in engine.run([c for rec in a.recipes for i in [0,1]for c in candidates(rec,i)],'probe'):

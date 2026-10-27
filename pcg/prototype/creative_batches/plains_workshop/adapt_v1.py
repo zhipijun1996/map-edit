@@ -11,7 +11,7 @@ from pcg.prototype.workshop.evaluate import purpose
 from pcg.prototype.workshop.counterexamples import alternatives
 from pcg.prototype.workshop.production_loop import run
 from pcg.prototype.workshop.engine import ROOT
-from pcg.map_directed.library import fits
+from pcg.module_library.library import fits
 
 CAPS=['move','jump','shot_recoil']
 DEMANDS=[

@@ -1,3 +1,4 @@
+// Historical document compatibility only; not a requirement for new Module production.
 // Optional extension of generationContract.space; all geometry remains objects.
 const directions={W:[-1,0],E:[1,0],N:[0,-1],S:[0,1]};
 const need=(ok,message)=>{if(!ok)throw Error('Block contract: '+message);};

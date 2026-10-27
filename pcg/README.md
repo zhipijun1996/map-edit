@@ -1,3 +1,5 @@
+> 当前入口是 [WORKSPACE.md](WORKSPACE.md)。本页为历史研究记录；旧Map相关命令与要求不再生效。
+
 # 失序之钟 PCG 研究原型
 
 最新 **PCG-FACTORY-05**：见 [离线生产与评审报告](FACTORY-REPORT.md)。已运行1002次真实物理测试，按严格regular门槛筛出4个待真人候选、2个返工；人评0、批准0。新增双档案质量搜索、完整源/失败留存、独立留出、网页亲自试玩评分/导出与版本绑定的返工工具。`python3 -m prototype.factory.core.producer --name new-run --tier regular` 为新入口；当前仍是有限注册家族，未签趣味、Runtime或正式游戏准入。

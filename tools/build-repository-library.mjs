@@ -12,7 +12,7 @@ import {repositoryEntry,validateRepositoryCatalog,SCOPE_NAMES} from '../reposito
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const output=path.join(root,'library/workshop');
-const candidateRoot=path.join(root,'pcg/map_directed/library/candidates');
+const candidateRoot=path.join(root,'pcg/module_library/store/candidates');
 const args=process.argv.slice(2),check=args.includes('--check');
 if(args.some(a=>a!=='--check'))throw Error('Usage: node tools/build-repository-library.mjs [--check]');
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));

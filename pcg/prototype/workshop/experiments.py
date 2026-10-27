@@ -9,7 +9,7 @@ from .evidence import counter_records,geometry_key
 from ..factory.core.quality import module_hash,digest,gate,POLICY
 from ..factory.core.engine import file_sha
 from pcg.contract.export import collect
-from pcg.map_directed.library import CandidateLibrary
+from pcg.module_library.library import CandidateLibrary
 
 REPO=ROOT.parent
 def write(path,value):

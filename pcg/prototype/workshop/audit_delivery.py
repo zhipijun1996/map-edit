@@ -6,7 +6,7 @@ from .experiments import write
 from .evidence import GEOMETRY,counter_records,geometry_key
 from ..factory.core.engine import file_sha
 from ..factory.core.quality import digest
-from pcg.map_directed.library import CandidateLibrary,verified_document
+from pcg.module_library.library import CandidateLibrary,verified_document
 
 PHYSICAL=[k for k in GEOMETRY if k not in ['spawn','entry_port','exit_port','goal']]
 def physical(c):return digest({k:c.get(k,[])for k in PHYSICAL})

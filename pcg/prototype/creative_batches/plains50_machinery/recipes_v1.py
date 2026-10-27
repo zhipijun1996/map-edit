@@ -101,4 +101,4 @@ if __name__=='__main__':
         (e.out/'summary.json').write_text(json.dumps(rows,indent=2))
     else:
         from pcg.prototype.workshop.production_loop import run
-        run(a.name,requests=[dict(recipe=r)for r in RECIPES],cycles=4,library_root=ROOT/'map_directed/library',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra_sources(),runner_script=OLD/'dock_runner_v11.gd',export_script=OLD/'dock_export_v13.mjs')
+        run(a.name,requests=[dict(recipe=r)for r in RECIPES],cycles=4,library_root=ROOT/'module_library/store',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=extra_sources(),runner_script=OLD/'dock_runner_v11.gd',export_script=OLD/'dock_export_v13.mjs')

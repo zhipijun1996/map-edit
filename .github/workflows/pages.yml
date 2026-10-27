@@ -28,6 +28,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Restore Module evidence only
+        run: python3 pcg/tools/restore_archive.py module-library-evidence-v1 --extract
+      - name: Check Module isolation
+        run: npm run check:modules
       - name: Check offline factory contracts
         run: python3 -m unittest discover -s prototype/factory/tests -v
         working-directory: pcg
@@ -43,10 +47,12 @@ jobs:
           cp library/catalog.json library/coverage.json dist/library/
           cp -r library/modules library/thumbnails library/workshop dist/library/
           mkdir -p dist/experiments/l4-mapgen/results dist/docs
-          cp experiments/l4-mapgen/viewer.html experiments/l4-mapgen/viewer.js experiments/l4-mapgen/viewer.css experiments/l4-mapgen/*.md experiments/l4-mapgen/*.py experiments/l4-mapgen/*.json experiments/l4-mapgen/*.txt dist/experiments/l4-mapgen/
-          cp -r experiments/l4-mapgen/results experiments/l4-mapgen/failure_evidence experiments/l4-mapgen/godot dist/experiments/l4-mapgen/
+          cp experiments/l4-mapgen/viewer.html experiments/l4-mapgen/viewer.js experiments/l4-mapgen/viewer.css experiments/l4-mapgen/*.md experiments/l4-mapgen/*.json dist/experiments/l4-mapgen/
+          cp -r experiments/l4-mapgen/results experiments/l4-mapgen/failure_evidence dist/experiments/l4-mapgen/
           cp -r docs/l4-mapgen dist/docs/
           cp -r generation dist/generation
+          mkdir -p dist/archive/mapgen-failed
+          cp archive/mapgen-failed/README.md archive/mapgen-failed/manifest.json dist/archive/mapgen-failed/
           touch dist/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

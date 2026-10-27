@@ -3,7 +3,7 @@ import argparse,copy,itertools,json,math
 from .rules import cmd,wait_x,settle
 from .engine import ROOT,WorkshopEngine,HERE
 from .experiments import write,source_cases,counter_run,produce
-from .map_demand import request,adapt
+from .carrier_fixture import request,adapt
 
 def parked(c):
     out=[];lead=c['moving_platforms'][0]['start'][0]+c['moving_platforms'][0]['size'][0]/2-14

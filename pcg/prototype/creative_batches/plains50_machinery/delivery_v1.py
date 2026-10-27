@@ -15,7 +15,7 @@ def actual_candidates():
         if not folder.exists():continue
         for manifest in sorted(folder.glob('round-*/modules/manifest.json')):
             for item in json.loads(manifest.read_text())['modules']:
-                directory=ROOT/'map_directed/library/candidates'/item['contentVersion'].removeprefix('sha256:')
+                directory=ROOT/'module_library/store/candidates'/item['contentVersion'].removeprefix('sha256:')
                 if not(directory/'record.json').is_file():continue
                 c=json.loads((directory/'case.json').read_text());rec=json.loads((directory/'record.json').read_text());doc=directory/'module.mapnote.json'
                 assert rec['document_sha256']==file_sha(doc) and rec['case_sha256']==file_sha(directory/'case.json')
@@ -30,7 +30,7 @@ def actual_candidates():
     return rows
 
 def query():
-    found=[];library=WorkshopLibrary(ROOT/'map_directed/library')
+    found=[];library=WorkshopLibrary(ROOT/'module_library/store')
     for row in actual_candidates():
         hits=library.find_single_exact(row['specification']);versions=[m['record']['contentVersion']for m in hits]
         assert row['contentVersion']in versions

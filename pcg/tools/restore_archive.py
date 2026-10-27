@@ -35,9 +35,16 @@ def open_parts(name):
 
 def sha(p):
  with p.open('rb')as f:return hashlib.file_digest(f,'sha256').hexdigest()
+def check_retired_destinations(index, prefix):
+ manifest=ROOT.parent/'archive/mapgen-failed/manifest.json'
+ if not manifest.exists():return
+ retired={row['path'] for row in json.loads(manifest.read_text())['files']}
+ conflicts=[name for name in index if (not prefix or name.startswith(prefix)) and ('pcg/'+name in retired or name.startswith('map_directed/'))]
+ if conflicts:raise ValueError('Retired Map or relocated files cannot be restored into the active workspace; inspect fixed archive commit in a separate checkout: '+str(conflicts[:3]))
+
 def restore(name,extract=False,prefix=''):
  folder=ROOT/'archives'/name
- if name not in('godot-runtime-v1','research-results-v1','review-delivery-v1','guided-landing-v1','plains-generation-v1','module-contract-v1','plains-review-round2-v1','plains-three-port-v1','map-directed-source-and-failures-v1','r2-full-source-and-failures-v1','r2-full-run-payloads-v1','direct-module-source-and-failures-v1','direct-module-run-payloads-v1','open-valley-sample-v1','valley-complete-v1','formal-style-v2','full-region-spatial-v1','content-ecosystem-v1','woven-region-v1','content-routes-v1','shape-search-calibration-v1','shape-search-source-v1','shape-search-results-v1','catalog-feed-source-and-runs-v1','catalog-feed-media-v1','contact-grammar-v1','block-grid-v1','same-graph-landforms-v1','content-domains-v1','graph-map-materialization-v1'):raise ValueError('Unknown archive')
+ if name not in('module-library-evidence-v1','module-isolation-verification-v1','godot-runtime-v1','research-results-v1','review-delivery-v1','guided-landing-v1','plains-generation-v1','module-contract-v1','plains-review-round2-v1','plains-three-port-v1','map-directed-source-and-failures-v1','r2-full-source-and-failures-v1','r2-full-run-payloads-v1','direct-module-source-and-failures-v1','direct-module-run-payloads-v1','open-valley-sample-v1','valley-complete-v1','formal-style-v2','full-region-spatial-v1','content-ecosystem-v1','woven-region-v1','content-routes-v1','shape-search-calibration-v1','shape-search-source-v1','shape-search-results-v1','catalog-feed-source-and-runs-v1','catalog-feed-media-v1','contact-grammar-v1','block-grid-v1','same-graph-landforms-v1','content-domains-v1','graph-map-materialization-v1'):raise ValueError('Unknown archive')
  manifest=json.loads((folder/'manifest.json').read_text());work=ROOT/'archives/_work';work.mkdir(exist_ok=True);archive=work/(name+'.zip')
  if archive.exists():
   if sha(archive)!=manifest['archive_sha256']:raise ValueError('Existing archive differs; retained')
@@ -53,6 +60,7 @@ def restore(name,extract=False,prefix=''):
  count=0
  with zipfile.ZipFile(archive)as z:
   index=json.loads(z.read('PCG-ARCHIVE-INDEX.json'))
+  if extract:check_retired_destinations(index,prefix)
   for name,info in index.items():
    if prefix and not name.startswith(prefix):continue
    p=ROOT/name

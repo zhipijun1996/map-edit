@@ -11,7 +11,7 @@ BRANCH_RUN='workshop-plains50-machinery-branch-production-v1'
 def candidates():
     rows=original.actual_candidates();folder=ROOT/'results'/BRANCH_RUN/'carrier-safe-branch';manifest=json.loads((folder/'modules/manifest.json').read_text())
     for item in manifest['modules']:
-        directory=ROOT/'map_directed/library/candidates'/item['contentVersion'].removeprefix('sha256:')
+        directory=ROOT/'module_library/store/candidates'/item['contentVersion'].removeprefix('sha256:')
         if not(directory/'record.json').is_file():continue
         rec=json.loads((directory/'record.json').read_text());cs=json.loads((directory/'cases.json').read_text())['cases'];doc=directory/'module.mapnote.json'
         assert rec['document_sha256']==file_sha(doc) and rec['cases_sha256']==file_sha(directory/'cases.json')
@@ -23,7 +23,7 @@ def candidates():
     return rows
 
 def query():
-    rows=[];lib=WorkshopLibrary(ROOT/'map_directed/library')
+    rows=[];lib=WorkshopLibrary(ROOT/'module_library/store')
     for c in candidates():
         hits=lib.find_multi(c['specification'])if c['portCount']>2 else lib.find_single_exact(c['specification']);versions=[m['record']['contentVersion']for m in hits]
         assert c['contentVersion']in versions

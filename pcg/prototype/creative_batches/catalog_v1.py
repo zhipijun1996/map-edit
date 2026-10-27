@@ -5,14 +5,14 @@ Each command is an independent process; retrieve calls original WorkshopLibrary.
 """
 import argparse,copy,gzip,hashlib,json,os,shutil,sys,time,uuid
 from pathlib import Path
-from pcg.map_directed.library import CandidateLibrary,verified_document,verify_case_binding
+from pcg.module_library.library import CandidateLibrary,verified_document,verify_case_binding
 from pcg.prototype.workshop.library import WorkshopLibrary
 from pcg.prototype.factory.core.quality import gate,counts,module_hash
 from pcg.prototype.factory.core.engine import file_sha
 REPO=Path(__file__).resolve().parents[3]
 DEFAULT_SELECTED=REPO/'pcg/creative-production/novelty-review/selected20.json'
 DEFAULT_OUT=REPO/'pcg/results/workshop-creative20-catalog-v1'
-DEFAULT_LIBRARY=REPO/'pcg/map_directed/library'
+DEFAULT_LIBRARY=REPO/'pcg/module_library/store'
 FILES=('record.json','case.json','module.mapnote.json')
 
 def read(p):return json.loads(Path(p).read_text())

@@ -2,8 +2,8 @@
 import argparse,hashlib,json,sys,tempfile
 from pathlib import Path
 from pcg.tools.restore_archive import open_parts
-from pcg.map_directed.director import REPO
-from pcg.map_directed.run import write
+from pcg.module_library.paths import REPO
+from pcg.module_library.paths import write
 PARENT='results/shape-search-web-transport-v2/overlay.3b09aef68f37.pck'
 def parent_files(tools):
  sys.path.insert(0,str(tools));from check_web_bundle import Pack

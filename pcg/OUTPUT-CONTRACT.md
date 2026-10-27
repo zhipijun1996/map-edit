@@ -1,3 +1,5 @@
+> 状态：现有Module文档与历史证据的兼容说明。旧Map拼装准入与Block扩展不是后续Module制作的统一标准，不得据此恢复退役求解器或约束新Map；新Module契约另行制定。
+
 # Module / Macro 输出契约 v1
 
 适用于后续公开交付的生成内容；搜索算法、动作策略、物理参数和质量筛选不变。主生产入口`prototype/plains/produce.py`与`prototype/factory/core/producer.py`在结束时自动调用`contract.export`，输出`modules/`。输出失败会报错，不降级为可拼装模块。适配器遇到未映射的多端口、支路、奖励区或新机关会明确拒绝，要求补齐映射或直接提供完整Map Notes契约，不能静默丢弃。历史raw case、Godot输入和档案是研究证据，不是地图拼装接口；不回写或重标历史结论。

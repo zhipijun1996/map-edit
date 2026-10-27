@@ -1,3 +1,9 @@
+## 当前Module独立归档
+
+- `module-library-evidence-v1`：94候选所需的最小原证据，644文件，不含旧Map源码；可单独恢复。
+- `module-isolation-verification-v1`：本轮5个真实Godot案例、冻结源、输入输出、标准导出及临时入库记录。
+- 其他旧Map归档保持原字节，只作历史证据；恢复工具禁止写回退役执行路径。
+
 # 研究原件归档
 
 各目录manifest.json记录分片、完整ZIP SHA、原件数与数据范围。`_work/`是本地重组ZIP缓存，未提交。每片最大10MiB，避免GitHub单文件与连接器请求体限制；没有删失败来压体积。

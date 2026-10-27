@@ -4,7 +4,7 @@ from pcg.prototype.workshop.rules import generate,specifications
 from pcg.prototype.workshop.intake import ingest,propose
 from pcg.prototype.workshop.library import WorkshopLibrary
 from pcg.prototype.workshop.engine import ROOT
-from pcg.map_directed.library import CandidateLibrary,verified_document
+from pcg.module_library.library import CandidateLibrary,verified_document
 
 class WorkshopBoundaryTests(unittest.TestCase):
     def test_unsupported_idea_cannot_self_implement(self):
@@ -36,7 +36,7 @@ class WorkshopBoundaryTests(unittest.TestCase):
         reasons=CandidateLibrary.promotion_reasons(dict(technical_status='passed_scoped',human_reviews=[]))
         self.assertIn('human_quality_review_missing',reasons);self.assertIn('canonical_assembly_interface_not_admitted',reasons)
     def test_withdrawal_blocks_even_otherwise_approved_record(self):
-        from pcg.map_directed.library import withdrawn_versions
+        from pcg.module_library.library import withdrawn_versions
         versions=withdrawn_versions()
         self.assertTrue(versions)
         record=dict(contentVersion=next(iter(versions)),technical_status='passed_scoped',human_reviews=[dict(type='human_quality_review',reviewer=str(i),approved=True,artifact_sha256='a'*64)for i in range(2)])
@@ -66,16 +66,16 @@ class PersistedContractTests(unittest.TestCase):
 
 class MapDemandTests(unittest.TestCase):
     def test_map_partial_capabilities_fail_closed(self):
-        from pcg.prototype.workshop.map_demand import request,adapt
+        from pcg.prototype.workshop.carrier_fixture import request,adapt
         spec=request()[1];spec['capabilities']['status']='partial'
         self.assertEqual(adapt(spec)['status'],'unsatisfied')
     def test_map_resource_state_cannot_be_ignored(self):
-        from pcg.prototype.workshop.map_demand import request,adapt
+        from pcg.prototype.workshop.carrier_fixture import request,adapt
         spec=request()[1];spec['resource_state']['entry']='airborne, zero air shots'
         self.assertEqual(adapt(spec)['status'],'unsatisfied')
     def test_adapted_actual_map_demand_keeps_footprint(self):
-        from pcg.prototype.workshop.map_demand import request,adapt
-        from pcg.map_directed.library import fits
+        from pcg.prototype.workshop.carrier_fixture import request,adapt
+        from pcg.module_library.library import fits
         original,spec=request();response=adapt(spec)
         self.assertEqual(response['status'],'requires_physics')
         self.assertTrue(fits(response['cases'][0],spec));self.assertEqual(spec['rise'],original['rise']);self.assertEqual(spec['space'],original['space'])

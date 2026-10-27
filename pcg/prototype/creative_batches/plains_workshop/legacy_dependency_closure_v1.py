@@ -6,6 +6,7 @@ run/source-snapshot history. No source file, library record or Engine is changed
 """
 import hashlib,json,re
 from pathlib import Path
+from pcg.module_library.paths import evidence_path
 ROOT=Path(__file__).resolve().parents[3]
 REPO=ROOT.parent
 OUT=ROOT/'results/workshop-plains-inventory-v1/legacy-dependency-closure.json'
@@ -18,7 +19,7 @@ def read(p):return json.loads(p.read_text())
 def build():
  inv=read(INVENTORY);items={};doc_seen=set();roots=[];component_versions={};unknown=[];unhashed_paths=[]
  def resolve(raw):
-  p=(REPO/raw).resolve()
+  p=evidence_path(raw)
   if not p.is_relative_to(ROOT):raise ValueError('dependency outside pcg archive root:'+raw)
   return p
  def add(raw,expected,reason,version):
@@ -50,7 +51,7 @@ def build():
   for dep in g['generation']['source'].get('componentDocuments',[]):
    component_versions[dep['contentVersion']]=dep['path'];document(dep['path'],dep['sha256'],version,'macro-component-document')
  for row in inv['records']:
-  version=row['contentVersion'];folder=ROOT/'map_directed/library/candidates'/version[7:];record=read(folder/'record.json');case_name='cases.json'if row['multi_route']else'case.json'
+  version=row['contentVersion'];folder=ROOT/'module_library/store/candidates'/version[7:];record=read(folder/'record.json');case_name='cases.json'if row['multi_route']else'case.json'
   if record['contentVersion']!=version:raise ValueError('legacy record version drift')
   for filename in ['record.json',case_name,'module.mapnote.json']:
    raw=str((folder/filename).relative_to(REPO));add(raw,row['files'][filename],'shared-legacy-root',version);roots.append(raw[4:])

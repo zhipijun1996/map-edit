@@ -5,7 +5,7 @@ from .engine import ROOT,HERE
 from .experiments import write
 from ..factory.core.quality import digest,module_hash
 from ..factory.core.engine import file_sha
-from pcg.map_directed.library import verified_document
+from pcg.module_library.library import verified_document
 
 SELECTED=[('workshop-a1-holdout-v1',None),('workshop-five-holdout-v1',{'brake-under-ledge','one-shot-two-routes','air-refund'}),('workshop-carrier-binding-v2',None),('workshop-gate-window-v2',None)]
 

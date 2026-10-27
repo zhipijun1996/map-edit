@@ -15,29 +15,7 @@ from ..factory.core.engine import file_sha
 from pcg.contract.export import collect
 
 def compile_request(request):
-    if request.get('recipe')=='map-owned-supports/v1':
-        from .map_supports import configure
-        return configure(request)
-    if request.get('recipe')=='map-state-boundary/v1':
-        from .map_boundaries import configure
-        return configure(request)
-    if request.get('recipe')=='ordered-interface/v1':
-        from pcg.map_directed.graph_map.verify_pairs import proposals
-        return dict(status='requires_macro_physics',modules=proposals([request['module']]),gaps=[],production_admitted=False)
-    if request.get('recipe')=='rigid-mirror/v1':
-        from pcg.map_directed.content_domains.mirror import mirror
-        return dict(status='requires_macro_physics',modules=[mirror(request['module'])],gaps=[],production_admitted=False)
-    if request.get('recipe')=='map-budget-binding/v1':
-        from .map_budget import configure
-        return configure(request)
-    if request.get('recipe')=='bellstrider-court/v1':
-        from pcg.map_directed.graph_map.boss_content import bellstrider
-        if request.get('ports',{}).get('count')!=1:return dict(status='needs_design',gaps=['original Boss court exposes one exterior Port'])
-        return dict(status='requires_macro_physics',modules=[bellstrider()],gaps=[],production_admitted=False)
     recipe=request.get('recipe')
-    if recipe=='branch-terraces/v1':
-        from pcg.prototype.plains.branch_terraces import request as local_macro
-        return local_macro(request)
     if recipe not in RECIPES:return dict(status='needs_design',gaps=['missing executable recipe: '+str(recipe)],searched=list(RECIPES),cases=[])
     interfaces=request.get('interfaces',[0,1])
     if not isinstance(interfaces,list)or not interfaces or len(interfaces)>2 or any(type(i)is not int or i not in (0,1)for i in interfaces)or len(set(interfaces))!=len(interfaces):return dict(status='unsatisfied',gaps=['outside registered interface domain [0,1]'],cases=[])
@@ -71,7 +49,7 @@ def run(name,requests=None,cycles=4,library_root=None,compiler=None,checker=None
     if not 1<=cycles<=protocol['maximum_rounds']:raise ValueError('round_budget_outside_protocol')
     requests=requests if requests is not None else [dict(recipe='refund-turnback'),dict(recipe='bell-floor-drop'),dict(recipe='refund-turnback',purpose='persistent reuse probe'),dict(recipe='unregistered-new-idea',implemented=True)]
     requests=requests[:cycles];write(root/'protocol.json',dict(protocol,requests=requests));ledger=[];blocked=set();batch_start=time.perf_counter();parent_families=set()
-    library_root=Path(library_root or ROOT/'map_directed/library');library=WorkshopLibrary(library_root)
+    library_root=Path(library_root or ROOT/'module_library/store');library=WorkshopLibrary(library_root)
     for index,request in enumerate(requests):
         started=time.perf_counter();response=compile_fn(request);row=dict(round=index,recipe=request.get('recipe'),source_status=response['status'],new_candidates=0,reused=0,physics_cases=0,stage='request',failures=[])
         def done(stage):

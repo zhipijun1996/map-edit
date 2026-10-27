@@ -60,7 +60,7 @@ def alternatives(c):
  for axis in [-1,0,1]:
   for wait in [0,45]:add(f'walk-{axis}-{wait}',[cmd('axis',value=axis),cmd('wait',wait),settle(x,1)])
  for hold in [4,8,16,24]:
-  add(f'single-jump-{hold}',[cmd('axis',value=1),wait_x(205 if c['production_recipe']=='late-air-rise'else130),cmd('jump'),cmd('jump_release',hold),settle(x,5)])
+  add(f'single-jump-{hold}',[cmd('axis',value=1),wait_x(205 if c['production_recipe']=='late-air-rise'else 130),cmd('jump'),cmd('jump_release',hold),settle(x,5)])
  for idx,q in enumerate(c['control_plan']):
   if q['op']=='jump':
    p=copy.deepcopy(c['control_plan']);p[idx]['op']='wait';add('omit-jump-'+str(idx),p)

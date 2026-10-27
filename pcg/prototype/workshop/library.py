@@ -4,8 +4,8 @@ Single-route callers retain their strict original behavior. They skip the new
 scoped status, rather than treating a group as one interchangeable route.
 """
 import copy,json,shutil,subprocess
-from pcg.map_directed.library import CandidateLibrary,verified_document
-from pcg.map_directed.ecosystem.ideas import demand_key
+from pcg.module_library.library import CandidateLibrary,verified_document
+from pcg.module_library.matching import demand_key
 from ..factory.core.engine import file_sha
 from ..factory.core.quality import module_hash
 from .experiments import REPO,write

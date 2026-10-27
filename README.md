@@ -8,11 +8,7 @@
 - [草图编辑器](https://zhipijun1996.github.io/map-edit/) · [编辑器原说明](docs/map-notes-editor.md)
 - [生成工作区与恢复命令](pcg/WORKSPACE.md) · [迁移与本轮实验报告](pcg/MIGRATION-AND-NEXT.md)
 
-L4 与 Module 联动研究：[L4研究报告](docs/l4-mapgen/report.md) · [区域探索修订](docs/l4-mapgen/region-exploration-revision.md) · [工作台](experiments/l4-mapgen/WORKBENCH.md)。PR #1 保留隔离实验，正式流程未改。
-
-当前完整Map实验：[R2多环路真实落地与限制](docs/l4-mapgen/full-r2-playable-v1.md)，27场所/39连接，实际连续巡视覆盖74有向边，另有闭环视频与真实风铃库补缺；仍是内容不足的可玩结构候选。媒体在 `generation/maps/r2-full-v2/`。
-
-历史小motif技术闭环：[v1实现与证据](docs/l4-mapgen/map-driven-library-v1.md)。用户已指出其范围太小、安全连接过长；不作为完整区域的设计验收。
+旧 Map 生成实验已终止并固定归档，见[失败归档与Module隔离](archive/mapgen-failed/README.md)。Module继续在本仓库独立制作、验证与归档；候选库入口为[中立Module库](pcg/module_library/README.md)。
 
 ## 开始研究
 

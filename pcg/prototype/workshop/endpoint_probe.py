@@ -3,7 +3,7 @@ import argparse,copy,json
 from .engine import ROOT,WorkshopEngine
 from .experiments import source_cases,write
 from .rules import cmd,settle
-from .map_demand import request,adapt
+from .carrier_fixture import request,adapt
 
 def run(name,map_case=False):
     bases=adapt(request()[1])['cases']if map_case else source_cases(['chase-landing'])[1]

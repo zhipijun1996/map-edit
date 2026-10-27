@@ -11,7 +11,7 @@ HERE = Path(__file__).parent
 class WorkshopEngine(PlainsEngine):
     def __init__(self, out, batch_size=12, extra_sources=None, runner_script=None):
         super().__init__(out, batch_size)
-        files=list(HERE.rglob('*'))+[ROOT/'map_directed/library.py',ROOT/'contract/export.py']+[Path(p)for p in (extra_sources or [])]
+        files=list(HERE.rglob('*'))+list((ROOT/'module_library').glob('*.py'))+list((ROOT/'module_library').glob('*.json'))+[ROOT/'module_library/validate_document.mjs',ROOT/'contract/export.py']+[Path(p)for p in (extra_sources or [])]
         for p in sorted(files):
             if p.suffix not in ('.py', '.gd', '.json', '.mjs', '.tscn'): continue
             rel = p.relative_to(ROOT).as_posix()

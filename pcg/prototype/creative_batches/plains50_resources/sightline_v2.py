@@ -42,4 +42,4 @@ def alternatives(c):
  return out
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--name',required=True);a=p.parse_args()
- run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'map_directed/library',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=[HERE/'production_v1.py',HERE/'protocol-v1.json',prior.LEGACY/'runner-v2.gd',prior.LEGACY/'export-v4.mjs'],runner_script=prior.LEGACY/'runner-v2.gd',export_script=prior.LEGACY/'export-v4.mjs')
+ run(a.name,[dict(recipe=RECIPE)],1,library_root=ROOT/'module_library/store',compiler=compiler,checker=purpose,counter_builder=alternatives,source_file=Path(__file__),extra_sources=[HERE/'production_v1.py',HERE/'protocol-module-isolated-v1.json',prior.LEGACY/'runner-v2.gd',prior.LEGACY/'export-v4.mjs'],runner_script=prior.LEGACY/'runner-v2.gd',export_script=prior.LEGACY/'export-v4.mjs')

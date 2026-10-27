@@ -13,7 +13,7 @@ def publish():
  for run in RUNS:
   r=ROOT/'results'/run;entries=json.loads((r/'modules/manifest.json').read_text())['modules'];cases=json.loads((r/'review_cases.json').read_text())['cases'];evals=json.loads((r/'evaluations.json').read_text())
   for row in entries:
-   src=r/'modules'/row['file'];doc=json.loads(src.read_text());v=row['contentVersion'];lp=ROOT/'map_directed/library/candidates'/v.removeprefix('sha256:');record=json.loads((lp/'record.json').read_text());assert file_sha(src)==record['document_sha256'];assert record['technical_status']=='passed_scoped'
+   src=r/'modules'/row['file'];doc=json.loads(src.read_text());v=row['contentVersion'];lp=ROOT/'module_library/store/candidates'/v.removeprefix('sha256:');record=json.loads((lp/'record.json').read_text());assert file_sha(src)==record['document_sha256'];assert record['technical_status']=='passed_scoped'
    case=next(c for c in cases if 'generated-'+c['factory_id']==doc['id']);spec=case['map_specification'];q=next(e for e in evals if e['case']['id']==case['review_alias']);assert q['quality_gate']['status']=='awaiting_human_review'
    target=modules/src.name
    if target.exists():assert target.read_bytes()==src.read_bytes()
@@ -23,7 +23,7 @@ def publish():
    else:shutil.copy2(svg,dest)
    family=row['family'];vf=out/'videos'/VIDEO_DIRS[family]/'manifest.json';videos=json.loads(vf.read_text())['clips']if vf.exists()else[]
    items.append(dict(id=f'PN{len(items)+1:02d}',title=NAMES[family],family=family,contentVersion=v,portCount=len(doc['generationContract']['ports']),document=str(target.relative_to(REPO)),document_sha256=file_sha(target),svg=str(dest.relative_to(REPO)),svg_sha256=file_sha(dest),source_run=str(r.relative_to(REPO)),record=str((lp/'record.json').relative_to(REPO)),specification=spec,case_id=case['id'],case_sha256=case['module_sha256'],holdout_rates={k:x['rate']for k,x in q['stats'].items()},video_manifest=str(vf.relative_to(REPO))if vf.exists()else'PENDING',representative_video_covers_this_exact_version=bool(videos and videos[0]['case_sha256']==case['module_sha256']),capabilities=['move','jump','shot_recoil'],human_fun='unreviewed',human_playtest='UNKNOWN',production_admitted=False))
- manifest=dict(schema='pcg/owner-content-delivery/v1',owner='/root/plains50_new_relations',items=items,module_versions=len(items),recipe_count=len(set(i['family']for i in items)),new_family_claim=False,library='pcg/map_directed/library',source_design_cards='pcg/prototype/creative_batches/plains50_new_relations/design-cards-v2.json',feedback='pcg/feedback/workshop/plains50-new-relations-design-gaps-v1.json',production_admitted=False)
+ manifest=dict(schema='pcg/owner-content-delivery/v1',owner='/root/plains50_new_relations',items=items,module_versions=len(items),recipe_count=len(set(i['family']for i in items)),new_family_claim=False,library='pcg/module_library/store',source_design_cards='pcg/prototype/creative_batches/plains50_new_relations/design-cards-v2.json',feedback='pcg/feedback/workshop/plains50-new-relations-design-gaps-v1.json',production_admitted=False)
  target=out/'manifest.json'
  if target.exists():raise ValueError('immutable_owner_publication_exists')
  target.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(target)

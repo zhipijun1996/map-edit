@@ -5,6 +5,7 @@ records and case/doc hashes must match the published candidate metadata.
 """
 import argparse,copy,json
 from pathlib import Path
+from pcg.module_library.paths import evidence_path
 from .catalog_v1 import snapshot as original_snapshot,HERE
 from pcg.prototype.creative_batches.catalog_v1 import REPO,path,read,write_new
 from pcg.prototype.factory.core.engine import file_sha
@@ -19,7 +20,7 @@ def snapshot(manifest_path):
     for row in view['rows']:
         item=registered.get(row['contentVersion'])
         if not item:continue
-        seen.add(row['contentVersion']);record_path=path(row['record']);doc_path=path(row['document'])
+        seen.add(row['contentVersion']);record_path=evidence_path(row['record']);doc_path=evidence_path(row['document'])
         if file_sha(record_path)!=item['record_sha256']or file_sha(doc_path)!=item['document_sha256']:raise ValueError('published_candidate_binding_drift')
         if row['selection_reason'] in ['technical_withdrawal','outside_scoped_candidate_store','tested_capabilities_missing']or row['additional_capabilities']or not set(row['tested_capabilities'])<=allowed:raise ValueError('published_candidate_not_plains_qualified')
         if not row['tested_capabilities']:raise ValueError('missing_actual_tested_configuration')

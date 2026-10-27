@@ -1,3 +1,5 @@
+> 历史实验日志。旧Map相关入口及设计约束已终止，仅作反例资料；当前工作指令以SKILL.md和pcg/WORKSPACE.md为准。
+
 # 迭代记录
 
 - 2026-10-23：Factory05，82策略/1002物理，strict regular 4待评+2返工；一次FI父子修复有效，仍无人评。
@@ -129,3 +131,7 @@
 ## 2026-10-27 Map要求核对与固定骨架退役
 
 用户明确五段固定骨架完全废弃。删除content_domains的region_build/region_run、旧小图run/graph/build、stage专用key_route和review工具；只留全库资格/Port工具。没有legacy回退。沿用block_grid.plan与PR #1 R2逻辑规划，policy补三类支路覆盖、主路线真实性、返回/汇入主网；原assembler/audit接蓝图对应与原始图绑定，holdout在Godot前拒绝设计不合格的旧43图。本轮三个预先固定Seed42/43/41逻辑槽、3/2/3主路、每图6条三类支路；通用物化、真实Module/Boss/道具和Godot均未运行。新增Map Director工作规则，详见docs/l4-mapgen/map-requirements-reset-v1.md。不能把需求文档或策略函数存在当接入完成，不能撤销必要源修复维持旧缓存命中。
+
+## 2026-10-27 Module独立化
+
+旧Map版本固定于862b736并从活跃代码删除。94候选原字节迁移，中立查库/入库和原认证范围保留；5个真实Godot案例（1个新生成、反冲、击铃载台、多口两方向）通过，导出与临时入库查回通过。未新增质量认证或人工认可，未改主游戏物理。失败归档与精确文件表见archive/mapgen-failed。
