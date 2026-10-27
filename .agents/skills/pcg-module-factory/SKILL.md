@@ -50,3 +50,6 @@ Codex 负责提出和实现新因果规则；程序负责规则域内的动作/�
 2026-10-27后续实码核对：Map已支持Module自有条件/单向边界门适配，门bounds进入拥有格；它改变内容版本，须真实整图条件/反走验证。512高默认边界门可能割到同面另一口，适配失败应返回冲突，不能宣称任意多口均能装门。支撑并集只允许同Module同目标高度的原实体，不能加地形或借邻居支持。Block128/JS/端口公式未变；旧物理原身份保留，静态兼容不算新物理。
 
 生成前显式编译原Map的UNKNOWN关系/空间为本地具体提案，原请求另存source_map_request，未解决区域foldback仍UNKNOWN。运行前调用现有produce_v3的原Godot语法/Block/原route消费者字段检查；不要把未解析Map字符串直接传给原Module存储器。选择不能只看第一份clean：新周期可在噪声/留出前固定按实际M/桥完整身体水平余量排序；原regular不变。录像使用record_block_v1从持久化case读取原scene，原record逐字段比较不改。
+
+
+薄岸/袋口适配要检查整块平台而非仅top：例如24px薄台不能把top移到原bottom以下；明确移动整块后，重新绑定实体、奖物与完整身体净空。新Module standard接口与同世界回路证据分别保存；自口A→A不是原schema允许的标准route。发布使用`publish_block_v1 --compatibility <新静态回执>`显式绑定该批覆盖，不把18版本回执冒充21版本覆盖。当前Map实际862b规则没有变化时仍保留物理原source身份，静态重核不算新Godot案例。

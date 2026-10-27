@@ -1,0 +1,97 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "id": "batch30/N11/E-E/width96",
+  "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+  "region": "plains",
+  "required_family": "block128-underledge-brake-return",
+  "objective": {
+    "recipe": "block128-underledge-brake-return",
+    "interface": 1,
+    "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+    "sameface_offset_demand": true,
+    "independent_new_family_claim": false,
+    "mirror_requires_freshphysics": true
+  },
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": []
+  },
+  "ports": {
+    "count": 2,
+    "required_normals": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "relations": [
+    {
+      "from_port": "A",
+      "to_port": "B",
+      "role": "main",
+      "route_id": "A-to-B"
+    }
+  ],
+  "space": {
+    "block_size": 128,
+    "max_width": 1408,
+    "max_height": 768,
+    "max_port_span_x": 256,
+    "port_profiles": [
+      "ground64/v1"
+    ]
+  },
+  "boundary_policy": "open",
+  "enclosing_walls": false,
+  "rewards": [
+    {
+      "kind": "major_item",
+      "id": "new_traversal_ability",
+      "amount": 1
+    }
+  ],
+  "difficulty": {
+    "intent": "regular",
+    "human_score": null
+  },
+  "risk_reward": {
+    "mandatory_damage": false,
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          -35,
+          462
+        ],
+        "region": [
+          -65,
+          457,
+          60,
+          10
+        ],
+        "amount": 10
+      }
+    ]
+  },
+  "resource_state": {
+    "reset_between_components": false,
+    "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+    "exit": "Observedstablebagdock/reward/originalrenewal"
+  },
+  "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+  "budget": {
+    "generator_candidates": 4,
+    "director_revisions": 0
+  }
+}

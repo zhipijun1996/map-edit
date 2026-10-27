@@ -8,6 +8,7 @@ from . import publish_v3 as base
 def main():
     p=argparse.ArgumentParser();p.add_argument('--runs',nargs='+',required=True)
     p.add_argument('--manifest',type=Path,default=base.REPO/'generation/workshop/plains30-block-v1/manifest.json')
+    p.add_argument('--compatibility',type=Path,default=base.REPO/'pcg/creative-production/batch30/latest-map-compatibility-v4.json')
     args=p.parse_args();target=args.manifest.resolve()
     if target.exists():raise ValueError('immutable Block delivery exists')
     base.OUT=target.parent
@@ -23,7 +24,7 @@ def main():
     value=json.loads(temporary.read_text())
     value.update(schema='pcg/block-module-delivery/v1',id='plains30-block-v1',
                  block_contract_upstream='862b736c491502ae9934265bc7415805b4c122b9',
-                 upstream_static_compatibility=base.binding(base.REPO/'pcg/creative-production/batch30/latest-map-compatibility-v4.json'),
+                 upstream_static_compatibility=base.binding(args.compatibility.resolve()),
                  original_physics_evidence_not_relabelled=True,
                  block_policy=base.binding(base.REPO/'pcg/map_directed/block_grid/plains-policy.json'),
                  publisher_adapters=[base.binding(Path(__file__))],

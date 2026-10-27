@@ -1,0 +1,87 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "id": "B31-N08/reward-return-interface0",
+  "source_type": "explicit_derived_reward_return_demand_notrewardfreeMap",
+  "region": "plains",
+  "required_family": "folded-reward-upper-out-lower-back",
+  "objective": {
+    "recipe": "folded-reward-upper-out-lower-back",
+    "roles": [
+      "reward",
+      "return"
+    ],
+    "physical_layout_sha256": "75db39168ab146c6a9780044f6ed04f89c9c950af0e164c93b67e68b0f5c20a1",
+    "new_gameplay_family": false,
+    "core": "Upperbridge andoneactual16coinclaim outbound, sameworldlowerbridgeactualsupportreturn; alternateupperreturncostmeasurednotforbidden"
+  },
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": []
+  },
+  "ports": {
+    "count": 2,
+    "required_normals": [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "relations": [
+    {
+      "from_port": "A",
+      "to_port": "B",
+      "role": "reward"
+    },
+    {
+      "from_port": "B",
+      "to_port": "A",
+      "role": "return"
+    }
+  ],
+  "space": {
+    "block_size": 256,
+    "max_width": 1536,
+    "max_height": 1408,
+    "max_port_span_x": 1536,
+    "port_profiles": [
+      "ground64/v1"
+    ]
+  },
+  "boundary_policy": "open",
+  "enclosing_walls": false,
+  "rewards": [
+    {
+      "id": "upper-cache",
+      "amount": 16
+    }
+  ],
+  "risk_reward": {
+    "amount": 16,
+    "mandatory_damage": false
+  },
+  "difficulty": {
+    "intent": "regular",
+    "human_score": null
+  },
+  "resource_state": {
+    "reset_between_components": false,
+    "entry": "OriginalsupportedAorBinternaldock; originalpairupperclosed/loweropen. FreshBhas0coins/unclaimedbox anddoesnotclaimearnedrewardstate.",
+    "exit": "Observedstableactualdock. SameworldA->reward->B->Arequiresseparatelyboundloopfixture."
+  },
+  "return_conditions": "A->B/freshB->A onlystandarddirections. Continuousrewardloop separatelyverified; otherstate/recovery/boundary/MapUNKNOWN",
+  "budget": {
+    "generator_candidates": 4,
+    "director_revisions": 0
+  }
+}

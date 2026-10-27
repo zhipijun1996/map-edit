@@ -1,6 +1,6 @@
 # 平原 Module：Block128 生产批次
 
-当前[18份标准候选](manifest-progress-18-v1.json)，原库126版、平原优选108版；不是30份Block完成，也不是18种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@862b736`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
+当前[21份标准候选](manifest-progress-21-v1.json)，原库129版、平原优选111版；不是30份Block完成，也不是21种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@862b736`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
 
 | 内容 | 包围尺寸/拥有格 | 实际玩法与影片 |
 | --- | --- | --- |
@@ -24,7 +24,7 @@ C05是真正去向选择，不是额外安全口。A是低处西口，B是上方
 
 十三组成功生产运行共2797次真实Godot案例，含全部失败与精确反例。C02、C01、D05各两份及C05/C10的两条路线、C07一路均过原regular校准和独立留出。C05的动态世界clean/mild/moderate各12次，留出两路线各36/36；D05两接口留出各clean12/12、mild12/12、moderate11/12；C01/C02静态世界clean各1次，mild/moderate各12次。它们仅为有限程序策略资格，不是人工成功率。
 
-C01/C02两个review-only影片各有3帧`support_id`接触体顺序差异，完整差异见其`review-only-manifest.json`和`strict-failure-audit-v1.json`；位置、输入、资源、机关、奖励字段一致。原严格比较仍失败，没有放宽。C05两片、D05、C07、C10主路共加上A1双向270帧，加上A3两片314帧、A2两片2000帧，共4036帧是严格比较通过的正常60fps原生连续输入回放，末尾约1秒冻结结果画面。
+C01/C02两个review-only影片各有3帧`support_id`接触体顺序差异，完整差异见其`review-only-manifest.json`和`strict-failure-audit-v1.json`；位置、输入、资源、机关、奖励字段一致。原严格比较仍失败，没有放宽。C05两片、D05、C07、C10主路共加上A1双向270帧，加上A3两片314帧、A2两片2000帧，再加N11两片318帧，共4354帧是严格比较通过的正常60fps原生连续输入回放，末尾约1秒冻结结果画面。
 
 ## 运行与检索
 
@@ -33,13 +33,13 @@ python3 pcg/tools/restore_archive.py godot-runtime-v1 --extract
 python3 pcg/tools/restore_archive.py content-workshop-plains30-block-v1 --extract \
   --prefix results/workshop-batch30-blockc05-full-v1/
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-18-v1.json --list
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-21-v1.json --list
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-18-v1.json \
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-21-v1.json \
   --play C05-1 --route far
 ```
 
-默认进入手动试玩；加`--replay`为程序见证。复现生产使用`batch30_runtime.produce_v3`和新run名；固定协议在`pcg/creative-production/batch30/protocol-map-block-v4.json`。原CandidateLibrary持久化检索见[前13份跨进程复用](retrieval-v3/receipt.json)及[新增4份](retrieval-v4/receipt.json)、[第18份](retrieval-v5/receipt.json)，生成与物理调用均0；C05新增记录同样来自原磁盘库。
+默认进入手动试玩；加`--replay`为程序见证。复现生产使用`batch30_runtime.produce_v3`和新run名；固定协议在`pcg/creative-production/batch30/protocol-map-block-v4.json`。原CandidateLibrary持久化检索见[前13份跨进程复用](retrieval-v3/receipt.json)及[新增4份](retrieval-v4/receipt.json)、[第18份](retrieval-v5/receipt.json)及[新增3份](retrieval-v6/receipt.json)，生成与物理调用均0；C05新增记录同样来自原磁盘库。
 
 ## 请求、失败与待做
 
@@ -82,3 +82,14 @@ A3地面预开+空中反冲是合法多一枪替代，可能比名义更快；�
 最新Map源码862b的24文件、Git blob/字节SHA已核。Block128/JS/锚点公式未变，新增Module自有条件/单向边界门覆盖和同Module同高原支撑并集。改后新版本须真实Map验收，不自动给现有候选单向/整图资格；512高边界门也可能割到同面另一口。18版本33方向已用新原validator静态核对，0新物理、旧证据原身份保留。
 
 原件新增`content-workshop-plains30-block-v6`（A2/A3含398元数据失败）、`v7`（N03与N06原失败/修订）、`v8`（独立四口）。独立AI[27技术记录增补](../../../pcg/creative-production/batch30/curation-block27-v1.md)覆盖截至Block17的25活跃版，11审阅组/14适配；四口为后续适配，不能借此增加新家族计数。所有新候选人工观感/试玩/生产均UNKNOWN。
+
+
+## 新增三份：回廊与下落刹车
+
+N08上行取16币、下行换桥返回：双向Module157完整案例通过；另同一人物/宝箱/世界A→B→A连续50案例通过，两者证据不互换。[完整连续片](videos/BN08-continuous-loop-v1/folded-reward-upper-out-lower-back-review-only.mp4)799帧有4处support_id差异，仅供观感；两段Module片408/393帧分别2/4处同类差异。旧高路返回仍是合法解，同任务配对对照下路约0.3秒更慢，不称捷径。它是连续取奖/回程技术样品，是否有趣待人工评审。
+
+N11岩唇下刹回宝袋：[W/W 3.7秒](videos/BN11-WW-v1/block128-underledge-brake-return.mp4)、[E/E 3.77秒](videos/BN11-EE-v1/block128-underledge-brake-return.mp4)，157/161物理帧逐字段严格一致。两接口154完整案例通过原regular，E/E中等扰动11/12，其余全过；落底原岸保留，付费重试小样本不能替代通用恢复/返回。两种接口仍是一种旧A4动作关系的适配。
+
+N10双铃遮挡恢复路线mod5/12未通过，0候选、留出未运行；80probe含3零帧拒绝及107full均保留。新闭合原件[归档v9](../../../pcg/archives/content-workshop-plains30-block-v9/manifest.json)含N08/N10/N11失败、冻结源与全部真实实验；26205工件逐SHA恢复检查通过。最新Map静态兼容为[21版本37策略/36有序对](../../../pcg/creative-production/batch30/latest-map-compatibility-v5.json)，静态检查不冒充新物理或整图证据。
+
+独立AI[三版增补审查](../../../pcg/creative-production/batch30/curation-block30-addendum-v1.md)把N08后移创意展示队列、N11归旧A4代表/适配，没有撤回技术资格；逐raw纠正低回稳定帧778/旧高760、相差18帧，早期摘要779/391保留为未与raw一致的原声明，不混作另一套实验。
