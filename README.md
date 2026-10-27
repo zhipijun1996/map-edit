@@ -13,6 +13,8 @@
 
 本地运行 `npm run serve`，打开 `http://localhost:8080/`。点“新版 Module 库”选择模块，点“更新新版 Module”可从已推送的工坊分支读取并校验新目录。静态构建执行 `python3 tools/build_editor_site.py --out dist`；GitHub Pages 的手动工作流支持选择 branch/ref。当前网站的部署环境仅允许 `main`，工作分支中的新版编辑器需合并后才能更新现有线上网址。下面保留历史研究入口与原复现说明，不授予旧模块新地基资格，也不恢复新内容生产。
 
+新版编辑器与模块结构由 `editor.yml` 持续检查；退役的 L4 研究流水线只保留手动历史审计，不再被新模块 PR 或分支推送自动触发。
+
 ## 历史研究入口
 
 - [最新三端口Module短视频 T](https://zhipijun1996.github.io/map-edit/generation/videos/plains-three-port-v1/all-samples.mp4)（约16.7秒） · [实验报告](pcg/PLAINS-THREE-PORT-REPORT.md)
