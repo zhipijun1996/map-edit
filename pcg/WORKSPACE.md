@@ -1,3 +1,15 @@
+# 当前工作区：既有 Module 迁移
+
+先读根 [MAP_FOUNDATION.md](../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../MAP_GENERATION_GUIDE.md)（推荐）及 [迁移skill](../.agents/skills/pcg-module-migration/SKILL.md)。当前已授权执行：**先本仓库既有内容，再主游戏已有内容**，以最小必要修改迁移；新增Module暂停、旧Map生成器退役，本轮不实现新Map、不commit、不发布。
+
+正式技术内容目录为根 `modules/`，回收为 `modules-recycle/`，失败/近似重复待审/证据缺口保留原处。完全重复须确定性等价和alias引用后归并；技术认证不等于人工趣味/试玩/生产批准。目标验证、回读、引用与可恢复归档检查完成后才归档原件。
+
+复用原Godot Harness/资源/质量门槛；转换、metadata pass和旧录像不自动取得新认证。新CLI预期 `python3 -m pcg.migration` 的 audit/inspect/validate/promote/archive/build，先核实际已实现子命令、参数和覆盖，不按本文假定已可用。迁移状态若仍有旧顺序/旧计数，报告待同步，以实际证据为准。
+
+## 以下为历史正文（完整保留，非当前执行指令）
+
+以下“当前/最新”、旧入口、批次产量与Block不规则拥有格等描述均属历史上下文；不据此恢复生产或覆盖新地基。
+
 **R2真实整图里程碑**：见 [woven-region-v1](../docs/l4-mapgen/woven-region-v1.md)。固定Seed由既有R2驱动19个不同尺寸Macro、27直接接缝；25条冻结整图策略（12独立输入扰动）及全部50声明方向通过。19版本入隔离候选库，热库全复用后13条整图复验通过；配对实测两条回程节省4.90/11.35秒。四段正常速度原生录像13,822帧精确一致。仍只有一张物理拓扑，内容与空间语法有限，非最终区域规模/人类趣味/生产准入；正式游戏未改。原件与失败见 woven-region-v1 归档。
 
 # 关卡生成工作区

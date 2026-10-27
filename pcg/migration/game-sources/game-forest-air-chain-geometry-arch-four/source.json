@@ -1,0 +1,218 @@
+{
+  "id": "forest_air_chain_geometry__arch_four",
+  "kind": "forest",
+  "title": "拱根四动作",
+  "sourcePath": "scripts/generation/forest_air_chain_geometry.gd",
+  "sourceDocument": "library/modules/forest_air_chain_geometry__arch_four.json",
+  "sourceDocumentSha256": "dab3dd8ed0c23e8e60584f88883ebf0cfe562a4a8e8d4f84b7d4458c39995241",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "sourceArtifact": {
+    "kind": "generation",
+    "originalPath": "scripts/generation/forest_air_chain_geometry.gd",
+    "path": "library/source/scripts/generation/forest_air_chain_geometry.gd",
+    "sha256": "4d900bcbf8303a43ac73e9a75ac1d58a1dbde6e7616f83ace48e73f252a4543a",
+    "gitBlobSha": "bde32566b61e96561b759ba4f14a06874df20f55",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "action": "reused_exact_existing_copy"
+  },
+  "method": "build",
+  "arguments": [
+    "arch_four"
+  ],
+  "data": {
+    "action_program": [
+      {
+        "action": "H",
+        "anchor": "side_ring"
+      },
+      {
+        "action": "R",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "action": "H",
+        "anchor": "arch_exit_ring"
+      },
+      {
+        "action": "H",
+        "anchor": "crown_ring"
+      }
+    ],
+    "chain_contract": {
+      "continuous_airborne": true,
+      "fixed_anchor_does_not_refill_shots": true,
+      "hook_restoration": "actual_contact_kick_completion",
+      "midair_floor_allowed": false,
+      "native_verified": false,
+      "production_pool": false
+    },
+    "dangers": [
+      [
+        82.0,
+        100.0,
+        790.0,
+        18.0
+      ]
+    ],
+    "goal": [
+      550.0,
+      -240.0
+    ],
+    "hook_anchors": [
+      {
+        "id": "side_ring",
+        "position": [
+          200.0,
+          -40.0
+        ]
+      },
+      {
+        "id": "arch_exit_ring",
+        "position": [
+          470.0,
+          -130.0
+        ]
+      },
+      {
+        "id": "crown_ring",
+        "position": [
+          500.0,
+          -320.0
+        ]
+      },
+      {
+        "id": "return_catch_ring",
+        "position": [
+          415.0,
+          -40.0
+        ]
+      }
+    ],
+    "id": "arch_four",
+    "observations": [
+      {
+        "platform_id": "entry",
+        "see": [
+          "side_ring",
+          "root_arch"
+        ]
+      },
+      {
+        "platform_id": "crown",
+        "see": [
+          "return_catch_ring",
+          "side_ring",
+          "return_drop"
+        ]
+      }
+    ],
+    "platforms": [
+      {
+        "id": "entry",
+        "one_way": false,
+        "rect": [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ]
+      },
+      {
+        "id": "root_arch",
+        "one_way": false,
+        "rect": [
+          -220.0,
+          -520.0,
+          570.0,
+          410.0
+        ]
+      },
+      {
+        "id": "crown",
+        "one_way": false,
+        "rect": [
+          500.0,
+          -222.0,
+          260.0,
+          24.0
+        ]
+      },
+      {
+        "id": "recovery",
+        "one_way": false,
+        "rect": [
+          -310.0,
+          220.0,
+          1190.0,
+          40.0
+        ]
+      },
+      {
+        "id": "recovery_step",
+        "one_way": true,
+        "rect": [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ]
+      }
+    ],
+    "recovery": {
+      "exit": "entry",
+      "support": "recovery",
+      "via": "recovery_step",
+      "walk_x": -275.0
+    },
+    "return": {
+      "anchor_id": "side_ring",
+      "cast_below_y": -70.0,
+      "catch_anchor_id": "return_catch_ring",
+      "drop_outside_x": 390.0,
+      "goal_support": "entry",
+      "shoot_direction": [
+        1.0,
+        0.0
+      ]
+    },
+    "scene_language": {
+      "crown": "living_bough",
+      "entry": "root_ground",
+      "recovery": "root_catch",
+      "recovery_step": "root_step",
+      "root_arch": "hollow_trunk"
+    },
+    "spawn": [
+      0.0,
+      0.0
+    ],
+    "steps": [
+      {
+        "anchor_id": "side_ring",
+        "direction": "horizontal",
+        "id": "side_catch",
+        "then": "away_kick"
+      },
+      {
+        "action": "shoot_left_recoil_right",
+        "id": "root_exit",
+        "then": "arch_exit_ring"
+      },
+      {
+        "anchor_id": "crown_ring",
+        "id": "crown_rise",
+        "then": "stable_crown"
+      }
+    ],
+    "version": "forest-air-chain-golden-v1",
+    "world_bounds": [
+      -320.0,
+      -550.0,
+      1220.0,
+      850.0
+    ]
+  }
+}

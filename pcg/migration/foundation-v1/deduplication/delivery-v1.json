@@ -1,0 +1,72 @@
+{
+  "schema": "pcg/exact-current-deduplication-delivery/v1",
+  "proof": {
+    "path": "pcg/migration/foundation-v1/deduplication/micro-board-door-landing-proof-v1.json",
+    "sha256": "65b889808eeb4d84c8f2ba43eec4ae6402d228c674c20a60a795cf219915b4cf"
+  },
+  "exact": true,
+  "primaryId": "game-micro-board",
+  "removedCurrentId": "game-plains-door-landing",
+  "portMapping": {
+    "entry": "entry",
+    "door": "exit"
+  },
+  "resolved": {
+    "requestedId": "game-plains-door-landing",
+    "primaryId": "game-micro-board",
+    "contentVersion": "sha256:f815a168170c2857b6e9ef92e14335ef0d9d6b263a83749588ad02bd32acd55a",
+    "mappedPorts": [
+      "entry",
+      "exit"
+    ],
+    "file": "modules/game-micro-board/module.mapnote.json",
+    "scene": "modules/game-micro-board/module.tscn",
+    "aliasChain": [
+      {
+        "id": "game-plains-door-landing",
+        "primaryId": "game-micro-board",
+        "portMapping": {
+          "entry": "entry",
+          "door": "exit"
+        },
+        "proof": {
+          "path": "pcg/migration/foundation-v1/deduplication/micro-board-door-landing-proof-v1.json",
+          "sha256": "65b889808eeb4d84c8f2ba43eec4ae6402d228c674c20a60a795cf219915b4cf"
+        }
+      }
+    ],
+    "reloadedFrom": "persistent modules/aliases.json and actual current certified package",
+    "mapReady": false
+  },
+  "transaction": {
+    "path": "pcg/migration/foundation-v1/transactions/deduplicate-game-plains-door-landing.json",
+    "sha256": "72d6ba1d8b2b512b8646d1822023127b17bc2d9a08612c62a9a1f77a51da496c",
+    "status": "complete"
+  },
+  "aliasRegistry": {
+    "path": "modules/aliases.json",
+    "sha256": "27c4c3efdb0e33552f58e9a52b2a9bb50f99fa719ee288c7af651d3147ae4489"
+  },
+  "originalSourceRelocationPreserved": true,
+  "strictPhysics": {
+    "identicalRuntimeDependencies": 884,
+    "identicalPhysicsAndCausalFiles": 769,
+    "sourceFiles": 770,
+    "nonPhysicsException": [
+      {
+        "path": "migration/core.py",
+        "primarySha256": "a130c66d85ec1e6484f3106ce20352114af0b9e2507c0a36f7a9a30c5aed2f56",
+        "duplicateSha256": "55de2fccae9673a23b07322a95800173d14bc666a74064a45052e70c72380ada",
+        "unchangedRemainingAstSha256": "10cbbd04fedfd3893b5aa438ce37ab42d876c077eca0e9b745cd31979e7dbf3c",
+        "changedFunctions": [
+          "package",
+          "prepare"
+        ],
+        "reason": "Only offline prepare/package implementations differ. Both compiled payloads and every actual physics/causal source are separately identical; these functions do not execute inside the frozen Godot experiment."
+      }
+    ]
+  },
+  "transactionTests": 10,
+  "sourceCurrentFilesChangedExceptArchivedDuplicate": false,
+  "newPhysicsCases": 0
+}

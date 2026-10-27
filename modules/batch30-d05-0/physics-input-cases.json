@@ -1,0 +1,849 @@
+{
+  "cases": [
+    {
+      "id": "b30-d05-api2-i0-c1",
+      "family": "bell-carrier-catch",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          1220,
+          330,
+          300,
+          120
+        ],
+        [
+          700,
+          370,
+          35,
+          50
+        ],
+        [
+          -600,
+          760,
+          2300,
+          60
+        ],
+        [
+          -560,
+          680,
+          120,
+          30
+        ],
+        [
+          -420,
+          600,
+          120,
+          30
+        ],
+        [
+          -280,
+          520,
+          120,
+          30
+        ],
+        [
+          -640,
+          438,
+          64,
+          24
+        ],
+        [
+          -576,
+          438,
+          440,
+          24
+        ],
+        [
+          1728,
+          310,
+          64,
+          24
+        ],
+        [
+          1496,
+          330,
+          232,
+          24
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        1320,
+        312
+      ],
+      "goal": [
+        1295,
+        308,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "catch-deck",
+          "start": [
+            360,
+            450
+          ],
+          "finish": [
+            950,
+            450
+          ],
+          "size": [
+            240,
+            22
+          ],
+          "travel_duration": 0.7866666666666666,
+          "dwell_duration": 0.2,
+          "initial_phase": 0
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "catch-bell",
+          "bell": [
+            440,
+            330
+          ],
+          "gate": [
+            -400,
+            -500,
+            10,
+            10
+          ],
+          "open_seconds": 0,
+          "ferry_id": "catch-deck",
+          "carrier_mount": "catch-deck"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            1320,
+            312
+          ],
+          "region": [
+            1290,
+            307,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 1500,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 355
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 0,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 425
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "catch-bell"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 6,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 905
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 16
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.8,
+            0.6
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1320,
+          "deadband": 4
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "bell-carrier-catch",
+      "expected_reward": 12,
+      "rule_parameters": {
+        "interface": 0,
+        "control": 1,
+        "speed": 750,
+        "first_shot_tick": 20,
+        "carrier_mount": "catch-deck",
+        "first_departure_x": 425,
+        "second_departure_x": 905,
+        "roof": [
+          700,
+          370,
+          35,
+          50
+        ],
+        "purpose": "same air shot starts moving support and creates interception landing, then actual grounded resource renewal supports second jump"
+      },
+      "generation_rule": {
+        "id": "human-d05/bell-carrier-catch",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/batch30_d05/api_v2.py",
+        "parameters": {
+          "interface": 0,
+          "control": 1,
+          "speed": 750,
+          "first_shot_tick": 20,
+          "carrier_mount": "catch-deck",
+          "first_departure_x": 425,
+          "second_departure_x": 905,
+          "roof": [
+            700,
+            370,
+            35,
+            50
+          ],
+          "purpose": "same air shot starts moving support and creates interception landing, then actual grounded resource renewal supports second jump"
+        },
+        "registration_source": "pcg/migration/boundary_runners/runner_2cd30e6f24263319.py"
+      },
+      "idea_ids": [
+        "human-d05-bell-carrier-catch"
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -616,
+            420
+          ],
+          "support_index": 7,
+          "normal": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "B",
+          "position": [
+            1768,
+            292
+          ],
+          "support_index": 9,
+          "normal": [
+            1,
+            0
+          ]
+        }
+      ],
+      "route_spec": {
+        "id": "air-start-interception",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "layout_uid": "3d4ac6147daa95dbc7d582339873c68f57ce5fb2de2e0d7140940f9953d03dee",
+      "layout_title": "风铃台追接 / 远岸",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/D05/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "bell-carrier-catch",
+        "objective": {
+          "recipe": "bell-carrier-catch",
+          "interface": 0,
+          "physical_layout_sha256": "3d4ac6147daa95dbc7d582339873c68f57ce5fb2de2e0d7140940f9953d03dee",
+          "core": "same air shot recoils actor and starts its mounted-bell carrier; carrier intercepts actor before grounded renewal and second bank jump"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "air-start-interception"
+          }
+        ],
+        "space": {
+          "max_width": 2400,
+          "max_height": 1600,
+          "max_port_span_x": 1400
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                1320,
+                312
+              ],
+              "region": [
+                1290,
+                307,
+                60,
+                10
+              ],
+              "amount": 12
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported actor and initially parked carrier",
+          "exit": "observed stable B only; arbitrary carrier phase UNKNOWN"
+        },
+        "return_conditions": "Missed catch has lower recovery terrain; exact retry fixtures separate. Reverse B to A UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "factory_id": "d44f5a26e11b4a3644e321a470335e69780ac0f0fea3748a14b3b6ff761eb8de",
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b30-d05-api2-i0-c1",
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -640,
+            406
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -616,
+            420
+          ],
+          "aperture": [
+            -672,
+            374,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1792,
+            278
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1768,
+            292
+          ],
+          "aperture": [
+            1760,
+            246,
+            64,
+            64
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "schema": "pcg/original-core-preserving/v1",
+        "originalCoreRectanglesExact": true,
+        "originalProgramExact": true,
+        "portAdaptations": []
+      },
+      "migration_boundary_plans": {
+        "A": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -616,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -621,
+                  415,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 80,
+              "deadband": 2
+            }
+          ]
+        },
+        "B": {
+          "egress": [
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 355
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "on_platform",
+                  "id": "catch-deck"
+                },
+                "min_after": 0,
+                "timeout": 180
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 0
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 8
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 425
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 20
+              }
+            },
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 0
+              },
+              "aim_cell": {
+                "kind": "bell",
+                "id": "catch-bell"
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "on_platform",
+                  "id": "catch-deck"
+                },
+                "min_after": 6,
+                "timeout": 180
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 0
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 6
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 905
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 16
+              }
+            },
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 6
+              },
+              "direction": [
+                -0.8,
+                0.6
+              ]
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1320,
+              "deadband": 4
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1295,
+                  308,
+                  50,
+                  8
+                ],
+                "timeout": 1500
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1692,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1688,
+                  307,
+                  8,
+                  10
+                ],
+                "timeout": 360
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1768,
+              "deadband": 2
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 1
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 16
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1763,
+                  287,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1840,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "migration_boundary_control_binding": {
+        "caseId": "b30-d05-api2-i0-c1",
+        "schema": "pcg/boundary-controller-binding/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_d05/api_v2.py",
+        "originalRunner": "pcg/prototype/creative_batches/batch30_d05/runner_v1.gd",
+        "runnerSource": "pcg/migration/boundary_runners/runner_2cd30e6f24263319.gd",
+        "wrapperSource": "pcg/migration/boundary_runners/runner_2cd30e6f24263319.py",
+        "fullPlansSha256": "82825fa905f88f78e9614ad68e6db059c7012f3705a8b9a9cea348e7e63cc725",
+        "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
+      }
+    }
+  ]
+}

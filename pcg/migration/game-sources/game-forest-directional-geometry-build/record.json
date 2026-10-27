@@ -1,0 +1,193 @@
+{
+  "schema": "pcg/original-game-source-package/v1",
+  "sourceType": "original_game",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "contentVersion": "sha256:93c7595f10cceb1fae005538f7f8f03428713815fea5d78f23ca1443963b7e96",
+  "document_sha256": "106215219feaf14de0514bcad53149c2d17eca31a6ac63df84b4a84e7577528c",
+  "cases_sha256": "dca0eba97c4e8945edff5cded4e7343f1c0b4dd5e405dcc2f5d95cfd4d45198c",
+  "technical_status": "source_import_unverified",
+  "evidence": [],
+  "specification": {
+    "id": "game-forest-directional-geometry-build"
+  },
+  "originalSource": {
+    "id": "forest_directional_geometry__build",
+    "kind": "forest",
+    "title": "拱根钩索反冲",
+    "sourcePath": "scripts/generation/forest_directional_geometry.gd",
+    "sourceDocument": "library/modules/forest_directional_geometry__build.json",
+    "sourceDocumentSha256": "76d8052373cdbe6d08106006b4568a95715fb24e8c8afbb96ce83006116c4b21",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "sourceArtifact": {
+      "kind": "generation",
+      "originalPath": "scripts/generation/forest_directional_geometry.gd",
+      "path": "library/source/scripts/generation/forest_directional_geometry.gd",
+      "sha256": "ea44b33daa27cfc8c46eba54648cf99cc7f4b7fa6391e57caa6ce48b15407bd7",
+      "gitBlobSha": "61164e6a7d8fe6a7d9774d071c55ac52d6cb1036",
+      "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+      "action": "reused_exact_existing_copy"
+    },
+    "method": "build",
+    "arguments": [],
+    "data": {
+      "dangers": [
+        [
+          82.0,
+          100.0,
+          790.0,
+          18.0
+        ]
+      ],
+      "goal": [
+        550.0,
+        -240.0
+      ],
+      "hook_anchors": [
+        {
+          "id": "side_ring",
+          "position": [
+            200.0,
+            -40.0
+          ]
+        },
+        {
+          "id": "arch_exit_ring",
+          "position": [
+            470.0,
+            -130.0
+          ]
+        },
+        {
+          "id": "crown_ring",
+          "position": [
+            500.0,
+            -320.0
+          ]
+        },
+        {
+          "id": "return_catch_ring",
+          "position": [
+            415.0,
+            -40.0
+          ]
+        }
+      ],
+      "id": "root_arch_hook_recoil",
+      "observations": [
+        {
+          "platform_id": "entry",
+          "see": [
+            "side_ring",
+            "root_arch"
+          ]
+        },
+        {
+          "platform_id": "crown",
+          "see": [
+            "return_catch_ring",
+            "side_ring",
+            "return_drop"
+          ]
+        }
+      ],
+      "platforms": [
+        {
+          "id": "entry",
+          "one_way": false,
+          "rect": [
+            -220.0,
+            18.0,
+            300.0,
+            60.0
+          ]
+        },
+        {
+          "id": "root_arch",
+          "one_way": false,
+          "rect": [
+            -220.0,
+            -520.0,
+            570.0,
+            410.0
+          ]
+        },
+        {
+          "id": "crown",
+          "one_way": false,
+          "rect": [
+            500.0,
+            -222.0,
+            260.0,
+            24.0
+          ]
+        },
+        {
+          "id": "recovery",
+          "one_way": false,
+          "rect": [
+            -310.0,
+            220.0,
+            1190.0,
+            40.0
+          ]
+        },
+        {
+          "id": "recovery_step",
+          "one_way": true,
+          "rect": [
+            -305.0,
+            118.0,
+            65.0,
+            20.0
+          ]
+        }
+      ],
+      "recovery": {
+        "exit": "entry",
+        "support": "recovery",
+        "via": "recovery_step",
+        "walk_x": -275.0
+      },
+      "return": {
+        "anchor_id": "side_ring",
+        "cast_below_y": -70.0,
+        "catch_anchor_id": "return_catch_ring",
+        "drop_outside_x": 390.0,
+        "goal_support": "entry",
+        "shoot_direction": [
+          1.0,
+          0.0
+        ]
+      },
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "steps": [
+        {
+          "anchor_id": "side_ring",
+          "direction": "horizontal",
+          "id": "side_catch",
+          "then": "away_kick"
+        },
+        {
+          "action": "shoot_left_recoil_right",
+          "id": "root_exit",
+          "then": "arch_exit_ring"
+        },
+        {
+          "anchor_id": "crown_ring",
+          "id": "crown_rise",
+          "then": "stable_crown"
+        }
+      ],
+      "version": "forest-directional-golden-v1",
+      "world_bounds": [
+        -320.0,
+        -550.0,
+        1220.0,
+        850.0
+      ]
+    }
+  }
+}

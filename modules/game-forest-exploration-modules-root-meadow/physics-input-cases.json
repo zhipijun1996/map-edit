@@ -1,0 +1,671 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_exploration_modules__root_meadow-authored-step-h12-r0-native-pickup--16",
+      "family": "original-game-forest_exploration_modules__root_meadow",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0.0,
+          0.0,
+          240.0,
+          48.0
+        ],
+        [
+          312.0,
+          -32.0,
+          224.0,
+          48.0
+        ],
+        [
+          608.0,
+          0.0,
+          272.0,
+          48.0
+        ],
+        [
+          -160.0,
+          144.0,
+          1040.0,
+          40.0
+        ],
+        [
+          -144.0,
+          96.0,
+          128.0,
+          16.0
+        ],
+        [
+          -128.0,
+          48.0,
+          128.0,
+          16.0
+        ],
+        [
+          -256,
+          0.0,
+          280.0,
+          24
+        ],
+        [
+          856.0,
+          0.0,
+          40.0,
+          24
+        ]
+      ],
+      "spawn": [
+        40.0,
+        -18.0
+      ],
+      "entry_port": [
+        40.0,
+        -18.0
+      ],
+      "exit_port": [
+        840.0,
+        -18.0
+      ],
+      "goal": [
+        828.0,
+        -22.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -384,
+        -288.0,
+        1408,
+        704.0
+      ],
+      "one_way_platform_indices": [
+        4,
+        5
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 200.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 200.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12,
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 416.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "native_pickup_interact",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 496.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 496.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12,
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 832.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 840.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_world_v4.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [],
+        "admission": {
+          "geometry": "candidate",
+          "motor": "unverified",
+          "production_pool": false,
+          "visual": "unverified"
+        },
+        "danger_faces": [],
+        "danger_hosts": [],
+        "danger_surfaces": [],
+        "difficulty": "easy",
+        "entry_support_id": "entry",
+        "exit_support_id": "exit",
+        "goal": [
+          840.0,
+          -18.0
+        ],
+        "height": 460.0,
+        "hook_anchors": [],
+        "id": "root_meadow",
+        "identity": "broad horizontal roots, two short gaps and a low crest",
+        "main_route_kind": "ordinary_sequence",
+        "requires": [
+          "grapple"
+        ],
+        "resource_contract": {
+          "health_override": false,
+          "new_abilities": false,
+          "physics_override": false,
+          "shot_refill_override": false
+        },
+        "reward_position": [
+          432.0,
+          -50.0
+        ],
+        "reward_support_id": "low_crest",
+        "risk_reward": {
+          "coins": 1,
+          "notes": 0,
+          "optional": false,
+          "return_required": true,
+          "tier": "low"
+        },
+        "routes": {
+          "main": [
+            {
+              "kind": "walk",
+              "landing": [
+                208.0,
+                -18.0
+              ],
+              "support_id": "entry"
+            },
+            {
+              "from_support_id": "entry",
+              "kind": "jump_gap",
+              "landing": [
+                344.0,
+                -50.0
+              ],
+              "support_id": "low_crest",
+              "takeoff": [
+                208.0,
+                -18.0
+              ]
+            },
+            {
+              "kind": "walk",
+              "landing": [
+                504.0,
+                -50.0
+              ],
+              "support_id": "low_crest"
+            },
+            {
+              "from_support_id": "low_crest",
+              "kind": "jump_gap",
+              "landing": [
+                640.0,
+                -18.0
+              ],
+              "support_id": "exit",
+              "takeoff": [
+                504.0,
+                -50.0
+              ]
+            },
+            {
+              "kind": "walk",
+              "landing": [
+                840.0,
+                -18.0
+              ],
+              "support_id": "exit"
+            }
+          ],
+          "recovery": [
+            {
+              "kind": "walk",
+              "landing": [
+                -80.0,
+                126.0
+              ],
+              "support_id": "catch"
+            },
+            {
+              "from_support_id": "catch",
+              "kind": "jump_rise",
+              "landing": [
+                -80.0,
+                78.0
+              ],
+              "support_id": "catch_step_low",
+              "takeoff": [
+                -80.0,
+                126.0
+              ]
+            },
+            {
+              "from_support_id": "catch_step_low",
+              "kind": "jump_rise",
+              "landing": [
+                -64.0,
+                30.0
+              ],
+              "support_id": "catch_step_high",
+              "takeoff": [
+                -80.0,
+                78.0
+              ]
+            },
+            {
+              "from_support_id": "catch_step_high",
+              "kind": "jump_rise",
+              "landing": [
+                32.0,
+                -18.0
+              ],
+              "support_id": "entry",
+              "takeoff": [
+                -32.0,
+                30.0
+              ]
+            }
+          ]
+        },
+        "spawn": [
+          40.0,
+          -18.0
+        ],
+        "steps": [
+          {
+            "kind": "walk",
+            "landing": [
+              208.0,
+              -18.0
+            ],
+            "support_id": "entry"
+          },
+          {
+            "from_support_id": "entry",
+            "kind": "jump_gap",
+            "landing": [
+              344.0,
+              -50.0
+            ],
+            "support_id": "low_crest",
+            "takeoff": [
+              208.0,
+              -18.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              504.0,
+              -50.0
+            ],
+            "support_id": "low_crest"
+          },
+          {
+            "from_support_id": "low_crest",
+            "kind": "jump_gap",
+            "landing": [
+              640.0,
+              -18.0
+            ],
+            "support_id": "exit",
+            "takeoff": [
+              504.0,
+              -50.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              840.0,
+              -18.0
+            ],
+            "support_id": "exit"
+          }
+        ],
+        "version": "forest-exploration-modules-v1",
+        "width": 880.0,
+        "world_bounds": [
+          -160.0,
+          -240.0,
+          1040.0,
+          460.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -232,
+            -18.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 6
+        },
+        {
+          "id": "exit",
+          "position": [
+            872,
+            -18.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 7
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_exploration_modules.gd",
+          "path": "library/source/scripts/generation/forest_exploration_modules.gd",
+          "sha256": "951123639e721c5f5f422b9c3b1c06bbcd04d9fcb46b4dc82e39cecefc372641",
+          "gitBlobSha": "bde620e0a7d5e8a3a09fdb63e7bc828d300bb367",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "5e31ff22885ddf8497a8a37bdc7b627fdaaec14a23e32a6af0852b71bd651670",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -256,
+            -32.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            -18.0
+          ],
+          "aperture": [
+            -288,
+            -64.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14.0
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            896,
+            -32.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            872,
+            -18.0
+          ],
+          "aperture": [
+            864,
+            -64.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14.0
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": -96.0,
+          "w": 1152,
+          "h": 384
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                40,
+                -18
+              ],
+              "stagingPosition": [
+                40,
+                -18
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                -32.0
+              ],
+              "stagingPosition": [
+                -232,
+                -18.0
+              ],
+              "supportIndex": 6,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                840,
+                -18
+              ],
+              "stagingPosition": [
+                840,
+                -18
+              ]
+            },
+            "after": {
+              "position": [
+                896,
+                -32.0
+              ],
+              "stagingPosition": [
+                872,
+                -18.0
+              ],
+              "supportIndex": 7,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          2
+        ],
+        "validation": "UNKNOWN"
+      },
+      "source_action_program": [],
+      "original_pickups": [
+        {
+          "id": "root_coin",
+          "kind": "coin",
+          "amount": 1,
+          "position": [
+            432.0,
+            -50.0
+          ]
+        }
+      ],
+      "required_original_pickups": [
+        "root_coin"
+      ],
+      "module_sha256": "6d8cce3a3d5b29dfb61564596f59455d56fca519ad95ec8e58b827e91ffa5af2"
+    }
+  ]
+}

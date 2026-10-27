@@ -1,0 +1,291 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-plains-fork-rest",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-plains-fork-rest",
+  "sourceVersion": "sha256:e20c736d95fb4e38abdf0aa21d3d6fc55d67cee9508de611853865b222a840e3",
+  "sourceFiles": {
+    "cases.json": "8035c8451acf62a1969b50b509d52a1fa74a5aec4f21c3164fc0b98c948ed258",
+    "record.json": "0dc3ba6bd89eb22f88561d0ef40514a7e8af12f7497d4fd59ca80ec9d0f60a6f",
+    "module.mapnote.json": "8409690d20d9d2ef8af2b027f45e0bbc991103af8c8b72433aaab7288b56ce2d",
+    "source.json": "0bd7cfb79c93ebc23ff11d2d90eb64cc39239603668c4ba0be6ef863e0ac1be1"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 120.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 480,
+      "w": 800,
+      "h": 160
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 376.0,
+      "w": 896,
+      "h": 384
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 2,
+        "objectId": "generated-8b842c4f3e317127655bca2c5ce0cfdce269bb726f5bdfad9df54990a530f8b4/platform-2",
+        "before": [
+          500.0,
+          480.0,
+          160.0,
+          24.0
+        ],
+        "after": [
+          500.0,
+          472.0,
+          160.0,
+          32.0
+        ],
+        "topDelta": -8.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "fork_right",
+        "sourcePlatformIndex": 0,
+        "platformIndex": 3,
+        "objectId": "generated-8b842c4f3e317127655bca2c5ce0cfdce269bb726f5bdfad9df54990a530f8b4/migration-shore-fork_right",
+        "rect": [
+          776.0,
+          600.0,
+          120.0,
+          24
+        ],
+        "length": 96.0,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "fork_up",
+        "sourcePlatformIndex": 2,
+        "platformIndex": 4,
+        "objectId": "generated-8b842c4f3e317127655bca2c5ce0cfdce269bb726f5bdfad9df54990a530f8b4/migration-shore-fork_up",
+        "rect": [
+          636.0,
+          472.0,
+          260.0,
+          24
+        ],
+        "length": 236.0,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            582
+          ],
+          "stagingPosition": [
+            20,
+            582
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            568.0
+          ],
+          "stagingPosition": [
+            24,
+            582.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "fork_right",
+        "before": {
+          "position": [
+            780,
+            582
+          ],
+          "stagingPosition": [
+            780,
+            582
+          ]
+        },
+        "after": {
+          "position": [
+            896,
+            568.0
+          ],
+          "stagingPosition": [
+            872,
+            582.0
+          ],
+          "supportIndex": 3,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "fork_up",
+        "before": {
+          "position": [
+            640,
+            462
+          ],
+          "stagingPosition": [
+            640,
+            462
+          ]
+        },
+        "after": {
+          "position": [
+            896,
+            440.0
+          ],
+          "stagingPosition": [
+            872,
+            454.0
+          ],
+          "supportIndex": 4,
+          "surface": "ONE_WAY_PLATFORM"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "sideDockRepair": {
+      "schema": "pcg/local-solid-side-dock-repair/v1",
+      "internalGeometryChanged": true,
+      "rows": [
+        {
+          "portId": "fork_up",
+          "previousSurface": "ONE_WAY_PLATFORM",
+          "surface": "ROCK",
+          "previousSupport": {
+            "objectId": "generated-8b842c4f3e317127655bca2c5ce0cfdce269bb726f5bdfad9df54990a530f8b4/migration-shore-fork_up",
+            "face": "top",
+            "status": "source_derived"
+          },
+          "supportObjectId": "generated-8b842c4f3e317127655bca2c5ce0cfdce269bb726f5bdfad9df54990a530f8b4/solid-side-dock-fork_up",
+          "platformIndex": 5,
+          "rect": [
+            832,
+            472,
+            64,
+            24
+          ],
+          "preservesInteriorOneWayPlatform": true,
+          "reason": "Actual one-way boundary ±2px body penetration failed; new solid dock requires revalidation.",
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "certificateInherited": false
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/migration-physics.json",
+      "sha256": "6e8e9e1373a34d872f52d9848df0133750ace80a57c0f44b06c205091b7a8f78"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/source_binding.json",
+      "sha256": "d6ce3d8b701b0b54f581bfeb3f3719791f259038353f1dc535d8ebde338ce11b"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/batches.json",
+      "sha256": "87bb4ddd67a066ceeb0474f4c735ec030327cca1aa272b47e2a6fe0b998225d1"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/boundary-probes.json",
+      "sha256": "87367011093fee02323ea3c796f09fb048add914139387cdebf611b07f8ce075"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "programSelection": {
+    "path": "pcg/results/foundation-migration-original-policy-discovery-v3/discovery.json",
+    "sha256": "eba9df3e1a752fa436146bd983b22f133885b766aeaa8a9dd84714d7aa6c1b56"
+  },
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/migration-physics.json",
+    "sha256": "6e8e9e1373a34d872f52d9848df0133750ace80a57c0f44b06c205091b7a8f78"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/boundary-probes.json",
+      "sha256": "87367011093fee02323ea3c796f09fb048add914139387cdebf611b07f8ce075"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/game-plains-fork-rest/f371b06c131095d0ff32590df8c4fbdb31a6fe12f9d971f436287e7317ff5f1f.json",
+        "sha256": "86f24f7be5ed63a742dad57f07a3c8a6e6d4e3d7c50d1025d4607070384c3e82"
+      },
+      "previousUnresolved": [
+        "actual routes",
+        "external mechanisms",
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unsearched pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-original-game-plains-fork-rest-solid-dock-quality-v1/migration-physics.json",
+        "sha256": "6e8e9e1373a34d872f52d9848df0133750ace80a57c0f44b06c205091b7a8f78"
+      }
+    }
+  ]
+}

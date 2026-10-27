@@ -1,0 +1,272 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "generated-2f62b2adbfad06e8b42f566e59450e8c20348dc47bc6d02d652366dc969bf411",
+  "sourcePath": "pcg/map_directed/library/candidates/21029b907d05a8cc45163abf0dfc3abe7a5e6d34ce7fa76b7327cfaa77d55001",
+  "sourceVersion": "sha256:21029b907d05a8cc45163abf0dfc3abe7a5e6d34ce7fa76b7327cfaa77d55001",
+  "sourceFiles": {
+    "record.json": "025c7b8909018a53a4fec8784fe1a9c2fadcde1ee8c8640b3f5f962dec698d41",
+    "module.mapnote.json": "e52be867226f615cf209443ecb847bced8f751ee594e7b7189ea917be097b831",
+    "case.json": "f059d1a1b1126ae17050296d86595137cdbac5c92f6c2cf5bc058ba42976afd7"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 116,
+    "beforeBounds": {
+      "x": -240,
+      "y": 143.925231933594,
+      "w": 1240,
+      "h": 596.074768066406
+    },
+    "afterBounds": {
+      "x": -256,
+      "y": 116,
+      "w": 1280,
+      "h": 640
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 0,
+        "objectId": "generated-2f62b2adbfad06e8b42f566e59450e8c20348dc47bc6d02d652366dc969bf411/platform-0",
+        "before": [
+          -160,
+          180,
+          420,
+          100
+        ],
+        "after": [
+          -160,
+          212,
+          420,
+          68
+        ],
+        "topDelta": 32,
+        "leftExtension": 0,
+        "rightExtension": 0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "entry",
+        "sourcePlatformIndex": 0,
+        "platformIndex": 3,
+        "objectId": "generated-2f62b2adbfad06e8b42f566e59450e8c20348dc47bc6d02d652366dc969bf411/migration-shore-entry",
+        "rect": [
+          -256,
+          212,
+          120,
+          24
+        ],
+        "length": 96,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 1,
+        "platformIndex": 4,
+        "objectId": "generated-2f62b2adbfad06e8b42f566e59450e8c20348dc47bc6d02d652366dc969bf411/migration-shore-exit",
+        "rect": [
+          121,
+          468,
+          903,
+          24
+        ],
+        "length": 879,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            180,
+            162
+          ],
+          "stagingPosition": [
+            180,
+            162
+          ]
+        },
+        "after": {
+          "position": [
+            -256,
+            180
+          ],
+          "stagingPosition": [
+            -232,
+            194
+          ],
+          "supportIndex": 3,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            105,
+            450
+          ],
+          "stagingPosition": [
+            105,
+            450
+          ]
+        },
+        "after": {
+          "position": [
+            -256,
+            436
+          ],
+          "stagingPosition": [
+            -232,
+            450
+          ],
+          "supportIndex": 4,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "repairs": [
+      {
+        "schema": "pcg/underledge-port-orientation-repair/v1",
+        "source": ".cache/migration/full-v6/21029b907d05a8cc45163abf0dfc3abe7a5e6d34ce7fa76b7327cfaa77d55001",
+        "reason": "RIGHT connector placed a broad receiving floor under the core fall; a nearer LEFT outlet preserves original recoil-braking purpose.",
+        "originalOutwardDirection": "unverified proposal; no measured permission removed",
+        "portId": "exit",
+        "before": {
+          "position": [
+            1024,
+            436
+          ],
+          "face": "RIGHT",
+          "connector": [
+            121,
+            468,
+            903,
+            24
+          ]
+        },
+        "after": {
+          "position": [
+            -256,
+            436
+          ],
+          "face": "LEFT",
+          "connector": [
+            -256,
+            468,
+            325,
+            24
+          ]
+        },
+        "validation": "UNKNOWN"
+      },
+      {
+        "schema": "pcg/migration-control-revision/v1",
+        "revision": 2,
+        "reason": "Real calibration failures reach the lower pocket too late after a downward aim perturbation. Brake earlier while full body is already below unchanged rock lip; no geometry, power or resource change.",
+        "sourceCalibration": "pcg/results/foundation-migration-brake-left-quality-v1-21029b907d05/calibration-0.json",
+        "sourceCalibrationSha256": "0c29ee8a43db600795b3a462ebb2759119d46fe10933e0242ce2a62368901f95",
+        "parameter": "control_plan[1].trigger.dynamic.value",
+        "before": 365,
+        "after": 345,
+        "holdoutUsedForRevision": false
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/migration-physics.json",
+      "sha256": "94617d630d5969cea1b866c7e1181053dec7e6394a47339e7df1fdfd1d0abbdf"
+    },
+    {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/source_binding.json",
+      "sha256": "f7de4ee0a887238fe4e6b1a8e6d76d80514394d6da985ef240049e5d26c9d8e2"
+    },
+    {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/batches.json",
+      "sha256": "c65b0789a44632e2d0096fad95bd9549948879b92fe00280becae113e5f15025"
+    },
+    {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/boundary-probes.json",
+      "sha256": "bb69d874792a8f4699b40bbc2ee18dbed649066264b0ea0c28510b5feee47347"
+    }
+  ],
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/migration-physics.json",
+    "sha256": "94617d630d5969cea1b866c7e1181053dec7e6394a47339e7df1fdfd1d0abbdf"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/boundary-probes.json",
+      "sha256": "bb69d874792a8f4699b40bbc2ee18dbed649066264b0ea0c28510b5feee47347"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/generated-2f62b2adbfad06e8b42f566e59450e8c20348dc47bc6d02d652366dc969bf411/508fd12f7a2ccf15fd9310f109e3f90fc05100ec985c72bfa8f712d5ba76c93c.json",
+        "sha256": "920a0d10caf97110f36bfd006e233f47ba9a7639601be505bf15af5b5365b63b"
+      },
+      "previousUnresolved": [
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unverified port pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-brake-feedback-quality-v2-21029b907d05/migration-physics.json",
+        "sha256": "94617d630d5969cea1b866c7e1181053dec7e6394a47339e7df1fdfd1d0abbdf"
+      }
+    }
+  ]
+}

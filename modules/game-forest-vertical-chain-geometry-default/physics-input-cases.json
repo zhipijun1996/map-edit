@@ -1,0 +1,836 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_vertical_chain_geometry__default-forest-native-feedback-v7-0",
+      "family": "original-game-forest_vertical_chain_geometry__default",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ],
+        [
+          100.0,
+          -542.0,
+          300.0,
+          24.0
+        ],
+        [
+          -310.0,
+          220.0,
+          1190.0,
+          40.0
+        ],
+        [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ],
+        [
+          -290.0,
+          -760.0,
+          60.0,
+          650.0
+        ],
+        [
+          470.0,
+          -440.0,
+          60.0,
+          330.0
+        ],
+        [
+          -320,
+          18.0,
+          100.0,
+          24
+        ],
+        [
+          -384,
+          -30,
+          64,
+          24
+        ],
+        [
+          400.0,
+          -542.0,
+          432.0,
+          24
+        ],
+        [
+          832,
+          -542,
+          64,
+          24
+        ]
+      ],
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "entry_port": [
+        0.0,
+        0.0
+      ],
+      "exit_port": [
+        872,
+        -560
+      ],
+      "goal": [
+        864,
+        -565,
+        16,
+        10
+      ],
+      "world_bounds": [
+        -512,
+        -1016.0,
+        1536,
+        1530.0
+      ],
+      "one_way_platform_indices": [
+        1,
+        3
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 110.0,
+          "y": -170.0,
+          "kind": "bounce",
+          "source_id": "spiral_lower"
+        },
+        {
+          "x": -30.0,
+          "y": -340.0,
+          "kind": "bounce",
+          "source_id": "spiral_middle"
+        },
+        {
+          "x": 90.0,
+          "y": -670.0,
+          "kind": "bounce",
+          "source_id": "spiral_crown"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 0.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              -5.0,
+              -4.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 1
+          },
+          "aim_target": [
+            110.0,
+            -170.0
+          ]
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 5
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 0
+          },
+          "aim_target": [
+            -30.0,
+            -340.0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 9,
+            "state": "free",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 0
+          },
+          "aim_target": [
+            90.0,
+            -670.0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 150.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              145.0,
+              -564.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              138.0,
+              -564.0,
+              24,
+              8
+            ],
+            "timeout": 1200
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 796,
+          "deadband": 2
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              792,
+              -565.0,
+              8,
+              10
+            ],
+            "timeout": 360
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 872,
+          "deadband": 2
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              867,
+              -565,
+              10,
+              10
+            ],
+            "timeout": 300
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 872,
+          "deadband": 2
+        }
+      ],
+      "max_frames": 2200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/boundary_runners/binding_b0e87547048db63a.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [
+          {
+            "action": "H",
+            "anchor": "spiral_lower"
+          },
+          {
+            "action": "H",
+            "anchor": "spiral_middle"
+          },
+          {
+            "action": "R",
+            "direction": [
+              0,
+              1
+            ]
+          },
+          {
+            "action": "H",
+            "anchor": "spiral_crown"
+          }
+        ],
+        "chain_contract": {
+          "continuous_airborne": true,
+          "fixed_anchor_does_not_refill_shots": true,
+          "hook_restoration": "actual_contact_kick_completion",
+          "midair_floor_allowed": false,
+          "native_verified": false,
+          "production_pool": false
+        },
+        "goal": [
+          150.0,
+          -560.0
+        ],
+        "hook_anchors": [
+          {
+            "id": "spiral_lower",
+            "position": [
+              110.0,
+              -170.0
+            ]
+          },
+          {
+            "id": "spiral_middle",
+            "position": [
+              -30.0,
+              -340.0
+            ]
+          },
+          {
+            "id": "spiral_crown",
+            "position": [
+              90.0,
+              -670.0
+            ]
+          }
+        ],
+        "id": "hollow_spiral",
+        "recovery": {
+          "exit": "entry",
+          "support": "recovery",
+          "via": "recovery_step",
+          "walk_x": -275.0
+        },
+        "rest_program": [
+          {
+            "action": "HANG",
+            "anchor": "rest_ring"
+          },
+          {
+            "action": "H",
+            "anchor": "spiral_middle"
+          },
+          {
+            "action": "R",
+            "direction": [
+              0,
+              1
+            ]
+          },
+          {
+            "action": "H",
+            "anchor": "spiral_crown"
+          }
+        ],
+        "return": {
+          "goal_support": "entry",
+          "via": "recovery"
+        },
+        "scene_language": {
+          "crown": "living_bough",
+          "entry": "root_ground",
+          "recovery": "root_catch",
+          "recovery_step": "root_step"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "version": "forest-vertical-chain-golden-v1",
+        "world_bounds": [
+          -340.0,
+          -850.0,
+          1300.0,
+          1200.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -360,
+            -48
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            872,
+            -560
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 9
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_vertical_chain_geometry.gd",
+          "path": "library/source/scripts/generation/forest_vertical_chain_geometry.gd",
+          "sha256": "c1868e8d032bac8ff0ea6a0fa6e803424a293eed7b41ff0b140859d6a8683a80",
+          "gitBlobSha": "ea07af04bdf79fb0ca2acfece62efd2219d63210",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "b25f075d8b6045f0f28d2fbbe36bae451ef8e3f4a34611b14bba20e9e27edc20",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -384,
+            -62
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -360,
+            -48
+          ],
+          "aperture": [
+            -416,
+            -94,
+            64,
+            64
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            896,
+            -574
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            872,
+            -560
+          ],
+          "aperture": [
+            864,
+            -606,
+            64,
+            64
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -384,
+          "y": -766.0,
+          "w": 1280,
+          "h": 1152
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                0,
+                0
+              ],
+              "stagingPosition": [
+                0,
+                0
+              ]
+            },
+            "after": {
+              "position": [
+                -384,
+                -62.0
+              ],
+              "stagingPosition": [
+                -360,
+                -48.0
+              ],
+              "supportIndex": 6,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                150,
+                -560
+              ],
+              "stagingPosition": [
+                150,
+                -560
+              ]
+            },
+            "after": {
+              "position": [
+                896,
+                -574.0
+              ],
+              "stagingPosition": [
+                872,
+                -560.0
+              ],
+              "supportIndex": 7,
+              "surface": "ONE_WAY_PLATFORM"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      },
+      "migration_boundary_continuations": {
+        "entry": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -360,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -365,
+                  -53,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -272,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -277,
+                  -5.0,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 0.0,
+              "deadband": 2
+            }
+          ]
+        },
+        "exit": {
+          "egress": [
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  138.0,
+                  -564.0,
+                  24,
+                  8
+                ],
+                "timeout": 1200
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 796,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  792,
+                  -565.0,
+                  8,
+                  10
+                ],
+                "timeout": 360
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 872,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  867,
+                  -565,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 944,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "migration_core_replay_authority": {
+        "kind": "preserved_prepared_original_source_inputs",
+        "originalInputFrames": 0,
+        "boundaryEgressPlanIsTailOnly": true,
+        "noResetBetweenOriginalReplayAndBoundary": true
+      },
+      "original_pickups": [],
+      "source_action_program": [
+        {
+          "action": "H",
+          "anchor": "spiral_lower"
+        },
+        {
+          "action": "H",
+          "anchor": "spiral_middle"
+        },
+        {
+          "action": "R",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "action": "H",
+          "anchor": "spiral_crown"
+        }
+      ],
+      "required_original_pickups": [],
+      "original_feedback_routines": {
+        "source": "Pinned original ForestAirChain input rhythm + exact source steps",
+        "variant": 0,
+        "sourcePosesAssigned": false
+      },
+      "migration_boundary_plans": {
+        "entry": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -360,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -365,
+                  -53,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -272,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -277,
+                  -5.0,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 0.0,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "module_sha256": "b90294d24c689aec36641fbf175c28337e9b831e7e89be517ca0328dd8a9a369",
+      "migration_boundary_control_binding": {
+        "caseId": "game-forest_vertical_chain_geometry__default-forest-native-feedback-v7-0",
+        "schema": "pcg/boundary-controller-binding/v1",
+        "originalAuthorSource": "pcg/migration/forest_feedback_v8.py",
+        "originalRunner": "pcg/migration/forest_feedback_runner_v7.gd",
+        "runnerSource": "pcg/migration/boundary_runners/runner_ce052b8e7cd6ad5d.gd",
+        "wrapperSource": "pcg/migration/boundary_runners/binding_b0e87547048db63a.py",
+        "fullPlansSha256": "f1c0ede09b33dca6dfe8acd4f50936231f8255c0b44440d05ae734dd4f81c4cb",
+        "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
+      }
+    }
+  ]
+}

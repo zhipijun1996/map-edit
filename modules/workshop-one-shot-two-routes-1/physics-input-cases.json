@@ -1,0 +1,1108 @@
+{
+  "cases": [
+    {
+      "id": "one-shot-two-routes-1-low-clean-0",
+      "family": "one-shot-two-routes",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          422,
+          400,
+          116
+        ],
+        [
+          315,
+          230,
+          130,
+          24
+        ],
+        [
+          520,
+          550,
+          390,
+          100
+        ],
+        [
+          -200,
+          750,
+          1300,
+          60
+        ],
+        [
+          -256,
+          422,
+          120,
+          24
+        ],
+        [
+          886,
+          550,
+          266,
+          24
+        ],
+        [
+          292.0,
+          166.0,
+          96,
+          12
+        ],
+        [
+          272.0,
+          118,
+          96,
+          12
+        ]
+      ],
+      "spawn": [
+        80,
+        404
+      ],
+      "entry_port": [
+        80,
+        404
+      ],
+      "exit_port": [
+        680,
+        532
+      ],
+      "goal": [
+        655,
+        528,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [
+        6,
+        7
+      ],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            380,
+            212
+          ],
+          "region": [
+            350,
+            207,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 720,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -232,
+            404
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "B",
+          "position": [
+            1128,
+            532
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        },
+        {
+          "id": "C",
+          "position": [
+            320,
+            100
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        }
+      ],
+      "rule_parameters": {
+        "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+        "upper": [
+          380,
+          212
+        ],
+        "lower": [
+          680,
+          532
+        ]
+      },
+      "layout_uid": "4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786",
+      "route_spec": {
+        "id": "low",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 205
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "direction": [
+            -0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 680,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/one-shot-two-routes",
+        "version": 1,
+        "parameters": {
+          "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+          "upper": [
+            380,
+            212
+          ],
+          "lower": [
+            680,
+            532
+          ]
+        },
+        "source_type": "executable_rule",
+        "human_fun": "unreviewed",
+        "registration_source": "pcg/prototype/workshop/evaluate.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/one-shot-two-routes/1",
+        "region": "plains",
+        "required_family": "one-shot-two-routes",
+        "objective": {
+          "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+          "upper": [
+            380,
+            212
+          ],
+          "lower": [
+            680,
+            532
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -112,
+        "space": {
+          "max_width": 1800,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "supported, original fresh resources, exact capture before input",
+          "exit": "stable original ground state; universal transfer UNKNOWN"
+        },
+        "return_conditions": "UNKNOWN until continuous witness exists",
+        "budget": {
+          "generator_candidates": 12,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "codex-one-shot-two-routes-v1"
+      ],
+      "factory_id": "43bc6ebe45f18feaeadf1a875db9079118c2698801f48bacd03b5465f7ef7acf",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "one-shot-two-routes-1-low",
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -256,
+            390
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            404
+          ],
+          "aperture": [
+            -288,
+            358,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1152,
+            518
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1128,
+            532
+          ],
+          "aperture": [
+            1120,
+            486,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            320.0,
+            70
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "stagingPosition": [
+            320,
+            100
+          ],
+          "aperture": [
+            288.0,
+            38,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            0,
+            30
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": 70,
+          "w": 1408,
+          "h": 768
+        },
+        "portAdaptations": [
+          {
+            "portId": "A",
+            "before": {
+              "position": [
+                80,
+                420
+              ],
+              "stagingPosition": [
+                80,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                390
+              ],
+              "stagingPosition": [
+                -232,
+                404
+              ],
+              "supportIndex": 4,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "B",
+            "before": {
+              "position": [
+                680,
+                532
+              ],
+              "stagingPosition": [
+                680,
+                532
+              ]
+            },
+            "after": {
+              "position": [
+                1152,
+                518
+              ],
+              "stagingPosition": [
+                1128,
+                532
+              ],
+              "supportIndex": 5,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "C",
+            "before": {
+              "position": [
+                380,
+                212
+              ],
+              "stagingPosition": [
+                380,
+                212
+              ]
+            },
+            "after": {
+              "position": [
+                320.0,
+                70
+              ],
+              "stagingPosition": [
+                320,
+                100
+              ],
+              "supportIndex": 7,
+              "surface": "ONE_WAY_PLATFORM"
+            },
+            "connectorPlatforms": [
+              {
+                "objectId": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-0",
+                "platformIndex": 6,
+                "rect": [
+                  292.0,
+                  166.0,
+                  96,
+                  12
+                ]
+              },
+              {
+                "objectId": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-1",
+                "platformIndex": 7,
+                "rect": [
+                  272.0,
+                  118,
+                  96,
+                  12
+                ]
+              }
+            ],
+            "routeContinuationRequired": true
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          2
+        ],
+        "validation": "UNKNOWN"
+      }
+    },
+    {
+      "id": "one-shot-two-routes-1-high-clean-0",
+      "family": "one-shot-two-routes",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          422,
+          400,
+          116
+        ],
+        [
+          315,
+          230,
+          130,
+          24
+        ],
+        [
+          520,
+          550,
+          390,
+          100
+        ],
+        [
+          -200,
+          750,
+          1300,
+          60
+        ],
+        [
+          -256,
+          422,
+          120,
+          24
+        ],
+        [
+          886,
+          550,
+          266,
+          24
+        ],
+        [
+          292.0,
+          166.0,
+          96,
+          12
+        ],
+        [
+          272.0,
+          118,
+          96,
+          12
+        ]
+      ],
+      "spawn": [
+        80,
+        404
+      ],
+      "entry_port": [
+        80,
+        404
+      ],
+      "exit_port": [
+        380,
+        212
+      ],
+      "goal": [
+        355,
+        208,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [
+        6,
+        7
+      ],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            380,
+            212
+          ],
+          "region": [
+            350,
+            207,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 720,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -232,
+            404
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "B",
+          "position": [
+            1128,
+            532
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        },
+        {
+          "id": "C",
+          "position": [
+            320,
+            100
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        }
+      ],
+      "rule_parameters": {
+        "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+        "upper": [
+          380,
+          212
+        ],
+        "lower": [
+          680,
+          532
+        ]
+      },
+      "layout_uid": "4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786",
+      "route_spec": {
+        "id": "high",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "reward",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 140
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.5000439980641704,
+            0.866
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 380,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/one-shot-two-routes",
+        "version": 1,
+        "parameters": {
+          "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+          "upper": [
+            380,
+            212
+          ],
+          "lower": [
+            680,
+            532
+          ]
+        },
+        "source_type": "executable_rule",
+        "human_fun": "unreviewed",
+        "registration_source": "pcg/prototype/workshop/evaluate.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/one-shot-two-routes/1",
+        "region": "plains",
+        "required_family": "one-shot-two-routes",
+        "objective": {
+          "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+          "upper": [
+            380,
+            212
+          ],
+          "lower": [
+            680,
+            532
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": -112,
+        "space": {
+          "max_width": 1800,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "supported, original fresh resources, exact capture before input",
+          "exit": "stable original ground state; universal transfer UNKNOWN"
+        },
+        "return_conditions": "UNKNOWN until continuous witness exists",
+        "budget": {
+          "generator_candidates": 12,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "codex-one-shot-two-routes-v1"
+      ],
+      "factory_id": "db3c5fe3625577ee7cecdd8bddbdef5e9b35da20b091884b0279b07c4befc45f",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "one-shot-two-routes-1-high",
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -256,
+            390
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            404
+          ],
+          "aperture": [
+            -288,
+            358,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1152,
+            518
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1128,
+            532
+          ],
+          "aperture": [
+            1120,
+            486,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            320.0,
+            70
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "stagingPosition": [
+            320,
+            100
+          ],
+          "aperture": [
+            288.0,
+            38,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            0,
+            30
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": 70,
+          "w": 1408,
+          "h": 768
+        },
+        "portAdaptations": [
+          {
+            "portId": "A",
+            "before": {
+              "position": [
+                80,
+                420
+              ],
+              "stagingPosition": [
+                80,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                390
+              ],
+              "stagingPosition": [
+                -232,
+                404
+              ],
+              "supportIndex": 4,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "B",
+            "before": {
+              "position": [
+                680,
+                532
+              ],
+              "stagingPosition": [
+                680,
+                532
+              ]
+            },
+            "after": {
+              "position": [
+                1152,
+                518
+              ],
+              "stagingPosition": [
+                1128,
+                532
+              ],
+              "supportIndex": 5,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "C",
+            "before": {
+              "position": [
+                380,
+                212
+              ],
+              "stagingPosition": [
+                380,
+                212
+              ]
+            },
+            "after": {
+              "position": [
+                320.0,
+                70
+              ],
+              "stagingPosition": [
+                320,
+                100
+              ],
+              "supportIndex": 7,
+              "surface": "ONE_WAY_PLATFORM"
+            },
+            "connectorPlatforms": [
+              {
+                "objectId": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-0",
+                "platformIndex": 6,
+                "rect": [
+                  292.0,
+                  166.0,
+                  96,
+                  12
+                ]
+              },
+              {
+                "objectId": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-1",
+                "platformIndex": 7,
+                "rect": [
+                  272.0,
+                  118,
+                  96,
+                  12
+                ]
+              }
+            ],
+            "routeContinuationRequired": true
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          2
+        ],
+        "validation": "UNKNOWN"
+      }
+    }
+  ]
+}

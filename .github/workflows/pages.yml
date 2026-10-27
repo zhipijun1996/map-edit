@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -36,18 +36,8 @@ jobs:
         working-directory: pcg
       - name: Verify generation videos and archived data
         run: python3 tools/check_generation.py
-      - name: Prepare static files
-        run: |
-          mkdir -p dist/library
-          cp index.html style.css app.js model.js capabilities.js difficulty.js library-client.js repository-library-client.js module-contract.js module-block-grid.js module-contract-render.js dist/
-          cp library/catalog.json library/coverage.json dist/library/
-          cp -r library/modules library/thumbnails library/workshop dist/library/
-          mkdir -p dist/experiments/l4-mapgen/results dist/docs
-          cp experiments/l4-mapgen/viewer.html experiments/l4-mapgen/viewer.js experiments/l4-mapgen/viewer.css experiments/l4-mapgen/*.md experiments/l4-mapgen/*.py experiments/l4-mapgen/*.json experiments/l4-mapgen/*.txt dist/experiments/l4-mapgen/
-          cp -r experiments/l4-mapgen/results experiments/l4-mapgen/failure_evidence experiments/l4-mapgen/godot dist/experiments/l4-mapgen/
-          cp -r docs/l4-mapgen dist/docs/
-          cp -r generation dist/generation
-          touch dist/.nojekyll
+      - name: Prepare current-only editor and historical video assets
+        run: python3 tools/build_editor_site.py --out dist
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

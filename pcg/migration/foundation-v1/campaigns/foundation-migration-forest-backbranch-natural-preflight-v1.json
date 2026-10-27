@@ -1,0 +1,83 @@
+{
+  "schema": "pcg/full-migration-clean-diagnostics/v1",
+  "name": "foundation-migration-forest-backbranch-natural-preflight-v1",
+  "preparedRoot": ".cache/migration/forest-backbranch-natural-v1",
+  "plan": [
+    {
+      "source": "game-forest-bible-backbranch-geometry-default",
+      "documentSha256": "69fc84c4dd97f3c54f79cee2baf6c68f53488ecbd31e5258d49f3c586e8e5965",
+      "casesSha256": "07fbe175629ba169fc6d188ef0aedf0b10d76e9b1b0d3f485b049c6998135a6a"
+    },
+    {
+      "source": "game-forest-exploration-modules-backbranch-turn",
+      "documentSha256": "fc32984a464e0ec4cf28faf1d32e32c3723c9297f85abfd07e928d3e42d5c474",
+      "casesSha256": "68fd29d53eecb2ffacf70ba6dc1a31c32af0c9f8d82309afa82280907a80c64b"
+    }
+  ],
+  "protocol": {
+    "path": "pcg/migration/foundation-v1/protocol-full-v2.json",
+    "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+  },
+  "maximumAttempts": 60000,
+  "rows": [
+    {
+      "source": "game-forest-bible-backbranch-geometry-default",
+      "status": "needs_repair",
+      "actualAttempts": 19,
+      "contentVersion": "sha256:4fa24f52b3208f92e3f2e3aa33178fdb95c3a5d83f82885dcf71de7de8021b0c",
+      "title": "背枝钩索反冲",
+      "report": {
+        "path": "pcg/results/foundation-migration-forest-backbranch-natural-preflight-v1-game-forest-/clean-preflight.json",
+        "sha256": "cfc16e989b9500c50d65d5725d9dd6f8588b6bbb0dabc63b7499b82e9242a270"
+      },
+      "routeFailures": [],
+      "probeFailures": [],
+      "invalidatingCounters": [
+        {
+          "id": "game-forest_bible_backbranch_geometry__default-forest-native-feedback-v7-1-forest-departure-v11-0-natural-top-left-v1-migration-counter-ordinary-jump",
+          "reasons": [
+            "original_hook_relation_not_executed",
+            "original_hook_target_sequence_not_executed"
+          ],
+          "judgment": {
+            "invalidates_design": true,
+            "reason": "same external goal compared with original causal requirement",
+            "cost_comparison": {
+              "nominal": {
+                "shots": 1,
+                "jumps": 0,
+                "ticks": 136
+              },
+              "alternative": {
+                "shots": 0,
+                "jumps": 1,
+                "ticks": 114
+              }
+            },
+            "same_external_outcome": true,
+            "reasonable_alternatives_preserved": true
+          }
+        }
+      ],
+      "preparationError": null,
+      "replayCases": {
+        "path": "pcg/results/foundation-migration-forest-backbranch-natural-preflight-v1-game-forest-/replay-cases.json",
+        "sha256": "bb6858f34f60106b6d6f886d385b77ad918afbf7b1a5cb7d7fd4350efb6b896f"
+      }
+    },
+    {
+      "source": "game-forest-exploration-modules-backbranch-turn",
+      "status": "error",
+      "actualAttempts": 19,
+      "error": "Refuse existing factory run: /workspace/map-edit-task-a/pcg/results/foundation-migration-forest-backbranch-natural-preflight-v1-game-forest-"
+    }
+  ],
+  "technicalAdmission": false,
+  "actualAttempts": 38,
+  "counts": {
+    "passed": 0,
+    "needs_repair": 1,
+    "error": 1
+  },
+  "complete": true
+}

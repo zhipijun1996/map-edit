@@ -1,0 +1,42 @@
+{
+  "schema": "pcg/archive-streaming-tool-check/v1",
+  "status": "passed_small_real_fixtures",
+  "sources": [
+    {
+      "path": "pcg/tools/build_archive.py",
+      "sha256": "3f95d7136b57cef615bfe0e37256863308c444b5c46216b4452d13b62d895254"
+    },
+    {
+      "path": "pcg/tools/restore_archive.py",
+      "sha256": "fe1e12372fb836c9853a84a4131f832a3e4244e67bc17643ff1807a64e935cc4"
+    },
+    {
+      "path": "pcg/tools/tests/test_archive_streaming.py",
+      "sha256": "734665c9580c9eb87e6d2c588dd7079b4e4c353d68c96181507b2aa94631b21b"
+    }
+  ],
+  "testCommand": "python3 -m unittest pcg.tools.tests.test_archive_streaming -v",
+  "testsPassed": 12,
+  "fixture": {
+    "source": "deterministic real files, text and byte-identical alias",
+    "internalPartBytes": 127,
+    "checks": [
+      "stream ZIP multipart without whole ZIP cache",
+      "seek and cross-part reads",
+      "full part+whole ZIP+each decompressed entry SHA",
+      "default legacy build and extract roundtrip",
+      "deduplicated alias entry verification",
+      "older v1 manifest without dedup fields",
+      "part corruption, missing, truncation, unsafe path and duplicates rejected",
+      "whole hash mismatch rejected",
+      "index hash/count and undeclared ZIP entry rejected even with valid outer hashes",
+      "existing archives cannot be overwritten"
+    ]
+  },
+  "productionArchiveRun": false,
+  "newGodotAttempts": 0,
+  "largeRawScanned": false,
+  "buildUsage": "python3 pcg/tools/build_archive.py module-foundation-migration-v2 <pcg-relative-path> ... --deduplicate --stream-parts",
+  "verifyUsage": "python3 pcg/tools/restore_archive.py module-foundation-migration-v2 --verify-parts-only",
+  "constraints": "verify-parts-only checks all files and cannot combine with --extract or --prefix; default historical behavior and archive allowlist retained."
+}

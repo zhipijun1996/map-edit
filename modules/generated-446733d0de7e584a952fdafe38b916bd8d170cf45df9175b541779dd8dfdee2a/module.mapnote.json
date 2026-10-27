@@ -1,0 +1,2998 @@
+{
+  "schema": "gunman-rush-level-sketch/v1",
+  "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a",
+  "title": "p50-enemy-r2-live-enemy-sensor-d0-c0",
+  "description": "内容工坊隔离候选；技术覆盖、视频观感、手动试玩和生产认可分别记录。",
+  "constraints": "UNKNOWN不得作为有效地图接口。",
+  "canvas": {
+    "width": 1040,
+    "height": 838,
+    "origin": [
+      0,
+      0
+    ],
+    "units": "godot_world_unit",
+    "positionPrecision": "exact"
+  },
+  "objects": [
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-0",
+      "type": "terrain",
+      "x": -160,
+      "y": 438,
+      "w": 1040,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-1",
+      "type": "terrain",
+      "x": 270,
+      "y": 400,
+      "w": 24,
+      "h": 38,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0",
+      "type": "gate",
+      "x": 500,
+      "y": -300,
+      "w": 20,
+      "h": 738,
+      "rotation": 0,
+      "label": "living-sensor gate",
+      "note": "",
+      "mechanics": {
+        "kind": "occupancy_gate",
+        "condition": "enemy_alive",
+        "releaseGraceSeconds": 0.05,
+        "clockAndAntiPinch": "original ShotLatch, unchanged",
+        "openSeconds": 0.05
+      }
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/bell-0",
+      "type": "switch",
+      "x": 345,
+      "y": 410,
+      "w": 10,
+      "h": 28,
+      "rotation": 0,
+      "label": "活体感应区",
+      "note": "真实Area2D占位；原ShotLatch弹丸接收器禁用，不是可射击风铃",
+      "targetId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0",
+      "sourceId": "living-sensor",
+      "mechanics": {
+        "service": "isolated OccupancyLatch v1",
+        "mode": "enemy_alive",
+        "originalBellBody": {
+          "position": [
+            350,
+            430
+          ],
+          "collisionLayer": 0
+        },
+        "sensorRect": [
+          345,
+          410,
+          10,
+          28
+        ],
+        "source": "pcg/prototype/creative_batches/occupancy/occupancy_latch_v1.gd",
+        "runtimeParameters": {
+          "disabledReceiverPosition": [
+            350,
+            430
+          ],
+          "occupancy": {
+            "mode": "enemy_alive",
+            "rect": [
+              345,
+              410,
+              10,
+              28
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/enemy-0",
+      "type": "enemy",
+      "x": 316,
+      "y": 406,
+      "w": 28,
+      "h": 32,
+      "rotation": 0,
+      "label": "keeper",
+      "note": "",
+      "sourceId": "keeper",
+      "definition": "plains_sentry",
+      "mechanics": {
+        "runtimeParameters": {
+          "initial_idle_cooldown": 0.6
+        }
+      }
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/port-entry",
+      "type": "entry",
+      "x": -268,
+      "y": 388,
+      "w": 24,
+      "h": 36,
+      "rotation": 0,
+      "label": "entry",
+      "note": ""
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/port-exit",
+      "type": "exit",
+      "x": 884,
+      "y": 388,
+      "w": 24,
+      "h": 36,
+      "rotation": 0,
+      "label": "exit",
+      "note": ""
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/main-route",
+      "type": "route",
+      "x": 60,
+      "y": 190.766464233398,
+      "w": 556.725953148438,
+      "h": 229.233536766602,
+      "rotation": 0,
+      "label": "真实输入见证",
+      "note": "",
+      "points": [
+        {
+          "x": 60,
+          "y": 420
+        },
+        {
+          "x": 64.3333358764648,
+          "y": 419.925262451172,
+          "action": ""
+        },
+        {
+          "x": 68.6666641235352,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 73,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 77.3333358764648,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 81.6666717529297,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 86.0000076293945,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 90.3333435058594,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 94.6666793823242,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 99.0000152587891,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 103.333351135254,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 107.666687011719,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 112.000022888184,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 116.333358764648,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 120.666694641113,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 125.000030517578,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 129.333374023438,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 133.666702270508,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 138.000030517578,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 142.333358764648,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 146.666687011719,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 151.000015258789,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 155.333343505859,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 159.66667175293,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 164,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 168.33332824707,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 172.666656494141,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 176.999984741211,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 181.333312988281,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 185.666641235352,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 189.999969482422,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 194.333297729492,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 198.666625976562,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 202.999954223633,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 207.333282470703,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 211.666610717773,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 215.999938964844,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 220.333267211914,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 224.666595458984,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 228.999923706055,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 233.333251953125,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 237.666580200195,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 241.999908447266,
+          "y": 419.92529296875,
+          "action": ""
+        },
+        {
+          "x": 246.333679199219,
+          "y": 409.546447753906,
+          "action": "ground_jump"
+        },
+        {
+          "x": 250.667007446289,
+          "y": 399.168670654297,
+          "action": ""
+        },
+        {
+          "x": 255.000335693359,
+          "y": 388.790893554688,
+          "action": ""
+        },
+        {
+          "x": 259.333679199219,
+          "y": 378.413116455078,
+          "action": ""
+        },
+        {
+          "x": 263.667022705078,
+          "y": 368.035339355469,
+          "action": ""
+        },
+        {
+          "x": 268.000366210938,
+          "y": 357.657562255859,
+          "action": ""
+        },
+        {
+          "x": 272.333709716797,
+          "y": 347.27978515625,
+          "action": ""
+        },
+        {
+          "x": 276.667053222656,
+          "y": 337.046447753906,
+          "action": ""
+        },
+        {
+          "x": 281.000396728516,
+          "y": 337.768676757812,
+          "action": ""
+        },
+        {
+          "x": 285.333740234375,
+          "y": 339.213134765625,
+          "action": ""
+        },
+        {
+          "x": 289.667083740234,
+          "y": 341.379791259766,
+          "action": ""
+        },
+        {
+          "x": 294.000427246094,
+          "y": 344.268676757812,
+          "action": ""
+        },
+        {
+          "x": 298.333770751953,
+          "y": 347.879791259766,
+          "action": ""
+        },
+        {
+          "x": 302.667114257812,
+          "y": 352.213134765625,
+          "action": ""
+        },
+        {
+          "x": 307.000457763672,
+          "y": 357.268676757812,
+          "action": ""
+        },
+        {
+          "x": 311.333801269531,
+          "y": 363.046447753906,
+          "action": ""
+        },
+        {
+          "x": 307.381591796875,
+          "y": 345.144165039062,
+          "action": "shot"
+        },
+        {
+          "x": 303.429382324219,
+          "y": 327.241882324219,
+          "action": ""
+        },
+        {
+          "x": 299.477172851562,
+          "y": 309.339599609375,
+          "action": ""
+        },
+        {
+          "x": 295.524963378906,
+          "y": 291.437316894531,
+          "action": ""
+        },
+        {
+          "x": 291.57275390625,
+          "y": 273.535034179688,
+          "action": ""
+        },
+        {
+          "x": 287.620544433594,
+          "y": 255.632766723633,
+          "action": ""
+        },
+        {
+          "x": 283.668334960938,
+          "y": 237.730499267578,
+          "action": ""
+        },
+        {
+          "x": 279.716125488281,
+          "y": 219.828231811523,
+          "action": ""
+        },
+        {
+          "x": 278.135223388672,
+          "y": 212.667327880859,
+          "action": ""
+        },
+        {
+          "x": 282.468566894531,
+          "y": 212.667327880859,
+          "action": ""
+        },
+        {
+          "x": 286.801910400391,
+          "y": 212.667327880859,
+          "action": ""
+        },
+        {
+          "x": 291.13525390625,
+          "y": 212.667327880859,
+          "action": ""
+        },
+        {
+          "x": 295.468597412109,
+          "y": 212.667327880859,
+          "action": ""
+        },
+        {
+          "x": 299.801940917969,
+          "y": 212.668563842773,
+          "action": ""
+        },
+        {
+          "x": 304.135284423828,
+          "y": 212.70002746582,
+          "action": ""
+        },
+        {
+          "x": 308.468627929688,
+          "y": 212.836166381836,
+          "action": ""
+        },
+        {
+          "x": 312.801971435547,
+          "y": 213.18359375,
+          "action": ""
+        },
+        {
+          "x": 317.135314941406,
+          "y": 213.866470336914,
+          "action": ""
+        },
+        {
+          "x": 335.26123046875,
+          "y": 211.116470336914,
+          "action": "shot"
+        },
+        {
+          "x": 353.387145996094,
+          "y": 208.366470336914,
+          "action": ""
+        },
+        {
+          "x": 371.513061523438,
+          "y": 205.616470336914,
+          "action": ""
+        },
+        {
+          "x": 389.638977050781,
+          "y": 202.866470336914,
+          "action": ""
+        },
+        {
+          "x": 407.764892578125,
+          "y": 200.116470336914,
+          "action": ""
+        },
+        {
+          "x": 425.890808105469,
+          "y": 197.366470336914,
+          "action": ""
+        },
+        {
+          "x": 444.016723632812,
+          "y": 194.616470336914,
+          "action": ""
+        },
+        {
+          "x": 462.142639160156,
+          "y": 191.866470336914,
+          "action": ""
+        },
+        {
+          "x": 469.393005371094,
+          "y": 190.766464233398,
+          "action": ""
+        },
+        {
+          "x": 473.726348876953,
+          "y": 190.766464233398,
+          "action": ""
+        },
+        {
+          "x": 478.059692382812,
+          "y": 190.766464233398,
+          "action": ""
+        },
+        {
+          "x": 482.393035888672,
+          "y": 190.766464233398,
+          "action": ""
+        },
+        {
+          "x": 486.726379394531,
+          "y": 190.766464233398,
+          "action": ""
+        },
+        {
+          "x": 491.059722900391,
+          "y": 190.767700195312,
+          "action": ""
+        },
+        {
+          "x": 495.39306640625,
+          "y": 190.799163818359,
+          "action": ""
+        },
+        {
+          "x": 499.726409912109,
+          "y": 190.935302734375,
+          "action": ""
+        },
+        {
+          "x": 504.059753417969,
+          "y": 191.282730102539,
+          "action": ""
+        },
+        {
+          "x": 508.393096923828,
+          "y": 191.965606689453,
+          "action": ""
+        },
+        {
+          "x": 512.726440429688,
+          "y": 193.111038208008,
+          "action": ""
+        },
+        {
+          "x": 517.059753417969,
+          "y": 194.834411621094,
+          "action": ""
+        },
+        {
+          "x": 521.39306640625,
+          "y": 197.224807739258,
+          "action": ""
+        },
+        {
+          "x": 525.726379394531,
+          "y": 200.330368041992,
+          "action": ""
+        },
+        {
+          "x": 530.059692382812,
+          "y": 204.158142089844,
+          "action": ""
+        },
+        {
+          "x": 534.393005371094,
+          "y": 208.708145141602,
+          "action": ""
+        },
+        {
+          "x": 538.726318359375,
+          "y": 213.980361938477,
+          "action": ""
+        },
+        {
+          "x": 543.059631347656,
+          "y": 219.974807739258,
+          "action": ""
+        },
+        {
+          "x": 547.392944335938,
+          "y": 226.691482543945,
+          "action": ""
+        },
+        {
+          "x": 551.726257324219,
+          "y": 234.13037109375,
+          "action": ""
+        },
+        {
+          "x": 556.0595703125,
+          "y": 242.291488647461,
+          "action": ""
+        },
+        {
+          "x": 560.392883300781,
+          "y": 251.174819946289,
+          "action": ""
+        },
+        {
+          "x": 564.726196289062,
+          "y": 260.780364990234,
+          "action": ""
+        },
+        {
+          "x": 569.059509277344,
+          "y": 271.108154296875,
+          "action": ""
+        },
+        {
+          "x": 573.392822265625,
+          "y": 282.158142089844,
+          "action": ""
+        },
+        {
+          "x": 577.726135253906,
+          "y": 293.930358886719,
+          "action": ""
+        },
+        {
+          "x": 582.059448242188,
+          "y": 306.4248046875,
+          "action": ""
+        },
+        {
+          "x": 586.392761230469,
+          "y": 319.641479492188,
+          "action": ""
+        },
+        {
+          "x": 590.72607421875,
+          "y": 332.974822998047,
+          "action": ""
+        },
+        {
+          "x": 595.059387207031,
+          "y": 346.308166503906,
+          "action": ""
+        },
+        {
+          "x": 599.392700195312,
+          "y": 359.641510009766,
+          "action": ""
+        },
+        {
+          "x": 603.726013183594,
+          "y": 372.974853515625,
+          "action": ""
+        },
+        {
+          "x": 608.059326171875,
+          "y": 386.308197021484,
+          "action": ""
+        },
+        {
+          "x": 612.392639160156,
+          "y": 399.641540527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 412.974884033203,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        },
+        {
+          "x": 616.725952148438,
+          "y": 419.954040527344,
+          "action": ""
+        }
+      ],
+      "duration": 2.1,
+      "mode": "once",
+      "sourceRoute": "main",
+      "trajectory": "recorded_actual_physics"
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/cache-0",
+      "type": "reward",
+      "x": 602,
+      "y": 402,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            620,
+            420
+          ],
+          "region": [
+            590,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-entry",
+      "type": "terrain",
+      "x": -256,
+      "y": 438,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 2
+    },
+    {
+      "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-exit",
+      "type": "terrain",
+      "x": 856,
+      "y": 438,
+      "w": 40,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 3
+    }
+  ],
+  "updatedAt": "2026-10-26T03:12:59.897Z",
+  "intent": {
+    "operation": "new_module"
+  },
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+  },
+  "difficulty": {
+    "version": 1,
+    "scale": "gunman-rush/module-difficulty/v1",
+    "score": null,
+    "note": ""
+  },
+  "source": {
+    "repository": "zhipijun1996/map-edit",
+    "commit": "4af6b8bdc9bbd6f36ca8979356e5d34cb7d21020",
+    "path": "pcg/prototype/creative_batches/occupancy/production_v2.py",
+    "moduleId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a",
+    "kind": "generated",
+    "category": "平原",
+    "method": "actual_flight_and_pressure_relations",
+    "arguments": [],
+    "integration": {
+      "isIntegrated": false,
+      "usage": "not_integrated",
+      "label": "未接入 · 研究候选",
+      "reason": "生成与回放证据未写回正式游戏地图消费者。",
+      "checkedCommit": "4af6b8bdc9bbd6f36ca8979356e5d34cb7d21020",
+      "evidence": [],
+      "verification": "research_output_only"
+    }
+  },
+  "generationContract": {
+    "version": 2,
+    "kind": "module",
+    "contentVersion": "sha256:7dd8e62d357115d65f158dfa6d05c7655d2e286b3d356764bcf6bb537481a3b0",
+    "seed": {
+      "status": "not_used",
+      "value": null,
+      "reason": "Deterministic registered rules; phase/noise seeds are validation only"
+    },
+    "generation": {
+      "source": {
+        "cases": {
+          "path": "pcg/results/workshop-plains50-enemy-r2-live-enemy-sensor/round-00/review_cases.json",
+          "sha256": "2268710f6c1fe18ffc06638525e9c9dbc613d364b7b507fb009103ecc88a8294"
+        },
+        "run": "pcg/results/workshop-plains50-enemy-r2-live-enemy-sensor/round-00",
+        "sourceCaseId": "p50-enemy-r2-live-enemy-sensor-d0-c0",
+        "moduleSha256": "07ac699ab08f80764f69d3f39c353ed0dbb60ad9f7ec22edc9eb49ae3218fc5b",
+        "physicsSourceCommit": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+        "sourceManifestSha256": "4c0ed57464d54a4a769b9faa867720286c5f5f4f7f4f127eb43ff63a0144fd92",
+        "workshopSpecification": {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/enemy/live-enemy-sensor/d0/r2",
+          "region": "plains",
+          "required_family": "enemy-sensor-hold",
+          "objective": {
+            "role": "shoot enemy into live occupancy zone, maintain actual door energization until crossing; killing is not an artificial checker ban",
+            "spatial_demand": {
+              "entry_x": 60,
+              "exit_x": 620,
+              "floor_width": 1040
+            },
+            "source_relationship": "existing family, demand adaptation not new family",
+            "campaign": "plains50-v1"
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 1500,
+            "max_height": 1000,
+            "max_port_span_x": 900
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 12,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        "ideaIds": [
+          "plains50/enemy/live-enemy-sensor"
+        ],
+        "isolatedCell": {
+          "service": "OccupancyLatch v1",
+          "implementation": "pcg/prototype/creative_batches/occupancy/occupancy_latch_v1.gd",
+          "physics": "original Godot bodies and Area2D; original ShotLatch anti-pinch/clock; original EnemyActor health and knockback"
+        }
+      },
+      "parameters": {
+        "producerArguments": {
+          "id": "plains50/enemy/live-enemy-sensor",
+          "version": 2,
+          "source_path": "pcg/prototype/creative_batches/plains50_enemy/rules_v2.py",
+          "parameters": {
+            "spatial_demand": {
+              "entry_x": 60,
+              "exit_x": 620,
+              "floor_width": 1040
+            },
+            "existing_relationship": "live-enemy-sensor",
+            "campaign": "plains50-v1",
+            "interface": 0,
+            "control_choice": 0
+          }
+        },
+        "family": "enemy-sensor-hold",
+        "controlPlan": [
+          {
+            "op": "axis",
+            "trigger": {
+              "after": 0
+            },
+            "value": 1
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "dynamic": {
+                "kind": "actor_x",
+                "direction": "gte",
+                "value": 240
+              },
+              "timeout": 180
+            }
+          },
+          {
+            "op": "jump",
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "jump_release",
+            "trigger": {
+              "after": 8
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 8
+            },
+            "aim_cell": {
+              "kind": "enemy",
+              "id": "keeper"
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 18
+            },
+            "direction": [
+              -0.9886859966642595,
+              0.15
+            ]
+          },
+          {
+            "op": "settle",
+            "trigger": {
+              "after": 6
+            },
+            "target_x": 620,
+            "deadband": 4
+          }
+        ],
+        "challengeRequirements": "UNKNOWN",
+        "synthesis": "UNKNOWN",
+        "workshop": {
+          "spatial_demand": {
+            "entry_x": 60,
+            "exit_x": 620,
+            "floor_width": 1040
+          },
+          "existing_relationship": "live-enemy-sensor",
+          "campaign": "plains50-v1",
+          "interface": 0,
+          "control_choice": 0
+        }
+      },
+      "migration": {
+        "sourcePath": "pcg/map_directed/library/candidates/610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa",
+        "sourceVersion": "sha256:610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa",
+        "sourceDocumentSha256": "b7e35be179f080f231bd15175d98e0e8b455b31e4933128ce7c9fcfc89dca326",
+        "policy": "minimal_actual_boundary_adaptation",
+        "moduleId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a",
+        "legacyEvidencePolicy": "Historical artifacts remain bound to their original content version."
+      }
+    },
+    "designStatus": "declared",
+    "space": {
+      "units": "godot_world_unit",
+      "axes": {
+        "x": "right",
+        "y": "down"
+      },
+      "localOrigin": [
+        0,
+        0
+      ],
+      "actorBody": {
+        "shape": "rectangle",
+        "size": [
+          24,
+          36
+        ],
+        "source": {
+          "path": "pcg/prototype/godot/scenes/player/player.tscn",
+          "sha256": "75ea76ff43b9b8cb3410096d01bfde92c678c56bd31ea3cf6a0bfd438fd9acd8"
+        }
+      },
+      "bounds": {
+        "x": -256,
+        "y": -426,
+        "w": 1152,
+        "h": 1024
+      },
+      "boundsCoverage": "Complete rectangular Module footprint; internal geometry preserved.",
+      "occupancy": {
+        "status": "partial",
+        "objectIds": [
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-0",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-1",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/bell-0",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/enemy-0",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/cache-0",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-entry",
+          "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-exit"
+        ],
+        "regions": [],
+        "coverage": "known cells; full action and projectile reservations UNKNOWN"
+      },
+      "actionClearance": {
+        "status": "partial",
+        "regions": [
+          {
+            "x": 48,
+            "y": 401.925262451172,
+            "w": 28.3333358764648,
+            "h": 36.07473754882801
+          },
+          {
+            "x": 52.3333358764648,
+            "y": 401.925262451172,
+            "w": 28.333328247070398,
+            "h": 36.00003051757801
+          },
+          {
+            "x": 56.6666641235352,
+            "y": 401.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 61,
+            "y": 401.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 65.3333358764648,
+            "y": 401.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 69.6666717529297,
+            "y": 401.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 74.0000076293945,
+            "y": 401.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 78.3333435058594,
+            "y": 401.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 82.6666793823242,
+            "y": 401.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 87.0000152587891,
+            "y": 401.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 91.333351135254,
+            "y": 401.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 95.666687011719,
+            "y": 401.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 100.000022888184,
+            "y": 401.92529296875,
+            "w": 28.33333587646399,
+            "h": 36
+          },
+          {
+            "x": 104.333358764648,
+            "y": 401.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 108.666694641113,
+            "y": 401.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 113.000030517578,
+            "y": 401.92529296875,
+            "w": 28.333343505860014,
+            "h": 36
+          },
+          {
+            "x": 117.33337402343801,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 121.66670227050801,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 126.00003051757801,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 130.333358764648,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 134.666687011719,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 139.000015258789,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 143.333343505859,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 147.66667175293,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 152,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 156.33332824707,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 160.666656494141,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 164.999984741211,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 169.333312988281,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 173.666641235352,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 177.999969482422,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 182.333297729492,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 186.666625976562,
+            "y": 401.92529296875,
+            "w": 28.333328247071023,
+            "h": 36
+          },
+          {
+            "x": 190.999954223633,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 195.333282470703,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 199.666610717773,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 203.999938964844,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 208.333267211914,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 212.666595458984,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 216.999923706055,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 221.333251953125,
+            "y": 401.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 225.666580200195,
+            "y": 401.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 229.999908447266,
+            "y": 391.546447753906,
+            "w": 28.33377075195301,
+            "h": 46.37884521484398
+          },
+          {
+            "x": 234.333679199219,
+            "y": 381.168670654297,
+            "w": 28.33332824707,
+            "h": 46.377777099609034
+          },
+          {
+            "x": 238.667007446289,
+            "y": 370.790893554688,
+            "w": 28.33332824707,
+            "h": 46.37777709960898
+          },
+          {
+            "x": 243.000335693359,
+            "y": 360.413116455078,
+            "w": 28.333343505859972,
+            "h": 46.37777709961
+          },
+          {
+            "x": 247.33367919921898,
+            "y": 350.035339355469,
+            "w": 28.333343505859034,
+            "h": 46.377777099609034
+          },
+          {
+            "x": 251.667022705078,
+            "y": 339.657562255859,
+            "w": 28.33334350586,
+            "h": 46.37777709961
+          },
+          {
+            "x": 256.000366210938,
+            "y": 329.27978515625,
+            "w": 28.333343505858977,
+            "h": 46.37777709960898
+          },
+          {
+            "x": 260.333709716797,
+            "y": 319.046447753906,
+            "w": 28.333343505859034,
+            "h": 46.23333740234398
+          },
+          {
+            "x": 264.667053222656,
+            "y": 319.046447753906,
+            "w": 28.33334350586,
+            "h": 36.722229003905966
+          },
+          {
+            "x": 269.000396728516,
+            "y": 319.768676757812,
+            "w": 28.333343505858977,
+            "h": 37.44445800781301
+          },
+          {
+            "x": 273.333740234375,
+            "y": 321.213134765625,
+            "w": 28.333343505858977,
+            "h": 38.16665649414102
+          },
+          {
+            "x": 277.667083740234,
+            "y": 323.379791259766,
+            "w": 28.33334350586,
+            "h": 38.888885498045966
+          },
+          {
+            "x": 282.000427246094,
+            "y": 326.268676757812,
+            "w": 28.333343505859034,
+            "h": 39.611114501954034
+          },
+          {
+            "x": 286.333770751953,
+            "y": 329.879791259766,
+            "w": 28.333343505858977,
+            "h": 40.33334350585898
+          },
+          {
+            "x": 290.667114257812,
+            "y": 334.213134765625,
+            "w": 28.33334350586,
+            "h": 41.05554199218699
+          },
+          {
+            "x": 295.000457763672,
+            "y": 339.268676757812,
+            "w": 28.333343505859034,
+            "h": 41.777770996094034
+          },
+          {
+            "x": 295.381591796875,
+            "y": 327.144165039062,
+            "w": 27.952209472656023,
+            "h": 53.902282714844034
+          },
+          {
+            "x": 291.429382324219,
+            "y": 309.241882324219,
+            "w": 27.952209472656023,
+            "h": 53.90228271484301
+          },
+          {
+            "x": 287.477172851562,
+            "y": 291.339599609375,
+            "w": 27.95220947265699,
+            "h": 53.90228271484398
+          },
+          {
+            "x": 283.524963378906,
+            "y": 273.437316894531,
+            "w": 27.952209472655966,
+            "h": 53.90228271484398
+          },
+          {
+            "x": 279.57275390625,
+            "y": 255.535034179688,
+            "w": 27.952209472656023,
+            "h": 53.90228271484301
+          },
+          {
+            "x": 275.620544433594,
+            "y": 237.632766723633,
+            "w": 27.952209472656023,
+            "h": 53.902267456055
+          },
+          {
+            "x": 271.668334960938,
+            "y": 219.730499267578,
+            "w": 27.952209472655966,
+            "h": 53.902267456055
+          },
+          {
+            "x": 267.716125488281,
+            "y": 201.828231811523,
+            "w": 27.95220947265699,
+            "h": 53.902267456055
+          },
+          {
+            "x": 266.135223388672,
+            "y": 194.667327880859,
+            "w": 25.580902099609034,
+            "h": 43.160903930664006
+          },
+          {
+            "x": 266.135223388672,
+            "y": 194.667327880859,
+            "w": 28.333343505859034,
+            "h": 36
+          },
+          {
+            "x": 270.468566894531,
+            "y": 194.667327880859,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 274.801910400391,
+            "y": 194.667327880859,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 279.13525390625,
+            "y": 194.667327880859,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 283.468597412109,
+            "y": 194.667327880859,
+            "w": 28.33334350586,
+            "h": 36.001235961914006
+          },
+          {
+            "x": 287.801940917969,
+            "y": 194.668563842773,
+            "w": 28.333343505859034,
+            "h": 36.03146362304699
+          },
+          {
+            "x": 292.135284423828,
+            "y": 194.70002746582,
+            "w": 28.33334350586,
+            "h": 36.136138916015994
+          },
+          {
+            "x": 296.468627929688,
+            "y": 194.836166381836,
+            "w": 28.333343505858977,
+            "h": 36.347427368164006
+          },
+          {
+            "x": 300.801971435547,
+            "y": 195.18359375,
+            "w": 28.333343505859034,
+            "h": 36.682876586914006
+          },
+          {
+            "x": 305.135314941406,
+            "y": 193.116470336914,
+            "w": 42.12591552734398,
+            "h": 38.75
+          },
+          {
+            "x": 323.26123046875,
+            "y": 190.366470336914,
+            "w": 42.12591552734398,
+            "h": 38.75
+          },
+          {
+            "x": 341.387145996094,
+            "y": 187.616470336914,
+            "w": 42.125915527344034,
+            "h": 38.75
+          },
+          {
+            "x": 359.513061523438,
+            "y": 184.866470336914,
+            "w": 42.12591552734301,
+            "h": 38.75
+          },
+          {
+            "x": 377.638977050781,
+            "y": 182.116470336914,
+            "w": 42.12591552734398,
+            "h": 38.75
+          },
+          {
+            "x": 395.764892578125,
+            "y": 179.366470336914,
+            "w": 42.12591552734398,
+            "h": 38.75
+          },
+          {
+            "x": 413.890808105469,
+            "y": 176.616470336914,
+            "w": 42.12591552734301,
+            "h": 38.75
+          },
+          {
+            "x": 432.016723632812,
+            "y": 173.866470336914,
+            "w": 42.125915527344034,
+            "h": 38.75
+          },
+          {
+            "x": 450.142639160156,
+            "y": 172.766464233398,
+            "w": 31.250366210937955,
+            "h": 37.100006103515994
+          },
+          {
+            "x": 457.393005371094,
+            "y": 172.766464233398,
+            "w": 28.333343505859034,
+            "h": 36
+          },
+          {
+            "x": 461.726348876953,
+            "y": 172.766464233398,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 466.059692382812,
+            "y": 172.766464233398,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 470.393035888672,
+            "y": 172.766464233398,
+            "w": 28.333343505859034,
+            "h": 36
+          },
+          {
+            "x": 474.726379394531,
+            "y": 172.766464233398,
+            "w": 28.33334350586,
+            "h": 36.00123596191398
+          },
+          {
+            "x": 479.059722900391,
+            "y": 172.767700195312,
+            "w": 28.333343505858977,
+            "h": 36.03146362304702
+          },
+          {
+            "x": 483.39306640625,
+            "y": 172.799163818359,
+            "w": 28.333343505858977,
+            "h": 36.136138916015994
+          },
+          {
+            "x": 487.726409912109,
+            "y": 172.935302734375,
+            "w": 28.33334350586,
+            "h": 36.347427368164006
+          },
+          {
+            "x": 492.059753417969,
+            "y": 173.282730102539,
+            "w": 28.333343505859034,
+            "h": 36.682876586914006
+          },
+          {
+            "x": 496.393096923828,
+            "y": 173.965606689453,
+            "w": 28.333343505859943,
+            "h": 37.145431518555
+          },
+          {
+            "x": 500.72644042968795,
+            "y": 175.111038208008,
+            "w": 28.333312988281023,
+            "h": 37.723373413085994
+          },
+          {
+            "x": 505.059753417969,
+            "y": 176.834411621094,
+            "w": 28.333312988281023,
+            "h": 38.390396118164006
+          },
+          {
+            "x": 509.39306640625,
+            "y": 179.224807739258,
+            "w": 28.333312988281023,
+            "h": 39.10556030273398
+          },
+          {
+            "x": 513.726379394531,
+            "y": 182.330368041992,
+            "w": 28.333312988281023,
+            "h": 39.82777404785202
+          },
+          {
+            "x": 518.059692382812,
+            "y": 186.158142089844,
+            "w": 28.333312988281932,
+            "h": 40.55000305175798
+          },
+          {
+            "x": 522.393005371094,
+            "y": 190.708145141602,
+            "w": 28.333312988281023,
+            "h": 41.272216796875
+          },
+          {
+            "x": 526.726318359375,
+            "y": 195.980361938477,
+            "w": 28.333312988281023,
+            "h": 41.99444580078102
+          },
+          {
+            "x": 531.059631347656,
+            "y": 201.974807739258,
+            "w": 28.333312988281932,
+            "h": 42.71667480468699
+          },
+          {
+            "x": 535.392944335938,
+            "y": 208.691482543945,
+            "w": 28.333312988281023,
+            "h": 43.438888549805
+          },
+          {
+            "x": 539.726257324219,
+            "y": 216.13037109375,
+            "w": 28.333312988281023,
+            "h": 44.161117553710994
+          },
+          {
+            "x": 544.0595703125,
+            "y": 224.291488647461,
+            "w": 28.333312988281023,
+            "h": 44.88333129882801
+          },
+          {
+            "x": 548.392883300781,
+            "y": 233.174819946289,
+            "w": 28.333312988281023,
+            "h": 45.60554504394497
+          },
+          {
+            "x": 552.726196289062,
+            "y": 242.78036499023398,
+            "w": 28.333312988281932,
+            "h": 46.32778930664102
+          },
+          {
+            "x": 557.059509277344,
+            "y": 253.108154296875,
+            "w": 28.333312988281023,
+            "h": 47.04998779296898
+          },
+          {
+            "x": 561.392822265625,
+            "y": 264.158142089844,
+            "w": 28.333312988281023,
+            "h": 47.772216796875
+          },
+          {
+            "x": 565.726135253906,
+            "y": 275.930358886719,
+            "w": 28.333312988281932,
+            "h": 48.49444580078102
+          },
+          {
+            "x": 570.059448242188,
+            "y": 288.4248046875,
+            "w": 28.333312988281023,
+            "h": 49.21667480468801
+          },
+          {
+            "x": 574.392761230469,
+            "y": 301.641479492188,
+            "w": 28.333312988281023,
+            "h": 49.33334350585898
+          },
+          {
+            "x": 578.72607421875,
+            "y": 314.974822998047,
+            "w": 28.333312988281023,
+            "h": 49.333343505859034
+          },
+          {
+            "x": 583.059387207031,
+            "y": 328.308166503906,
+            "w": 28.333312988281023,
+            "h": 49.33334350586
+          },
+          {
+            "x": 587.392700195312,
+            "y": 341.641510009766,
+            "w": 28.333312988281932,
+            "h": 49.33334350585898
+          },
+          {
+            "x": 591.726013183594,
+            "y": 354.974853515625,
+            "w": 28.333312988281023,
+            "h": 49.33334350585898
+          },
+          {
+            "x": 596.059326171875,
+            "y": 368.308197021484,
+            "w": 28.333312988281023,
+            "h": 49.33334350586
+          },
+          {
+            "x": 600.392639160156,
+            "y": 381.641540527344,
+            "w": 28.333312988281932,
+            "h": 49.333343505859034
+          },
+          {
+            "x": 604.725952148438,
+            "y": 394.974884033203,
+            "w": 24,
+            "h": 42.979156494140966
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 604.725952148438,
+            "y": 401.954040527344,
+            "w": 24,
+            "h": 36
+          }
+        ],
+        "coverage": "recorded_policy_body_sweep",
+        "unverified": [
+          "all allowed entry states",
+          "alternative policies",
+          "unobserved projectile paths"
+        ]
+      },
+      "dynamicEnvelopes": [
+        {
+          "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/enemy-0",
+          "region": "UNKNOWN",
+          "status": "UNKNOWN",
+          "coverage": "full AI attack/projectile/motion envelope not bounded; observed frames retained"
+        }
+      ],
+      "seams": [
+        {
+          "id": "entry-seam",
+          "portId": "entry",
+          "region": {
+            "x": -288,
+            "y": 374,
+            "w": 64,
+            "h": 64
+          },
+          "status": "UNKNOWN",
+          "allowedOverlap": []
+        },
+        {
+          "id": "exit-seam",
+          "portId": "exit",
+          "region": {
+            "x": 864,
+            "y": 374,
+            "w": 64,
+            "h": 64
+          },
+          "status": "UNKNOWN",
+          "allowedOverlap": []
+        }
+      ],
+      "transforms": [
+        {
+          "id": "identity",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "translation",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": [],
+          "note": "任意平移尚未验证；本项不是自由平移许可"
+        },
+        {
+          "id": "mirror-x",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": true,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "rotate-90",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 90,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "scale-2",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            2,
+            2
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        }
+      ]
+    },
+    "ports": [
+      {
+        "id": "entry",
+        "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/port-entry",
+        "position": [
+          -256,
+          406
+        ],
+        "connection": {
+          "status": "UNKNOWN",
+          "region": "UNKNOWN"
+        },
+        "support": {
+          "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-entry",
+          "face": "top",
+          "status": "source_derived"
+        },
+        "normal": [
+          -1,
+          0
+        ],
+        "orientationSource": "design proposal, not evidence of allowed movement",
+        "motion": {
+          "ingress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          },
+          "egress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          }
+        },
+        "preconditions": {
+          "ingress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "egress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "seamIds": [
+          "entry-seam"
+        ],
+        "routeRoles": [
+          "main:entry"
+        ],
+        "stagingPosition": [
+          -232,
+          420
+        ],
+        "face": "LEFT",
+        "surface": "ROCK",
+        "permission": "INOUT",
+        "permissionStatus": "declared_pending_boundary_probe",
+        "cornerRelocations": {
+          "TOP_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "TOP_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          }
+        }
+      },
+      {
+        "id": "exit",
+        "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/port-exit",
+        "position": [
+          896,
+          406
+        ],
+        "connection": {
+          "status": "UNKNOWN",
+          "region": "UNKNOWN"
+        },
+        "support": {
+          "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/migration-shore-exit",
+          "face": "top",
+          "status": "source_derived"
+        },
+        "normal": [
+          1,
+          0
+        ],
+        "orientationSource": "design proposal, not evidence of allowed movement",
+        "motion": {
+          "ingress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          },
+          "egress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          }
+        },
+        "preconditions": {
+          "ingress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "egress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "seamIds": [
+          "exit-seam"
+        ],
+        "routeRoles": [
+          "main:exit"
+        ],
+        "stagingPosition": [
+          872,
+          420
+        ],
+        "face": "RIGHT",
+        "surface": "ROCK",
+        "permission": "INOUT",
+        "permissionStatus": "declared_pending_boundary_probe",
+        "cornerRelocations": {
+          "TOP_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "TOP_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          }
+        }
+      }
+    ],
+    "relations": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "path",
+        "routeIds": [
+          "main"
+        ],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      }
+    ],
+    "routes": [
+      {
+        "id": "main",
+        "from": "entry",
+        "to": "exit",
+        "role": "main",
+        "pathObjectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/main-route",
+        "capabilityRequirements": {
+          "version": 1,
+          "status": "partial",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": [],
+          "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+        },
+        "difficulty": {
+          "version": 1,
+          "scale": "gunman-rush/module-difficulty/v1",
+          "score": null,
+          "note": ""
+        },
+        "availability": "UNKNOWN",
+        "transfer": {
+          "status": "observed_only",
+          "requires": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "ensures": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "return": {
+          "status": "UNKNOWN",
+          "routeId": "UNKNOWN",
+          "conditions": "UNKNOWN"
+        },
+        "onward": {
+          "status": "UNKNOWN",
+          "target": "UNKNOWN",
+          "requiredState": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "note": "原见证无伤落地稳定不等于所有进入状态均可恢复"
+        },
+        "resourcePressure": {
+          "status": "partial",
+          "observedShots": 2,
+          "observedJumps": 1,
+          "phaseWaits": [
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 240
+                },
+                "timeout": 180
+              }
+            }
+          ]
+        },
+        "validationIds": [
+          "migration-main"
+        ],
+        "requiredAbilities": [
+          "jump",
+          "move",
+          "shot_recoil"
+        ],
+        "actionTags": [
+          "jump",
+          "jump_release",
+          "settle",
+          "shoot"
+        ],
+        "durationSeconds": "UNKNOWN",
+        "resourceProfile": {
+          "status": "UNKNOWN"
+        },
+        "initialConditions": {
+          "status": "UNKNOWN"
+        },
+        "localDisplacementBlocks": [
+          9,
+          0
+        ]
+      }
+    ],
+    "unlocks": [
+      {
+        "id": "living-sensor",
+        "trigger": {
+          "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/bell-0",
+          "condition": "actual Area2D overlap by enemy_alive; terminal enemy does not energize gate"
+        },
+        "changes": {
+          "objectId": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0",
+          "collision": "disabled while qualifying body occupies sensor; original timed safe close after release"
+        },
+        "before": {
+          "from": "entry",
+          "to": "exit",
+          "status": "UNKNOWN",
+          "conditions": [
+            {
+              "field": "mechanisms.living-sensor.open",
+              "op": "eq",
+              "value": false
+            }
+          ]
+        },
+        "after": {
+          "from": "entry",
+          "to": "exit",
+          "status": "UNKNOWN",
+          "conditions": [
+            {
+              "field": "mechanisms.living-sensor.open",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      }
+    ],
+    "composition": {
+      "components": [],
+      "connections": [],
+      "exports": [],
+      "cells": [
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-0",
+          "contentVersion": "sha256:3b1f74752d377e17d94800d1e34258eb969c821602118aa7d24756366c6b486f",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-0"
+          ]
+        },
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-1",
+          "contentVersion": "sha256:9f6b0af7fea6390e19699932d0f59dbb9f555fc05dad3a62ea970f2488f3c4f7",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/platform-1"
+          ]
+        },
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0",
+          "contentVersion": "sha256:f6ca20795e9d453528c8a6cbb3fc80c56e2a49737f9fb90b6c731c07aa9cd5e6",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/gate-0"
+          ]
+        },
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/bell-0",
+          "contentVersion": "sha256:fb31732a42dd31ca785b67049646161cd6c3b7846465a65051d845b524e8488c",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/bell-0"
+          ]
+        },
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/enemy-0",
+          "contentVersion": "sha256:1d3eacb683878de00508c350587404177124d1a815fa4e5bd71742b3a593eb53",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/enemy-0"
+          ]
+        },
+        {
+          "id": "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/cache-0",
+          "contentVersion": "sha256:1feb9d293418b47c6090a57f0028c995f6c91ad247e7f5b4426348cda38f8eae",
+          "objectIds": [
+            "generated-446733d0de7e584a952fdafe38b916bd8d170cf45df9175b541779dd8dfdee2a/cache-0"
+          ]
+        }
+      ]
+    },
+    "validations": [
+      {
+        "id": "migration-main",
+        "kind": "physics",
+        "contentVersion": "sha256:7dd8e62d357115d65f158dfa6d05c7655d2e286b3d356764bcf6bb537481a3b0",
+        "routeId": "main",
+        "from": "entry",
+        "to": "exit",
+        "capabilityConfiguration": {
+          "available": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "equipment": "UNKNOWN",
+          "originalSnapshot": {
+            "base_max_air_shots": 1,
+            "declared": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "double_enabled": false,
+            "grapple_enabled": false,
+            "hook_range": 231,
+            "jump_enabled": true,
+            "maximum_jumps": 1,
+            "move_enabled": true,
+            "shoot_enabled": true,
+            "wall_enabled": false
+          }
+        },
+        "entryState": {
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "Actual sampled configuration, not a minimum-ability proof"
+          },
+          "equipment": "UNKNOWN",
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "living-sensor",
+                "open": false,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [
+              {
+                "dead": false,
+                "hp": 3,
+                "id": "plains_sentry",
+                "state": "idle",
+                "x": 330,
+                "y": 422
+              }
+            ],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "recoveryConditions": "UNKNOWN"
+        },
+        "method": "actual_godot_fixed_migration_protocol",
+        "coverage": {
+          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
+          "route": {
+            "routeId": "main",
+            "passed": true,
+            "calibration": {
+              "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/calibration-0.json",
+              "sha256": "3bb2da92f73017fd4054c7c2778544c6e5299cfcdf8c62fe39b7ec92e9383154"
+            },
+            "holdout": {
+              "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/holdout-0.json",
+              "sha256": "b8bd458b965dbd183782a45157ec05906e161f67a44dd72fe81c2570314c2d8c"
+            }
+          },
+          "arbitraryEntryStates": "UNKNOWN",
+          "fullMap": "UNKNOWN"
+        },
+        "result": "pass",
+        "failures": [],
+        "unverified": [
+          "unsearched port pairs",
+          "closure combinations",
+          "mirror",
+          "arbitrary entry states",
+          "full Map"
+        ],
+        "artifacts": [
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/migration-physics.json",
+            "sha256": "1ae3a40f3f61587bc0783b593e26e199e997de92bbd2fb12065279294bcd5e2b"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/source_binding.json",
+            "sha256": "d73d10b6a51eaa8b09a1b87903af172bf4a774898adedb5e570028b1f338f245"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/batches.json",
+            "sha256": "f1288a5dfa79c1963a5319cd0ab194d2746ffab6f439f7736bde60bb797c87a8"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/protocol.json",
+            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v1-610b9bbe8efe/boundary-probes.json",
+            "sha256": "f085fb51097c0575bc3d6d9a3c62b54a00cc7858a921a4ba9f46bb452cee5914"
+          }
+        ],
+        "sourceCaseSha256": "07ac699ab08f80764f69d3f39c353ed0dbb60ad9f7ec22edc9eb49ae3218fc5b",
+        "sourceCaseId": "p50-enemy-r2-live-enemy-sensor-d0-c0",
+        "observedEntry": {
+          "position": [
+            60,
+            420
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "living-sensor",
+                "open": false,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [
+              {
+                "dead": false,
+                "hp": 3,
+                "id": "plains_sentry",
+                "state": "idle",
+                "x": 330,
+                "y": 422
+              }
+            ],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ]
+        },
+        "observedExit": {
+          "position": [
+            616.725952148438,
+            419.954040527344
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "living-sensor",
+                "open": true,
+                "open_count": 1,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [
+              {
+                "dead": false,
+                "hp": 2,
+                "id": "plains_sentry",
+                "state": "recovery",
+                "x": 346.200012207031,
+                "y": 422
+              }
+            ],
+            "events": [
+              {
+                "frame": 45,
+                "id": "keeper",
+                "state": "telegraph",
+                "type": "enemy_state"
+              },
+              {
+                "direction": [
+                  0.215575516223907,
+                  0.976487219333649
+                ],
+                "frame": 58,
+                "muzzle": [
+                  320.186706542969,
+                  377.225646972656
+                ],
+                "origin": [
+                  311.333801269531,
+                  363.046447753906
+                ],
+                "shot_id": 1,
+                "type": "shot_origin"
+              },
+              {
+                "direction": [
+                  0.215575516223907,
+                  0.976487219333649
+                ],
+                "frame": 60,
+                "point": [
+                  325.879699707031,
+                  403.012969970703
+                ],
+                "type": "projectile_impact"
+              },
+              {
+                "fired_airborne": true,
+                "frame": 60,
+                "id": "keeper",
+                "player_airborne": true,
+                "shot_id": 1,
+                "shots_before_refund": 0,
+                "type": "enemy_hit"
+              },
+              {
+                "amount": 1,
+                "frame": 60,
+                "hp": 2,
+                "source": "player_projectile:82829117166",
+                "target": "keeper",
+                "type": "damage"
+              },
+              {
+                "count": 1,
+                "frame": 63,
+                "id": "living-sensor",
+                "type": "bell_open"
+              },
+              {
+                "frame": 63,
+                "id": "living-sensor",
+                "mode": "enemy_alive",
+                "occupied": true,
+                "type": "occupancy_changed"
+              },
+              {
+                "frame": 69,
+                "id": "keeper",
+                "state": "recovery",
+                "type": "enemy_state"
+              },
+              {
+                "direction": [
+                  -0.98868602514267,
+                  0.150000005960464
+                ],
+                "frame": 76,
+                "muzzle": [
+                  302.593109130859,
+                  216.71418762207
+                ],
+                "origin": [
+                  317.135314941406,
+                  213.866470336914
+                ],
+                "shot_id": 2,
+                "type": "shot_origin"
+              }
+            ],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 2.16666666666666,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ]
+        },
+        "observedFirstPostAction": {
+          "position": [
+            64.3333358764648,
+            419.925262451172
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              260.000152587891,
+              260.000152587891
+            ],
+            "y": [
+              -4.4842529296875,
+              -4.4842529296875
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "living-sensor",
+                "open": false,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [
+              {
+                "dead": false,
+                "hp": 3,
+                "id": "plains_sentry",
+                "state": "idle",
+                "x": 330,
+                "y": 422
+              }
+            ],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ]
+        }
+      }
+    ],
+    "visualization": {
+      "contentVersion": "sha256:7dd8e62d357115d65f158dfa6d05c7655d2e286b3d356764bcf6bb537481a3b0",
+      "path": "thumbnail.svg"
+    },
+    "staticChecks": {
+      "result": "pass",
+      "contentVersion": "sha256:7dd8e62d357115d65f158dfa6d05c7655d2e286b3d356764bcf6bb537481a3b0",
+      "method": "existing Map Notes validator + output contract structural/geometry checks",
+      "scope": "schema, references, actual extents, separate motion envelopes, exhaustive ordered port pairs; not physics"
+    },
+    "foundation": {
+      "version": "1.0",
+      "blockSize": 128,
+      "widthBlocks": 9,
+      "heightBlocks": 8
+    },
+    "legacyCertification": {
+      "contentVersion": "sha256:610b9bbe8efe8cb0d3eb2b169f2b4be33cf0f543b9a4cbf227788295176802fa",
+      "scope": "Historical witness only; not a v2 certificate."
+    },
+    "closures": [],
+    "mirror": {
+      "status": "UNKNOWN",
+      "validationIds": []
+    },
+    "portConfigurations": []
+  }
+}

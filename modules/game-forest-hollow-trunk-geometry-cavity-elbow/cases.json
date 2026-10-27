@@ -1,0 +1,2272 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_hollow_trunk_geometry__cavity_elbow-forest-departure-v11-1",
+      "family": "original-game-forest_hollow_trunk_geometry__cavity_elbow",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ],
+        [
+          -220.0,
+          -520.0,
+          390.0,
+          90.0
+        ],
+        [
+          170.0,
+          -520.0,
+          40.0,
+          130.0
+        ],
+        [
+          -220.0,
+          -276.0,
+          390.0,
+          166.0
+        ],
+        [
+          170.0,
+          -186.0,
+          40.0,
+          76.0
+        ],
+        [
+          210.0,
+          -520.0,
+          120.0,
+          130.0
+        ],
+        [
+          210.0,
+          -186.0,
+          120.0,
+          92.0
+        ],
+        [
+          210.0,
+          -24.0,
+          120.0,
+          164.0
+        ],
+        [
+          210.0,
+          420.0,
+          120.0,
+          70.0
+        ],
+        [
+          330.0,
+          -24.0,
+          270.0,
+          24.0
+        ],
+        [
+          -310.0,
+          220.0,
+          500.0,
+          40.0
+        ],
+        [
+          350.0,
+          300.0,
+          350.0,
+          40.0
+        ],
+        [
+          330.0,
+          460.0,
+          370.0,
+          30.0
+        ],
+        [
+          270.0,
+          350.0,
+          60.0,
+          16.0
+        ],
+        [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ],
+        [
+          -350.0,
+          -300.0,
+          130.0,
+          24.0
+        ],
+        [
+          40.0,
+          -300.0,
+          130.0,
+          24.0
+        ],
+        [
+          330.0,
+          -210.0,
+          270.0,
+          24.0
+        ],
+        [
+          610.0,
+          -400.0,
+          90.0,
+          20.0
+        ],
+        [
+          460.0,
+          -490.0,
+          110.0,
+          20.0
+        ],
+        [
+          350.0,
+          -500.0,
+          100.0,
+          20.0
+        ],
+        [
+          -470.0,
+          -400.0,
+          120.0,
+          20.0
+        ],
+        [
+          -360.0,
+          -490.0,
+          120.0,
+          20.0
+        ],
+        [
+          500.0,
+          -310.0,
+          160.0,
+          20.0
+        ],
+        [
+          -448,
+          -300.0,
+          98.0,
+          24
+        ],
+        [
+          -512,
+          -300,
+          64,
+          24
+        ],
+        [
+          600.0,
+          -210.0,
+          104.0,
+          24
+        ],
+        [
+          704,
+          -172,
+          64,
+          24
+        ]
+      ],
+      "spawn": [
+        -245.0,
+        -318.0
+      ],
+      "entry_port": [
+        -245.0,
+        -318.0
+      ],
+      "exit_port": [
+        744,
+        -190
+      ],
+      "goal": [
+        736,
+        -195,
+        16,
+        10
+      ],
+      "world_bounds": [
+        -640,
+        -776.0,
+        1536,
+        1404.0
+      ],
+      "one_way_platform_indices": [
+        9,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          -220.0,
+          -430.0,
+          390.0,
+          20.0
+        ],
+        [
+          -220.0,
+          -300.0,
+          260.0,
+          24.0
+        ],
+        [
+          170.0,
+          -210.0,
+          160.0,
+          24.0
+        ],
+        [
+          170.0,
+          -390.0,
+          160.0,
+          20.0
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 200.0,
+          "y": -40.0,
+          "kind": "bounce",
+          "source_id": "upper_window_ring"
+        },
+        {
+          "x": 120.0,
+          "y": 155.0,
+          "kind": "bounce",
+          "source_id": "lower_window_ring"
+        },
+        {
+          "x": -35.0,
+          "y": -350.0,
+          "kind": "bounce",
+          "source_id": "cavity_ring_a"
+        },
+        {
+          "x": 310.0,
+          "y": -260.0,
+          "kind": "bounce",
+          "source_id": "cavity_ring_b"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": -245.0,
+          "deadband": 0.6,
+          "source_native_gain": 12
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              -250.0,
+              -322.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 0
+          },
+          "aim_target": [
+            -35.0,
+            -350.0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 21,
+            "state": "free",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 9,
+            "state": "free",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 110.0,
+          "deadband": 0.6,
+          "source_native_gain": 12
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              105.0,
+              -322.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "source_right_of": 182.0,
+            "timeout": 180,
+            "state": "free"
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 0
+          },
+          "aim_target": [
+            310.0,
+            -260.0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 21,
+            "state": "free",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 9,
+            "state": "free",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 430.0,
+          "deadband": 0.6,
+          "source_native_gain": 12
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              425.0,
+              -232.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              418.0,
+              -232.0,
+              24,
+              8
+            ],
+            "timeout": 1200
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 668,
+          "deadband": 2
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              664,
+              -233.0,
+              8,
+              10
+            ],
+            "timeout": 360
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 2
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              739,
+              -195,
+              10,
+              10
+            ],
+            "timeout": 300
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 2
+        }
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/boundary_runners/binding_d938ab1f5320cf98.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "candidate_itinerary": [
+          {
+            "anchor_id": "upper_window_ring",
+            "from": "M",
+            "id": "belly_to_crown",
+            "intent": "horizontal_hook_then_shoot_left_recoil_right",
+            "to": "E"
+          },
+          {
+            "drop_x": 620.0,
+            "from": "E",
+            "id": "crown_to_outer_root",
+            "intent": "walk_past_outer_edge_then_observe_lower_window",
+            "to": "R"
+          },
+          {
+            "anchor_id": "lower_window_ring",
+            "from": "R",
+            "id": "outer_to_inner_root",
+            "intent": "jump_or_descent_side_hook_then_shoot_right_recoil_left",
+            "to": "D"
+          },
+          {
+            "from": "D",
+            "id": "inner_to_belly",
+            "intent": "two_short_recovery_jumps",
+            "to": "M",
+            "via": "inner_recovery_step"
+          }
+        ],
+        "cavity_contract": {
+          "airborne_after_bay_required": true,
+          "bay_is_real_landing": true,
+          "body": [
+            24,
+            36
+          ],
+          "ceiling_danger_bottom": -370,
+          "ceiling_solid_bottom": -390,
+          "centres_y": [
+            -392,
+            -318
+          ],
+          "clear_height": 110,
+          "exit_top": -210,
+          "floor_danger_top": -210,
+          "floor_solid_top": -186,
+          "native_verified": false,
+          "not_yet_verified": [
+            "second_HR_full_return",
+            "second_H0R_full_return",
+            "adapted_strong_ordinary",
+            "regional_seams",
+            "viewport"
+          ],
+          "preserved_ports": [
+            "M",
+            "E",
+            "D",
+            "R",
+            "S",
+            "B"
+          ],
+          "return_relay_id": "elbow_return_relay",
+          "seam_overlap_height": 70,
+          "second_clear_height": 160,
+          "successful_contact_restores_hook": true,
+          "variant": "horizontal_then_airborne_descending_elbow"
+        },
+        "comparisons": [
+          "ordinary_jump_no_hook_no_shoot",
+          "normal_shots_without_hook",
+          "hook_without_shoot",
+          "intentional_miss_then_local_retry"
+        ],
+        "danger_presentations": [
+          {
+            "facing": "down"
+          },
+          {
+            "facing": "up"
+          },
+          {
+            "facing": "up"
+          },
+          {
+            "facing": "down"
+          }
+        ],
+        "evidence_scope": "New solid trunk and lower-window return: NO inherited directional/narrow native approval. No enemies/rewards/seed variation/Boss integration yet.",
+        "goal": [
+          430.0,
+          -228.0
+        ],
+        "hook_anchors": [
+          {
+            "id": "upper_window_ring",
+            "position": [
+              200.0,
+              -40.0
+            ]
+          },
+          {
+            "id": "lower_window_ring",
+            "position": [
+              120.0,
+              155.0
+            ]
+          },
+          {
+            "id": "cavity_ring_a",
+            "position": [
+              -35.0,
+              -350.0
+            ]
+          },
+          {
+            "id": "cavity_ring_b",
+            "position": [
+              310.0,
+              -260.0
+            ]
+          }
+        ],
+        "id": "hollow_airborne_descending_elbow",
+        "native_verified": false,
+        "nodes": {
+          "B": {
+            "position": [
+              110.0,
+              -318.0
+            ],
+            "role": "observe_second_side_hook",
+            "support_id": "cavity_bay"
+          },
+          "C": {
+            "position": [
+              430.0,
+              -228.0
+            ],
+            "role": "lower_wide_receiver_after_downward_hook",
+            "support_id": "cavity_exit"
+          },
+          "D": {
+            "position": [
+              120.0,
+              202.0
+            ],
+            "role": "inner_recovery",
+            "support_id": "inner_root"
+          },
+          "E": {
+            "position": [
+              380.0,
+              -42.0
+            ],
+            "role": "outer_crown_observe",
+            "support_id": "outer_crown"
+          },
+          "M": {
+            "position": [
+              0.0,
+              0.0
+            ],
+            "role": "belly_observe",
+            "support_id": "belly_entry"
+          },
+          "R": {
+            "position": [
+              420.0,
+              282.0
+            ],
+            "role": "outer_recovery",
+            "support_id": "outer_root"
+          },
+          "S": {
+            "position": [
+              -245.0,
+              -318.0
+            ],
+            "role": "observe_entire_borer_hole",
+            "support_id": "cavity_observe"
+          }
+        },
+        "production_pool": false,
+        "recovery": {
+          "bottom_miss_support": "outer_sump",
+          "bottom_retry_via": [
+            "outer_recovery_step",
+            "outer_root"
+          ],
+          "inner_miss_support": "inner_root",
+          "native_verified": false,
+          "outer_miss_support": "outer_root",
+          "safe_retry": "R",
+          "sump_retry_via": [
+            "trunk_below_window",
+            "outer_recovery_step",
+            "outer_root"
+          ]
+        },
+        "return_style": "deep_zeroR",
+        "spawn": [
+          -245.0,
+          -318.0
+        ],
+        "version": "forest-hollow-horizontal-elbow-candidate-v2",
+        "windows": [
+          {
+            "anchor_id": "upper_window_ring",
+            "clear_rect": [
+              210.0,
+              -94.0,
+              120.0,
+              70.0
+            ],
+            "from": "M",
+            "id": "upper_window",
+            "to": "E"
+          },
+          {
+            "anchor_id": "lower_window_ring",
+            "clear_rect": [
+              210.0,
+              140.0,
+              120.0,
+              280.0
+            ],
+            "from": "R",
+            "id": "lower_window",
+            "to": "D"
+          },
+          {
+            "anchor_id": "cavity_ring_a",
+            "clear_rect": [
+              -220.0,
+              -410.0,
+              390.0,
+              110.0
+            ],
+            "from": "S",
+            "id": "cavity",
+            "to": "B"
+          },
+          {
+            "anchor_id": "cavity_ring_b",
+            "clear_rect": [
+              170.0,
+              -370.0,
+              160.0,
+              160.0
+            ],
+            "from": "B",
+            "id": "cavity_elbow",
+            "to": "C"
+          }
+        ],
+        "world_bounds": [
+          -510.0,
+          -570.0,
+          1220.0,
+          1100.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -488,
+            -318
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 25
+        },
+        {
+          "id": "exit",
+          "position": [
+            744,
+            -190
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 27
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_hollow_trunk_geometry.gd",
+          "path": "library/source/scripts/generation/forest_hollow_trunk_geometry.gd",
+          "sha256": "17e4f89d4180a03a20e01f0cec68738971769c99846b41b3210e26d50f4d4a4c",
+          "gitBlobSha": "da9123ce705ace1e7357ceff44d389e29e17bf6b",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "f8b655f4a3a1382974777269c4498c709ba5b2f43b3903396a2e2fe05bac7559",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -512,
+            -332
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -488,
+            -318
+          ],
+          "aperture": [
+            -544,
+            -364,
+            64,
+            64
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            768,
+            -204
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            744,
+            -190
+          ],
+          "aperture": [
+            736,
+            -236,
+            64,
+            64
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -512,
+          "y": -524.0,
+          "w": 1280,
+          "h": 1024
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                -245,
+                -318
+              ],
+              "stagingPosition": [
+                -245,
+                -318
+              ]
+            },
+            "after": {
+              "position": [
+                -512,
+                -332.0
+              ],
+              "stagingPosition": [
+                -488,
+                -318.0
+              ],
+              "supportIndex": 24,
+              "surface": "ONE_WAY_PLATFORM"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                430,
+                -228
+              ],
+              "stagingPosition": [
+                430,
+                -228
+              ]
+            },
+            "after": {
+              "position": [
+                768,
+                -204.0
+              ],
+              "stagingPosition": [
+                744,
+                -190.0
+              ],
+              "supportIndex": 25,
+              "surface": "ONE_WAY_PLATFORM"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          15,
+          17
+        ],
+        "validation": "UNKNOWN"
+      },
+      "migration_boundary_continuations": {
+        "entry": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -488,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -493,
+                  -323,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -245.0,
+              "deadband": 2
+            }
+          ]
+        },
+        "exit": {
+          "egress": [
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  418.0,
+                  -232.0,
+                  24,
+                  8
+                ],
+                "timeout": 1200
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 668,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  664,
+                  -233.0,
+                  8,
+                  10
+                ],
+                "timeout": 360
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 744,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  739,
+                  -195,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 816,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "migration_core_replay_authority": {
+        "kind": "preserved_prepared_original_source_inputs",
+        "originalInputFrames": 0,
+        "boundaryEgressPlanIsTailOnly": true,
+        "noResetBetweenOriginalReplayAndBoundary": true
+      },
+      "original_pickups": [],
+      "source_action_program": [
+        {
+          "action": "H",
+          "anchor": "cavity_ring_a"
+        },
+        {
+          "action": "R",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "action": "H",
+          "anchor": "cavity_ring_b"
+        },
+        {
+          "action": "R",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "required_original_pickups": [],
+      "original_named_driver": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "driver": "tests/forest_hollow_upper_runner.gd",
+        "case": "cavity/elbow",
+        "onlyInputTranslation": true
+      },
+      "source_departure_observation": {
+        "kind": "elbow_full_body_walkoff",
+        "physicsChanged": false,
+        "triggerDispatchFixed": true
+      },
+      "source_departure_body_edge": 182.0,
+      "original_feedback_routines": {
+        "source": "Pinned original H/R rhythm and explicit source approach/departure/routes",
+        "variant": 1,
+        "sourcePosesAssigned": false
+      },
+      "migration_boundary_plans": {
+        "entry": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -488,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -493,
+                  -323,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -245.0,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "module_sha256": "d922631209524f69d40b5b0a082545959e0f33fd11d738a6ea7f6c26f14139b4",
+      "migration_boundary_control_binding": {
+        "caseId": "game-forest_hollow_trunk_geometry__cavity_elbow-forest-departure-v11-1",
+        "schema": "pcg/boundary-controller-binding/v1",
+        "originalAuthorSource": "pcg/migration/forest_departure_v11.py",
+        "originalRunner": "pcg/migration/forest_hollow_runner_v10.gd",
+        "runnerSource": "pcg/migration/boundary_runners/runner_73e5e83207b49a21.gd",
+        "wrapperSource": "pcg/migration/boundary_runners/binding_d938ab1f5320cf98.py",
+        "fullPlansSha256": "375b3dc0a67394ecb977325764177028110bc54d332ed4a9caa7b8277fd02b20",
+        "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
+      },
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.992422580718994,
+                -0.122871369123459
+              ],
+              "plan_index": 2,
+              "type": "grapple"
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                -1.0,
+                0.0
+              ],
+              "plan_index": 4,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 36,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.643811543782552,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.888402819633484,
+                0.459064662456512
+              ],
+              "plan_index": 11,
+              "type": "grapple"
+            }
+          ]
+        },
+        {
+          "frame": 79,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                -1.0,
+                0.0
+              ],
+              "plan_index": 13,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 108,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.747111002604167,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.477320353190104,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.304954528808594,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.194831848144531,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.124476114908854,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0795262654622396,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0508092244466146,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 205,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 209,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}

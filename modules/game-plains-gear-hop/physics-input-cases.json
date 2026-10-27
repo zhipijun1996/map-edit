@@ -1,0 +1,394 @@
+{
+  "cases": [
+    {
+      "id": "game-plains_gear_hop-authored-step-h12-r0",
+      "family": "original-game-plains_gear_hop",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0.0,
+          300.0,
+          180.0,
+          30.0
+        ],
+        [
+          156.0,
+          300.0,
+          100.0,
+          24
+        ]
+      ],
+      "spawn": [
+        20.0,
+        282.0
+      ],
+      "entry_port": [
+        20.0,
+        282.0
+      ],
+      "exit_port": [
+        160.0,
+        282.0
+      ],
+      "goal": [
+        148.0,
+        278.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        0.0,
+        512,
+        460.0
+      ],
+      "one_way_platform_indices": [],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [
+        {
+          "contact_interval": 0.7,
+          "damage": 1.0,
+          "initial_phase": 0.0,
+          "origin": [
+            90.0,
+            270.0
+          ],
+          "period": 2.8,
+          "radius": 18.0,
+          "source_id": "meadow_gear",
+          "travel": [
+            0.0,
+            10.0
+          ]
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 2.0
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "saw_phase",
+              "id": "meadow_gear",
+              "window": [
+                0.7,
+                0.75
+              ]
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12,
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 160.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_search.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            24,
+            282.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "sourcePort": {
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "max_normal_speed": 330.0,
+            "max_recoil_speed": 0.0,
+            "max_shot_cooldown": 0.0,
+            "min_air_shots": 0,
+            "min_jumps": 0,
+            "minimum_held_jump_height": 0.0,
+            "minimum_held_jump_range": 0.0,
+            "port_id": "entry",
+            "position": [
+              20.0,
+              282.0
+            ]
+          },
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            232,
+            282.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "max_normal_speed": 330.0,
+            "max_recoil_speed": 0.0,
+            "max_shot_cooldown": 0.0,
+            "min_air_shots": 0,
+            "min_jumps": 0,
+            "minimum_held_jump_height": 0.0,
+            "minimum_held_jump_range": 0.0,
+            "port_id": "exit",
+            "position": [
+              160.0,
+              282.0
+            ]
+          },
+          "support_index": 1
+        }
+      ],
+      "entry_normal": [
+        -1.0,
+        -0.0
+      ],
+      "exit_normal": [
+        1.0,
+        0.0
+      ],
+      "source_external_latches": [],
+      "source_tuning_constraints": {
+        "maximum_shot_cooldown": 0.0,
+        "min_air_shots": 0,
+        "min_jumps": 1,
+        "minimum_burst_distance": 0.0,
+        "minimum_ground_speed": 0.0,
+        "minimum_held_jump_height": 100.0,
+        "minimum_held_jump_range": 160.0,
+        "requires_burst": false
+      },
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "resources",
+          "originalPath": "resources/generation/modules/plains_gear_hop.tres",
+          "path": "library/source/resources/generation/modules/plains_gear_hop.tres",
+          "sha256": "be0994232729677ce85194829c6bcfd63995713165890b29cefe4bb8942414b2",
+          "gitBlobSha": "c215f12d4a733032a0ac23766bd97e61b191ab15",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "93d26e549612ef3327b32e4162f31a1bf3148be3bdc008ec40f563a75d04c959",
+        "adapterVersion": 1
+      },
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            0,
+            268.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            282.0
+          ],
+          "aperture": [
+            -32,
+            236.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14.0
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            256,
+            268.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            232,
+            282.0
+          ],
+          "aperture": [
+            224,
+            236.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14.0
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": 0,
+          "y": 204.0,
+          "w": 256,
+          "h": 128
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                20,
+                282
+              ],
+              "stagingPosition": [
+                20,
+                282
+              ]
+            },
+            "after": {
+              "position": [
+                0,
+                268.0
+              ],
+              "stagingPosition": [
+                24,
+                282.0
+              ],
+              "supportIndex": 0,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                160,
+                282
+              ],
+              "stagingPosition": [
+                160,
+                282
+              ]
+            },
+            "after": {
+              "position": [
+                256,
+                268.0
+              ],
+              "stagingPosition": [
+                232,
+                282.0
+              ],
+              "supportIndex": 1,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0
+        ],
+        "validation": "UNKNOWN"
+      },
+      "module_sha256": "ddbf786ec7e4257926554c41e8daebc784efdf780d850622c4c0bc54fea18c63"
+    }
+  ]
+}

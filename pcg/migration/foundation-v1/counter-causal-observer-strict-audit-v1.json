@@ -1,0 +1,577 @@
+{
+  "schema": "pcg/strict-causal-observer-audit/v1",
+  "rows": [
+    {
+      "counterId": "timed-cache-0-clean-0-migration-counter-ground-preopen-short-bell",
+      "sourceReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/migration-physics.json",
+        "sha256": "b35a9d4684c2dab6d38492cddee8e971e1b812b02d977848c003de7e250f7924"
+      },
+      "originalCounterReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/counterexamples.json",
+        "sha256": "461589006d9608e5235ef02c1693dc80c7ca7d9d651a573a31650fbe640393dd"
+      },
+      "actualInput": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/physics/0005-cheap-adaptation-counters.input.json",
+        "sha256": "9e63027f2741bb479b370cbc719097d9c67d4384b07bc631c697a6cd4ad2a326"
+      },
+      "actualExecution": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/physics/0005-cheap-adaptation-counters.execution.json",
+        "sha256": "4e16587cfa03d557a3e6ec97b49e190b5522d2de8471ed73942995f88d17e2ce"
+      },
+      "rawGzip": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/physics/0005-cheap-adaptation-counters.output.json.gz",
+        "sha256": "5b0da55695bf199c7a0843d393888f2fc030dad23abcea397e2550adb0645be1"
+      },
+      "rawOutputSha256": "6025d55d418eae76273daf9b839ea71fedfa021f592946d7cbea61c8c780e147",
+      "rawResultIndex": 5,
+      "sourceBinding": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-8c90c97e8fc1/source_binding.json",
+        "sha256": "f7de4ee0a887238fe4e6b1a8e6d76d80514394d6da985ef240049e5d26c9d8e2"
+      },
+      "originalCheck": {
+        "ok": false,
+        "reasons": [
+          "same_air_shot_gate_crossing_not_demonstrated"
+        ],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 1,
+          "ground_jumps": 1,
+          "sequence": [
+            "recoil_horizontal",
+            "open_bell",
+            "jump",
+            "recoil_diagonal",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "3218c8f943c0d6bf",
+          "air_shots": 1,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "short-bell"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_frame": 0,
+          "hit_frame": 4,
+          "body_door_frames": [
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110
+          ],
+          "body_clear_frame": 111,
+          "projectile_flight_ticks": 4,
+          "hit_to_body_clear_ticks": 107,
+          "timer_ticks": 33.0,
+          "anti_pinch": "original ShotLatch.grow(24), unchanged",
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        }
+      },
+      "originalClassifierBeforeAttribution": {
+        "invalidates_design": true,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "causalEpisodeCheck": {
+        "ok": true,
+        "reasons": [],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 1,
+          "ground_jumps": 1,
+          "sequence": [
+            "recoil_horizontal",
+            "open_bell",
+            "jump",
+            "recoil_diagonal",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "3218c8f943c0d6bf",
+          "air_shots": 1,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "short-bell"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_frame": 0,
+          "hit_frame": 4,
+          "body_door_frames": [
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110
+          ],
+          "body_clear_frame": 111,
+          "projectile_flight_ticks": 4,
+          "hit_to_body_clear_ticks": 107,
+          "timer_ticks": 33.0,
+          "anti_pinch": "original ShotLatch.grow(24), unchanged",
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": [],
+          "observerCorrections": [
+            {
+              "originalReason": "same_air_shot_gate_crossing_not_demonstrated",
+              "proof": {
+                "method": "pcg/actual-causal-episode-observer/v1",
+                "kind": "air_projectile_opens_actual_body_crossing_window",
+                "bellId": "short-bell",
+                "shotId": 2,
+                "shotFrame": 89,
+                "impactFrame": 93,
+                "hitFrame": 93,
+                "bodyDoorFrames": [
+                  101,
+                  102,
+                  103,
+                  104,
+                  105,
+                  106,
+                  107,
+                  108,
+                  109,
+                  110
+                ],
+                "bodyClearFrame": 111,
+                "bodySize": [
+                  24,
+                  36
+                ],
+                "actualGateOpenDuringEveryBodyOverlap": true,
+                "flightTicks": 4,
+                "hitToWholeBodyClearTicks": 18,
+                "timerTicks": 33.0,
+                "rawTraceFiltered": false
+              }
+            }
+          ]
+        }
+      },
+      "strictOriginalClassifierAfterAttribution": {
+        "invalidates_design": false,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "sameExternalOutcome": {
+        "ok": true,
+        "required_reward_ids": [],
+        "claimed_reward_ids": [
+          "visible-cache"
+        ]
+      },
+      "costBasedExceptionUsed": false,
+      "passed": true
+    },
+    {
+      "counterId": "timed-cache-1-clean-0-migration-counter-ground-preopen-short-bell",
+      "sourceReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/migration-physics.json",
+        "sha256": "6a2c4d58b03218fc38b61b63c23633f51e9e76c26a1fbb20082e55b2a4f159e4"
+      },
+      "originalCounterReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/counterexamples.json",
+        "sha256": "11219c8d6497db107a6ecfdbee3a2a22b7ee6a4633ab3546994b23fb4ca0e91e"
+      },
+      "actualInput": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/physics/0005-cheap-adaptation-counters.input.json",
+        "sha256": "57459a0c2bb70c6f8eb1f598563796e4a555e5fe0ae0476c3dabf88cd7afa30f"
+      },
+      "actualExecution": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/physics/0005-cheap-adaptation-counters.execution.json",
+        "sha256": "4bc2a7c4dbe1028b602a591db99b54bdd4a8598ce70207e824114d41dbdc2d34"
+      },
+      "rawGzip": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/physics/0005-cheap-adaptation-counters.output.json.gz",
+        "sha256": "9cbdca3356f6e25f14a67d5aab9d73e2a4f7b466b10d2bccd2f8742805dc414f"
+      },
+      "rawOutputSha256": "1ae4d1fd66f1adb7298e4b8d947b6da70c8fda4e479d9102b25d8a344e86495d",
+      "rawResultIndex": 5,
+      "sourceBinding": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-490a5f1478c3/source_binding.json",
+        "sha256": "f7de4ee0a887238fe4e6b1a8e6d76d80514394d6da985ef240049e5d26c9d8e2"
+      },
+      "originalCheck": {
+        "ok": false,
+        "reasons": [
+          "same_air_shot_gate_crossing_not_demonstrated"
+        ],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 1,
+          "ground_jumps": 1,
+          "sequence": [
+            "recoil_horizontal",
+            "open_bell",
+            "jump",
+            "recoil_diagonal",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "3218c8f943c0d6bf",
+          "air_shots": 1,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "short-bell"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_frame": 0,
+          "hit_frame": 4,
+          "body_door_frames": [
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116
+          ],
+          "body_clear_frame": 117,
+          "projectile_flight_ticks": 4,
+          "hit_to_body_clear_ticks": 113,
+          "timer_ticks": 39.0,
+          "anti_pinch": "original ShotLatch.grow(24), unchanged",
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        }
+      },
+      "originalClassifierBeforeAttribution": {
+        "invalidates_design": true,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "causalEpisodeCheck": {
+        "ok": true,
+        "reasons": [],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 1,
+          "ground_jumps": 1,
+          "sequence": [
+            "recoil_horizontal",
+            "open_bell",
+            "jump",
+            "recoil_diagonal",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "3218c8f943c0d6bf",
+          "air_shots": 1,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "short-bell"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_frame": 0,
+          "hit_frame": 4,
+          "body_door_frames": [
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116
+          ],
+          "body_clear_frame": 117,
+          "projectile_flight_ticks": 4,
+          "hit_to_body_clear_ticks": 113,
+          "timer_ticks": 39.0,
+          "anti_pinch": "original ShotLatch.grow(24), unchanged",
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": [],
+          "observerCorrections": [
+            {
+              "originalReason": "same_air_shot_gate_crossing_not_demonstrated",
+              "proof": {
+                "method": "pcg/actual-causal-episode-observer/v1",
+                "kind": "air_projectile_opens_actual_body_crossing_window",
+                "bellId": "short-bell",
+                "shotId": 2,
+                "shotFrame": 89,
+                "impactFrame": 93,
+                "hitFrame": 93,
+                "bodyDoorFrames": [
+                  107,
+                  108,
+                  109,
+                  110,
+                  111,
+                  112,
+                  113,
+                  114,
+                  115,
+                  116
+                ],
+                "bodyClearFrame": 117,
+                "bodySize": [
+                  24,
+                  36
+                ],
+                "actualGateOpenDuringEveryBodyOverlap": true,
+                "flightTicks": 4,
+                "hitToWholeBodyClearTicks": 24,
+                "timerTicks": 39.0,
+                "rawTraceFiltered": false
+              }
+            }
+          ]
+        }
+      },
+      "strictOriginalClassifierAfterAttribution": {
+        "invalidates_design": false,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "sameExternalOutcome": {
+        "ok": true,
+        "required_reward_ids": [],
+        "claimed_reward_ids": [
+          "visible-cache"
+        ]
+      },
+      "costBasedExceptionUsed": false,
+      "passed": true
+    },
+    {
+      "counterId": "p50-resource-lowray-v2-i1-d34-migration-counter-ground-preopen-low-return-key",
+      "sourceReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/migration-physics.json",
+        "sha256": "e7b1eebecccf18def172a5de52737c627c5ebef5d3498dda649783e1d9f66dc6"
+      },
+      "originalCounterReport": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/counterexamples.json",
+        "sha256": "4843743441f73388b1f6a56d0ec3e3cc3d37c36ce9d7cc7ee891e1754cacfa04"
+      },
+      "actualInput": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/physics/0005-cheap-adaptation-counters.input.json",
+        "sha256": "0573d71d9436d44ccd124fe88951e7c67389178409c6c04e764ee4aff06c27da"
+      },
+      "actualExecution": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/physics/0005-cheap-adaptation-counters.execution.json",
+        "sha256": "2c6eb1b4905ef350718ccb05c4388428adb0731545fb3c652cfaaae0f528b7cb"
+      },
+      "rawGzip": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/physics/0005-cheap-adaptation-counters.output.json.gz",
+        "sha256": "5f3d7b33ad660e6050b3c1d2768437f4786da6dcf23e6f8a995f21e74e1c5b38"
+      },
+      "rawOutputSha256": "3b6f22f48b9292adbcd3bac9dec13a801a67817a2ab472965b3cfd2b7fb49d9a",
+      "rawResultIndex": 4,
+      "sourceBinding": {
+        "path": "pcg/results/foundation-migration-full-quality-v1-12ca61f568f3/source_binding.json",
+        "sha256": "17cd0025495a51fd84bc11dc8e26061df226a1b5e3270ba5aeb3cfd7d95fe206"
+      },
+      "originalCheck": {
+        "ok": false,
+        "reasons": [
+          "low_ray_then_upward_recovery_missing"
+        ],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 2,
+          "ground_jumps": 0,
+          "sequence": [
+            "recoil_up",
+            "land_recover",
+            "recoil_up",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "85705fa20cddba30",
+          "air_shots": 2,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "low-return-key"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_body_below_entry_lip": false,
+          "recoil_recovery_rise": true,
+          "gate_open": true,
+          "side_wall_full_body_clearance_not_required": true,
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        }
+      },
+      "originalClassifierBeforeAttribution": {
+        "invalidates_design": true,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "causalEpisodeCheck": {
+        "ok": true,
+        "reasons": [],
+        "behavior": {
+          "reversals": 0,
+          "gear_crossings": 0,
+          "landings": 2,
+          "ground_jumps": 0,
+          "sequence": [
+            "recoil_up",
+            "land_recover",
+            "recoil_up",
+            "open_bell",
+            "land_recover"
+          ],
+          "signature": "85705fa20cddba30",
+          "air_shots": 2,
+          "refunds": 0,
+          "continuous_two_air_shots": false,
+          "opened_bells": [
+            "low-return-key"
+          ],
+          "air_enemy_hits": 0
+        },
+        "causal": {
+          "shot_body_below_entry_lip": false,
+          "recoil_recovery_rise": true,
+          "gate_open": true,
+          "side_wall_full_body_clearance_not_required": true,
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": [],
+          "observerCorrections": [
+            {
+              "originalReason": "low_ray_then_upward_recovery_missing",
+              "proof": {
+                "method": "pcg/actual-causal-episode-observer/v1",
+                "kind": "actual_low_ray_bell_shot_reverses_fall_and_recovers",
+                "bellId": "low-return-key",
+                "shotId": 2,
+                "shotFrame": 75,
+                "impactFrame": 90,
+                "hitFrame": 90,
+                "lipBottom": 280,
+                "preShotBodyTop": 526.758728027344,
+                "postShotBodyTop": 511.436706542969,
+                "preShotVy": 800.0,
+                "postShotVy": -919.320068359375,
+                "recoveryRiseFrame": 77,
+                "measuredRiseBeforeAnyLandingOrLaterPropulsion": 30.64401245117199,
+                "rawTraceFiltered": false
+              }
+            }
+          ]
+        }
+      },
+      "strictOriginalClassifierAfterAttribution": {
+        "invalidates_design": false,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": null,
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      },
+      "sameExternalOutcome": {
+        "ok": true,
+        "required_reward_ids": [],
+        "claimed_reward_ids": [
+          "visible-cache"
+        ]
+      },
+      "costBasedExceptionUsed": false,
+      "passed": true
+    }
+  ],
+  "observerSource": {
+    "path": "pcg/migration/causal_observer.py",
+    "sha256": "5e7f86b6ffa0a466c788c8bf68f3c6c81e17a4790d07b3c8639a4be943ab6ecb"
+  },
+  "auditSource": {
+    "path": "pcg/migration/audit_causal_observer.py",
+    "sha256": "95943323d2e1c3ef3ab92a6ea3c70b412bdfecb3c0633f40e87cad7c678f9dcb"
+  },
+  "originalClassifierSource": {
+    "path": "pcg/prototype/creative_batches/batch30_runtime/produce_v1.py",
+    "sha256": "38973ebd8b021fa9e46c891c8b750ea8d669c07757a442623394ceb2c96fb5de"
+  },
+  "allStrictChecksPass": true,
+  "newPhysicsAttempts": 0,
+  "historicalRawOrReportsRewritten": false,
+  "humanApproval": "UNKNOWN",
+  "productionApproval": false,
+  "scope": "Re-analysis of three actual saved counters. No generic extra-action permission; original world goals and classifier retained."
+}

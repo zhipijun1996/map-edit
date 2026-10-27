@@ -1,0 +1,266 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_directional_geometry__build_narrow",
+      "family": "original-game-forest_directional_geometry__build_narrow",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ],
+        [
+          -220.0,
+          -520.0,
+          570.0,
+          410.0
+        ],
+        [
+          250.0,
+          -24.0,
+          320.0,
+          60.0
+        ],
+        [
+          -310.0,
+          220.0,
+          1190.0,
+          40.0
+        ],
+        [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ]
+      ],
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "entry_port": [
+        0.0,
+        0.0
+      ],
+      "exit_port": [
+        355.0,
+        -42.0
+      ],
+      "goal": [
+        343.0,
+        -46.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -310.0,
+        -776.0,
+        1190.0,
+        1164.0
+      ],
+      "one_way_platform_indices": [
+        4
+      ],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          210.0,
+          -138.0,
+          60.0,
+          44.0
+        ],
+        [
+          210.0,
+          -24.0,
+          60.0,
+          52.0
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 200.0,
+          "y": -40.0,
+          "kind": "bounce",
+          "source_id": "side_ring"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 355.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "allowed_seams": [
+          {
+            "platform_id": "entry",
+            "side": "left",
+            "top": 18.0
+          },
+          {
+            "platform_id": "crown",
+            "side": "right",
+            "top": -24.0
+          }
+        ],
+        "damage_mode": "production_environment_policy",
+        "goal": [
+          355.0,
+          -42.0
+        ],
+        "hook_anchors": [
+          {
+            "id": "side_ring",
+            "position": [
+              200.0,
+              -40.0
+            ]
+          }
+        ],
+        "id": "side_hook_thorn_mouth",
+        "observations": [
+          {
+            "platform_id": "entry",
+            "see": [
+              "side_ring",
+              "upper_thorns",
+              "lower_thorns",
+              "crown"
+            ]
+          },
+          {
+            "platform_id": "crown",
+            "see": [
+              "right_drop",
+              "recovery"
+            ]
+          }
+        ],
+        "protected_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ],
+        "recovery": {
+          "exit": "entry",
+          "support": "recovery",
+          "via": "recovery_step",
+          "walk_x": -275.0
+        },
+        "return": {
+          "drop_outside_x": 600.0,
+          "goal_support": "entry",
+          "via": "recovery"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "steps": [
+          {
+            "anchor_id": "side_ring",
+            "direction": "horizontal",
+            "id": "side_catch",
+            "then": "away_kick"
+          },
+          {
+            "action": "shoot_left_recoil_right",
+            "id": "thorn_mouth",
+            "then": "stable_crown"
+          }
+        ],
+        "version": "forest-directional-narrow-thorns-v1",
+        "world_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            0.0,
+            0.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            355.0,
+            -42.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 2
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_directional_geometry.gd",
+          "path": "library/source/scripts/generation/forest_directional_geometry.gd",
+          "sha256": "ea44b33daa27cfc8c46eba54648cf99cc7f4b7fa6391e57caa6ce48b15407bd7",
+          "gitBlobSha": "61164e6a7d8fe6a7d9774d071c55ac52d6cb1036",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "8d62caefdf941cda11e0837758788d94e204aa41502a369e7874778c681bd88f",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "module_sha256": "fbe3fd83031db4d140a83c7b812cf988a199af58a0e4237c48e17d13136af68b"
+    }
+  ]
+}

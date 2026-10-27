@@ -1,0 +1,174 @@
+{
+  "id": "forest_directional_geometry__build_narrow",
+  "kind": "forest",
+  "title": "侧钩刺口",
+  "sourcePath": "scripts/generation/forest_directional_geometry.gd",
+  "sourceDocument": "library/modules/forest_directional_geometry__build_narrow.json",
+  "sourceDocumentSha256": "9c192949e22536022f34904dc0ea5f5aa88f6c66bad246b93de822ea0e505369",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "sourceArtifact": {
+    "kind": "generation",
+    "originalPath": "scripts/generation/forest_directional_geometry.gd",
+    "path": "library/source/scripts/generation/forest_directional_geometry.gd",
+    "sha256": "ea44b33daa27cfc8c46eba54648cf99cc7f4b7fa6391e57caa6ce48b15407bd7",
+    "gitBlobSha": "61164e6a7d8fe6a7d9774d071c55ac52d6cb1036",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "action": "reused_exact_existing_copy"
+  },
+  "method": "build_narrow",
+  "arguments": [],
+  "data": {
+    "allowed_seams": [
+      {
+        "platform_id": "entry",
+        "side": "left",
+        "top": 18.0
+      },
+      {
+        "platform_id": "crown",
+        "side": "right",
+        "top": -24.0
+      }
+    ],
+    "damage_mode": "production_environment_policy",
+    "dangers": [
+      [
+        210.0,
+        -138.0,
+        60.0,
+        44.0
+      ],
+      [
+        210.0,
+        -24.0,
+        60.0,
+        52.0
+      ]
+    ],
+    "goal": [
+      355.0,
+      -42.0
+    ],
+    "hook_anchors": [
+      {
+        "id": "side_ring",
+        "position": [
+          200.0,
+          -40.0
+        ]
+      }
+    ],
+    "id": "side_hook_thorn_mouth",
+    "observations": [
+      {
+        "platform_id": "entry",
+        "see": [
+          "side_ring",
+          "upper_thorns",
+          "lower_thorns",
+          "crown"
+        ]
+      },
+      {
+        "platform_id": "crown",
+        "see": [
+          "right_drop",
+          "recovery"
+        ]
+      }
+    ],
+    "platforms": [
+      {
+        "id": "entry",
+        "one_way": false,
+        "rect": [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ]
+      },
+      {
+        "id": "root_arch",
+        "one_way": false,
+        "rect": [
+          -220.0,
+          -520.0,
+          570.0,
+          410.0
+        ]
+      },
+      {
+        "id": "crown",
+        "one_way": false,
+        "rect": [
+          250.0,
+          -24.0,
+          320.0,
+          60.0
+        ]
+      },
+      {
+        "id": "recovery",
+        "one_way": false,
+        "rect": [
+          -310.0,
+          220.0,
+          1190.0,
+          40.0
+        ]
+      },
+      {
+        "id": "recovery_step",
+        "one_way": true,
+        "rect": [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ]
+      }
+    ],
+    "protected_bounds": [
+      -320.0,
+      -550.0,
+      1220.0,
+      850.0
+    ],
+    "recovery": {
+      "exit": "entry",
+      "support": "recovery",
+      "via": "recovery_step",
+      "walk_x": -275.0
+    },
+    "return": {
+      "drop_outside_x": 600.0,
+      "goal_support": "entry",
+      "via": "recovery"
+    },
+    "spawn": [
+      0.0,
+      0.0
+    ],
+    "steps": [
+      {
+        "anchor_id": "side_ring",
+        "direction": "horizontal",
+        "id": "side_catch",
+        "then": "away_kick"
+      },
+      {
+        "action": "shoot_left_recoil_right",
+        "id": "thorn_mouth",
+        "then": "stable_crown"
+      }
+    ],
+    "version": "forest-directional-narrow-thorns-v1",
+    "world_bounds": [
+      -320.0,
+      -550.0,
+      1220.0,
+      850.0
+    ]
+  }
+}

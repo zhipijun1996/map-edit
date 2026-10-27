@@ -1,0 +1,373 @@
+{
+  "cases": [
+    {
+      "id": "game-plains_recoil_span-policy-jump12-r1",
+      "family": "original-game-plains_recoil_span",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0.0,
+          600.0,
+          300.0,
+          40.0
+        ],
+        [
+          560.0,
+          600.0,
+          240.0,
+          40.0
+        ],
+        [
+          776.0,
+          600.0,
+          120.0,
+          24
+        ]
+      ],
+      "spawn": [
+        20.0,
+        582.0
+      ],
+      "entry_port": [
+        20.0,
+        582.0
+      ],
+      "exit_port": [
+        780.0,
+        582.0
+      ],
+      "goal": [
+        768.0,
+        578.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        0.0,
+        1152,
+        888.0
+      ],
+      "one_way_platform_indices": [],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          300.0,
+          720.0,
+          260.0,
+          20.0
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 264.0
+            },
+            "timeout": 200
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.85,
+            0.5267826876
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12,
+            "state": "grounded",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 780.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            24,
+            582.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "sourcePort": {
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "max_normal_speed": 330.0,
+            "max_recoil_speed": 0.0,
+            "max_shot_cooldown": 0.0,
+            "min_air_shots": 1,
+            "min_jumps": 0,
+            "minimum_held_jump_height": 0.0,
+            "minimum_held_jump_range": 0.0,
+            "port_id": "entry",
+            "position": [
+              20.0,
+              582.0
+            ]
+          },
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            872,
+            582.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "direction": [
+              1.0,
+              0.0
+            ],
+            "max_normal_speed": 330.0,
+            "max_recoil_speed": 0.0,
+            "max_shot_cooldown": 0.0,
+            "min_air_shots": 0,
+            "min_jumps": 0,
+            "minimum_held_jump_height": 0.0,
+            "minimum_held_jump_range": 0.0,
+            "port_id": "exit",
+            "position": [
+              780.0,
+              582.0
+            ]
+          },
+          "support_index": 2
+        }
+      ],
+      "entry_normal": [
+        -1.0,
+        -0.0
+      ],
+      "exit_normal": [
+        1.0,
+        0.0
+      ],
+      "source_external_latches": [],
+      "source_tuning_constraints": {
+        "maximum_shot_cooldown": 0.0,
+        "min_air_shots": 1,
+        "min_jumps": 1,
+        "minimum_burst_distance": 140.0,
+        "minimum_ground_speed": 260.0,
+        "minimum_held_jump_height": 100.0,
+        "minimum_held_jump_range": 185.0,
+        "requires_burst": true
+      },
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "resources",
+          "originalPath": "resources/generation/modules/plains_recoil_span.tres",
+          "path": "library/source/resources/generation/modules/plains_recoil_span.tres",
+          "sha256": "1eedb1159fcad07e753cbcfe89ec322d1ffda9fa3ee0304054cb6fa52770d42a",
+          "gitBlobSha": "9f035b67b73af14ec397677961a347cc1f3f1917",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "e062a44ee9052bbe7c938f9e21635ec79b430e054f06e72033e68dd2f4036d48",
+        "adapterVersion": 1
+      },
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            0,
+            568.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            582.0
+          ],
+          "aperture": [
+            -32,
+            536.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14.0
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            896,
+            568.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            872,
+            582.0
+          ],
+          "aperture": [
+            864,
+            536.0,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14.0
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": 0,
+          "y": 504.0,
+          "w": 896,
+          "h": 256
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                20,
+                582
+              ],
+              "stagingPosition": [
+                20,
+                582
+              ]
+            },
+            "after": {
+              "position": [
+                0,
+                568.0
+              ],
+              "stagingPosition": [
+                24,
+                582.0
+              ],
+              "supportIndex": 0,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                780,
+                582
+              ],
+              "stagingPosition": [
+                780,
+                582
+              ]
+            },
+            "after": {
+              "position": [
+                896,
+                568.0
+              ],
+              "stagingPosition": [
+                872,
+                582.0
+              ],
+              "supportIndex": 2,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      },
+      "module_sha256": "16c1e1bcc7274d47ecb891839a74ac9214cb3fda04cf4c14c48dcd4287b73221"
+    }
+  ]
+}

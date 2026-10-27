@@ -1,0 +1,868 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_playful_module_variants__l_hollow_reward_loop",
+      "family": "original-game-forest_playful_module_variants__l_hollow_reward_loop",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -40.0,
+          18.0,
+          256.0,
+          48.0
+        ],
+        [
+          408.0,
+          -174.0,
+          96.0,
+          224.0
+        ],
+        [
+          504.0,
+          -46.0,
+          160.0,
+          32.0
+        ],
+        [
+          216.0,
+          178.0,
+          352.0,
+          48.0
+        ],
+        [
+          632.0,
+          178.0,
+          224.0,
+          48.0
+        ],
+        [
+          936.0,
+          178.0,
+          224.0,
+          64.0
+        ],
+        [
+          -200.0,
+          338.0,
+          1360.0,
+          40.0
+        ]
+      ],
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "entry_port": [
+        0.0,
+        0.0
+      ],
+      "exit_port": [
+        1120.0,
+        160.0
+      ],
+      "goal": [
+        1108.0,
+        156.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -200.0,
+        -430.0,
+        1360.0,
+        936.0
+      ],
+      "one_way_platform_indices": [],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          424.0,
+          50.0,
+          64.0,
+          16.0
+        ],
+        [
+          520.0,
+          154.0,
+          48.0,
+          24.0
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 648.0,
+          "y": 50.0,
+          "kind": "bounce",
+          "source_id": "elbow_side_fruit"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1120.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "crown",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [],
+        "admission": {
+          "geometry": "candidate",
+          "motor": "unverified",
+          "production_pool": false,
+          "visual": "unverified"
+        },
+        "bible_sha256": "a7bad8323af64a7be0577132e5d988a6e1b781d9e1ac1639d37f9d65935194e3",
+        "branch_reward_contract": {
+          "native_verified": false,
+          "no_exit_coin_override": true,
+          "return_route": "reward_other_exit",
+          "reward_position": [
+            760.0,
+            160.0
+          ],
+          "reward_route": "reward",
+          "reward_support_id": "receiver",
+          "world_reward_required": true
+        },
+        "chain_contract": {
+          "continuous_airborne": false,
+          "midair_floor_allowed": true,
+          "native_verified": false,
+          "production_pool": false
+        },
+        "consumer_contract": {
+          "full_held_jump_to_receiver": true,
+          "kind": "ordinary_sequence",
+          "optional_reward_loop": true,
+          "steps_route": "main"
+        },
+        "danger_faces": [
+          "down",
+          "up"
+        ],
+        "danger_hosts": [
+          "upright_root",
+          "elbow_root"
+        ],
+        "danger_surfaces": [
+          {
+            "danger_index": 0,
+            "face": "down",
+            "host_support_id": "upright_root"
+          },
+          {
+            "danger_index": 1,
+            "face": "up",
+            "host_support_id": "elbow_root"
+          }
+        ],
+        "derivations": [
+          "rooted_L_body_and_danger_union_retained",
+          "retired_four_generic_return_rungs",
+          "reward_then_two_real_exit_choices",
+          "rigid_spawn_normalization"
+        ],
+        "difficulty": "normal",
+        "ecology_slots": [],
+        "entry_support_id": "entry",
+        "exit_support_id": "crown",
+        "goal": [
+          1120.0,
+          160.0
+        ],
+        "height": 552.0,
+        "hook_anchors": [
+          {
+            "fruit_presentation": "rooted_fruit",
+            "fruit_role": "optional",
+            "host_support_id": "fruit_bough",
+            "id": "elbow_side_fruit",
+            "position": [
+              648.0,
+              50.0
+            ],
+            "stem_root": [
+              648.0,
+              -15.0
+            ]
+          }
+        ],
+        "id": "l_hollow_reward_loop",
+        "identity": "descend around a real root elbow for an optional cache, then choose the lower return mouth or the far outward exit",
+        "main_route_kind": "ordinary_sequence",
+        "play_contract": {
+          "alternative": "A full-held ordinary thorn jump is legal. The side fruit is optional; no H/R chain is invented to fit an airborne test.",
+          "counterexample": "Verify both reward-then-return and reward-then-onward with actual pickup settlement; bind lower_rejoin to a real earlier root, not another copied reward room.",
+          "decision": "Drop into the elbow to earn the cache, then return through the visible lower-left mouth or continue through the far lower-right exit.",
+          "observe": "A vertical rooted limb and its joined overhead bough form a broad downward elbow; the cache is on its far receiving root.",
+          "recovery": "One continuous root catches a miss and connects to another world root node; the old four-step external ladder is absent."
+        },
+        "ports": {
+          "cache": {
+            "native_verified": false,
+            "position": [
+              760.0,
+              160.0
+            ],
+            "role": "elbow_cache",
+            "support_id": "receiver"
+          },
+          "crown": {
+            "native_verified": false,
+            "position": [
+              1120.0,
+              160.0
+            ],
+            "role": "far_outward_exit",
+            "support_id": "crown"
+          },
+          "entry": {
+            "native_verified": false,
+            "position": [
+              0.0,
+              0.0
+            ],
+            "role": "optional_elbow_departure",
+            "support_id": "entry"
+          },
+          "lower_rejoin": {
+            "native_verified": false,
+            "position": [
+              152.0,
+              320.0
+            ],
+            "role": "different_lower_return_mouth",
+            "support_id": "catch"
+          }
+        },
+        "recovery": {
+          "native_verified": false,
+          "removed_ladder": true,
+          "safe_port": "lower_rejoin",
+          "support": "catch",
+          "world_must_connect_lower_port": true
+        },
+        "requires": [
+          "grapple"
+        ],
+        "resource_contract": {
+          "health_override": false,
+          "new_abilities": false,
+          "physics_override": false,
+          "shot_refill_override": false
+        },
+        "retired_ladder_supports": [
+          {
+            "id": "return_root_0",
+            "one_way": true,
+            "rect": [
+              -128.0,
+              256.0,
+              128.0,
+              16.0
+            ]
+          },
+          {
+            "id": "return_root_1",
+            "one_way": true,
+            "rect": [
+              -128.0,
+              192.0,
+              128.0,
+              16.0
+            ]
+          },
+          {
+            "id": "return_root_2",
+            "one_way": true,
+            "rect": [
+              -128.0,
+              128.0,
+              128.0,
+              16.0
+            ]
+          },
+          {
+            "id": "return_root_3",
+            "one_way": true,
+            "rect": [
+              -128.0,
+              64.0,
+              128.0,
+              16.0
+            ]
+          }
+        ],
+        "return": {
+          "different_exit_port": "lower_rejoin",
+          "native_verified": false,
+          "route": "reward_other_exit"
+        },
+        "reward_position": [
+          760.0,
+          160.0
+        ],
+        "reward_support_id": "receiver",
+        "risk_reward": {
+          "coins": 4,
+          "notes": 0,
+          "optional": true,
+          "return_required": true,
+          "tier": "medium"
+        },
+        "routes": {
+          "main": {
+            "from_port": "entry",
+            "kind": "ordinary_sequence",
+            "native_verified": false,
+            "steps": [
+              {
+                "kind": "walk",
+                "landing": [
+                  200.0,
+                  0.0
+                ],
+                "support_id": "entry"
+              },
+              {
+                "from_support_id": "entry",
+                "kind": "drop_through",
+                "landing": [
+                  280.0,
+                  160.0
+                ],
+                "path": [
+                  [
+                    200.0,
+                    0.0
+                  ],
+                  [
+                    280.0,
+                    0.0
+                  ],
+                  [
+                    280.0,
+                    160.0
+                  ]
+                ],
+                "support_id": "elbow_root",
+                "takeoff": [
+                  200.0,
+                  0.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  488.0,
+                  160.0
+                ],
+                "support_id": "elbow_root"
+              },
+              {
+                "from_support_id": "elbow_root",
+                "hold_until_ceiling_or_receiver": true,
+                "kind": "jump_gap",
+                "landing": [
+                  664.0,
+                  160.0
+                ],
+                "support_id": "receiver",
+                "takeoff": [
+                  488.0,
+                  160.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  824.0,
+                  160.0
+                ],
+                "support_id": "receiver"
+              },
+              {
+                "from_support_id": "receiver",
+                "hold_until_ceiling_or_receiver": true,
+                "kind": "jump_gap",
+                "landing": [
+                  968.0,
+                  160.0
+                ],
+                "support_id": "crown",
+                "takeoff": [
+                  824.0,
+                  160.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  1120.0,
+                  160.0
+                ],
+                "support_id": "crown"
+              }
+            ],
+            "to_port": "crown"
+          },
+          "reward": {
+            "from_port": "entry",
+            "kind": "ordinary_sequence",
+            "native_verified": false,
+            "steps": [
+              {
+                "kind": "walk",
+                "landing": [
+                  200.0,
+                  0.0
+                ],
+                "support_id": "entry"
+              },
+              {
+                "from_support_id": "entry",
+                "kind": "drop_through",
+                "landing": [
+                  280.0,
+                  160.0
+                ],
+                "path": [
+                  [
+                    200.0,
+                    0.0
+                  ],
+                  [
+                    280.0,
+                    0.0
+                  ],
+                  [
+                    280.0,
+                    160.0
+                  ]
+                ],
+                "support_id": "elbow_root",
+                "takeoff": [
+                  200.0,
+                  0.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  488.0,
+                  160.0
+                ],
+                "support_id": "elbow_root"
+              },
+              {
+                "from_support_id": "elbow_root",
+                "hold_until_ceiling_or_receiver": true,
+                "kind": "jump_gap",
+                "landing": [
+                  664.0,
+                  160.0
+                ],
+                "support_id": "receiver",
+                "takeoff": [
+                  488.0,
+                  160.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  760.0,
+                  160.0
+                ],
+                "support_id": "receiver"
+              }
+            ],
+            "to_port": "cache"
+          },
+          "reward_onward": {
+            "from_port": "cache",
+            "kind": "ordinary_sequence",
+            "native_verified": false,
+            "steps": [
+              {
+                "kind": "walk",
+                "landing": [
+                  824.0,
+                  160.0
+                ],
+                "support_id": "receiver"
+              },
+              {
+                "from_support_id": "receiver",
+                "hold_until_ceiling_or_receiver": true,
+                "kind": "jump_gap",
+                "landing": [
+                  968.0,
+                  160.0
+                ],
+                "support_id": "crown",
+                "takeoff": [
+                  824.0,
+                  160.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  1120.0,
+                  160.0
+                ],
+                "support_id": "crown"
+              }
+            ],
+            "to_port": "crown"
+          },
+          "reward_other_exit": {
+            "from_port": "cache",
+            "kind": "ordinary_sequence",
+            "native_verified": false,
+            "steps": [
+              {
+                "kind": "walk",
+                "landing": [
+                  664.0,
+                  160.0
+                ],
+                "support_id": "receiver"
+              },
+              {
+                "from_support_id": "receiver",
+                "hold_until_ceiling_or_receiver": true,
+                "kind": "jump_gap",
+                "landing": [
+                  488.0,
+                  160.0
+                ],
+                "support_id": "elbow_root",
+                "takeoff": [
+                  664.0,
+                  160.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  232.0,
+                  160.0
+                ],
+                "support_id": "elbow_root"
+              },
+              {
+                "from_support_id": "elbow_root",
+                "kind": "drop_through",
+                "landing": [
+                  152.0,
+                  320.0
+                ],
+                "path": [
+                  [
+                    232.0,
+                    160.0
+                  ],
+                  [
+                    152.0,
+                    160.0
+                  ],
+                  [
+                    152.0,
+                    320.0
+                  ]
+                ],
+                "support_id": "catch",
+                "takeoff": [
+                  232.0,
+                  160.0
+                ]
+              }
+            ],
+            "to_port": "lower_rejoin"
+          }
+        },
+        "scene_language": {
+          "catch": "hollow_trunk",
+          "crown": "hollow_trunk",
+          "elbow_root": "root_ground",
+          "entry": "root_ground",
+          "fruit_bough": "hollow_trunk",
+          "receiver": "hollow_trunk",
+          "upright_root": "root_ground"
+        },
+        "source_factory": {
+          "path": "res://scripts/generation/forest_thorn_corridor_modules.gd",
+          "sha256": "4f3e95f5303853b179473399ed3e48727fe4aeb482689a717dbf5267a42bcad4",
+          "version": "forest-thorn-corridors-v1"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "steps": [
+          {
+            "kind": "walk",
+            "landing": [
+              200.0,
+              0.0
+            ],
+            "support_id": "entry"
+          },
+          {
+            "from_support_id": "entry",
+            "kind": "drop_through",
+            "landing": [
+              280.0,
+              160.0
+            ],
+            "path": [
+              [
+                200.0,
+                0.0
+              ],
+              [
+                280.0,
+                0.0
+              ],
+              [
+                280.0,
+                160.0
+              ]
+            ],
+            "support_id": "elbow_root",
+            "takeoff": [
+              200.0,
+              0.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              488.0,
+              160.0
+            ],
+            "support_id": "elbow_root"
+          },
+          {
+            "from_support_id": "elbow_root",
+            "hold_until_ceiling_or_receiver": true,
+            "kind": "jump_gap",
+            "landing": [
+              664.0,
+              160.0
+            ],
+            "support_id": "receiver",
+            "takeoff": [
+              488.0,
+              160.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              824.0,
+              160.0
+            ],
+            "support_id": "receiver"
+          },
+          {
+            "from_support_id": "receiver",
+            "hold_until_ceiling_or_receiver": true,
+            "kind": "jump_gap",
+            "landing": [
+              968.0,
+              160.0
+            ],
+            "support_id": "crown",
+            "takeoff": [
+              824.0,
+              160.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              1120.0,
+              160.0
+            ],
+            "support_id": "crown"
+          }
+        ],
+        "tile_contract": {
+          "family": "shared_underworld_with_forest_bible_material",
+          "hazards": "actual solid root surfaces: up24/down16",
+          "source_tile_px": 16,
+          "standalone_spike_blocks": false,
+          "world_tile_wu": 32
+        },
+        "version": "forest-old-language-variants-v1",
+        "width": 1200.0,
+        "windows": [
+          {
+            "clear_rect": [
+              216.0,
+              -14.0,
+              192.0,
+              192.0
+            ],
+            "id": "root_elbow_descent"
+          },
+          {
+            "clear_rect": [
+              504.0,
+              66.0,
+              656.0,
+              88.0
+            ],
+            "id": "elbow_onward"
+          }
+        ],
+        "world_bounds": [
+          -232.0,
+          -206.0,
+          1424.0,
+          616.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            0.0,
+            0.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "cache",
+          "position": [
+            760.0,
+            160.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              760.0,
+              160.0
+            ],
+            "role": "elbow_cache",
+            "support_id": "receiver"
+          },
+          "support_index": 4
+        },
+        {
+          "id": "crown",
+          "position": [
+            1120.0,
+            160.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              1120.0,
+              160.0
+            ],
+            "role": "far_outward_exit",
+            "support_id": "crown"
+          },
+          "support_index": 5
+        },
+        {
+          "id": "lower_rejoin",
+          "position": [
+            152.0,
+            320.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              152.0,
+              320.0
+            ],
+            "role": "different_lower_return_mouth",
+            "support_id": "catch"
+          },
+          "support_index": 6
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_playful_module_variants.gd",
+          "path": "library/source/scripts/generation/forest_playful_module_variants.gd",
+          "sha256": "c6f258e5bddad4fc8877b8a34753238d0f74a86f7a5120652b19bc062375cac2",
+          "gitBlobSha": "642141825ece21f0a58285da07c27889fe7b35e3",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "a94bf1e50ba2c1a556b2f92762a7dccf95dac4f71df56691ee9640d68bc6aea8",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "module_sha256": "d52600fb1d5a8714194852dbd0afc7b735e6f28f425716f984f5ea697f8d50a4"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+--- a/pcg/migration/godot_package.py
++++ b/pcg/migration/godot_package.py
+@@ -55,6 +55,8 @@
+     Multiple route witnesses must describe the same installed Cells.
+     """
+     if not _extension:
++        from . import godot_package_v5
++        if godot_package_v5.required(doc,cases):return godot_package_v5.bind_case_behavior(doc,cases)
+         from . import godot_package_v4
+         if godot_package_v4.required(doc,cases):return godot_package_v4.bind_case_behavior(doc,cases)
+     doc=copy.deepcopy(doc)
+@@ -269,6 +271,8 @@
+ 
+ def audit_cases(doc, cases, *, require_replay=True, _extension=False):
+     if not _extension:
++        from . import godot_package_v5
++        if godot_package_v5.required(doc,cases):return godot_package_v5.audit_cases(doc,cases,require_replay=require_replay)
+         from . import godot_package_v4
+         if godot_package_v4.required(doc,cases):return godot_package_v4.audit_cases(doc,cases,require_replay=require_replay)
+     content=content_from_objects(doc)
+@@ -355,7 +359,9 @@
+     doc=_json(module_path);raw=_json(cases_path);cases=raw.get('cases',[])if isinstance(raw,dict)else raw
+     if _extension is None:
+         from . import godot_package_v4
+-        if godot_package_v4.required(doc,cases):_extension=godot_package_v4
++        from . import godot_package_v5
++        if godot_package_v5.required(doc,cases):_extension=godot_package_v5
++        elif godot_package_v4.required(doc,cases):_extension=godot_package_v4
+     content,audit=(_extension.audit_cases if _extension else audit_cases)(doc,cases)
+     stable_id=stable_id or re.sub(r'[^a-zA-Z0-9_-]+','-',str(doc.get('id','module'))).strip('-')
+     if not stable_id or '/'in stable_id or '\\'in stable_id:_fail('invalid_stable_id',stable_id=stable_id)
+@@ -394,6 +400,8 @@
+     package=Path(output_dir).resolve();manifest=_json(_internal(package,'godot-package.json'))
+     if _extension is None:
+         from . import godot_package_v4
++        from . import godot_package_v5
++        if manifest.get('compiler_version')==godot_package_v5.VERSION:return godot_package_v5.verify_package(package,require_loaded=require_loaded)
+         if manifest.get('compiler_version')==godot_package_v4.VERSION:return godot_package_v4.verify_package(package,require_loaded=require_loaded)
+     if manifest.get('schema')!='pcg/godot-module-package/v1' or manifest.get('compiler_version')not in (VERSION,LEGACY_VERSION,EXTENDED_VERSION,*([_extension.VERSION]if _extension else [])):_fail('wrong_package_schema')
+     required={'module.mapnote.json','cases.json','compiled-content.json','geometry-audit.json','module.tscn','demo.tscn'}

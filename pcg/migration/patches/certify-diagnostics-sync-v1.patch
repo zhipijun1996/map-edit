@@ -1,0 +1,12 @@
+--- a/pcg/migration/core.py
++++ b/pcg/migration/core.py
+@@ -912,7 +912,8 @@
+     meta = read(folder/'migration.json')
+     meta.update(status='passed_scoped', physicsReport=proof,
+                 boundaryProbe={'passed': True, 'artifact': report['probes']},
+-                evidence=[proof, report['sourceBinding'], report['batches'], report['protocol'], report['probes']])
++                evidence=[proof, report['sourceBinding'], report['batches'], report['protocol'], report['probes']],
++                unresolved=copy.deepcopy(report['unknown']))
+     write(folder/'migration.json', meta)
+     _check_available_metadata(folder)
+     return dict(status='passed_scoped', moduleId=meta['moduleId'], actualAttempts=report['actualAttempts'])

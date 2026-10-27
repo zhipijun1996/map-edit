@@ -1,0 +1,15 @@
+{
+  "schema": "pcg/content-failure-feedback/v1",
+  "failure_id": "N21-intermediate-settle-persistent-axis",
+  "actual_failed_inputs": 16,
+  "source": "pcg/prototype/godot/runner_plains.gd",
+  "real_semantics": "settle setssettling=true andeachframeoverridesaxis. axis doesnotclearsettling. Thereisnooriginalcancellingop.",
+  "failed_assumption": "Intermediate settle(x) is a transient stop, thenaxis canresume.",
+  "repair": "Localcompilerusesoriginalaxis/wait_x/groundwithactualarrival/resourcechecks; onlyfinalexitretainssettle. NoHarnessmodification.",
+  "propagation": "Futureproposal/codegenerator mustrejectnonterminalsettleunlesssubsequentprogram deliberatelyupdatestarget and preserves intended control. Do not silently emulatea stop byactorwrites.",
+  "source_runs": [
+    "batch30-blockn21-core-v1b",
+    "batch30-blockn21-core-v2"
+  ],
+  "human_fun": "UNKNOWN"
+}

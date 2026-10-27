@@ -1,6 +1,19 @@
-# 失序之钟 · 关卡生成工坊 / Map Notes
+# 失序之钟 · Module 工坊与归档 / Map Notes
 
-本仓库现在以**离线自动生成高质量动作 Module**为主要任务：动作语法、真实Godot验证、质量多样性搜索、失败修复与短视频反馈。原Map Notes草图编辑器继续保留，作为设计与审阅工具。
+本仓库负责 Module 的离线创作、真实 Godot 验证、归档和发布。后续主游戏与新 Map 生成器读取模块库，不在游戏中生成 Module 内容。旧 Map 生成器退役；当前暂停新内容生产，先迁移既有内容。
+
+- [当前正式 Module 库](modules/README.md)：每个模板只保留一个当前版本，技术认证与人工趣味审核分开。
+- [回收归档](modules-recycle/README.md)：迁移旧件和明确废弃项；未完成或待修复的原件继续留在原处。
+- [迁移 skill](.agents/skills/pcg-module-migration/SKILL.md) · [工具与复现命令](pcg/migration/README.md)
+- [强制地基](MAP_FOUNDATION.md) · [推荐指南](MAP_GENERATION_GUIDE.md)
+
+网页只展示 `modules/catalog.json` 中的新版当前库；旧主游戏参考库和旧工坊不再出现在模块选择器。打开模块后可查看 128px Block 网格、完整占地矩形及真实 Port 的位置、方向、surface 和进出权限；同一物理口的逻辑别名会合并显示。编辑草图仍按像素细调，打开和更新目录不会修改认证原件。
+
+`game-route-junction` 与 `game-forest-playful-module-variants-thorn-side-outlet` 各有两个源逻辑名共用一个物理口。检索按物理口计数；把这些别名同时指定为独立连接会返回具体冲突，需先完成契约别名归一化并重绑证据。仅选择一个别名仍须满足原 Route、能力和封口认证，不能从网页的合并显示推断可拼装。
+
+本地运行 `npm run serve`，打开 `http://localhost:8080/`。点“新版 Module 库”选择模块，点“更新新版 Module”可从已推送的工坊分支读取并校验新目录。静态构建执行 `python3 tools/build_editor_site.py --out dist`；GitHub Pages 的手动工作流支持选择 branch/ref。当前网站的部署环境仅允许 `main`，工作分支中的新版编辑器需合并后才能更新现有线上网址。下面保留历史研究入口与原复现说明，不授予旧模块新地基资格，也不恢复新内容生产。
+
+## 历史研究入口
 
 - [最新三端口Module短视频 T](https://zhipijun1996.github.io/map-edit/generation/videos/plains-three-port-v1/all-samples.mp4)（约16.7秒） · [实验报告](pcg/PLAINS-THREE-PORT-REPORT.md)
 - [生成研究与短视频下载](https://zhipijun1996.github.io/map-edit/generation/)
@@ -35,7 +48,7 @@ python3 -m prototype.factory.compare_landing_repairs --name guided-new-run
 - `pcg/research/`及各阶段`*-REPORT.md`：论文、开源代码/许可、架构审计和算法结论。
 - `pcg/archives/`：完整旧实验原件、870份固定运行素材/脚本、审阅产物；每片与整体有SHA，不只保存成功。引擎、Godot缓存和可重建AVI不重复提交。
 - `pcg/results/`：可直接查看的紧凑结果；大轨迹从归档恢复，旧失败不覆盖。
-- `generation/`：发布短视频及观察入口，Pages仅部署这一部分和原编辑器，不上传原始轨迹/源码资产归档。
+- `generation/`：发布短视频及观察入口，Pages部署历史视频网页及新版专用编辑器，不上传原始轨迹/源码资产归档。
 - `.agents/skills/`：生产实验、物理合同、视频评审三项可复用方法，按实际反例和数据迭代。
 
 ## 人工反馈方式

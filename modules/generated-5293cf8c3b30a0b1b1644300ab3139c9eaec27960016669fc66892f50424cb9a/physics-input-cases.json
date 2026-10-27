@@ -1,0 +1,469 @@
+{
+  "cases": [
+    {
+      "id": "thorn-slot-0-clean-0",
+      "family": "thorn-slot",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          460,
+          438,
+          220,
+          160
+        ],
+        [
+          260,
+          80,
+          240,
+          200
+        ],
+        [
+          280,
+          444,
+          150,
+          90
+        ],
+        [
+          -200,
+          680,
+          1100,
+          60
+        ],
+        [
+          -256,
+          438,
+          120,
+          24
+        ],
+        [
+          656,
+          438,
+          368,
+          24
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        565,
+        420
+      ],
+      "goal": [
+        540,
+        416,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-slot",
+          "platform_index": 2,
+          "face": "bottom",
+          "start_offset": 0,
+          "length": 240,
+          "depth": 12
+        },
+        {
+          "surface_id": "lower-slot",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 150,
+          "depth": 12
+        }
+      ],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            565,
+            420
+          ],
+          "region": [
+            535,
+            415,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "max_frames": 720,
+      "trace_all": false,
+      "rule_parameters": {
+        "landing_front": 460,
+        "landing_y": 438,
+        "slot_body": [
+          24,
+          36
+        ],
+        "open_band": [
+          292,
+          432
+        ]
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 205
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "direction": [
+            -0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 565,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/thorn-slot",
+        "version": 1,
+        "parameters": {
+          "landing_front": 460,
+          "landing_y": 438,
+          "slot_body": [
+            24,
+            36
+          ],
+          "open_band": [
+            292,
+            432
+          ]
+        },
+        "source_type": "executable_rule",
+        "human_fun": "unreviewed"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/thorn-slot/0",
+        "region": "plains",
+        "required_family": "thorn-slot",
+        "objective": {
+          "landing_front": 460,
+          "landing_y": 438,
+          "slot_body": [
+            24,
+            36
+          ],
+          "open_band": [
+            292,
+            432
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1800,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 8,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "supported, original fresh resources, exact capture before input",
+          "exit": "stable original ground state; universal transfer UNKNOWN"
+        },
+        "return_conditions": "UNKNOWN until continuous witness exists",
+        "budget": {
+          "generator_candidates": 12,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "human-A1-thorn-slot"
+      ],
+      "factory_id": "5293cf8c3b30a0b1b1644300ab3139c9eaec27960016669fc66892f50424cb9a",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 10,
+          "safe_stable": 10,
+          "rate": 0.8333333333333334,
+          "wilson95": [
+            0.5519636426153274,
+            0.9530358523851776
+          ]
+        }
+      },
+      "review_alias": "thorn-slot-0",
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main"
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -232,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        },
+        {
+          "id": "exit",
+          "position": [
+            1000,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 6
+        }
+      ],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -256,
+            406
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            420
+          ],
+          "aperture": [
+            -288,
+            374,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            1024,
+            406
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            420
+          ],
+          "aperture": [
+            992,
+            374,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": -42,
+          "w": 1280,
+          "h": 896
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                80,
+                420
+              ],
+              "stagingPosition": [
+                80,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                406
+              ],
+              "stagingPosition": [
+                -232,
+                420
+              ],
+              "supportIndex": 5,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                565,
+                420
+              ],
+              "stagingPosition": [
+                565,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                1024,
+                406
+              ],
+              "stagingPosition": [
+                1000,
+                420
+              ],
+              "supportIndex": 6,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      }
+    }
+  ]
+}

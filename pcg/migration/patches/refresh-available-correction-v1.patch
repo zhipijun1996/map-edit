@@ -1,0 +1,62 @@
+--- a/pcg/migration/core.py
++++ b/pcg/migration/core.py
+@@ -711,13 +711,13 @@
+     return dict(status='recycled', archive=relative(target))
+ 
+ 
+-def refresh_package(prepared_folder):
+-    """Install a validated compiler-only update without changing content identity."""
++def refresh_package(prepared_folder, *, evidence_update=False):
++    """Refresh compiled output; explicit evidence correction has a narrow proof."""
+     with _migration_lock():
+-        return _refresh_package_locked(Path(prepared_folder).resolve())
+-
+-
+-def _refresh_package_locked(folder):
++        return _refresh_package_locked(Path(prepared_folder).resolve(), evidence_update=evidence_update)
++
++
++def _refresh_package_locked(folder, *, evidence_update=False):
+     meta = read(folder/'migration.json'); module_id = safe_id(meta['moduleId'])
+     current = ACTIVE/module_id
+     new_manifest = sha(folder/'godot-package.json')
+@@ -730,6 +730,8 @@
+     identity = dict(operation='refresh_package', source=relative(current),
+                     destination=relative(current), journalKey=key, moduleId=module_id,
+                     contentVersion=content_version, newManifestSha256=new_manifest)
++    if evidence_update:
++        identity['evidenceUpdate'] = True
+     # Restore a prior interrupted attempt before any evidence verifier needs
+     # paths under the temporarily absent current package.
+     recovered = _recover_transaction(transaction_path, identity)
+@@ -740,8 +742,12 @@
+         raise ValueError('package_refresh_module_id_changed')
+     if ready['contentVersion'] != old['contentVersion'] or old['contentVersion'] != content_version:
+         raise ValueError('package_refresh_content_version_changed')
++    evidence_proof = None
+     if sha(folder/'module.mapnote.json') != sha(current/'module.mapnote.json'):
+-        raise ValueError('package_refresh_module_document_changed')
++        if not evidence_update:
++            raise ValueError('package_refresh_module_document_changed')
++        from .evidence_refresh import prove_available_correction
++        evidence_proof = prove_available_correction(current, folder)
+     # A compiler update cannot silently replace physics, original identity, or
+     # human review. godotLoad is intentionally allowed to bind the new replay.
+     for field in ('sourcePath', 'sourceVersion', 'sourceFiles', 'physicsReport',
+@@ -777,12 +783,15 @@
+     transaction = _new_transaction('refresh_package', current, archive, journal,
+         destination=current, staging=staging, prepared=folder, journal_key=key,
+         contentVersion=content_version, moduleId=module_id,
+-        oldManifestSha256=old_manifest, newManifestSha256=new_manifest)
++        oldManifestSha256=old_manifest, newManifestSha256=new_manifest,
++        **(dict(evidenceUpdate=True, evidenceUpdateProof=evidence_proof) if evidence_update else {}))
+     history = copy.deepcopy(existing.get('packageHistory', []))
+     history.append(dict(contentVersion=content_version,
+         previousManifestSha256=old_manifest, manifestSha256=new_manifest,
+         archivedPackage=relative(archive), archiveReceipt=relative(archive/transaction['receiptName']),
+         transaction=relative(transaction_path)))
++    if evidence_update:
++        history[-1].update(evidenceUpdate=True, evidenceUpdateProof=evidence_proof)
+     updated = {**existing, 'packageHistory': history}
+     _save_transaction(transaction_path, transaction)
+     try:

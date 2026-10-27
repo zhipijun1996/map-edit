@@ -1,0 +1,540 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_exploration_modules__root_basin_return",
+      "family": "original-game-forest_exploration_modules__root_basin_return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0.0,
+          0.0,
+          224.0,
+          32.0
+        ],
+        [
+          160.0,
+          96.0,
+          400.0,
+          64.0
+        ],
+        [
+          496.0,
+          48.0,
+          224.0,
+          32.0
+        ],
+        [
+          688.0,
+          0.0,
+          352.0,
+          48.0
+        ],
+        [
+          144.0,
+          48.0,
+          144.0,
+          16.0
+        ]
+      ],
+      "spawn": [
+        40.0,
+        -18.0
+      ],
+      "entry_port": [
+        40.0,
+        -18.0
+      ],
+      "exit_port": [
+        1000.0,
+        -18.0
+      ],
+      "goal": [
+        988.0,
+        -22.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        0.0,
+        -256.0,
+        1040.0,
+        544.0
+      ],
+      "one_way_platform_indices": [
+        0,
+        2,
+        4
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1000.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [],
+        "admission": {
+          "geometry": "candidate",
+          "motor": "unverified",
+          "production_pool": false,
+          "visual": "unverified"
+        },
+        "danger_faces": [],
+        "danger_hosts": [],
+        "danger_surfaces": [],
+        "difficulty": "easy",
+        "entry_support_id": "entry",
+        "exit_support_id": "exit",
+        "goal": [
+          1000.0,
+          -18.0
+        ],
+        "height": 460.0,
+        "hook_anchors": [],
+        "id": "root_basin_return",
+        "identity": "controlled descent into a broad basin and shallow exit terraces",
+        "main_route_kind": "ordinary_sequence",
+        "requires": [
+          "grapple"
+        ],
+        "resource_contract": {
+          "health_override": false,
+          "new_abilities": false,
+          "physics_override": false,
+          "shot_refill_override": false
+        },
+        "reward_position": [
+          352.0,
+          78.0
+        ],
+        "reward_support_id": "basin",
+        "risk_reward": {
+          "coins": 1,
+          "notes": 0,
+          "optional": false,
+          "return_required": true,
+          "tier": "low"
+        },
+        "routes": {
+          "main": [
+            {
+              "from_support_id": "entry",
+              "kind": "drop_through",
+              "landing": [
+                256.0,
+                30.0
+              ],
+              "path": [
+                [
+                  208.0,
+                  -18.0
+                ],
+                [
+                  256.0,
+                  -18.0
+                ],
+                [
+                  256.0,
+                  30.0
+                ]
+              ],
+              "support_id": "return_mushroom",
+              "takeoff": [
+                208.0,
+                -18.0
+              ]
+            },
+            {
+              "from_support_id": "return_mushroom",
+              "kind": "drop_through",
+              "landing": [
+                320.0,
+                78.0
+              ],
+              "path": [
+                [
+                  256.0,
+                  30.0
+                ],
+                [
+                  320.0,
+                  30.0
+                ],
+                [
+                  320.0,
+                  78.0
+                ]
+              ],
+              "support_id": "basin",
+              "takeoff": [
+                256.0,
+                30.0
+              ]
+            },
+            {
+              "kind": "walk",
+              "landing": [
+                528.0,
+                78.0
+              ],
+              "support_id": "basin"
+            },
+            {
+              "from_support_id": "basin",
+              "kind": "jump_rise",
+              "landing": [
+                592.0,
+                30.0
+              ],
+              "support_id": "low_exit",
+              "takeoff": [
+                528.0,
+                78.0
+              ]
+            },
+            {
+              "from_support_id": "low_exit",
+              "kind": "jump_rise",
+              "landing": [
+                736.0,
+                -18.0
+              ],
+              "support_id": "exit",
+              "takeoff": [
+                656.0,
+                30.0
+              ]
+            },
+            {
+              "kind": "walk",
+              "landing": [
+                1000.0,
+                -18.0
+              ],
+              "support_id": "exit"
+            }
+          ],
+          "recovery": [
+            {
+              "kind": "walk",
+              "landing": [
+                224.0,
+                78.0
+              ],
+              "support_id": "basin"
+            },
+            {
+              "from_support_id": "basin",
+              "kind": "jump_rise",
+              "landing": [
+                208.0,
+                30.0
+              ],
+              "support_id": "return_mushroom",
+              "takeoff": [
+                224.0,
+                78.0
+              ]
+            },
+            {
+              "from_support_id": "return_mushroom",
+              "kind": "jump_rise",
+              "landing": [
+                160.0,
+                -18.0
+              ],
+              "support_id": "entry",
+              "takeoff": [
+                192.0,
+                30.0
+              ]
+            }
+          ],
+          "returning": [
+            {
+              "from_support_id": "exit",
+              "kind": "drop_through",
+              "landing": [
+                640.0,
+                30.0
+              ],
+              "path": [
+                [
+                  720.0,
+                  -18.0
+                ],
+                [
+                  640.0,
+                  -18.0
+                ],
+                [
+                  640.0,
+                  30.0
+                ]
+              ],
+              "support_id": "low_exit",
+              "takeoff": [
+                720.0,
+                -18.0
+              ]
+            },
+            {
+              "from_support_id": "low_exit",
+              "kind": "drop_through",
+              "landing": [
+                480.0,
+                78.0
+              ],
+              "path": [
+                [
+                  528.0,
+                  30.0
+                ],
+                [
+                  480.0,
+                  30.0
+                ],
+                [
+                  480.0,
+                  78.0
+                ]
+              ],
+              "support_id": "basin",
+              "takeoff": [
+                528.0,
+                30.0
+              ]
+            },
+            {
+              "kind": "walk",
+              "landing": [
+                224.0,
+                78.0
+              ],
+              "support_id": "basin"
+            },
+            {
+              "from_support_id": "basin",
+              "kind": "jump_rise",
+              "landing": [
+                208.0,
+                30.0
+              ],
+              "support_id": "return_mushroom",
+              "takeoff": [
+                224.0,
+                78.0
+              ]
+            },
+            {
+              "from_support_id": "return_mushroom",
+              "kind": "jump_rise",
+              "landing": [
+                160.0,
+                -18.0
+              ],
+              "support_id": "entry",
+              "takeoff": [
+                192.0,
+                30.0
+              ]
+            }
+          ]
+        },
+        "spawn": [
+          40.0,
+          -18.0
+        ],
+        "steps": [
+          {
+            "from_support_id": "entry",
+            "kind": "drop_through",
+            "landing": [
+              256.0,
+              30.0
+            ],
+            "path": [
+              [
+                208.0,
+                -18.0
+              ],
+              [
+                256.0,
+                -18.0
+              ],
+              [
+                256.0,
+                30.0
+              ]
+            ],
+            "support_id": "return_mushroom",
+            "takeoff": [
+              208.0,
+              -18.0
+            ]
+          },
+          {
+            "from_support_id": "return_mushroom",
+            "kind": "drop_through",
+            "landing": [
+              320.0,
+              78.0
+            ],
+            "path": [
+              [
+                256.0,
+                30.0
+              ],
+              [
+                320.0,
+                30.0
+              ],
+              [
+                320.0,
+                78.0
+              ]
+            ],
+            "support_id": "basin",
+            "takeoff": [
+              256.0,
+              30.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              528.0,
+              78.0
+            ],
+            "support_id": "basin"
+          },
+          {
+            "from_support_id": "basin",
+            "kind": "jump_rise",
+            "landing": [
+              592.0,
+              30.0
+            ],
+            "support_id": "low_exit",
+            "takeoff": [
+              528.0,
+              78.0
+            ]
+          },
+          {
+            "from_support_id": "low_exit",
+            "kind": "jump_rise",
+            "landing": [
+              736.0,
+              -18.0
+            ],
+            "support_id": "exit",
+            "takeoff": [
+              656.0,
+              30.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              1000.0,
+              -18.0
+            ],
+            "support_id": "exit"
+          }
+        ],
+        "version": "forest-exploration-modules-v1",
+        "width": 1040.0,
+        "world_bounds": [
+          0.0,
+          -200.0,
+          1040.0,
+          460.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            40.0,
+            -18.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            1000.0,
+            -18.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 3
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_exploration_modules.gd",
+          "path": "library/source/scripts/generation/forest_exploration_modules.gd",
+          "sha256": "951123639e721c5f5f422b9c3b1c06bbcd04d9fcb46b4dc82e39cecefc372641",
+          "gitBlobSha": "bde620e0a7d5e8a3a09fdb63e7bc828d300bb367",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "b1acb7cf5eef09795cd93cc3c0a6ba94ae05cbd7dea93005fb80b4af06b24204",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [],
+      "module_sha256": "f6668c47c0c798ebd1b715f4c5a29e62343f5155b204e5d2c18c2e9ebf27fe8d"
+    }
+  ]
+}

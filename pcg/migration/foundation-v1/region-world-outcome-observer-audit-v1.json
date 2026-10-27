@@ -1,0 +1,138 @@
+{
+  "schema": "pcg/region-world-outcome-observer-audit/v1",
+  "status": "DRAFT_READY_NOT_ACTIVATED",
+  "helper": {
+    "path": "pcg/migration/region_outcomes.py",
+    "sha256": "babc5a02aa6f7a4142d942a37aaefd694c21465fd6dabac4ea47d9d404716b73"
+  },
+  "patch": {
+    "schema": "pcg/region-world-outcome-patch/v1",
+    "status": "DRAFT_NOT_APPLIED",
+    "basePhysicsSha256": "ffafcaeb173fae41419668f2247d86d1e9e32ab45feaeda3c1ba286735df08a3",
+    "patch": "pcg/migration/patches/region-world-outcome-v1.patch",
+    "patchSha256": "1715ce1f94336425985dc9969fdfdaacbe8c0d4fefdfff550b87d5ad7675b3b0",
+    "helper": "pcg/migration/region_outcomes.py",
+    "helperSha256": "babc5a02aa6f7a4142d942a37aaefd694c21465fd6dabac4ea47d9d404716b73",
+    "activation": "After root coordinated quiet window only; old no-requirement cases unchanged."
+  },
+  "actualNativeReceipts": [
+    {
+      "receipt": {
+        "path": "pcg/results/foundation-migration-native-package-v5-release-1j2s/package/load-evidence/case-0/receipt.json",
+        "sha256": "2e4bd540a4409254bc80d11c6c5fdc41c8608660a2ce534f97336fd8e34d5b8d"
+      },
+      "cases": {
+        "path": "pcg/results/foundation-migration-native-package-v5-release-1j2s/cases.json",
+        "sha256": "825d018054dbf09a296f9831fc72cf3d08bbfdf47ef2de3a324c932a0f40366b"
+      },
+      "actualNativeOutcome": {
+        "ok": true,
+        "reasons": [],
+        "required": [
+          {
+            "id": "native-or",
+            "kind": "coin"
+          }
+        ],
+        "transactions": [
+          {
+            "id": "native-or",
+            "kind": "coin",
+            "amount": 6,
+            "interactionEventIndex": 0,
+            "choiceEventIndex": 1,
+            "interactionFrame": 0,
+            "choiceFrame": 0,
+            "beforeWalletMeta": [
+              0,
+              0
+            ],
+            "afterWalletMeta": [
+              6,
+              0
+            ],
+            "deltaWalletMeta": [
+              6,
+              0
+            ],
+            "selected": "native-demo-instance/native-or/resource/coin",
+            "balancesConsumer": "Original RunWallet.balance and MetaProgression.snapshot().notes",
+            "prebalanceSource": "Accepted native_region_interact event, before native choice; not inferred from frame0."
+          }
+        ],
+        "scope": "Exact required same-chest/same-kind OR outcome; another valid resource choice is a different outcome."
+      }
+    },
+    {
+      "receipt": {
+        "path": "pcg/results/foundation-migration-native-package-v5-release-2j2s/package/load-evidence/case-0/receipt.json",
+        "sha256": "3086afc543a02eaa4cb63624c1b38ac6df26de513c7822211fdd55aa06c31873"
+      },
+      "cases": {
+        "path": "pcg/results/foundation-migration-native-package-v5-release-2j2s/cases.json",
+        "sha256": "9800e884a4fd24c0ba1000a31b31ee0a676feeebc69ec414339b0d43bcfd7b9c"
+      },
+      "actualNativeOutcome": {
+        "ok": true,
+        "reasons": [],
+        "required": [
+          {
+            "id": "native-or",
+            "kind": "note"
+          }
+        ],
+        "transactions": [
+          {
+            "id": "native-or",
+            "kind": "note",
+            "amount": 2,
+            "interactionEventIndex": 0,
+            "choiceEventIndex": 1,
+            "interactionFrame": 0,
+            "choiceFrame": 0,
+            "beforeWalletMeta": [
+              0,
+              0
+            ],
+            "afterWalletMeta": [
+              0,
+              2
+            ],
+            "deltaWalletMeta": [
+              0,
+              2
+            ],
+            "selected": "native-demo-instance/native-or/resource/note",
+            "balancesConsumer": "Original RunWallet.balance and MetaProgression.snapshot().notes",
+            "prebalanceSource": "Accepted native_region_interact event, before native choice; not inferred from frame0."
+          }
+        ],
+        "scope": "Exact required same-chest/same-kind OR outcome; another valid resource choice is a different outcome."
+      }
+    }
+  ],
+  "testCommand": "python3 -m unittest pcg.migration.tests.test_region_outcomes -v",
+  "testsPassed": 7,
+  "stagedDispatchTest": "Patched code loaded in separate Python namespace: valid real native reward accepts same-outcome and continuous_exit; omitted actual claim rejects both; all no-requirement legacy outputs exactly equal original.",
+  "invalidMutations": [
+    "missing claim",
+    "wrong chestID",
+    "wrong selected resource kind",
+    "wrong resource amount",
+    "claimed without accepted native event",
+    "event without actual native wallet/meta balance",
+    "wrong native offerID",
+    "both OR currencies granted",
+    "forged prebalance",
+    "unaccepted event",
+    "proxy consumer",
+    "resource reset",
+    "modal unfinished",
+    "source amount changed",
+    "no pre-choice interaction"
+  ],
+  "positiveNonzeroInitialWallet": "Actual native services receipt note choice: Wallet6/Meta0→Wallet6/Meta2, using accepted interact BEFORE choose in event order even within frame0.",
+  "newPhysicsAttempts": 0,
+  "publicPhysicsEdited": false,
+  "v12NewSimulation": "NOT_RUN_BY_THIS_AUDIT"
+}

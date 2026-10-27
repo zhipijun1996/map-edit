@@ -1,0 +1,310 @@
+{
+  "schema": "pcg/original-game-source-package/v1",
+  "sourceType": "original_game",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "contentVersion": "sha256:3a397d2177beb513a96ceaea40ce9f7fe06bb9239da5f7f4c01ad215f93298ef",
+  "document_sha256": "dca6ab937bd89f26991a18df492612ba93d3513dd6bfc0bf118ebc9756340eba",
+  "cases_sha256": "fee989a70e5cb7d85266356c8f12c4d3303efb5ecbca9203b7096ce37a326b11",
+  "technical_status": "source_import_unverified",
+  "evidence": [],
+  "specification": {
+    "id": "game-forest-exploration-modules-root-meadow"
+  },
+  "originalSource": {
+    "id": "forest_exploration_modules__root_meadow",
+    "kind": "forest",
+    "title": "宽根草甸",
+    "sourcePath": "scripts/generation/forest_exploration_modules.gd",
+    "sourceDocument": "library/modules/forest_exploration_modules__root_meadow.json",
+    "sourceDocumentSha256": "b4c164b58e0ec99d8c4d6cff76d73137f218c10642fb4c8e789d73bbc0e6bae3",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "sourceArtifact": {
+      "kind": "generation",
+      "originalPath": "scripts/generation/forest_exploration_modules.gd",
+      "path": "library/source/scripts/generation/forest_exploration_modules.gd",
+      "sha256": "951123639e721c5f5f422b9c3b1c06bbcd04d9fcb46b4dc82e39cecefc372641",
+      "gitBlobSha": "bde620e0a7d5e8a3a09fdb63e7bc828d300bb367",
+      "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+      "action": "reused_exact_existing_copy"
+    },
+    "method": "build",
+    "arguments": [
+      "root_meadow"
+    ],
+    "data": {
+      "action_program": [],
+      "admission": {
+        "geometry": "candidate",
+        "motor": "unverified",
+        "production_pool": false,
+        "visual": "unverified"
+      },
+      "danger_faces": [],
+      "danger_hosts": [],
+      "danger_surfaces": [],
+      "dangers": [],
+      "difficulty": "easy",
+      "entry_support_id": "entry",
+      "exit_support_id": "exit",
+      "goal": [
+        840.0,
+        -18.0
+      ],
+      "height": 460.0,
+      "hook_anchors": [],
+      "id": "root_meadow",
+      "identity": "broad horizontal roots, two short gaps and a low crest",
+      "main_route_kind": "ordinary_sequence",
+      "platforms": [
+        {
+          "id": "entry",
+          "one_way": false,
+          "rect": [
+            0.0,
+            0.0,
+            240.0,
+            48.0
+          ]
+        },
+        {
+          "id": "low_crest",
+          "one_way": false,
+          "rect": [
+            312.0,
+            -32.0,
+            224.0,
+            48.0
+          ]
+        },
+        {
+          "id": "exit",
+          "one_way": false,
+          "rect": [
+            608.0,
+            0.0,
+            272.0,
+            48.0
+          ]
+        },
+        {
+          "id": "catch",
+          "one_way": false,
+          "rect": [
+            -160.0,
+            144.0,
+            1040.0,
+            40.0
+          ]
+        },
+        {
+          "id": "catch_step_low",
+          "one_way": true,
+          "rect": [
+            -144.0,
+            96.0,
+            128.0,
+            16.0
+          ]
+        },
+        {
+          "id": "catch_step_high",
+          "one_way": true,
+          "rect": [
+            -128.0,
+            48.0,
+            128.0,
+            16.0
+          ]
+        }
+      ],
+      "requires": [
+        "grapple"
+      ],
+      "resource_contract": {
+        "health_override": false,
+        "new_abilities": false,
+        "physics_override": false,
+        "shot_refill_override": false
+      },
+      "reward_position": [
+        432.0,
+        -50.0
+      ],
+      "reward_support_id": "low_crest",
+      "risk_reward": {
+        "coins": 1,
+        "notes": 0,
+        "optional": false,
+        "return_required": true,
+        "tier": "low"
+      },
+      "routes": {
+        "main": [
+          {
+            "kind": "walk",
+            "landing": [
+              208.0,
+              -18.0
+            ],
+            "support_id": "entry"
+          },
+          {
+            "from_support_id": "entry",
+            "kind": "jump_gap",
+            "landing": [
+              344.0,
+              -50.0
+            ],
+            "support_id": "low_crest",
+            "takeoff": [
+              208.0,
+              -18.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              504.0,
+              -50.0
+            ],
+            "support_id": "low_crest"
+          },
+          {
+            "from_support_id": "low_crest",
+            "kind": "jump_gap",
+            "landing": [
+              640.0,
+              -18.0
+            ],
+            "support_id": "exit",
+            "takeoff": [
+              504.0,
+              -50.0
+            ]
+          },
+          {
+            "kind": "walk",
+            "landing": [
+              840.0,
+              -18.0
+            ],
+            "support_id": "exit"
+          }
+        ],
+        "recovery": [
+          {
+            "kind": "walk",
+            "landing": [
+              -80.0,
+              126.0
+            ],
+            "support_id": "catch"
+          },
+          {
+            "from_support_id": "catch",
+            "kind": "jump_rise",
+            "landing": [
+              -80.0,
+              78.0
+            ],
+            "support_id": "catch_step_low",
+            "takeoff": [
+              -80.0,
+              126.0
+            ]
+          },
+          {
+            "from_support_id": "catch_step_low",
+            "kind": "jump_rise",
+            "landing": [
+              -64.0,
+              30.0
+            ],
+            "support_id": "catch_step_high",
+            "takeoff": [
+              -80.0,
+              78.0
+            ]
+          },
+          {
+            "from_support_id": "catch_step_high",
+            "kind": "jump_rise",
+            "landing": [
+              32.0,
+              -18.0
+            ],
+            "support_id": "entry",
+            "takeoff": [
+              -32.0,
+              30.0
+            ]
+          }
+        ]
+      },
+      "spawn": [
+        40.0,
+        -18.0
+      ],
+      "steps": [
+        {
+          "kind": "walk",
+          "landing": [
+            208.0,
+            -18.0
+          ],
+          "support_id": "entry"
+        },
+        {
+          "from_support_id": "entry",
+          "kind": "jump_gap",
+          "landing": [
+            344.0,
+            -50.0
+          ],
+          "support_id": "low_crest",
+          "takeoff": [
+            208.0,
+            -18.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            504.0,
+            -50.0
+          ],
+          "support_id": "low_crest"
+        },
+        {
+          "from_support_id": "low_crest",
+          "kind": "jump_gap",
+          "landing": [
+            640.0,
+            -18.0
+          ],
+          "support_id": "exit",
+          "takeoff": [
+            504.0,
+            -50.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            840.0,
+            -18.0
+          ],
+          "support_id": "exit"
+        }
+      ],
+      "version": "forest-exploration-modules-v1",
+      "width": 880.0,
+      "world_bounds": [
+        -160.0,
+        -240.0,
+        1040.0,
+        460.0
+      ]
+    }
+  }
+}

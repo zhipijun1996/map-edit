@@ -1,3 +1,17 @@
+# 当前输出规范入口：Foundation 迁移
+
+以根 [MAP_FOUNDATION.md](../MAP_FOUNDATION.md)为强制模型，[MAP_GENERATION_GUIDE.md](../MAP_GENERATION_GUIDE.md)为推荐，执行 [Module迁移skill](../.agents/skills/pcg-module-migration/SKILL.md)。当前先迁移本仓库既有Module，再主游戏；新增生产暂停、旧Map生成器退役，不实现新Map。
+
+目标交付须明确：基础模板/版本及来源SHA、完整正整数W×H Block矩形（默认128像素可配置）、矩形外边BoundaryBlock外侧边中心Port、AIR/ROCK/ONE_WAY_PLATFORM与初始INPUT/OUTPUT/INOUT、N×N含自环/每格多Route、必要能力/动作/位移/难度/时长/资源/初态/动作接口/实证、允许镜像、部分连接的认证封口及实际有效Route集合。ROCK仅左右；AIR底边无INPUT/INOUT进入；顶部AIR OUTPUT无合法同类底边INPUT，不能作必接上出口。镜像同base，权限不交换、矩阵不转置；封口真阻断而非少量伤害，不破坏保留Route。规划不能删真实额外Route。
+
+这些是语义要求，不声明旧 `generationContract`、schema、Python/JS或迁移工具已经支持。旧Map Notes文件保留来源兼容；新字段/适配要以实际共享实现与真实证据为准，不新造平行几何、库或物理。未来在线仅静态能力/初始权限，不传播HP/速度/资源/机关步骤。
+
+根 `modules/`是技术合格可复用迁移内容；`modules-recycle/`保存事实已确认的重复非代表/明确排除项；近似待审、缺口、失败原处保留。先验证目标、回读/引用/可恢复归档，再归档原件；技术、AI、人评、试玩和生产认可分开。不commit、不发布。
+
+## 以下为历史输出合同（原文保留，不覆盖当前模型）
+
+下文不规则占用、N×(N−1)、自环不允许、在线状态传递、旧生产入口等均属旧系统资料；不能继续作为新迁移准入规则。其历史物理身份保留，不改标签为Foundation通过。
+
 # Module / Macro 输出契约 v1
 
 ## 当前 Map 接口增量（2026-10-27）
