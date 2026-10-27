@@ -2,6 +2,7 @@
 import copy,unittest
 from pcg.map_directed.direct_join.assemble import assemble_modules
 from pcg.prototype.plains.content_routes import adapt
+from pcg.prototype.factory.core.quality import digest
 
 class ContentContracts(unittest.TestCase):
     def module(self,key,x,normal):
@@ -14,12 +15,27 @@ class ContentContracts(unittest.TestCase):
 
     def test_hazard_hosts_use_global_platform_index_after_placement(self):
         a=self.module('a',0,[1,0]);b=self.module('b',64,[-1,0])
-        g=dict(entry='a',goal='b',edges=[dict(id='e',**{'from':'a','to':'b'},bidirectional=True)])
+        g=dict(entry='a',goal='b',nodes=[dict(id='a'),dict(id='b')],edges=[dict(id='e',**{'from':'a','to':'b'},bidirectional=True)])
         c=assemble_modules(g,[a,b],[dict(id='e',kind='side')])
         self.assertEqual(c['case']['thorns'][1]['platform_index'],3)
         self.assertEqual(c['case']['thorns'][1]['surface_id'],'b/pit')
         self.assertEqual(c['case']['hazards'][1],[80,110,12,8])
         self.assertEqual(b['case']['thorns'][0]['platform_index'],1)
+
+    def test_real_assembler_rejects_a_blueprint_node_with_no_module(self):
+        a=self.module('a',0,[1,0]);b=self.module('b',64,[-1,0])
+        g=dict(entry='a',goal='b',nodes=[dict(id='a'),dict(id='b'),dict(id='missing')],edges=[dict(id='e',**{'from':'a','to':'b'},bidirectional=True)])
+        with self.assertRaisesRegex(ValueError,'blueprint_placement_nodes_mismatch'):
+            assemble_modules(g,[a,b],[dict(id='e',kind='side')])
+
+    def test_assembled_graph_keeps_the_actual_input_binding_after_caller_edits(self):
+        a=self.module('a',0,[1,0]);b=self.module('b',64,[-1,0])
+        g=dict(entry='a',goal='b',source='actual-demanded-graph',nodes=[dict(id='a'),dict(id='b')],edges=[dict(id='e',**{'from':'a','to':'b'},bidirectional=True)])
+        expected=digest(g);c=assemble_modules(g,[a,b],[dict(id='e',kind='side')]);g['edges'].clear()
+        self.assertEqual(c['source']['graph_sha256'],expected)
+        self.assertEqual(c['source']['graph_source'],'actual-demanded-graph')
+        self.assertEqual(len(c['exploration_graph']['edges']),1)
+        self.assertTrue(c['blueprint_correspondence']['ok'])
 
     def test_unsupported_challenge_is_a_gap_not_generic_success(self):
         m=self.module('a',0,[1,0]);s=copy.deepcopy(m['spec'])

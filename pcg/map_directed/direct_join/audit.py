@@ -2,6 +2,11 @@
 from pcg.prototype.factory.core.quality import digest
 
 def audit(c):
+ if 'exploration_graph'in c:
+  from ..block_grid.policy import materialization_review
+  if c.get('source',{}).get('graph_sha256')!=digest(c['exploration_graph']):raise ValueError('input_graph_binding_drift')
+  correspondence=materialization_review(c['exploration_graph'],c)
+  if not correspondence['ok']:raise ValueError('blueprint_materialization_mismatch/'+','.join(correspondence['errors']))
  modules={m['id']:m for m in c['modules']};platforms=c['case']['platforms'];origins=c['object_provenance']
  if len(platforms)!=len(origins):raise ValueError('orphan_map_platform')
  used=set()

@@ -5,6 +5,7 @@ from .policy import load,review,demands
 from ..director import REPO,regional
 from ..run import write
 from pcg.prototype.workshop.production_loop import compile_request
+from pcg.prototype.factory.core.quality import digest
 
 def allocate(g,seed):
     rng=random.Random(seed);branches=g['branches'];sites=[]
@@ -37,6 +38,7 @@ def run(name,seed,policy_path=None):
     if not selected:
         write(out/'summary.json',dict(status='unsatisfied_within_design_budget',physics='NOT_RUN',may_delete_required_routes=False,production_admitted=False));return out
     g,audit=selected;requests=demands(g,p);write(out/'exploration.json',g);write(out/'challenge-specifications.json',requests);write(out/'policy-review.json',audit)
+    write(out/'input-binding.json',dict(policy_sha256=digest(p),exploration_sha256=digest(g),challenge_specifications_sha256=digest(requests),physical_input_must_equal_exploration=True))
     # Original Workshop entry handles unregistered capabilities/mechanics by
     # needs_design, rather than inventing equivalent-looking content.
     gaps=[]
@@ -45,9 +47,9 @@ def run(name,seed,policy_path=None):
         response=compile_request(dict(recipe=recipe,specifications=[s]))
         gaps.append(dict(request=s['id'],recipe=recipe,status=response['status'],gaps=response.get('gaps',[]),required_ports=s['ports']['count']))
     write(out/'generator-feedback.json',gaps)
-    write(out/'summary.json',dict(status='logical_targets_satisfied_content_pending',modules=len(g['nodes']),branches=len(g['branches']),
+    write(out/'summary.json',dict(status='logical_targets_satisfied_content_pending',planned_placement_slots=len(g['nodes']),module_instances='NOT_MATERIALIZED',branches=len(g['branches']),
         return_kinds=sorted({b['kind']for b in g['branches']}),principal_routes=len(audit['routes']),physics='NOT_RUN',
-        production_admitted=False,scope='Actual R2 logical design only; no abstract layout or Module success claimed'))
+        regional_requirements_satisfied=False,production_admitted=False,scope='Actual R2 logical design only; unresolved Generator requests are gaps, not successful module creation; node slots are not measured playable Module instances'))
     return out
 
 if __name__=='__main__':

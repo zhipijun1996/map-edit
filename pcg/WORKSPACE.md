@@ -1,3 +1,15 @@
+# 当前Map任务入口（2026-10-27）
+
+先读[需求核对与实施路径](../docs/l4-mapgen/map-requirements-reset-v1.md)、[Map Director skill](../.agents/skills/pcg-map-director/SKILL.md)和`map_directed/block_grid/plains-policy.json`。五段串联骨架、上下路槽位选型、对应路线/录像及旧小图生成已删除，无兼容开关和回退；旧归档仅保留证据。
+
+当前仅可用`python3 -m pcg.map_directed.block_grid.plan --name fresh-plan --seed fixed-seed`生成逻辑网络与需求。通用Graph→候选域→空间→真实拼装尚待接通，不得接回固定模板。策略已补齐三类支路覆盖、主路线真实性、返回/汇入目标检查；assembler/audit已接输入图哈希与节点/边/端口对应。旧43图设计拒绝。新计划不能冒充实际Module或可玩区域。
+
+本轮审计`generation/maps/map-requirements-review-v2`三个固定Seed：42/43/41逻辑槽位，3/2/3主路，各6支路且三类齐全，空间和Godot均NOT_RUN。源变更使旧缓存需要按新版本重新验，不继承历史10/10或43/43复用结论。
+
+以下均为历史工作记录。“最新/当前”指各记录当时阶段；与页首当前Map约束冲突时，以页首及用户最新要求为准。正式物理基线与来源、输出合同等通用规定仍保留。
+
+---
+
 **全库Block适配与43实例整图，设计验收仍未通过**：见[本轮报告](../docs/l4-mapgen/content-domains-region-v1.md)。94父版本全部审计，40取得有限接口见证、54阻塞；非全库适配完成。全库条件域→整数Block CSP→标准文档→真实拼装43实例/47接缝，Map补地形0，5分叉汇合和3金币折返支路。4常规+6新扰动通过，70/70声明方向覆盖；两片7262物理帧严格一致。仍五段重复串联双路、段间单向，自动路线98–128秒，未达自由网状/7–10分钟区域/Boss/趣味认可。旧7实例留出8/11及全部失败保留，7个旧地图payload技术撤回；新43候选也不准入生产。原始源/所有失败/候选/媒体恢复content-domains-v1。
 
 **实际形状空间搜索v1，鲁棒验收未通过**：见 [real-shape-search-v1](../docs/l4-mapgen/real-shape-search-v1.md)。五张8 Macro整图、9零间隙接缝，Map补地形0；实际形状/端口/门体/齿轮扫掠/身体轨迹与落地资源条件参与有界CSP。常规30/30，独立扰动27/30，配对旧布局28/30，不能宣布稳定更优。只有4空间签名/3去镜像岸体组合/1拓扑。真实阻塞反例、三段严格原生录像、完整失败均保留。已合入main7bea81d新仓库浏览；算法冻结6479908。恢复shape-search-calibration-v1、shape-search-source-v1与shape-search-results-v1，通用关系UNKNOWN、生产准入关闭。

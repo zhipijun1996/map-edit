@@ -14,6 +14,17 @@
 - 后续交付Module/Macro沿用Map Notes `gunman-rush-level-sketch/v1`并附`generationContract`，执行`pcg/OUTPUT-CONTRACT.md`及`module-contract.js`检查。UNKNOWN不准入拼装；逐方向、状态和版本绑定，不能由单段见证推断回程/Macro/整图。
 
 
+## 当前Map工作约束（2026-10-27）
+
+- L4任务先读[Map Director skill](.agents/skills/pcg-map-director/SKILL.md)与[需求重新核对/实施路径](docs/l4-mapgen/map-requirements-reset-v1.md)。当前策略来源唯一为`pcg/map_directed/block_grid/plains-policy.json`。
+- 五段串联骨架及其旧小图生成、专用选型、路线和展示入口已从当前执行路径删除，不保留legacy开关、兼容分支或回退。历史代码/归档只作证据，不可恢复或改名作为新Map方案。
+- `block_grid.plan`仅是现有逻辑入口，通用Graph物化仍待实现。不得用另一个固定样图假装接通；不能把规划节点数、物理通过率当作区域设计通过。
+- 必须保持同图驱动、双/三主路与三种奖励支路、实际回程/汇入、独立奖励预算；全库按能力/动作/Port/状态/形状建立候选域，不写上下路或家族固定名单。
+- 检查设计→内容→空间→整图物理→质量/多Seed→人工观感；缺项保留UNKNOWN/NOT_RUN，不能只追加报告而不接实际入口。空间搜索与Module补缺均有界，失败不删关键职责、不补平台掩盖问题。
+- 新源改变后历史物理/候选保持原冻结身份，不为维持缓存命中而撤销必要修复。当前并无符合全部目标的可玩区域。
+
+## 历史阶段记录（不能作为当前Map生成入口）
+
 **岩井回环空间原型v1**：见[完整报告](docs/l4-mapgen/contact-grammar-v1.md)。三Seed 12/16实例、13/18零间隙接缝，37/37（12常规、18新扰动、7回归），每图2箱48币；两段真实原生录像3187帧严格一致。仅一种有限3/4层空间文法，5父版本，尚无128网格迁移、人工趣味/正式生产准入。旧25/30及28/35失败保留；恢复contact-grammar-v1归档。
 
 **Graph + Block128 + Module第一版**：见[分析与真实证据](docs/l4-mapgen/graph-block-module-v1.md)和[增量契约](docs/l4-mapgen/graph-block-module-contract-v1.md)。128网格/实际轮廓/边界中心Port接入原CSP、标准Module文档与Godot Harness，三个有限Seed 33/33整图，16/16精确需求热库复用后5/5重验；Map补平台0。当前仅两种拓扑，0与1同摆放，仍有重复岩井，未证明更有趣。完整44节点蓝图仍NOT_RUN物理，5 Port枢纽/主要道具/实际Boss/人类分钟未打通，不作生产准入。恢复block-grid-v1归档。

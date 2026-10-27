@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import unittest
 from pcg.map_directed.direct_join.audit import audit
+from pcg.prototype.factory.core.quality import digest
 
 ROOT=Path(__file__).resolve().parents[3]
 
@@ -19,6 +20,21 @@ class DirectContactGuardTests(unittest.TestCase):
         changed=copy.deepcopy(self.fixture)
         changed['case']['platforms'].append([50,50,32,8])
         with self.assertRaisesRegex(ValueError,'orphan_map_platform'):audit(changed)
+
+    def graph_fixture(self):
+        c=copy.deepcopy(self.fixture)
+        c['exploration_graph']=dict(nodes=[dict(id=m['id'])for m in c['modules']],edges=[dict(id=s['id'],**{'from':s['from_module'],'to':s['to_module']})for s in c['seams']])
+        c['source']=dict(graph_sha256=digest(c['exploration_graph']))
+        return c
+
+    def test_post_assembly_graph_change_is_rejected_by_the_existing_auditor(self):
+        c=self.graph_fixture();c['exploration_graph']['edges'].clear()
+        with self.assertRaisesRegex(ValueError,'input_graph_binding_drift'):audit(c)
+
+    def test_existing_auditor_rejects_a_missing_node_even_with_matching_graph_hash(self):
+        c=self.graph_fixture();c['exploration_graph']['nodes'].append(dict(id='unrealized'))
+        c['source']['graph_sha256']=digest(c['exploration_graph'])
+        with self.assertRaisesRegex(ValueError,'blueprint_placement_nodes_mismatch'):audit(c)
 
     def test_one_unit_seam_gap_is_rejected(self):
         changed=copy.deepcopy(self.fixture)

@@ -20,6 +20,7 @@ def compile_map(layout_path, library_modules=None):
 
 def assemble_modules(graph,modules,seams):
  """Shared exact-object placer; bounding boxes need not form closed rooms."""
+ input_graph=copy.deepcopy(graph)
  by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards','reward_sites','shop_sites']}
  shared={}
  for seam in seams:
@@ -143,7 +144,11 @@ def assemble_modules(graph,modules,seams):
   wall_platform_indices=[],world_bounds=[min(xs)-32,min(ys)-96,max(xs)-min(xs)+64,max(ys)-min(ys)+192],spawn=nodes[graph['entry']]['center']['position'],
   entry_port=nodes[graph['entry']]['center']['position'],exit_port=nodes[graph['goal']]['center']['position'],goal=nodes[graph['goal']]['center']['region'],
   max_frames=3600,control_plan=[],trace_all=False,**other)
- return dict(schema='pcg/direct-joined-module-map/v1',case=case,nodes=nodes,edges=edges,gate_specs=gates,modules=modules,
-  exploration_graph=graph,source={'graph_source':'existing region-network-v2/plains-R2-0','graph_sha256':digest(graph)},
+ result=dict(schema='pcg/direct-joined-module-map/v1',case=case,nodes=nodes,edges=edges,gate_specs=gates,modules=modules,
+  exploration_graph=copy.deepcopy(graph),source={'graph_source':graph.get('source','caller-supplied exploration graph'),'graph_sha256':digest(input_graph)},
   seams=seamproof,object_provenance=origin,status='exact contact assembly; physical validation pending',
   hard_checks={'modules':len(modules),'connections':len(seams),'all_ports_coincident':True,'map_added_platforms':0,'connector_modules':0,'inter_module_platform_chains':0,'all_platforms_bound_to_module_versions':len(origin)==len(platforms)})
+ from ..block_grid.policy import materialization_review
+ result['blueprint_correspondence']=materialization_review(input_graph,result)
+ if not result['blueprint_correspondence']['ok']:raise ValueError('blueprint_materialization_mismatch/'+','.join(result['blueprint_correspondence']['errors']))
+ return result
