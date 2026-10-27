@@ -77,3 +77,9 @@ python3 -m unittest discover -s pcg/map_directed/tests -v
 - 浏览器失败包括相对资源路径、手动UI顶层状态字段缺失、动态加载的尖刺TileSet未打包，均单独保留。修正消费者/资源闭包后，`graph-map-web-smoke-v5`通过实际WebGL、原键盘移动/跳跃/射击/重试/整图检查。手动UI适配仅展示原真实网络/钱包，不改变动作、碰撞或奖励服务。
 - `graph-map-bounded-seeds-v1`的3个预声明新Seed全部空间预算失败，整图物理NOT_RUN；不能据单一成功样图对外称稳定生成器。
 - 原正式游戏870保护文件仍按12f6cb0逐SHA一致，游戏本体未改。原生影片的软件录制耗时不代表Runtime帧率；本阶段仍为离线研究、未满足Runtime成本目标。
+
+## 审阅与恢复
+
+[完整地图、路线对应和三段原速录像](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-GRAPH-MAP-01/9174ee9c4819291250aa08aef12b20ee8a43e921/69123cedd3b9/report.html) · [同一地图手动试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-GRAPH-MAP-01/9174ee9c4819291250aa08aef12b20ee8a43e921/69123cedd3b9/index.html)。公开9个文件逐字节SHA验证，实际公网WebGL/键盘/跳跃/射击/重试/整图检查通过；非仅本地加载。
+
+原件恢复：`python3 pcg/tools/restore_archive.py graph-map-materialization-v1 --extract`。归档27783路径、2420唯一原件、241862370字节，分片/整体/每个条目SHA均通过；晚于归档的公开发布与浏览器收据位于`generation/maps/graph-map-review-v2`。第一次上传80MB包被GitHub Blob API大小限制拒绝，按原工具移除已有导入产物对应的冗余图像/音频源，保留原渲染资源字节，39.95MB传输包重新真实浏览器验证后发布；未改变世界或物理。
