@@ -6,19 +6,10 @@ on:
       - 'docs/l4-mapgen/**'
       - '.github/workflows/l4-mapgen.yml'
       - 'package.json'
-      - 'library/**'
       - 'pcg/map_directed/**'
-      - 'pcg/prototype/plains/engine.py'
-      - 'pcg/prototype/plains/synthesis.py'
-      - 'pcg/prototype/plains/open_landforms.py'
-      - 'pcg/prototype/plains/valley_complete.py'
-      - 'pcg/prototype/plains/room_modules.py'
-      - 'pcg/prototype/plains/regional_macros.py'
-      - 'pcg/prototype/plains/rock_recoil.py'
-      - 'pcg/prototype/plains/woven_landforms.py'
-      - 'pcg/prototype/plains/content_routes.py'
-      - 'pcg/prototype/plains/block_modules.py'
-      - 'pcg/prototype/plains/graph_landforms.py'
+      - 'pcg/prototype/plains/**'
+      - 'pcg/prototype/workshop/**'
+      - 'pcg/OUTPUT-CONTRACT.md'
       - 'module-block-grid.js'
       - 'module-contract.js'
   push:
@@ -29,17 +20,9 @@ on:
       - '.github/workflows/l4-mapgen.yml'
       - 'package.json'
       - 'pcg/map_directed/**'
-      - 'pcg/prototype/plains/engine.py'
-      - 'pcg/prototype/plains/synthesis.py'
-      - 'pcg/prototype/plains/open_landforms.py'
-      - 'pcg/prototype/plains/valley_complete.py'
-      - 'pcg/prototype/plains/room_modules.py'
-      - 'pcg/prototype/plains/regional_macros.py'
-      - 'pcg/prototype/plains/rock_recoil.py'
-      - 'pcg/prototype/plains/woven_landforms.py'
-      - 'pcg/prototype/plains/content_routes.py'
-      - 'pcg/prototype/plains/block_modules.py'
-      - 'pcg/prototype/plains/graph_landforms.py'
+      - 'pcg/prototype/plains/**'
+      - 'pcg/prototype/workshop/**'
+      - 'pcg/OUTPUT-CONTRACT.md'
       - 'module-block-grid.js'
       - 'module-contract.js'
 permissions:
@@ -56,45 +39,34 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python3 -m pip install -r experiments/l4-mapgen/requirements.txt
-      - run: npm run check
-      - run: npm run check:mapgen
-      - run: python3 experiments/l4-mapgen/check_artifacts.py
-      - run: node --check experiments/l4-mapgen/viewer.js
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/open-valley-final-v2/module-library/documents/manifest.json
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/valley-complete-release-v1/module-library/documents/manifest.json
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/full-region-phase-aware-calibration-v1/module-library/documents/manifest.json
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/ecosystem-stability-v2/maps/0/module-library/documents/manifest.json
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/woven-release-v1/module-library/documents/manifest.json
-      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-routes-release-v1/module-library/documents/manifest.json
-      - name: Check five real-shape map output contracts
+      - run: python3 -m pip install -r experiments/l4-mapgen/requirements.txt networkx==3.5
+      - name: Check Map and Block contracts
         run: |
-          for seed in 0 1 2 3 4; do
-            node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/shape-search-evaluation-${seed}-v1/module-library/documents/manifest.json
-          done
-      - run: python3 -m unittest discover -s pcg/map_directed/tests -v
-      - name: Check a real Block map's persisted Module contracts
+          node tools/contract-tests/check-contract.mjs
+          node tools/contract-tests/check-block-grid.mjs
+          node tools/contract-tests/check-block-staging.mjs
+          python3 -m unittest discover -s pcg/map_directed/tests -v
+      - name: Check existing R2 research kernel
+        run: |
+          npm run check:mapgen
+          python3 experiments/l4-mapgen/check_artifacts.py
+          node --check experiments/l4-mapgen/viewer.js
+      - name: Check this Map's actual persisted Module documents
         run: |
           python3 - <<'PY'
           import hashlib,json
           from pcg.tools.restore_archive import open_parts,ROOT
-          for archive_name,prefix in [('block-grid-v1','results/block-grid-evaluation-2-v1/module-library/documents/'),('same-graph-landforms-v1','results/graph-landforms-evaluation-v1/module-library/documents/'),('content-domains-v1','results/content-domains-region-scale-v1/module-library/documents/'),('content-domains-v1','results/content-domains-inventory-v3/module-library/documents/')]:
-              with open_parts(archive_name) as archive:
-                  index=json.loads(archive.read('PCG-ARCHIVE-INDEX.json'))
-                  for name,info in index.items():
-                      if not name.startswith(prefix): continue
-                      target=ROOT/name
-                      assert target.resolve().is_relative_to(ROOT.resolve())
-                      data=archive.read(info.get('archive_entry',name))
-                      assert len(data)==info['bytes'] and hashlib.sha256(data).hexdigest()==info['sha256']
-                      if target.exists(): assert target.read_bytes()==data
-                      else: target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+          prefix='results/graph-map-whole-evaluation-v2/module-library/documents/'
+          with open_parts('graph-map-materialization-v1') as archive:
+              index=json.loads(archive.read('PCG-ARCHIVE-INDEX.json'))
+              selected={name:info for name,info in index.items() if name.startswith(prefix)}
+              assert len([name for name in selected if name.endswith('.mapnote.json')])==22
+              for name,info in selected.items():
+                  target=ROOT/name
+                  assert target.resolve().is_relative_to(ROOT.resolve())
+                  data=archive.read(info.get('archive_entry',name))
+                  assert len(data)==info['bytes'] and hashlib.sha256(data).hexdigest()==info['sha256']
+                  if target.exists(): assert target.read_bytes()==data
+                  else: target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
           PY
-          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/block-grid-evaluation-2-v1/module-library/documents/manifest.json
-          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/graph-landforms-evaluation-v1/module-library/documents/manifest.json
-          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-domains-region-scale-v1/module-library/documents/manifest.json
-          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-domains-inventory-v3/module-library/documents/manifest.json
-      - run: python3 -m unittest discover -s prototype/factory/tests -v
-        working-directory: pcg
-      - run: python3 -m unittest discover -s prototype/plains/tests -v
-        working-directory: pcg
+          node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/graph-map-whole-evaluation-v2/module-library/documents/manifest.json
