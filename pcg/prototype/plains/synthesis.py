@@ -38,11 +38,11 @@ def crossing(result,height):
   if not b['grounded']and b['vy']>0 and a['y']<=height<b['y']:
    t=(height-a['y'])/(b['y']-a['y']);return a['x']+(b['x']-a['x'])*t,b['frame']
  return None
-def materialize(case,result):
+def materialize(case,result,heights=None):
  family=case['family'];shots=shot_events(result)
  if result.get('jumps')!=1 or len(shots)!=(2 if family=='enemy_refund'else 1):return []
  out=[]
- for height in ((240,280)if family=='bell_lift'else(420,)):
+ for height in (((240,280)if family=='bell_lift'else(420,))if heights is None else heights):
   cross=crossing(result,height)
   if not cross:continue
   x,frame=cross

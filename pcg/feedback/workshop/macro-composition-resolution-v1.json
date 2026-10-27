@@ -1,0 +1,33 @@
+{
+  "id": "macro-composition-rejection-v1",
+  "type": "technical_experiment",
+  "family": "gate-brake-return",
+  "flag": "controls_issue",
+  "failures": [
+    "lower chest reachable by ordinary jump in rejected geometry: 4/6 policies",
+    "four geometry revisions did not solve return",
+    "initial controller calibration interrupted by source-freeze guard after 324 cases; incomplete, never passed",
+    "controller revision 4 passed regular but failed lower supported seam: airborne crossing instead of E landing"
+  ],
+  "source_runs": [
+    "workshop-macro-cheap-v2",
+    "workshop-macro-probe-v1",
+    "workshop-macro-probe-v2",
+    "workshop-macro-probe-v3",
+    "workshop-macro-probe-v4",
+    "workshop-macro-calibration-v2",
+    "workshop-macro-export-probe-v1",
+    "workshop-macro-holdout-v1"
+  ],
+  "next_revision": "same fourth geometry; require actual E landing before supported lower seam, independent new protocol and seed",
+  "resolved_by": {
+    "protocol": "pcg/prototype/workshop/protocol-macro-port-v3.json",
+    "holdout": "workshop-macro-holdout-v2",
+    "retry": "workshop-macro-retry-held-v2",
+    "contentVersions": [
+      "sha256:167dcb6ec336cd7ff659febe66b44a3daabfe79922a9ddca5c041e62e28d114e",
+      "sha256:04a93aeaf9d4c19f132097e52e97faecda0da4b15b35539ee4be69598ca03c58"
+    ]
+  },
+  "production_admitted": false
+}

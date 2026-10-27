@@ -4,12 +4,13 @@ from ..factory.core.engine import ROOT,Engine,file_sha
 from ..dynamic.simulator import Simulator,ENGINE,PROJECT
 
 class PlainsSimulator(Simulator):
+ runner_script='res://runner_plains.gd'
  def run(self,cases,label):
   if not cases:return []
   self.calls+=1;self.cases+=len(cases);inp=self.out/(label+'.input.json');output=self.out/(label+'.output.json');log=self.out/(label+'.log')
   if output.exists():raise ValueError('Refuse existing physics output')
   inp.write_text(json.dumps(dict(cases=cases),allow_nan=False))
-  cmd=[str(ENGINE),'--headless','--path',str(PROJECT),'--fixed-fps','60','--script','res://runner_plains.gd','--','--input='+str(inp),'--output='+str(output)]
+  cmd=[str(ENGINE),'--headless','--path',str(PROJECT),'--fixed-fps','60','--script',self.runner_script,'--','--input='+str(inp),'--output='+str(output)]
   started=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN)
   with log.open('w')as f:p=subprocess.run(cmd,stdout=f,stderr=subprocess.STDOUT,timeout=240)
   usage=resource.getrusage(resource.RUSAGE_CHILDREN)

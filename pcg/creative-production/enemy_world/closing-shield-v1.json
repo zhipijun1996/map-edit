@@ -1,0 +1,48 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "enemy-world/closing-shield",
+  "title": "穿门后借关门截弹",
+  "source_type": "llm_subagent_proposal",
+  "producer_task": "/root/enemy_world_creator",
+  "status": "proposal_not_verified",
+  "observation_and_decision": "观察射手和会自行关合的实门，开门同时暴露射手视线；通过后停入门后落点，闭门必须在真实敌弹抵达前恢复遮挡。",
+  "causal_relationship": "真实bell_open、完整身体穿门、gate关闭及敌弹运动/消失；无伤目标稳定；不把仅等待动作当必要。",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": {
+    "enemy_hp": 3,
+    "air_shots": "original single air charge; ground/hit recovery only",
+    "cooldown": "original actual ability",
+    "no_synthetic_projectiles": true
+  },
+  "cells": [
+    "original PlainsCells",
+    "original EnemyActor plains_sentry",
+    "original ShotLatch",
+    "original SimpleRoomReward"
+  ],
+  "terrain": "低顶水平通道限制跳避，入口射手在背后，门后短终点没有其它弹道遮挡。",
+  "reward": "visible original SimpleRoomReward chest at stable exit; actual transaction required",
+  "failure_cost": "player damage/unstable landing rejects; no HP reset during case",
+  "return_status": "UNKNOWN",
+  "recovery_status": "UNKNOWN",
+  "cheap_counters": [
+    "永久早开门",
+    "门内等待",
+    "延迟跨门",
+    "不开门跳过",
+    "不等待关门直接冲",
+    "只用普通跳"
+  ],
+  "distinction_from_existing": "not an air-refund rise, recoil slot, carrier chase, timed same-shot gate crossing, brake pocket or high/low fork",
+  "implementation": {
+    "source_directory": "pcg/prototype/creative_batches/enemy_world/",
+    "max_interfaces": 1,
+    "max_control_candidates_per_interface": 4,
+    "physics": "WorkshopEngine original Godot",
+    "release_requirement": "exact clean, 6 mild screen, >=18 same-geometry counters, regular calibration and independent holdout; unsupported mechanism reported"
+  }
+}

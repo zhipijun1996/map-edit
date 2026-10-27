@@ -1,0 +1,48 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "grapple/hang-recast",
+  "title": "挂停观察后转投第二挂点",
+  "source_type": "llm_subagent_proposal",
+  "source_task": "/root/grapple_creator",
+  "status": "technical_candidate_awaiting_novelty_and_human_review",
+  "observation_decision": "第一环已停住前冲，玩家决定再次朝左上环瞄准，把运动从右行转为回折上升",
+  "causal_hypothesis": "真实hang恢复grapple且再次cast离挂；第二环改变去向，不靠枪弹补给。",
+  "terrain": "先朝右普通长按跃起够100高首环，原悬挂位重瞄左上(90,0)环，主动跃回(-100,150)岸；接收岸足够偏左，单首环长按跳不能落到。",
+  "capabilities": [
+    "move",
+    "jump",
+    "grapple"
+  ],
+  "resources": "原Traversal.restore_air_actions仅恢复二跳与grapple；不恢复airShots。实际Godot资源字段验证。",
+  "reward": "岩角后高岸箱",
+  "failure_return": "下落代价与无伤出口分别检验；反向与连续回程UNKNOWN，不宣称通用重试。",
+  "cheap_counterexamples": [
+    "跳过第一环直接第二环",
+    "一环直跳",
+    "只等不重抛",
+    "18种首环单跳：hold0/8/12/16/20/24/30/36/48×离挂等待0/3，实际safe stable0"
+  ],
+  "difference_from_existing": "假设为安全悬停状态下的目标重选与折返抛钩；若只是多环次数，审查应合并而不计新。",
+  "parent_family": "original grapple hang/bounce",
+  "implementation": {
+    "path": "pcg/prototype/creative_batches/grapple/recipes_v8.py",
+    "engine": "existing WorkshopEngine and Godot 4.7.2",
+    "interfaces": 1,
+    "controls_max": 4,
+    "checker": "actual events/states/resources and safe rewarded stable exit; same-core alternatives allowed",
+    "counterexamples_min": 18
+  },
+  "human_fun": "unreviewed",
+  "manual_play": "unreviewed",
+  "production_approval": false,
+  "revision": 4,
+  "actual_failed_predecessors": [
+    "pcg/results/workshop-creative-grapple-production-v1",
+    "pcg/results/workshop-creative-grapple-production-v2",
+    "pcg/results/workshop-creative-grapple-production-v3",
+    "pcg/results/workshop-creative-grapple-production-v4"
+  ],
+  "novelty_status": "需要审查目标重新选择/折返是否构成不同决策，不按多环次数自动计新",
+  "actual_validation": "pcg/results/workshop-creative-grapple-production-v8/round-00/summary.json",
+  "additional_counter_evidence": "pcg/results/workshop-creative-grapple-recast-audit-v1/summary.json"
+}

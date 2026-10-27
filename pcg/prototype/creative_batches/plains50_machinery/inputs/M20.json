@@ -1,0 +1,391 @@
+{
+  "id": "interlock-v14-54-d20",
+  "family": "carrier-dual-service",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "platforms": [
+    [
+      -160,
+      438,
+      1280,
+      100
+    ],
+    [
+      1660,
+      438,
+      240,
+      100
+    ]
+  ],
+  "spawn": [
+    80,
+    420
+  ],
+  "entry_port": [
+    80,
+    420
+  ],
+  "exit_port": [
+    1770,
+    420
+  ],
+  "goal": [
+    1745,
+    416,
+    50,
+    8
+  ],
+  "world_bounds": [
+    -1200,
+    -1000,
+    4000,
+    2400
+  ],
+  "one_way_platform_indices": [],
+  "hazards": [],
+  "thorns": [],
+  "saws": [],
+  "moving_platforms": [
+    {
+      "platform_id": "key-carrier",
+      "start": [
+        300,
+        448
+      ],
+      "finish": [
+        1400,
+        448
+      ],
+      "size": [
+        144,
+        20
+      ],
+      "travel_duration": 3.2,
+      "dwell_duration": 0.5,
+      "initial_phase": 0.0
+    }
+  ],
+  "hooks": [],
+  "latches": [
+    {
+      "id": "key-control",
+      "bell": [
+        200,
+        380
+      ],
+      "gate": [
+        -100,
+        -100,
+        10,
+        10
+      ],
+      "open_seconds": 0,
+      "ferry_id": "key-carrier",
+      "return_access": [
+        1080,
+        360
+      ]
+    },
+    {
+      "id": "dock-gate",
+      "bell": [
+        -500,
+        -500
+      ],
+      "gate": [
+        1000,
+        -250,
+        24,
+        688
+      ],
+      "open_seconds": 0.18,
+      "carrier_dock": {
+        "platform_id": "key-carrier",
+        "rect": [
+          480,
+          433,
+          40,
+          30
+        ]
+      }
+    }
+  ],
+  "enemies": [],
+  "reward_sites": [
+    {
+      "id": "visible-cache",
+      "position": [
+        1770,
+        420
+      ],
+      "region": [
+        1740,
+        415,
+        60,
+        10
+      ],
+      "amount": 8
+    }
+  ],
+  "max_frames": 1800,
+  "trace_all": false,
+  "control_plan": [
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 0
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 0
+      },
+      "aim_cell": {
+        "kind": "bell",
+        "id": "key-control"
+      }
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 54
+      },
+      "aim_cell": {
+        "kind": "bell",
+        "id": "key-control"
+      }
+    },
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 1
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "dynamic": {
+          "kind": "actor_x",
+          "direction": "gte",
+          "value": 1065
+        },
+        "timeout": 420
+      }
+    },
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 0
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 0
+      },
+      "aim_cell": {
+        "kind": "bell",
+        "id": "key-control",
+        "receiver": "access"
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 100
+      }
+    },
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 1
+    },
+    {
+      "op": "jump",
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump_release",
+      "trigger": {
+        "after": 12
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "dynamic": {
+          "kind": "on_platform",
+          "id": "key-carrier"
+        },
+        "min_after": 0,
+        "timeout": 180
+      }
+    },
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 0
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 20
+      }
+    },
+    {
+      "op": "axis",
+      "trigger": {
+        "after": 0
+      },
+      "value": 1
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "dynamic": {
+          "kind": "actor_x",
+          "direction": "gte",
+          "value": 1450
+        },
+        "timeout": 180
+      }
+    },
+    {
+      "op": "jump",
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump_release",
+      "trigger": {
+        "after": 12
+      }
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 6
+      },
+      "direction": [
+        -0.97,
+        0.243
+      ]
+    },
+    {
+      "op": "settle",
+      "trigger": {
+        "after": 6
+      },
+      "target_x": 1770,
+      "deadband": 4
+    }
+  ],
+  "generation_rule": {
+    "id": "creative-machinery/carrier-dual-service",
+    "version": 14,
+    "source_type": "llm_subagent_proposal",
+    "source_task": "/root/machinery_creator",
+    "parameters": {
+      "relationship": "same carrier holds remote gate then is released for indispensable transport",
+      "departure_wait": 20,
+      "source_task": "/root/machinery_creator",
+      "human_fun": "unreviewed"
+    }
+  },
+  "production_recipe": "carrier-dual-service",
+  "parent_family": "moving_platform",
+  "rule_parameters": {
+    "relationship": "same carrier holds remote gate then is released for indispensable transport",
+    "departure_wait": 20,
+    "source_task": "/root/machinery_creator",
+    "human_fun": "unreviewed"
+  },
+  "map_specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "creative-machinery/v14/carrier-dual-service",
+    "region": "plains",
+    "required_family": "carrier-dual-service",
+    "objective": {
+      "relationship": "same body first remote sustained key, then surrendered and recaptured as transport"
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 2,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "reward"
+      }
+    ],
+    "entry_y": 420,
+    "rise": 0,
+    "space": {
+      "max_width": 2400,
+      "max_height": 1400,
+      "max_port_span_x": 1900
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "risk_reward": {
+      "amount": 8,
+      "mandatory_damage": false
+    },
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "original supported resources",
+      "exit": "observed only"
+    },
+    "return_conditions": "UNKNOWN",
+    "budget": {
+      "generator_candidates": 4,
+      "director_revisions": 0
+    }
+  },
+  "idea_ids": [
+    "machinery/carrier-dual-service"
+  ],
+  "adaptation_ancestor": {
+    "path": "generation/workshop/creative20-v1/cases/M20.json",
+    "sha256": "866c68116d99a75b2e76571d25d2b740c2df15ce9d9d63d3cbfb97ac88c36529",
+    "scope": "Executable input ancestry, not evidence for new geometry"
+  }
+}

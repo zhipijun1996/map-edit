@@ -1,0 +1,83 @@
+{
+  "schema": "pcg/contact-grammar-experiment/v1",
+  "implementation_status": "isolated_experiment",
+  "main_checked": "54d0cfc494936bb74bd9912324a840285212b995",
+  "physics_baseline": "12f6cb0",
+  "source_manifest": "pcg/results/contact-grammar-calibration-v7/physics/source_binding.json",
+  "seeds": [
+    "contact-grammar-eval-0",
+    "contact-grammar-eval-1",
+    "contact-grammar-eval-2"
+  ],
+  "showcase_selection": {
+    "seed": "contact-grammar-eval-2",
+    "reason": "smallest three-level grammar, chosen by size; not selected by holdout success"
+  },
+  "topology": {
+    "kind": "bounded alternating crossing grammar",
+    "levels": [
+      3,
+      4
+    ],
+    "mission_generator": "existing Mission/Exploration contract; no new generic regional generator"
+  },
+  "constraints": {
+    "map_added_geometry": 0,
+    "chests": 2,
+    "currency": 48,
+    "maximum_shape_assignments": 3,
+    "search_expansions_per_assignment": 50000,
+    "world_resets_within_route": 0
+  },
+  "calibration": {
+    "single_module_runs": [
+      "spatial-interchange-probe-v1",
+      "spatial-interchange-probe-v2",
+      "spatial-interchange-probe-v3",
+      "spatial-interchange-probe-v4",
+      "spatial-interchange-probe-v5",
+      "spatial-interchange-probe-v6",
+      "spatial-interchange-probe-v7",
+      "spatial-interchange-probe-v8",
+      "spatial-interchange-probe-v9",
+      "spatial-interchange-probe-v10"
+    ],
+    "whole_map_runs": [
+      "contact-grammar-calibration-v1",
+      "contact-grammar-calibration-v2",
+      "contact-grammar-calibration-v3",
+      "contact-grammar-calibration-v4",
+      "contact-grammar-calibration-v5",
+      "contact-grammar-calibration-v6",
+      "contact-grammar-calibration-v7"
+    ],
+    "failed_holdouts_retained": [
+      "77319",
+      "88241"
+    ]
+  },
+  "final_matrix": {
+    "nominal_routes_per_seed": 4,
+    "fresh_input_trials_per_seed": 6,
+    "noise": {
+      "timing_frames": 1,
+      "aim_degrees": 1,
+      "seed": "contact-grammar-input-99109"
+    },
+    "regression": "all failed v2 cases replayed; calibration, not independent holdout"
+  },
+  "video": {
+    "engine": "Godot 4.7.2 Standard",
+    "hz": 60,
+    "speed": 1,
+    "compare": "exact native trace vs bound headless reference",
+    "routes": [
+      "main",
+      "middle-reward-return",
+      "lower-reward-return"
+    ]
+  },
+  "grid_status": "128 block not enforced; this experiment isolates finite spatial grammar and exact contact/state contracts",
+  "human_fun": "awaiting_video_observation",
+  "production_admitted": false
+}

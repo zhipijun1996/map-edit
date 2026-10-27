@@ -1,0 +1,40 @@
+{
+  "schema": "pcg/observed-check-receipt/v1",
+  "source": "Commands observed in this execution session; summary, not fabricated raw stdout",
+  "checks": [
+    {
+      "command": "npm run check",
+      "cwd": "repository root",
+      "status": "passed",
+      "scope": "original editor, 177 docs, 94 workshop versions, 43 pure contract cases"
+    },
+    {
+      "command": "npm run check:mapgen",
+      "cwd": "repository root",
+      "status": "passed",
+      "tests": 31
+    },
+    {
+      "command": "python3 -m unittest discover -s pcg/map_directed/tests -q",
+      "cwd": "repository root",
+      "status": "passed",
+      "tests": 52
+    },
+    {
+      "command": "python3 -m unittest discover -s prototype/factory/tests -q",
+      "cwd": "pcg",
+      "status": "passed",
+      "tests": 26
+    }
+  ],
+  "command_failures": [
+    {
+      "command": "python3 -m unittest discover -s pcg/prototype/factory/tests -q",
+      "cwd": "repository root",
+      "reason": "ModuleNotFoundError prototype",
+      "correction": "run documented command from pcg; no tests modified"
+    }
+  ],
+  "scene_failures": "All physics and source-guard failures retained under immutable versioned result folders",
+  "production_admitted": false
+}

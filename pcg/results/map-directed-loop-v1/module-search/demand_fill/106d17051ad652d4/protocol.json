@@ -1,0 +1,187 @@
+{
+  "schema": "pcg/map-demand-fill/v1",
+  "request": {
+    "schema": "map-notes/challenge-specification/v1",
+    "map_seed": "map-growth-01",
+    "region": "plains",
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": [],
+      "note": "No advanced movement ability"
+    },
+    "resource_state": {
+      "entry": "grounded at a supported safe port; exact snapshot must be captured before input",
+      "exit": "stable landing; observed resources do not imply arbitrary-state guarantees",
+      "reset_between_components": false
+    },
+    "adaptation": {
+      "allowed": [
+        "translation",
+        "explicit separately versioned connector Cell"
+      ],
+      "forbidden": [
+        "scaling",
+        "rotation",
+        "implicit mirrored traversal",
+        "invented ports",
+        "removing required exploration routes"
+      ]
+    },
+    "validation": {
+      "engine": "Godot 4.7.2",
+      "method": "existing PlainsEngine and exact-instance continuous map runner",
+      "requires_whole_map_validation": true
+    },
+    "budget": {
+      "director_revisions": 1,
+      "generator_calls": 2,
+      "unbounded_search": false
+    },
+    "id": "bell-terrace-ascent",
+    "objective": "After rejoining, ascend 100 world units to the bell terrace with one jump/recoil relation.",
+    "ports": {
+      "count": 2,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from": "entry",
+        "to": "exit",
+        "role": "main"
+      }
+    ],
+    "difficulty": {
+      "intent": "one short action after supported recovery",
+      "human_score": null,
+      "evidence": "UNKNOWN"
+    },
+    "risk_reward": {
+      "optional": false,
+      "amount": 0,
+      "mandatory_damage": false
+    },
+    "space": {
+      "max_width": 2000,
+      "max_height": 800,
+      "max_port_span_x": 900
+    },
+    "entry_y": 420,
+    "rise": 100,
+    "require_bell": true,
+    "required_family": "bell_lift"
+  },
+  "request_sha256": "106d17051ad652d4a786c7a8efa270ed50f6ffd15b66c83cccf438082a615cfa",
+  "adapter_source_sha256": "0937243e9e19cc03fb8cf4b8e5abab44d87a06ad084c2860bd2bf35d410f8417",
+  "producer": "existing plains.synthesis.proposals/materialize",
+  "budgets": {
+    "motion_probes": 8,
+    "geometry_candidates": 8,
+    "calibration_levels": [
+      "clean",
+      "mild"
+    ],
+    "calibration_trials_per_level": 1,
+    "holdout_trials": {
+      "clean": 1,
+      "mild": 12,
+      "moderate": 12
+    },
+    "counterfactual_trials": 4,
+    "holdout_attempts": 1
+  },
+  "calibration_seed": 241025101,
+  "holdout_seed": 241025903,
+  "selection": "existing BehaviorArchive, executed sequence and requested rise bin; highest discovery quality then content identity before holdout",
+  "policy": {
+    "schema": "pcg/factory-policy/v1",
+    "version": 2,
+    "requested_tier": "regular",
+    "validation_trials": 12,
+    "clean_min": 0.9,
+    "regular": {
+      "mild_min": 0.85,
+      "moderate_min": 0.65
+    },
+    "precision_review": {
+      "mild_min": 0.7,
+      "moderate_min": 0.4
+    },
+    "minimum_human_reviewers": 2,
+    "scope": "Experimental engineering thresholds; not calibrated human difficulty or fun."
+  },
+  "scope": "finite automated policy; no general seam/transform/state-transfer, human-fun or production admission",
+  "archive_history": [
+    {
+      "candidate": "5d07808025cc49e8d8b4f00082c08fd3fb58bfd1671c20d2ec5b4490c2a51937",
+      "cell": [
+        "53b74ad415583708",
+        2
+      ],
+      "partition": "infeasible",
+      "replaced": true
+    },
+    {
+      "candidate": "8e5e16db23ec6a0e7d5d83568f128a107781b877a8878bb670b25708de47d4c4",
+      "cell": [
+        "af811eb80da03696",
+        2
+      ],
+      "partition": "infeasible",
+      "replaced": true
+    },
+    {
+      "candidate": "d34831d7f41f176620181f9ffdb45e9692d5bfbe09f98bcfdf16bb4c061e8c4d",
+      "cell": [
+        "af811eb80da03696",
+        2
+      ],
+      "partition": "infeasible",
+      "replaced": false
+    },
+    {
+      "candidate": "5d07808025cc49e8d8b4f00082c08fd3fb58bfd1671c20d2ec5b4490c2a51937",
+      "cell": [
+        "53b74ad415583708",
+        2
+      ],
+      "partition": "infeasible",
+      "replaced": false
+    },
+    {
+      "candidate": "8e5e16db23ec6a0e7d5d83568f128a107781b877a8878bb670b25708de47d4c4",
+      "cell": [
+        "af811eb80da03696",
+        2
+      ],
+      "partition": "feasible",
+      "replaced": true
+    },
+    {
+      "candidate": "d34831d7f41f176620181f9ffdb45e9692d5bfbe09f98bcfdf16bb4c061e8c4d",
+      "cell": [
+        "af811eb80da03696",
+        2
+      ],
+      "partition": "feasible",
+      "replaced": true
+    }
+  ],
+  "feasible_behavior_cells": 1,
+  "infeasible_behavior_cells": 2,
+  "selected_before_holdout": "d34831d7f41f176620181f9ffdb45e9692d5bfbe09f98bcfdf16bb4c061e8c4d"
+}

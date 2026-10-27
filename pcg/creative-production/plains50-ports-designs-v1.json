@@ -1,0 +1,192 @@
+{
+  "schema": "pcg/design-proposals/v1",
+  "batch_id": "plains50-ports-v1",
+  "human_source": "human-plains50-branch-modules",
+  "model_provider": "current Codex root session",
+  "cards": [
+    {
+      "id": "plains50-ports/investment-fork",
+      "title": "单枪投资：高宝箱或低出口",
+      "source_type": "codex_assisted_proposal",
+      "author": "/root",
+      "status": "executable_recipe_requires_version_bound_evidence",
+      "observation": "高处宝箱、低处主路和更低恢复出口同时可读。",
+      "decision": "把唯一空中枪用于向上取宝还是向前通行；取得宝箱后是否下落汇回。",
+      "causality": "射向改变人物位移，真实接地后才恢复空中枪；高路去程上升、汇回下降。",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "cells": [
+        "原岩体碰撞",
+        "原角色普通跳跃/反冲/真实资源",
+        "原SimpleRoomReward"
+      ],
+      "terrain": "同一layout所有route共享全部碰撞/机关/敌人/奖励初态；端口有真实支撑；形状/范围见recipes_v2.layouts的两个完整Challenge Specification。",
+      "reward": "入口可见；实际落稳接触才由原奖励事务发放；所有路线共享同一奖励集合。",
+      "failure_recovery": "显式低风险路线与已验奖励汇回可供继续；不是所有失败状态均可恢复的保证。未验证失败/回程状态保持UNKNOWN。",
+      "directional_difference": "源端口A逐出口独立验；只有明确via_ports路线连续保留人物与世界状态。反向、接缝、外部进入速度不自动互换。",
+      "cheap_solutions": [
+        "省略关键枪/普通跳长按/提前射击/越顶",
+        "从允许的低路反过来免费取得高路奖励",
+        "把未取得必需奖励的低口到达误当取宝目标的绕法",
+        "安全且保留核心因果的合理替代应接受"
+      ],
+      "difference": "原单枪高低选择；新增可实际调用的三/四出口与连续取宝汇回，不计新家族。",
+      "space_demands": "model_authored_challenge_spec; two concrete interfaces; not task-B actual call or blinded generalization",
+      "source_file": "pcg/prototype/creative_batches/plains50_ports/recipes_v2.py",
+      "technical_candidates": "See immutable original library records and final plains50 delivery manifest",
+      "human_fun": "unreviewed",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-ports/thorn-branch",
+      "title": "尖刺窄道与安全下路",
+      "source_type": "codex_assisted_proposal",
+      "author": "/root",
+      "status": "executable_recipe_requires_version_bound_evidence",
+      "observation": "上方岩齿、下方荆棘间的完整身体通道，以及入口后方可走的低路。",
+      "decision": "穿窄道取可见宝箱，或先退到低路从另一高度离开。",
+      "causality": "反冲改变横移；24×36身体净空限制风险线路；无射击低路是明确允许分支。",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "cells": [
+        "原岩体碰撞",
+        "原角色普通跳跃/反冲/真实资源",
+        "原SimpleRoomReward",
+        "原荆棘伤害"
+      ],
+      "terrain": "同一layout所有route共享全部碰撞/机关/敌人/奖励初态；端口有真实支撑；形状/范围见recipes_v2.layouts的两个完整Challenge Specification。",
+      "reward": "入口可见；实际落稳接触才由原奖励事务发放；所有路线共享同一奖励集合。",
+      "failure_recovery": "显式低风险路线与已验奖励汇回可供继续；不是所有失败状态均可恢复的保证。未验证失败/回程状态保持UNKNOWN。",
+      "directional_difference": "源端口A逐出口独立验；只有明确via_ports路线连续保留人物与世界状态。反向、接缝、外部进入速度不自动互换。",
+      "cheap_solutions": [
+        "省略关键枪/普通跳长按/提前射击/越顶",
+        "从允许的低路反过来免费取得高路奖励",
+        "把未取得必需奖励的低口到达误当取宝目标的绕法",
+        "安全且保留核心因果的合理替代应接受"
+      ],
+      "difference": "原尖刺净空配方的分叉用途；两版低口位于不同侧，改变去向而非仅换Seed。",
+      "space_demands": "model_authored_challenge_spec; two concrete interfaces; not task-B actual call or blinded generalization",
+      "source_file": "pcg/prototype/creative_batches/plains50_ports/recipes_v2.py",
+      "technical_candidates": "See immutable original library records and final plains50 delivery manifest",
+      "human_fun": "unreviewed",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-ports/brake-branch",
+      "title": "过檐刹袋与直落分支",
+      "source_type": "codex_assisted_proposal",
+      "author": "/root",
+      "status": "executable_recipe_requires_version_bound_evidence",
+      "observation": "出发岩沿下的侧袋宝箱与更下方水平出口。",
+      "decision": "落出岩沿后刹回侧袋取宝，还是保留前向运动直接进入下层。",
+      "causality": "向前射击会制动并返向；取宝落稳后可继续落下汇入另一出口。",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "cells": [
+        "原岩体碰撞",
+        "原角色普通跳跃/反冲/真实资源",
+        "原SimpleRoomReward"
+      ],
+      "terrain": "同一layout所有route共享全部碰撞/机关/敌人/奖励初态；端口有真实支撑；形状/范围见recipes_v2.layouts的两个完整Challenge Specification。",
+      "reward": "入口可见；实际落稳接触才由原奖励事务发放；所有路线共享同一奖励集合。",
+      "failure_recovery": "显式低风险路线与已验奖励汇回可供继续；不是所有失败状态均可恢复的保证。未验证失败/回程状态保持UNKNOWN。",
+      "directional_difference": "源端口A逐出口独立验；只有明确via_ports路线连续保留人物与世界状态。反向、接缝、外部进入速度不自动互换。",
+      "cheap_solutions": [
+        "省略关键枪/普通跳长按/提前射击/越顶",
+        "从允许的低路反过来免费取得高路奖励",
+        "把未取得必需奖励的低口到达误当取宝目标的绕法",
+        "安全且保留核心因果的合理替代应接受"
+      ],
+      "difference": "原刹车关系的奖励/主路分工；四口版提供东西两个低路端口。",
+      "space_demands": "model_authored_challenge_spec; two concrete interfaces; not task-B actual call or blinded generalization",
+      "source_file": "pcg/prototype/creative_batches/plains50_ports/recipes_v2.py",
+      "technical_candidates": "See immutable original library records and final plains50 delivery manifest",
+      "human_fun": "unreviewed",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-ports/timed-branch",
+      "title": "短门风险与低路分流",
+      "source_type": "codex_assisted_proposal",
+      "author": "/root",
+      "status": "executable_recipe_requires_version_bound_evidence",
+      "observation": "短开门控制上层宝箱，低处另有允许绕开的通行口与返回侧接收器。",
+      "decision": "同枪开门反冲取宝，或走下层；取宝后延迟停留要靠近门再射返侧铃。",
+      "causality": "弹丸飞行与整身过门时间真实求解；原防夹保留，关闭后再开与低口汇回连续实测。",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "cells": [
+        "原岩体碰撞",
+        "原角色普通跳跃/反冲/真实资源",
+        "原SimpleRoomReward",
+        "原ShotLatch与弹丸",
+        "原安全关门"
+      ],
+      "terrain": "同一layout所有route共享全部碰撞/机关/敌人/奖励初态；端口有真实支撑；形状/范围见recipes_v2.layouts的两个完整Challenge Specification。",
+      "reward": "入口可见；实际落稳接触才由原奖励事务发放；所有路线共享同一奖励集合。",
+      "failure_recovery": "显式低风险路线与已验奖励汇回可供继续；不是所有失败状态均可恢复的保证。未验证失败/回程状态保持UNKNOWN。",
+      "directional_difference": "源端口A逐出口独立验；只有明确via_ports路线连续保留人物与世界状态。反向、接缝、外部进入速度不自动互换。",
+      "cheap_solutions": [
+        "省略关键枪/普通跳长按/提前射击/越顶",
+        "从允许的低路反过来免费取得高路奖励",
+        "把未取得必需奖励的低口到达误当取宝目标的绕法",
+        "安全且保留核心因果的合理替代应接受"
+      ],
+      "difference": "原短门配方的分叉用途；低路可绕过奖励，但无奖抵达不反证取宝挑战。",
+      "space_demands": "model_authored_challenge_spec; two concrete interfaces; not task-B actual call or blinded generalization",
+      "source_file": "pcg/prototype/creative_batches/plains50_ports/recipes_v2.py",
+      "technical_candidates": "See immutable original library records and final plains50 delivery manifest",
+      "human_fun": "unreviewed",
+      "production_admitted": false
+    },
+    {
+      "id": "plains50-ports/refund-fork",
+      "title": "有限活敌回充的方向分叉",
+      "source_type": "codex_assisted_proposal",
+      "author": "/root",
+      "status": "executable_recipe_requires_version_bound_evidence",
+      "observation": "可命中的有限HP敌人、空中奖励岸和能跳避敌人的下层出口。",
+      "decision": "用命中返还的空中枪登高；四口版还能选择第二枪转回左上岸，或跳过敌人走低路。",
+      "causality": "命中真实敌人回充一次空中枪；收益与反冲方向耦合，接地按原组件恢复。",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "cells": [
+        "原岩体碰撞",
+        "原角色普通跳跃/反冲/真实资源",
+        "原SimpleRoomReward",
+        "原敌人HP与真实命中回充"
+      ],
+      "terrain": "同一layout所有route共享全部碰撞/机关/敌人/奖励初态；端口有真实支撑；形状/范围见recipes_v2.layouts的两个完整Challenge Specification。",
+      "reward": "入口可见；实际落稳接触才由原奖励事务发放；所有路线共享同一奖励集合。",
+      "failure_recovery": "显式低风险路线与已验奖励汇回可供继续；不是所有失败状态均可恢复的保证。未验证失败/回程状态保持UNKNOWN。",
+      "directional_difference": "源端口A逐出口独立验；只有明确via_ports路线连续保留人物与世界状态。反向、接缝、外部进入速度不自动互换。",
+      "cheap_solutions": [
+        "省略关键枪/普通跳长按/提前射击/越顶",
+        "从允许的低路反过来免费取得高路奖励",
+        "把未取得必需奖励的低口到达误当取宝目标的绕法",
+        "安全且保留核心因果的合理替代应接受"
+      ],
+      "difference": "原回充前进/折返关系合入同世界多端口；不推断取完一侧后敌人存活与另一侧可达。",
+      "space_demands": "model_authored_challenge_spec; two concrete interfaces; not task-B actual call or blinded generalization",
+      "source_file": "pcg/prototype/creative_batches/plains50_ports/recipes_v2.py",
+      "technical_candidates": "See immutable original library records and final plains50 delivery manifest",
+      "human_fun": "unreviewed",
+      "production_admitted": false
+    }
+  ]
+}

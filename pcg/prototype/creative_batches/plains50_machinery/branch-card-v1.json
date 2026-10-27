@@ -1,0 +1,202 @@
+{
+  "schema": "pcg/causal-design-card/v1",
+  "id": "plains50-machinery/carrier-safe-branch",
+  "source_type": "parent_map_interface_work_order",
+  "requested_by": "/root",
+  "source_task": "/root/plains50_machinery",
+  "parent_work_order": "单个3port的chase载台分叉：A→B载台挑战奖路＋A→C允许无射击低风险出口，同物理Cell/奖励初态完整3ports/6有序对，未验方向UNKNOWN。",
+  "status": "technical_candidate_scoped",
+  "observation": "入口同时可见高处宝箱、追逐载台与通往更低出口的地势。",
+  "decision": "要不要为奖励启动/追逐载台，还是沿低路继续；选择是难度与收益的分流。",
+  "causality": "奖励路用同枪启台反冲和空中停台离台；低路保留无射击通行，不强迫玩家为走主路做奖励挑战。",
+  "required_cells": [
+    "Original controlled ModuleMovingPlatform",
+    "Original bell start/pause",
+    "Original actor move/jump/shot recoil",
+    "Original SimpleRoomReward"
+  ],
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "resources": "No artificial refills; all routes share all initial mechanisms/rewards and use original resources.",
+  "terrain": "入口A在上岸，高处B在追台后接收岸，C为真实低层稳定地面出口；无自动外框/接缝补平台。",
+  "reward": "A能看见B宝箱；唯有B路径要求实际领取，C路线的0金币是有意结果。",
+  "failure_recovery": "已测低风险路线A→C；从B失误后的重试/回程仍UNKNOWN，不以C可达推断。",
+  "direction_difference": "A→B奖励与A→C主路各自独立证据；其余4有序对UNKNOWN，不能反转入口出口。",
+  "cheap_solutions": [
+    "同终点且同奖励的无射击/略枪绕行",
+    "静止登台/省略启动或暂停",
+    "被动站台",
+    "低路路线必须比较实际C出口，不把没拿箱的低路通行当高路反例"
+  ],
+  "difference": "A2关系的真实3端口分叉接口，非新动作家族；不是在旧图上只增加标记，C稳定身体目标、路线策略和逐方向合同均重新验证。",
+  "map_specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "plains50/machinery/carrier-safe-branch/3port/v1",
+    "source_type": "parent_map_interface_work_order",
+    "region": "plains",
+    "required_family": "chase-landing",
+    "objective": {
+      "recipe": "carrier-safe-branch",
+      "physical_layout_sha256": "f608e889e50720d179e97848d478aca0a69b5fa740f1d7ea2a04ddcdd02b141d",
+      "branch_ports": [
+        {
+          "id": "A",
+          "position": [
+            80,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            905,
+            270
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            1030,
+            632
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        }
+      ]
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 3,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "reward",
+        "route_id": "reward"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "route_id": "safe-lower-exit"
+      }
+    ],
+    "space": {
+      "max_width": 1900,
+      "max_height": 1300,
+      "max_port_span_x": 1300
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "risk_reward": {
+      "mandatory_damage": false,
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            905,
+            270
+          ],
+          "region": [
+            875,
+            265,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ]
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "authored fresh original supported source A; actual entry snapshot bound",
+      "exit": "observed stable only"
+    },
+    "return_conditions": "B→A/B→C/C→A/C→B UNKNOWN; no implicit all-to-all connectivity",
+    "budget": {
+      "generator_candidates": 1,
+      "director_revisions": 0
+    }
+  },
+  "protocol": {
+    "schema": "pcg/plains50-carrier-safe-branch/v1",
+    "proposal": "carrier-safe-branch",
+    "source_revision_max": 2,
+    "interfaces": 1,
+    "actual_supported_ports": 3,
+    "ordered_relations": 6,
+    "routes": [
+      "A→B challenge/reward",
+      "A→C intentional safe exit"
+    ],
+    "max_actual_physics_cases": 400,
+    "minimum_counters_per_route": 18,
+    "calibration_and_holdout_trials_per_level": 12,
+    "quality": "original regular unchanged",
+    "external_outcome": "exact exit plus actual reward for challenge; safe low arrival without reward is not a high-route refutation",
+    "novelty": "A2 branch-interface adaptation, not a new action family",
+    "return_conditions": "UNKNOWN"
+  },
+  "actual_result": {
+    "real_physics_cases": 212,
+    "calibration_route_samples": 72,
+    "holdout_route_samples": 72,
+    "all_calibration_holdout_purpose_samples_passed": true,
+    "counterexamples": 52,
+    "accepted_same_goal_safe_alternatives": 24,
+    "invalidating_counterexamples": 0,
+    "ports": 3,
+    "ordered_relations": 6,
+    "path_directions": [
+      "A→B",
+      "A→C"
+    ],
+    "other_directions": "UNKNOWN"
+  },
+  "human_approval": "UNKNOWN",
+  "production_admitted": false
+}

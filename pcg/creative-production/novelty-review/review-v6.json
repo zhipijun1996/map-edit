@@ -1,0 +1,1179 @@
+{
+  "schema": "pcg/independent-novelty-review/v6",
+  "reviewer": "/root/novelty_critic",
+  "source_type": "actual_codex_subagent_reasoning",
+  "exact_model_revision": "unavailable",
+  "external_model_api_calls": 0,
+  "scope": "Read-only review of creator source/cards and existing result summaries. No Godot run, no source mutation, no production approval, no human fun judgment.",
+  "baseline_families": [
+    "thorn-slot",
+    "chase-landing",
+    "timed-cache",
+    "brake-under-ledge",
+    "one-shot-two-routes",
+    "air-refund"
+  ],
+  "count_policy": "Only new distinct causal player experiences with executable evidence may become technical_candidate_distinct. Proposal, executable_not_yet_validated, and possible_duplicate count zero. A variant sharing the same observation-decision-resource loop does not add a family. Old six and two-box Macro add zero new families.",
+  "status_meanings": {
+    "proposal_unique_hypothesis": "Plausibly distinct player decision and causal state change; no executable validation claimed.",
+    "possible_duplicate": "A specific parent/shared decision remains unresolved; does not count separately even if execution succeeds.",
+    "executable_not_yet_validated": "Some source or clean probe exists; independent counterexamples/regular validation or novelty evidence remains incomplete.",
+    "technical_candidate_distinct": "Finite evidence supports an independently different causal relationship. Not human fun or production approval.",
+    "rejected": "Withdrawn, unsupported, or presently a serial/parameter variant without a new decision. Versioned rework remains possible."
+  },
+  "rows": [
+    {
+      "id": "jump_wall/late-air-rise",
+      "status": "technical_candidate_distinct",
+      "parent": "ordinary double jump; spatial timing",
+      "observation_decision": "Keep the second jump until the body clears a low overhang.",
+      "causal_change": "Same finite jump resource succeeds only after a spatial release point.",
+      "terrain_necessity": "Overhang must obstruct early ascent and far high bank require late ascent.",
+      "falsifiers": [
+        "early second jump",
+        "long first jump",
+        "roof bypass"
+      ],
+      "basis": "Overhang makes early second jump lose height; accepted near-edge anticipation changes neither the spatial timing decision nor finite jump resource. Unlike baseline recoil slot, movement is controlled by preserving an air jump until useful ascent space is available. Three successful timing variants correctly remain same-core alternatives.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-jump-wall-production-v3/round-00",
+        "case": "late-air-rise-v3-0",
+        "version": "sha256:7aef28e0dbe7327991dff45b91c499673002d5af60ecf4b83e18765fa99d030b",
+        "counterexamples": 22,
+        "safe_counterexamples": 3,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 11,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 23
+        },
+        "candidate_json_sha256": "740c4aeebadab22c0c2ceb9604cee077ed81e1384921c013241049f941ea8930"
+      }
+    },
+    {
+      "id": "jump_wall/wall-renew-air-rise",
+      "status": "possible_duplicate",
+      "parent": "contact-restored jump relay; grapple/jump-refill",
+      "observation_decision": "Spend second jump to reach wall, restore it, spend again.",
+      "causal_change": "Wall jump restores remaining jump resource.",
+      "terrain_necessity": "Finite wall prevents ordinary continuous wall ascent.",
+      "falsifiers": [
+        "single wall repeated jumps",
+        "save initial second jump",
+        "direct double jump"
+      ],
+      "basis": "Different contact Cell alone does not distinguish the same exhaust-touch-refill-spend loop from grapple/jump-refill."
+    },
+    {
+      "id": "jump_wall/step-off-wall-return",
+      "status": "technical_candidate_distinct",
+      "parent": "wall jump; deliberate descent entry",
+      "observation_decision": "Commit to walking off a ledge to obtain a wall contact and reverse upward.",
+      "causal_change": "Capability absent at entry becomes available through falling contact, not a resource pickup.",
+      "terrain_necessity": "No-jump configuration and wall below ledge must force commitment before escape.",
+      "falsifiers": [
+        "walk directly to target",
+        "single noncontact input",
+        "ordinary drop"
+      ],
+      "basis": "No ordinary jump or shot: deliberate descent obtains the contact that enables upward reversal. Seven successful wall-return timing alternatives retain that commitment and are accepted rather than rejected by action identity.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-jump-wall-production-v2/round-01",
+        "case": "step-off-wall-return-v1-0",
+        "version": "sha256:11c4b82f4c8c6db4d59f60d146c5dedab615e2654290bdd6e51ab52e95ac8aff",
+        "counterexamples": 20,
+        "safe_counterexamples": 7,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "0d9013b8797ab96c581c0755915421398642c3d4b4875982d4a976680e7a7df0"
+      }
+    },
+    {
+      "id": "jump_wall/switchback-wall-ascent",
+      "status": "technical_candidate_distinct",
+      "parent": "alternating wall contacts",
+      "observation_decision": "Alternate sides of a shaft rather than remain on one wall.",
+      "causal_change": "Cross-shaft contact refreshes wall-jump opportunity while gaining height.",
+      "terrain_necessity": "Finite separated walls must invalidate single-wall repetition.",
+      "falsifiers": [
+        "same-wall repeated jumps",
+        "one wall jump",
+        "direct jump"
+      ],
+      "basis": "Opposite-side contact avoids an actually thorned first wall segment and raises launch position above its finite top. Same-wall-return timing probes fail; not just more copies of an infinite wall climb.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-jump-wall-production-v2/round-02",
+        "case": "switchback-wall-ascent-v1-0",
+        "version": "sha256:f485c275bafdb2b85460b091553f1a5a3705f3dafd13627f637886c989a0aa9d",
+        "counterexamples": 21,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "cb1dc7cfb7d3b45f93c3279f89f8d19b0b7bcbe2b2890a3382e8448da667f81c"
+      }
+    },
+    {
+      "id": "jump_wall/ground-reset-gap-relay",
+      "status": "rejected",
+      "parent": "ordinary grounded resource reset; serial gaps",
+      "observation_decision": "Land on intermediate island, then jump again.",
+      "causal_change": "Default grounded restoration.",
+      "terrain_necessity": "Island length/range alone.",
+      "falsifiers": [
+        "whole gap direct jump"
+      ],
+      "basis": "Serial standard jump sections do not add a family. Creator explicitly agreed withdrawal in message."
+    },
+    {
+      "id": "grapple/anchor-gap",
+      "status": "technical_candidate_distinct",
+      "parent": "original hang grapple",
+      "observation_decision": "Acquire a stable aerial origin and choose a deliberate launch.",
+      "causal_change": "Hang clears velocity; anchor jump starts from a new supported position.",
+      "terrain_necessity": "New origin must be necessary for reaching high bank.",
+      "falsifiers": [
+        "no hook",
+        "hang forever",
+        "ordinary jump"
+      ],
+      "basis": "Aerial stable origin plus deliberate departure is different from all six baseline recoil/trigger/refund relationships. 21 finite counters include a safe omit-first-ground-jump route which preserves hook+anchor departure and is correctly accepted, not treated as a design invalidation.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v1/round-00",
+        "version": "sha256:89300bb54eb562fd3b8b1633744130f011adc11d98833e16375d1f582cb8085a",
+        "physics_cases": 99,
+        "counterexamples": 21,
+        "calibration": {
+          "clean": {
+            "trials": 1,
+            "purpose_valid": 1,
+            "safe_stable": 1,
+            "rate": 1.0,
+            "wilson95": [
+              0.20654329147389294,
+              1.0
+            ]
+          },
+          "mild": {
+            "trials": 12,
+            "purpose_valid": 12,
+            "safe_stable": 12,
+            "rate": 1.0,
+            "wilson95": [
+              0.7574992425007574,
+              1.0
+            ]
+          },
+          "moderate": {
+            "trials": 12,
+            "purpose_valid": 9,
+            "safe_stable": 9,
+            "rate": 0.75,
+            "wilson95": [
+              0.46768966087934005,
+              0.9110599603710386
+            ]
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 24,
+          "accepted_chest_claims": 24
+        },
+        "selection_record": "pcg/results/workshop-creative-grapple-production-v1/round-00/selection-before-holdout.json",
+        "candidate_json_sha256": "f3b1c30620958f0577e3e7885a25b4769ecf0413d6f01c8439343b36d8f44793"
+      }
+    },
+    {
+      "id": "grapple/hang-recast",
+      "status": "possible_duplicate",
+      "parent": "grapple/anchor-gap; serial hook range relay",
+      "observation_decision": "Aim a second hook around an occluding corner.",
+      "causal_change": "New target selection could change path topology.",
+      "terrain_necessity": "Occluder must hide second target at entry and prevent direct first-to-exit launch.",
+      "falsifiers": [
+        "direct second hook",
+        "one hook to exit",
+        "same direction repeated grapple"
+      ],
+      "basis": "Actual two-hook route and stable reward are supported, including first-hook-only and direct-second-hook failures. Current geometry has no claimed occluding corner; second high hook is simply outside initial range, and additional opposite-direction aiming is a target/length parameter. Two necessary contacts do not yet establish a different player decision. Count as a technically validated adapter, not an independent fifth family.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v8/round-00",
+        "case": "grapple-hang-recast-v8-0",
+        "version": "sha256:a69ac1ba2ed94e93f8709c9061fdeff1df4c221b6348d250a66487fdf95b595c",
+        "counterexamples": 26,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "85fdacf5044ece0a536e95886f5bceb6f0e2038dc2bc0a13d1c34f7a83a02ee8"
+      }
+    },
+    {
+      "id": "grapple/hang-phase",
+      "status": "rejected",
+      "parent": "timed-cache temporal window; proposed wall timed dwell",
+      "observation_decision": "Wait at an aerial refuge then launch through hazard window.",
+      "causal_change": "Safe observation point may make timing physically possible.",
+      "terrain_necessity": "Waiting on entry must not reproduce same opportunity cheaply.",
+      "falsifiers": [
+        "entry wait then straight jump",
+        "immediate launch all phases",
+        "hazard bypass"
+      ],
+      "basis": "Old claim that safe aerial observation is necessary is physically falsified by 5/8 safe entry-phase routes. Replaced by versioned hazard-window semantics, counted separately only as the same one autonomous timing family, never as both.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v2/round-00",
+        "version": "sha256:a9337f777bf0781b96193f079104e79f04f1863083faafe5b2933c6c4cf932c1",
+        "physics_cases": 116,
+        "counterexamples": 22,
+        "calibration": {
+          "clean": {
+            "trials": 12,
+            "purpose_valid": 12,
+            "safe_stable": 12,
+            "rate": 1.0,
+            "wilson95": [
+              0.7574992425007574,
+              1.0
+            ]
+          },
+          "mild": {
+            "trials": 12,
+            "purpose_valid": 12,
+            "safe_stable": 12,
+            "rate": 1.0,
+            "wilson95": [
+              0.7574992425007574,
+              1.0
+            ]
+          },
+          "moderate": {
+            "trials": 12,
+            "purpose_valid": 11,
+            "safe_stable": 11,
+            "rate": 0.9166666666666666,
+            "wilson95": [
+              0.6461140782014047,
+              0.9851352905492264
+            ]
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36,
+          "accepted_chest_claims": 36
+        },
+        "selection_record": "pcg/results/workshop-creative-grapple-production-v2/round-00/selection-before-holdout.json",
+        "candidate_json_sha256": "17cae981abdac1a5974e5fc923ed3a7115a623ef4eb54b3a5a18533ddfc303b4"
+      },
+      "additional_audit": {
+        "summary": "pcg/results/workshop-creative-grapple-hang-audit-v1/summary.json",
+        "cases": 8,
+        "safe_stable": 5,
+        "safe_without_old_purpose": [
+          "grapple-hang-phase-v2-16-counter-entry-phase-0.25",
+          "grapple-hang-phase-v2-16-counter-entry-phase-0.375",
+          "grapple-hang-phase-v2-16-counter-entry-phase-0.5",
+          "grapple-hang-phase-v2-16-counter-entry-phase-0.75",
+          "grapple-hang-phase-v2-16-counter-entry-phase-0.875"
+        ]
+      }
+    },
+    {
+      "id": "grapple/jump-refill",
+      "status": "technical_candidate_distinct",
+      "parent": "contact-restored jump relay; wall version shares count",
+      "observation_decision": "Spend second jump to reach hook, restore it, spend again.",
+      "causal_change": "Hook contact restores finite jump resource.",
+      "terrain_necessity": "Hook must be inaccessible without prior expenditure and far bank require renewed jump.",
+      "falsifiers": [
+        "preserve first resource",
+        "direct double jump",
+        "anchor launch alone"
+      ],
+      "basis": "Revised v7 hook at y0 requires precontact extra jump, and farther x550 receiving bank requires another postcontact extra jump. Twelve newly added extended single-jump hook alternatives all fail. Real resource recovery and two expenditures are supported. v3 remains withdrawn, not retroactively repaired. Count this contact-restored-jump planning family once.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v7/round-00",
+        "case": "grapple-jump-refill-v7-0",
+        "version": "sha256:6a586b10102ea2ee318d8419afe9228207688eb28f697e39087daf790239a1e7",
+        "counterexamples": 35,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 24
+        },
+        "candidate_json_sha256": "dea4a2960354f8b269549589fafe0fef146c5091990785ff202231da9ddc5ae9"
+      },
+      "additional_audit": {
+        "summary": "pcg/results/workshop-creative-grapple-jump-audit-v1/summary.json",
+        "cases": 12,
+        "safe_stable": 2,
+        "safe_without_old_purpose": [
+          "grapple-jump-refill-v3-2-counter-direct-single-hook-24-0",
+          "grapple-jump-refill-v3-2-counter-direct-single-hook-24-4"
+        ]
+      },
+      "prior_evidence": [
+        {
+          "run": "pcg/results/workshop-creative-grapple-production-v3/round-00",
+          "version": "sha256:15190bab6de1b6f180bd4cd8b376e5d096fee184da71c82951640e1cee9d7b61",
+          "physics_cases": 101,
+          "counterexamples": 23,
+          "calibration": {
+            "clean": {
+              "trials": 1,
+              "purpose_valid": 1,
+              "safe_stable": 1,
+              "rate": 1.0,
+              "wilson95": [
+                0.20654329147389294,
+                1.0
+              ]
+            },
+            "mild": {
+              "trials": 12,
+              "purpose_valid": 12,
+              "safe_stable": 12,
+              "rate": 1.0,
+              "wilson95": [
+                0.7574992425007574,
+                1.0
+              ]
+            },
+            "moderate": {
+              "trials": 12,
+              "purpose_valid": 12,
+              "safe_stable": 12,
+              "rate": 1.0,
+              "wilson95": [
+                0.7574992425007574,
+                1.0
+              ]
+            }
+          },
+          "holdout": {
+            "trials": 25,
+            "safe_stable": 24,
+            "accepted_chest_claims": 24
+          },
+          "selection_record": "pcg/results/workshop-creative-grapple-production-v3/round-00/selection-before-holdout.json",
+          "candidate_json_sha256": "c29eb60c9dc86e7e1572ff1fc1a09ca7c6fa2193841566be21ebdedc321aa348"
+        }
+      ]
+    },
+    {
+      "id": "grapple/bounce-brake",
+      "status": "technical_candidate_distinct",
+      "parent": "brake-under-ledge",
+      "observation_decision": "Repair forced bounce trajectory with recoil.",
+      "causal_change": "Forced departure could remove the option to wait and create a new commitment.",
+      "terrain_necessity": "Natural bounce and direct recoil must miss the pocket.",
+      "falsifiers": [
+        "natural bounce",
+        "direct recoil",
+        "ordinary turn without recoil"
+      ],
+      "basis": "Contact with a bounce anchor automatically ejects the player and provides no stable waiting origin; the player must act on the imposed flight to extend into a high bank. This creates launch commitment/timing unlike active hang departure, and is not old falling recoil braking merely renamed. Current geometry is a high open rise, not the abandoned low-ring bypass version.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v5/round-01",
+        "case": "grapple-bounce-brake-v5-0",
+        "version": "sha256:1215efd08c9ed9db84393b1da9d3e2f70836d397d68838fc13053123d29a1f2f",
+        "counterexamples": 93,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "975b541886bf8ef7367c46a184cec121e61c5b0701fa74f8f69f6c6bbfde09b6"
+      }
+    },
+    {
+      "id": "machinery/momentum-vault",
+      "status": "rejected",
+      "parent": "chase-landing; platform launch",
+      "observation_decision": "Choose departing platform phase for inherited momentum.",
+      "causal_change": "Claimed persistent inherited velocity not established.",
+      "terrain_necessity": "Would require reachability change from platform velocity.",
+      "falsifiers": [
+        "stationary platform launch",
+        "same range without velocity"
+      ],
+      "basis": "Creator reports Motor rebuilds normal_velocity each frame so inheritance survives only first frame; both v1 probes out_of_bounds. No novelty credited."
+    },
+    {
+      "id": "machinery/elevator-headroom",
+      "status": "possible_duplicate",
+      "parent": "elevator use; headroom exit window",
+      "observation_decision": "Walk off at sufficient elevation while avoiding overhead rock.",
+      "causal_change": "Sustained carrier height provides otherwise unavailable side opening.",
+      "terrain_necessity": "High opening and ceiling must jointly constrain exit, rather than generic wait-to-top.",
+      "falsifiers": [
+        "direct bank jump/recoil",
+        "low exit",
+        "any phase walkoff"
+      ],
+      "basis": "v3 is an actual standard technical candidate with >300 true carried height. Novelty unresolved: reviewed roof bottom -50, carrier highest center50, target shore65 appear to permit generic wait-to-top then walk off. No demonstrated height/headroom decision beyond an ordinary elevator or motion-axis parameter. Creator asked for evidence and may revise; physical success alone does not supply independent novelty."
+    },
+    {
+      "id": "machinery/carrier-rendezvous",
+      "status": "technical_candidate_distinct",
+      "parent": "moving-support rendezvous",
+      "observation_decision": "Read relative position of two supports and transfer while they meet.",
+      "causal_change": "Two moving spatial supports, not just two grounded refills, create a changing transfer opportunity.",
+      "terrain_necessity": "Neither single carrier nor direct second-carrier entry may reach exit.",
+      "falsifiers": [
+        "one carrier only",
+        "direct second carrier",
+        "skip transfer"
+      ],
+      "basis": "Two separate moving supports have different clocks/dwells. Relative phase permits transfer and each alone cannot deliver to target. Dynamic rendezvous creates a new spatial prediction decision beyond single started-carrier chase or static ground reset.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-machinery-production-v6/round-00",
+        "case": "transfer-v5-12",
+        "version": "sha256:331f331fdce3d4f0cfc997c577ac934bed74af7cddade5135984a5108b2515f1",
+        "counterexamples": 35,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36
+        },
+        "candidate_json_sha256": "26e0df8df36e042d31d01ac8b4e32aec3e2dd7077069228dbac7dc78f15dc33f"
+      }
+    },
+    {
+      "id": "machinery/saw-pursuit",
+      "status": "technical_candidate_distinct",
+      "parent": "hazard released-space pursuit",
+      "observation_decision": "Enter the space just vacated by a moving hazard and keep advancing before return.",
+      "causal_change": "A moving forbidden volume turns stopping after entry into failure; revised proposal exits by dropping below track.",
+      "terrain_necessity": "Low roof prevents jumping over saw; final floor drop must remove player from return track.",
+      "falsifiers": [
+        "arbitrary-phase sprint",
+        "jump over saw",
+        "wait in corridor"
+      ],
+      "basis": "Follow space released by a horizontal moving hazard, continue through a low corridor, and drop out of its returning track. Unlike self-triggered timed gate, danger phase is autonomous; unlike hang departure, keeping forward progress and leaving the track are both causal. Thorned roof repairs actual recoil-over-roof bypasses.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-machinery-production-v6/round-01",
+        "case": "pursuit-v5-0.88",
+        "version": "sha256:e1aed107d2df1af781c1b3fdf8f2409d5d6093973ae967a186e2a8995484d888",
+        "counterexamples": 39,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36
+        },
+        "candidate_json_sha256": "21bf1234dd678cef168fc2115a0012614a6f1e0ad61ea43d6f629f87a410192b"
+      }
+    },
+    {
+      "id": "machinery/saw-internal-switchback",
+      "status": "possible_duplicate",
+      "parent": "brake-under-ledge",
+      "observation_decision": "Pass a hazard layer then reverse into pocket.",
+      "causal_change": "Saw may be only an extra obstacle on an existing reversal.",
+      "terrain_necessity": "Must demonstrate a phase-dependent choice beyond existing ledge brake.",
+      "falsifiers": [
+        "remove saw same plan",
+        "ordinary fall-and-turn",
+        "direct pocket entry"
+      ],
+      "basis": "Hazard addition does not count without an independent new decision."
+    },
+    {
+      "id": "enemy-world/brace-clearance",
+      "status": "possible_duplicate",
+      "parent": "kill-to-clear blockade; absorber-bell same family",
+      "observation_decision": "Brace against wall and repeatedly shoot blocking enemy.",
+      "causal_change": "Death removes contact blockade; wall absorbs own recoil.",
+      "terrain_necessity": "Ceiling prevents jump over; backing wall must materially affect firing feasibility.",
+      "falsifiers": [
+        "walk/jump past",
+        "shoot without wall",
+        "fewer shots"
+      ],
+      "basis": "Merged into technical kill-to-clear-firing-line family represented by clear-sightline v2. Not counted separately."
+    },
+    {
+      "id": "enemy-world/absorber-bell",
+      "status": "technical_candidate_distinct",
+      "parent": "enemy-world/brace-clearance; kill-to-clear blockade",
+      "observation_decision": "Fire three times into enemy then fire again at exposed bell.",
+      "causal_change": "Enemy death exposes same ray, followed by an ordinary switch action.",
+      "terrain_necessity": "Aiming around enemy/waiting until it moves must fail.",
+      "falsifiers": [
+        "aim around enemy",
+        "wait enemy away",
+        "kill then same fixed action"
+      ],
+      "basis": "Count one kill-to-clear-firing-line family only, merging brace-clearance. Enemy body absorbs early shots and death exposes the key receiver; same-position fourth shot does not add a second family. Roof/back wall constrain firing and bypass; finite actual counters do not claim exhaustive necessity.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-enemy-world-production-v2/round-00",
+        "case": "ew-clear-sightline-v2-21",
+        "version": "sha256:0e52e3732ffbae67d01f6636592f765a9a145ef6fc85787fdd287e2000a90976",
+        "counterexamples": 21,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 11,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36
+        },
+        "candidate_json_sha256": "39fccca24467cc6e2b0d09dac2e9e6610355b499641c7ef32acb5dc349745eee"
+      }
+    },
+    {
+      "id": "enemy-world/live-knockback-aperture",
+      "status": "proposal_unique_hypothesis",
+      "parent": "move living blocker to change firing geometry; risk kill-to-clear variant",
+      "observation_decision": "Reposition a live enemy to open a different firing line.",
+      "causal_change": "Persistent enemy position changes later projectile occlusion.",
+      "terrain_necessity": "Shooting position/occluder must require actual displacement.",
+      "falsifiers": [
+        "no hit direct bell",
+        "wait",
+        "kill enemy then bell with equal or lower cost"
+      ],
+      "basis": "Potentially separate only if keeping/moving alive changes a real tradeoff. Checker must permit legitimate killing alternatives rather than fail them solely for lacking intended live-state tag."
+    },
+    {
+      "id": "enemy-world/closing-shield",
+      "status": "proposal_unique_hypothesis",
+      "parent": "timed-cache uses opening; this proposal uses restored occlusion",
+      "observation_decision": "Pass through an opening then depend on its closure for cover.",
+      "causal_change": "Gate collision returns before incoming enemy projectile reaches exit.",
+      "terrain_necessity": "No other cover or cheap sprint route may replace restored gate.",
+      "falsifiers": [
+        "gate never closes",
+        "sprint straight through",
+        "kill shooter",
+        "stand safe elsewhere"
+      ],
+      "basis": "Reinterpreting closure as useful world state is plausibly distinct, not yet validated."
+    },
+    {
+      "id": "enemy-world/telegraph-underpass",
+      "status": "proposal_unique_hypothesis",
+      "parent": "active enemy aim manipulation",
+      "observation_decision": "Expose high position to lock shot, then relocate low before firing.",
+      "causal_change": "Player deliberately changes future projectile direction; not passive phase waiting.",
+      "terrain_necessity": "High bait position and low passage must produce distinct actual firing ray.",
+      "falsifiers": [
+        "direct low crossing",
+        "wait without bait",
+        "kill shooter",
+        "random phase"
+      ],
+      "basis": "Strong independent causal hypothesis if real locked aim and low-route necessity are demonstrated."
+    },
+    {
+      "id": "resource-routes/ground-reset-relay",
+      "status": "rejected",
+      "parent": "ordinary grounded resource reset; jump_wall/ground-reset-gap-relay",
+      "observation_decision": "Land at intermediate island to recharge then repeat jump/recoil.",
+      "causal_change": "Default grounded reset only.",
+      "terrain_necessity": "Two serial range gaps.",
+      "falsifiers": [
+        "skip island"
+      ],
+      "basis": "Creator and parent explicitly exclude ordinary landing relay from new family count."
+    },
+    {
+      "id": "resource-routes/sightline-backtrack",
+      "status": "technical_candidate_distinct",
+      "parent": "spatial remote unlock with return commitment",
+      "observation_decision": "Move away from target to obtain line of sight, unlock it, then return.",
+      "causal_change": "Permanent remote world-state change makes an earlier blocked route traversable.",
+      "terrain_necessity": "Actual occluding rock must invalidate prefire and alternative sight lines.",
+      "falsifiers": [
+        "prefire from entry",
+        "climb over gate",
+        "skip excursion"
+      ],
+      "basis": "Player must depart away from the desired left exit to obtain an unoccluded line to the persistent key, then return through the now-changed earlier path. Different from immediate same-shot timed crossing: spatial dependency and return are the meaningful state plan.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-resource-routes-v6/round-00",
+        "case": "sightline-backtrack-v6-0",
+        "version": "sha256:708a6dd6002a8db604e732f418d733eec70fb9c4e0055b5208e47ef31076a0a3",
+        "counterexamples": 31,
+        "safe_counterexamples": 1,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "41bf9c270200f827e483d1ca66fbfa19ff3ac9af1776028966ab1d823191d063"
+      }
+    },
+    {
+      "id": "resource-routes/sequence-spatial-lock",
+      "status": "possible_duplicate",
+      "parent": "sightline-backtrack; serial remote switches",
+      "observation_decision": "Hit one bell to expose next station, move, hit next bell.",
+      "causal_change": "Ordered state machine with spatially inaccessible second receiver.",
+      "terrain_necessity": "First state must change discoverability/access to second rather than just add another door.",
+      "falsifiers": [
+        "second bell first",
+        "same station both shots",
+        "parallel independent gate equivalent"
+      ],
+      "basis": "Reviewed v4 exact two-receiver ordered key: shoot first to remove intermediate partition, traverse rock, shoot second to open final gate. This is observationally reproducible by two independent simple locks in series; sequence_step itself does not create an independent decision. Retain as spatial-lock adapter, not separate new family."
+    },
+    {
+      "id": "resource-routes/drop-key-late-recoil",
+      "status": "possible_duplicate",
+      "parent": "brake-under-ledge + timed-cache same-shot gate coupling",
+      "observation_decision": "Fall below occluder, shoot down to unlock and rise into side pocket.",
+      "causal_change": "Single recoil both moves body and opens gate, from spatially restricted ray.",
+      "terrain_necessity": "Only correct lower shooting region may offer line of sight.",
+      "falsifiers": [
+        "ground prefire",
+        "ordinary pocket fall",
+        "gate absent same brake route"
+      ],
+      "basis": "Promising composition, but currently a concatenation of baseline line-of-sight recoil gate and pocket correction; prove a new incompatible choice rather than both old requirements."
+    },
+    {
+      "id": "resource-routes/start-walk-intercept",
+      "status": "possible_duplicate",
+      "parent": "chase-landing",
+      "observation_decision": "Start platform then take separate ground route to intercept it.",
+      "causal_change": "Same start/pursue moving-support state as chase-landing; walking route changes approach.",
+      "terrain_necessity": "Alternative ground route must induce an independent choice, not just replace a jump approach.",
+      "falsifiers": [
+        "wait and board",
+        "normal chase",
+        "static platform access"
+      ],
+      "basis": "Current card changes route to moving support, not the central player decision. Recommended replacing with trapdoor or moving cover."
+    },
+    {
+      "id": "occupancy/player-release-window",
+      "status": "possible_duplicate",
+      "parent": "timed-cache trigger-and-sprint",
+      "observation_decision": "Stand on a pressure zone then leave to start a finite departure window.",
+      "causal_change": "Actual body occupancy and loss of occupancy control gate state.",
+      "basis": "New Cell binding is not a new experience by itself. If player merely replaces shooting trigger with walking off a plate, same trigger-and-sprint relationship remains. Could become different with a consequential maintained state and release commitment, not yet demonstrated.",
+      "falsifiers": [
+        "ordinary leave plate and sprint",
+        "prefire equivalent",
+        "any release timing",
+        "hold gate indefinitely through another route"
+      ]
+    },
+    {
+      "id": "occupancy/live-enemy-pressure-support",
+      "status": "proposal_unique_hypothesis",
+      "parent": "enemy-world/live-knockback-aperture; preserved live-body world support",
+      "observation_decision": "Push a live enemy onto an occupancy zone and preserve it to keep a distant gate traversable.",
+      "causal_change": "Enemy is a persistent functional world support, not a blocker to clear; actual body departure or death physically removes gate support.",
+      "basis": "Strong independent state planning relative to killing, knockback-to-open-ray, and air-refund. Death must really deactivate occupancy; the checker must not simply impose an alive label.",
+      "falsifiers": [
+        "no push direct route",
+        "player self-press then sprint",
+        "kill then residual timer sprint",
+        "leave enemy off zone",
+        "push after passing gate"
+      ]
+    },
+    {
+      "id": "resource-routes/trapdoor-commit",
+      "parent": "new physical supporting-gate topology",
+      "status": "technical_candidate_distinct",
+      "basis": "The closed gate is the players actual supporting bridge. Opening it removes own footing and creates the lower route. Three successful airborne opening variants retain this self-removal of support. Claim of a specific on-bridge firing pose is not required.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-resource-routes-v5/round-02",
+        "case": "trapdoor-commit-v5-0",
+        "version": "sha256:b4634207ffe04d75ab5fb4308714818158cc5b9e26f6c97c8340cf3752f5b3b4",
+        "counterexamples": 30,
+        "safe_counterexamples": 3,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "7d7944267c4bc6622d66cdb6faa190da5efba6b46fd97736065bb2e60f964890"
+      }
+    },
+    {
+      "id": "enemy-world/displace-landing",
+      "status": "technical_candidate_distinct",
+      "parent": "live-enemy body displacement for physical landing clearance",
+      "basis": "v6 changes the physical lower bank to start x170 with thorns covering x170..188. Player center needs x>=200 to clear left thorns, but with enemy initial center225 and combined halfwidth26 needs x<=199 to avoid the enemy from the left. There is no stationary safe gap before displacement. One actual hit opens a landing gap; extra-hit and lethal alternatives are accepted, not suppressed by an alive-only requirement. This is physical occupancy displacement, unlike fixed volley removal of a projectile absorber. Old v3 broad-floor concern remains recorded; narrow goal alone is no longer the sole boundary.",
+      "falsifiers": [
+        "turn left while falling and stop away from blocker",
+        "long jump past blocker to right",
+        "kill blocker before descent",
+        "wait without attack"
+      ],
+      "evidence": {
+        "run": "pcg/results/workshop-creative-enemy-world-production-v6/round-00",
+        "case": "ew-displace-landing-v6-14",
+        "version": "sha256:d5fe842b15c1b85d978230799de0058e58c2f290258eaf5068e03352ed493607",
+        "counterexamples": 23,
+        "safe_counterexamples": 2,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 11,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36
+        },
+        "candidate_json_sha256": "63e553c503edcadc3043452297731a50581ee14c8016f62d48623fc24e07f091"
+      }
+    },
+    {
+      "id": "jump_wall/bell-wall-rebound",
+      "status": "technical_candidate_distinct",
+      "parent": "timed-cache + wall return; incompatible aim/travel coupling",
+      "basis": "Aiming at the required bell sends recoil away from the desired gate. The one spent airborne round cannot reverse again and wall jump does not refill it. A wall supplies the required direction reversal before timed closure. This is a nontrivial combination resolving incompatible aiming and travel direction, not two independent actions in series.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-jump-wall-production-v3/round-01",
+        "case": "bell-wall-rebound-v3-0",
+        "version": "sha256:934403a04df43b5dddad97a2cfbe55388c5ea0ed4ca79316d0cbcd5bf064e2d2",
+        "counterexamples": 25,
+        "safe_counterexamples": 1,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 25
+        },
+        "candidate_json_sha256": "20d513948e42b4048ed054eea0d427fbc4cb43b70642137aa9088dd67c4d3498"
+      }
+    },
+    {
+      "id": "grapple/hazard-window",
+      "status": "technical_candidate_distinct",
+      "parent": "autonomous hazard phase synchronization",
+      "basis": "New semantic contract accepts both entry synchronization and safe-hang synchronization. Uncontrolled periodic saw requires a departure phase choice; unlike timed-cache the player cannot create the window by firing, and unlike static anchor-gap time changes the safe route. Five successful entry-phase alternatives retain this timing decision; old necessary-aerial-observation claim is not retained.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-grapple-production-v7/round-02",
+        "case": "grapple-hazard-window-v7-16",
+        "version": "sha256:3db49838ae459fffab4cc1fbac4e438a08e00ae059f4c919ecdf3a6c290f128c",
+        "counterexamples": 30,
+        "safe_counterexamples": 6,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 12,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 35
+        },
+        "candidate_json_sha256": "48f106f2d6736347749dba1c3d962a369a293734198eff66181d054d1be9d971"
+      }
+    },
+    {
+      "id": "machinery/evacuate-rejoin",
+      "status": "technical_candidate_distinct",
+      "parent": "temporary evacuation from a still-moving support",
+      "basis": "Same carrier must continue through a real large saw while player leaves to a high refuge, crosses above it, and intercepts the original carrier again to finish. Unlike rendezvous between two carriers, the player temporarily gives up the only mobile support and predicts where that same unpaused object will reappear. Stay aboard, late boarding, and skip-refuge alternatives fail physically; reward label alone does not enforce leaving.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-machinery-production-v9/round-00",
+        "case": "evac-v9-2.6-800",
+        "version": "sha256:d111648359a582cf23082401d12276881fa995b8b310970ca15ed15316ba091e",
+        "counterexamples": 49,
+        "safe_counterexamples": 0,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 11,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 36
+        },
+        "candidate_json_sha256": "fd6100c80932edd9ff54f3cfb068e50cefd121381d96f4092d28fec37c43d447"
+      }
+    },
+    {
+      "id": "resource-routes/moving-projectile-aperture",
+      "status": "technical_candidate_distinct",
+      "parent": "periodic projectile occlusion; not body hazard crossing",
+      "observation_decision": "Choose when to fire a finite shot so its swept path passes a moving slab and hits the unlock receiver; the same recoil must still support traversal.",
+      "causal_change": "Platform changes the projectiles reachable target set rather than carrying the player or shielding against enemy bullets.",
+      "basis": "Original moving slab controls whether the players projectile reaches the bell; the body does not ride or need cross the slab. One sampled blocked shot physically impacts inside the slab bounds before opening the short gate, while alternate firing/entry times reach the target. This is projectile-path anticipation, distinct from body hazard departure phase, autonomous moving support, or a stationary bell timed gate. Eleven successful other timings are accepted rather than hidden by phase labels.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-resource-routes-moving-ray-v1/round-00",
+        "case": "moving-ray-v1-0",
+        "version": "sha256:de3f1cb2b2456022c4d4b0e3a884fa0b7ef6ae3bcc2e3ff02d09335bf061f577",
+        "counterexamples": 43,
+        "safe_counterexamples": 11,
+        "calibration": {
+          "clean": {
+            "valid": 12,
+            "trials": 12
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 11,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 36,
+          "safe_stable": 34
+        },
+        "candidate_json_sha256": "5d18bbc42cfc16c361471cd5780f48a57b423d227fdc5de61fb12a2ed1648383"
+      }
+    },
+    {
+      "id": "jump_wall/wall-slide-launch-window",
+      "status": "proposal_unique_hypothesis",
+      "parent": "autonomous hazard synchronization with irreversible height budget",
+      "basis": "Original wall attachment continues sliding downward at75 and spends height while observing. Finite vertical exit band plus autonomous saw can require a launch before both constraints expire; unlike infinite safe hook hang, waiting changes future reachability. No stamina drain claimed. Test entry synchronization, same-wall relaunch to recover height, and direct drop."
+    },
+    {
+      "id": "resource-routes/ordered-target-transaction",
+      "status": "technical_candidate_distinct",
+      "parent": "noncommutative target order; replaces serial spatial locks",
+      "basis": "Both receivers are already reachable by shooting from the starting area. Their real transactions do not commute: first-then-second unlocks, the same two hits in reverse order leave only primed progress. This cannot be reproduced by two independent simple gates, unlike the withdrawn serial spatial-lock distinction. Correct ground pre-opening plus another traversal shot and wrong-order recovery are valid and accepted, so no false airborne-only or finite-ammo requirement supports this count.",
+      "evidence": {
+        "run": "pcg/results/workshop-creative-resource-routes-ordered-target-v2/round-00",
+        "case": "ordered-target-v2-12-18",
+        "version": "sha256:35a76f5584c914dd5701edf175fffbaa89b28a19c8c072d6e711b52c620da659",
+        "counterexamples": 35,
+        "safe_counterexamples": 5,
+        "calibration": {
+          "clean": {
+            "valid": 1,
+            "trials": 1
+          },
+          "mild": {
+            "valid": 12,
+            "trials": 12
+          },
+          "moderate": {
+            "valid": 10,
+            "trials": 12
+          }
+        },
+        "holdout": {
+          "trials": 25,
+          "safe_stable": 23
+        },
+        "candidate_json_sha256": "e8e2be10c181c9a44be35be13ec7ca2d870f632796c47bdcd0b3fcd884022a7e"
+      }
+    },
+    {
+      "id": "machinery/carrier-dual-service",
+      "status": "proposal_unique_hypothesis",
+      "parent": "external occupancy key plus mutually exclusive carrier duty",
+      "basis": "Same platform must first remain docked to maintain a remote gate, then be released after traversal to become required support for a far gap. Unlike merely replacing the living sensor occupant with a platform, stationary key duty and mobile support duty conflict and require an actual handoff/order plan. Test early release plus anti-pinch passage, permanent dock plus direct jump, prefire return bell, and bypass of either duty."
+    }
+  ],
+  "evidence_read": [
+    "pcg/creative-production/jump_wall/design-cards-v1.json",
+    "pcg/creative-production/grapple/*-v1.json",
+    "pcg/creative-production/machinery/design-cards-v1.json",
+    "pcg/creative-production/enemy_world/*-v1.json",
+    "pcg/creative-production/resource_routes/*-v1.json",
+    "pcg/results/workshop-creative-machinery-probe-v1/summary.json",
+    "pcg/results/workshop-creative-enemy-world-probe-v1/rows.json",
+    "pcg/prototype/godot/plains_cells.gd",
+    "pcg/prototype/godot/scripts/generation/module_moving_platform.gd",
+    "pcg/prototype/godot/scripts/enemies/enemy_attack_projectile.gd",
+    "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
+    "pcg/results/workshop-creative-grapple-production-v1/round-00/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v1/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-grapple-production-v1/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v1/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v1/round-00/selection-before-holdout.json",
+    "pcg/results/workshop-creative-grapple-production-v2/round-00/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v2/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-grapple-production-v2/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v2/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v2/round-00/selection-before-holdout.json",
+    "pcg/results/workshop-creative-grapple-production-v3/round-00/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v3/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-grapple-production-v3/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v3/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v3/round-00/selection-before-holdout.json",
+    "pcg/results/workshop-creative-grapple-jump-audit-v1/summary.json",
+    "pcg/results/workshop-creative-grapple-hang-audit-v1/summary.json",
+    "pcg/results/workshop-creative-grapple-production-v5/round-01/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v5/round-01/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v5/round-01/calibration-evaluations.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-00/candidates.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-01/candidates.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-01/bound-counterexamples.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-01/calibration-evaluations.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-02/candidates.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-02/bound-counterexamples.json",
+    "pcg/results/workshop-creative-jump-wall-production-v2/round-02/calibration-evaluations.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-00/candidates.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-01/candidates.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-01/bound-counterexamples.json",
+    "pcg/results/workshop-creative-machinery-production-v6/round-01/calibration-evaluations.json",
+    "pcg/results/workshop-creative-resource-routes-v5/round-02/candidates.json",
+    "pcg/results/workshop-creative-resource-routes-v5/round-02/bound-counterexamples.json",
+    "pcg/results/workshop-creative-resource-routes-v5/round-02/calibration-evaluations.json",
+    "pcg/results/workshop-creative-resource-routes-v6/round-00/candidates.json",
+    "pcg/results/workshop-creative-resource-routes-v6/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-resource-routes-v6/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-enemy-world-production-v2/round-00/candidates.json",
+    "pcg/results/workshop-creative-enemy-world-production-v2/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-enemy-world-production-v2/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-01/candidates.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-01/bound-counterexamples.json",
+    "pcg/results/workshop-creative-jump-wall-production-v3/round-01/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-00/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-02/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-02/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v7/round-02/calibration-evaluations.json",
+    "pcg/results/workshop-creative-grapple-production-v8/round-00/candidates.json",
+    "pcg/results/workshop-creative-grapple-production-v8/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-grapple-production-v8/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-machinery-production-v9/round-00/candidates.json",
+    "pcg/results/workshop-creative-machinery-production-v9/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-machinery-production-v9/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-enemy-world-production-v6/round-00/candidates.json",
+    "pcg/results/workshop-creative-enemy-world-production-v6/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-enemy-world-production-v6/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-enemy-world-production-v6/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-resource-routes-ordered-target-v2/round-00/candidates.json",
+    "pcg/results/workshop-creative-resource-routes-ordered-target-v2/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-resource-routes-ordered-target-v2/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-resource-routes-ordered-target-v2/round-00/calibration-evaluations.json",
+    "pcg/results/workshop-creative-resource-routes-moving-ray-v1/round-00/candidates.json",
+    "pcg/results/workshop-creative-resource-routes-moving-ray-v1/round-00/counter-decisions.json",
+    "pcg/results/workshop-creative-resource-routes-moving-ray-v1/round-00/bound-counterexamples.json",
+    "pcg/results/workshop-creative-resource-routes-moving-ray-v1/round-00/calibration-evaluations.json"
+  ],
+  "technical_candidate_distinct_count": 17,
+  "human_fun": "unreviewed",
+  "manual_play": "unreviewed",
+  "production_approval": false,
+  "supersedes": "review-v5.json",
+  "technical_candidate_distinct_ids": [
+    "jump_wall/late-air-rise",
+    "jump_wall/step-off-wall-return",
+    "jump_wall/switchback-wall-ascent",
+    "grapple/anchor-gap",
+    "grapple/jump-refill",
+    "grapple/bounce-brake",
+    "machinery/carrier-rendezvous",
+    "machinery/saw-pursuit",
+    "enemy-world/absorber-bell",
+    "resource-routes/sightline-backtrack",
+    "resource-routes/trapdoor-commit",
+    "enemy-world/displace-landing",
+    "jump_wall/bell-wall-rebound",
+    "grapple/hazard-window",
+    "machinery/evacuate-rejoin",
+    "resource-routes/moving-projectile-aperture",
+    "resource-routes/ordered-target-transaction"
+  ],
+  "count_limit_note": "This is the independent reviewed count at this snapshot, not total team output. Validated candidates awaiting novelty resolution are not counted as independent families.",
+  "status_counts": {
+    "technical_candidate_distinct": 17,
+    "possible_duplicate": 9,
+    "rejected": 4,
+    "proposal_unique_hypothesis": 6
+  }
+}

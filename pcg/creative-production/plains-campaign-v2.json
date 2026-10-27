@@ -1,0 +1,79 @@
+{
+  "schema": "pcg/ai-content-campaign/v2",
+  "id": "plains-campaign-v2",
+  "supersedes_scope_not_history": "campaign-v1 new20 completed; this campaign prioritizes recoil-only plains",
+  "status": "active_session_bounded_batches",
+  "controller_skill": ".agents/skills/pcg-creative-producer/SKILL.md",
+  "batch_protocol": ".agents/skills/pcg-creative-producer/references/batch-production-v1.md",
+  "model_provider": "current Codex conversation and user-authorized subagents; no background or external API service",
+  "allowed_capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "human_source": "pcg/feedback/workshop/idea-sources/human-plains-batch-production/v1.json",
+  "latest_feedback": "pcg/feedback/workshop/plains-five-design-feedback-v1.json",
+  "persistent_library": "pcg/module_library/store",
+  "scope_view": "pcg/prototype/creative_batches/plains_workshop/profile-v1.json",
+  "budgets": {
+    "ideas_per_round": 5,
+    "new_technical_candidate_versions_per_ai_review": 20,
+    "max_idea_rounds_per_checkpoint": 8,
+    "max_concurrent_implementations": 2,
+    "max_new_cells_per_batch": 1,
+    "max_source_revisions_per_proposal": 2,
+    "max_control_candidates_per_interface": 4,
+    "max_actual_physics_cases_per_proposal": 400,
+    "quality_policy": "original regular; no reduced calibration, holdout or post-failure relaxation",
+    "stop_conditions": [
+      "candidate batch full",
+      "predeclared experiment budget exhausted",
+      "supported proposal queue exhausted",
+      "8 idea rounds exhausted"
+    ],
+    "budget_is_plan_not_executed_count": true
+  },
+  "queue": [
+    {
+      "id": "PR-D01",
+      "state": "suppressed_redundant",
+      "selection_weight": 0
+    },
+    {
+      "id": "PR-D02",
+      "state": "implementation_assigned",
+      "owner": "/root/machinery_creator",
+      "human_design_feedback": "positive",
+      "experiment_receipt": "pending"
+    },
+    {
+      "id": "PR-D03",
+      "state": "missing_generation_rule",
+      "human_design_feedback": "positive"
+    },
+    {
+      "id": "PR-D04",
+      "state": "missing_generation_rule",
+      "human_design_feedback": "positive"
+    },
+    {
+      "id": "PR-D05",
+      "state": "needs_cell",
+      "human_design_feedback": "positive",
+      "gap": "真实可射击移动支撑物；承载、防夹和不意外触发敌人命中回充的接收路径"
+    }
+  ],
+  "initial_batch": {
+    "basis": "existing 32 selected plains candidate versions, not 32 distinct families",
+    "snapshot": {
+      "path": "generation/workshop/plains-recoil-v1/catalog.json",
+      "sha256": "077d69b109257b721a141e61bace805e46e02057b154e99cc644ba5fbee2910f"
+    },
+    "ai_review": "pcg/creative-production/curation/plains-batch-001-ai-review-v1.json",
+    "review_owner": "/root/novelty_critic",
+    "status_at_campaign_registration": "in_progress"
+  },
+  "human_gate": "batch representative videos; design/video/playtest/production recorded separately",
+  "next_receipt": "pcg/creative-production/plains-campaign-v2-cycle-001.json",
+  "production_admitted": false
+}

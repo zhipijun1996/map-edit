@@ -1,0 +1,160 @@
+{
+  "schema": "pcg/content-design-proposals/v1",
+  "source_type": "current_codex_subagent_design",
+  "source_task": "/root/plains50_new_relations",
+  "exact_model_revision": "not exposed",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "human_approval": "UNKNOWN",
+  "production_admitted": false,
+  "cards": [
+    {
+      "id": "P50-N01",
+      "recipe": "brake-gate-catch",
+      "title": "开侧门的一枪也是刹车",
+      "observation": "从上方岩脊能看到下侧袋中的宝箱，但袋口有门；外侧风铃与门同色连线。",
+      "decision": "先从岩唇外落下，再决定开枪位置和制动方向，进入刚打开的侧袋。",
+      "causality": "发布见证的一枪向右击铃开侧门，同时反冲向左刹入；其他仍保留空中刹车的开门策略允许，不能宣称全策略同枪必要。",
+      "cells": [
+        "原ShotLatch计时门/防夹",
+        "原单跳/反冲/冷却",
+        "实体岩唇",
+        "SimpleRoomReward"
+      ],
+      "resources": "原空中枪与地面恢复，未伪造返还；无需额外能力。",
+      "terrain": "真实上岩唇迫使身体先下落，侧袋门遮住进入路线，近侧铃缩短实际弹丸飞行距离。",
+      "reward": "宝箱在侧袋可预见，真正支持接触后提交10金币。",
+      "recovery": "落错可以落在下方真实安全地面；回到入口与反向路线尚未逐段验证，UNKNOWN。",
+      "direction": "仅已测entry→exit，反方向不交换。",
+      "cheap": [
+        "普通跳/省略空中射击",
+        "地面提前开门再转向掉落",
+        "过早或过晚击铃",
+        "从岩脊另一端绕入"
+      ],
+      "difference": "G02过檐刹车与G04门世界状态的组合，按组合记，不自动新增家族。",
+      "interfaces": [
+        "438侧袋/240岩唇",
+        "468侧袋/260岩唇"
+      ]
+    },
+    {
+      "id": "P50-N02",
+      "recipe": "adverse-refund-reversal",
+      "title": "补给把你推离目标",
+      "observation": "高岸在前上方，唯一补给敌人在前下方。",
+      "decision": "先接受命中带来的向后反冲，再用真正返还的第二枪把身体转回高岸。",
+      "causality": "第一枪朝前下命中活敌，空中资源返还而水平运动后退；第二枪朝后下使人物重新向前上升。",
+      "cells": [
+        "原3HPplains_sentry",
+        "原弹丸/命中返空中枪",
+        "原反冲",
+        "实体高岸/奖励"
+      ],
+      "resources": "实际空中命中后才返还；杀掉敌人后资源机会有限，不重置HP。",
+      "terrain": "目标岸高出原地一枪预算，近侧补给的位置故意与目标行进方向对立。",
+      "reward": "高岸宝箱从入口可见，落稳后领取16金币。",
+      "recovery": "下方原安全地面可落地恢复；连续重试/敌人死亡后回程UNKNOWN，不承诺无代价重置。",
+      "direction": "已测向前上岸，返回/其他端口UNKNOWN。",
+      "cheap": [
+        "长按普通跳",
+        "单枪直接升岸",
+        "落地刷新冒称空中命中返还",
+        "先把敌人打死再飞"
+      ],
+      "difference": "同属G03命中回充，但原有利方向命中改为收益造成逆向运动问题；AI最终判断是否独立关系。",
+      "interfaces": [
+        "330/110目标，230前方补给",
+        "355/100高目标，240起始的扩宽接收面"
+      ]
+    },
+    {
+      "id": "P50-N03",
+      "recipe": "refill-short-gate",
+      "title": "把回充枪投给高处短门",
+      "observation": "高处宝箱隔着短时门，入口附近活敌提供唯一额外空中枪机会。",
+      "decision": "先用第一枪取得真实回充，第二枪既要用于抬升，也要命中高处门铃。",
+      "causality": "敌人命中返还资源；发布见证第二枪开门并上升，门按实际弹丸飞行与身体穿过持续开启。提前开门但仍完成资源链的合理替代允许。",
+      "cells": [
+        "原plains_sentry",
+        "ShotLatch短门及防夹",
+        "原空中资源/反冲",
+        "奖励事务"
+      ],
+      "resources": "最多原机制可返还的空中枪，先射杀补给再出发不伪造额外枪。",
+      "terrain": "门横在高岸入口，普通一枪不够升到目标，铃位于第二枪向下后方的真实射线上。",
+      "reward": "穿门后在高岸落地领取16金币；看见不等于取得。",
+      "recovery": "可落下方安全地面，真实状态保持；声明回程UNKNOWN。",
+      "direction": "两个独立向上需求；并未验证门关闭后的返回。",
+      "cheap": [
+        "省略命中补给",
+        "省略第二枪",
+        "普通/单枪越门",
+        "地面提前开门等候后再飞",
+        "先杀敌"
+      ],
+      "difference": "G03资源链与G04短门的组合，不以多一个门自称新家族。",
+      "interfaces": [
+        "350/100高岸门x300",
+        "380/80高岸门x320"
+      ]
+    },
+    {
+      "id": "P50-N05",
+      "recipe": "prepared-air-sequence",
+      "title": "先备好第一铃，再跃过第二铃的短门",
+      "observation": "入口可见标1的准备铃、远侧标2的动作铃，以及门后宝箱；准备成功后世界显示sequence_step=1。",
+      "decision": "先确认一号铃真正提交，再选择越沟时命中二号铃的时机；允许有准备价值的其他顺序时机。",
+      "causality": "原有序ShotLatch拒绝未准备的二号铃；发布见证第二枪在空中击中二号并反冲穿门，短门按真实命中计时。此处不宣称所有合法解都必须同枪。",
+      "cells": [
+        "原ShotLatch.sequence_offset",
+        "原ShotLatch计时/防夹",
+        "真实地面资源恢复/普通跳跃/反冲",
+        "SimpleRoomReward"
+      ],
+      "resources": "准备枪在真实地面，空中仍按原预算；无敌人或额外能力。",
+      "terrain": "出发岸/短门间有真实沟，铃2位于越沟反冲的瞄准方向。",
+      "reward": "门后可见宝箱，必须落稳触碰才领取12金币。",
+      "recovery": "下方安全地面接真实恢复；出口倒向、连续返回UNKNOWN。",
+      "direction": "两个entry→exit空间需求，未验证关系不互换。",
+      "cheap": [
+        "先打二号再打一号",
+        "省略第一或第二枪",
+        "地面提前开完两铃再越沟",
+        "长跳/越门"
+      ],
+      "difference": "G17有序世界事务与G04短门跨越的组合，是否值得保留由AI/人工评审，不能多一个铃自动算新家族。",
+      "interfaces": [
+        "460门前岸/665目标",
+        "480门前岸/705目标"
+      ]
+    }
+  ],
+  "unfulfilled_prior_designs": [
+    {
+      "id": "PR-D02",
+      "state": "two_revisions_failed_regular",
+      "reason": "real sightline repair fixed old cheap policies but selected calibration moderate6/12 below original regular threshold; no candidate"
+    },
+    {
+      "id": "PR-D04",
+      "state": "two_probes_failed",
+      "reason": "world-state/outbound-return route never safely completed; planner settle operation does not wait for actual arrival, next revision must explicitly bind arrival/grounding"
+    },
+    {
+      "id": "PR-D05",
+      "state": "cell_prototype_two_probes_failed",
+      "reason": "native support moves/stops on real mechanism hit without damage commit callback; player briefly grounded on support but second high shore failed. No production Cell claim, no module substitution under D05 title"
+    },
+    {
+      "id": "P50-N04",
+      "recipe": "ground-refill-switchback",
+      "state": "two_control_revisions_failed",
+      "reason": "persistent settle controller keeps prior target and overrides later axis; middle-platform arrival was real but onward turn timed out. Needs explicit changed settle target and ground-condition gate. No claim that physical relation is impossible."
+    }
+  ],
+  "supersedes": "design-cards-v1.json"
+}

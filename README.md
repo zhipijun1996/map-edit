@@ -8,6 +8,8 @@
 - [草图编辑器](https://zhipijun1996.github.io/map-edit/) · [编辑器原说明](docs/map-notes-editor.md)
 - [生成工作区与恢复命令](pcg/WORKSPACE.md) · [迁移与本轮实验报告](pcg/MIGRATION-AND-NEXT.md)
 
+旧 Map 生成实验已终止并固定归档，见[失败归档与Module隔离](archive/mapgen-failed/README.md)。Module继续在本仓库独立制作、验证与归档；候选库入口为[中立Module库](pcg/module_library/README.md)。
+
 ## 开始研究
 
 `pcg/`保留原研究程序的相对布局，可直接运行Python模块；并非只有报告或预制模块压缩包。

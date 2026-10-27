@@ -1,0 +1,171 @@
+{
+  "schema": "pcg/causal-design-cards/v1",
+  "cards": [
+    {
+      "id": "plains50/enemy/attack-relay",
+      "status": "executable_adaptation_requires_physics",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_enemy",
+      "resource_conditions": "真实原组件HP/精力/枪次数/冷却/落地恢复；无钩索/墙跳/二跳。",
+      "reward": "入口可观察的原奖励，位置和拾取region共同绑定；实际接触落地领奖。",
+      "directed_ports": "entry→exit only; reverse/other states UNKNOWN",
+      "demands": [
+        {
+          "entry_x": 50,
+          "exit_x": 460,
+          "floor_width": 850,
+          "ceiling_width": 400
+        },
+        {
+          "entry_x": 110,
+          "exit_x": 520,
+          "floor_width": 980,
+          "ceiling_width": 470
+        }
+      ],
+      "observation": "敌人架在低洞口上，门上连线把攻击动作和短开门窗口联系起来；能看到后方宝箱。",
+      "decision": "在暴露位置诱发一次真实攻击，承诺后进入掩体下的出口，不能提前离开射界也不能一直停在弹线。",
+      "causality": "原EnemyAttackBehavior进入attack并实际发射弹丸，已有AttackRelayLatch打开门；玩家靠跑动避开射线。",
+      "terrain": "入口在真实视野内，敌人高台和低通道分离；不可跳越的厚岩压住上方绕路。",
+      "cells": [
+        "原EnemyActor/EnemyAttackBehavior/敌弹",
+        "已有AttackRelayLatch薄组件",
+        "岩体/原ShotLatch防夹",
+        "原奖励事务"
+      ],
+      "recovery": "入口/出口为宽安全实地，当前只验无伤单向；攻击周期可再观察，连续失败重试与回程未声明。",
+      "difference": "已有M07关系的两个洞长/入口射界工单；不计新家族。",
+      "falsifiers": [
+        "入口离开视野而门仍开",
+        "直接越顶/长按跳",
+        "杀敌后穿关闭门",
+        "未发生真实attack弹丸却到达"
+      ]
+    },
+    {
+      "id": "plains50/enemy/clear-sightline",
+      "status": "executable_adaptation_requires_physics",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_enemy",
+      "resource_conditions": "真实原组件HP/精力/枪次数/冷却/落地恢复；无钩索/墙跳/二跳。",
+      "reward": "入口可观察的原奖励，位置和拾取region共同绑定；实际接触落地领奖。",
+      "directed_ports": "entry→exit only; reverse/other states UNKNOWN",
+      "demands": [
+        {
+          "entry_x": 90,
+          "exit_x": 480,
+          "bell_x": 245,
+          "gate_x": 320,
+          "floor_width": 850
+        },
+        {
+          "entry_x": 90,
+          "exit_x": 560,
+          "bell_x": 265,
+          "gate_x": 355,
+          "floor_width": 1000
+        }
+      ],
+      "observation": "窄平洞里敌体挡住远铃，门和宝箱在同一可见水平线。",
+      "decision": "先清除吸弹敌体，再把后续枪送到铃；不要把人物射退到失去射界的位置。",
+      "causality": "真实3HP敌人先吸收投射物，死亡后投射物才能击铃开门；原地面反冲和冷却仍作用。",
+      "terrain": "低顶阻止跳过敌身和从上方射铃，后侧岩靠限制不必要后退。",
+      "cells": [
+        "原3HP哨兵/真实击退和伤害",
+        "原投射物与风铃门",
+        "低岩顶/宽接收地",
+        "原奖励事务"
+      ],
+      "recovery": "实地按原机制恢复地面枪；敌人死亡/门永久打开保持真实状态；未伪造重置或通用回程。",
+      "difference": "已有M09关系，两个远铃距离/门位/出口长度要求，不计新家族。",
+      "falsifiers": [
+        "不清敌直接射铃",
+        "少打一个原3HP命中",
+        "跳过头顶",
+        "直接步行或长等到达"
+      ]
+    },
+    {
+      "id": "plains50/enemy/live-enemy-sensor",
+      "status": "executable_adaptation_requires_physics",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_enemy",
+      "resource_conditions": "真实原组件HP/精力/枪次数/冷却/落地恢复；无钩索/墙跳/二跳。",
+      "reward": "入口可观察的原奖励，位置和拾取region共同绑定；实际接触落地领奖。",
+      "directed_ports": "entry→exit only; reverse/other states UNKNOWN",
+      "demands": [
+        {
+          "entry_x": 60,
+          "exit_x": 620,
+          "floor_width": 1040
+        },
+        {
+          "entry_x": 100,
+          "exit_x": 720,
+          "floor_width": 1200
+        }
+      ],
+      "observation": "活敌与窄感应区可见，连线指向远门，门后能看到宝箱。",
+      "decision": "把敌人击退到感应区，保留它来维持开门，反冲离开危险身体并在门释放前通过。",
+      "causality": "真实敌体重叠Area2D才供电；击杀会失去供电，原抗夹闭门仍有效。",
+      "terrain": "近侧低石阶阻止玩家直接占重，长门封住从上方绕过；接收岸长度按需求变化。",
+      "cells": [
+        "原EnemyActor/3HP/击退",
+        "已有OccupancyLatch",
+        "原反冲/真实落地恢复",
+        "原防夹门/奖励"
+      ],
+      "recovery": "入口实地可观察，世界状态不随离开重置；本批单向见证，连续失败恢复与返回UNKNOWN。",
+      "difference": "已有M11关系；较短出口与更远出口改变供电持续要求，不增家族。",
+      "falsifiers": [
+        "玩家自压感应区",
+        "杀死钥匙再走",
+        "不命中直接过门",
+        "越顶/提前绕后"
+      ]
+    },
+    {
+      "id": "plains50/enemy/displace-landing",
+      "status": "executable_adaptation_requires_physics",
+      "source_type": "current_codex_subagent_design",
+      "author": "/root/plains50_enemy",
+      "resource_conditions": "真实原组件HP/精力/枪次数/冷却/落地恢复；无钩索/墙跳/二跳。",
+      "reward": "入口可观察的原奖励，位置和拾取region共同绑定；实际接触落地领奖。",
+      "directed_ports": "entry→exit only; reverse/other states UNKNOWN",
+      "demands": [
+        {
+          "entry_x": 170,
+          "entry_y": 190,
+          "exit_x": 208,
+          "entry_bank_width": 350
+        },
+        {
+          "entry_x": 170,
+          "entry_y": 240,
+          "exit_x": 208,
+          "entry_bank_width": 350
+        }
+      ],
+      "observation": "下方唯一安全窄落点被敌人身体占着，左侧刺带使不处理敌体的落地有明确代价。",
+      "decision": "在下落过程中命中敌人清出完整身体的落位，控制反冲后落稳；击杀真正腾空也允许。",
+      "causality": "命中改变真实EnemyMotor击退/HP，敌人位移或死亡使24x36角色能落地；奖励要求真实支撑。",
+      "terrain": "起点在高岸，下方刺边与敌体间原来无安全净空；两个入场高度改变观察和射击时间。",
+      "cells": [
+        "原敌体碰撞/击退/3HP",
+        "真实反冲/命中回充",
+        "原刺带与高岸",
+        "原奖励事务"
+      ],
+      "recovery": "宽起岸允许观察；本批不声明受伤重置后继承状态的连续恢复，返回UNKNOWN。",
+      "difference": "已有M13关系；180/230下落高差的需求适配，不增家族。",
+      "falsifiers": [
+        "不射击沿左边落地",
+        "走落/延长普通跳直接抢位",
+        "不移动或清除敌身仍落稳",
+        "将命中回充误作落地恢复"
+      ]
+    }
+  ],
+  "human_fun": "UNKNOWN",
+  "production_admitted": false
+}

@@ -1,3 +1,5 @@
+> 状态：现有Module文档与历史证据的兼容说明。旧Map拼装准入与Block扩展不是后续Module制作的统一标准，不得据此恢复退役求解器或约束新Map；新Module契约另行制定。
+
 # Module / Macro 输出契约 v1
 
 适用于后续公开交付的生成内容；搜索算法、动作策略、物理参数和质量筛选不变。主生产入口`prototype/plains/produce.py`与`prototype/factory/core/producer.py`在结束时自动调用`contract.export`，输出`modules/`。输出失败会报错，不降级为可拼装模块。适配器遇到未映射的多端口、支路、奖励区或新机关会明确拒绝，要求补齐映射或直接提供完整Map Notes契约，不能静默丢弃。历史raw case、Godot输入和档案是研究证据，不是地图拼装接口；不回写或重标历史结论。
@@ -128,3 +130,7 @@ npm run check
 新物理批`plains-contract-production-v1`在首批12个输出后因Godot退出资源ERROR被拒；v2使用**同一seed93007211与原选择规则**做基础设施重试，首批接受、第二批退出ERROR后停止。错误原样保留，没有修改物理、退出检查或再抽幸运种子；本次没有新的完整通关批次可报告，也未把这些不完整运行当生产通过。交付使用既有3个Module的有界证据来验证输出适配，不重新盖章。
 
 版本化归档`module-contract-v1`保留本轮适配过程、失败日志、两次不完整物理运行及源快照。它与此前真实平原/原角色归档共同复现；公开Module JSON和SVG在`generation/contracts/plains-v1`。
+
+## 可选 Block 拼接扩展（2026-10-26）
+
+新实验可声明 `generationContract.space.blockGrid`，沿用全部既有身份、方向关系、状态、真实证据和准入规则，详见[Graph + Block + Module增量契约](../docs/l4-mapgen/graph-block-module-contract-v1.md)。128px Block只约束布局和预留形状，不要求矩形外墙，不取代32px美术Tile、真实碰撞或动作净空。Port须位于所拥有Block的实际边界中心；锚点与角色staging位置分开。原有无Block文档保持原行为，不能自动转成Block合格模块。

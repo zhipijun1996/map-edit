@@ -1,0 +1,24 @@
+"""Final machinery index; preserve all earlier incomplete reports and recorder failure."""
+import json,hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[3];REPO=ROOT.parent;HERE=Path(__file__).parent
+
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def rel(p):return str(p.relative_to(REPO))
+def main():
+ out=ROOT/'results/workshop-creative-machinery-delivery-v18'
+ out.mkdir(parents=True,exist_ok=True)
+ if(out/'manifest.json').exists():raise ValueError('immutable delivery exists')
+ result=json.loads((ROOT/'results/workshop-creative-machinery-delivery-v10/manifest.json').read_text())
+ run=ROOT/'results/workshop-creative-machinery-production-v14/round-00';media=ROOT/'results/workshop-creative-machinery-media-dual-service-v17';manifest=json.loads((run/'modules/manifest.json').read_text());module=manifest['modules'][0];cal=json.loads((run/'calibration-evaluations.json').read_text())[0];held=json.loads((run/'evaluations.json').read_text())[0];counter=json.loads((run/'counterexamples.json').read_text());clip=json.loads((media/'manifest.json').read_text())['clips'][0]
+ result['candidates'].append(dict(family='carrier-dual-service',technically_ready=True,independent_relationship_candidate=True,novelty_note='same physical carrier first holds remote gate, then must be released and intercepted as indispensable transport; critic accepts distinct dual-purpose hypothesis, human fun unreviewed',contentVersion=module['contentVersion'],module_json=rel(run/'modules'/module['file']),module_svg=rel(run/'modules'/(module['id']+'.svg')),calibration={level:cal['stats'][level]for level in ['clean','mild','moderate']},holdout={level:held['stats'][level]for level in ['clean','mild','moderate']},counterexamples=len(counter),safe_stable_counterexamples=sum(x['safe_stable']for x in counter),invalidating_counterexamples=sum(x['invalidates_design']for x in counter),video=rel(media/clip['file']),video_sha256=clip['sha256'],video_duration=clip['duration'],native_exact_frames=clip['frames_exact'],run=rel(run),source_binding=rel(run/'source_binding.json'),source_binding_sha256=sha(run/'source_binding.json'),production_admitted=False,human_fun='unreviewed'))
+ p=run.parent/'summary.json';d=json.loads(p.read_text());result['production_attempts'].append(dict(run=rel(p.parent),sha256=sha(p),physics_cases=d['physics_cases'],new_candidates=d['new_candidates'],ledger=d['ledger']))
+ for v in [11,12,13]:
+  p=ROOT/'results'/f'workshop-creative-machinery-probe-v{v}'/'summary.json';d=json.loads(p.read_text());result['probe_attempts'].append(dict(run=rel(p.parent),cases=len(d),summary_sha256=sha(p)))
+ result.update(schema='pcg/creative-machinery-delivery/v18',technical_candidates=5,independent_relationship_candidates=4,actual_gap=0,stretch_target_independent_relationships=5,stretch_gap=1,source_files=[dict(path=rel(p),sha256=sha(p))for p in sorted(HERE.iterdir())if p.suffix in ['.py','.gd','.mjs','.tscn']],cards=[rel(p)for p in sorted((ROOT/'creative-production/machinery').glob('*.json'))])
+ result['total_godot_cases']=sum(a['physics_cases']for a in result['production_attempts'])+sum(p['cases']for p in result['probe_attempts'])
+ result['cross_process_reuse'].update(candidates=5);result['cross_process_reuse']['runs'].append('pcg/results/workshop-creative-machinery-reuse-v14')
+ result['exact_native_frames']=sum(x['native_exact_frames']for x in result['candidates']);result['total_candidate_counterexamples']=sum(x['counterexamples']for x in result['candidates']);result['checks']=json.loads((ROOT/'results/workshop-creative-machinery-delivery-v16/checks.json').read_text());result['new_isolated_cell']=dict(type='CarrierDockLatch',physics='native Area2D detects original ModuleMovingPlatform',gate='inherits original ShotLatch collision/timer/safe close',files=[dict(path=rel(HERE/n),sha256=sha(HERE/n))for n in ['dock_latch_v11.gd','dock_binding_v11.gd','dock_runner_v11.gd','dock_export_v13.mjs']],export_retains=['actual dock Area2D rectangle','original carrier and full envelope','control bell and return access','gate collision','reward'],published_geometry_source='v14 canonical clean-screen fixed before counterexamples and holdout')
+ result['recording_failures']=[dict(run='pcg/results/workshop-creative-machinery-media-dual-service-v15',reason='scene root Node must be Node2D; original Godot ERROR and failed AVI retained',termination='owned failed recorder stopped with SIGTERM',repaired_source='dock_main_v17.tscn',strict_success='media-dual-service-v17')]
+ (out/'manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(dict(out=rel(out),technical_candidates=5,independent_relationship_candidates=4,physics_cases=result['total_godot_cases'],exact_native_frames=result['exact_native_frames'],counterexamples=result['total_candidate_counterexamples']),ensure_ascii=False))
+if __name__=='__main__':main()

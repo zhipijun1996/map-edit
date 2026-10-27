@@ -1,5 +1,5 @@
 """Check shipped videos, immutable archive parts and current evidence status."""
-import hashlib,json
+import hashlib,json,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):
@@ -20,7 +20,14 @@ def run():
  for manifest in(ROOT/'pcg/archives').glob('*/manifest.json'):
   m=json.loads(manifest.read_text());total=0;whole=hashlib.sha256()
   for entry in m['parts']:
-   p=manifest.parent/entry['file'];assert p.parent==manifest.parent and p.stat().st_size==entry['bytes']and sha(p)==entry['sha256'];whole.update(p.read_bytes());total+=p.stat().st_size;parts+=1
+   p=manifest.parent/entry['file'];assert p.parent==manifest.parent
+   if p.exists():raw=p.read_bytes()
+   else:
+    rel=str(p.relative_to(ROOT));state=subprocess.check_output(['git','ls-files','-v','--',rel],cwd=ROOT,text=True)
+    assert state.startswith('S '),'Missing archive part is not an intentionally unmaterialized Git-backed file: '+rel
+    raw=subprocess.check_output(['git','show','HEAD:'+rel],cwd=ROOT)
+   assert len(raw)==entry['bytes']and hashlib.sha256(raw).hexdigest()==entry['sha256']
+   whole.update(raw);total+=len(raw);parts+=1
   assert total==m['archive_bytes']and whole.hexdigest()==m['archive_sha256']
  summary=json.loads((ROOT/'pcg/results/guided-landing-v2/summary.json').read_text());assert all(a['parents']==6 for a in summary['arms'].values());assert summary['approved_offline']==0 and summary['human_video_feedback']==0
  print(json.dumps(dict(videos_verified=videos,archive_parts_verified=parts,scope='Shipped bytes and recorded finite evidence; no human review approval')))

@@ -1,0 +1,157 @@
+{
+  "source_proposal": "pcg/prototype/workshop/macro-proposal-v1.json",
+  "parent_video_feedback": "pcg/feedback/workshop/v2-positive-video-v1.json",
+  "before": [
+    {
+      "id": "proposal-deda5eedc95046c8d352",
+      "source_id": "codex-gate-brake-return-v1",
+      "novelty_family": "gate-brake-return",
+      "status": "revision_required",
+      "source_type": "codex_assisted_proposal",
+      "idea": {
+        "schema": "pcg/content-proposal/v1",
+        "id": "codex-gate-brake-return-v1",
+        "source_type": "codex_assisted_proposal",
+        "parent_ideas": [
+          "human-A3-short-gate",
+          "codex-brake-under-ledge-v1"
+        ],
+        "family_count_added": 0,
+        "status": "executable_recipe_requires_independent_macro_validation",
+        "observation_and_decision": "先看到门内宝箱和岩沿下第二箱。穿门后可退出，也可承诺向外下落，选择朝右开枪刹回岩沿下。",
+        "causal_relationship": "第一枪同时反冲和开门；第二枪刹住水平外冲并向左转进下层。取完第二箱，熟悉的上岸变成头顶障碍，需从下岸逐级回攀。",
+        "cells_and_resources": "原 ShotLatch 短门/防夹、实际弹丸、PlayerController、岩体、SimpleRoomReward/RunWallet。基础 move/jump/shot_recoil；原落地恢复、冷却与精力，不提供额外空中弹药。",
+        "terrain": "上部左右两组件的岩体在一个竖直接触面相接。下部恢复岸在另一接触面相接；零自动连接平台。门前后净空沿用实际 24×36 身体；下层箱与恢复岸的高度差拒绝单次普通跳。",
+        "reward": "门内12金币，下层10金币，均真实可见且受支持接触后提交原奖励事务。独立稳定ID，保留去回程同一账本以防重复领奖。",
+        "recovery": "漏接落到下岸，以两级实心岩阶返回，最后一跳借反冲上岸；再穿门重试。必须在同一场景验证，不复位门、角色或钱包。",
+        "direction": "A到B是穿门并在岩沿外刹入下层；B到A是下降后逐级上攀，不依赖再次穿短门。C到B从门内支点开始；C到A与B到C未知。",
+        "falsifiers": [
+          "地面提前开门仍能轻松到第一箱",
+          "无第二枪的外侧转向直接到下层箱",
+          "从恢复地面一跳就取第二箱",
+          "返回被实心岩阶底部卡住",
+          "两箱稳定ID冲突或回程重复领奖",
+          "接缝新增碰撞或支撑空洞"
+        ],
+        "experience_difference": "不是新增第七家族。目标是让两个既有动作在同一局部循环内共享真实状态，并让取第二项收益改变回程问题。",
+        "human_video_observation": "unreviewed_for_this_new_macro",
+        "human_playtest": "UNKNOWN",
+        "production_admitted": false,
+        "rule": "workshop/macro/gate-brake-return"
+      },
+      "feedback": [
+        {
+          "id": "macro-composition-rejection-v1",
+          "type": "technical_experiment",
+          "family": "gate-brake-return",
+          "flag": "controls_issue",
+          "failures": [
+            "lower chest reachable by ordinary jump in rejected geometry: 4/6 policies",
+            "four geometry revisions did not solve return",
+            "initial controller calibration interrupted by source-freeze guard after 324 cases; incomplete, never passed",
+            "controller revision 4 passed regular but failed lower supported seam: airborne crossing instead of E landing"
+          ],
+          "source_runs": [
+            "workshop-macro-cheap-v2",
+            "workshop-macro-probe-v1",
+            "workshop-macro-probe-v2",
+            "workshop-macro-probe-v3",
+            "workshop-macro-probe-v4",
+            "workshop-macro-calibration-v2",
+            "workshop-macro-export-probe-v1",
+            "workshop-macro-holdout-v1"
+          ],
+          "next_revision": "same fourth geometry; require actual E landing before supported lower seam, independent new protocol and seed",
+          "production_admitted": false
+        }
+      ],
+      "selection_weight": 0,
+      "missing_conditions": [
+        "same fourth geometry; require actual E landing before supported lower seam, independent new protocol and seed"
+      ],
+      "human_video_observation": "unreviewed",
+      "human_playtest": "unreviewed",
+      "production_admitted": false
+    }
+  ],
+  "after": [
+    {
+      "id": "proposal-ab848d1f92243c07f533",
+      "source_id": "codex-gate-brake-return-v1",
+      "novelty_family": "gate-brake-return",
+      "status": "executable_rule_requires_physics",
+      "source_type": "codex_assisted_proposal",
+      "idea": {
+        "schema": "pcg/content-proposal/v1",
+        "id": "codex-gate-brake-return-v1",
+        "source_type": "codex_assisted_proposal",
+        "parent_ideas": [
+          "human-A3-short-gate",
+          "codex-brake-under-ledge-v1"
+        ],
+        "family_count_added": 0,
+        "status": "executable_recipe_requires_independent_macro_validation",
+        "observation_and_decision": "先看到门内宝箱和岩沿下第二箱。穿门后可退出，也可承诺向外下落，选择朝右开枪刹回岩沿下。",
+        "causal_relationship": "第一枪同时反冲和开门；第二枪刹住水平外冲并向左转进下层。取完第二箱，熟悉的上岸变成头顶障碍，需从下岸逐级回攀。",
+        "cells_and_resources": "原 ShotLatch 短门/防夹、实际弹丸、PlayerController、岩体、SimpleRoomReward/RunWallet。基础 move/jump/shot_recoil；原落地恢复、冷却与精力，不提供额外空中弹药。",
+        "terrain": "上部左右两组件的岩体在一个竖直接触面相接。下部恢复岸在另一接触面相接；零自动连接平台。门前后净空沿用实际 24×36 身体；下层箱与恢复岸的高度差拒绝单次普通跳。",
+        "reward": "门内12金币，下层10金币，均真实可见且受支持接触后提交原奖励事务。独立稳定ID，保留去回程同一账本以防重复领奖。",
+        "recovery": "漏接落到下岸，以两级实心岩阶返回，最后一跳借反冲上岸；再穿门重试。必须在同一场景验证，不复位门、角色或钱包。",
+        "direction": "A到B是穿门并在岩沿外刹入下层；B到A是下降后逐级上攀，不依赖再次穿短门。C到B从门内支点开始；C到A与B到C未知。",
+        "falsifiers": [
+          "地面提前开门仍能轻松到第一箱",
+          "无第二枪的外侧转向直接到下层箱",
+          "从恢复地面一跳就取第二箱",
+          "返回被实心岩阶底部卡住",
+          "两箱稳定ID冲突或回程重复领奖",
+          "接缝新增碰撞或支撑空洞"
+        ],
+        "experience_difference": "不是新增第七家族。目标是让两个既有动作在同一局部循环内共享真实状态，并让取第二项收益改变回程问题。",
+        "human_video_observation": "unreviewed_for_this_new_macro",
+        "human_playtest": "UNKNOWN",
+        "production_admitted": false,
+        "rule": "workshop/macro/gate-brake-return"
+      },
+      "feedback": [
+        {
+          "id": "macro-composition-rejection-v1",
+          "type": "technical_experiment",
+          "family": "gate-brake-return",
+          "flag": "controls_issue",
+          "failures": [
+            "lower chest reachable by ordinary jump in rejected geometry: 4/6 policies",
+            "four geometry revisions did not solve return",
+            "initial controller calibration interrupted by source-freeze guard after 324 cases; incomplete, never passed",
+            "controller revision 4 passed regular but failed lower supported seam: airborne crossing instead of E landing"
+          ],
+          "source_runs": [
+            "workshop-macro-cheap-v2",
+            "workshop-macro-probe-v1",
+            "workshop-macro-probe-v2",
+            "workshop-macro-probe-v3",
+            "workshop-macro-probe-v4",
+            "workshop-macro-calibration-v2",
+            "workshop-macro-export-probe-v1",
+            "workshop-macro-holdout-v1"
+          ],
+          "next_revision": "same fourth geometry; require actual E landing before supported lower seam, independent new protocol and seed",
+          "resolved_by": {
+            "protocol": "pcg/prototype/workshop/protocol-macro-port-v3.json",
+            "holdout": "workshop-macro-holdout-v2",
+            "retry": "workshop-macro-retry-held-v2",
+            "contentVersions": [
+              "sha256:167dcb6ec336cd7ff659febe66b44a3daabfe79922a9ddca5c041e62e28d114e",
+              "sha256:04a93aeaf9d4c19f132097e52e97faecda0da4b15b35539ee4be69598ca03c58"
+            ]
+          },
+          "production_admitted": false
+        }
+      ],
+      "selection_weight": 1,
+      "missing_conditions": [],
+      "human_video_observation": "unreviewed",
+      "human_playtest": "unreviewed",
+      "production_admitted": false
+    }
+  ]
+}
