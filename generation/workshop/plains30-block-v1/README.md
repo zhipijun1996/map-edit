@@ -1,6 +1,6 @@
 # 平原 Module：Block128 生产批次
 
-当前[21份标准候选](manifest-progress-21-v1.json)，原库129版、平原优选111版；不是30份Block完成，也不是21种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@862b736`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
+当前[24份标准候选](manifest-progress-24-v1.json)，原库132版、平原优选114版；不是30份Block完成，也不是24种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@862b736`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
 
 | 内容 | 包围尺寸/拥有格 | 实际玩法与影片 |
 | --- | --- | --- |
@@ -33,9 +33,9 @@ python3 pcg/tools/restore_archive.py godot-runtime-v1 --extract
 python3 pcg/tools/restore_archive.py content-workshop-plains30-block-v1 --extract \
   --prefix results/workshop-batch30-blockc05-full-v1/
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-21-v1.json --list
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-24-v1.json --list
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-21-v1.json \
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-24-v1.json \
   --play C05-1 --route far
 ```
 
@@ -93,3 +93,25 @@ N11岩唇下刹回宝袋：[W/W 3.7秒](videos/BN11-WW-v1/block128-underledge-br
 N10双铃遮挡恢复路线mod5/12未通过，0候选、留出未运行；80probe含3零帧拒绝及107full均保留。新闭合原件[归档v9](../../../pcg/archives/content-workshop-plains30-block-v9/manifest.json)含N08/N10/N11失败、冻结源与全部真实实验；26205工件逐SHA恢复检查通过。最新Map静态兼容为[21版本37策略/36有序对](../../../pcg/creative-production/batch30/latest-map-compatibility-v5.json)，静态检查不冒充新物理或整图证据。
 
 独立AI[三版增补审查](../../../pcg/creative-production/batch30/curation-block30-addendum-v1.md)把N08后移创意展示队列、N11归旧A4代表/适配，没有撤回技术资格；逐raw纠正低回稳定帧778/旧高760、相差18帧，早期摘要779/391保留为未与raw一致的原声明，不混作另一套实验。
+
+
+## 新增两个真实三口：N12 / N14
+
+N12 一次空中资源选择近高奖岸或远低通路，A→B/A→C两路线同世界布局。两路1枪1跳，高路实际12币、低路0；[高岸3.4秒](videos/BN12-B-v1/one-shot-two-routes.mp4)及[远低岸4.98秒](videos/BN12-C-v1/one-shot-two-routes.mp4)，139/234帧原strict全字段一致。170完整案例cal/held各档全过，第二空间仍needs_design。高奖后再落低口的真实替代穿B外邻19身体/20扫掠帧，最大80.667px，Map若提供空气可能可重汇；不认证B→C、不强称永久二选一。见[AI逐raw审查](../../../pcg/creative-production/batch30/curation-block31-addendum-v1.md)。
+
+N14 先真实落共同M回枪，选择左/右，跳到相应铃外侧再回身射击，同枪反冲朝选定高岸并打开它的原短时门。[左侧5.15秒](videos/BN14-B-v1/pass-receiver-turn-fork.mp4)、[右侧5.17秒](videos/BN14-C-v1/pass-receiver-turn-fork.mp4)，244/245帧strict全字段一致。原regular校准全通过，held B moderate10/12、C11/12，其余全通过；不称全扰动100%。另四方向、通用恢复、第四口与接缝UNKNOWN。名为over-top的两有限策略实际仍击中正确铃，是合法瞄准替代，不误报已证无越顶绕行。
+
+新增两份各在原库新进程完整请求命中，分别[复用v7](retrieval-v7/receipt.json)、[复用v8](retrieval-v8/receipt.json)，每份6种变更冲突皆拒绝，累计23技术版本复用，0生成/新物理。新[静态兼容v7](../../../pcg/creative-production/batch30/latest-map-compatibility-v7.json)覆盖23版本41策略case/40有序对，不替代源物理、任意进入或整图。
+
+原件闭包[block-v10](../../../pcg/archives/content-workshop-plains30-block-v10/manifest.json)为N12含全部316次失败/成功；[block-v11](../../../pcg/archives/content-workshop-plains30-block-v11/manifest.json)为N14共208次。与原v1..v9均保留，旧结果不覆盖。当前29条Module片中17strict共5216物理帧、12review-only；所有都是程序输入回放，非真人试玩或趣味批准。
+
+
+## 当前24份：N16与N14靶标清晰版
+
+N16 [斜射开高门5.77秒](videos/BN16-near-v1/wall-projection-unlock.mp4)281帧strict一致。48probe+77full，cal各档全过，held moderate11/12其余全过。贴壁时原碰撞确实去掉水平反冲，离壁方案也1枪1跳且更快/同等小样可靠，因此保留为基础反冲的具体地貌接口，不算新族、不强制碰墙。实际8币；失手回A再试、同世界返回仅各1clean，不签一般恢复/反向。
+
+N14默认观感消费者改用明确绑定的[靶标表现配置](presentation-n14-readable-v1.json)：[左侧清晰版](videos/BN14-B-readable-v1/pass-receiver-turn-fork.mp4)、[右侧清晰版](videos/BN14-C-readable-v1/pass-receiver-turn-fork.mp4)。左右真28×34靶标以不同色框出、细线连对应门、门顶写标识。新旧两片的完整native trace字节相同，原case/文档/物理源都不变；旧scene/影片保留。该配置逐case SHA、版本、场景依赖和原严格录像绑定，不由一个自填implemented标志准入。
+
+当前32条Module影片中20strict共5986重录帧，489帧是上述同case表现重录；独立原canonical片18条5497帧，其余12review-only。表现重录不增加Module、家族或独立校准/留出数量；实际原生调用另计预算。
+
+N13停车方案原51与修订29共80probe后封为needs_design，0full/held/Module。近距离停枪+45度离台能更好保门，但返回原A仍不可靠，不能只保留较容易A→B删去目的。失败闭包[block-v12](../../../pcg/archives/content-workshop-plains30-block-v12/manifest.json)/[v13](../../../pcg/archives/content-workshop-plains30-block-v13/manifest.json)保留，N16原件在[v14](../../../pcg/archives/content-workshop-plains30-block-v14/manifest.json)。新[静态兼容v8](../../../pcg/creative-production/batch30/latest-map-compatibility-v8.json)覆盖24版本42case/41有序对；真人反馈、趣味和生产批准继续UNKNOWN。

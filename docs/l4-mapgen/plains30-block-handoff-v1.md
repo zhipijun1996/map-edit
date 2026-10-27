@@ -56,3 +56,17 @@ N08 `1685840d…` 标准Module仅A→B与B→A，原regular校准/留出完整15
 N11 `1b61e402…`/`c98366c7…` 独立W/W、E/E接口：走出岩唇后反冲折回下方宝袋，真实身体落袋/10币，1枪0跳。两接口154完整案例通过原regular；E/E中等扰动11/12，不能称全样本通过。底面原恢复岸保留，付费重试仅小样本，不提升为通用返回。新两段157/161帧原生影片逐字段严格一致，镜像适配不增加家族数。
 
 N10有用的遮挡双铃Cell作用成立，但恢复路径moderate5/12低于原.65，不入库，held未跑。80probe谱系（含3个零帧构造拒绝）和107full保留。后续若修订须另明确外层设计周期与剩余总预算，不静默清零。原件闭包见`content-workshop-plains30-block-v9`。
+
+
+## 23版本交接：N12 / N14 两个三口
+
+当前[manifest-progress-23-v1](../../generation/workshop/plains30-block-v1/manifest-progress-23-v1.json)，原库131/平原113；23版本41canonicalcases/40有序对原862b静态兼容。N12 `b961d4a4…` 原A5新Block地貌两去向，170full两路全档校准/held通过；高奖→低口替代真实借B外邻空气，内部B→C/永久互斥不成立声明，依赖UNKNOWN，不在接缝补空间。第二需求负完整身体余量不入库。N14 `88c75d0f…` 共同M→左/右各越铃反射，154full，held moderate10/12、11/12；另四对UNKNOWN，无四口或通用恢复继承。两家族都是有效接口适配，不自动算新家族。
+
+两份精确Map派生需求、标准合同及冲突回执随manifest绑定；retrieval-v7/v8均在新进程由原持久库命中并拒绝6类冲突。四条正常60Hz原生影片共862物理帧严格一致；N12失败源交接38与旧counter70不删除，完整闭包block-v10/v11逐SHA恢复核验。原共享物理/Harness/合同未修改；B仍需安装实际Cell/请求状态/接缝与整图验证。
+
+
+## 24版本：斜射与可选纯表现消费者
+
+[manifest24](../../generation/workshop/plains30-block-v1/manifest-progress-24-v1.json)新增N16 `87731645…`，只声明A→B，77full过原regular，held moderate11/12。原墙接触是可选投影示范，不是能力锁或必要动作；离壁同目标更快也合法。旧回程/恢复各1clean有限附证，未知状态不签。最新静态24版本42策略case/41有序对，24原Map源身份不变。
+
+N14可选新readable scene只添加真靶标/左右连线标签，两case严格重录的完整native trace字节与原片相同；原候选case/doc/version均保留。publisher显式presentation配置核对全部canonical case SHA、原scene、场景文件与严格录影片source哈希后才选择新显示消费者，不能把纯表现当新物理候选或整图证明。Map接入仍读取原标准JSON及实际Cells，未自动接入B运行时。

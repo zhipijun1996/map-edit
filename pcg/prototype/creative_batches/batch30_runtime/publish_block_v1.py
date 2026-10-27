@@ -9,11 +9,38 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--runs',nargs='+',required=True)
     p.add_argument('--manifest',type=Path,default=base.REPO/'generation/workshop/plains30-block-v1/manifest.json')
     p.add_argument('--compatibility',type=Path,default=base.REPO/'pcg/creative-production/batch30/latest-map-compatibility-v4.json')
+    p.add_argument('--presentation',type=Path,help='Optional version/case-bound strict replay presentation; candidate bytes stay unchanged')
     args=p.parse_args();target=args.manifest.resolve()
     if target.exists():raise ValueError('immutable Block delivery exists')
     base.OUT=target.parent
+    presentation=json.loads(args.presentation.read_text())if args.presentation else None
+    presentation_cases=set()
+    if presentation:
+        folder=base.REPO/'pcg/map_directed/library/candidates'/presentation['contentVersion'].removeprefix('sha256:')
+        record=json.loads((folder/'record.json').read_text())
+        assert record['contentVersion']==presentation['contentVersion']
+        assert base.file_sha(folder/'cases.json')==record['cases_sha256']
+        stored_cases=json.loads((folder/'cases.json').read_text())['cases']
+        assert all(c['native_block_scene']==presentation['original_scene']for c in stored_cases)
+        presentation_cases={c['module_sha256']for c in stored_cases}
+        assert presentation_cases==set(presentation['case_sha256s'])
+        assert presentation['scene']in {binding['path']for binding in presentation['source_files']}
+        for binding in presentation['source_files']:
+            assert base.file_sha(base.REPO/binding['path'])==binding['sha256']
+        replay_cases=set()
+        for binding in presentation['strict_replay_manifests']:
+            path=base.REPO/binding['path'];assert base.file_sha(path)==binding['sha256']
+            replay=json.loads(path.read_text())
+            assert replay['recording_source_files'][presentation['scene']]==base.file_sha(base.REPO/presentation['scene'])
+            for clip in replay['clips']:
+                assert clip['frames_exact']>0
+                assert base.file_sha(path.parent/clip['file'])==clip['sha256']
+                replay_cases.add(clip['case_sha256'])
+        assert replay_cases==presentation_cases
     def scene_for(case):
         if not case.get('block_grid'):raise ValueError('non-Block candidate cannot enter current delivery')
+        if case.get('module_sha256')in presentation_cases:
+            return base.REPO/presentation['scene']
         if case.get('native_block_scene'):
             return base.REPO/case['native_block_scene']
         if any(l.get('carrier_mount')for l in case.get('latches',[])):
@@ -39,6 +66,8 @@ def main():
         item['block_dimensions']=[c['space']['bounds'][k]//128 for k in ['w','h']]
         bound_cases=json.loads((base.REPO/item['case_file']['path']).read_text())['cases']
         case=bound_cases[0]
+        if presentation and item['contentVersion']==presentation['contentVersion']:
+            item['presentation_variant']=dict(**base.binding(args.presentation.resolve()),candidate_bytes_unchanged=True,all_canonical_strict_replays=True)
         bound_case_hashes={c['module_sha256']for c in bound_cases}
         item['map_request']=case.get('source_map_request','UNKNOWN')
         item['map_request_response']=case.get('map_request_response','UNKNOWN')

@@ -1,0 +1,276 @@
+{
+  "id": "B31-N13",
+  "title": "停车会推你下船：先留甲板后退余量",
+  "priority": 3,
+  "status": "proposal_existing_dock_mount_binding_needed",
+  "source_rule": "newrule using machinery/dock_latch_v11 and mountedferry",
+  "parents": [
+    {
+      "version": "sha256:b0a994d20b21700fbe3c3159f7bdda5467b19838d3adfb623058c116268413d0",
+      "rule": "machinery/production_v14.py",
+      "scope": "existing dualservice, no newfamily claim"
+    }
+  ],
+  "observation": "前方挂铃使停车枪把人物向后推；停住平台并压住门钥匙区是收益，跌出台后缘是运动代价。",
+  "decision": "先走到长甲板前半给后退留空间，再射铃停车、稳住真实相对位置，随后离台。跳离重接的更贵方案也可接受。",
+  "causal_relation": "同一枪停下世界落点，却将人物相对它推后；玩家读台内剩余裕量而非精确世界x时刻。",
+  "cells": [
+    "originalwide movingdeck/start-pause",
+    "existingdock_latch_v11 Area2D hold-originalgate",
+    "D05 originalmount"
+  ],
+  "resources": "按真实ground/airshot、cooldown、接地恢复；不能把groundgun假设为不影响身体。",
+  "terrain": "长甲板停在可见dock维持出口及返回门；底面不能一路走到奖。需实际同世界返回证明停车状态用途，不是任意requiredpark字段。",
+  "reward": "门后奖励可见，真实门状态与回程职责使停台有用途；无该用途就归旧移台练习而非强迫射击。",
+  "recovery": "后退落底时P保留停位，从原控制位再登台。若安全地面预停同成本到奖，按A2/D02/N03失败反馈拒绝或折叠。",
+  "directions": "首A→B及必要同世界B→A；镜像第二输入方向重验。不可将dynamiccarrier/外来地面放入静态ownsupportunion伪造承载。",
+  "cheap_solutions": [
+    "岸上预停后不用乘台",
+    "不停车趁Area短窗过门且回来同样可用",
+    "字段park代替有用世界后果",
+    "只看末帧支持掩盖中段跌台",
+    "把ground平路避掉原运动代价"
+  ],
+  "nearest": [
+    "A2 start/pause",
+    "D04 parkingreturn",
+    "P50-G13",
+    "N03 groundedreverse counter"
+  ],
+  "difference": "具体判断是停车收益附带的甲板相对后退预算；不同当前C01/C07/N04/N06/N10。仍可能是A2/G13有用组合，不因大台或新字段增家族。",
+  "first_probe": "同一停位前/中/后台真实差异，记录supporttimeline；再预停/不停台强counter。没有更丰富后果则不硬判必须空中。",
+  "budget": "独立新2rule/80probe；旧dockconsumer薄接mount，不重写载人/物理。",
+  "two_space_demands": [
+    {
+      "id": "N13/east_boat",
+      "concept_only": true,
+      "units": "proposed_Godot_pixels",
+      "block_size": 128,
+      "bounds": [
+        0,
+        0,
+        1664,
+        1152
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "cell": [
+            0,
+            4
+          ],
+          "edge": "W",
+          "profile": "ground64/v1",
+          "anchor": [
+            0,
+            576
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "staging": [
+            24,
+            590
+          ],
+          "floor_y": 608,
+          "outward_cell": [
+            -1,
+            4
+          ],
+          "role": "boarding"
+        },
+        {
+          "id": "B",
+          "cell": [
+            12,
+            3
+          ],
+          "edge": "E",
+          "profile": "ground64/v1",
+          "anchor": [
+            1664,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "staging": [
+            1640,
+            462
+          ],
+          "floor_y": 480,
+          "outward_cell": [
+            13,
+            3
+          ],
+          "role": "gate/return continuation"
+        }
+      ],
+      "adaptation_class": "newrule_existingCells",
+      "solid_sketch": [
+        {
+          "role": "A",
+          "rect": [
+            0,
+            608,
+            192,
+            96
+          ]
+        },
+        {
+          "role": "B",
+          "rect": [
+            1408,
+            480,
+            256,
+            96
+          ]
+        },
+        {
+          "role": "realheldgate",
+          "rect": [
+            1344,
+            224,
+            24,
+            512
+          ]
+        },
+        {
+          "role": "retryfloor",
+          "rect": [
+            96,
+            928,
+            1472,
+            40
+          ]
+        }
+      ],
+      "notes": [
+        "P[320,618]→[960,618], size320×20; mountedreceiver offset[200,-80]. DockArea uses actual wholebody overlap, not inventedcentrecondition.",
+        "Gate/park necessity remains a counterquestion; firstbodydeceleration may not require uniquejumpsequence."
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended": "requested",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended": "not_requested_no_negative_claim",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+    },
+    {
+      "id": "N13/west_mirror",
+      "concept_only": true,
+      "units": "proposed_Godot_pixels",
+      "block_size": 128,
+      "bounds": [
+        0,
+        0,
+        1664,
+        1152
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "cell": [
+            12,
+            4
+          ],
+          "edge": "E",
+          "profile": "ground64/v1",
+          "anchor": [
+            1664,
+            576
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "staging": [
+            1640,
+            590
+          ],
+          "floor_y": 608,
+          "outward_cell": [
+            13,
+            4
+          ],
+          "role": "eastboarding"
+        },
+        {
+          "id": "B",
+          "cell": [
+            0,
+            3
+          ],
+          "edge": "W",
+          "profile": "ground64/v1",
+          "anchor": [
+            0,
+            448
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "staging": [
+            24,
+            462
+          ],
+          "floor_y": 480,
+          "outward_cell": [
+            -1,
+            3
+          ],
+          "role": "westcontinuation"
+        }
+      ],
+      "adaptation_class": "newmirror_rule",
+      "solid_sketch": [
+        {
+          "role": "mirrorallfirstsolids",
+          "transform": "x→1664-x, realrect/control mirror"
+        }
+      ],
+      "notes": [
+        "P[1344,618]→[704,618], receiveroffset[-200,-80]. Freshphysics includingrealbodycarry."
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended": "requested",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended": "not_requested_no_negative_claim",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+    }
+  ],
+  "author": "/root/block_next_creative",
+  "source_type": "actual_current_codex_authorized_subagent",
+  "capabilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "physics": "NOT_RUN_BY_DESIGN_AGENT",
+  "new_candidate_versions": [],
+  "human_video_observation": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false
+}
