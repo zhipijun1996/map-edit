@@ -140,7 +140,7 @@ def core_network(seed, region, core_count=20, edge_factor=1.3):
     return rng, points, edges
 
 
-def construct(seed, region, core_count=20, *, reward_expeditions=2, reward_return_modes=None, core_edge_factor=1.3, approach_steps=(4,8),reuse_perimeter_anchors=False):
+def construct(seed, region, core_count=20, *, reward_expeditions=2, reward_return_modes=None, core_edge_factor=1.3, approach_steps=(4,8),reuse_perimeter_anchors=False,spread_branch_anchors=False):
     if not 0<=reward_expeditions<=8:raise ValueError('reward_expedition_count_outside_budget')
     if reward_return_modes is not None and (len(reward_return_modes)!=reward_expeditions or any(k not in ['foldback','loop_back','merge']for k in reward_return_modes)):raise ValueError('unsupported_reward_return_mode')
     rng, points, pairs = core_network(seed, region, core_count,core_edge_factor)
@@ -193,7 +193,15 @@ def construct(seed, region, core_count=20, *, reward_expeditions=2, reward_retur
     occupied = [tuple(n['ideal']) for n in g['nodes']]
     for bi in range(reward_expeditions):
         fitted = None
-        for a,b in rng.shuffle(available):
+        anchor_choices=rng.shuffle(available)
+        degrees_now={f'r{i}':sum(f'r{i}'in[e['from'],e['to']]for e in g['edges'])for i in range(len(points))}
+        mode_now=reward_return_modes[bi]if reward_return_modes is not None else None
+        if spread_branch_anchors:
+            def pressure(pair):
+                da,db=[degrees_now[f'r{i}']for i in pair]
+                return (min(da,db)+ (2 if mode_now=='loop_back'else 1),min(da,db))if mode_now in ['foldback','loop_back']else(max(da,db)+1,da+db)
+            anchor_choices.sort(key=pressure)
+        for a,b in anchor_choices:
             ax,ay = points[a]; bx,by = points[b]; dx,dy = bx-ax,by-ay; length=math.hypot(dx,dy)
             nx,ny = dy/length,-dx/length  # CCW hull's outside.
             for chain_count in rng.shuffle([3,4,5]):
@@ -209,6 +217,8 @@ def construct(seed, region, core_count=20, *, reward_expeditions=2, reward_retur
             if fitted:break
         if fitted is None: raise ValueError('reward_expedition_spatial_budget')
         a,b,curve=fitted
+        if spread_branch_anchors and mode_now in ['foldback','loop_back']and degrees_now[f'r{a}']>degrees_now[f'r{b}']:
+            a,b=b,a;curve=list(reversed(curve))
         if not reuse_perimeter_anchors:available.remove((a,b))
         chain=[]; flag=f'expedition_return_{bi}'
         for j,point in enumerate(curve):

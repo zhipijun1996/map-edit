@@ -36,7 +36,7 @@ for(const module of input.modules){
  for(const [i,gate]of module.boundary_gates.entries()){
   const [x,y,w,h]=gate.bounds;
   doc.objects.push({id:id+'/boundary-gate-'+i,type:'gate',x,y,w,h,rotation:0,label:gate.edge_id,note:'Module输出的状态门',sourceId:gate.id,
-   mechanics:{kind:'boundary_gate',edgeId:gate.edge_id,direction:gate.direction,switch:gate.switch,oneWay:gate.one_way,owner:module.id,from:gate.from_module,to:gate.to_module}});
+   mechanics:{kind:'boundary_gate',edgeId:gate.edge_id,direction:gate.direction,switch:gate.switch,oneWay:gate.one_way,owner:module.id,from:gate.from_module,to:gate.to_module,sourceFields:gate}});
  }
  gc.ports=Object.values(module.ports).map((p,i)=>{
   const marker={id:id+'/port-'+p.id,type:i===0?'entry':'exit',x:p.position[0]-12,y:p.position[1]-18,w:24,h:36,rotation:0,label:p.id,note:'接触面上的角色中心点'};
@@ -57,6 +57,9 @@ for(const module of input.modules){
  gc.space.actionClearance.regions=[];gc.space.actionClearance.coverage=UNKNOWN;
  if(module.block_grid){gc.space.blockGrid=structuredClone(module.block_grid);gc.space.actionClearance.regions=module.action_clearance.map(([x,y,w,h])=>({x,y,w,h}));gc.space.actionClearance.coverage=module.block_grid.action_coverage;gc.space.actionClearance.status='partial';}
  gc.generation.parameters.orderedPortPrograms=Object.entries(module.port_transitions??{}).map(([pair,program])=>({pair,policySha256:sha(JSON.stringify(program)),source:module.transition_sources?.[pair]??UNKNOWN,evidence:module.independent_evidence??UNKNOWN,scope:'Concrete ordered policy only; universal conditions remain UNKNOWN'}));
+ gc.generation.parameters.runtimeActors=module.case.boss_encounters??[];
+ gc.generation.parameters.macroCompositionLineage=module.content_components??[];
+ gc.generation.parameters.macroComposition=module.adaptation?.joint_shape_search??module.adaptation?.local_component_graph??UNKNOWN;
  gc.unlocks=[];
  gc.generation.parameters.moduleSourceVersion=module.content_version;
  gc.generation.parameters.policyBinding={sha256:sha(JSON.stringify({out:module.center_to_port,in:module.port_to_center,portTransitions:module.port_transitions??{},transitionOptions:module.transition_options??{}})),scope:'A policy is a calibration candidate, not inferred physics'};

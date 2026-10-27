@@ -31,5 +31,5 @@ def configure(request):
         sites.append(slot)
     m['case']['reward_sites']=sites;m['case']['shop_sites']=shops
     m['adaptation']['reward_budget_binding']=dict(parent_version=m['content_version'],allocated=[s['id']for s in allocations],inactive_source_sockets=source,geometry_changed=False,source_reward_proof_inherited=False,requires_whole_map_economy_verification=True)
-    m['content_version']='sha256:'+digest(dict(case=m['case'],ports=m['ports'],programs=m.get('port_transitions'),allocations=allocations));m.pop('independent_evidence',None)
+    m['content_version']='sha256:'+digest(dict(case=m['case'],ports=m['ports'],programs=m.get('port_transitions'),boundary=m['boundary_gates'],allocations=allocations));m.pop('independent_evidence',None)
     return dict(status='requires_macro_physics',modules=[m],gaps=[],production_admitted=False)

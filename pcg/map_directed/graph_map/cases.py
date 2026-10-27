@@ -1,7 +1,7 @@
 """Routes come from the actual principal paths and all three branch contracts."""
 import copy
 from ..block_grid.policy import principal_routes
-from ..r2_full.orchestrate import path_to,state_after,edge_cover_route
+from ..r2_full.orchestrate import path_to,state_after,edge_cover_route,logical_route
 from ..region_scale.materialize import case_for
 from ..director import REPO
 from ..shape_search.search import translated
@@ -17,6 +17,8 @@ def steps(g,nodes):
 
 def base(c,path,name,required=()):
     v=case_for(c,path,name);v.update(title='风铃平原 · Graph / Block / Module 联合空间候选',preview_title='同图驱动 · 多路线 · 三类奖励回程 · 原角色/机关',extra_script=str(REPO/'pcg/map_directed/graph_map/extra.gd'),required_reward_ids=list(required),map_seed=c['exploration_graph']['seed'],reward_flag_requirements=c.get('reward_flag_requirements',{}),automatic_shop_input=False)
+    terrain=c['case']['platforms'];left=min(r[0]for r in terrain);top=min(r[1]for r in terrain);right=max(r[0]+r[2]for r in terrain);bottom=max(r[1]+r[3]for r in terrain)
+    v['overview_bounds']=[left-96,top-320,right-left+192,bottom-top+416]
     v['presentation_keep_clear']=[translated(r,m['spec']['placement'])for m in c['modules']for r in m['action_clearance']]
     v['presentation_areas']=[dict(id=k,identity=identity,position=c['nodes'][k]['center']['position'])for k,identity in zip(c['exploration_graph'].get('landmarks',[]),['windmill_plateau','clock_court','creek_well','repair_gallery'])]
     for n in v['r2_semantics']['nodes']:
@@ -25,6 +27,8 @@ def base(c,path,name,required=()):
     visit=last.get('port_transitions',{}).get(eid+'>'+eid,[])
     for i,raw in enumerate(visit):
         leg=copy.deepcopy(raw);leg.update(id='goal-visit-'+str(i),edge_id='goal-visit',edge_from=goal,edge_to=goal,edge_terminal=False);v['pilot_program'].append(leg)
+    v['condition_definitions']=c['exploration_graph'].get('condition_definitions',{})
+    v['knowledge_discoveries']=[dict(flag=e['switch'],targets=[c['nodes'][n]['ports'][e['id']]['target']for n in [e['from'],e['to']]])for e in c['exploration_graph']['edges']if c['exploration_graph'].get('condition_definitions',{}).get(e.get('switch'),{}).get('kind')=='knowledge']
     v['required_bosses']=[b['id']for b in c['case'].get('boss_encounters',[])]
     v['map_budget_ticks']=36000
     for leg in v['pilot_program']:
@@ -49,6 +53,8 @@ def create(c,coverage_parts=4):
         tail,state,_=path_to(g,state,g['goal']);path=lead+middle+tail
         earned=[s['id']for s in c['case']['reward_sites']if s.get('allocation',{}).get('node')==b['reward']and s.get('reward_kind')in ['major_item','hidden_collectible']]
         v=base(c,path,'branch-'+b['id']+'-'+b['kind'],earned+baseline);v['branch_contract']=copy.deepcopy(b);out.append(v)
+    for shop in c['case'].get('shop_sites',[]):
+        owner=shop['id'].split('/')[0];v=base(c,logical_route(c,[owner,g['goal']]),'shop-'+owner);v.update(automatic_shop_input=True,required_shop_ids=[shop['id']]);out.append(v)
     if coverage_parts:
         arcs=sorted({(e['id'],e['from'],e['to'])for e in g['edges']}|{(e['id'],e['to'],e['from'])for e in g['edges']if e['bidirectional']});count=(len(arcs)+coverage_parts-1)//coverage_parts
         for i in range(0,len(arcs),count):

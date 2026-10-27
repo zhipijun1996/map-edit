@@ -7,3 +7,8 @@ func control_plan(frame:int)->Array:
 	var value:Dictionary=extra.duel_input(str(leg.boss_duel),frame,leg.target.position)
 	if value.get("done",false):return super.control_plan(frame)
 	return value.get("requested",[])
+
+func capture_dynamic_frame()->void:
+	var before:int=captured.size()
+	super.capture_dynamic_frame()
+	if captured.size()>before:captured[-1]["axis_bits"]=var_to_bytes(controller.router.axis).hex_encode()

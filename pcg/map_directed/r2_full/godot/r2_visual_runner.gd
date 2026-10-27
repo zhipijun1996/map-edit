@@ -94,7 +94,7 @@ func capture_whole_map(case: Dictionary) -> void:
 	camera_driver.follow = false
 	ui.visible = false
 	annotations.overview = true
-	var bounds := rect(case.world_bounds)
+	var bounds := rect(case.get("overview_bounds",case.world_bounds))
 	camera.position = bounds.get_center()
 	var view := root.get_visible_rect().size
 	var factor := minf(view.x / (bounds.size.x + 120.0), view.y / (bounds.size.y + 120.0))
@@ -105,7 +105,7 @@ func capture_whole_map(case: Dictionary) -> void:
 	DirAccess.make_dir_recursive_absolute(whole_map_path.get_base_dir())
 	var error := root.get_texture().get_image().save_png(whole_map_path)
 	print("R2_WHOLE_MAP_CAPTURE ", JSON.stringify({"case_id": case.id, "file": whole_map_path,
-		"error": error, "world_bounds": case.world_bounds, "viewport": [view.x, view.y],
+		"error": error, "world_bounds": case.world_bounds, "camera_bounds":case.get("overview_bounds",case.world_bounds), "viewport": [view.x, view.y],
 		"actual_platforms": case.platforms.size(), "one_way_platforms": case.get("one_way_platform_indices", []).size(),
 		"state_gates": case.get("gate_specs", []).size(), "player_position": [motor.position.x, motor.position.y],
 		"player_position_not_changed_for_capture": true, "scope": "actual complete instantiated world at initial state, camera-only overview"}))

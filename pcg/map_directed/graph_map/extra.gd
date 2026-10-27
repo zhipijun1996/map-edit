@@ -17,6 +17,7 @@ var boss_events:Array=[]
 var contacts:Dictionary={}
 var shop_specs:Array=[]
 var merchant_sprites:Array=[]
+var purchase_pending:=false
 var initial:Dictionary
 const STATE=preload("../r2_full/state_extra.gd")
 var network
@@ -69,6 +70,15 @@ func setup(value:Dictionary,world:Node2D,controller:PlayerController,context)->v
 		var contact:=DemoContactEmitter.new();contact.policy=scope.policy;contact.controller=actor;contact.source_id=StringName(str(spec.id)+"_contact");contact.kind=DamageRequest.Kind.MONSTER;contact.half_size=Vector2(64,55);contact.position=Vector2(0,10);contact.enabled=false;motor.add_child(contact)
 		bosses[str(spec.id)]={"motor":motor,"encounter":encounter,"spec":spec};contacts[str(spec.id)]=contact
 
+	currency_presentation()
+
+func request_purchase()->void:purchase_pending=true
+
+func currency_presentation()->void:
+	for spec:Dictionary in rewards.specs:
+		var id:String=str(spec.id);var sprite:Sprite2D=rewards.sprites[id]
+		sprite.texture=UnderworldActors.icon_texture(&"coin");sprite.scale=Vector2.ONE*20./sprite.texture.get_width();sprite.position=Vector2(spec.position[0],spec.position[1]+2);sprite.visible=not(rewards.services[id]as SimpleRoomReward).claimed
+
 func _projectile(projectile:BossProjectile)->void:
 	projectile.hit.connect(func(body:Node2D,event_id:StringName,amount:float)->void:
 		if body!=actor.motor or not scope.lifetime.active:return
@@ -103,7 +113,11 @@ func duel_input(id:String,frame:int,anchor:Array)->Dictionary:
 
 func capture(frame:int,value:Dictionary)->void:
 	super.capture(frame,value)
+	currency_presentation()
 	network.capture(frame,value)
+	for discovery:Dictionary in data.get("knowledge_discoveries",[]):
+		if not network.opened_flags.has(str(discovery.flag))and actor.motor.is_on_floor()and discovery.targets.any(func(t:Dictionary)->bool:return Rect2(t.region[0],t.region[1],t.region[2],t.region[3]).has_point(actor.motor.position)):
+			network.opened_flags[str(discovery.flag)]=true;earned_flag_events.append({"frame":frame,"flag":discovery.flag,"source":"actual_hidden_entrance_discovered"})
 	for id:String in bosses:
 		var e:BossEncounter=bosses[id].encounter;contacts[id].enabled=e.body_contact_enabled()
 		var activation:Array=bosses[id].spec.activation_region
@@ -124,10 +138,11 @@ func capture(frame:int,value:Dictionary)->void:
 			typed_events.append({"frame":frame,"id":id,"kind":spec.reward_kind,"accepted":accepted,"amount":amount,"items":build.item_ids()})
 			if accepted:claimed[id]=true;UnderworldObjects.place_chest(typed_sprites[id],Vector2(spec.position[0],spec.position[1]+18),true)
 		for spec:Dictionary in shop_specs:
-			if not initial.get("automatic_shop_input",false)or p.distance_to(Vector2(spec.position[0],spec.position[1]))>54 or rewards.wallet.balance<int(spec.price)or claimed.has(str(spec.id)):continue
+			if (not initial.get("automatic_shop_input",false)and not purchase_pending)or p.distance_to(Vector2(spec.position[0],spec.position[1]))>54 or rewards.wallet.balance<int(spec.price)or claimed.has(str(spec.id)):continue
 			var request:=ShopPurchaseRequest.new();request.token=scope.lifetime.token();request.offer_id=StringName(spec.id);request.transaction_id=StringName("map-shop/"+str(spec.id))
 			var receipt:=shop.purchase(request);typed_events.append({"frame":frame,"id":spec.id,"kind":"shop","accepted":receipt.accepted(),"coins":rewards.wallet.balance})
 			if receipt.accepted():claimed[str(spec.id)]=true
+	purchase_pending=false
 	var earned:Array=claimed.keys()
 	for event:Dictionary in rewards.events:
 		if event.get("type")=="chest_claim"and event.get("accepted",false):earned.append(str(event.id))
@@ -150,7 +165,7 @@ func report()->Dictionary:
 	for e:Dictionary in ordinary.workshop.events:
 		if e.type=="chest_claim"and e.accepted:currency_claims.append(str(e.id))
 	var missing:Array=[]
-	for id:String in data.get("required_reward_ids",[]):
+	for id:String in data.get("required_reward_ids",[])+data.get("required_shop_ids",[]):
 		if id not in currency_claims and not claimed.has(id):missing.append(id)
 	var required_bosses:Array=data.get("required_bosses",[])
 	for id:String in required_bosses:

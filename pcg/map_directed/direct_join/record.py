@@ -22,7 +22,7 @@ def run(physics_run,index,out,display=':104',renderer=None,resolution='1280x720'
     if hashlib.sha256(raw).hexdigest()!=batch['raw_output_sha256']:raise ValueError('raw_trace_identity_mismatch')
     reference=json.loads(raw)['results'][0]
     if not reference['ok']:raise ValueError('cannot_sign_failed_movie_as_pass')
-    case=dict(original);case['recorded_frames']=[{k:f[k]for k in ['frame','axis','requested','plan_index']}for f in reference['frames']]
+    case=dict(original);case['recorded_frames']=[{k:f[k]for k in ['frame','axis','requested','plan_index','axis_bits']if k in f}for f in reference['frames']]
     cases=out/'replay-cases.json';write(cases,{'cases':[case]})
     renderer=Path(renderer).resolve()if renderer else Path(__file__).parent/'visual.gd'
     sources={}
@@ -42,9 +42,9 @@ def run(physics_run,index,out,display=':104',renderer=None,resolution='1280x720'
             stdout=log,stderr=subprocess.STDOUT,timeout=900)
     native=json.loads(trace.read_text())['result']
     comparison=dict(native_exit_code=completed.returncode,reference_frames=len(reference['frames']),native_frames=len(native['frames']),mismatches=[])
-    keys=['frame','x','y','vx','vy','grounded','axis','requested','shot_charges','shot_cooldown','jumps_used',
+    keys=['frame','axis_bits','x','y','vx','vy','grounded','axis','requested','shot_charges','shot_cooldown','jumps_used',
         'energy','hp','traversal_state','real_velocity','normal_velocity','module_clock','moving_platforms','saws',
-        'support_id','goal_stable_frames','plains','plains_events_delta','player_damage_delta']
+        'support_id','goal_stable_frames','graph_map','plains','plains_events_delta','player_damage_delta']
     for left,right in zip(native['frames'],reference['frames']):
         different=[k for k in keys if semantic(left.get(k))!=semantic(right.get(k))]
         if different:comparison['mismatches'].append(dict(frame=left['frame'],fields=different))

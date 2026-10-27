@@ -42,8 +42,10 @@ func capture(frame: int, _value: Dictionary) -> void:
 	for node: Dictionary in semantics.get("nodes", []):
 		var key := str(node.id)
 		if visited.has(key): continue
-		var raw: Array = node.target.region
-		if not Rect2(raw[0],raw[1],raw[2],raw[3]).has_point(actor.motor.position): continue
+		var checkpoints:Array=node.get("visit_targets",[node.target])
+		if not checkpoints.any(func(t:Dictionary)->bool:
+			var raw:Array=t.region
+			return Rect2(raw[0],raw[1],raw[2],raw[3]).has_point(actor.motor.position)):continue
 		var accepted := true
 		if services.has(key):
 			var receipt := (services[key] as SimpleRoomReward).claim(context.lifetime.token(),StringName("r2_map:" + key))

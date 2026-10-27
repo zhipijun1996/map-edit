@@ -4,7 +4,8 @@ from pathlib import Path
 from .joint import expand,domains,fold
 from ..content_domains.build import load
 from ..block_grid.policy import review,demands
-from ..shape_search.block_cp import solve
+from ..shape_search.search import search
+from .boundaries import bind as bind_boundaries
 from ..direct_join.canonical import export_reload
 from ..direct_join.assemble import assemble_modules
 from ..direct_join.audit import audit
@@ -32,7 +33,8 @@ def finish(out,g,selected,policy):
     allocate_items(g);write(out/'exploration.json',g);write(out/'policy.json',policy);write(out/'challenge-specifications.json',demands(g,policy))
     bound=[];log=[]
     for m in selected:
-        m=copy.deepcopy(m);m['spec']['node']=copy.deepcopy(next(n for n in g['nodes']if n['id']==m['id']))
+        m=compile_request(dict(recipe='map-owned-supports/v1',module=m))['modules'][0];m['spec'].setdefault('design_contract',dict(input_node=m['id'],map_added_platforms=0,exact_ports=list(m['ports'])))
+        m['spec']['node']=copy.deepcopy(next(n for n in g['nodes']if n['id']==m['id']))
         allocations=[a for a in g['reward_allocations']if a['node']==m['id']]
         response=compile_request(dict(recipe='map-budget-binding/v1',module=m,allocations=allocations));v=response['modules'][0]
         # Bounds are metadata, not a rectangular collider or frame.
@@ -51,7 +53,7 @@ def finish(out,g,selected,policy):
         node=next(n for n in g['nodes']if n['id']==b['reward']);sites=[s['id']for s in c['case']['reward_sites']if s.get('allocation',{}).get('node')==b['reward']and s.get('reward_kind')=='major_item']
         for flag in node.get('opens',[]):c['reward_flag_requirements'][flag]=sites
     for gate in c['gate_specs']:gate.update(x=gate['bounds'][0],y=gate['bounds'][1],w=gate['bounds'][2],h=gate['bounds'][3])
-    write(out/'assembly-audit.json',audit(c));write(out/'compiled.json',c);write(out/'input-binding.json',dict(exploration_sha256=digest(g),policy_sha256=digest(policy),whole_world_graph_sha256=c['source']['graph_sha256']))
+    write(out/'map-recipe.json',dict(seed=g['seed'],exploration_sha256=digest(g),source_contract='Graph / Block / Module, exact placements and owned state boundaries',modules=[m['canonical_document']for m in bound],map_added_platforms=0,production_admitted=False));write(out/'assembly-audit.json',audit(c));write(out/'compiled.json',c);write(out/'input-binding.json',dict(exploration_sha256=digest(g),policy_sha256=digest(policy),whole_world_graph_sha256=c['source']['graph_sha256']))
     return c
 
 
@@ -60,14 +62,33 @@ def build(out,g,policy,sources,attempts=4,seconds=60,preselected=None):
     design=review(g,policy);write(out/'policy-review.json',design)
     if not design['ok']:raise ValueError('design_rejected/'+str(design['errors']))
     pool,qualification=load(sources);pool=[compact_clearance(m)for m in pool];write(out/'source-qualification.json',qualification)
-    if preselected:return finish(out,g,preselected,policy)
+    if preselected:
+        # Explicit rigid-layout replay only; it never becomes a regional fallback.
+        required={e['id']for e in g['edges']if(not e['bidirectional']or e.get('switch'))and not(g.get('condition_definitions',{}).get(e.get('switch'),{}).get('kind')=='knowledge'and e['bidirectional'])}
+        present={q['edge_id']for m in preselected for q in m.get('boundary_gates',[])}
+        if present and not required<=present:raise ValueError('partial_preselected_state_boundaries')
+        if not present:
+            preselected,log=bind_boundaries(g,preselected);write(out/'state-boundary-binding.json',log)
+            if preselected is None:raise ValueError('preselected_layout_state_boundaries_unsatisfied')
+        return finish(out,g,preselected,policy)
     history=[]
     for i in range(attempts):
         ex,mapping=expand(g,g['seed']+'/components-'+str(i));D,A=domains(ex,pool);write(out/('domain-counts-'+str(i)+'.json'),{k:len(v)for k,v in D.items()})
-        r=solve(ex,D,g['seed']+'/space-'+str(i),seconds=seconds,layout_preference=True);ms=r.pop('modules',[]);write(out/('search-'+str(i)+'.json'),r);history.append(dict(attempt=i,status=r['status']))
+        accepted={};rejections=[]
+        def complete(ms):
+            try:folded=fold(g,mapping,ms)
+            except ValueError as e:
+                if len(rejections)<12:rejections.append(dict(stage='fold',reason=str(e)))
+                return False
+            gated,log=bind_boundaries(g,folded)
+            if gated is None:
+                if len(rejections)<12:rejections.append(dict(stage='state_boundary',attempts=log))
+                return False
+            accepted.update(modules=gated,boundaries=log);return True
+        r=search(ex,D,g['seed']+'/space-'+str(i),budget=100000,require_blocks=True,allow_shared_air=True,ideal_scale_blocks=.4,forward_check=True,probe_budget=3500000,wall_budget_seconds=seconds,solution_check=complete)
+        ms=r.pop('modules',[]);write(out/('search-'+str(i)+'.json'),r);write(out/('solution-rejections-'+str(i)+'.json'),rejections);history.append(dict(attempt=i,status=r['status']))
         if not ms:continue
-        try:selected=fold(g,mapping,ms)
-        except ValueError as e:history[-1]['fold_error']=str(e);continue
+        selected=accepted['modules'];write(out/'state-boundary-binding.json',accepted['boundaries'])
         write(out/'component-mapping.json',mapping);write(out/'expanded-modules.json',ms);write(out/'expanded-constraints.json',ex);write(out/'search-history.json',history)
         return finish(out,g,selected,policy)
     write(out/'search-history.json',history);write(out/'generator-feedback.json',dict(status='needs_design',reason='No qualified joint shape layout within budget',source_graph_sha256=digest(g),unresolved_nodes=[n['id']for n in g['nodes']],may_delete_required_edges=False,history=history))

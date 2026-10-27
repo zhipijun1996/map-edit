@@ -18,7 +18,7 @@
 
 - L4任务先读[Map Director skill](.agents/skills/pcg-map-director/SKILL.md)与[需求重新核对/实施路径](docs/l4-mapgen/map-requirements-reset-v1.md)。当前策略来源唯一为`pcg/map_directed/block_grid/plains-policy.json`。
 - 五段串联骨架及其旧小图生成、专用选型、路线和展示入口已从当前执行路径删除，不保留legacy开关、兼容分支或回退。历史代码/归档只作证据，不可恢复或改名作为新Map方案。
-- `block_grid.plan`仅是现有逻辑入口，通用Graph物化仍待实现。不得用另一个固定样图假装接通；不能把规划节点数、物理通过率当作区域设计通过。
+- `block_grid.plan`生成逻辑输入，`graph_map.run`已接全库候选域→本地Macro联合形状CSP→标准文档/直接拼装→真实Harness。见[本轮报告](docs/l4-mapgen/graph-map-materialization-v1.md)。22 Macro接口样图10/10及9个有限反向门探针通过，完整区域/多Seed稳定性/美感未通过；不能把规划节点数、物理通过率当作区域设计通过。
 - 必须保持同图驱动、双/三主路与三种奖励支路、实际回程/汇入、独立奖励预算；全库按能力/动作/Port/状态/形状建立候选域，不写上下路或家族固定名单。
 - 检查设计→内容→空间→整图物理→质量/多Seed→人工观感；缺项保留UNKNOWN/NOT_RUN，不能只追加报告而不接实际入口。空间搜索与Module补缺均有界，失败不删关键职责、不补平台掩盖问题。
 - 新源改变后历史物理/候选保持原冻结身份，不为维持缓存命中而撤销必要修复。当前并无符合全部目标的可玩区域。

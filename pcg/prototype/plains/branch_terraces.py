@@ -78,12 +78,15 @@ def ordered(m):
 def request(value):
     """The existing Workshop dispatches this finite, independently tested family."""
     p=value.get('parameters',{});kind=p.get('kind','junction');port_count=value.get('ports',{}).get('count')
-    expected=p.get('port_count',port_count)if kind=='compound'else 3 if kind=='junction'else 2
+    expected=p.get('port_count',port_count)if kind=='compound'else 3 if kind in ['junction','overhang']else 2
     if port_count!=expected:return dict(status='needs_design',gaps=['registered local recipe Port count mismatch'])
     variants=[]
     try:
         if kind=='junction':
             for span,rise,drop in itertools.product(p.get('spans',[512,640]),p.get('rises',[128,256]),p.get('drops',[128,256])):variants.append(ordered(terrace(span,rise,drop)))
+        elif kind=='overhang':
+            from .overhang_junction import generate
+            for span in p.get('spans',[640,768]):variants.append(ordered(generate(span)))
         elif kind=='turn':
             for span,rise in itertools.product(p.get('spans',[512]),p.get('rises',[128,256])):variants.append(ordered(turn(rise,span)))
         elif kind=='compound':

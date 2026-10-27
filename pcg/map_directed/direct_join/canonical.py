@@ -33,6 +33,7 @@ def reload_catalog(out):
   doc_path=out/'documents'/entry['file'];doc=json.loads(doc_path.read_text());by={o['id']:o for o in doc['objects']}
   if file_sha(doc_path)!=entry['sha256']:raise ValueError('canonical_module_file_drift')
   m=copy.deepcopy(module);case=m['case']
+  if doc['generationContract']['generation']['parameters'].get('runtimeActors',[])!=case.get('boss_encounters',[]):raise ValueError('canonical_runtime_actor_payload_mismatch')
   if m.get('block_grid'):
    gc=doc['generationContract']
    if gc['space'].get('blockGrid')!=m['block_grid']:raise ValueError('canonical_block_grid_mismatch')
@@ -80,7 +81,7 @@ def reload_catalog(out):
    elif o['type']=='reward'and o.get('mechanics',{}).get('kind')in ['chest','merchant']:
     case['reward_sites'if o['mechanics']['kind']=='chest'else'shop_sites'].append(copy.deepcopy(o['mechanics']['source']))
    elif o['type']=='gate'and o.get('mechanics',{}).get('kind')=='boundary_gate':
-    v=o['mechanics'];m['boundary_gates'].append(dict(id=o['sourceId'],edge_id=v['edgeId'],bounds=[o[k]for k in ['x','y','w','h']],direction=v['direction'],switch=v['switch'],one_way=v['oneWay'],owner_module=v['owner'],source='module-generated boundary gate',from_module=v['from'],to_module=v['to']))
+    v=o['mechanics'];gate=copy.deepcopy(v.get('sourceFields',{}));gate.update(id=o['sourceId'],edge_id=v['edgeId'],bounds=[o[k]for k in ['x','y','w','h']],direction=v['direction'],switch=v['switch'],one_way=v['oneWay'],owner_module=v['owner'],from_module=v['from'],to_module=v['to']);gate.setdefault('source','module-generated boundary gate');m['boundary_gates'].append(gate)
   for kind in ['platforms','one_way_platform_indices','saws','moving_platforms','latches','enemies']+(['reward_sites','shop_sites']if 'reward_sites'in module['case']else[]):
    if case[kind]!=module['case'][kind]:raise ValueError('canonical_physical_payload_mismatch/'+m['id']+'/'+kind)
   if m['boundary_gates']!=module['boundary_gates']:raise ValueError('canonical_module_gate_mismatch')

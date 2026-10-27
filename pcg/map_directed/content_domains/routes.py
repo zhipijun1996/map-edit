@@ -14,7 +14,7 @@ def route_section(compiled,steps,ordinal):
         else:raise ValueError('unsupported_ordered_port_pair/'+fr+'/'+key)
     else:before=source['center_to_port'][eid]
     after=[]if nodes[to].get('port_transitions')else nodes[to]['port_to_center'][eid]
-    return before+path+after
+    return [dict(copy.deepcopy(v),assembly_phase='module_traversal',assembly_node=fr)for v in before]+[dict(copy.deepcopy(v),assembly_phase='seam_transfer',assembly_node=None)for v in path]+[dict(copy.deepcopy(v),assembly_phase='module_traversal',assembly_node=to)for v in after]
 
 def ingress_target(compiled,node,steps):
     n=compiled['nodes'][node]

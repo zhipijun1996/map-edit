@@ -2,7 +2,7 @@
 
 先读[需求核对与实施路径](../docs/l4-mapgen/map-requirements-reset-v1.md)、[Map Director skill](../.agents/skills/pcg-map-director/SKILL.md)和`map_directed/block_grid/plains-policy.json`。五段串联骨架、上下路槽位选型、对应路线/录像及旧小图生成已删除，无兼容开关和回退；旧归档仅保留证据。
 
-当前仅可用`python3 -m pcg.map_directed.block_grid.plan --name fresh-plan --seed fixed-seed`生成逻辑网络与需求。通用Graph→候选域→空间→真实拼装尚待接通，不得接回固定模板。策略已补齐三类支路覆盖、主路线真实性、返回/汇入目标检查；assembler/audit已接输入图哈希与节点/边/端口对应。旧43图设计拒绝。新计划不能冒充实际Module或可玩区域。
+当前`block_grid.plan`生成逻辑网络与需求，`graph_map.run`已接全库候选域、本地Macro联合形状CSP、标准文档/直接拼装和真实Harness；见[本轮报告](../docs/l4-mapgen/graph-map-materialization-v1.md)。22 Macro/24组件的小规模同图样图10/10常规与9/9有限反向门体探针通过，仍非40–65完整区域，也未证明新Seed稳定性/美感。不得接回固定模板。策略已补齐三类支路覆盖、主路线真实性、返回/汇入目标检查；assembler/audit已接输入图哈希与节点/边/端口对应。旧43图设计拒绝。新计划不能冒充实际Module或可玩区域。
 
 本轮审计`generation/maps/map-requirements-review-v2`三个固定Seed：42/43/41逻辑槽位，3/2/3主路，各6支路且三类齐全，空间和Godot均NOT_RUN。源变更使旧缓存需要按新版本重新验，不继承历史10/10或43/43复用结论。
 

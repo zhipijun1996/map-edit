@@ -66,7 +66,7 @@ def join_waypoints(*sections):
     result = []
     for section in sections:
         for waypoint in section:
-            if result and waypoint.get('kind') == 'walk' and waypoint['target']['position'] == result[-1]['target']['position']:
+            if result and waypoint.get('kind') == 'walk' and waypoint['target']['position'] == result[-1]['target']['position'] and waypoint.get('assembly_phase')==result[-1].get('assembly_phase'):
                 continue
             result.append(copy.deepcopy(waypoint))
     return result

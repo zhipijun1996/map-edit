@@ -26,6 +26,13 @@ def audit(c):
    m=modules[node];p=m['ports'][seam['id']];dx,dy=m['spec']['placement']
    positions.append([p['position'][0]+dx,p['position'][1]+dy]);normals.append(p['normal'])
   if positions[0]!=positions[1]or normals[0]!=[-v for v in normals[1]]:raise ValueError('module_ports_are_not_flush')
+ for gate in c.get('gate_specs',[]):
+  owner=modules.get(gate['owner_module'])
+  if owner is None:raise ValueError('map_gate_without_module_owner')
+  raw=next((g for g in owner['boundary_gates']if g['id']==gate['id']),None)
+  if raw is None:raise ValueError('map_created_unversioned_gate')
+  dx,dy=owner['spec']['placement'];r=raw['bounds']
+  if gate['bounds']!=[r[0]+dx,r[1]+dy,*r[2:]]or gate['module_content_version']!=owner['content_version']:raise ValueError('map_altered_module_gate')
  overlaps=[]
  for i,a in enumerate(platforms):
   own={p['module']for p in origins[i]}
@@ -34,10 +41,10 @@ def audit(c):
    if min(a[0]+a[2],b[0]+b[2])-max(a[0],b[0])>1e-5 and min(a[1]+a[3],b[1]+b[3])-max(a[1],b[1])>1e-5:overlaps.append([i,j])
  if overlaps:raise ValueError('undeclared_inter_module_solid_overlap/'+str(overlaps))
  for m in modules.values():
-  W,H=m['spec']['space']['core_bounds'][2:]
+  left,top,W,H=m['spec']['space']['core_bounds']
   for s in m['case']['saws']:
    x,y=s['origin'];tx,ty=s['travel'];r=s['radius']
-   if x-abs(tx)-r<0 or x+abs(tx)+r>W or y-abs(ty)-r<0 or y+abs(ty)+r>H:raise ValueError('module_saw_sweeps_into_neighbor/'+m['id'])
+   if x-abs(tx)-r<left or x+abs(tx)+r>left+W or y-abs(ty)-r<top or y+abs(ty)+r>top+H:raise ValueError('module_saw_sweeps_into_neighbor/'+m['id'])
  return dict(schema='pcg/direct-module-assembly-audit/v1',modules=len(modules),seams=len(c['seams']),
   map_created_terrain_objects=0,omitted_module_objects=0,orphan_platforms=0,port_gaps=0,
   undeclared_inter_module_solid_overlaps=0,all_instance_geometry_exact=True,

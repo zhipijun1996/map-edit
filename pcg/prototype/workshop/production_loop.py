@@ -15,6 +15,12 @@ from ..factory.core.engine import file_sha
 from pcg.contract.export import collect
 
 def compile_request(request):
+    if request.get('recipe')=='map-owned-supports/v1':
+        from .map_supports import configure
+        return configure(request)
+    if request.get('recipe')=='map-state-boundary/v1':
+        from .map_boundaries import configure
+        return configure(request)
     if request.get('recipe')=='ordered-interface/v1':
         from pcg.map_directed.graph_map.verify_pairs import proposals
         return dict(status='requires_macro_physics',modules=proposals([request['module']]),gaps=[],production_admitted=False)

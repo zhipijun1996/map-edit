@@ -23,6 +23,18 @@ def allocate(g,seed):
     for n in g['nodes']:n['reward']=0
     g['reward_allocations']=sites
 
+def condition_types(g):
+    """Knowledge affects discovery/planning; it is not an invented locked door."""
+    definitions={}
+    prep=g.get('mission_policy',{}).get('boss_forecourt')
+    rewards={b['reward']for b in g.get('branches',[])}
+    for n in g['nodes']:
+        for flag in n.get('opens',[]):
+            kind='reward_earned'if n['id']in rewards else'arrival'if n['id']==prep else'knowledge'if n['id']in g.get('landmarks',[])else'mechanism'
+            definitions[flag]=dict(kind=kind,source_node=n['id'],physical_passage_required=kind!='knowledge',scope='Actual reward receipt / actual visit; knowledge can also be discovered at its entrance')
+    g['condition_definitions']=definitions
+
+
 def run(name,seed,policy_path=None):
     p=load(policy_path)if policy_path else load();out=REPO/'pcg/results'/name
     if out.exists():raise ValueError('immutable_block_plan_exists')
@@ -30,7 +42,7 @@ def run(name,seed,policy_path=None):
     for i in range(8):
         try:
             g=regional.construct(seed+'/design-'+str(i),p['region'],20,reward_expeditions=6,
-                reward_return_modes=['foldback','loop_back','merge']*2,core_edge_factor=1.05,approach_steps=(7,14),reuse_perimeter_anchors=True)
+                reward_return_modes=['foldback','loop_back','merge']*2,core_edge_factor=1.0,approach_steps=(7,14),reuse_perimeter_anchors=True,spread_branch_anchors=True)
             g.update(seed=seed,region=p['region']);allocate(g,seed);audit=review(g,p)
             attempts.append(dict(attempt=i,errors=audit['errors'],module_count=len(g['nodes']),unknown=audit['unknown']))
             if audit['ok']:selected=(g,audit);break
@@ -38,7 +50,7 @@ def run(name,seed,policy_path=None):
     write(out/'design-attempts.json',attempts);write(out/'policy.json',p)
     if not selected:
         write(out/'summary.json',dict(status='unsatisfied_within_design_budget',physics='NOT_RUN',may_delete_required_routes=False,production_admitted=False));return out
-    g,audit=selected;requests=demands(g,p);write(out/'exploration.json',g);write(out/'challenge-specifications.json',requests);write(out/'policy-review.json',audit)
+    g,audit=selected;condition_types(g);requests=demands(g,p);write(out/'exploration.json',g);write(out/'challenge-specifications.json',requests);write(out/'policy-review.json',audit)
     write(out/'input-binding.json',dict(policy_sha256=digest(p),exploration_sha256=digest(g),challenge_specifications_sha256=digest(requests),physical_input_must_equal_exploration=True))
     # Original Workshop entry handles unregistered capabilities/mechanics by
     # needs_design, rather than inventing equivalent-looking content.

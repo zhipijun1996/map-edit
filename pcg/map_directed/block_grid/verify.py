@@ -14,7 +14,16 @@ def verify(c,case,result):
         eid=step['edge_id'];source,dest=step['from'],step['to'];prefix=f'{i:03d}-{eid}-'
         legs=[q for q in logs if q['id'].startswith(prefix)]
         if not legs or not all(q.get('ok')for q in legs):continue
-        start,end=legs[0]['start']['frame'],legs[-1]['end']['frame'];m=by[source];p=m['ports'][eid];offset=m['spec']['placement']
+        tagged=[leg for leg in case['pilot_program']if leg['id'].startswith(prefix)and leg.get('assembly_phase')=='seam_transfer'];transfer_ids={leg['id']for leg in tagged}
+        transfer=[leg for leg in legs if leg['id']in transfer_ids]if tagged else legs
+        if not transfer:errors.append('explicit_seam_transfer_missing/'+str(i));continue
+        for leg in case['pilot_program']:
+            if not leg['id'].startswith(prefix)or leg.get('assembly_phase')!='module_traversal':continue
+            log=next((item for item in legs if item['id']==leg['id']),None)
+            if log is None:continue
+            owned_node=leg['assembly_node'];local_owned=placed_cells(by[owned_node],by[owned_node]['spec']['placement'])
+            if any(not raster([f['x']-12,f['y']-18,24,36])<=local_owned for f in frames if log['start']['frame']<=f['frame']<=log['end']['frame']):errors.append('module_transition_left_declared_shape/'+leg['id'])
+        start,end=transfer[0]['start']['frame'],transfer[-1]['end']['frame'];m=by[source];p=m['ports'][eid];offset=m['spec']['placement']
         normal=p['normal'];axis=0 if normal[0]else 1;axis_key='x'if axis==0 else'y';tangent='y'if axis==0 else'x';half=18 if axis==0 else 12
         plane=p['position'][axis]+offset[axis];a=p['aperture'];lo=a[1-axis]+offset[1-axis];hi=lo+a[3-axis]
         samples=[f for f in frames if start<=f['frame']<=end];found=[]
@@ -30,4 +39,4 @@ def verify(c,case,result):
         elif any(not f['aperture_ok']for f in found):errors.append('boundary_aperture_bypass/'+str(i)+'/'+eid)
         crossings.append(dict(step=i,edge=eid,**{'from':source,'to':dest},source_version=m['content_version'],destination_version=by[dest]['content_version'],samples=found))
     return dict(ok=result['ok']and not errors,physics_ok=result['ok'],errors=sorted(set(errors)),unreserved_body_frames=outside[:10],crossings=crossings,
-        scope='Concrete trajectory/pose/state only; no arbitrary input, ability-lock or human fun proof')
+        scope='Explicit seam-phase trajectory, per-Module body ownership and actual state only; no arbitrary input, ability-lock or human fun proof')
