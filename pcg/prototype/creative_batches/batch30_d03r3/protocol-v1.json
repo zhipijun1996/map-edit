@@ -1,0 +1,55 @@
+{
+  "schema": "pcg/D03-r3-aiming-margin-protocol/v1",
+  "parent": "pcg/creative-production/batch30/protocol-v8.json",
+  "maximum_rule_revisions": 2,
+  "maximum_probe_cases": 120,
+  "maximum_full_cases": 1600,
+  "calibration_seed": 261032001,
+  "holdout_seed": 261032002,
+  "prior_costs": {
+    "cycle1_probes": 215,
+    "cycle2_probes": 80,
+    "r2_probes": 120,
+    "prior_two_full": 2996
+  },
+  "initial_controls": [
+    {
+      "id": 0,
+      "enemy_y": 330,
+      "first_shot_pre_axis": 0,
+      "second_shot_minimum_nominal_delay": 18
+    },
+    {
+      "id": 1,
+      "enemy_y": 330,
+      "first_shot_pre_axis": "inward",
+      "second_shot_minimum_nominal_delay": 18
+    },
+    {
+      "id": 2,
+      "enemy_y": 350,
+      "first_shot_pre_axis": 0,
+      "second_shot_minimum_nominal_delay": 18
+    },
+    {
+      "id": 3,
+      "enemy_y": 350,
+      "first_shot_pre_axis": "inward",
+      "second_shot_minimum_nominal_delay": 18
+    }
+  ],
+  "initial_bank_right_extension": 48,
+  "first_stage": "Interface0 clean west/east air for all4 preregistered controls, measure actual muzzle range and angular silhouette before any full; then all7route same-world clean selected control",
+  "selection": "Prefer clean both routes with second range<=200 and center static angular half-window>=6.5; tie lowercontrol; no held selection. If none meet range/angle, explicit fail/second registered version within authorized geometry/control domain.",
+  "frozen_originals": [
+    "allr2/v8 sources/oldheld remain immutable",
+    "EnemyHP3/collider28x32, originalprojectile radius3 speed1200/cooldown.25 unchanged"
+  ],
+  "counterrequirements": [
+    "true3HPgroundclear then use newperch",
+    "living enemy perch landing",
+    "1hit then grounded shortcut",
+    "remaining1HP air versusstaged in same world"
+  ],
+  "note": "Prepared during disk pause; NO Godot until root resume notification. Geometry calculations diagnose only, never certify physics."
+}

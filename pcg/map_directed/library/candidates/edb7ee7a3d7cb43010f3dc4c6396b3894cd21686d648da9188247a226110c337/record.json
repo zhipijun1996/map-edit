@@ -1,0 +1,137 @@
+{
+  "schema": "map-notes/module-library-entry/v1",
+  "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910",
+  "contentVersion": "sha256:edb7ee7a3d7cb43010f3dc4c6396b3894cd21686d648da9188247a226110c337",
+  "technical_status": "passed_scoped_multi_route",
+  "content_kind": "module",
+  "technical_scope": "independent single-module route witnesses; no arbitrary-state or Map guarantee",
+  "cases_sha256": "4cfd27caff116f1ad2d89d90878649f2261b868193383070313bfd53696f2cbc",
+  "document_sha256": "782e9da6bdd0603778cc367d60bb0f3c157621828678eecc030dbf01e922440f",
+  "demand_key": "971af577bd07a2e4c6fc0b01dc538aa17cabf10e40258e7b68a27d094c712753",
+  "specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "batch30/block-C02/1",
+    "source_type": "model_authored_challenge_spec",
+    "region": "plains",
+    "required_family": "block128-serial-airlock",
+    "objective": {
+      "recipe": "block128-serial-airlock",
+      "interface": 1,
+      "physical_layout_sha256": "5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910",
+      "core": "full body clears A before original air shot closes it and opens B; same recoil crosses unsupported middle",
+      "receiver": [
+        690,
+        382
+      ],
+      "role": "rising_receiver",
+      "source_relationship": "serial-airlock-recoil",
+      "block_contract": "map-notes/block-grid/v1",
+      "source_map_request": {
+        "id": "block-demand/exp1_0",
+        "sha256": "961940758f937fb3069e0374a679154fa160563fd653cdc9acebb47085ad2ff9",
+        "preserve_all_edges": [
+          "e26",
+          "e27"
+        ]
+      }
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 2,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "route_id": "cross-A-swap-cross-B"
+      }
+    ],
+    "space": {
+      "max_width": 1536,
+      "max_height": 1024,
+      "max_port_span_x": 1280,
+      "block_size": 128,
+      "port_profiles": [
+        "ground64/v1"
+      ]
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "risk_reward": {
+      "mandatory_damage": false,
+      "reward_sites": []
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "Original supported body at interior W staging; true boundary crossing is separate fixture, no reset",
+      "exit": "observed stable B with A closed/B open; arbitrary states UNKNOWN"
+    },
+    "return_conditions": "Original recovery geometry retained; new continuous recovery and reverse remain UNKNOWN until exact verification",
+    "budget": {
+      "generator_candidates": 4,
+      "director_revisions": 0
+    }
+  },
+  "quality_gates": [
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/evaluations.json",
+      "sha256": "78803ef46e53fbe3993207fd9a0aa9c74dd0aff11f8fde06b2a8e96e27e33523"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/calibration-evaluations.json",
+      "sha256": "d1c59fd786875f29b3a165d138b33a5437f992a80b9d19c6a38dff281afc2f82"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/protocol.json",
+      "sha256": "b3c562e30f4c4558cb53b5ee7ed8282e6117a1c9bb888dcf2697cece1e360ac0"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/bound-counterexamples.json",
+      "sha256": "2cee42b64285f21c7339b5131c4bce24de788a63ecc5a026ddad1c31d313586a"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/counter-decisions.json",
+      "sha256": "71c564faf25e85d939b6f4e10db66546a8b2de446abd103b4ac506760173f192"
+    },
+    {
+      "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/selection-before-holdout.json",
+      "sha256": "abf65c32476d8f2185b0f6bcee838ccb6a93dffab008c60194e454a19b26ac6a"
+    }
+  ],
+  "human_quality": "awaiting_review",
+  "human_reviews": [],
+  "production_admitted": false
+}

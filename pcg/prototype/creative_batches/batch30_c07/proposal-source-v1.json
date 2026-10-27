@@ -1,0 +1,221 @@
+{
+  "id": "B30-C07",
+  "title": "关出一面能接住反冲的墙",
+  "source_type": "codex_assisted_proposal",
+  "author": "/root/batch30_creative",
+  "status": "proposal_requires_executable_rule_and_physics",
+  "priority": 7,
+  "content_role": "collision_brake_wall",
+  "player_observation": "前方通口堵住，后侧凹岸缺少挡住反冲的立面；两个门的连线显示一开一关。",
+  "player_decision": "向前射铃开路的同时，怎样用向后的反冲落回侧袋，并利用新闭合的后墙限制过冲，随后从已打开的通口继续。",
+  "causal_relationship": "打开前门A会关闭后墙B；同枪反冲把人物送向后墙，真实碰撞改变横向运动并让其落稳在侧袋支撑，而非直接夹住人物。",
+  "terrain_and_spatial_identity": "悬岩下的短侧袋与前门隔着一段空中转向区，新墙在人物后方留有完整身体距离；墙脚有真实接收面。",
+  "nonnegotiable_experience": "新闭合墙确实参与一次无伤碰撞/限位，开路与反冲落位属于同一行动后果。",
+  "required_cells": [
+    "original static rock",
+    "original jump/recoil/projectile",
+    "new mutually exclusive paired-gate ShotLatch"
+  ],
+  "required_abilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "mechanism_support": {
+    "existing": [
+      "original collision response/recoil",
+      "original stable supported pockets"
+    ],
+    "new_or_unverified": [
+      "paired gate used as new solid braking surface",
+      "atomic switch must reject overlapping body, never use gate push-out as movement"
+    ]
+  },
+  "resource_conditions": "一枪后先实际落稳侧袋，再用原地面恢复处理下一段。",
+  "visible_reward_and_claim": "通口后的可见奖励岸；侧袋只是动作中间位，不额外标口。",
+  "failure_recovery": "过冲或未触新墙落入内部低台，可走短动作回到可调铃位置；不能压门弹人恢复。",
+  "directional_and_return_difference": "去程开路并建立后墙；回程这面墙可能阻挡，需要另行切换，未验证保持UNKNOWN。",
+  "proposed_state_sequence": [
+    "前门闭/后墙开",
+    "朝前击铃造成后向反冲",
+    "前门开/后墙闭",
+    "身体随后接触新墙并落袋",
+    "经前门到出口"
+  ],
+  "cheap_solution_search": [
+    "普通空中转向同样稳定，墙从不参与但仍声称限位",
+    "关门时重叠身体被挤进侧袋",
+    "先地面开路后普通跳更好",
+    "墙已关但玩家穿过",
+    "只换普通brake标题"
+  ],
+  "required_actual_witnesses": [
+    "new wall solid contact normal and velocity change",
+    "body outside close envelope at commit",
+    "same-shot switch and recoil",
+    "support stable after contact"
+  ],
+  "first_small_prototype_falsifier": "先用一墙一袋验证真实碰撞限位是否可读且有容错；若墙只是装饰，退回原岩沿刹入适配。",
+  "two_space_demands": [
+    {
+      "id": "B30-C07/horizontal",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 1450,
+        "max_height": 1000,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "横向前门与后侧浅袋"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "supported_ingress",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            1,
+            0
+          ],
+          "role": "onward_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "not_requested",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "主要限制水平过冲。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    },
+    {
+      "id": "B30-C07/vertical",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 1300,
+        "max_height": 1400,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "下坠后的反向高袋与侧门"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            0,
+            -1
+          ],
+          "role": "upper_ingress",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "raised_side_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "not_requested",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "先下落再反冲抬入袋，墙接触高度不同。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    }
+  ],
+  "novelty_assessment": {
+    "nearest": [
+      "P50-G12 跌出遮挡后开侧袋并反冲落位"
+    ],
+    "difference": "新建的闭门本身成为碰撞限位，不仅开启一扇原本挡路的门。",
+    "qualification": "new collision-use hypothesis; merge with brake family if causal wall unused"
+  },
+  "risks_and_gaps": [
+    "不得借门夹人产生假加速度",
+    "若实际原摩擦/碰撞使稳定必须极精确，不能降regular门槛"
+  ],
+  "candidate_versions": [],
+  "physics": "NOT_RUN",
+  "human_design_approval": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false,
+  "gate_pair_roles": {
+    "A": "forward_passage",
+    "B": "new_braking_wall"
+  },
+  "gate_pair_state_table": [
+    {
+      "name": "initial",
+      "A_open": false,
+      "B_open": true
+    },
+    {
+      "name": "after_one_accepted_switch",
+      "A_open": true,
+      "B_open": false
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "id": "B30-C11",
+  "title": "下沉渡台：先退后抢的真实修订",
+  "source_type": "codex_assisted_proposal",
+  "author": "/root/batch30_creative",
+  "status": "proposal_requires_executable_rule_and_physics",
+  "priority": 11,
+  "content_role": "descending_carrier_position_control",
+  "player_observation": "宽台斜向右下驶向低悬岩，远岸较高；站在台上能看见净空逐渐打开，也看见自己越来越低。",
+  "player_decision": "先保持后侧相对位置，让完整身体降到岩底以下；随后向前缘移动，在离台高度耗尽前跳出。后侧登台等达成相同因果的替代应接受。",
+  "causal_relationship": "原载台承载改变人的世界位置与剩余高度，原反冲/走位调节相对位置；不是射词不同就算先退后抢。",
+  "terrain_and_spatial_identity": "入口与受控台之间有真实遮铃岩唇；对岸与所有有用预停位置不能组成更容易静态跳台。悬岩、台宽、下降距离共同产生宽容窗口。",
+  "nonnegotiable_experience": "真实持续承载下降与相对位置变化，而不是岸上预停后零承载跳到终点。",
+  "required_cells": [
+    "original ModuleMovingPlatform diagonal travel/start-pause",
+    "original ShotLatch",
+    "original rock/recoil/reward"
+  ],
+  "required_abilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "mechanism_support": {
+    "existing": [
+      "original start/pause carrier and real carriage",
+      "original projectile occlusion",
+      "original body/recoil"
+    ],
+    "new_or_unverified": [
+      "new generation rule to address documented shore-prepark falsifiers",
+      "moving bell attachment only if actually provided, not assumed"
+    ]
+  },
+  "resource_conditions": "台上接地正常恢复，允许原地面射击；不锁弹药来堵合法解。",
+  "visible_reward_and_claim": "远岸宽处取宝；无刺下岸用于恢复而非奖励二选一。",
+  "failure_recovery": "下岸通过短动作到可操作铃位置，保留台相位/运行状态重新登台；不要求等整圈或重建世界。",
+  "directional_and_return_difference": "返回可沿已声明实体下路，不预先签反向乘台。",
+  "proposed_state_sequence": [
+    "实际登台",
+    "开动后真实下降承载",
+    "保持后侧/让净空打开",
+    "移动到可离台前缘",
+    "跳出并反冲到远岸"
+  ],
+  "cheap_solution_search": [
+    "已知shore-prepark-110/130/150-downward反例必须重测",
+    "零轴到底即可领奖",
+    "没有承载只有擦过平台",
+    "用角色坐标跟台",
+    "后侧登台被错误判为没退而拒绝"
+  ],
+  "required_actual_witnesses": [
+    "continuous supported moving-deck frames",
+    "world displacement vs relative displacement",
+    "body clears overhang",
+    "shore-prepark equal-goal comparison",
+    "same-world missed-departure recovery"
+  ],
+  "first_small_prototype_falsifier": "先只解决原17案例中的岸上预停绕法并保留后侧登台合法解；小原型看不到承载位置判断就停止，不做两尺寸。",
+  "two_space_demands": [
+    {
+      "id": "B30-C11/long",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 2100,
+        "max_height": 1500,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "横向悬岩较长，载台下降较缓"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "supported_ingress",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            1,
+            0
+          ],
+          "role": "onward_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "not_requested",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "比较前缘离台距离与较长净空展开。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    },
+    {
+      "id": "B30-C11/steep",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 1700,
+        "max_height": 1750,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "高侧入口进入较陡下降台，侧向远岸"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "upper_ingress",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            1,
+            0
+          ],
+          "role": "mid_height_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "not_requested",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "载台宽度、岩底高度和离台路线改变，不仅调快速度。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    }
+  ],
+  "novelty_assessment": {
+    "nearest": [
+      "PR-D02 original proposal",
+      "P50-G06 chase"
+    ],
+    "difference": "原案未完成的真实修订，不计已存在家族的新发明；成功新版本可作为新增候选。",
+    "qualification": "existing proposal revision, not new family"
+  },
+  "risks_and_gaps": [
+    "已知反例必须解决，不能只换标题",
+    "不新增平台自动停靠/改向能力"
+  ],
+  "candidate_versions": [],
+  "physics": "NOT_RUN",
+  "human_design_approval": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false
+}

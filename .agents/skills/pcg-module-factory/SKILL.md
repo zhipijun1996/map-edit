@@ -7,6 +7,10 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 ## 当前平原入口
 
+**最新 Map 约束（2026-10-27）**：生产前读取当前 Map 分支的真实策略与适配代码，不只读README。本轮已核对 `research/l4-map-generator@a685faebdb7596b0808538ab9ef299d6455d2320`，证据在 `pcg/creative-production/batch30/map-constraint-source-v1/`。当前入口为 `batch30_runtime.produce_v3`；复用原Engine/evaluate/store，增加上游Block合同预检。Block128连通所有权、128倍数包围尺寸、真实边界中心Port及独立内部staging必须在几何生成前满足。内部挑战不缩放，不增外框；两门、移动铃包络、恢复地貌和完整身体扫掠均不能漏。旧候选缺少该合同即返回缺口，不由标签补齐。见[契约](../../../docs/l4-mapgen/graph-block-module-contract-v1.md)。
+
+先求解端口岸体的Block相位及预算，再跑真实动作。不能在留出失败后扩大所有权掩码，或删除名义路线未访问的恢复岸来强行拼接。受支持的终岸微调不满足时，记录具体相位/空间冲突；要重构岸体则另建生成规则及新版本完整重验。staging成功、边界穿越、反向、状态连续性、全图分别绑定，绝不相互代签。
+
 本阶段按 [反冲平原配方流程](../pcg-creative-producer/references/plains-recoil-workflow.md) 收窄能力与内容职责。原库视图：`python3 -m pcg.prototype.creative_batches.plains_workshop.catalog_v1`。两个已试验的有界适配配方接收完整需求：`python3 -m pcg.prototype.creative_batches.plains_workshop.produce_v1 --name new-plains-demand --specifications demands.json`；`--examples` 输出格式。其他家族仍按现有具体生成规则处理；统一入口不宣称任意需求可生成。
 
 ## 持续生产入口

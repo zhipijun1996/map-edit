@@ -1,0 +1,19 @@
+{
+  "schema": "pcg/block-pilot-exact-boundary-fixture/v2",
+  "registered_before_execution": true,
+  "prior_failed_run": "workshop-batch30-blockpilot-boundary-v1",
+  "prior_probe_cases": 13,
+  "maximum_additional_cases": 63,
+  "maximum_controller_revisions": 1,
+  "reason": "Original settle stops roughly2px before target, leaving x869.928 or917.984 below a following actor_x threshold. Correct controller targets; do not alter world, purpose tolerances, noise, regular gate or raw traces.",
+  "controller": "After original challenge settle874 then wait870; settle922 then wait918; return settle838 then wait842. Original stable-dock tolerance remains2px.",
+  "screen_seed": 271027901,
+  "screen": {"clean": 1, "mild": 6, "moderate": 6},
+  "calibration_seed": 271027902,
+  "holdout_seed": 271027903,
+  "full_trials": 12,
+  "selection": "Single frozen controller. Screen must pass everycase before original regular calibration; calibration must qualify before independent holdout. No tuning from holdout.",
+  "scope": "Exact two-source union receiver boundary and return only; not mirrored challenge, sourceB-to-A, generic state interface or wholeMap.",
+  "new_modules": 0,
+  "production_admitted": false
+}

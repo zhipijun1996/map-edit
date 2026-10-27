@@ -1,0 +1,189 @@
+{
+  "schema": "pcg/block-C06-counter-policy-audit/v1",
+  "source_failed_run": "pcg/results/workshop-batch30-blockc06-full-v1/block128-falling-choice",
+  "new_physics_cases": 0,
+  "old_rejection_changed": false,
+  "geometry_or_quality_gate_changed": false,
+  "policy_sha256": "137a030e347f49db0ea9e5d55f6b2ee9febf9aca9d4d9c73460740c8901932a5",
+  "rows": [
+    {
+      "test": "unpaid",
+      "unchanged_rejection": {
+        "invalidates_design": true,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": {
+          "nominal": {
+            "shots": 1,
+            "jumps": null,
+            "ticks": null
+          },
+          "alternative": {
+            "shots": 1,
+            "jumps": 0,
+            "ticks": 123
+          }
+        },
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      }
+    },
+    {
+      "test": "causal_failure",
+      "unchanged_rejection": {
+        "invalidates_design": true,
+        "reason": "same external goal compared with original causal requirement",
+        "cost_comparison": {
+          "nominal": {
+            "shots": 0,
+            "jumps": null,
+            "ticks": null
+          },
+          "alternative": {
+            "shots": 1,
+            "jumps": 0,
+            "ticks": 123
+          }
+        },
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true
+      }
+    },
+    {
+      "test": "actual_paid_external_low",
+      "qualification_purpose_still_failed": {
+        "ok": false,
+        "reasons": [
+          "actual_body_left_frozen_block_reservation"
+        ],
+        "causal": {
+          "actual_pair_events": [],
+          "air_high_openings": [],
+          "falling_recoil_shots": [],
+          "claimed_rewards": [
+            "low-cache"
+          ],
+          "final_pair": {
+            "blocked_count": 0,
+            "events": [],
+            "gate_a_disabled": false,
+            "gate_a_layer": 1,
+            "gate_b_disabled": true,
+            "gate_b_layer": 0,
+            "id": "branch-pair",
+            "open_a": false,
+            "open_b": true,
+            "switch_count": 0
+          },
+          "unreserved_body_frames": [
+            6,
+            7,
+            8
+          ],
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        },
+        "behavior": {
+          "shots": 1,
+          "jumps": 0,
+          "ticks": 123
+        }
+      },
+      "classification": {
+        "invalidates_design": false,
+        "reason": "Paid low-route recoil preserves the causal choice; spatial-only scope failure is retained as external dependency, not a mechanism bypass",
+        "cost_comparison": {
+          "nominal": {
+            "shots": 0,
+            "jumps": 0,
+            "ticks": 113
+          },
+          "alternative": {
+            "shots": 1,
+            "jumps": 0,
+            "ticks": 123
+          }
+        },
+        "same_external_outcome": true,
+        "reasonable_alternatives_preserved": true,
+        "scope": "outside_contract_alternative",
+        "spatial_certification": "UNKNOWN",
+        "certified_internal_alternative": false,
+        "nominal_body_qualification_unchanged": true,
+        "actual_unowned_body_frames": [
+          {
+            "frame": 6,
+            "body": [
+              255.58969116210898,
+              118.441467285156,
+              24,
+              36
+            ],
+            "unowned_cells": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 7,
+            "body": [
+              253.818634033203,
+              108.51488494873,
+              24,
+              36
+            ],
+            "unowned_cells": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "frame": 8,
+            "body": [
+              253.110229492188,
+              104.544250488281,
+              24,
+              36
+            ],
+            "unowned_cells": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          }
+        ],
+        "maximum_outward_body_overrun_by_port_px": {
+          "A": 2.8897705078119884
+        },
+        "external_dependency": "The alternative uses air outside Module ownership. No wall, support or neighbour availability is inferred; it is not an internal path certificate."
+      },
+      "evidence": {
+        "batch": "0003-counterexample",
+        "gzip_path": "physics/0003-counterexample.output.json.gz",
+        "gzip_sha256": "7a69c732fe39b1896fb016279cdbe878b46dc0af4ba712794f2d3494425e0f22"
+      }
+    }
+  ]
+}

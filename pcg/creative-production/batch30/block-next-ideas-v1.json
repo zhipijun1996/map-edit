@@ -1,0 +1,1454 @@
+{
+  "schema": "pcg/block-first-creative-proposals/v1",
+  "id": "plains30-block-next-ideas-v1",
+  "source_type": "actual_current_codex_authorized_subagent",
+  "author": "/root/block_next_creative",
+  "exact_model_revision": "not_exposed",
+  "external_api_called": false,
+  "upstream_map_commit": "a685faebdb7596b0808538ab9ef299d6455d2320",
+  "scope": "Five design hypotheses, one rejected before implementation. No generation rule/physics/candidate/human approval created by this agent.",
+  "source_bindings": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "3edacc13b385f4b2224820017ce2b8017c9e0c139ee13e36fe8f8c5adc22dc0a"
+    },
+    {
+      "path": ".agents/skills/pcg-creative-producer/SKILL.md",
+      "sha256": "8603ed139d404e84567368061c63a0bda639ebee92f7d358e71520e608cbf3ba"
+    },
+    {
+      "path": ".agents/skills/pcg-multiport-junction/SKILL.md",
+      "sha256": "ccc97fb110426551fdec783efac322d3e439a9c91c3eebea6728c3f7a848fdca"
+    },
+    {
+      "path": "docs/l4-mapgen/graph-block-module-contract-v1.md",
+      "sha256": "ca72b6362692f0343faa124a3817b638770ab6a85035c1dbeaf424a26b9a3ec2"
+    },
+    {
+      "path": "pcg/map_directed/block_grid/plains-policy.json",
+      "sha256": "820e134640f976c99601f0bcd001950dc51129d3db934ef118b351ffbed0befa"
+    },
+    {
+      "path": "pcg/creative-production/batch30/design-cards-v1.json",
+      "sha256": "c7cd98fad663d786883d048c74861465423b7720461710fe055ea74481e82ad3"
+    },
+    {
+      "path": "pcg/creative-production/curation/plains50-final-ai-review-v1.json",
+      "sha256": "79b27ab1393ffcac0e3605871b9069cee93a531656e5500d337f0aaac2b2a773"
+    },
+    {
+      "path": "pcg/creative-production/novelty-review/selected20-v2.json",
+      "sha256": "e3063c227738a2578e79a971b575c448ca1fb278859b3aad0f3785a56ee49a8e"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockbridge/README.md",
+      "sha256": "ac84848db81d2ac614c0d6cf3c37033f5cf92d3d9826b56e4bb37c33fc87c7d8"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockpilot/README.md",
+      "sha256": "54c6e576bb3bc8da3dcf8caf71818190b32c30d2b028121c267ea97397595ffb"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockc05/README.md",
+      "sha256": "4babdfcf71dd2b917171156c8317e087d9a5ffef517c2ec363a2bda5465142ff"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockd05/README.md",
+      "sha256": "0c7431fba3c5f7e474759a984922265d90729d92e242feb2b696e0ac2e607c48"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockc06/README.md",
+      "sha256": "972e682c3d0bc5093364fae6881ed0ae03826f3571afe5f6a36b189cf06cb121"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_blockc10/README.md",
+      "sha256": "8a22c8af38350bb9382d73eb169db22a39fa2967697e9528b50949db5fbd8b76"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+      "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/occupancy/occupancy_latch_v1.gd",
+      "sha256": "8d18bb2873a3bb40ac659acbe40a3eea0e1bcfc8bf8a0355143a0a19885539c8"
+    }
+  ],
+  "cards": [
+    {
+      "id": "B31-N01",
+      "title": "占口保桥，放口换岸",
+      "status": "design_rejected_before_implementation",
+      "priority": null,
+      "observation": "宽开口A与远处已经闭合的桥B由同一铃互斥控制。人物占据A时关闭会被原防夹整笔拒绝。",
+      "decision": "身体还在A时射击保留B桥并反冲上桥，或者离A后再射使B撤去、转去下层出口。",
+      "causal_relationship": "人物完整身体位置决定同一弹丸命中的世界切换是否被接受，原射击反冲仍发生。",
+      "nonnegotiable_experience": [
+        "实际blocked事件与完整身体相交，不是隐藏脚本标记",
+        "占口/离口各有多帧窗口，玩家看得懂世界为何没有切换"
+      ],
+      "cells_existing": [
+        "paired-gate v3 atomic anti-pinch",
+        "original projectile/recoil/support"
+      ],
+      "missing": [
+        "可审计的生成规则",
+        "若原画面不足，明确的blocked事务表现"
+      ],
+      "resources": "一枚原空中枪；落B后正常恢复，防夹不返弹药。",
+      "landform": "宽A空腔之后是远B桥与上下外接岸；原下方回收岸不作为新口。",
+      "reward": "两岸分别接后续路线，宝箱只提供动机，不能用奖励名称替代分叉。",
+      "recovery": "同世界下层地返回A，未验证，不重置。",
+      "direction_difference": "上支依赖B维持，下支使用B撤去空间；其他方向UNKNOWN。",
+      "cheap_solutions": [
+        "故意射空、得到几乎同样反冲并保B初态",
+        "普通跳射直接到B",
+        "把命中没效果当机关坏了"
+      ],
+      "nearest": [
+        "B30-C01",
+        "B30-C06",
+        "B30-C10"
+      ],
+      "experience_difference": "想利用身体位置门控世界响应，而非仅用枪向选择高低；但该因果存在射空等价反例。",
+      "design_refutation": "概念强反例：blocked命中没有任何已接受的世界副作用，故相近方向射空可能同枪同反冲保留B，不必利用防夹。没有跑真实物理，不当技术撤回；不准以必须击铃的目的词堵住。",
+      "next_step": "停止实现，除非另有必要世界副作用或宽容几何证据。若需新副作用则是缺Cell，不悄悄添加。",
+      "novelty_status": "rejected causal hypothesis; no family claim",
+      "source_type": "actual_current_codex_authorized_subagent",
+      "author": "/root/block_next_creative",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "geometry": {
+        "concept_only": true,
+        "units": "proposed_godot_world_pixels",
+        "block_size": 128,
+        "bounding_blocks": [
+          8,
+          9
+        ],
+        "bounds": [
+          0,
+          0,
+          1024,
+          1152
+        ],
+        "ownership_plan": "Conservative connected rectangle for first prototype; reservation is not an outer solid frame. Actual physical envelopes and complete body sweeps must fit before source freezing.",
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                3
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              448.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              462.0
+            ],
+            "floor_y": 480.0,
+            "role": "lower ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                7,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1024.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1000.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "upper onward",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                7,
+                5
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1024.0,
+              704.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1000.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "lower onward",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "A volume",
+            "rect": [
+              256,
+              256,
+              384,
+              384
+            ]
+          },
+          {
+            "role": "B bridge",
+            "rect": [
+              672,
+              416,
+              128,
+              24
+            ]
+          },
+          {
+            "role": "A shore",
+            "rect": [
+              0,
+              480,
+              224,
+              80
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              832,
+              224,
+              192,
+              96
+            ]
+          },
+          {
+            "role": "C shore",
+            "rect": [
+              832,
+              736,
+              192,
+              96
+            ]
+          }
+        ],
+        "features": [
+          "A initially open/B closed; accepted swap reverses, blocked transaction preserves both"
+        ]
+      },
+      "executable_generation_rule": "MISSING",
+      "physics": "NOT_RUN",
+      "candidate_versions": [],
+      "human_video_observation": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended_relation": "upper_choice",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "C",
+          "intended_relation": "lower_choice",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "C",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "B",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "B31-N02",
+      "title": "先放走自己的台，再启动接你的台",
+      "status": "proposal_existing_cells_rule_missing",
+      "priority": 1,
+      "observation": "P1正在横向载人，P2停在更高更远处；P1中段同时能看见P2启动铃、高B和后段离台可到的低C。",
+      "decision": "留在P1后段主动离台去C，或现在跳离P1、向左下启动P2，把空中枪投资在高处运动接力。",
+      "causal_relationship": "同一枪反冲人物右上，并启动不同于刚离开支撑的P2。P1继续离开；弹丸飞行与两台相对位置决定追接，而非站等两台自动会合。",
+      "nonnegotiable_experience": [
+        "P1/P2不同真实support_id；先乘P1，再由P2作射后第一次落脚",
+        "P2命中前停泊、命中后真实启动；P1不被同枪暂停/重定相",
+        "P2实际接地后才恢复下一枪；底层恢复地不算第三口"
+      ],
+      "cells_existing": [
+        "two original ModuleMovingPlatform",
+        "original ferry start/pause ShotLatch",
+        "original recoil/projectile/landing renewal"
+      ],
+      "missing": [
+        "两运动参考的几何/控制生成规则",
+        "实际完整dynamic envelope与接落证据"
+      ],
+      "resources": "高路枪在启动P2时花掉，必须落P2恢复；不假设持续继承平台离台惯性。",
+      "landform": "P1从低入口水平向东；P2在右上停泊并向更高东岸运行。铃在离台点左下、枪线不穿P1台面。上下出口都有后续职责，底岸仅回收。",
+      "reward": "两个去向在决策前可见；可用等值货币，另编无奖需求。不得以币充主要道具。",
+      "recovery": "失去P2后两台保留真实phase，从底岸和原楼梯重接。若只能长等整周期，退回节奏设计。",
+      "direction_difference": "先验证A→B/A→C。B/C进入时phase和资源不同，反向和互通UNKNOWN。",
+      "cheap_solutions": [
+        "岸上预开P2后不乘P1直跳",
+        "从P1直接跳高B而不接P2",
+        "P1自动送到C不需主动离台",
+        "站等自动会合代替启动",
+        "复制旧长等待rendezvous只改标题"
+      ],
+      "nearest": [
+        "machinery/carrier-rendezvous (pacing held)",
+        "B30-C05/BlockC05",
+        "human-D05/BlockD05"
+      ],
+      "experience_difference": "旧rendezvous等已有相位；这里一枪主动创造P2相位，原P1离去改变失误后果。C05一台选岸，D05启动同一台接自己；这里从另一移动参考部署新落点。",
+      "novelty_status": "active-rendezvous repair/composition hypothesis, independent family UNKNOWN",
+      "collapse_condition": "若P1同成本可省且仍是D05部署落点，归D05适配；若仍主要等相遇，沿用旧pacing hold。两台数量不算新机制。",
+      "prior_feedback": "旧片37.45s、7s dwell、可能18s入场等待，已因节奏暂扣；本案应主动过程约8–10s量级，小样必须看正常速度，时间目标不是人评通过。",
+      "next_step": "先A→B证明P1真实载人、空中启动P2、首次射后落P2回枪，立即对岸上预开/省P1/省P2反例；成立后才加低C。",
+      "source_type": "actual_current_codex_authorized_subagent",
+      "author": "/root/block_next_creative",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "geometry": {
+        "concept_only": true,
+        "units": "proposed_godot_world_pixels",
+        "block_size": 128,
+        "bounding_blocks": [
+          10,
+          8
+        ],
+        "bounds": [
+          0,
+          0,
+          1280,
+          1024
+        ],
+        "ownership_plan": "Conservative connected rectangle for first prototype; reservation is not an outer solid frame. Actual physical envelopes and complete body sweeps must fit before source freezing.",
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                4
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              576.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              590.0
+            ],
+            "floor_y": 608.0,
+            "role": "first-carrier ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                9,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "high second-carrier continuation",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                9,
+                4
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              576.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              590.0
+            ],
+            "floor_y": 608.0,
+            "role": "lower late-departure continuation",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "low shores",
+            "rects": [
+              [
+                0,
+                608,
+                224,
+                80
+              ],
+              [
+                1088,
+                608,
+                192,
+                80
+              ]
+            ]
+          },
+          {
+            "role": "high B shore",
+            "rect": [
+              1088,
+              224,
+              192,
+              96
+            ]
+          },
+          {
+            "role": "internal floor",
+            "rect": [
+              96,
+              864,
+              1088,
+              40
+            ]
+          }
+        ],
+        "features": [
+          {
+            "id": "P1",
+            "start": [
+              256,
+              544
+            ],
+            "finish": [
+              800,
+              544
+            ],
+            "size": [
+              160,
+              20
+            ],
+            "mode": "original autonomous pingpong",
+            "travel_seconds_domain": [
+              1.6,
+              2.0
+            ]
+          },
+          {
+            "id": "P2",
+            "start": [
+              896,
+              416
+            ],
+            "finish": [
+              1152,
+              288
+            ],
+            "size": [
+              160,
+              20
+            ],
+            "mode": "original ferry starts parked; real bell starts",
+            "travel_seconds_domain": [
+              1.2,
+              1.6
+            ]
+          },
+          {
+            "id": "P2-bell",
+            "position": [
+              560,
+              476
+            ],
+            "mode": "static receiver; no grouped/mounted assumption"
+          }
+        ]
+      },
+      "executable_generation_rule": "MISSING",
+      "physics": "NOT_RUN",
+      "candidate_versions": [],
+      "human_video_observation": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended_relation": "active_second_carrier_transfer",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "C",
+          "intended_relation": "late_first_carrier_departure",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "C",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "B",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "B31-N03",
+      "title": "让台掉头，接住另一边的自己",
+      "status": "missing_new_platform_behaviour",
+      "priority": 4,
+      "observation": "平台向东，西高岸仍在身后；东危险段迫近，平台铃提示改变当前行驶方向。",
+      "decision": "继续现航向晚离台去东B，或跳离后击铃让台反向，同枪反冲向西上，再由反向台接落去西C。",
+      "causal_relationship": "同一枪改变人物运动和落点到来方向；平台实际反转，位置连续，而非原start/pause。",
+      "nonnegotiable_experience": [
+        "真正连续反转，不瞬移平台或人物",
+        "真实接住跳离者或保留付费有效替代",
+        "未有reverse Cell时不假装原暂停就是反转"
+      ],
+      "cells_existing": [
+        "original ModuleMovingPlatform collision/carriage",
+        "original recoil/projectile receiver"
+      ],
+      "missing": [
+        "reverse_on_hit相位控制，保持瞬时位置连续",
+        "新Cell的端点/dwell/承载/时钟/包络证据"
+      ],
+      "resources": "真实空中枪与落台恢复，不能写人物速度或凭空继承台速。",
+      "landform": "中段水平台位于东西高岸下方。东危险使主动控制有代价，允许较贵的离台避险重接；内部低入口/回收。",
+      "reward": "东西高岸有可见后续通路，奖励预算另编；不是把安全地叫另一个Port。",
+      "recovery": "漏铃台继续东行；命中漏接则台保留向西状态。无自动返港、停靠或重定相假设。",
+      "direction_difference": "A→B保航向，A→C利用反向；反向进入与当前phase/方向有关，均UNKNOWN。",
+      "cheap_solutions": [
+        "只等原自动往返同成本完成",
+        "岸上预反向再普通跳",
+        "平台命中瞬移",
+        "其实只是暂停后人自己左跳",
+        "捏造持续台速惯性"
+      ],
+      "nearest": [
+        "A2 start/pause",
+        "B30-C05",
+        "P50-G07 same-carrier evacuate/rejoin"
+      ],
+      "experience_difference": "改变落点到来方向，主动调整相对距离；不是方向词或速度参数变化，而是明确缺失的控制能力。",
+      "novelty_status": "new behaviour hypothesis, unavailable today",
+      "collapse_condition": "若自动反向等待或原暂停已同成本解决，退为旧关系适配。",
+      "next_step": "先隔离新Cell连续反向，左右/端点/停留期与真实承载逐帧校准；缺Cell返回needs_design，不能生成普通电梯替代。",
+      "source_type": "actual_current_codex_authorized_subagent",
+      "author": "/root/block_next_creative",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "geometry": {
+        "concept_only": true,
+        "units": "proposed_godot_world_pixels",
+        "block_size": 128,
+        "bounding_blocks": [
+          10,
+          8
+        ],
+        "bounds": [
+          0,
+          0,
+          1280,
+          1024
+        ],
+        "ownership_plan": "Conservative connected rectangle for first prototype; reservation is not an outer solid frame. Actual physical envelopes and complete body sweeps must fit before source freezing.",
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                5
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              704.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "lower boarding ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                9,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "east high continuation",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                0,
+                1
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              192.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "west high continuation",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "A shore",
+            "rect": [
+              0,
+              736,
+              256,
+              64
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              1088,
+              224,
+              192,
+              96
+            ]
+          },
+          {
+            "role": "C shore",
+            "rect": [
+              0,
+              224,
+              192,
+              96
+            ]
+          },
+          {
+            "role": "floor",
+            "rect": [
+              96,
+              864,
+              1088,
+              40
+            ]
+          }
+        ],
+        "features": [
+          {
+            "id": "reverse-carrier",
+            "start": [
+              320,
+              480
+            ],
+            "finish": [
+              960,
+              480
+            ],
+            "size": [
+              176,
+              20
+            ],
+            "mode": "MISSING continuous reverse_on_hit Cell"
+          },
+          {
+            "role": "east pressure",
+            "kind": "original saw/overhang",
+            "note": "author actual pressure; do not add random spikes or claim all paid evade alternatives illegal"
+          }
+        ]
+      },
+      "executable_generation_rule": "MISSING",
+      "physics": "NOT_RUN",
+      "candidate_versions": [],
+      "human_video_observation": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended_relation": "keep_heading",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "C",
+          "intended_relation": "reverse_intercept",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "C",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "B",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "B31-N04",
+      "title": "穿过的门，回来接住你",
+      "status": "proposal_existing_cells_rule_missing",
+      "priority": 2,
+      "observation": "低入口看见中央横门与左右高向。闭门是实心横板，击铃暂时透空；之后恢复为能接人的同一块地板。",
+      "decision": "井内选上升/射击时机，穿门后让回落落在已关闭的同门顶，真实恢复后选择左上或右上；从另一低口接近时有利枪向改变。",
+      "causal_relationship": "同一实体先是必须暂时取消的障碍，再由原时钟复位成必须接地的资源层。第一枪令身体穿上去，回落门顶才获得后续枪。",
+      "nonnegotiable_experience": [
+        "同一真实横门closed→真实shot开→完整身体上穿→原计时/防夹关→真正顶面支撑",
+        "门底碰撞或固定侧唇不能冒充门顶回枪",
+        "同门回充后的同一选择点通向两个高向；第二低口确实另验后才算第四口"
+      ],
+      "cells_existing": [
+        "original timed ShotLatch horizontal gate",
+        "original full-body safe close",
+        "original jump/recoil/projectile and landing renewal"
+      ],
+      "missing": [
+        "横门/计时/岩体生成规则",
+        "真实顶面支撑观察绑定",
+        "用弹丸/完整身体/回落求解timer区间"
+      ],
+      "resources": "第一枪实际耗掉；空中不能造第二枪。门顶是下一资源层；可以再落原侧岩，最后普通跳高岸，必须如实记录这些落地。",
+      "landform": "中央宽井，两侧厚高岸下方是低入向通道，避免低岸直接外侧反冲高口。横门与侧岩是分层支撑，底层仅回收。",
+      "reward": "左右高向在门顶同时可见且连接不同后续。无奖/货币版本需实际编译，不自称已满足Map奖励预算。",
+      "recovery": "早晚枪、门未开或错过门顶均落原底层，真实落地回枪重试，保留时钟。迟离台与重新关门分别测。",
+      "direction_difference": "先A→B/A→C，再D→B/D→C。高进低出可能是开门主动自坠，与去程不同，但直到连续试件均UNKNOWN。",
+      "cheap_solutions": [
+        "低岸一跳一枪直接上B/C省门顶",
+        "从左右绕横门或外侧越顶",
+        "门未关就先落固定侧岩回枪",
+        "门底接触误认接地",
+        "等关门自动送人而没有上穿",
+        "一帧窗口或夹门实现"
+      ],
+      "nearest": [
+        "A3 timed-cache",
+        "B30-C01 support swap",
+        "B30-C02 serial airlock",
+        "P50-G15 ground-renewal relay"
+      ],
+      "experience_difference": "A3门只是通过窗，C01换另一个支撑；这里同一横门先透过再复位接自己，变成下一枪资源层。",
+      "novelty_status": "temporal-role hypothesis, independent family UNKNOWN",
+      "collapse_condition": "若能省同门落地直达高岸，复位关系冗余；若只是普通两段回充且计时不改变决定，归G15适配。",
+      "timing": "测量projectile_hit<body_entry；body_complete_clear<actual_close<actual_return_top_contact。保留原防夹并记录延迟，不是一帧时机。",
+      "concept_revision": "初稿floor928/gate480升高448过大；实现代理指出原最强升高约304，改floor864→gate608(256)→侧岩320(288)→高岸224(96)。后两个内部支撑可按容错调，不需Block对齐；高端口仍对齐。设计代理本人没跑物理。",
+      "next_step": "先一入一高向证实完整上穿、同门复位、真实顶面回枪；立即省门/直上/绕侧反例，再扩左右选择，最后另一低入向。",
+      "source_type": "actual_current_codex_authorized_subagent",
+      "author": "/root/block_next_creative",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "geometry": {
+        "concept_only": true,
+        "units": "proposed_godot_world_pixels",
+        "block_size": 128,
+        "bounding_blocks": [
+          10,
+          8
+        ],
+        "bounds": [
+          0,
+          0,
+          1280,
+          1024
+        ],
+        "ownership_plan": "Conservative connected rectangle for first prototype; reservation is not an outer solid frame. Actual physical envelopes and complete body sweeps must fit before source freezing.",
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                5
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              704.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "west low ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "D",
+            "grid": {
+              "cell": [
+                9,
+                5
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              704.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "east low ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                0,
+                1
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              192.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "west high continuation",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                9,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "east high continuation",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "upper west shore/overhang",
+            "rect": [
+              0,
+              224,
+              320,
+              352
+            ]
+          },
+          {
+            "role": "upper east shore/overhang",
+            "rect": [
+              960,
+              224,
+              320,
+              352
+            ]
+          },
+          {
+            "role": "left rib",
+            "rect": [
+              320,
+              320,
+              64,
+              480
+            ]
+          },
+          {
+            "role": "right rib",
+            "rect": [
+              896,
+              320,
+              64,
+              480
+            ]
+          },
+          {
+            "role": "horizontal timed gate",
+            "rect": [
+              384,
+              608,
+              512,
+              24
+            ]
+          },
+          {
+            "role": "floor",
+            "rect": [
+              96,
+              864,
+              1088,
+              40
+            ]
+          },
+          {
+            "role": "west lower ingress shore",
+            "rect": [
+              0,
+              736,
+              256,
+              64
+            ]
+          },
+          {
+            "role": "east lower ingress shore",
+            "rect": [
+              1024,
+              736,
+              256,
+              64
+            ]
+          }
+        ],
+        "features": [
+          {
+            "role": "receiver",
+            "position": "solve below/diagonal to real launch; no uncalibrated timer assertion"
+          },
+          {
+            "role": "support heights",
+            "sequence": [
+              864,
+              608,
+              320,
+              224
+            ],
+            "note": "concept corrected after original strongest rise~304 report; side rib can lower for tolerance before freezing"
+          }
+        ]
+      },
+      "executable_generation_rule": "MISSING",
+      "physics": "NOT_RUN",
+      "candidate_versions": [],
+      "human_video_observation": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "D",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended_relation": "first_ingress_left",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "C",
+          "intended_relation": "first_ingress_right",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "D",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "D",
+          "to_port": "B",
+          "intended_relation": "second_ingress_left_after_core",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "D",
+          "to_port": "C",
+          "intended_relation": "second_ingress_right_after_core",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "D",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "C",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "D",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "B",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "B31-N05",
+      "title": "最后一次借火，会关掉另一条路",
+      "status": "proposal_enemy_block_envelope_gap",
+      "priority": 5,
+      "observation": "3HP敌人在感应区，活着维持近B门；前两次命中给真实回充。第三击既给收益，也令活敌门失去维持，更远C需要额外空中资源。",
+      "decision": "剩1HP时保留敌人、用现有枪回折近高B，或最后一击拿最后一次资源承诺远C，接受B关回。",
+      "causal_relationship": "同一命中给人物资源，却永久耗尽维持另一通路的生命资源；是不可同时保留的路线机会成本。",
+      "nonnegotiable_experience": [
+        "两个路线共用同一真实HP3初态，不分别生成不同血量场景",
+        "敌人死亡真的让门按原时钟/防夹关回",
+        "先probe击杀命中是否真的返枪，不从标签推断",
+        "死亡不可重生重置以恢复近门"
+      ],
+      "cells_existing": [
+        "original EnemyActor health/projectile refund",
+        "existing occupancy_latch_v1 living-enemy hold",
+        "original recoil/real threat"
+      ],
+      "missing": [
+        "完整敌人AI与弹丸Block包络合同",
+        "不可逆health/route/resource生成规则",
+        "killing-hit实际回充probe"
+      ],
+      "resources": "有限3HP，枪数和到岸路径由程序求。保活/击杀代价均是真通路/资源，不赠枪。",
+      "landform": "中层有真实边界与射孔的敌笼；近B回折、远C上东继续。不能把敌人标为无害靶；底岸非安全第四口。",
+      "reward": "近/远收益和世界代价同时可见；价值预算另编，不以货币充主要道具。",
+      "recovery": "误杀后须有原地面或远路恢复，不软锁；近门保持新死态。不能无限从同一个敌人回充。",
+      "direction_difference": "B保留活钥匙，C接受终结；反向/已死进入时资源与通路全部UNKNOWN。",
+      "cheap_solutions": [
+        "不杀也同成本到C",
+        "死亡后B仍长期可通",
+        "实际击退离plate提前关门而非第三击因果",
+        "击杀不返枪却脚本造枪",
+        "笼阻掉真实敌弹或包络跑外",
+        "重建场景复活钥匙"
+      ],
+      "nearest": [
+        "P50-G05 live key",
+        "P50-G18 adverse refund",
+        "P50-G20 finite-hit route choice",
+        "B30-C03/C08"
+      ],
+      "experience_difference": "最后一次资源收益与另一路通行权的不可逆丧失由同一命中绑定；仍可能是旧G05/G20的有用组合。",
+      "novelty_status": "irreversible-opportunity-cost hypothesis; full enemy envelope currently blocks production",
+      "next_step": "先独立证实第三击回枪与原live门关回、完整AI/弹丸包络。若Block仍UNKNOWN就needs_design，不替换成普通平台。",
+      "source_type": "actual_current_codex_authorized_subagent",
+      "author": "/root/block_next_creative",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "geometry": {
+        "concept_only": true,
+        "units": "proposed_godot_world_pixels",
+        "block_size": 128,
+        "bounding_blocks": [
+          12,
+          10
+        ],
+        "bounds": [
+          0,
+          0,
+          1536,
+          1280
+        ],
+        "ownership_plan": "Conservative connected rectangle for first prototype; reservation is not an outer solid frame. Actual physical envelopes and complete body sweeps must fit before source freezing.",
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                5
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              704.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "common low ingress",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                0,
+                1
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              192.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "near upper living-key branch",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                11,
+                0
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1536.0,
+              64.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1512.0,
+              78.0
+            ],
+            "floor_y": 96.0,
+            "role": "far high last-hit branch",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "A shore",
+            "rect": [
+              0,
+              736,
+              256,
+              80
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              0,
+              224,
+              256,
+              96
+            ]
+          },
+          {
+            "role": "C shore",
+            "rect": [
+              1280,
+              96,
+              256,
+              96
+            ]
+          },
+          {
+            "role": "floor",
+            "rect": [
+              96,
+              1120,
+              1344,
+              40
+            ]
+          }
+        ],
+        "features": [
+          {
+            "role": "enemy sensor cage",
+            "around": [
+              720,
+              640
+            ],
+            "note": "real collision cage and firing corridor, full AI/projectile envelope missing; cannot set verified flag oneself"
+          },
+          {
+            "role": "B vertical gate",
+            "control": "existing living-enemy occupancy close via original delay/anti-pinch"
+          }
+        ]
+      },
+      "executable_generation_rule": "MISSING",
+      "physics": "NOT_RUN",
+      "candidate_versions": [],
+      "human_video_observation": "UNKNOWN",
+      "human_playtest": "UNKNOWN",
+      "production_admitted": false,
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "intended_relation": "preserve_last_hp",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "A",
+          "to_port": "C",
+          "intended_relation": "spend_last_hit",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "C",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "A",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        },
+        {
+          "from_port": "C",
+          "to_port": "B",
+          "intended_relation": "not_requested_no_negative_claim",
+          "evidence_status": "UNKNOWN"
+        }
+      ]
+    }
+  ],
+  "recommended_implementation_order": [
+    "B31-N02",
+    "B31-N04"
+  ],
+  "proposal_count": 5,
+  "immediate_rule_prototypes_recommended": 2,
+  "design_rejected_count": 1,
+  "missing_new_cell_count": 1,
+  "enemy_envelope_gap_count": 1,
+  "confirmed_new_action_families": 0,
+  "confirmed_new_modules": 0,
+  "physics_cases_by_design_agent": 0,
+  "human_fun": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false
+}

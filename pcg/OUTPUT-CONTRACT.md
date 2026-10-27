@@ -1,5 +1,11 @@
 # Module / Macro 输出契约 v1
 
+## 当前 Map 接口增量（2026-10-27）
+
+新内容还需遵守[Graph + Block + Module契约](../docs/l4-mapgen/graph-block-module-contract-v1.md)和`map_directed/block_grid/plains-policy.json`。当前已校准Block为128，Module预留轮廓以连通Block表示，包围尺寸为Block倍数，内部碰撞/机关不按Block缩放。所有Port位于所拥有cell的真实边界中心；`ground64/v1`锚点、向内staging位置和身体中心+14px分别记录。旧局部通过不自动获得Block资格。
+
+执行入口为`prototype/creative_batches/batch30_runtime/produce_v3.py`，复用原物理/质量/候选库；先调用上游原Python/JS校验，再进行Godot实验。完整实体、双门第二门、移动铃接收器的全行程和实际身体扫掠必须入所有权；未知敌人全行为范围仍返回缺口。改岸体/开口/机关或动作后重新绑定版本和证据。Map不补平台或重置资源。
+
 适用于后续公开交付的生成内容；搜索算法、动作策略、物理参数和质量筛选不变。主生产入口`prototype/plains/produce.py`与`prototype/factory/core/producer.py`在结束时自动调用`contract.export`，输出`modules/`。输出失败会报错，不降级为可拼装模块。适配器遇到未映射的多端口、支路、奖励区或新机关会明确拒绝，要求补齐映射或直接提供完整Map Notes契约，不能静默丢弃。历史raw case、Godot输入和档案是研究证据，不是地图拼装接口；不回写或重标历史结论。
 
 [阅读模块图与下载JSON](https://zhipijun1996.github.io/map-edit/generation/contracts/plains-v1/) · [交付清单](../generation/contracts/plains-v1/manifest.json)

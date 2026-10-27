@@ -7,6 +7,8 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 ## 当前优先：反冲平原
 
+**2026-10-27 Map接口更新**：继续本批先读`docs/l4-mapgen/graph-block-module-contract-v1.md`和`pcg/map_directed/block_grid/plains-policy.json`；来源固定`a685faebdb7596b0808538ab9ef299d6455d2320`，实际代码快照/差异审计在`pcg/creative-production/batch30/map-constraint-source-v1/`与`block-audit-v1`。新发布调用`batch30_runtime.produce_v3`，Block128所有权/边界中心Port是生成前置约束，禁止先批量做任意尺寸后仅改标签。内部岩体与动作不缩放；anchor不是身体checkpoint，保留向内staging与ground64的+14偏移。旧候选保持局部资格，不能自行补blockGrid宣称已兼容。双门平移/第二门覆盖、移动铃完整包络、禁用占位门以及原失败恢复地貌均须映射；适配器原nominal未访问的恢复地形不能删。按新版本重验所有声明方向和连续试件，失败返回具体冲突。
+
 最新人工否定见`pcg/feedback/workshop/junction-boring-observation-v1.json`：J06/J03的四份实现无聊，暂扣于优选之外。原五案D02—D05的价值在具体动作/后果的耦合；不以最低实现成本选静态几何来代替。先冻结不可丢失的体验与地貌，单份可玩原型表现出来后才做接口适配/完整批次。物理通过与模型接口审查不能替代体验实现，详见多端口skill的纠偏段。无需新增逐件人工批准流程，仍在已授权范围内推进。
 
 **多端口的新优先级**：用户已指出旧多口偏向“挑战＋额外安全口”。所有三/四口创意、改造与Map路口请求先执行 [pcg-multiport-junction](../pcg-multiport-junction/SKILL.md)：先输出不同空间构图、共同选择点、端口地域职责和有向意图，再接原工坊。环岛仅是试例；不默认全连通，也不默认所有三/四口都从A出2/3口。旧批次出口数量达标不等于新设计标准达标。原空间需求见`pcg/feedback/workshop/multiport-spatial-choice-feedback-v1.json`，旧15版侧边审查见`pcg/creative-production/curation/multiport-junction-audit-v1.json`。用户后已授权实际实现；首次J06/J03落地受到上述明确否定，不再把审查阶段的范围或模型结论当作当前状态。

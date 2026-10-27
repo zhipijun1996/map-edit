@@ -165,3 +165,15 @@ J06共享落点的高来岸/西低廊/东阶地，与J03上下双廊的直行/�
 ### 多口人工否定后的纠偏（2026-10-26）
 
 用户明确认为J06/J03无聊、只有走路、缺设计感。四版本保留技术证据，从优选与精确内容检索暂扣；profile.design_holds在发布清单注册后应用，旧清单不可重新选中。总技术库98保持，平原优选回到82。复盘确认选案以易实现为先、地貌/体验承诺未进入生成约束、AI审查只核对分叉合法性。先冻结不可丢失的体验/构图并在单份小原型中表现，再做适配与完整批次；不以强制射击或堆危险补过。原话与4版本/6影片绑定见feedback/workshop/junction-boring-observation-v1.json，无新物理/无伪造人评，技术回执不是设计通过。
+
+### 最新Map约束进入真实生产（2026-10-27）
+
+实际核对Map分支a685fae的25个代码/策略/需求原件，复用其Block Python/JS校验器。新入口batch30_runtime.produce_v3不另建Engine/候选库/Map。先解128格所有权、岸顶相位、边界中心anchor与内侧身体dock，再做原clean/mild/反例/完整cal/held。内部地貌不缩放，原恢复实体保留；门B与移动铃完整包络不能漏。
+
+9份新Block候选已过原regular，六成功运行1038案例含失败；原库117/平原99，独立家族数未据此增加。C05三口的实际早退回折与继续追远岸构成选择，原生两片692帧严格一致。其余严格片D05/C07/C10主路补足至1452帧，C01/C02与C10恢复的support_id差异仍review-only。新进程原库9/9精确复用、0生成/物理。见generation/workshop/plains30-block-v1。
+
+负反馈已影响后续选择：C06两规则后moderate7/12未过.65，整fork拒绝，不靠低路单独成功凑数；D04中间岸的两侧内部路线与端口外邻冲突，0physics就返回needs_design；D05/C07新恢复借端口外空气不能从旧版继承。所有权只覆盖声明策略，合理的多付一枪外部替代要保留外部空间UNKNOWN，不能放宽名义完整身体或冒充内部路径。
+
+C10发现注册ID把-d24放到-counter-kind后，原counter_records正确拒绝入库。仅修ID、冻结同一物理/策略后完整重跑；重复同一held条件不算两份独立样本。此教训已进入代码：0physics预检原geometry_key/base_id及Block格/Port/reservation精确绑定。旧API拒绝和7组真实API正例均保存，不再花完整物理成本才发现绑定错误。
+
+旧未准入原型、失败和源码保存在content-workshop-plains30-prototypes-v1；Block闭合原件在block-v1/v2/v3/v4归档（完整前缀content-workshop-plains30-）。新AI五卡中N01已被射空等价反例在实现前否决，N03缺反向平台Cell，N05缺敌人包络；N02/N04另开有界真实小样，不能把提案计库存。人工趣味/试玩/生产准入仍UNKNOWN。

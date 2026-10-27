@@ -1,0 +1,227 @@
+{
+  "id": "B30-C09",
+  "title": "去程走高，回程把空间翻到低处",
+  "source_type": "codex_assisted_proposal",
+  "author": "/root/batch30_creative",
+  "status": "proposal_requires_executable_rule_and_physics",
+  "priority": 9,
+  "content_role": "persistent_return_route_flip",
+  "player_observation": "上层去程与下层回程从同一中庭能同时看见，两门分别守住高/低连接位；风铃显示当前开放层。",
+  "player_decision": "去程在跨越中切开高通道，取得目标后从返回侧重新射铃，改用低洞返回；需要记住刚改变的世界，而不是原路倒放。",
+  "causal_relationship": "持续门态让去/回两段使用不同可用连接；返回一枪同时撤去当前通路并打开低层通路，反冲/下落负责换层。",
+  "terrain_and_spatial_identity": "同一中空石拱上下穿行，门口、观察位和返程落点构成清楚折返剖面；不能交付两条横板或靠箭头命名编织。",
+  "nonnegotiable_experience": "真实同世界去程→领取→返程，走过两套不同动作/连接；门态和奖励事务在整个过程保留。",
+  "required_cells": [
+    "original static rock",
+    "original jump/recoil/projectile",
+    "new mutually exclusive paired-gate ShotLatch"
+  ],
+  "required_abilities": [
+    "move",
+    "jump",
+    "shot_recoil"
+  ],
+  "mechanism_support": {
+    "existing": [
+      "original jump/recoil and rewards",
+      "original continuous trial runner"
+    ],
+    "new_or_unverified": [
+      "paired gate persistent upper/lower connectivity",
+      "return receiver line-of-sight must be physically solved"
+    ]
+  },
+  "resource_conditions": "每次真实落地按原机制恢复；不因腿切换而重置枪、体力或门。",
+  "visible_reward_and_claim": "远岸可见宝箱，返程改变熟悉空间的使用方式；奖励只是折返动机。",
+  "failure_recovery": "切错层或没进低洞仍有内部短支撑可到调铃位置；无法返回时报告缺口，不给传送。",
+  "directional_and_return_difference": "去程偏水平反冲穿高位；回程主动下降再横向刹入低洞。反向port path单独记，连续证据另列。",
+  "proposed_state_sequence": [
+    "S0:高A闭/低B开，入口可接近首次调铃位",
+    "去程同枪切为高A开/低B闭并完成高路领取",
+    "返回侧同铃切回高A闭/低B开",
+    "沿低洞用不同动作返回同一入口岸"
+  ],
+  "cheap_solution_search": [
+    "高路开时直接走完去回，无需状态变化",
+    "返回站地上随手切换后只空走",
+    "用fresh scene把门复位",
+    "只在图上画双拱而实际两横板",
+    "重复领宝或重置敌人"
+  ],
+  "required_actual_witnesses": [
+    "same actor/world epoch and reward claimed once",
+    "upper outbound/lower return real support traces",
+    "pair state persists between legs",
+    "missed-return recovery"
+  ],
+  "first_small_prototype_falsifier": "只做一个可识别的石拱与一个完整回程，不先适配第二尺寸；若无标题录像只能看出走两层地板，退回设计。",
+  "two_space_demands": [
+    {
+      "id": "B30-C09/arch",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 1800,
+        "max_height": 1200,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "宽拱上下穿行的左右双接口"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "supported_ingress",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            1,
+            0
+          ],
+          "role": "onward_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "回程经拱腹下降与反向刹入。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    },
+    {
+      "id": "B30-C09/well",
+      "source_type": "model_authored_challenge_specification",
+      "region": "plains",
+      "units": "godot_world_unit",
+      "space": {
+        "max_width": 1250,
+        "max_height": 1550,
+        "boundary_policy": "open_no_default_frame",
+        "shape_request": "窄高折返庭，高侧去程、低侧返口"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "normal": [
+            -1,
+            0
+          ],
+          "role": "lower_west_ingress_return",
+          "position_evidence": "UNKNOWN"
+        },
+        {
+          "id": "B",
+          "normal": [
+            1,
+            0
+          ],
+          "role": "upper_east_reward_exit",
+          "position_evidence": "UNKNOWN"
+        }
+      ],
+      "relations": [
+        {
+          "from_port": "A",
+          "to_port": "B",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        },
+        {
+          "from_port": "B",
+          "to_port": "A",
+          "design_intent": "desired",
+          "evidence": "UNKNOWN"
+        }
+      ],
+      "adaptation_changes": "高差、调铃视角和返回落点不同，不能把去程倒放。",
+      "capabilities": {
+        "version": 1,
+        "status": "defined",
+        "allOf": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": []
+      },
+      "difficulty": {
+        "intent": "regular",
+        "human_score": null
+      },
+      "resources": "Original landing renewal, airborne shot charge/cooldown/stamina only. No per-leg reset.",
+      "return_state": "UNKNOWN until exact continuous trial",
+      "physics": "NOT_RUN"
+    }
+  ],
+  "novelty_assessment": {
+    "nearest": [
+      "D04 persistent future platform state",
+      "J03 failed two-corridor",
+      "B30-C02 serial airlock"
+    ],
+    "difference": "检验持续状态造成真正不同的返程动作；但可能只是气闸的回程用途适配，不能预先另算家族。",
+    "qualification": "possible return adapter; duplicate-risk high"
+  },
+  "risks_and_gaps": [
+    "J03已经被人工否决，不能仅加门改名翻面就放行",
+    "中空构图与不同动作必须实际呈现"
+  ],
+  "candidate_versions": [],
+  "physics": "NOT_RUN",
+  "human_design_approval": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false,
+  "gate_pair_roles": {
+    "A": "upper_outbound_connection",
+    "B": "lower_return_connection"
+  },
+  "gate_pair_state_table": [
+    {
+      "name": "initial",
+      "A_open": false,
+      "B_open": true
+    },
+    {
+      "name": "after_one_accepted_switch",
+      "A_open": true,
+      "B_open": false
+    },
+    {
+      "name": "after_second_accepted_switch",
+      "A_open": false,
+      "B_open": true
+    }
+  ]
+}

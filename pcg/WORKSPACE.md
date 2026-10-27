@@ -2,6 +2,16 @@
 
 # 关卡生成工作区
 
+## 最新Map接口：Block128内容生产（2026-10-27）
+
+先读[Block交接](../docs/l4-mapgen/plains30-block-handoff-v1.md)与`creative-production/batch30/map-constraint-source-v1/source-index.json`：已核对Map分支a685fae实际policy/校验器/适配器/请求，而非只读README。新入口`batch30_runtime.produce_v3`强制原Block预检、原Engine/regular/候选库；128倍数尺寸、真实边界中心Port和内部staging分开。旧8份局部候选不自动升级。
+
+当前[9份Block候选](../generation/workshop/plains30-block-v1/manifest-progress-9-v1.json)：气闸2、换脚桥2、真正三口移动站1、风铃台追接2、新墙刹车1、侧洞纠错1；原库117/平原优选99。成功生产运行1038真实案例含失败，六配方均过原校准及独立留出。C05两路线+D05/C07/C10主路共1452帧严格比较通过；C01/C02各3帧、C10恢复1帧support_id差异为review-only，严格失败未改。C02真实消费B exp1_0无奖励请求，其余为明确派生需求。Block适配不算新家族，人工/生产批准UNKNOWN。
+
+C06两规则79probe+152full均保留，高路moderate7/12未过.65，整接口0新候选/held未跑。低路额外一枪跨入口外空气的分类记录UNKNOWN，不放宽名义完整身体。D04端口外邻高柱与双唇回程冲突返回needs_design；D05新恢复虽到奖但身体越外邻，未签恢复。气闸边界v2仍11/13，未签接缝。不要以保留恢复岸或clean成功继承旧保证。
+
+原件恢复`content-workshop-plains30-block-v1/v2/v3`、旧未准入研究`content-workshop-plains30-prototypes-v1`；按精确results前缀取用，不覆盖新源。网页Block校验与Pages文件复制已由PR #6发布，公网字节已核对；候选索引继续从content/task-a-workshop读取。
+
 ## 当前执行：修订核心优先，新增30平原Module（2026-10-26）
 
 当前8/30新增候选：D05追接、C01换脚桥、D04修订停台、C02空中气闸各两份需求，见`generation/workshop/plains30-v1/manifest-progress-8-v2.json`与README。总库98→108含旧D04另2份有效技术记录但因更省取奖绕法设计暂扣，不计8；原J06/J03四版暂扣不变。D03两次full各1498案例未达原regular，不计候选；当前r3真实perch缩短第二射距，协议v8先注册。C03/C04在开发，不能当库存。人工观感/试玩/生产准入UNKNOWN。
