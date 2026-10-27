@@ -36,9 +36,18 @@ def build(cases,out,dependencies,game_tools):
     provenance=json.loads((project/'source_provenance.json').read_text())
     for name in provenance['files']:
         if Path(name).suffix in ['.gd','.tscn','.tres']:stage(name,(project/name).read_bytes())
+    # This TileSet is loaded dynamically by formal hazard paint, not by a
+    # static scene preload. Carry its exact texture import closure as well.
+    pending_art=['assets/underworld_plains/hazards/hazard_fine_tileset.tres'];seen_art=set()
+    while pending_art:
+        name=pending_art.pop()
+        if name in seen_art:continue
+        seen_art.add(name);asset=project/name;stage(name,asset.read_bytes())
+        if asset.suffix in ['.tres','.import','.tscn','.gd']:pending_art+=re.findall(r'res://([^"\s]+)',asset.read_text())
+        if asset.suffix in ['.png','.svg']and asset.with_suffix(asset.suffix+'.import').exists():pending_art.append(name+'.import')
     stage('.godot/global_script_class_cache.cfg',(project/'.godot/global_script_class_cache.cfg').read_bytes())
     original=json.loads(Path(cases).read_text())['cases'][0]
-    case=dict(original,extra_script='res://graph_map/extra.gd',automatic_shop_input=False,preview_title='风铃平原 · 同图驱动22 Macro隔离原型')
+    case=dict(original,extra_script='res://graph_map/manual_extra.gd',automatic_shop_input=False,preview_title='风铃平原 · 同图驱动22 Macro隔离原型')
     # Verification-only goals do not constrain a human's exploration order.
     for key in ['require_purchase','require_parking','required_optional_challenges','required_reward_ids','recorded_frames']:case.pop(key,None)
     data=json.dumps({'cases':[case]},ensure_ascii=False);stage('r2/cases.json',data);stage('modules_v3.json',data)

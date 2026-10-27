@@ -17,7 +17,7 @@ def run(name,graph,policy,sources,attempts=4,seconds=60,preselected=None,calibra
     return verify_world(out,c,graph,calibration,started)
 
 
-def verify_world(out,c,graph,calibration=False,started=None):
+def verify_world(out,c,graph,calibration=False,started=None,enroll=True):
     started=time.perf_counter()if started is None else started
     cs=create(c)
     if calibration:cs=cs[:1]
@@ -27,7 +27,7 @@ def verify_world(out,c,graph,calibration=False,started=None):
         row=dict(id=case['id'],ok=a['ok'],physics_ok=r['ok'],reason=r['reason'],boundary_errors=a['errors'],ticks=r.get('ticks'),shots=r.get('shots'),failure=r.get('pilot',{}).get('failure'),extra=r.get('extra'),evidence=e);rows.append(row);write(out/'rows.json',rows);print(json.dumps({k:row[k]for k in ['id','ok','physics_ok','reason','boundary_errors','ticks','failure']},ensure_ascii=False),flush=True)
     summary=dict(rows=rows,calibration_only=calibration,status='finite_whole_map_pass'if all(r['ok']for r in rows)else'whole_map_failed',passed=sum(r['ok']for r in rows),total=len(cs),macro_placements=len(c['modules']),actual_module_components=sum(max(1,len(m.get('content_components',[])))for m in c['modules']),principal_routes=len(c['exploration_graph'].get('principal_routes',[])),branch_kinds=sorted({b['kind']for b in graph['branches']}),seconds=time.perf_counter()-started,all_passed=len(rows)==len(cs)and all(r['ok']for r in rows),production_admitted=False,human_fun='UNREVIEWED',bypass_proof='NOT_RUN',economic_balance='UNCALIBRATED',human_minutes='UNKNOWN')
     write(out/'summary.json',summary)
-    if summary['all_passed']and not calibration:write(out/'candidate-enrollment.json',dict(records=CandidateLibrary().enroll_payloads(out),production_admitted=False))
+    if summary['all_passed']and not calibration and enroll:write(out/'candidate-enrollment.json',dict(records=CandidateLibrary().enroll_payloads(out),production_admitted=False))
     return out
 
 
@@ -38,7 +38,7 @@ def reverify(name,source):
         if(source/key).exists():shutil.copy2(source/key,out/key)
     c=json.loads((out/'compiled.json').read_text())
     write(out/'reverification-source.json',dict(source=str(source.relative_to(REPO)),compiled_sha256=hashlib.sha256((source/'compiled.json').read_bytes()).hexdigest(),geometry_changed=False,reason='Fresh current observer and exact binary Router axis capture; no reference trace or Module edits'))
-    return verify_world(out,c,c['exploration_graph'])
+    return verify_world(out,c,c['exploration_graph'],enroll=False)
 
 
 if __name__=='__main__':

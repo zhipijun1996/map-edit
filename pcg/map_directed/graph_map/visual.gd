@@ -26,5 +26,6 @@ func prepare_dynamic_frame()->void:
 
 func capture_dynamic_frame()->void:
 	var before:int=captured.size()
+	var input_axis:float=controller.router.axis
 	super.capture_dynamic_frame()
-	if captured.size()>before:captured[-1]["axis_bits"]=var_to_bytes(controller.router.axis).hex_encode()
+	if captured.size()>before:captured[-1]["axis_bits"]=var_to_bytes(input_axis).hex_encode()
