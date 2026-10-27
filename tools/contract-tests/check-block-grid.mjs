@@ -9,3 +9,4 @@ x=doc();x.generationContract.space.actionClearance.regions.push({x:100,y:30,w:60
 x=doc();x.generationContract.space.blockGrid.cells.push([0,0]);assert.throws(()=>validateBlockGrid(x),/duplicate/);
 x=doc();x.generationContract.space.blockGrid.size=127;assert.throws(()=>validateBlockGrid(x),/Block size/);
 console.log(JSON.stringify({block_contract_checks:7,passed:true,physics:false}));
+
