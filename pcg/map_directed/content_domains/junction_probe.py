@@ -20,6 +20,8 @@ def cases(m):
         for i,p in enumerate(pr):p.update(id=str(i)+'-'+p['target']['id'],edge_id='independent-landform')
         marker=end['position']if start['position']!=end['position']else next((p['dock']['position']for p in m['ports'].values()if p['dock']['position']!=start['position']),m['center']['position'])
         c.update(id=m['variant_id']+'/'+name,spawn=start['position'][:],entry_port=start['position'][:],exit_port=marker[:],goal=end['region'][:],pilot_program=pr,map_budget_ticks=12000,noise={},extra_required=True,extra_script=str(REPO/'pcg/map_directed/catalog_feed/extra.gd'),required_reward_ids=[r['id']for r in c.get('reward_sites',[])])
+        if m.get('verification_extra'):
+            c['extra_script']=m['verification_extra'];c['required_bosses']=[b['id']for b in c.get('boss_encounters',[])]
         out.append(c)
     return out
 

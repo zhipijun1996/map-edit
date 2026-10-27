@@ -25,7 +25,41 @@ def compatible_state(a,b,abilities,state=None):
         if not state.get('grounded')or state.get('air_shots',0)<c['required_air_shots']or state.get('speed',float('inf'))>c['maximum_entry_speed']:return False
     return True
 
-def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None,require_blocks=False,allow_shared_air=False):
+def geometry_conflict(m,p,other,q,mode='shape_action',allow_shared_air=False):
+    ours,md,mc=closed_solids(m),sweeps(m),m['action_clearance'];theirs0,od,oc=closed_solids(other),sweeps(other),other['action_clearance']
+    rects=[translated(r,p)for r in ours];theirs=[translated(r,q)for r in theirs0]
+    if mode=='aabb':
+        a=rect_bounds(rects);b=rect_bounds(theirs)
+        return 'bounding_box_overlap'if intersects([a[0],a[1],a[2]-a[0],a[3]-a[1]],[b[0],b[1],b[2]-b[0],b[3]-b[1]])else None
+    shared_ours=set();shared_theirs=set()
+    for i,a in enumerate(rects):
+        for j,b in enumerate(theirs):
+            if not intersects(a,b):continue
+            shared_a={eid for eid,port in m['ports'].items()if port.get('shared_landing_index')==i}
+            shared_b={eid for eid,port in other['ports'].items()if port.get('shared_landing_index')==j}
+            if shared_a&shared_b and all(abs(x-y)<.01 for x,y in zip(a,b)):
+                shared_ours.add(i);shared_theirs.add(j);continue
+            return 'actual_shape_overlap'
+    # An explicitly identical shared landing is already the Module's own
+    # collider. It is deduplicated by the assembler; do not classify that
+    # same collider a second time as a foreign obstruction.
+    foreign_theirs=[r for i,r in enumerate(theirs)if i not in shared_theirs]
+    foreign_ours=[r for i,r in enumerate(rects)if i not in shared_ours]
+    if any(intersects(translated(a,p),b)for a in md for b in foreign_theirs)or any(intersects(a,translated(b,q))for a in foreign_ours for b in od):return 'dynamic_sweep_into_neighbor'
+    if mode=='shape_action':
+        if allow_shared_air:
+            from ..block_grid.contracts import regions
+            # A shared coarse Block is only a broad-phase candidate. Body
+            # samples must still avoid ALL foreign solids, hazards and
+            # full dynamic envelopes, including foreign one-way supports.
+            foreign_a=regions(dict(m,action_clearance=[]));foreign_b=regions(dict(other,action_clearance=[]))
+            if any(intersects(translated(a,p),translated(b,q))for a in mc for b in foreign_b)or any(intersects(translated(a,p),translated(b,q))for a in foreign_a for b in oc):return 'foreign_occupancy_blocks_action'
+        solid_theirs=[r for i,r in enumerate(theirs)if i not in other['case']['one_way_platform_indices']]
+        solid_ours=[r for i,r in enumerate(rects)if i not in m['case']['one_way_platform_indices']]
+        if any(intersects(translated(a,p),b)for a in mc for b in solid_theirs)or any(intersects(a,translated(b,q))for a in solid_ours for b in oc):return 'actual_action_space_blocked'
+    return None
+
+def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,entry_state=None,require_blocks=False,allow_shared_air=False,solution_check=None,ideal_scale_blocks=None):
     started=time.perf_counter();rng=random.Random(seed);abilities=abilities or ['move','jump','shot_recoil']
     adjacent={n['id']:[]for n in graph['nodes']}
     for e in graph['edges']:
@@ -48,7 +82,25 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
     for values in candidates.values():rng.shuffle(values)
     selected={};positions={};grid_positions={};expanded=0;rejects={};trace=[];examples=[]
     def reject(reason):rejects[reason]=rejects.get(reason,0)+1
-    displacement_cache={};chain_displacements={}
+    displacement_cache={};chain_displacements={};oriented_cache={};best_partial={}
+    def port_mode(p):return tuple(p['normal'])+(p.get('grid',{}).get('profile','legacy'),)+tuple(p.get('crossing_offset',[0,0]))
+    def chain_deltas(part_keys,start_port,end_port):
+        signature=(tuple(part_keys),port_mode(start_port),port_mode(end_port))
+        if signature in chain_displacements:return chain_displacements[signature]
+        initial=port_mode(start_port);states={(0,0,*initial)}
+        for ck in part_keys:
+            if ck not in oriented_cache:
+                key,a,b=ck;oriented_cache[ck]={(port_mode(m['ports'][a]),port_mode(m['ports'][b]),m['ports'][b]['position'][0]-m['ports'][a]['position'][0],m['ports'][b]['position'][1]-m['ports'][a]['position'][1])for m in candidates[key]}
+            following=set()
+            for dx,dy,nx,ny,profile,ox,oy in states:
+                for incoming,outgoing,sx,sy in oriented_cache[ck]:
+                    if incoming[:2]!=(-nx,-ny)or incoming[2:]!=(profile,ox,oy):continue
+                    following.add((dx+sx,dy+sy,*outgoing))
+            states=following
+            if len(states)>10000:chain_displacements[signature]=None;return None
+            if not states:break
+        mode=port_mode(end_port);answer={(x,y)for x,y,nx,ny,profile,ox,oy in states if (nx,ny)==(-mode[0],-mode[1])and(profile,ox,oy)==mode[2:]}
+        chain_displacements[signature]=answer;return answer
     def remaining_chains_possible():
         # A chain between two placed anchors has a known remaining port delta.
         # Reject impossible intervals before enumerating every geometric pose.
@@ -69,26 +121,20 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
                     desired=[positions[key][i]+b[i]-positions[anchor][i]-a[i]for i in range(2)]
                     if any(desired[i]<sum(p[0][i]for p in parts)-.01 or desired[i]>sum(p[1][i]for p in parts)+.01 for i in range(2)):return False
                     if require_blocks:
-                        signature=tuple(part_keys)
-                        if signature not in chain_displacements:
-                            possible={(0,0)}
-                            for part in parts:
-                                possible={(a+c,b+d)for a,b in possible for c,d in part[2]}
-                                if len(possible)>4096:possible=None;break
-                            chain_displacements[signature]=possible
-                        possible=chain_displacements[signature]
+                        possible=chain_deltas(part_keys,selected[anchor]['ports'][first['id']],selected[key]['ports'][incoming['id']])
                         if possible is not None and tuple(desired)not in possible:return False
+
         return True
     local_cache={};pair_cache={};hard_cell_cache={}
     def hard_cells(m,p):
         from ..block_grid.contracts import regions,raster
-        key=id(m)
+        key=id(m['case'])
         if key not in hard_cell_cache:
             g=m['block_grid'];step=math.gcd(g['size'],32);hard_cell_cache[key]=set().union(*(raster(r,step,g['origin'])for r in regions(dict(m,action_clearance=[]))))
         g=m['block_grid'];step=math.gcd(g['size'],32);dx,dy=[round((p[i]+g['origin'][i])/step)for i in range(2)]
         return {(x+dx,y+dy)for x,y in hard_cell_cache[key]}
     def local(m):
-        k=id(m)
+        k=(id(m['case']),id(m['action_clearance']))
         if k not in local_cache:
             rects=closed_solids(m);dynamic=sweeps(m);clearance=m['action_clearance']
             extra=[]
@@ -98,40 +144,6 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             a=rect_bounds(rects+dynamic+clearance+extra)
             local_cache[k]=(rects,dynamic,clearance,[a[0],a[1],a[2]-a[0],a[3]-a[1]])
         return local_cache[k]
-    def pair_reason(m,p,other,q):
-        ours,md,mc,_=local(m);theirs0,od,oc,_=local(other)
-        rects=[translated(r,p)for r in ours];theirs=[translated(r,q)for r in theirs0]
-        if mode=='aabb':
-            a=rect_bounds(rects);b=rect_bounds(theirs)
-            return 'bounding_box_overlap'if intersects([a[0],a[1],a[2]-a[0],a[3]-a[1]],[b[0],b[1],b[2]-b[0],b[3]-b[1]])else None
-        shared_ours=set();shared_theirs=set()
-        for i,a in enumerate(rects):
-            for j,b in enumerate(theirs):
-                if not intersects(a,b):continue
-                shared_a={eid for eid,port in m['ports'].items()if port.get('shared_landing_index')==i}
-                shared_b={eid for eid,port in other['ports'].items()if port.get('shared_landing_index')==j}
-                if shared_a&shared_b and all(abs(x-y)<.01 for x,y in zip(a,b)):
-                    shared_ours.add(i);shared_theirs.add(j);continue
-                if len(examples)<12:examples.append(dict(reason='actual_shape_overlap',node=m['id'],peer=other['id'],rect=a,peer_rect=b,position=p,peer_position=q))
-                return 'actual_shape_overlap'
-        # An explicitly identical shared landing is already the Module's own
-        # collider. It is deduplicated by the assembler; do not classify that
-        # same collider a second time as a foreign obstruction.
-        foreign_theirs=[r for i,r in enumerate(theirs)if i not in shared_theirs]
-        foreign_ours=[r for i,r in enumerate(rects)if i not in shared_ours]
-        if any(intersects(translated(a,p),b)for a in md for b in foreign_theirs)or any(intersects(a,translated(b,q))for a in foreign_ours for b in od):return 'dynamic_sweep_into_neighbor'
-        if mode=='shape_action':
-            if allow_shared_air:
-                from ..block_grid.contracts import regions
-                # A shared coarse Block is only a broad-phase candidate. Body
-                # samples must still avoid ALL foreign solids, hazards and
-                # full dynamic envelopes, including foreign one-way supports.
-                foreign_a=regions(dict(m,action_clearance=[]));foreign_b=regions(dict(other,action_clearance=[]))
-                if any(intersects(translated(a,p),translated(b,q))for a in mc for b in foreign_b)or any(intersects(translated(a,p),translated(b,q))for a in foreign_a for b in oc):return 'foreign_occupancy_blocks_action'
-            solid_theirs=[r for i,r in enumerate(theirs)if i not in other['case']['one_way_platform_indices']]
-            solid_ours=[r for i,r in enumerate(rects)if i not in m['case']['one_way_platform_indices']]
-            if any(intersects(translated(a,p),b)for a in mc for b in solid_theirs)or any(intersects(a,translated(b,q))for a in solid_ours for b in oc):return 'actual_action_space_blocked'
-        return None
     def geometry(m,p):
         if require_blocks:
             try:ours=placed_cells(m,p)
@@ -149,13 +161,22 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
             # removed: every narrow-phase collision lies within both bounds.
             if mode!='aabb'and not intersects(translated(local(m)[3],p),translated(local(other)[3],q)):continue
             ck=(id(m),id(other),p[0]-q[0],p[1]-q[1])
-            if ck not in pair_cache:pair_cache[ck]=pair_reason(m,p,other,q)
+            if ck not in pair_cache:pair_cache[ck]=geometry_conflict(m,p,other,q,mode,allow_shared_air)
             reason=pair_cache[ck]
             if reason:reject(reason);return False
         return True
     def recurse():
-        nonlocal expanded
-        if len(selected)==len(candidates):return True
+        nonlocal expanded,best_partial
+        if len(selected)>len(best_partial):best_partial={k:dict(variant=selected[k]['variant_id'],position=positions[k][:])for k in selected}
+        if len(selected)==len(candidates):
+            if solution_check is not None:
+                proposed=[]
+                for n in graph['nodes']:
+                    m=copy.deepcopy(selected[n['id']]);m['spec']['placement']=positions[n['id']]
+                    if require_blocks:m['spec']['block_placement']=grid_positions[n['id']]
+                    proposed.append(m)
+                if not solution_check(proposed):reject('solution_contract_rejected');return False
+            return True
         if expanded>=budget:return False
         if not remaining_chains_possible():reject('remaining_port_displacement_unsatisfied');return False
         remaining=[k for k in candidates if k not in selected]
@@ -170,7 +191,26 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
                     if peer not in visited:visited.add(peer);front.append((peer,d+1))
             return 100000
         key=min(remaining,key=lambda k:(-sum(peer in selected for _,peer in adjacent[k]),closure_distance(k),-len(adjacent[k]),len(candidates[k]),k))
-        for m in candidates[key]:
+        ordered=candidates[key]
+        if ideal_scale_blocks is not None:
+            node_by={n['id']:n for n in graph['nodes']}
+            def preference(m):
+                target=node_by[key].get('ideal',[0,0]);cost=0.
+                if selected:
+                    root=next(iter(selected));ref=node_by[root].get('ideal',[0,0]);anchor=selected[root];center=[sum(p['position'][i]for p in anchor['ports'].values())/len(anchor['ports'])+positions[root][i]for i in range(2)]
+                    for e,peer in adjacent[key]:
+                        if peer not in selected:continue
+                        a=m['ports'][e['id']];b=selected[peer]['ports'][e['id']]
+                        if a['normal']!=[-v for v in b['normal']]:return 1e20
+                        origin=[positions[peer][i]+b['position'][i]-a['position'][i]for i in range(2)]
+                        at=[sum(p['position'][i]for p in m['ports'].values())/len(m['ports'])+origin[i]for i in range(2)]
+                        return sum((at[i]-center[i]-(target[i]-ref[i])*ideal_scale_blocks*128)**2 for i in range(2))
+                for e,peer in adjacent[key]:
+                    other=node_by[peer].get('ideal',[0,0]);p=m['ports'][e['id']]
+                    cost-=sum(p['normal'][i]*(other[i]-target[i])for i in range(2))*1000
+                return cost
+            ordered=sorted(ordered,key=preference)
+        for m in ordered:
             if expanded>=budget:return False
             expanded+=1
             if expanded>budget:return False
@@ -208,8 +248,8 @@ def search(graph,domains,seed,mode='shape_action',budget=50000,abilities=None,en
     ok=recurse();result=dict(schema='pcg/shape-search-layout/v1',seed=seed,mode=mode,status='feasible'if ok else'budget_exhausted'if expanded>=budget else'unsatisfied',
         expanded=expanded,budget=budget,wall_seconds=time.perf_counter()-started,rejections=rejects,trace=trace,
         rejection_examples=examples,placements={k:dict(position=positions[k],variant=selected[k]['variant_id'],shape_sha256=selected[k]['source_shape_sha256'])for k in selected}if ok else{},
-        consumes=['actual canonical-derived collider rectangles and closed gates','saw sweep envelopes','actual local ports and apertures','capability/motion requirements','measured body action samples'],
-        topology_sha256=digest(graph),source_placement_hints=False,block_grid_required=require_blocks,shared_air_only=allow_shared_air,block_origins=grid_positions.copy()if ok and require_blocks else{},coordinate_system='integer Block origins; pixels only for narrow-phase geometry'if require_blocks else'legacy pixel origins')
+        maximum_placed=len(best_partial),best_partial=best_partial,consumes=['actual canonical-derived collider rectangles and closed gates','saw sweep envelopes','actual local ports and apertures','capability/motion requirements','measured body action samples'],
+        topology_sha256=digest(graph),source_placement_hints=False,abstract_graph_ideal_ordering=ideal_scale_blocks,block_grid_required=require_blocks,shared_air_only=allow_shared_air,block_origins=grid_positions.copy()if ok and require_blocks else{},coordinate_system='integer Block origins; pixels only for narrow-phase geometry'if require_blocks else'legacy pixel origins')
     if ok:
         modules=[]
         for n in graph['nodes']:

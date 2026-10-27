@@ -21,10 +21,10 @@ def load(sources):
     for path in sources:
         root=REPO/path;_,results=traces(root/'physics');original=json.loads((root/'cases.json').read_text())['cases'];stored={c['id']:c for c in original}
         if len(stored)!=len(original):raise ValueError('duplicate_source_case_identity')
-        modules=json.loads((root/'modules.json').read_text());ownership=owned_results(modules,results)
+        modules=json.loads((root/'modules.json').read_text());ownership=owned_results(modules,results);input_ownership=owned_results(modules,stored)
         for m in modules:
             rr=ownership[m['variant_id']]
-            if not rr or not all(r['ok']for r in rr):audit.append(dict(version=m['source_version'],variant=m['variant_id'],status='physics_failed_or_incomplete'));continue
+            if not rr or any(c['id']not in results for c in input_ownership[m['variant_id']])or not all(r['ok']for r in rr):audit.append(dict(version=m['source_version'],variant=m['variant_id'],status='physics_failed_or_incomplete'));continue
             is_return=bool(m.get('adaptation',{}).get('return_proposal'))
             if not m.get('transition_options'):
                 from .junction_probe import cases as junction_cases

@@ -21,7 +21,7 @@ def compile_map(layout_path, library_modules=None):
 def assemble_modules(graph,modules,seams):
  """Shared exact-object placer; bounding boxes need not form closed rooms."""
  input_graph=copy.deepcopy(graph)
- by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards','reward_sites','shop_sites']}
+ by={m['id']:m for m in modules};platforms=[];oneway=[];origin=[];lookup={};localmap={};other={k:[]for k in ['saws','moving_platforms','latches','thorns','hooks','enemies','hazards','reward_sites','shop_sites','boss_encounters']}
  shared={}
  for seam in seams:
   if seam['kind']=='vertical':
@@ -72,6 +72,10 @@ def assemble_modules(graph,modules,seams):
      for field in ['required_bell','required_enemy']:
       if raw.get(field):value[field]=key+'/'+raw[field]
     if kind=='shop_sites':value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy]
+    if kind=='boss_encounters':
+     value['id']=key+'/'+raw['id'];value['position']=[raw['position'][0]+dx,raw['position'][1]+dy];value['arena']=[v+dx for v in raw['arena']]
+     for field in ['action_bounds','activation_region']:
+      r=raw[field];value[field]=[r[0]+dx,r[1]+dy,*r[2:]]
     other[kind].append(value)
  # Validate every physical contact, including the coincident actor-center Port.
  nodes={};edges={};gates=[];seamproof=[]
@@ -79,6 +83,7 @@ def assemble_modules(graph,modules,seams):
   dx,dy=m['spec']['placement'];result=[]
   for raw in values:
    v=copy.deepcopy(raw);v['target']=translated_target(v['target'],m)
+   if v.get('boss_duel'):v['boss_duel']=m['id']+'/'+v['boss_duel']
    if v.get('depleted_enemy'):v['depleted_enemy']=m['id']+'/'+v['depleted_enemy']
    for cmd in v.get('control_plan',[])+v.get('depleted_plan',[]):
     if 'target_x'in cmd:cmd['target_x']+=dx
@@ -139,7 +144,16 @@ def assemble_modules(graph,modules,seams):
  for owners in origin:
   for owner in owners:owner['content_version']=by[owner['module']]['content_version']
  for key,node in nodes.items():node['module_content_version']=by[key]['content_version']
- xs=[p[0]for p in platforms]+[p[0]+p[2]for p in platforms];ys=[p[1]for p in platforms]+[p[1]+p[3]for p in platforms]
+ # Finite world extent includes each Module's declared action envelope, not
+ # just the visible rocks. A valid jump above the highest bank remains inside
+ # the composed world; no collider or route is added.
+ bounds=[[p[0],p[1],p[2],p[3]]for p in platforms]
+ for m in modules:
+  dx,dy=m['spec']['placement']
+  bounds.extend([[r[0]+dx,r[1]+dy,r[2],r[3]]for r in m.get('action_clearance',[])])
+  if m['case'].get('world_bounds'):
+   r=m['case']['world_bounds'];bounds.append([r[0]+dx,r[1]+dy,r[2],r[3]])
+ xs=[p[0]for p in bounds]+[p[0]+p[2]for p in bounds];ys=[p[1]for p in bounds]+[p[1]+p[3]for p in bounds]
  case=dict(id='direct-module-plains',family='direct_module_map',capabilities=['move','jump','shot_recoil'],platforms=platforms,one_way_platform_indices=oneway,
   wall_platform_indices=[],world_bounds=[min(xs)-32,min(ys)-96,max(xs)-min(xs)+64,max(ys)-min(ys)+192],spawn=nodes[graph['entry']]['center']['position'],
   entry_port=nodes[graph['entry']]['center']['position'],exit_port=nodes[graph['goal']]['center']['position'],goal=nodes[graph['goal']]['center']['region'],

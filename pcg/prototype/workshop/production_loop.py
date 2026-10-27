@@ -15,7 +15,23 @@ from ..factory.core.engine import file_sha
 from pcg.contract.export import collect
 
 def compile_request(request):
+    if request.get('recipe')=='ordered-interface/v1':
+        from pcg.map_directed.graph_map.verify_pairs import proposals
+        return dict(status='requires_macro_physics',modules=proposals([request['module']]),gaps=[],production_admitted=False)
+    if request.get('recipe')=='rigid-mirror/v1':
+        from pcg.map_directed.content_domains.mirror import mirror
+        return dict(status='requires_macro_physics',modules=[mirror(request['module'])],gaps=[],production_admitted=False)
+    if request.get('recipe')=='map-budget-binding/v1':
+        from .map_budget import configure
+        return configure(request)
+    if request.get('recipe')=='bellstrider-court/v1':
+        from pcg.map_directed.graph_map.boss_content import bellstrider
+        if request.get('ports',{}).get('count')!=1:return dict(status='needs_design',gaps=['original Boss court exposes one exterior Port'])
+        return dict(status='requires_macro_physics',modules=[bellstrider()],gaps=[],production_admitted=False)
     recipe=request.get('recipe')
+    if recipe=='branch-terraces/v1':
+        from pcg.prototype.plains.branch_terraces import request as local_macro
+        return local_macro(request)
     if recipe not in RECIPES:return dict(status='needs_design',gaps=['missing executable recipe: '+str(recipe)],searched=list(RECIPES),cases=[])
     interfaces=request.get('interfaces',[0,1])
     if not isinstance(interfaces,list)or not interfaces or len(interfaces)>2 or any(type(i)is not int or i not in (0,1)for i in interfaces)or len(set(interfaces))!=len(interfaces):return dict(status='unsatisfied',gaps=['outside registered interface domain [0,1]'],cases=[])

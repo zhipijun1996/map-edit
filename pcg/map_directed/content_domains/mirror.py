@@ -38,6 +38,9 @@ def mirror(module):
             if l.get(k):l[k]['rect']=rect(l[k]['rect'])
         if l.get('sequence_gate'):l['sequence_gate']=rect(l['sequence_gate'])
     for e in c.get('enemies',[]):e['position']=point(e['position'])
+    for b in c.get('boss_encounters',[]):
+        b['position']=point(b['position']);b['arena']=[w-b['arena'][1],w-b['arena'][0]]
+        for key in ['action_bounds','activation_region']:b[key]=rect(b[key])
     for h in c.get('hooks',[]):h['x']=w-h['x']
     for k in ['reward_sites','shop_sites']:
         for s in c.get(k,[]):

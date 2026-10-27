@@ -15,6 +15,7 @@ def raster(rect,size=128,origin=(0,0)):
 
 def regions(module):
     c=module['case'];out=list(c['platforms'])+list(c.get('hazards',[]))+list(module.get('action_clearance',[]))
+    out += [b['action_bounds']for b in c.get('boss_encounters',[])]
     movers={p['platform_id']for p in c.get('moving_platforms',[])}
     out += [l['gate']for l in c.get('latches',[])if l.get('ferry_id')not in movers]
     out += [[l['bell'][0]-14,l['bell'][1]-17,28,34]for l in c.get('latches',[])]

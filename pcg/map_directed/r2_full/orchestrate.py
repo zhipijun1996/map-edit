@@ -117,7 +117,7 @@ def make_case(compiled,steps,name,goal=None,required_rewards=None):
         else:section=join_waypoints(nodes[fr]['center_to_port'][eid],path,nodes[to]['port_to_center'][eid])
         for index,waypoint in enumerate(section):
             leg=copy.deepcopy(waypoint);leg.update(id=f'{ordinal:03d}-{eid}-{index:03d}',edge_id=eid,
-                edge_from=fr,edge_to=to,edge_terminal=index==len(section)-1,budget_ticks=360)
+                edge_from=fr,edge_to=to,edge_terminal=index==len(section)-1,budget_ticks=min(3600,int(waypoint.get('budget_ticks',360))))
             program.append(leg)
         visited.append(to)
     goal=goal or visited[-1]

@@ -12,6 +12,7 @@ def allocate(g,seed):
     def add(node,kind,**kw):sites.append(dict(id='allocation-'+str(len(sites)),node=node,kind=kind,value=None,materialized=False,**kw))
     ordered=sorted(branches,key=lambda b:(len(b['nodes']),g['nodes'].index(next(n for n in g['nodes']if n['id']==b['reward']))))
     high={b['reward']for b in ordered[-2:]}
+    add(g['mission_policy']['boss_forecourt'],'major_item',high_value=False,branch=None,extra_cost_proxy=0,value_basis='Guaranteed baseline growth before actual Boss; item balance UNKNOWN')
     for b in branches:add(b['reward'],'major_item',high_value=b['reward']in high,branch=b['id'],extra_cost_proxy=len(b['nodes']),value_basis='risk/depth proxy; actual module time and balance UNKNOWN')
     order=list(dict.fromkeys([g['entry']]+[n for p in regional.approach_routes(g)for n in p['nodes']]+[n['id']for n in g['nodes']if n['role']=='challenge']))
     for node in order[:12]:add(node,'currency',high_value=False)
