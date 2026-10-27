@@ -2,6 +2,12 @@
 
 # 关卡生成工作区
 
+## 最新：18份Block候选与862b实码（2026-10-27）
+
+当前[18份](../generation/workshop/plains30-block-v1/manifest-progress-18-v1.json)，126原库/108平原优选/生产0；含N06真正三/四口共同M选择，A1/A3两空间双向、A2一空间双向。最新Map862b源码24文件在map-constraint-source-v3，Block128/JS/面中心规则不变；原validator新增boundary_gates覆盖，Map已有真实22 Macro接口样图。新Module自有条件门/同Module同高支撑并集适配皆新版本需整图证据。18份33方向仅静态兼容原证据，旧源身份不改。
+
+原produce_v3新增原consumer字段预检/可选薄export；原record_block_v1读取持久化scene，严格比较不改。21条Module视频以当前manifest逐SHA绑定；A2两个完整1000帧保留，另明确6秒节选省验收尾段。N06 80探针谱系含失败后新几何修订，独立四口70probe+336full均留原件。N03新Cell8真实对照，但安全地面反向355连续支撑否决玩法，54总支出/0Module；不凑数。原件v6/v7/v8；独立AI增补curation-block27-v1覆盖25active/11审阅组，不是新家族数。
+
 ## 最新续作：13份Block候选与6c实际Map规则（2026-10-27）
 
 最新Map已核`6c864ae6423b6409990564371aca34a322b66253`实际19文件（`creative-production/batch30/map-constraint-source-v2/`），不只README。Block128策略/JS合同未变；真实图联合求解必须精确port数、满足请求全部有向对，UNKNOWN反向不可顶替。奖励预算重绑产生新语义版本，须B真实重验。`produce_v3`默认预注册protocol-v2，并在物理前执行原Godot语法/原Block/counter绑定预检；不建第二物理或Map生成器。

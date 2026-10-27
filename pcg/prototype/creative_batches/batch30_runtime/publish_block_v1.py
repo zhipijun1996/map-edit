@@ -22,7 +22,9 @@ def main():
     temporary=target.with_name(target.name+'.building');base.publish(args.runs,temporary)
     value=json.loads(temporary.read_text())
     value.update(schema='pcg/block-module-delivery/v1',id='plains30-block-v1',
-                 block_contract_upstream='6c864ae6423b6409990564371aca34a322b66253',
+                 block_contract_upstream='862b736c491502ae9934265bc7415805b4c122b9',
+                 upstream_static_compatibility=base.binding(base.REPO/'pcg/creative-production/batch30/latest-map-compatibility-v4.json'),
+                 original_physics_evidence_not_relabelled=True,
                  block_policy=base.binding(base.REPO/'pcg/map_directed/block_grid/plains-policy.json'),
                  publisher_adapters=[base.binding(Path(__file__))],
                  confirmed_new_action_families=0,

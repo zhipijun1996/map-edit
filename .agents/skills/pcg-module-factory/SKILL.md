@@ -7,7 +7,7 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 ## 当前平原入口
 
-**最新 Map 约束（2026-10-27）**：生产前读取当前 Map 分支的真实策略与适配代码，不只读README。本轮已核对 `research/l4-map-generator@6c864ae6423b6409990564371aca34a322b66253`，证据在 `pcg/creative-production/batch30/map-constraint-source-v2/`。当前入口为 `batch30_runtime.produce_v3`；复用原Engine/evaluate/store，增加上游Block合同预检。Block128连通所有权、128倍数包围尺寸、真实边界中心Port及独立内部staging必须在几何生成前满足。内部挑战不缩放，不增外框；两门、移动铃包络、恢复地貌和完整身体扫掠均不能漏。旧候选缺少该合同即返回缺口，不由标签补齐。见[契约](../../../docs/l4-mapgen/graph-block-module-contract-v1.md)。
+**最新 Map 约束（2026-10-27）**：生产前读取当前 Map 分支的真实策略与适配代码，不只读README。本轮已核对 `research/l4-map-generator@862b736c491502ae9934265bc7415805b4c122b9`，证据在 `pcg/creative-production/batch30/map-constraint-source-v3/`。当前入口为 `batch30_runtime.produce_v3`；复用原Engine/evaluate/store，增加上游Block合同预检。Block128连通所有权、128倍数包围尺寸、真实边界中心Port及独立内部staging必须在几何生成前满足。内部挑战不缩放，不增外框；两门、移动铃包络、恢复地貌和完整身体扫掠均不能漏。旧候选缺少该合同即返回缺口，不由标签补齐。见[契约](../../../docs/l4-mapgen/graph-block-module-contract-v1.md)。
 最新实际Map还使用`graph_map/domains.required_pairs`：精确匹配incident端口数，逐有向对满足需求，UNKNOWN不能顶替反向。`graph_map/joint/build`已做有限Block联合求解；不要沿用“只有逻辑图”的旧结论。奖励经`workshop/map_budget.py`重绑会产生新语义版本，必须重验真实经济与Map，不能继承旧宝箱证明。互斥双门/移动铃仍缺B消费者安装，必须返回此集成缺口。旧a685源绑定与实验作为历史原件保留，不重标。
 
 
@@ -46,3 +46,7 @@ Codex 负责提出和实现新因果规则；程序负责规则域内的动作/�
 第二轮共性：新接收面/顶棚可能破坏前一段，先用已有身体轨迹过滤交叠，再真实整段重验；这不等于完整动作净空。逐枪省略反例要保留时间间隔，并分别测试延长普通跳跃，防止第二枪仅被动作词要求强行认定有价值。齿轮等待22/24反例可跳过时不宣称必要；保留原等待视频供节奏审核。见PLAINS-REVIEW-ROUND2.md。
 
 三端口迭代：三端口候选必须共享全部物理Cell、位置及初始机关状态；6个有序对独立声明。主路到B合法不等于完成经C的支路，要检查真实坐标与落地。参数变体不增加玩法种数。 参见pcg/PLAINS-THREE-PORT-REPORT.md。
+
+2026-10-27后续实码核对：Map已支持Module自有条件/单向边界门适配，门bounds进入拥有格；它改变内容版本，须真实整图条件/反走验证。512高默认边界门可能割到同面另一口，适配失败应返回冲突，不能宣称任意多口均能装门。支撑并集只允许同Module同目标高度的原实体，不能加地形或借邻居支持。Block128/JS/端口公式未变；旧物理原身份保留，静态兼容不算新物理。
+
+生成前显式编译原Map的UNKNOWN关系/空间为本地具体提案，原请求另存source_map_request，未解决区域foldback仍UNKNOWN。运行前调用现有produce_v3的原Godot语法/Block/原route消费者字段检查；不要把未解析Map字符串直接传给原Module存储器。选择不能只看第一份clean：新周期可在噪声/留出前固定按实际M/桥完整身体水平余量排序；原regular不变。录像使用record_block_v1从持久化case读取原scene，原record逐字段比较不改。

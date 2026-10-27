@@ -1,0 +1,112 @@
+{
+  "schema": "pcg/blockA3-source-baseline/v1",
+  "human_source": {
+    "id": "human-A3-short-gate",
+    "source_type": "human_idea",
+    "source_revision": 1,
+    "original_text": "A3：短时风铃门\n\n玩家在空中击中风铃，利用同一枪的反冲穿过短暂开启的门。\n\n要求：\n- 门时间根据实际弹丸飞行、人物运动和身体通过时间求解。\n- 不把“一瞬”直接解释成一帧操作。\n- 检查地面提前射击、越门和其他低成本绕行。\n- 保留必要的防夹行为。\n- 玩家延迟离开或门重新关闭时，仍有经过验证的恢复或返回方式。",
+    "interpretation": "先用真实弹丸命中和24×36身体穿门时间测定窗口；采用原防夹与返回侧射击接收器。窗口以秒计，不能宣称一帧技巧。",
+    "hypothesis": "同一枪的后坐力把人物送过由它自身打开的短门，探索延迟后仍可自行重开",
+    "rule": "workshop/timed-cache",
+    "status": "executable_rule_requires_independent_physics",
+    "human_approval": "UNKNOWN"
+  },
+  "original_candidates": [
+    {
+      "interface": 0,
+      "contentVersion": "sha256:8c90c97e8fc15b43794c44d61bb64ed65be62df73b2c185be0285e94facc9a4a",
+      "case_id": "timed-cache-0-clean-0",
+      "open_seconds": 0.55,
+      "bindings": [
+        {
+          "path": "pcg/map_directed/library/candidates/8c90c97e8fc15b43794c44d61bb64ed65be62df73b2c185be0285e94facc9a4a/case.json",
+          "sha256": "fa187d6e5cf7abcf49a87e6b4131f68b32ca52214dd40ae5d12f5a26dea30dfe"
+        },
+        {
+          "path": "pcg/map_directed/library/candidates/8c90c97e8fc15b43794c44d61bb64ed65be62df73b2c185be0285e94facc9a4a/record.json",
+          "sha256": "cbdc9cb307bab2c317ab2f6fb86be4396e72657158aa3a1fd454703ac78c2236"
+        },
+        {
+          "path": "pcg/map_directed/library/candidates/8c90c97e8fc15b43794c44d61bb64ed65be62df73b2c185be0285e94facc9a4a/module.mapnote.json",
+          "sha256": "b828ce36c59ff494f3e47949e5ff600fd4b790617e9190eb0709f75e640e8876"
+        }
+      ],
+      "original_physics_evidence": [
+        {
+          "path": "pcg/results/workshop-gate-window-v2/evaluations.json",
+          "sha256": "86d21022831356e6262419ae8c2482911ab8b112c37fc7a9e9b169ec952845b7"
+        },
+        {
+          "path": "pcg/results/workshop-gate-window-v2/protocol.json",
+          "sha256": "a5bff4cdf1150cec7f3871bcc46919243f1ec90f50b7a8b16a4035c3f668f3f2"
+        },
+        {
+          "path": "pcg/results/workshop-gate-window-v2/bound-counterexamples.json",
+          "sha256": "a6831ed118f2f083c2ad18207d3a7483473716bb9243877e47b7edcc0860d81c"
+        }
+      ]
+    },
+    {
+      "interface": 1,
+      "contentVersion": "sha256:490a5f1478c34f1040d2c01dfdb2e7ad3fc09dc7bd3b7a70641ff6a0f37280ad",
+      "case_id": "timed-cache-1-clean-0",
+      "open_seconds": 0.65,
+      "bindings": [
+        {
+          "path": "pcg/map_directed/library/candidates/490a5f1478c34f1040d2c01dfdb2e7ad3fc09dc7bd3b7a70641ff6a0f37280ad/case.json",
+          "sha256": "c879001013dd89d19bbc40dbcd076fd2bab5113c5463c7bca2b37a383c1ee0b8"
+        },
+        {
+          "path": "pcg/map_directed/library/candidates/490a5f1478c34f1040d2c01dfdb2e7ad3fc09dc7bd3b7a70641ff6a0f37280ad/record.json",
+          "sha256": "2145f8e116f0b0d258fa1c65bda6d8558ecbdb4b4bf4da04bcb54445af2bb0fd"
+        },
+        {
+          "path": "pcg/map_directed/library/candidates/490a5f1478c34f1040d2c01dfdb2e7ad3fc09dc7bd3b7a70641ff6a0f37280ad/module.mapnote.json",
+          "sha256": "f8f867d80df1212da3997e112c3dad890db736e8d045d6f4bd7e47bedcfdb52a"
+        }
+      ],
+      "original_physics_evidence": [
+        {
+          "path": "pcg/results/workshop-gate-window-v2/evaluations.json",
+          "sha256": "86d21022831356e6262419ae8c2482911ab8b112c37fc7a9e9b169ec952845b7"
+        },
+        {
+          "path": "pcg/results/workshop-gate-window-v2/protocol.json",
+          "sha256": "a5bff4cdf1150cec7f3871bcc46919243f1ec90f50b7a8b16a4035c3f668f3f2"
+        },
+        {
+          "path": "pcg/results/workshop-gate-window-v2/bound-counterexamples.json",
+          "sha256": "a6831ed118f2f083c2ad18207d3a7483473716bb9243877e47b7edcc0860d81c"
+        }
+      ]
+    }
+  ],
+  "source_rules": {
+    "path": "pcg/prototype/workshop/rules.py",
+    "sha256": "0888822f60a63818082bc15d79d663e74e840260e020cd650dd2861c92d86bf8"
+  },
+  "original_measured_window_solver": {
+    "path": "pcg/prototype/workshop/gate_window.py",
+    "sha256": "89adc480375c3aa5f29313f277d7f399e5b7bd571a557dc3c014ce8453bd5add"
+  },
+  "original_true_return": {
+    "path": "pcg/prototype/workshop/transitions.py",
+    "sha256": "c9ce8a515a3a9b3d5bc197572d77d87ea0a1babadbe1c5566973449bcc5c5ae3"
+  },
+  "original_mechanism": {
+    "path": "pcg/prototype/godot/scripts/world/shot_latch.gd",
+    "sha256": "a982e1ceab32390bea30eab7843a382910b33a503338351bcd0bdc1fce825929"
+  },
+  "original_return_binding": {
+    "path": "pcg/prototype/workshop/mechanics.gd",
+    "sha256": "71ca553f1cd27ed7bdc1eeb796999dd51d6d25d302b410a8e3c196b2d5008325"
+  },
+  "old_evidence_not_transferred": true,
+  "explicit_reward_variation": {
+    "actual_request": [],
+    "registered_module_rewards": [],
+    "explicit_change": "Original A3 technical sample had12currency; new actualMap traversal variant deliberatelyhas0rewards. Human A3 original textdoesnotrequirechest; originaltwo12currencyversions remainunchanged. This isnot a claim thatoldrewardmotivation ispreserved."
+  },
+  "human_fun": "UNKNOWN",
+  "production_admitted": false
+}

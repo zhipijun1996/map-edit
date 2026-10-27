@@ -1,6 +1,6 @@
 # 平原内容工坊：最新 Block 合同交接
 
-最新直接核对 `research/l4-map-generator@6c864ae6423b6409990564371aca34a322b66253` 的策略、Python/JS校验器、真实适配与Map请求；检查时main为54d0cfc，随后网页兼容补丁PR #6已发布为75d2b02。逐文件URL、Git blob SHA和原字节SHA见[来源索引](../../pcg/creative-production/batch30/map-constraint-source-v2/source-index.json)。不是只依据README，也没有另建Map生成器。
+最新直接核对 `research/l4-map-generator@862b736c491502ae9934265bc7415805b4c122b9` 的策略、Python/JS校验器、真实适配与Map请求；检查时main为54d0cfc，随后网页兼容补丁PR #6已发布为75d2b02。逐文件URL、Git blob SHA和原字节SHA见[来源索引](../../pcg/creative-production/batch30/map-constraint-source-v3/source-index.json)。不是只依据README，也没有另建Map生成器。
 
 当前真实配方只支持Block128。拥有格是四邻接连通的不规则轮廓，包围尺寸为128倍数，内部地形不缩放、不默认补边框。端口在拥有格的真实外边中心，外邻格不得同时拥有。ground64水平口的floor=anchorY+32、人物中心=anchorY+14；本轮dock还向内24px，标准文档分别保存anchor与`grid.stagingPosition`。所有权保留原恢复岸、两扇门、交互物与动作空间，不能只覆盖nominal轨迹。
 
@@ -39,3 +39,11 @@ Map现已有`graph_map/domains.py`的端口赋值及`joint.py/build.py`的有限
 N04提供原timed ShotLatch，无新增物理Cell；四口样品仅验证低A/D→高B/C共四方向，另八方向UNKNOWN。三口非对称样品仅A→B/A→C。另有[双N04精确接缝](../../pcg/prototype/creative_batches/batch30_blockn04_seam/handoff-v2.json)：两个源原实体精确并集、零补路/资源，90真实案例含原失败，最终cal25/25、held23/25过原regular。它不新增Module，也不授予通用assembly。
 
 B实际`direct_join`变换/安装及`graph_map/extra.gd`仍未消费`paired_gate`或`carrier_mount`，相关候选需要此集成后再整图验收。Task A不复制B求解器或另建Map Generator。
+
+## 最新862b：18候选与边界适配约束
+
+[18份当前交接](../../generation/workshop/plains30-block-v1/manifest-progress-18-v1.json)，原库126/平原108。最新24源码和比较链保留，18份33方向在最新原Python validator静态兼容；不是补跑物理或重标6c/a685源。四口N06实际A/D→B/C共同世界，336完整案例全过；A1/A3双向和A2单空间两向各按原regular独立过。全部只是候选，任意状态/整图不自动满足。
+
+Map现在已有22 Macro/24组件的真实接口样图和有限反走探针（见其上游报告），仍未过完整区域/多Seed/美感；不要沿用“只是逻辑输入”的旧结论。`map-state-boundary/v1`添加Module自有条件/单向门体，其bounds必须拥有、另口不能被截、改变后新版本与实际整图states/bypass证据；不能由本地UNKNOWN反向宣称单向。默认512高门体可能与同面较近的另口冲突，必须返回具体缺口。`map-owned-supports/v1`只合并同Module同高的原支撑索引，不增实体、坐标、输入或邻居支撑，改语义也重新绑定。
+
+当前B canonical loader/runtime仍未解析Task A paired_gate/carrier_mount，carrier bell的targetId还指向平台而原加载器按门读取，需要显式Cell/格式桥接与真实Map验收；不以普通门/静台替代。A1/A3的原生Cell可作为先集成方向，但也需B按真实需求/进入/边界验证。新反向Cell只是研究组件，未输出合格Module。

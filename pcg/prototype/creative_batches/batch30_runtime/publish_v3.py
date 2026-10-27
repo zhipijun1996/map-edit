@@ -18,6 +18,24 @@ def binding(p):
     return dict(path=str(p.relative_to(REPO)), sha256=file_sha(p))
 
 
+def origin_for(case):
+    """Use a bound parent for publication labels, never rewrite an enrolled case."""
+    if case.get('idea_ids'):
+        return dict(idea_ids=case['idea_ids'],source='canonical_case',ancestry=[])
+    parent=case.get('block_adaptation',{}).get('source_candidate','').removeprefix('sha256:')
+    if len(parent)!=64 or any(c not in '0123456789abcdef'for c in parent):
+        raise ValueError('publication_idea_origin_missing')
+    folder=REPO/'pcg/map_directed/library/candidates'/parent
+    record=json.loads((folder/'record.json').read_text())
+    source=folder/'case.json'
+    if record['contentVersion']!='sha256:'+parent or file_sha(source)!=record['case_sha256']:
+        raise ValueError('publication_parent_origin_drift')
+    inherited=json.loads(source.read_text()).get('idea_ids')
+    if not inherited:raise ValueError('publication_parent_idea_origin_missing')
+    return dict(idea_ids=inherited,source='version_bound_parent_case',parent_contentVersion=record['contentVersion'],
+                ancestry=[binding(folder/'record.json'),binding(source)])
+
+
 def scene_for(case):
     explicit = case.get('native_scene')
     if explicit:
@@ -43,6 +61,7 @@ def publish(runs, target):
             if file_sha(REPO / source['path']) != source['sha256']:
                 raise ValueError('original candidate bytes changed')
     modules, run_bindings = [], []
+    labels=set()
     for run in runs:
         summary_path = REPO / 'pcg/results' / run / 'summary.json'
         summary = json.loads(summary_path.read_text())
@@ -60,9 +79,15 @@ def publish(runs, target):
                 assert file_sha(folder / 'cases.json') == record['cases_sha256']
                 assert all(q['status'] == 'awaiting_human_review' for q in record['quality_gates'])
                 first = cases[0]
-                idea = first['idea_ids'][0].removeprefix('PR-').removeprefix('B30-')
+                origin=origin_for(first)
+                idea = origin['idea_ids'][0].removeprefix('PR-').removeprefix('B30-')
                 if idea == 'human-d05-bell-carrier-catch': idea = 'D05'
+                if idea == 'human-A2-chase-landing': idea = 'A2'
                 label = idea + '-' + str(first['interface'] + 1)
+                if label in labels:
+                    label+='-'+str(len(gc['ports']))+'port'
+                    if label in labels:label+='-'+version.removeprefix('sha256:')[:8]
+                labels.add(label)
                 route_cases = {r['routeId']:r['sourceCaseId'] for r in gc['generation']['source']['routeCases']}
                 routes = [dict(id=r['id'], case_id=route_cases[r['id']],
                                **{'from':r['from'], 'to':r['to']}, role=r['role'],
@@ -78,7 +103,7 @@ def publish(runs, target):
                                           case_sha256=clip['case_sha256'], frames_exact=clip['frames_exact'],
                                           duration=clip['duration'], strict_comparison='passed'))
                 scene = scene_for(first)
-                modules.append(dict(id=label, name=document['title'], contentVersion=version,
+                modules.append(dict(id=label, name=document['title'], contentVersion=version,idea_origin=origin,
                     family=first['family'], content_role='action_challenge',
                     port_count=len(gc['ports']), ports=gc['ports'], directed_relations=gc['relations'],
                     routes=routes, case_ids=[c['id'] for c in cases],

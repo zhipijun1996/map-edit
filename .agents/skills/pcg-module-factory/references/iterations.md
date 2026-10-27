@@ -181,3 +181,7 @@ C10发现注册ID把-d24放到-counter-kind后，原counter_records正确拒绝�
 ## 2026-10-27：最新Map与发布双绑定
 
 实际6c源码新增图联合赋值/预算重绑，读取required_pairs和实际请求而非旧README。所有权在生成前定义，原Godot --check-only、counter原几何/ID绑定先于物理。N02完整校准高路1/12被拒，低路不能单独充数。A1双向与双N04连续接缝分别验证，不能互相继承。视频按版本+精确case SHA双绑定，组合接缝影片不能挂为单Module证据。C10实际纠错前回枪，体验主张必须随轨迹收窄；技术成功不是新家族。
+
+## 2026-10-27：完整接口预检、边缘余量与反例反馈
+
+A2同物理的两次末尾导出失败共398真实调用保留；本地spec必须显式关系/空间/法线，原Map UNKNOWN字符串另存。block_contract_v2复用上游规则和原fits/route字段，未强制multi-store不需要的可选span；27既有方向回归兼容。N06首52容错失败后，新几何4clean按M/桥实际身体水平余量择c1（54.833px），先于24noise，谱系80封顶后原full全过。N03地面射击后355帧持续安全承载，是真便宜解，0Module而非改动作词。录像别猜目录，用持久化scene；viewing excerpt只能显式字幕且保原全片，原Router最后动作从headless fired_commands读，native投影不含accepted不能当0。最新862b新边界门/支撑并集不让旧Module继承单向或Map资格。

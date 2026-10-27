@@ -1,0 +1,126 @@
+{
+  "schema": "pcg/A2-source-Map-demand/v1",
+  "repository": "zhipijun1996/map-edit",
+  "ref": "6c864ae6423b6409990564371aca34a322b66253",
+  "path": "generation/maps/map-requirements-review-v2/plan-0/challenge-specifications.json",
+  "git_blob_sha": "469c3087173ae14399ce286395e8be8b2a22e61a",
+  "file_sha256": "b714a54d883a5334c622beca84103e63c2edf3294ba9cd1e2adaef1e8ce8309a",
+  "exploration_path": "generation/maps/map-requirements-review-v2/plan-0/exploration.json",
+  "exploration_file_sha256": "f3302dbbf05d5be93f72f064dea514ec2b4bfa42c82a0894685a905af615d747",
+  "original_request": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "block-demand/exp0_0",
+    "map_seed": "requirements-review-0",
+    "region": "plains",
+    "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+    "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+    "objective": {
+      "node": "exp0_0",
+      "roles": [
+        "traversal"
+      ],
+      "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+      "preserve_all_edges": [
+        "e23",
+        "e24"
+      ]
+    },
+    "block_grid": {
+      "size": 128,
+      "shape": "connected_polyomino",
+      "port_anchors": "boundary_cell_centers",
+      "map_added_terrain": 0
+    },
+    "ports": {
+      "count": 2,
+      "directions": "joint_space_search",
+      "required_pairs": "explicit_ordered_matrix"
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "resource_state": {
+      "entry": "UNKNOWN until measured state contract",
+      "exit": "UNKNOWN until measured state contract",
+      "reset_between_components": false
+    },
+    "relations": "UNKNOWN until exact module directions are independently verified",
+    "difficulty": {
+      "intent": 2,
+      "human_score": null
+    },
+    "route_membership": {
+      "main": [],
+      "branches": [
+        "expedition_0"
+      ]
+    },
+    "rewards": [],
+    "return_conditions": {
+      "branches": [
+        {
+          "id": "expedition_0",
+          "nodes": [
+            "exp0_0",
+            "exp0_1",
+            "exp0_2"
+          ],
+          "entry": "r9",
+          "rejoin": "r9",
+          "reward": "exp0_2",
+          "kind": "foldback"
+        }
+      ]
+    },
+    "budget": {
+      "generator_calls": 4,
+      "local_revisions": 2,
+      "may_delete_required_edges": false
+    }
+  },
+  "incident_edges": [
+    {
+      "id": "e23",
+      "from": "r9",
+      "to": "exp0_0",
+      "requires": [
+        "shot_recoil"
+      ],
+      "switch": null,
+      "cost": 2.0,
+      "purpose": "reward_challenge",
+      "bidirectional": true
+    },
+    {
+      "id": "e24",
+      "from": "exp0_0",
+      "to": "exp0_1",
+      "requires": [],
+      "switch": null,
+      "cost": 2.0,
+      "purpose": "reward_challenge",
+      "bidirectional": true
+    }
+  ],
+  "resolved_hard_port_pairs": {
+    "required_directed_edge_pairs": [
+      [
+        "e23",
+        "e24"
+      ],
+      [
+        "e24",
+        "e23"
+      ]
+    ],
+    "source_rule": "Actual6c graph_map.domains.required_pairs: both incident edges bidirectional",
+    "local_mapping": "A/B assignment is still joint search; both A->B and B->A required, not interchangeable by assumption"
+  },
+  "new_physics_cases": 0
+}

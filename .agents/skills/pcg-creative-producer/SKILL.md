@@ -7,7 +7,7 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 ## 当前优先：反冲平原
 
-**2026-10-27 Map接口更新**：继续本批先读`docs/l4-mapgen/graph-block-module-contract-v1.md`和`pcg/map_directed/block_grid/plains-policy.json`；来源固定`6c864ae6423b6409990564371aca34a322b66253`，实际代码快照/差异审计在`pcg/creative-production/batch30/map-constraint-source-v2/`与`block-audit-v1`。新发布调用`batch30_runtime.produce_v3`，Block128所有权/边界中心Port是生成前置约束，禁止先批量做任意尺寸后仅改标签。内部岩体与动作不缩放；anchor不是身体checkpoint，保留向内staging与ground64的+14偏移。旧候选保持局部资格，不能自行补blockGrid宣称已兼容。双门平移/第二门覆盖、移动铃完整包络、禁用占位门以及原失败恢复地貌均须映射；适配器原nominal未访问的恢复地形不能删。按新版本重验所有声明方向和连续试件，失败返回具体冲突。
+**2026-10-27 Map接口更新**：继续本批先读`docs/l4-mapgen/graph-block-module-contract-v1.md`和`pcg/map_directed/block_grid/plains-policy.json`；来源固定`862b736c491502ae9934265bc7415805b4c122b9`，实际代码快照/差异审计在`pcg/creative-production/batch30/map-constraint-source-v3/`与`block-audit-v1`。新发布调用`batch30_runtime.produce_v3`，Block128所有权/边界中心Port是生成前置约束，禁止先批量做任意尺寸后仅改标签。内部岩体与动作不缩放；anchor不是身体checkpoint，保留向内staging与ground64的+14偏移。旧候选保持局部资格，不能自行补blockGrid宣称已兼容。双门平移/第二门覆盖、移动铃完整包络、禁用占位门以及原失败恢复地貌均须映射；适配器原nominal未访问的恢复地形不能删。按新版本重验所有声明方向和连续试件，失败返回具体冲突。
 最新实际Map还使用`graph_map/domains.required_pairs`：精确匹配incident端口数，逐有向对满足需求，UNKNOWN不能顶替反向。`graph_map/joint/build`已做有限Block联合求解；不要沿用“只有逻辑图”的旧结论。奖励经`workshop/map_budget.py`重绑会产生新语义版本，必须重验真实经济与Map，不能继承旧宝箱证明。互斥双门/移动铃仍缺B消费者安装，必须返回此集成缺口。旧a685源绑定与实验作为历史原件保留，不重标。
 
 
@@ -47,3 +47,7 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 严格20项选择：`pcg/creative-production/novelty-review/selected20-v2.json`；独立评审和反例标签审计在同目录。`generation/workshop/creative20-v1/` 提供交付目录。原六个基线、双环Macro、recast和普通升降适配不计这20项。
 
 下一轮不要从零写20个脚本：先用现有规则适配Map需求；真正未支持的关系再由模型新增隔离规则。迭代结果更新版本化设计卡、失败账本与新选集，历史选集及实验不覆盖。停止条件由用户目标定义；达到数量只是里程碑，不能以重复玩法或未经验证的点子填数。
+
+2026-10-27后续实码核对：Map已支持Module自有条件/单向边界门适配，门bounds进入拥有格；它改变内容版本，须真实整图条件/反走验证。512高默认边界门可能割到同面另一口，适配失败应返回冲突，不能宣称任意多口均能装门。支撑并集只允许同Module同目标高度的原实体，不能加地形或借邻居支持。Block128/JS/端口公式未变；旧物理原身份保留，静态兼容不算新物理。
+
+生成前显式编译原Map的UNKNOWN关系/空间为本地具体提案，原请求另存source_map_request，未解决区域foldback仍UNKNOWN。运行前调用现有produce_v3的原Godot语法/Block/原route消费者字段检查；不要把未解析Map字符串直接传给原Module存储器。选择不能只看第一份clean：新周期可在噪声/留出前固定按实际M/桥完整身体水平余量排序；原regular不变。录像使用record_block_v1从持久化case读取原scene，原record逐字段比较不改。

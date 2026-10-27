@@ -1,6 +1,6 @@
 # 平原 Module：Block128 生产批次
 
-当前[13份标准候选](manifest-progress-13-v2.json)，原库121版、平原优选103版；不是30份完成，也不是13种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@6c864ae`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
+当前[18份标准候选](manifest-progress-18-v1.json)，原库126版、平原优选108版；不是30份Block完成，也不是18种全新玩法。此前8份局部候选仍保留原资格，没有自动转为Block版本。当前Map合同来源为`research/l4-map-generator@862b736`，见[源码绑定与交接](../../../docs/l4-mapgen/plains30-block-handoff-v1.md)。
 
 | 内容 | 包围尺寸/拥有格 | 实际玩法与影片 |
 | --- | --- | --- |
@@ -13,14 +13,18 @@
 | N04-1 四口升层选择 | 1280×1024，80格 | 同一门先开孔让人上穿、再关闭成为落脚/回枪面，再择左右高岸；[A→B](videos/BN04-A-B-v1/timed-gate-return-catch-review-only.mp4)、[A→C](videos/BN04-A-C-v1/timed-gate-return-catch-review-only.mp4)，仅support_id差异，review-only |
 | N04-2 三口非对称选择 | 1280×1024 | 左高岸需再跳射、右低岸只需离台跳；[右侧分支](videos/BN04-low-C-v2/timed-gate-return-catch-review-only.mp4)，371帧/1帧support_id差异 |
 | A1-1/2 尖刺空槽双向 | 1280×896，39/44格 | 真实身体穿刺槽，宝箱可见；[正向124帧](videos/BA1-forward-v1/block128-human-A1-bidirectional.mp4)、[另一空间反向146帧](videos/BA1-return-v1/block128-human-A1-bidirectional.mp4)，严格逐帧一致 |
+| A2-1 主动追台/逆向冷台 | 1408×768 | [正向6秒节选](review-excerpts-v1/BA2-forward-v1-excerpt.mp4)、[反向6秒节选](review-excerpts-v1/BA2-return-v1-excerpt.mp4)，字幕明确省略抵达后的验收停留；两段完整1000帧严格片另存 |
+| A3-1/2 短时风铃门双向 | 1408×896 | [空间一](videos/BA3-forward-v1/block128-human-A3-bidirectional.mp4)、[空间二](videos/BA3-forward-2-v1/block128-human-A3-bidirectional.mp4)，各157帧严格一致；实际0.55/0.65s窗，不是单帧操作 |
+| N06 三口中庭双翼 | 1280×1152 | 共同M落地回枪后，[保留左桥向西上](videos/BN06-left-v1/central-two-wing-bridge-choice-review-only.mp4)或[击铃换成右桥向东上](videos/BN06-right-v1/central-two-wing-bridge-choice-review-only.mp4)，每支真实落桥恢复后登岸 |
+| N06 四口中庭双翼 | 1280×1152 | 新东低入口D；[D→西上B](videos/BN06-four-D-B-v2/central-two-wing-bridge-choice-review-only.mp4)、[D→东上C](videos/BN06-four-D-C-v1/central-two-wing-bridge-choice-review-only.mp4)，实际A/D→B/C四方向全部原regular通过，其余8对UNKNOWN |
 
 所有尺寸为128倍数；拥有格四邻接连通，可不规则。不生成外框，内部地形不缩放。SVG与可玩消费者显示Block轮廓、真实边界中心锚点和内部身体站位。Port锚点不是出生点：ground64地面在anchorY+32，人物中心在anchorY+14，本轮水平dock还向内24px。
 
 C05是真正去向选择，不是额外安全口。A是低处西口，B是上方西口，C是高处东口；同一世界初态下分别验证A→B/A→C，其他四个方向UNKNOWN。它是新Block地貌规则，超出旧终岸±32适配域，因此重新校准；原型与旧版通过结论没有挪用。
 
-九组成功生产运行共1800次真实Godot案例，含全部失败与精确反例。C02、C01、D05各两份及C05/C10的两条路线、C07一路均过原regular校准和独立留出。C05的动态世界clean/mild/moderate各12次，留出两路线各36/36；D05两接口留出各clean12/12、mild12/12、moderate11/12；C01/C02静态世界clean各1次，mild/moderate各12次。它们仅为有限程序策略资格，不是人工成功率。
+十三组成功生产运行共2797次真实Godot案例，含全部失败与精确反例。C02、C01、D05各两份及C05/C10的两条路线、C07一路均过原regular校准和独立留出。C05的动态世界clean/mild/moderate各12次，留出两路线各36/36；D05两接口留出各clean12/12、mild12/12、moderate11/12；C01/C02静态世界clean各1次，mild/moderate各12次。它们仅为有限程序策略资格，不是人工成功率。
 
-C01/C02两个review-only影片各有3帧`support_id`接触体顺序差异，完整差异见其`review-only-manifest.json`和`strict-failure-audit-v1.json`；位置、输入、资源、机关、奖励字段一致。原严格比较仍失败，没有放宽。C05两片、D05、C07、C10主路共加上A1双向270帧，共1722帧是严格比较通过的正常60fps原生连续输入回放，末尾约1秒冻结结果画面。
+C01/C02两个review-only影片各有3帧`support_id`接触体顺序差异，完整差异见其`review-only-manifest.json`和`strict-failure-audit-v1.json`；位置、输入、资源、机关、奖励字段一致。原严格比较仍失败，没有放宽。C05两片、D05、C07、C10主路共加上A1双向270帧，加上A3两片314帧、A2两片2000帧，共4036帧是严格比较通过的正常60fps原生连续输入回放，末尾约1秒冻结结果画面。
 
 ## 运行与检索
 
@@ -29,13 +33,13 @@ python3 pcg/tools/restore_archive.py godot-runtime-v1 --extract
 python3 pcg/tools/restore_archive.py content-workshop-plains30-block-v1 --extract \
   --prefix results/workshop-batch30-blockc05-full-v1/
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-13-v2.json --list
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-18-v1.json --list
 python3 -m pcg.prototype.creative_batches.plains50_catalog \
-  --manifest generation/workshop/plains30-block-v1/manifest-progress-13-v2.json \
+  --manifest generation/workshop/plains30-block-v1/manifest-progress-18-v1.json \
   --play C05-1 --route far
 ```
 
-默认进入手动试玩；加`--replay`为程序见证。复现生产使用`batch30_runtime.produce_v3`和新run名；固定协议在`pcg/creative-production/batch30/protocol-map-block-v2.json`。原CandidateLibrary持久化检索见[13份跨进程复用](retrieval-v3/receipt.json)，生成与物理调用均0；C05新增记录同样来自原磁盘库。
+默认进入手动试玩；加`--replay`为程序见证。复现生产使用`batch30_runtime.produce_v3`和新run名；固定协议在`pcg/creative-production/batch30/protocol-map-block-v4.json`。原CandidateLibrary持久化检索见[前13份跨进程复用](retrieval-v3/receipt.json)及[新增4份](retrieval-v4/receipt.json)、[第18份](retrieval-v5/receipt.json)，生成与物理调用均0；C05新增记录同样来自原磁盘库。
 
 ## 请求、失败与待做
 
@@ -64,3 +68,17 @@ N02主动双台分叉经过80probe、两次full52+124，高路线最终moderate1
 `manifest-progress-13-v1.json`保留为发布器诊断历史：其14条视频错误包含一条双N04接缝。当前v2严格按内容版本和精确case SHA双绑定，13条Module视频；接缝独立列出，不向单Module继承。
 
 [独立AI审阅与8段首看队列](../../../pcg/creative-production/batch30/curation-block21-v1.md)覆盖旧local8+Block11+旧held2快照：19活跃版归8组、11适配；不含后来A1，不是全库家族总数。代表只解释对应版本，不能替代其他版本证据。
+
+## 当前新增验证与方法修订
+
+A2最终`api_v3`只输出一个双向空间，另一个返程扰动失败仍拒绝。两次完整物理之后的导出元数据失败共398案例保持原件；最终199完整案例过原regular且重检索，三次相同held不算三套独立条件。原Map UNKNOWN输入另存，具体本地relations/space/normals/基础move桥接显式编译；区域foldback没有被本地资格替代。原consumer字段现已在0物理调用预检，不能用缺字段消耗完整实验。
+
+N06原周期52案例容错失败（M贴边、远铃敏感），新明确几何周期4clean+24noise，总谱系仍80封顶，旧失败不覆盖。仅扩大M左边与缩短枪线，在噪声前按真实完整身体落脚水平余量选c1，最小54.833px；154完整cal/held全过。独立四口是新的接口需求：M右侧扩大64、新D岸，70probe+336完整案例、4路线全部cal/held全过；不是给三口安全地板贴D。它是同一家族的有效空间适配。匿名support_id差异影片仍review-only，严格比较器不改。
+
+N03新反向Cell的8个真实运动/承载对照成立，但Module总54次后发现地面射击可持续安全乘台355帧、同3枪少1跳到同奖口，直接推翻空中反转接回的风险假设。0 Module、无full；保Cell与原反例，不改名当成功。
+
+A3地面预开+空中反冲是合法多一枪替代，可能比名义更快；底岸也是已验返程而非唯一解。同枪开门是可执行示范，不宣称所有解都必须如此。A2节选的[修正审计](review-excerpts-v1/manifest-v2.json)直接读原fired_commands，完整影片保持不变，不把节选计新录像证据。
+
+最新Map源码862b的24文件、Git blob/字节SHA已核。Block128/JS/锚点公式未变，新增Module自有条件/单向边界门覆盖和同Module同高原支撑并集。改后新版本须真实Map验收，不自动给现有候选单向/整图资格；512高边界门也可能割到同面另一口。18版本33方向已用新原validator静态核对，0新物理、旧证据原身份保留。
+
+原件新增`content-workshop-plains30-block-v6`（A2/A3含398元数据失败）、`v7`（N03与N06原失败/修订）、`v8`（独立四口）。独立AI[27技术记录增补](../../../pcg/creative-production/batch30/curation-block27-v1.md)覆盖截至Block17的25活跃版，11审阅组/14适配；四口为后续适配，不能借此增加新家族计数。所有新候选人工观感/试玩/生产均UNKNOWN。

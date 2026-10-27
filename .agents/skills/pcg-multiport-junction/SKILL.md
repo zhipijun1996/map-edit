@@ -7,7 +7,7 @@ description: 先设计多端口的空间构图、共同选择点与有向去向�
 
 ## 最新Map输入：先把空间需求变成真实接口约束
 
-2026-10-27核对`research/l4-map-generator@6c864ae6423b6409990564371aca34a322b66253`，真实源码索引在`pcg/creative-production/batch30/map-constraint-source-v2/`。先读上游Block策略和`graph_map/domains.required_pairs`：当前物理支持Block128，连通不规则拥有格/包围尺寸必须按128对齐，端口在所属格的真正外边中心，外邻不得拥有。内部身体dock另存`grid.stagingPosition`，不能把中心点当站位。不可为了凑Port删恢复岸、加外框或漏掉第二扇门/运动包络。
+2026-10-27核对`research/l4-map-generator@862b736c491502ae9934265bc7415805b4c122b9`，真实源码索引在`pcg/creative-production/batch30/map-constraint-source-v3/`。先读上游Block策略和`graph_map/domains.required_pairs`：当前物理支持Block128，连通不规则拥有格/包围尺寸必须按128对齐，端口在所属格的真正外边中心，外邻不得拥有。内部身体dock另存`grid.stagingPosition`，不能把中心点当站位。不可为了凑Port删恢复岸、加外框或漏掉第二扇门/运动包络。
 
 Map节点精确incident端口数和实际全部有向对必须同时满足；四口若只验证低A/D→高B/C，则另八对保持UNKNOWN，不能当全连通枢纽。需求允许非对称时只验证所需关系，不能擅自减少要求救过。预算重绑是新语义版本，未知金额/major-item不由旧金币证明代替。
 
@@ -79,3 +79,7 @@ Map端口是连接不同后续通路的接口；内部落脚、观察位、奖�
 当Map要求`fork`而库仅有奖励/恢复多口时，明确返回`unsatisfied`：冲突字段`junction_role`、已搜索版本/角色、已有技术种子、所缺空间/选择证据、可协商的职责或新规则；不得为了数量直接回传旧三口。这个设计筛选叠在原查找之上，不替代原合同或其UNKNOWN拒绝逻辑。
 
 发布一张整体可读的布局和正常速度短片，说明选择发生在哪里；再给不同方向/状态的路线见证、源码/失败/反例/校准/留出索引、标准Module与原库磁盘复用。AI去重比较空间组织与决策因果，不把每条边、每个端口或每个相位算作新玩法。人工可以直接按编号评价构图、可读性、方向感与想走哪边，不编造“艺术评分”。
+
+2026-10-27后续实码核对：Map已支持Module自有条件/单向边界门适配，门bounds进入拥有格；它改变内容版本，须真实整图条件/反走验证。512高默认边界门可能割到同面另一口，适配失败应返回冲突，不能宣称任意多口均能装门。支撑并集只允许同Module同目标高度的原实体，不能加地形或借邻居支持。Block128/JS/端口公式未变；旧物理原身份保留，静态兼容不算新物理。
+
+生成前显式编译原Map的UNKNOWN关系/空间为本地具体提案，原请求另存source_map_request，未解决区域foldback仍UNKNOWN。运行前调用现有produce_v3的原Godot语法/Block/原route消费者字段检查；不要把未解析Map字符串直接传给原Module存储器。选择不能只看第一份clean：新周期可在噪声/留出前固定按实际M/桥完整身体水平余量排序；原regular不变。录像使用record_block_v1从持久化case读取原scene，原record逐字段比较不改。
