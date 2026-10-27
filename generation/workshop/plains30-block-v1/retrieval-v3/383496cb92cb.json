@@ -1,0 +1,89 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "id": "batch30/block-D05/1",
+  "source_type": "model_authored_challenge_spec",
+  "region": "plains",
+  "required_family": "block128-bell-carrier-catch",
+  "objective": {
+    "recipe": "block128-bell-carrier-catch",
+    "interface": 1,
+    "physical_layout_sha256": "564734b3d072050dc06ead9bf18b0b2c02120573f73b94c400b2cbc8a4a24968",
+    "core": "same air shot recoils actor and starts its mounted-bell carrier; carrier intercepts actor before grounded renewal and second bank jump",
+    "block_contract": "map-notes/block-grid/v1"
+  },
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": []
+  },
+  "ports": {
+    "count": 2,
+    "required_normals": [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "relations": [
+    {
+      "from_port": "A",
+      "to_port": "B",
+      "role": "main",
+      "route_id": "air-start-interception"
+    }
+  ],
+  "space": {
+    "max_width": 2560,
+    "max_height": 1536,
+    "max_port_span_x": 1664,
+    "block_size": 128,
+    "port_profiles": [
+      "ground64/v1"
+    ]
+  },
+  "boundary_policy": "open",
+  "enclosing_walls": false,
+  "difficulty": {
+    "intent": "regular",
+    "human_score": null
+  },
+  "risk_reward": {
+    "mandatory_damage": false,
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          1512,
+          206
+        ],
+        "region": [
+          1482,
+          200,
+          60,
+          12
+        ],
+        "amount": 12
+      }
+    ]
+  },
+  "resource_state": {
+    "reset_between_components": false,
+    "entry": "Supported internal A dock and initially parked original carrier; boundary ingress/phase entailment UNKNOWN",
+    "exit": "observed stable B only; arbitrary carrier phase UNKNOWN"
+  },
+  "return_conditions": "All original failure floor/stairs retained; exact new same-world retry, reverse and boundaries UNKNOWN until separately verified",
+  "budget": {
+    "generator_candidates": 1,
+    "director_revisions": 0
+  }
+}

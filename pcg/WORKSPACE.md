@@ -2,6 +2,14 @@
 
 # 关卡生成工作区
 
+## 最新续作：13份Block候选与6c实际Map规则（2026-10-27）
+
+最新Map已核`6c864ae6423b6409990564371aca34a322b66253`实际19文件（`creative-production/batch30/map-constraint-source-v2/`），不只README。Block128策略/JS合同未变；真实图联合求解必须精确port数、满足请求全部有向对，UNKNOWN反向不可顶替。奖励预算重绑产生新语义版本，须B真实重验。`produce_v3`默认预注册protocol-v2，并在物理前执行原Godot语法/原Block/counter绑定预检；不建第二物理或Map生成器。
+
+当前[13份Block候选](../generation/workshop/plains30-block-v1/manifest-progress-13-v2.json)：此前9份＋N04四口/非对称三口各1＋A1两空间双向2。原库121，平原优选103，生产0；13份新进程原持久库复用，0生成/物理调用。13条Module影片，1722帧原严格比较通过，其他support_id差异完整保留review-only。版本/适配不等于新家族，人类趣味/试玩/生产仍UNKNOWN。
+
+双N04真实零补路接缝90案例含原失败，cal25/25、held23/25原regular通过；836帧影片4support_id差异不改strict。A1另两次同世界往返只各clean，不推断通用状态/拼装。N02双台80probe+52/124full后高路moderate1/12，0候选/无held，不凑数。C10独立AI复核为条件纠错恢复扩展，初纠错前曾真实回枪，不能宣称一路保留唯一空中资源。新原件归档`content-workshop-plains30-block-v5`，旧源码/失败不覆盖。
+
 ## 最新Map接口：Block128内容生产（2026-10-27）
 
 先读[Block交接](../docs/l4-mapgen/plains30-block-handoff-v1.md)与`creative-production/batch30/map-constraint-source-v1/source-index.json`：已核对Map分支a685fae实际policy/校验器/适配器/请求，而非只读README。新入口`batch30_runtime.produce_v3`强制原Block预检、原Engine/regular/候选库；128倍数尺寸、真实边界中心Port和内部staging分开。旧8份局部候选不自动升级。

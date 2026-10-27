@@ -177,3 +177,7 @@ J06共享落点的高来岸/西低廊/东阶地，与J03上下双廊的直行/�
 C10发现注册ID把-d24放到-counter-kind后，原counter_records正确拒绝入库。仅修ID、冻结同一物理/策略后完整重跑；重复同一held条件不算两份独立样本。此教训已进入代码：0physics预检原geometry_key/base_id及Block格/Port/reservation精确绑定。旧API拒绝和7组真实API正例均保存，不再花完整物理成本才发现绑定错误。
 
 旧未准入原型、失败和源码保存在content-workshop-plains30-prototypes-v1；Block闭合原件在block-v1/v2/v3/v4归档（完整前缀content-workshop-plains30-）。新AI五卡中N01已被射空等价反例在实现前否决，N03缺反向平台Cell，N05缺敌人包络；N02/N04另开有界真实小样，不能把提案计库存。人工趣味/试玩/生产准入仍UNKNOWN。
+
+## 2026-10-27：最新Map与发布双绑定
+
+实际6c源码新增图联合赋值/预算重绑，读取required_pairs和实际请求而非旧README。所有权在生成前定义，原Godot --check-only、counter原几何/ID绑定先于物理。N02完整校准高路1/12被拒，低路不能单独充数。A1双向与双N04连续接缝分别验证，不能互相继承。视频按版本+精确case SHA双绑定，组合接缝影片不能挂为单Module证据。C10实际纠错前回枪，体验主张必须随轨迹收窄；技术成功不是新家族。

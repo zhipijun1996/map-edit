@@ -22,11 +22,11 @@ def main():
     temporary=target.with_name(target.name+'.building');base.publish(args.runs,temporary)
     value=json.loads(temporary.read_text())
     value.update(schema='pcg/block-module-delivery/v1',id='plains30-block-v1',
-                 block_contract_upstream='a685faebdb7596b0808538ab9ef299d6455d2320',
+                 block_contract_upstream='6c864ae6423b6409990564371aca34a322b66253',
                  block_policy=base.binding(base.REPO/'pcg/map_directed/block_grid/plains-policy.json'),
                  publisher_adapters=[base.binding(Path(__file__))],
                  confirmed_new_action_families=0,
-                 family_notice='These are newly validated Block/interface adapters of existing gameplay, not new mechanics.',
+                 family_notice='Candidate versions and interface adaptations are not independent gameplay counts; novelty requires the separately bound AI review.',
                  map_assembly='UNKNOWN; source direction, boundary fixture, state entailment and full Map remain separate')
     for item in value['modules']:
         doc=json.loads((base.REPO/item['document']['path']).read_text());c=doc['generationContract']
@@ -34,14 +34,16 @@ def main():
         assert c['space']['bounds']['w']%128==0 and c['space']['bounds']['h']%128==0
         item['block_contract']=grid;item['reserved_bounds']=c['space']['bounds']
         item['block_dimensions']=[c['space']['bounds'][k]//128 for k in ['w','h']]
-        case=json.loads((base.REPO/item['case_file']['path']).read_text())['cases'][0]
+        bound_cases=json.loads((base.REPO/item['case_file']['path']).read_text())['cases']
+        case=bound_cases[0]
+        bound_case_hashes={c['module_sha256']for c in bound_cases}
         item['map_request']=case.get('source_map_request','UNKNOWN')
         item['map_request_response']=case.get('map_request_response','UNKNOWN')
         item['qualification']='original regular local staging-direction candidate; arbitrary entry, reverse, recovery and Map assembly UNKNOWN'
         item['presentation_dependencies']=[base.binding(Path(__file__).with_name(n))for n in ['main_block_v1.gd','main_block_v1.tscn','block_draw_v1.gd']]
         for manifest in sorted((base.OUT/'videos').glob('*/review-only-manifest.json')):
             for clip in json.loads(manifest.read_text())['clips']:
-                if clip.get('contentVersion')!=item['contentVersion']:continue
+                if clip.get('contentVersion')!=item['contentVersion'] or clip.get('case_sha256')not in bound_case_hashes:continue
                 movie=manifest.parent/clip['file']
                 assert base.file_sha(movie)==clip['sha256']
                 item['videos'].append(dict(**base.binding(movie),manifest=base.binding(manifest),

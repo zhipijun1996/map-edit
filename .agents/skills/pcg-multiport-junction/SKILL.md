@@ -5,6 +5,14 @@ description: 先设计多端口的空间构图、共同选择点与有向去向�
 
 适用：生成/改造三口及以上的Module/Macro、为Map提供分叉/汇流/换向节点、审查多口是否只有安全出口堆数。由当前真实模型会话主持，衔接`pcg-creative-producer`和原`pcg-module-factory`、`pcg-physics-contract`、`pcg-video-review`；不建立第二套候选库、物理或Map Generator。
 
+## 最新Map输入：先把空间需求变成真实接口约束
+
+2026-10-27核对`research/l4-map-generator@6c864ae6423b6409990564371aca34a322b66253`，真实源码索引在`pcg/creative-production/batch30/map-constraint-source-v2/`。先读上游Block策略和`graph_map/domains.required_pairs`：当前物理支持Block128，连通不规则拥有格/包围尺寸必须按128对齐，端口在所属格的真正外边中心，外邻不得拥有。内部身体dock另存`grid.stagingPosition`，不能把中心点当站位。不可为了凑Port删恢复岸、加外框或漏掉第二扇门/运动包络。
+
+Map节点精确incident端口数和实际全部有向对必须同时满足；四口若只验证低A/D→高B/C，则另八对保持UNKNOWN，不能当全连通枢纽。需求允许非对称时只验证所需关系，不能擅自减少要求救过。预算重绑是新语义版本，未知金额/major-item不由旧金币证明代替。
+
+本轮可复用案例：C05同趟早离/续乘分岸；N04同门先作开口、关闭后作承载，再选择上方两岸。N04第二空间封掉原D外口、降低右岸后重新完整验证，不能仅改标签算三口。它们是技术候选和模型审阅材料，人类批准UNKNOWN。双N04零补路连续试件另有独立证据，不向通用装配或全部端口继承。
+
 ## 最新纠偏：J06/J03被用户否决
 
 先读`pcg/feedback/workshop/junction-boring-observation-v1.json`与`docs/l4-mapgen/junction-design-regression-v1.md`。四个版本技术证据保留，但用户明确认为无聊、缺设计感，已从优选平原内容中暂扣。旧模型“适合路口”的结论不足以覆盖这条人工反馈。

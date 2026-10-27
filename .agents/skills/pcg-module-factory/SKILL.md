@@ -7,7 +7,9 @@ description: 用有界离线搜索生成动作模块，比较策略并输出可�
 
 ## 当前平原入口
 
-**最新 Map 约束（2026-10-27）**：生产前读取当前 Map 分支的真实策略与适配代码，不只读README。本轮已核对 `research/l4-map-generator@a685faebdb7596b0808538ab9ef299d6455d2320`，证据在 `pcg/creative-production/batch30/map-constraint-source-v1/`。当前入口为 `batch30_runtime.produce_v3`；复用原Engine/evaluate/store，增加上游Block合同预检。Block128连通所有权、128倍数包围尺寸、真实边界中心Port及独立内部staging必须在几何生成前满足。内部挑战不缩放，不增外框；两门、移动铃包络、恢复地貌和完整身体扫掠均不能漏。旧候选缺少该合同即返回缺口，不由标签补齐。见[契约](../../../docs/l4-mapgen/graph-block-module-contract-v1.md)。
+**最新 Map 约束（2026-10-27）**：生产前读取当前 Map 分支的真实策略与适配代码，不只读README。本轮已核对 `research/l4-map-generator@6c864ae6423b6409990564371aca34a322b66253`，证据在 `pcg/creative-production/batch30/map-constraint-source-v2/`。当前入口为 `batch30_runtime.produce_v3`；复用原Engine/evaluate/store，增加上游Block合同预检。Block128连通所有权、128倍数包围尺寸、真实边界中心Port及独立内部staging必须在几何生成前满足。内部挑战不缩放，不增外框；两门、移动铃包络、恢复地貌和完整身体扫掠均不能漏。旧候选缺少该合同即返回缺口，不由标签补齐。见[契约](../../../docs/l4-mapgen/graph-block-module-contract-v1.md)。
+最新实际Map还使用`graph_map/domains.required_pairs`：精确匹配incident端口数，逐有向对满足需求，UNKNOWN不能顶替反向。`graph_map/joint/build`已做有限Block联合求解；不要沿用“只有逻辑图”的旧结论。奖励经`workshop/map_budget.py`重绑会产生新语义版本，必须重验真实经济与Map，不能继承旧宝箱证明。互斥双门/移动铃仍缺B消费者安装，必须返回此集成缺口。旧a685源绑定与实验作为历史原件保留，不重标。
+
 
 先求解端口岸体的Block相位及预算，再跑真实动作。不能在留出失败后扩大所有权掩码，或删除名义路线未访问的恢复岸来强行拼接。受支持的终岸微调不满足时，记录具体相位/空间冲突；要重构岸体则另建生成规则及新版本完整重验。staging成功、边界穿越、反向、状态连续性、全图分别绑定，绝不相互代签。
 

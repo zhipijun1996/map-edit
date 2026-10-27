@@ -7,7 +7,9 @@ description: 用当前 Codex 大模型持续提出、实现、反驳并筛选不
 
 ## 当前优先：反冲平原
 
-**2026-10-27 Map接口更新**：继续本批先读`docs/l4-mapgen/graph-block-module-contract-v1.md`和`pcg/map_directed/block_grid/plains-policy.json`；来源固定`a685faebdb7596b0808538ab9ef299d6455d2320`，实际代码快照/差异审计在`pcg/creative-production/batch30/map-constraint-source-v1/`与`block-audit-v1`。新发布调用`batch30_runtime.produce_v3`，Block128所有权/边界中心Port是生成前置约束，禁止先批量做任意尺寸后仅改标签。内部岩体与动作不缩放；anchor不是身体checkpoint，保留向内staging与ground64的+14偏移。旧候选保持局部资格，不能自行补blockGrid宣称已兼容。双门平移/第二门覆盖、移动铃完整包络、禁用占位门以及原失败恢复地貌均须映射；适配器原nominal未访问的恢复地形不能删。按新版本重验所有声明方向和连续试件，失败返回具体冲突。
+**2026-10-27 Map接口更新**：继续本批先读`docs/l4-mapgen/graph-block-module-contract-v1.md`和`pcg/map_directed/block_grid/plains-policy.json`；来源固定`6c864ae6423b6409990564371aca34a322b66253`，实际代码快照/差异审计在`pcg/creative-production/batch30/map-constraint-source-v2/`与`block-audit-v1`。新发布调用`batch30_runtime.produce_v3`，Block128所有权/边界中心Port是生成前置约束，禁止先批量做任意尺寸后仅改标签。内部岩体与动作不缩放；anchor不是身体checkpoint，保留向内staging与ground64的+14偏移。旧候选保持局部资格，不能自行补blockGrid宣称已兼容。双门平移/第二门覆盖、移动铃完整包络、禁用占位门以及原失败恢复地貌均须映射；适配器原nominal未访问的恢复地形不能删。按新版本重验所有声明方向和连续试件，失败返回具体冲突。
+最新实际Map还使用`graph_map/domains.required_pairs`：精确匹配incident端口数，逐有向对满足需求，UNKNOWN不能顶替反向。`graph_map/joint/build`已做有限Block联合求解；不要沿用“只有逻辑图”的旧结论。奖励经`workshop/map_budget.py`重绑会产生新语义版本，必须重验真实经济与Map，不能继承旧宝箱证明。互斥双门/移动铃仍缺B消费者安装，必须返回此集成缺口。旧a685源绑定与实验作为历史原件保留，不重标。
+
 
 最新人工否定见`pcg/feedback/workshop/junction-boring-observation-v1.json`：J06/J03的四份实现无聊，暂扣于优选之外。原五案D02—D05的价值在具体动作/后果的耦合；不以最低实现成本选静态几何来代替。先冻结不可丢失的体验与地貌，单份可玩原型表现出来后才做接口适配/完整批次。物理通过与模型接口审查不能替代体验实现，详见多端口skill的纠偏段。无需新增逐件人工批准流程，仍在已授权范围内推进。
 
