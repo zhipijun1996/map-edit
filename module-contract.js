@@ -2,6 +2,7 @@
 import {validateDocument} from './model.js';
 import {validateRequirements,evaluateRequirements} from './capabilities.js';
 import {validateDifficulty} from './difficulty.js';
+import {validateBlockGrid} from './module-block-grid.js';
 export const UNKNOWN='UNKNOWN';
 export const CONTRACT_VERSION=1;
 export const canonical=v=>JSON.stringify(sort(v));
@@ -71,11 +72,12 @@ export function validateGenerationContract(doc,{resolve}={}){
  const transformIds=ids(s.transforms,'transforms');for(const t of s.transforms){need(vec(t.translation)&&vec(t.scale)&&finite(t.rotation)&&typeof t.mirrorX==='boolean','explicit transform');need(t.status&&Array.isArray(t.validationIds),'transform evidence');}
  const portIds=ids(c.ports,'ports'),routeIds=ids(c.routes,'routes');need(c.ports.length>0,'ports required');
  for(const p of c.ports){
+  if(p.grid)need(s.blockGrid,'grid staging requires explicit Block contract');
   need(objects.has(p.objectId)&&['entry','exit','anchor'].includes(objects.get(p.objectId).type),'port geometry reference');need(vec(p.position)&&vec(p.normal)&&Math.abs(Math.hypot(...p.normal)-1)<1e-5,'port position/normal');
   const marker=objects.get(p.objectId);need(Math.abs(marker.x+marker.w/2-p.position[0])<1e-5&&Math.abs(marker.y+marker.h/2-p.position[1])<1e-5,'port marker not at actual declared position');
   need(p.connection&&p.connection.status&&(p.connection.region===UNKNOWN||rect(p.connection.region)),'connection range/status required');
   need(p.support===UNKNOWN||objects.has(p.support.objectId)&&p.support.face,'support reference');
-  if(p.support!==UNKNOWN&&p.support.face==='top'){const b=shapeBounds(objects.get(p.support.objectId));need(p.position[0]>=b.x&&p.position[0]<=b.x+b.w&&Math.abs(p.position[1]+s.actorBody.size[1]/2-b.y)<1,'port support does not match standing player geometry');}
+  if(p.support!==UNKNOWN&&p.support.face==='top'){const b=shapeBounds(objects.get(p.support.objectId)),at=p.grid?.stagingPosition??p.position;need(vec(at)&&at[0]>=b.x&&at[0]<=b.x+b.w&&Math.abs(at[1]+s.actorBody.size[1]/2-b.y)<1,'port support does not match standing player geometry');}
   for(const key of ['ingress','egress']){const m=p.motion?.[key];need(m&&Object.hasOwn(m,'directions')&&Object.hasOwn(m,'modes'),'separate ingress/egress');need(m.directions===UNKNOWN||Array.isArray(m.directions)&&m.directions.every(vec),'motion directions');need(m.modes===UNKNOWN||Array.isArray(m.modes)&&m.modes.every(x=>typeof x==='string'),'motion modes');}
   validateState(p.preconditions?.ingress);validateState(p.preconditions?.egress);need(Array.isArray(p.seamIds)&&p.seamIds.every(id=>s.seams.some(x=>x.id===id&&x.portId===p.id)),'port seam mapping');
  }
@@ -94,6 +96,7 @@ export function validateGenerationContract(doc,{resolve}={}){
  need(c.composition&&Array.isArray(c.composition.components)&&Array.isArray(c.composition.connections)&&Array.isArray(c.composition.exports)&&Array.isArray(c.composition.cells),'composition');
  ids(c.composition.cells,'standalone cells');for(const cell of c.composition.cells){need(/^sha256:[a-f0-9]{64}$/.test(cell.contentVersion)&&Array.isArray(cell.objectIds)&&cell.objectIds.length>0&&cell.objectIds.every(id=>objects.has(id)),'versioned Cell geometry refs');const os=cell.objectIds.map(id=>objects.get(id));need(cell.contentVersion==='sha256:'+sha256(canonical(os.length===1?os[0]:os)),'stale Cell content version');}
  if(c.kind==='macro')validateComposition(doc,resolve);
+ validateBlockGrid(doc);
  return {wellFormed:true,currentVersion:contentVersion(doc),versionMatches:contentVersion(doc)===c.contentVersion};
 }
 function transformed(p,t){const a=t.rotation*Math.PI/180,x=p[0]*t.scale[0]*(t.mirrorX?-1:1),y=p[1]*t.scale[1];return [x*Math.cos(a)-y*Math.sin(a)+t.translation[0],x*Math.sin(a)+y*Math.cos(a)+t.translation[1]];}
