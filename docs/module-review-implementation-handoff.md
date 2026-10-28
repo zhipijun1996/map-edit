@@ -2,7 +2,9 @@
 
 当前设计会话持续处理图文与网页反馈。用户允许另开Codex会话，并行实现已确认保留的版本。这里的允许实现不等于技术通过或生产认可。
 
-实现入口：`feedback/manual-review/implementation-handoff-v1.json`。当前为01–07、10、12、17、23、25、27、28、30、32、34、35、36、37及39，共21项。逐项核对设计文件SHA256、designVersion与人工保留记录，不能使用最新目录名推断批准，不能自动追随随后网页的设计变动。当前首8批均已收到设计意见；08、09、11、13、14、15、16、18、19、20、21、22、24、26、29、31、33、38、40设计废弃，均不属于本轮实现。
+实现入口：`feedback/manual-review/implementation-handoff-v1.json`。当前为01–07、10、12、17、23、25、27、28、30、32、34、35、36、37、39及116–120，共26项。逐项核对设计文件SHA256、designVersion与人工保留记录，不能使用最新目录名推断批准，不能自动追随随后网页的设计变动。当前首10批均已收到设计意见；08、09、11、13、14、15、16、18、19、20、21、22、24、26、29、31、33、38、40、121、124设计废弃，均不属于本轮实现。
+
+122、123、125仅为待复审修订稿，不属于实现清单。122要求三口6向；125保留原三口并新增顶口，为四口12向；尚未收到新设计版本的保留。
 
 独立分支示例：
 
@@ -23,4 +25,4 @@ git worktree add -b content/approved-designs-batch001 ../map-edit-approved-imple
 
 可给新Codex会话的提示词：
 
-> 你负责已确认Module设计的实现。先读取最新main的AGENTS.md、docs/module-review-implementation-handoff.md和feedback/manual-review/implementation-handoff-v1.json。在独立分支/worktree仅实现清单中01–07、10、12、17、23、25、27、28、30、32、34、35、36、37及39的精确确认版本，补全真实参数，复用现有Godot Harness验证并提交可复现证据。不改图文设计网页，不处理清单外的Module，不恢复旧批量任务；发现设计冲突先记录反馈，不悄悄改玩法。
+> 你负责已确认Module设计的实现。先读取最新main的AGENTS.md、docs/module-review-implementation-handoff.md和feedback/manual-review/implementation-handoff-v1.json。在独立分支/worktree仅实现清单中01–07、10、12、17、23、25、27、28、30、32、34、35、36、37、39及116–120的精确确认版本，补全真实参数，复用现有Godot Harness验证并提交可复现证据。不改图文设计网页，不处理清单外的Module，不恢复旧批量任务；发现设计冲突先记录反馈，不悄悄改玩法。
