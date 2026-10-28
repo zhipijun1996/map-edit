@@ -1,0 +1,31 @@
+const $=s=>document.querySelector(s);
+const labels={PENDING:'待审批',KEEP:'保留',CHANGE:'修改',DISCARD:'废弃'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let queue,batch,rows=[];
+const key=r=>'module-review:item:'+r.moduleId+':'+r.sourceSha256;
+function feedback(r){try{const d=JSON.parse(localStorage.getItem(key(r))??'null');return d&&labels[d.decision]?{decision:d.decision,note:typeof d.note==='string'?d.note:''}:{decision:'PENDING',note:''};}catch{return {decision:'PENDING',note:''};}}
+function read(){return rows.map(r=>({...r,decision:$(`input[name="decision-${r.reviewId}"]:checked`).value,note:$(`#note-${r.reviewId}`).value}));}
+function save(){try{for(const r of read())localStorage.setItem(key(r),JSON.stringify({decision:r.decision,note:r.note}));$('#notice').textContent='已保存到当前浏览器；复制回聊天后我才能收到。';}catch{$('#notice').textContent='浏览器无法本地保存，请及时复制意见。';}progress();}
+function progress(){const current=read(),done=current.filter(r=>r.decision!=='PENDING').length;$('#progress').textContent=`本批 ${done} / ${rows.length}`;const total=queue.rows.filter(r=>feedback(r).decision!=='PENDING').length;$('#total').textContent=`共 ${queue.total} 个 Module / ${queue.batches.length} 批；当前浏览器已填写 ${total} 个，未填写 ${queue.total-total} 个。`;
+ const only=$('#pending-only').checked;for(const r of current)$(`#r${r.reviewId}`).hidden=only&&r.decision!=='PENDING';$('#empty').hidden=!(only&&done===rows.length);}
+function changeBatch(id){
+ batch=queue.batches.find(b=>b.id===id)??queue.batches[0];rows=batch.reviewIds.map(id=>queue.rows.find(r=>r.reviewId===id));
+ // Carry first-page local opinions into the reusable center, only for exact source versions.
+ try{const oldkey='module-review:'+batch.id+':'+rows.map(r=>r.sourceSha256).join(':');const prior=JSON.parse(localStorage.getItem(oldkey)||'null');if(Array.isArray(prior))for(const r of rows){const d=prior.find(v=>v.reviewId===r.reviewId);if(d&&labels[d.decision]&&!localStorage.getItem(key(r)))localStorage.setItem(key(r),JSON.stringify(d));}}catch{}
+ $('#batch-select').value=batch.id;const n=queue.batches.indexOf(batch);$('#previous').disabled=n===0;$('#next').disabled=n===queue.batches.length-1;$('#loading').hidden=true;
+ $('#numbers').innerHTML=rows.map(r=>`<a href="#r${r.reviewId}">${r.reviewId}</a>`).join('');
+ $('#cards').innerHTML=rows.map(r=>{const d=feedback(r);return `<article id="r${r.reviewId}" data-review="${r.reviewId}"><h2>${r.reviewId} · ${esc(r.title)}</h2><p>${esc(r.summary)}</p><button type="button" class="diagram" data-image="${esc(r.diagram)}" data-title="${esc(r.title)}" aria-label="放大 ${r.reviewId} 示意图"><img src="${esc(r.diagram)}" alt="${esc(r.title)}：归档地貌、Block、Port 与路线"></button><p class="hint">点图放大。<a href="${esc(r.diagram)}" target="_blank" rel="noopener">打开原图</a></p><fieldset><legend>${r.reviewId} 的审批意见</legend><div class="choices">${Object.entries(labels).map(([v,label])=>`<label class="choice"><input type="radio" name="decision-${r.reviewId}" value="${v}" ${d.decision===v?'checked':''}> ${label}</label>`).join('')}</div></fieldset><label for="note-${r.reviewId}">具体意见</label><textarea id="note-${r.reviewId}" placeholder="希望怎样修改，或者为什么废弃？">${esc(d.note)}</textarea><details><summary>归档来源与版本</summary><div>${esc(r.moduleId)}<br>${esc(r.contentVersion)}<br>文件 SHA256：${r.sourceSha256}<br>意见回传前不会改变正式库。</div></details></article>`;}).join('');
+ for(const button of document.querySelectorAll('.diagram'))button.onclick=()=>{$('#zoom-image').src=button.dataset.image;$('#zoom-title').textContent=button.dataset.title;$('.zoom-scroll').classList.remove('actual');$('#size').textContent='原尺寸';$('#zoom').showModal();};
+ for(const img of document.querySelectorAll('article img'))img.onerror=()=>{$('#notice').textContent='有图片加载失败，请刷新或打开原图。';};
+ const url=new URL(location.href);url.searchParams.set('batch',batch.id);url.hash='';history.replaceState(null,'',url);document.title=`第 ${n+1} 批 · Module 审批`;progress();
+}
+function text(){return `Module 人工审批 · ${batch.id}\n\n`+read().map(r=>`${r.reviewId} ${r.title}：${labels[r.decision]}\n${r.note.trim()?'意见：'+r.note.trim()+'\n':''}模块：${r.moduleId}\n版本：${r.contentVersion}`).join('\n\n');}
+function showExport(){$('#export-text').value=text();$('#export').showModal();}
+$('#cards').addEventListener('input',save);$('#cards').addEventListener('change',save);$('#pending-only').onchange=()=>queue&&progress();
+$('#copy').onclick=async()=>{if(!batch)return;try{await navigator.clipboard.writeText(text());$('#notice').textContent='已复制，请粘回 Codex 聊天。';}catch{showExport();$('#notice').textContent='请全选文字并复制回聊天。';}};
+$('#view').onclick=()=>batch&&showExport();$('#select').onclick=()=>{const t=$('#export-text');t.focus();t.select();t.setSelectionRange(0,t.value.length);};$('#close-export').onclick=()=>$('#export').close();
+$('#size').onclick=()=>{const actual=$('.zoom-scroll').classList.toggle('actual');$('#size').textContent=actual?'适应屏幕':'原尺寸';};$('#close-zoom').onclick=()=>$('#zoom').close();
+$('#batch-select').onchange=e=>{changeBatch(e.target.value);window.scrollTo(0,0);};
+for(const [id,delta]of [['previous',-1],['next',1]])$('#'+id).onclick=()=>{if(!batch)return;const target=queue.batches[queue.batches.indexOf(batch)+delta];if(target){changeBatch(target.id);window.scrollTo(0,0);}};
+$('#download').onclick=()=>{const receipt={schema:'pcg/manual-review-feedback/v1',savedUtc:new Date().toISOString(),scope:'browser_draft_not_received_by_codex',rows:queue.rows.filter(r=>{const f=feedback(r);return f.decision!=='PENDING'||f.note;}).map(r=>({...r,...feedback(r)}))};const url=URL.createObjectURL(new Blob([JSON.stringify(receipt,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='module-review-feedback.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+try{const response=await fetch('queue.json',{cache:'no-cache'});if(!response.ok)throw Error(response.status);queue=await response.json();if(queue.schema!=='pcg/manual-module-review-queue/v1'||!queue.batches.length)throw Error('队列格式错误');$('#batch-select').innerHTML=queue.batches.map((b,i)=>`<option value="${b.id}">第 ${i+1} 批 · ${b.reviewIds.join('～')}</option>`).join('');changeBatch(new URL(location.href).searchParams.get('batch'));}catch(error){$('#loading').textContent='队列加载失败，请刷新页面。'+error.message;}
