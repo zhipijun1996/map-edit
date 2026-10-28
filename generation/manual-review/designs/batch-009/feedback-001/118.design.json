@@ -1,0 +1,164 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-boss-arena",
+  "reviewId": "118",
+  "title": "平原 Boss 战场",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-boss-arena/module.mapnote.json",
+    "contentVersion": "sha256:e0203adb765744063c66f30f6d9cd073dd115e8b3e8b7663ce29caa8eacd1779",
+    "sha256": "deeafc8504818e6c4fa23379e70c31fe67890b24460368082808132de1ffe89c"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 120,
+    "w": 1152,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1152,
+        568
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "boss场地高度增加，3个平台平均分配",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-c5b38bd53902bbd7a2b6e52e8b5b8cc5a70504469ab59464e1e7990e09846d8b/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 600,
+      "w": 1120,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c5b38bd53902bbd7a2b6e52e8b5b8cc5a70504469ab59464e1e7990e09846d8b/platform-1",
+      "type": "platform",
+      "x": 153,
+      "y": 470,
+      "w": 180,
+      "h": 20,
+      "rotation": 0,
+      "label": "均布平台1",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c5b38bd53902bbd7a2b6e52e8b5b8cc5a70504469ab59464e1e7990e09846d8b/platform-2",
+      "type": "platform",
+      "x": 486,
+      "y": 470,
+      "w": 180,
+      "h": 20,
+      "rotation": 0,
+      "label": "均布平台2",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c5b38bd53902bbd7a2b6e52e8b5b8cc5a70504469ab59464e1e7990e09846d8b/platform-3",
+      "type": "platform",
+      "x": 819,
+      "y": 470,
+      "w": 180,
+      "h": 20,
+      "rotation": 0,
+      "label": "均布平台3",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c5b38bd53902bbd7a2b6e52e8b5b8cc5a70504469ab59464e1e7990e09846d8b/migration-shore-exit",
+      "type": "terrain",
+      "x": 1096,
+      "y": 600,
+      "w": 56,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 120,
+      "w": 1152,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 568
+        },
+        {
+          "x": 160,
+          "y": 582
+        },
+        {
+          "x": 960,
+          "y": 582
+        },
+        {
+          "x": 1152,
+          "y": 568
+        }
+      ]
+    }
+  ],
+  "summary": "9×5 Block；上方暂加高2行；三平台同高等宽，平台间及两侧间距相等。",
+  "designNotes": [
+    "“场地高度增加”暂按向上增加2行Block处理，从9×3变为9×5，顶部y376移至120；地面y600和两侧Port高度不变。",
+    "保留3个平台、保持同高y470，台宽统一180px，左侧x分别153/486/819；台间空隙及最左右空隙均为153px，整体对称。",
+    "原右端32px地面连接仍保留，保证exit口在实际岸面上。",
+    "这是战场空间与平台布置设计，不新增原数据没有的Boss对象、攻击规则或新地图布局。仅声明entry→exit，实际Boss战斗空间、身体净空、平台取舍和回程需要独立实现/整图集成验证。"
+  ],
+  "designVersion": "sha256:48ceea451f92b38b050154f5ae014e7af571a3694cbfbc40a74d5eddae7918ce"
+}

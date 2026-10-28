@@ -35,7 +35,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   x,y,w,h=X(o['x']),Y(o['y']),o['w']*s,o['h']*s
   if typ in ('terrain','platform'):
    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{'#c8d5b8'if typ=='platform'else'#a4b490'}" stroke="#697e60" stroke-width="1.5"/>')
-   if typ=='platform':text(x+w/2,y-10,o.get('label','可穿平台'),18,anchor='middle')
+   if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,o.get('label','可穿平台'),18,anchor='middle')
   elif typ=='gate':
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
    parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(x+w/2,y-10,o.get('diagramLabel',label+(' 初始开'if opened else' 初始关')),18,anchor='middle')

@@ -14,7 +14,8 @@
       "batch-005",
       "batch-006",
       "batch-007",
-      "batch-008"
+      "batch-008",
+      "batch-009"
     ],
     "priority": [
       "plains_without_grapple",
@@ -33,7 +34,7 @@
         "04",
         "05"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -45,7 +46,7 @@
         "09",
         "10"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -57,7 +58,7 @@
         "14",
         "15"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -69,7 +70,7 @@
         "19",
         "20"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -81,7 +82,7 @@
         "24",
         "25"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -93,7 +94,7 @@
         "29",
         "30"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -105,7 +106,7 @@
         "34",
         "35"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "已收意见 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -117,7 +118,7 @@
         "39",
         "40"
       ],
-      "priorityLabel": "历史批次 · 保留顺序",
+      "priorityLabel": "已收意见 · 批次保留",
       "orderingFrozen": true
     },
     {
@@ -129,8 +130,8 @@
         "119",
         "120"
       ],
-      "priorityLabel": "平原 · 无钩索",
-      "orderingFrozen": false
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
+      "orderingFrozen": true
     },
     {
       "id": "batch-010",
@@ -3093,16 +3094,30 @@
       "reviewId": "116",
       "moduleId": "game-plains-bell-ferry-control",
       "title": "风铃控制摆渡",
-      "summary": "8×3 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/game-plains-bell-ferry-control/module.mapnote.json",
-      "sourceSha256": "b8f99d9c699d740a98f18d88eedab85c0cf3ddd80db44d125a16debb26d81090",
-      "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
-      "diagram": "diagrams/game-plains-bell-ferry-control--b8f99d9c699d740a.svg",
+      "summary": "6×3 Block；左右各裁1列；摆渡平台上新增1只陆地怪。",
+      "source": "generation/manual-review/designs/batch-009/feedback-001/116.design.json",
+      "sourceSha256": "8e87daa0ede382dfe0a77dec18a3198b5665c34238d184e5ba9dc93facd055ed",
+      "contentVersion": "sha256:fdc36f9a04905e9a4a1c1cc7e2a7af33261bef2e0d33af14d5c7e64167169055",
+      "diagram": "designs/batch-009/feedback-001/images/116.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:fdc36f9a04905e9a4a1c1cc7e2a7af33261bef2e0d33af14d5c7e64167169055",
+      "reviewStage": "design",
+      "designNotes": [
+        "左右各裁1列，从8×3变为6×3 Block；原平台轨迹、坑底危险带和两岸高度保留，entry/exit移至(0,268)/(768,268)。",
+        "“平台上加怪”暂按摆渡台上的原plains_sentry陆地怪处理；初始x226–254、脚底y300与摆渡台顶面对齐。",
+        "保留原SHOOT TO START / SHOOT TO PARK与ferry_id=bell_ferry控制关系。旧图的gate对象是bind_motion使用的inactiveGate构造占位，本图显示风铃连摆渡台，不画成实际挡路门。",
+        "平台运动时怪物的真实承载/走动、人物碰撞和攻击时机需要用原Cell验证；图稿不通过逐帧传送把怪物固定在台上。仅声明entry→exit，动态相位、资源与失败恢复UNKNOWN。"
+      ],
+      "previousDiagram": "diagrams/game-plains-bell-ferry-control--b8f99d9c699d740a.svg",
+      "previousVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
+      "reviewRevision": "batch-009/design-feedback-001",
+      "receivedFeedback": "删除左1列，右1列。平台上加一个怪",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -3111,16 +3126,30 @@
       "reviewId": "117",
       "moduleId": "game-plains-bellstrider-arena",
       "title": "鸣铃巡游机战场",
-      "summary": "9×3 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/game-plains-bellstrider-arena/module.mapnote.json",
-      "sourceSha256": "b5b251f56efa4307a9e7796cd7d6765176d795881ddc97eb5a0c8fe97579192b",
-      "contentVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
-      "diagram": "diagrams/game-plains-bellstrider-arena--b5b251f56efa4307.svg",
+      "summary": "7×2 Block；左右各裁1列、底裁1行；中央地面挖空2格，新增2只空中怪。",
+      "source": "generation/manual-review/designs/batch-009/feedback-001/117.design.json",
+      "sourceSha256": "9b94514cba42997c1dcc0498338160dfc546033e49003511ed7d932b5458a803",
+      "contentVersion": "sha256:1614ad0c54ffbac55abb1bed8fa96de0d7fc5ecf48584f5699832081fb5af299",
+      "diagram": "designs/batch-009/feedback-001/images/117.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:1614ad0c54ffbac55abb1bed8fa96de0d7fc5ecf48584f5699832081fb5af299",
+      "reviewStage": "design",
+      "designNotes": [
+        "左右各裁1列、底裁1行，从9×3变为7×2 Block；两侧Port移至(128,568)/(1024,568)，地面裁薄至32px。",
+        "中央两格按完整Block处理，取新网格第4/5列x512–768，地面完全移除。因总宽7列，两格缺口暂居中偏右半格；未放安全底台或隐形地面。",
+        "保留原3块空中平台；新增2只原plains_diver，中心(470,450)/(820,530)，在缺口前后形成观察与射击机会，初始不埋在平台岩体里。",
+        "图稿仅修改战场地貌和新增小怪，不把标题或旧路径当作Boss本体已经存在的证据。两侧落地、空中怪行为、战斗资源、缺口失败恢复及Boss实际使用方式待实现/集成验证。"
+      ],
+      "previousDiagram": "diagrams/game-plains-bellstrider-arena--b5b251f56efa4307.svg",
+      "previousVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
+      "reviewRevision": "batch-009/design-feedback-001",
+      "receivedFeedback": "删除左右各一列，下侧一行block。中间的地面有两个block空出来不放地面，增加难度。整个空间放2个空中怪物",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -3129,16 +3158,30 @@
       "reviewId": "118",
       "moduleId": "game-plains-boss-arena",
       "title": "平原 Boss 战场",
-      "summary": "9×3 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/game-plains-boss-arena/module.mapnote.json",
-      "sourceSha256": "deeafc8504818e6c4fa23379e70c31fe67890b24460368082808132de1ffe89c",
-      "contentVersion": "sha256:e0203adb765744063c66f30f6d9cd073dd115e8b3e8b7663ce29caa8eacd1779",
-      "diagram": "diagrams/game-plains-boss-arena--deeafc8504818e6c.svg",
+      "summary": "9×5 Block；上方暂加高2行；三平台同高等宽，平台间及两侧间距相等。",
+      "source": "generation/manual-review/designs/batch-009/feedback-001/118.design.json",
+      "sourceSha256": "89a98e7acd4ea0531078e1a64baf7289a5547c51327b867be87ac9e316a04605",
+      "contentVersion": "sha256:48ceea451f92b38b050154f5ae014e7af571a3694cbfbc40a74d5eddae7918ce",
+      "diagram": "designs/batch-009/feedback-001/images/118.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:48ceea451f92b38b050154f5ae014e7af571a3694cbfbc40a74d5eddae7918ce",
+      "reviewStage": "design",
+      "designNotes": [
+        "“场地高度增加”暂按向上增加2行Block处理，从9×3变为9×5，顶部y376移至120；地面y600和两侧Port高度不变。",
+        "保留3个平台、保持同高y470，台宽统一180px，左侧x分别153/486/819；台间空隙及最左右空隙均为153px，整体对称。",
+        "原右端32px地面连接仍保留，保证exit口在实际岸面上。",
+        "这是战场空间与平台布置设计，不新增原数据没有的Boss对象、攻击规则或新地图布局。仅声明entry→exit，实际Boss战斗空间、身体净空、平台取舍和回程需要独立实现/整图集成验证。"
+      ],
+      "previousDiagram": "diagrams/game-plains-boss-arena--deeafc8504818e6c.svg",
+      "previousVersion": "sha256:e0203adb765744063c66f30f6d9cd073dd115e8b3e8b7663ce29caa8eacd1779",
+      "reviewRevision": "batch-009/design-feedback-001",
+      "receivedFeedback": "boss场地高度增加，3个平台平均分配",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -3147,16 +3190,29 @@
       "reviewId": "119",
       "moduleId": "game-plains-bramble-causeway",
       "title": "荆棘堤道",
-      "summary": "9×2 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/game-plains-bramble-causeway/module.mapnote.json",
-      "sourceSha256": "e780810c7dca3e9795cd97c7687f922fd7ab160c6f54d5d84062869801d4d99b",
-      "contentVersion": "sha256:9988cd2a868e9ed21872347b26c6ba8fc9eab82ac9fd1ac8849e2d8835f2753b",
-      "diagram": "diagrams/game-plains-bramble-causeway--e780810c7dca3e97.svg",
+      "summary": "7×2 Block；左右各裁1列，保留原4段堤道与3处荆棘缺口。",
+      "source": "generation/manual-review/designs/batch-009/feedback-001/119.design.json",
+      "sourceSha256": "df81d8d85494d507678282971cc97f8d81d57b7d4e284a376329771278717267",
+      "contentVersion": "sha256:a6d961f2866f3de4c792a99751d47b6c4dca239a36d667a3e236db0a83d77fb2",
+      "diagram": "designs/batch-009/feedback-001/images/119.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:a6d961f2866f3de4c792a99751d47b6c4dca239a36d667a3e236db0a83d77fb2",
+      "reviewStage": "design",
+      "designNotes": [
+        "左右各裁1列，从9×2变为7×2 Block；边界x0–896、y204–460。",
+        "entry/exit移至(0,268)/(896,268)；四段堤道、三处115/115/125px空隙与原危险带保持，最右原接岸仅裁短。",
+        "仅声明entry→exit设计目标；小跳/反冲时机、全身净空、落岸稳定、资源与失误恢复UNKNOWN，不继承旧认证。"
+      ],
+      "previousDiagram": "diagrams/game-plains-bramble-causeway--e780810c7dca3e97.svg",
+      "previousVersion": "sha256:9988cd2a868e9ed21872347b26c6ba8fc9eab82ac9fd1ac8849e2d8835f2753b",
+      "reviewRevision": "batch-009/design-feedback-001",
+      "receivedFeedback": "删除左右各一列block",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -3165,16 +3221,29 @@
       "reviewId": "120",
       "moduleId": "game-plains-bramble-ridge",
       "title": "荆棘山脊",
-      "summary": "8×3 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/game-plains-bramble-ridge/module.mapnote.json",
-      "sourceSha256": "a852af576ca7c4b9e655676593a9d2ff6c28aa9c59987dfff49b53878f8a67be",
-      "contentVersion": "sha256:c962cc34cc22fe8ae748f65cbdbd8a49ef0ead86619f6bf4e3e170ed3c125851",
-      "diagram": "diagrams/game-plains-bramble-ridge--a852af576ca7c4b9.svg",
+      "summary": "7×3 Block；右裁1列，保留原山脊起伏与下方危险带。",
+      "source": "generation/manual-review/designs/batch-009/feedback-001/120.design.json",
+      "sourceSha256": "f637dbe29d0d4339ea2b1efb7c8996c4a6e98b42204e78c4fc09ce7ac2940e40",
+      "contentVersion": "sha256:a2b035a4bbbad2d9956e780e3fc272e25b9b80cce96b2577b3bed45a9b49ea30",
+      "diagram": "designs/batch-009/feedback-001/images/120.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:a2b035a4bbbad2d9956e780e3fc272e25b9b80cce96b2577b3bed45a9b49ea30",
+      "reviewStage": "design",
+      "designNotes": [
+        "右裁1列，用户原话“cell”按128px Block解释，从8×3变为7×3；上下和左边界不变。",
+        "exit移至(896,368)，直接裁短原最右低岸；左起岸、三段起伏和原下方危险带不变，不额外添加连接平台。",
+        "仅声明entry→exit设计目标；各段跳跃与反冲、真实身体净空、到岸稳定和失误恢复UNKNOWN，待独立实现验证。"
+      ],
+      "previousDiagram": "diagrams/game-plains-bramble-ridge--a852af576ca7c4b9.svg",
+      "previousVersion": "sha256:c962cc34cc22fe8ae748f65cbdbd8a49ef0ead86619f6bf4e3e170ed3c125851",
+      "reviewRevision": "batch-009/design-feedback-001",
+      "receivedFeedback": "删除右侧一列cell",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"

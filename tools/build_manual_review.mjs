@@ -113,7 +113,7 @@ if(fs.existsSync(path.join(root,orderPath))){
   if(!reviewIds.length)continue;
   const priorities=[...new Set(reviewIds.map(id=>byId.get(id).reviewPriorityGroup))];
   const label=priorities.length===1?{plains_without_grapple:'平原 · 无钩索',other_without_grapple:'其他 · 无钩索',grapple:'钩索内容'}[priorities[0]]:'混合 · 按优先级';
-  batches.push({id,reviewIds,priorityLabel:isFrozen?'历史批次 · 保留顺序':label,orderingFrozen:isFrozen});
+  batches.push({id,reviewIds,priorityLabel:isFrozen?(priorities.length===1?label+' · 批次保留':'已收意见 · 批次保留'):label,orderingFrozen:isFrozen});
  }
  const assigned=batches.flatMap(b=>b.reviewIds);if(assigned.length!==rows.length||new Set(assigned).size!==rows.length)throw Error('review ordering lost or duplicated a Module');
  ordering={id:policy.id,preserveModuleReviewIds:true,frozenBatchIds:[...frozen.keys()],priority:policy.priority,description:'未审阅内容：平原无钩索 → 其他无钩索 → 钩索；已审批次与Module编号保留。'};
