@@ -1,0 +1,253 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-twin-gears",
+  "reviewId": "157",
+  "title": "双齿轮节奏",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-twin-gears/module.mapnote.json",
+    "contentVersion": "sha256:5d10094bba8a237c26a373282d51b3774ee1cfa330bcf89294b8fdc0ae1ceefe",
+    "sha256": "32605fe76ddcc44aa3f3a5da7d098bec8d494c22aec8b6ab855f86e87c8d9988"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 204,
+    "w": 768,
+    "h": 128
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        268
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        768,
+        268
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "齿轮移动范围增加，速度不一样，左右删1block",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 300,
+      "w": 740,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-0",
+      "type": "hazard",
+      "x": 194,
+      "y": 244,
+      "w": 52,
+      "h": 52,
+      "rotation": 0,
+      "label": "快 · 2.8s",
+      "note": "",
+      "sourceId": "rhythm_first",
+      "trackId": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-track-0",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7
+        },
+        "origin": [
+          220,
+          270
+        ],
+        "travel": [
+          100,
+          0
+        ],
+        "period": 2.8,
+        "radius": 26,
+        "initialPhase": 0,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "sourceType": "gear",
+      "shape": "gears",
+      "count": 1
+    },
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-track-0",
+      "type": "trackLine",
+      "x": 120,
+      "y": 270,
+      "w": 200,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 120,
+          "y": 270
+        },
+        {
+          "x": 320,
+          "y": 270
+        }
+      ],
+      "duration": 2.8,
+      "mode": "sine",
+      "initialPhase": 0
+    },
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-1",
+      "type": "hazard",
+      "x": 604,
+      "y": 244,
+      "w": 52,
+      "h": 52,
+      "rotation": 0,
+      "label": "慢 · 4.6s",
+      "note": "",
+      "sourceId": "rhythm_second",
+      "trackId": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-track-1",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7
+        },
+        "origin": [
+          510,
+          270
+        ],
+        "travel": [
+          120,
+          0
+        ],
+        "period": 4.6,
+        "radius": 26,
+        "initialPhase": 0.25,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "sourceType": "gear",
+      "shape": "gears",
+      "count": 1
+    },
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/saw-track-1",
+      "type": "trackLine",
+      "x": 390,
+      "y": 270,
+      "w": 240,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 390,
+          "y": 270
+        },
+        {
+          "x": 630,
+          "y": 270
+        }
+      ],
+      "duration": 4.6,
+      "mode": "sine",
+      "initialPhase": 0.25
+    },
+    {
+      "id": "generated-1f82aa1a72253eee7783518f6b65e7f219df9f3a898bcd7d1ae81ef09cdcb1b8/replay-shore-approach-exit",
+      "type": "terrain",
+      "x": 740,
+      "y": 300,
+      "w": 28,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 3
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 204,
+      "w": 768,
+      "h": 128,
+      "points": [
+        {
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 80,
+          "y": 282
+        },
+        {
+          "x": 220,
+          "y": 224
+        },
+        {
+          "x": 350,
+          "y": 282
+        },
+        {
+          "x": 510,
+          "y": 224
+        },
+        {
+          "x": 680,
+          "y": 282
+        },
+        {
+          "x": 768,
+          "y": 268
+        }
+      ]
+    }
+  ],
+  "summary": "6×1 Block；扩大双齿轮行程，2.8s与4.6s错速移动。",
+  "designNotes": [
+    "左右各裁1格，从8×1成为6×1，边界x0–768/y204–332。",
+    "第一齿轮中心轨迹x120–320、y270，行程200px（原70），暂定周期2.8秒；第二x390–630、y270，行程240px（原70），暂定周期4.6秒，相位0.25。两者半径26保留。",
+    "不同周期与行程使经过两段危险区的时机不同；观察相位后跳跃/反冲过齿轮。设计参数尚未调校，不当作真实移动速度或通过证据。",
+    "原地面保留，两侧口(0,268)/(768,268)均y300支撑；低顶身体净空、动态相位扰动、资源、廉价绕行、恢复和回程UNKNOWN。"
+  ],
+  "designVersion": "sha256:752e1bacb9f774130bf36a71622d00874891710d81891acd5b868ebff8970df9"
+}

@@ -1,0 +1,658 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-ferry-gears",
+  "reviewId": "122",
+  "title": "摆渡与齿轮",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-ferry-gears/module.mapnote.json",
+    "contentVersion": "sha256:08630e9612caa0744812c7cff605f80b8d8fcc14e97c8846cf3294add8118c88",
+    "sha256": "1c7fdccd41ac7e8e1c56fd27b7ca883f09a958482ae5229db525c44251d7d760"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 342,
+    "w": 1024,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        918
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1024,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        576,
+        342
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "supportObjectId": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/platform-2",
+      "motionCondition": "双向垂直跨界；真实动作与资源状态待验证"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "entry-to-C",
+      "from": "entry",
+      "to": "C",
+      "pathObjectId": "design-route-entry-to-C",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-C",
+      "from": "exit",
+      "to": "C",
+      "pathObjectId": "design-route-exit-to-C",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-entry",
+      "from": "C",
+      "to": "entry",
+      "pathObjectId": "design-route-C-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-exit",
+      "from": "C",
+      "to": "exit",
+      "pathObjectId": "design-route-C-to-exit",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除左1列右一列block，移动齿轮放在中间上下移动，同时覆盖上下两个摆渡区域。最上面是可穿越平台，增加正上方port，3个port可以互相route",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 950,
+      "w": 180,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/platform-1",
+      "type": "terrain",
+      "x": 620,
+      "y": 700,
+      "w": 120,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/platform-2",
+      "type": "platform",
+      "x": 320,
+      "y": 398,
+      "w": 640,
+      "h": 40,
+      "rotation": 0,
+      "label": "顶层可穿平台",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/hazard-0",
+      "type": "hazard",
+      "x": 44,
+      "y": 1000,
+      "w": 912,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/saw-0",
+      "type": "hazard",
+      "x": 492,
+      "y": 690,
+      "w": 40,
+      "h": 40,
+      "rotation": 0,
+      "label": "中央竖向移动齿轮",
+      "note": "",
+      "sourceId": "relay_gear",
+      "trackId": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/saw-track-0",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7
+        },
+        "origin": [
+          512,
+          710
+        ],
+        "travel": [
+          0,
+          240
+        ],
+        "radius": 20,
+        "period": 4.8,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "sourceType": "gear",
+      "shape": "gears",
+      "count": 1
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/saw-track-0",
+      "type": "trackLine",
+      "x": 512,
+      "y": 470,
+      "w": 9.999999974752427e-07,
+      "h": 480,
+      "rotation": 0,
+      "label": "齿轮竖向轨迹",
+      "note": "",
+      "points": [
+        {
+          "x": 512,
+          "y": 470
+        },
+        {
+          "x": 512,
+          "y": 950
+        }
+      ],
+      "duration": 4.8,
+      "mode": "sine",
+      "initialPhase": 0
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-0",
+      "type": "platform",
+      "x": 190,
+      "y": 920,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "下段摆渡",
+      "note": "",
+      "sourceId": "ascent_0",
+      "trackId": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-track-0"
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-track-0",
+      "type": "trackLine",
+      "x": 250,
+      "y": 792,
+      "w": 300.000001,
+      "h": 140.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 250,
+          "y": 932
+        },
+        {
+          "x": 550,
+          "y": 792
+        }
+      ],
+      "duration": 3,
+      "dwell": 1.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-1",
+      "type": "platform",
+      "x": 770,
+      "y": 618,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "上段摆渡",
+      "note": "",
+      "sourceId": "ascent_1",
+      "trackId": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-track-1"
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/moving-track-1",
+      "type": "trackLine",
+      "x": 500,
+      "y": 490,
+      "w": 330.000001,
+      "h": 140.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 830,
+          "y": 630
+        },
+        {
+          "x": 500,
+          "y": 490
+        }
+      ],
+      "duration": 3,
+      "dwell": 1.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-cdb8b0d02115190aa7af4482c6312f3afa04cf30d0d3d29fb5dac64492d0e5fd/replay-independent-dock-exit",
+      "type": "terrain",
+      "x": 960,
+      "y": 438,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 6
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 0,
+          "y": 918
+        },
+        {
+          "x": 100,
+          "y": 932
+        },
+        {
+          "x": 250,
+          "y": 902
+        },
+        {
+          "x": 550,
+          "y": 762
+        },
+        {
+          "x": 670,
+          "y": 682
+        },
+        {
+          "x": 830,
+          "y": 600
+        },
+        {
+          "x": 500,
+          "y": 460
+        },
+        {
+          "x": 500,
+          "y": 380
+        },
+        {
+          "x": 850,
+          "y": 380
+        },
+        {
+          "x": 980,
+          "y": 420
+        },
+        {
+          "x": 1024,
+          "y": 406
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-entry-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 0,
+          "y": 918
+        },
+        {
+          "x": 100,
+          "y": 932
+        },
+        {
+          "x": 250,
+          "y": 902
+        },
+        {
+          "x": 550,
+          "y": 762
+        },
+        {
+          "x": 670,
+          "y": 682
+        },
+        {
+          "x": 830,
+          "y": 600
+        },
+        {
+          "x": 500,
+          "y": 460
+        },
+        {
+          "x": 500,
+          "y": 380
+        },
+        {
+          "x": 576,
+          "y": 342
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 1024,
+          "y": 406
+        },
+        {
+          "x": 980,
+          "y": 420
+        },
+        {
+          "x": 880,
+          "y": 380
+        },
+        {
+          "x": 700,
+          "y": 450
+        },
+        {
+          "x": 830,
+          "y": 600
+        },
+        {
+          "x": 670,
+          "y": 682
+        },
+        {
+          "x": 550,
+          "y": 762
+        },
+        {
+          "x": 250,
+          "y": 902
+        },
+        {
+          "x": 100,
+          "y": 932
+        },
+        {
+          "x": 0,
+          "y": 918
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 1024,
+          "y": 406
+        },
+        {
+          "x": 980,
+          "y": 420
+        },
+        {
+          "x": 880,
+          "y": 380
+        },
+        {
+          "x": 650,
+          "y": 380
+        },
+        {
+          "x": 576,
+          "y": 342
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 576,
+          "y": 342
+        },
+        {
+          "x": 576,
+          "y": 380
+        },
+        {
+          "x": 700,
+          "y": 450
+        },
+        {
+          "x": 830,
+          "y": 600
+        },
+        {
+          "x": 670,
+          "y": 682
+        },
+        {
+          "x": 550,
+          "y": 762
+        },
+        {
+          "x": 250,
+          "y": 902
+        },
+        {
+          "x": 100,
+          "y": 932
+        },
+        {
+          "x": 0,
+          "y": 918
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 342,
+      "w": 1024,
+      "h": 768,
+      "points": [
+        {
+          "x": 576,
+          "y": 342
+        },
+        {
+          "x": 576,
+          "y": 380
+        },
+        {
+          "x": 850,
+          "y": 380
+        },
+        {
+          "x": 980,
+          "y": 420
+        },
+        {
+          "x": 1024,
+          "y": 406
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "summary": "8×6 Block；中央齿轮竖向跨越两段摆渡；新增顶口C，三口六向设计。",
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "designNotes": [
+    "左右各裁1列，从10×6变为8×6，边界x0–1024、y342–1110；两段摆渡原始轨迹不变。",
+    "原半径20px齿轮改为中央x512竖向正弦移动：中心原点(512,710)，竖向振幅240，范围y470–950，周期暂保留4.8秒。此范围覆盖下段摆渡中心高度792–932和上段490–630；实际相位与可避让窗口待验证。",
+    "最高平台保留为可穿平台；新增TOP C=(576,342)、ONE_WAY_PLATFORM、INOUT，复用其下方y398安全支撑，不使用无合法向上连接的AIR输出。",
+    "右边裁剪移除旧出口岸，原独立岩体岸内移到x960–1024、y438；上层可穿台裁到x960，形成40px下落接岸，避免把exit口埋在平台里。",
+    "三口6个不同端口间有向关系均为设计目标，含上下攀升与回落。回落利用原可穿平台离台/下跳机制，切换到不同相位的摆渡台；不复用去程轨迹推断回程成功。",
+    "所有动态相位、人物全身净空、资源/冷却、齿轮接触和失败恢复UNKNOWN，定稿后用原Godot Harness验证。"
+  ],
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit",
+      "C"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "entry",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "exit",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "C",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:f63f5498563aa4befc67726033aac3a6df4b8b4b5f3eb44d1c2d56404783960c"
+}

@@ -28,6 +28,26 @@
 
 最新反馈013优先：36/37/39按已发布版本保留（36/37重复确认不重复入库），实现交接共21项。用户要求后续先审无钩索平原、钩索最后：按generation/manual-review/order-policy.json重排未审批次，前8批及已收到意见的批次/稳定Module编号不变；批次与编号不再按数学连续区间对应，始终按reviewId查找。共享SVG渲染器的审阅模式补齐零尺寸hookBounce/hookHang的蓝环/H编号，图像缓存使用hooks-v1路径，原Module/参数/位置/内容版本不改。入口node tools/build_manual_review.mjs；不新建内容或跑物理。
 
+最新反馈014优先：第9批116–120全部仅改图文并保持批次成员。116左右裁1成6×3，摆渡台上原陆地怪、机关画为原ferry启停而非占位门；怪物承载待验。117左右1/底1成7×2，完整两格地面缺口x512–768、两只空中怪。118上方暂增2行成9×5，三平台y470同高、宽180，边距/台间153等距。119左右各1成7×2；120右1成7×3。原Module不改、动作/恢复UNKNOWN、不跑物理；实现清单仍21项，本批未获认可不加入。默认入口按当前版本待审批状态定位，不能因批次收到旧版意见就跳过新版复审。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-009/feedback-001。
+
+最新反馈015优先：116–120按用户提供精确设计版本保留，实现交接共26项；121/124设计废弃。122左右裁1成为8×6，中央齿轮竖向中心范围y470–950覆盖两段摆渡，顶口C为可穿平台双向口，三口6向目标。123左裁1/右2为6×4，保留原单段摆渡。125左裁1/右2/底1为4×5，保留原三个侧口再加顶部可穿双向C，因此四口12向目标。所有新路线技术UNKNOWN，当前只图文、不改真实Module、不跑Godot；122/123/125待复审。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-010/feedback-001。
+
+最新反馈016优先：用户“122-123-125保留”绑定当前已发布batch-010/feedback-001精确设计版本，实现交接共29项。126/128/129设计废弃；127/130待复审。127上增1格成4×2，原地面齿轮改左右、新增中央竖向齿轮，地刺保留，参数仅设计目标。130左1/右2/上1/下1裁为5×3；原高出口被裁，改(640,252)，末级原台下移74px至y284接岸，原底部危险随裁行移除。仅图文，不改真实Module、不跑物理；入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-011/feedback-001。
+
+最新反馈017优先：127按已发布设计保留；130按“增加port互通后保留”只补现有两口的exit→entry返程目标并绑定feedback-002结果版本，地貌不变。134按原参考Module版本原样保留，交接designFileKind=source_module_reference，核generationContract.contentVersion，不另造设计认可。实现交接共32项；131废弃；132/133/135待复审。132顶平台替换朝下尖刺，原地面齿轮保留；133右1/下1裁为3×1；135重排为2×2，仅两个岩台，左下(0,456)/右上(256,328)两口双向目标。真实物理与生产认可UNKNOWN，不改原Module或跑Godot。图文入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-012/feedback-001。
+
+最新反馈018优先：132/133/135按已发布batch-012/feedback-001精确设计版本保留，实现交接共35项；136/137/139设计废弃。138左裁1/右2成为3×3，两口双向目标；原出口岸被裁，最高原台上移56px至y44、裁短为64px接新出口，不新增冗余台。140左2/右3成为7×2，560px缺口和坑底危险区不改，仅声明原去程。138/140待复审。只更新设计图文，不修改真实Module、不跑物理。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-013/feedback-001。
+
+最新反馈019优先：第14批141–145全部按用户提供参考版本废弃；只记录设计决定，原件保留，不改库内容。已确认设计仍35项，138/140修订稿仍待复审，第13/14批的成员冻结，不因后批反馈跳过前批待审。
+
+最新反馈020优先：138原设计已两口双向，原版本保留；140仅补exit→entry目标后按条件保留，feedback-002绑定新版本，地貌不变。实现交接共37项；149设计废弃。146左裁4成5×2、铃右移3格，删前两空中台留门后台；三面长岩罩只留右口，门顶荆棘。147成6×3、清冗余台，铃2左上右岩罩、下方G1由铃1控制，铃2控制G2右门，门顶荆棘。两者门窗口UNKNOWN，不把来源0秒当有效时长，蓝色虚线仅射击意图、反例与物理待验。148加1空中怪；150在第2/5/8/11平台各加1陆怪。146/147/148/150待复审，只图文不改真实Module、不跑物理。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-015/feedback-001。
+
+最新反馈021/022优先：146/148/150按当前修订版保留；147按“改完后保留”绑定feedback-002：地面增加一只plains_sentry，G1为有限计时、铃1命中计时、可重开、防夹，秒数及恢复UNKNOWN。实现交接共41项。151/152/153/155设计废弃；154左右各裁1成为7×1，原双荆棘、移动齿轮轨迹与周期保留，仅图文、技术UNKNOWN待复审。本会话不实施、不跑Godot。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-016/feedback-001。
+
+最新反馈023优先：147重复保留不重复入清单，154按已发布精确版本保留，实现交接42项；158废弃。156左右裁1为5×2，左右墙刺对称向外，两口双向目标；157左右裁1为6×1，齿轮中心行程200/240px、周期2.8/4.6秒仅设计参数；159三陆三空共6只，原地貌不改；160左1右2成6×5，起点台下移6px对齐接口、摆渡轨迹保留。156/157/159/160待复审。本会话仅图文、不改真实Module、不跑物理。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-017/feedback-001。
+
+最新反馈024优先：第17批156/157/159/160按已发布精确版本保留，158仍废弃；实现交接46项。164废弃。161左右裁1为4×3；162左裁1并为高门上增1格为7×3，门顶y76/高224接边界，原3秒仅待验初值；163左右裁1为4×3，下铃1/上铃2同x170、相差96px，独立顺序触发缺口明确；165左右裁1为5×4，原井/铃/门不改。161/162/163/165待复审，只图文、不改真实Module、不跑物理。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-018/feedback-001。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）

@@ -1,0 +1,247 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-bell-ferry-control",
+  "reviewId": "116",
+  "title": "风铃控制摆渡",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-bell-ferry-control/module.mapnote.json",
+    "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
+    "sha256": "b8f99d9c699d740a98f18d88eedab85c0cf3ddd80db44d125a16debb26d81090"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 76,
+    "w": 768,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        268
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        768,
+        268
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除左1列，右1列。平台上加一个怪",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 300,
+      "w": 200,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1",
+      "type": "terrain",
+      "x": 600,
+      "y": 300,
+      "w": 168,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0",
+      "type": "hazard",
+      "x": 200,
+      "y": 430,
+      "w": 400,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
+      "type": "platform",
+      "x": 180,
+      "y": 300,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "风铃摆渡台",
+      "note": "",
+      "sourceId": "bell_ferry",
+      "trackId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+      "mechanics": {
+        "control": "original ShotLatch.bind_motion start/pause",
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "diagramLabelBelow": true
+    },
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+      "type": "trackLine",
+      "x": 240,
+      "y": 312,
+      "w": 320.000001,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 240,
+          "y": 312
+        },
+        {
+          "x": 560,
+          "y": 312
+        }
+      ],
+      "duration": 2.5,
+      "dwell": 1.2,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+      "type": "bell",
+      "x": 116,
+      "y": 203,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "windchime_plains_bell_ferry_control",
+      "note": "",
+      "targetId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
+      "sourceId": "windchime_plains_bell_ferry_control",
+      "mechanics": {
+        "runtimeParameters": {
+          "inactiveGate": [
+            740,
+            210,
+            24,
+            90
+          ],
+          "ferry_id": "bell_ferry",
+          "prompt": "SHOOT TO START / SHOOT TO PARK",
+          "kind": "toggle_ferry",
+          "link_color": "a4dce8",
+          "actuator_id": "bell_ferry"
+        }
+      },
+      "targetIds": [
+        "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0"
+      ],
+      "diagramLabel": "启停铃"
+    },
+    {
+      "id": "design-ferry-guard",
+      "type": "enemy",
+      "definition": "plains_sentry",
+      "x": 226,
+      "y": 268,
+      "w": 28,
+      "h": 32,
+      "label": "摆渡台陆地怪",
+      "placementSupportId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
+      "mechanics": {
+        "status": "DESIGN_TARGET_ONLY",
+        "supportPolicy": "Verify original enemy/platform carrying; no scripted teleport attachment"
+      }
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 76,
+      "w": 768,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 100,
+          "y": 282
+        },
+        {
+          "x": 210,
+          "y": 240
+        },
+        {
+          "x": 240,
+          "y": 282
+        },
+        {
+          "x": 400,
+          "y": 282
+        },
+        {
+          "x": 550,
+          "y": 282
+        },
+        {
+          "x": 650,
+          "y": 250
+        },
+        {
+          "x": 700,
+          "y": 282
+        },
+        {
+          "x": 768,
+          "y": 268
+        }
+      ]
+    }
+  ],
+  "summary": "6×3 Block；左右各裁1列；摆渡平台上新增1只陆地怪。",
+  "designNotes": [
+    "左右各裁1列，从8×3变为6×3 Block；原平台轨迹、坑底危险带和两岸高度保留，entry/exit移至(0,268)/(768,268)。",
+    "“平台上加怪”暂按摆渡台上的原plains_sentry陆地怪处理；初始x226–254、脚底y300与摆渡台顶面对齐。",
+    "保留原SHOOT TO START / SHOOT TO PARK与ferry_id=bell_ferry控制关系。旧图的gate对象是bind_motion使用的inactiveGate构造占位，本图显示风铃连摆渡台，不画成实际挡路门。",
+    "平台运动时怪物的真实承载/走动、人物碰撞和攻击时机需要用原Cell验证；图稿不通过逐帧传送把怪物固定在台上。仅声明entry→exit，动态相位、资源与失败恢复UNKNOWN。"
+  ],
+  "designVersion": "sha256:fdc36f9a04905e9a4a1c1cc7e2a7af33261bef2e0d33af14d5c7e64167169055"
+}

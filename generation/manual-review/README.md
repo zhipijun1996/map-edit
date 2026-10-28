@@ -29,3 +29,5 @@ python3 tools/publish_design_review.py generation/manual-review/designs/batch-00
 钩索审阅图支持 `reference_display`：直接引用原Module文件、SHA和参考版本，只补画零尺寸钩点及来源动作顺序，保持原技术状态与待审批问题。此模式不重写Module、不生成新设计版本；与几何修订设计稿分别标识。
 
 当前排序按 `order-policy.json`：前8批及后续已收到人工意见的批次冻结。未审内容按“平原无钩索 → 其他无钩索 → 钩索”重排，每批至多5项；Module稳定编号、来源SHA、内容版本和意见键不变。普通钩索图由共享SVG渲染器的审阅模式自动绘制蓝环与H编号，使用hooks-v1图片路径防止旧图缓存；运行 `node tools/build_manual_review.mjs` 即可增量更新。
+
+收到旧版修改意见后，新设计稿仍需复审；默认入口按当前版本是否已保留/废弃定位，而不是单凭批次已冻结就跳过。第9批116–120成员在本轮修改后继续保留。
