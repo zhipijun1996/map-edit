@@ -1,0 +1,420 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "batch30-d04-0",
+  "reviewId": "17",
+  "title": "去程留下的桥 / 宽回廊",
+  "summary": "8×4 Block；四边裁剪，移除底口B；保留左右A/C与移动桥，坑底加危险带。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/batch30-d04-0/module.mapnote.json",
+    "contentVersion": "sha256:843cf949f0bd2adf3fb1e6210575bec544519e9ee6c77a3488570b97b2d4be92",
+    "sha256": "8ad0016e7a66902159e239cb90defec8fd1c6a4694a205f278dce6d72b0b2a5e"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 214,
+    "w": 1024,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        128,
+        406
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        1152,
+        662
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-C",
+      "from": "A",
+      "to": "C",
+      "pathObjectId": "design-route-A-to-C",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-A",
+      "from": "C",
+      "to": "A",
+      "pathObjectId": "design-route-C-to-A",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删掉上方6行，左侧5列，下方3行，右侧5列block，下方port移除了，在中间镂空跳跃处下方添加危险地带。",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 438,
+      "w": 112,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-1",
+      "type": "platform",
+      "x": 570,
+      "y": 438,
+      "w": 180,
+      "h": 12,
+      "rotation": 0,
+      "label": "中继平台",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-2",
+      "type": "terrain",
+      "x": 780,
+      "y": 214,
+      "w": 55,
+      "h": 326,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-3",
+      "type": "terrain",
+      "x": 1030,
+      "y": 694,
+      "w": 122,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-5",
+      "type": "terrain",
+      "x": 220,
+      "y": 650,
+      "w": 180,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 5,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-7",
+      "type": "terrain",
+      "x": 465,
+      "y": 325,
+      "w": 30,
+      "h": 115,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 7,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/moving-0",
+      "type": "platform",
+      "x": 212,
+      "y": 610,
+      "w": 176,
+      "h": 20,
+      "rotation": 0,
+      "label": "移动桥：射铃启停",
+      "note": "",
+      "sourceId": "return-deck",
+      "trackId": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/moving-track-0",
+      "mechanics": {
+        "control": "original ShotLatch.bind_motion start/pause",
+        "initialRunning": false,
+        "clock": "original ModuleMovingPlatform.motion_clock",
+        "bellId": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/bell-0"
+      }
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/moving-track-0",
+      "type": "trackLine",
+      "x": 300,
+      "y": 620,
+      "w": 600.000001,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 300,
+          "y": 620
+        },
+        {
+          "x": 900,
+          "y": 620
+        }
+      ],
+      "duration": 3,
+      "dwell": 0.15,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/bell-0",
+      "type": "bell",
+      "x": 141,
+      "y": 378,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "return-control",
+      "note": "",
+      "targetId": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/moving-0",
+      "sourceId": "return-control",
+      "mechanics": {
+        "runtimeParameters": {
+          "inactiveGate": [
+            -100,
+            100,
+            10,
+            10
+          ],
+          "ferry_id": "return-deck"
+        }
+      },
+      "diagramLabel": "启停铃"
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/cache-0",
+      "type": "reward",
+      "x": 1092,
+      "y": 658,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            1110,
+            632
+          ],
+          "region": [
+            1080,
+            627,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-1-window-left",
+      "type": "terrain",
+      "x": 570,
+      "y": 438,
+      "w": 40,
+      "h": 100,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 8
+    },
+    {
+      "id": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/platform-1-window-right",
+      "type": "terrain",
+      "x": 738,
+      "y": 438,
+      "w": 12,
+      "h": 100,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 9
+    },
+    {
+      "id": "design-central-pit-hazard",
+      "type": "hazard",
+      "shape": "spikes",
+      "x": 240,
+      "y": 694,
+      "w": 790,
+      "h": 32,
+      "label": "坑底荆棘危险带",
+      "mechanics": {
+        "kind": "design_static_hazard",
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "design-route-A-to-C",
+      "type": "route",
+      "x": 128,
+      "y": 214,
+      "w": 1024,
+      "h": 512,
+      "points": [
+        {
+          "x": 128,
+          "y": 406
+        },
+        {
+          "x": 220,
+          "y": 406
+        },
+        {
+          "x": 310,
+          "y": 286
+        },
+        {
+          "x": 430,
+          "y": 248
+        },
+        {
+          "x": 550,
+          "y": 330
+        },
+        {
+          "x": 620,
+          "y": 420
+        },
+        {
+          "x": 720,
+          "y": 420
+        },
+        {
+          "x": 744,
+          "y": 500
+        },
+        {
+          "x": 756,
+          "y": 592
+        },
+        {
+          "x": 860,
+          "y": 592
+        },
+        {
+          "x": 940,
+          "y": 540
+        },
+        {
+          "x": 1040,
+          "y": 620
+        },
+        {
+          "x": 1070,
+          "y": 676
+        },
+        {
+          "x": 1152,
+          "y": 662
+        }
+      ]
+    },
+    {
+      "id": "design-route-C-to-A",
+      "type": "route",
+      "x": 128,
+      "y": 214,
+      "w": 1024,
+      "h": 512,
+      "points": [
+        {
+          "x": 1152,
+          "y": 662
+        },
+        {
+          "x": 1060,
+          "y": 676
+        },
+        {
+          "x": 968,
+          "y": 560
+        },
+        {
+          "x": 876,
+          "y": 592
+        },
+        {
+          "x": 744,
+          "y": 592
+        },
+        {
+          "x": 700,
+          "y": 424
+        },
+        {
+          "x": 620,
+          "y": 420
+        },
+        {
+          "x": 500,
+          "y": 260
+        },
+        {
+          "x": 350,
+          "y": 286
+        },
+        {
+          "x": 220,
+          "y": 406
+        },
+        {
+          "x": 128,
+          "y": 406
+        }
+      ]
+    }
+  ],
+  "designNotes": [
+    "按原占地裁顶部6行、左5列、底部3行、右5列，从18×13裁为8×4 Block；新边界x128–1152、y214–726。",
+    "移除底部B口及所有涉及B的端口路线；中央落脚平台仍是内部地貌，不再冒充出口。原A/C口移至新左右边界，保持各自Block中心高度。",
+    "坑底危险带位于x240–1030、y694–726，仅在两岸之间；裁剪范围内的原落脚台、中继平台与风铃启停移动桥保留。",
+    "裁剪后的右岸为对齐C口净空，下移44px到y694并裁薄为32px；岸上宝箱同步下移，不新增接缝补台。",
+    "去程经中继台转入墙下移动桥并到右岸；回程需利用留下/重新停住的桥经过墙下，再回中继台与左岸。两条均为设计目标，动态相位、真实反冲、失败恢复与连续进出状态UNKNOWN。",
+    "原门标记是bind_motion禁用碰撞的构造占位，本图不把它画作实际的门。"
+  ],
+  "designVersion": "sha256:64b5d57974080a1c26d39f2f6b3408e27fded8e48329ad6c79b36b9bf6c000bf"
+}
