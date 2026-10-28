@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -348,7 +348,13 @@ def continuous_exit(case, doc):
         raise ValueError('continuous_exit_needs_explicit_terminal_settle')
     if port['normal'][0]:
         target = port['position'][0]+port['normal'][0]*48
-        value['control_plan'][settle_indices[-1]]['target_x'] = target
+        origin=next(p for p in doc['generationContract']['ports']if p['id']==route['from_port'])
+        earned_reward_dock=case.get('approved_first30',{}).get('reviewId')=='17'and route['to_port']=='C'
+        if (origin.get('surface')=='AIR' and abs(case['spawn'][0]-case['exit_port'][0])<64) or earned_reward_dock:
+            # First complete the authored downward landing. Retargeting the
+            # only settle while still in the sky crosses the side aperture high.
+            value['control_plan'] += [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='wait',trigger=dict(after=6)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)] if earned_reward_dock else [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)]
+        else:value['control_plan'][settle_indices[-1]]['target_x'] = target
         value['goal'] = [target-9, port['stagingPosition'][1]-5, 18, 10]
     else:
         # Finish the original reward/core landing before moving to the new
@@ -494,6 +500,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=classify(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v2 import classify as reviewed_exterior
     judgment=reviewed_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v3 import classify as sky_exterior
+    judgment=sky_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -581,9 +589,18 @@ def verify_report(folder, proof):
     core.verify_artifacts([proof])
     report_path = core.resolve_artifact(proof['path']); run_path = report_path.parent
     report = core.read(report_path)
-    if report.get('boundaryRepair'):
-        from .review_boundary_repair_v1 import validate_lineage
-        validate_lineage(report,report_path)
+    lineage_report=report
+    if report.get('metadataCorrection'):
+        from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
+        lineage_report=validate_metadata(report,report_path)
+    if lineage_report.get('boundaryRepair'):
+        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v3':
+            from .review_boundary_repair_v3 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v2':
+            from .review_boundary_repair_v2 import validate_lineage
+        else:
+            from .review_boundary_repair_v1 import validate_lineage
+        validate_lineage(lineage_report,report_path)
     doc = core.read(Path(folder)/'module.mapnote.json')
     if report['schema'] != 'pcg/foundation-migration-physics/v1' or report['contentVersion'] != doc['generationContract']['contentVersion']:
         raise ValueError('physics_report_bound_to_another_version')
@@ -597,7 +614,7 @@ def verify_report(folder, proof):
     input_binding = core.read(run_path/'input-binding.json')
     physics_cases_path = Path(folder)/'physics-input-cases.json'
     if not physics_cases_path.exists(): physics_cases_path = Path(folder)/'cases.json'
-    if input_binding['contentVersion'] != doc['generationContract']['contentVersion'] or input_binding['cases']['sha256'] != core.sha(physics_cases_path):
+    if input_binding['contentVersion'] != lineage_report['contentVersion'] or input_binding['cases']['sha256'] != core.sha(physics_cases_path):
         raise ValueError('physics_input_not_bound_to_current_module')
     canonical_cases = core.read(physics_cases_path)['cases']
     playback_cases = core.read(Path(folder)/'cases.json')['cases']
@@ -734,6 +751,9 @@ def _verification_identity(folder, proof):
         holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
         reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
         reviewCounterScopeV2=core.sha(Path(__file__).with_name('review_counter_scope_v2.py')),
+        reviewCounterScopeV3=core.sha(Path(__file__).with_name('review_counter_scope_v3.py')),
+        metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),
+        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3')},
         airInterfaces=core.sha(Path(__file__).with_name('air_interfaces_v1.py')),
         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
         report=proof, runFiles=files,

@@ -1,0 +1,42 @@
+"""Rebind two provenance labels to the already executed runner and observer.
+
+No physics input, route, geometry, protocol, budget or raw result may change.
+"""
+import copy
+from . import core
+
+def _semantic(doc):
+    d=copy.deepcopy(doc);g=d['generationContract']
+    for k in ('contentVersion','staticChecks','visualization'):g.pop(k,None)
+    binding=g['generation']['approvedImplementation']
+    for k in ('runtimeSource','observerSource'):binding.pop(k,None)
+    return d
+
+def validate_lineage(report,path):
+    record=report['metadataCorrection']
+    if record.get('schema')!='pcg/review-runtime-label-correction/v1'or record.get('newPhysicsAttempts')!=0 or record.get('newIndependentHoldout')is not False:raise ValueError('invalid_runtime_label_correction')
+    core.verify_artifacts([record[k]for k in ('sourceReport','originalModule','correctedModule','canonicalCases','actualRunner','actualObserver')])
+    previous=core.read(core.resolve_artifact(record['sourceReport']['path']))
+    if not previous.get('passed')or previous.get('holdoutPool'):raise ValueError('runtime_label_correction_requires_complete_unpooled_original_proof')
+    protected={k:v for k,v in report.items()if k not in ('contentVersion','metadataCorrection')}
+    if protected!={k:v for k,v in previous.items()if k!='contentVersion'}:raise ValueError('runtime_label_correction_changed_experiments')
+    old=core.read(core.resolve_artifact(record['originalModule']['path']));new=core.read(core.resolve_artifact(record['correctedModule']['path']))
+    if _semantic(old)!=_semantic(new):raise ValueError('runtime_label_correction_changed_physical_or_interface_content')
+    if previous['contentVersion']!=old['generationContract']['contentVersion']or report['contentVersion']!=new['generationContract']['contentVersion']:raise ValueError('runtime_label_correction_version_mismatch')
+    b=new['generationContract']['generation']['approvedImplementation']
+    if b['runtimeSource']!=record['actualRunner']or b['observerSource']!=record['actualObserver']:raise ValueError('runtime_label_correction_not_exact')
+    binding=core.read(core.resolve_artifact(previous['sourceBinding']['path']))
+    runner_relative=core.resolve_artifact(record['actualRunner']['path']).relative_to(core.REPO/'pcg').as_posix()
+    if not str(binding.get('runner','')).endswith('/pcg/'+runner_relative):raise ValueError('runtime_label_correction_not_the_executed_top_level_runner')
+    from . import physics
+    import inspect
+    inputs=core.read(core.resolve_artifact(record['canonicalCases']['path']))['cases']
+    for case in inputs:
+        actual=inspect.getsourcefile(physics.author_for(case).purpose)
+        if core.relative(actual)!=record['actualObserver']['path']:raise ValueError('runtime_label_correction_not_the_executed_observer')
+    for key in ('actualRunner','actualObserver'):
+        rel=core.resolve_artifact(record[key]['path']).relative_to(core.REPO/'pcg').as_posix()
+        if binding['source_files'].get(rel)!=record[key]['sha256']:raise ValueError('runtime_label_correction_not_the_executed_source')
+    input_binding=core.read(core.resolve_artifact(record['sourceReport']['path']).parent/'input-binding.json')
+    if input_binding['module']!=record['originalModule']or input_binding['cases']['sha256']!=record['canonicalCases']['sha256']:raise ValueError('runtime_label_correction_not_bound_to_original_inputs')
+    return previous

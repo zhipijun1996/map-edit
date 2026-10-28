@@ -176,7 +176,24 @@ def check(folder,*,existing_report=None,protocol_path=None,refresh_locks=True):
         registration=declaration['declaration'])
 
 
-def register_pool(folder,pool_id):
+def _continuation_allowance(folder,reference,registered):
+    """One prospectively declared continuation for an exact frozen repair.
+
+    The legacy protocol/revision budget and all prior observations stay intact.
+    This is explicit task bookkeeping, never an automatic retry or seed option.
+    """
+    if reference is None:return 0,None
+    core.verify_artifacts([reference]);record=core.read(core.resolve_artifact(reference['path']))
+    if record.get('schema')!='pcg/frozen-repair-continuation-budget/v1' or record.get('maximumAdditionalPoolsPerSource')!=1 or record.get('seedsAllocated')is not False:raise ValueError('invalid_continuation_budget')
+    core.verify_artifacts([record['taskAuthorization']]);identity=_identity(folder);canonical,cases=_cases(folder)
+    row=next((r for r in record['rows']if r['source']==identity and r['documentSha256']==core.sha(Path(folder)/'module.mapnote.json')and r['canonicalCasesSha256']==core.sha(canonical)),None)
+    if row is None:raise ValueError('continuation_budget_not_bound_to_this_frozen_repair')
+    if set(row['priorPoolIds'])!={r['id']for r in registered}:raise ValueError('continuation_budget_history_changed_or_already_used')
+    if len(row['priorPoolIds'])!=2 or record.get('thresholdsAndNoiseUnchanged')is not True:raise ValueError('continuation_cannot_change_original_gates')
+    return 1,reference
+
+
+def register_pool(folder,pool_id,*,continuation_budget=None):
     """Allocate once after freezing a genuinely revised candidate, never reroll.
 
     Allocate conditions once after freezing the genuinely revised candidate,
@@ -199,6 +216,8 @@ def register_pool(folder,pool_id):
             bind_registered_pool(folder,previous['id'])
             return dict(status='already_registered_no_reroll',registration=previous,requiresRuntimeProtocolIntegration=False)
         maximum=core.read(physics.FULL_PROTOCOL).get('maximumAdaptationRevisions',2)
+        allowance,continuation=_continuation_allowance(folder,continuation_budget,registered)
+        maximum+=allowance
         if len(registered)>=maximum:raise ValueError('preregistered_revision_pool_budget_exhausted')
         target=POOLS/pool_id
         if target.exists()or any(p['id']==pool_id for p in state['independentPools']):raise ValueError('independent_pool_id_already_used')
@@ -224,6 +243,7 @@ def register_pool(folder,pool_id):
             allocationNonce=allocation_nonce,candidateFrozenBeforeAllocation=True,
             baseProtocol=dict(path=core.relative(physics.FULL_PROTOCOL),sha256=core.sha(physics.FULL_PROTOCOL)),
             runtimeProtocolIntegration='REGISTERED_POOL_RUNTIME_V1',humanApproval='UNKNOWN')
+        if continuation is not None:declaration['prospectiveContinuationBudget']=continuation
         target.mkdir(parents=True);core.write(target/'protocol.json',protocol);core.write(target/'registration.json',declaration)
         row=dict(id=pool_id,source=identity,frozenCandidate=frozen,pool=declaration['pool'],poolKey=digest(declaration['pool']),
             protocol=dict(path=core.relative(target/'protocol.json'),sha256=core.sha(target/'protocol.json')),

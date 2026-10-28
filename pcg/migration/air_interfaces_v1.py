@@ -13,6 +13,9 @@ def fixture(case,port,direction,offset=0,kind='local_boundary',label=None):
     value.update(spawn=start,entry_port=start[:],exit_port=target,goal=[x-9,y+43,18,10],
         control_plan=[dict(op='axis',value=0,trigger=dict(after=0))],max_frames=240,
         air_probe_points=[start,target],air_goal_probe=dict(portId=port['id'],direction=direction,boundary=[x,y]))
+    # A grounded source may require a longer stand. AIR's declared contract
+    # instead requires six full-body downward crossing frames inside its apron.
+    if value.get('settle_frames',6)!=6:value['settle_frames']=6
     neighbor=dict(portId=port['id'],source='explicit_test_neighbor_air',floor=None,
         airRectangle=dict(x=x-64,y=y-128 if direction=='ingress'else y,w=128,h=128),copiedIntoModule=False)
     value['migration_probe']=dict(kind=kind,portId=port['id'],direction=direction,boundary=[x,y],normal=port['normal'],neighbor=neighbor,body=[24,36],

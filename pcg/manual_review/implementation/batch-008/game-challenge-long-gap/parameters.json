@@ -1,0 +1,146 @@
+{
+  "designVersion": "sha256:36fe14c96962bd96d170b6b49130ab3a2249049b7b87615ebe85c2c354af7b54",
+  "content": {
+    "platforms": [
+      [
+        128,
+        600,
+        172,
+        40
+      ],
+      [
+        700,
+        600,
+        196,
+        40
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        300,
+        680,
+        400,
+        40
+      ]
+    ],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 310,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              305,
+              578,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            -1,
+            0
+          ],
+          "height_threshold": 548,
+          "trigger": {
+            "after": 0,
+            "state": "shot_ready_above",
+            "timeout": 90
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            -1,
+            0
+          ],
+          "height_threshold": 560,
+          "brake_target_y": 538,
+          "trigger": {
+            "after": 0,
+            "state": "shot_ready_below",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 4,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false,
+  "repairSelection": {
+    "path": "pcg/results/approved-b040-36-control-screen-v5/screen.json",
+    "sha256": "d1bc71131ac12576d162a78a6786658bee4d8d3430dd172f026fc34af76f5a6a"
+  }
+}
