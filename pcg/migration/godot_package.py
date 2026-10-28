@@ -188,7 +188,7 @@ def content_from_objects(doc):
             if o.get('sourceId'):value['source_id']=o['sourceId']
             content['hooks'].append(value);used.add(o['id'])
         elif kind=='enemy':
-            if not o.get('sourceId')or o.get('definition')not in ('plains_sentry','plains_charger'):_fail('unsupported_cell',object_id=o['id'],kind=kind)
+            if not o.get('sourceId')or o.get('definition')not in ('plains_sentry','plains_charger','plains_diver'):_fail('unsupported_cell',object_id=o['id'],kind=kind)
             definition=PROJECT/'resources/enemies'/(o['definition']+'.tres')
             size=re.search(r'collision_size = Vector2\(([^,]+), ([^)]+)\)',definition.read_text())
             if not size:_fail('missing_enemy_collision_size',object_id=o['id'])
@@ -358,10 +358,12 @@ def compile_package(module_path, cases_path, output_dir, *, stable_id=None, proj
     if project!=PROJECT:_fail('unsupported_runtime_project',expected=str(PROJECT),actual=str(project))
     doc=_json(module_path);raw=_json(cases_path);cases=raw.get('cases',[])if isinstance(raw,dict)else raw
     if _extension is None:
+        from . import review_air_runtime
+        if review_air_runtime.required(doc,cases):_extension=review_air_runtime
         from . import godot_package_v4
         from . import godot_package_v5
-        if godot_package_v5.required(doc,cases):_extension=godot_package_v5
-        elif godot_package_v4.required(doc,cases):_extension=godot_package_v4
+        if _extension is None and godot_package_v5.required(doc,cases):_extension=godot_package_v5
+        elif _extension is None and godot_package_v4.required(doc,cases):_extension=godot_package_v4
     content,audit=(_extension.audit_cases if _extension else audit_cases)(doc,cases)
     stable_id=stable_id or re.sub(r'[^a-zA-Z0-9_-]+','-',str(doc.get('id','module'))).strip('-')
     if not stable_id or '/'in stable_id or '\\'in stable_id:_fail('invalid_stable_id',stable_id=stable_id)
@@ -399,6 +401,8 @@ def verify_package(output_dir, require_loaded=True, *, _extension=None):
     """Recompute bindings and observed results; a metadata passed=True is ignored."""
     package=Path(output_dir).resolve();manifest=_json(_internal(package,'godot-package.json'))
     if _extension is None:
+        from . import review_air_runtime
+        if manifest.get('compiler_version')==review_air_runtime.VERSION:return review_air_runtime.verify_package(package,require_loaded=require_loaded)
         from . import godot_package_v4
         from . import godot_package_v5
         if manifest.get('compiler_version')==godot_package_v5.VERSION:return godot_package_v5.verify_package(package,require_loaded=require_loaded)
