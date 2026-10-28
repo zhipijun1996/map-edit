@@ -1,0 +1,154 @@
+{
+  "schema": "pcg/mechanism-display-audit/v1",
+  "scope": "reference_display_only",
+  "rows": [
+    {
+      "reviewId": "196",
+      "source": "./modules/generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/module.mapnote.json",
+      "sourceSha256": "d6652806853b54419996bb2afa75c623233eb8183f60845cc71114c34580e440",
+      "contentVersion": "sha256:efcb8e38d814183ceec5882617f88880102394891123002696ee5ab7d0c3e3cb",
+      "sourceCases": {
+        "path": "pcg/results/workshop-creative-jump-wall-production-v5/round-00/review_cases.json",
+        "sha256": "335d0e76c7a3de8210effdfdb49f1590a3a772abc4cc3091dbf8e390aaf79b55"
+      },
+      "sourceControlPlan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "wall_attach",
+            "min_after": 3,
+            "timeout": 120
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 235
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "wall_attach",
+            "min_after": 0,
+            "timeout": 100,
+            "dynamic": {
+              "kind": "saw_phase",
+              "id": "mouth-saw",
+              "window": [
+                0.28,
+                0.34
+              ]
+            }
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "state": "wall_kick",
+            "min_after": 1,
+            "timeout": 12
+          },
+          "value": -1
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 3
+          },
+          "target_x": -90,
+          "deadband": 4
+        }
+      ],
+      "explanation": [
+        "① 从上口沿导向井进入，贴右边可蹬墙面下滑；左侧上下墙都带刺，中间才是横向出口。",
+        "② 下滑到窗口高度时，观察开口齿轮，选择向左蹬出的时机；太早撞上口，太晚已滑低。",
+        "③ 落到左岸取8金币，再去左口。原目标需要wall_climb；不是只有反冲的内容，也不是等待射铃开门。"
+      ],
+      "moduleChanged": false,
+      "newPhysicsRun": false
+    },
+    {
+      "reviewId": "197",
+      "source": "./modules/generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/module.mapnote.json",
+      "sourceSha256": "c40fef9f3ad250277b422575044b9533ec1c9a7f6ff83bc52abbd25e0721166a",
+      "contentVersion": "sha256:638f5da1f6a51c211ad582f7bb0fb89c0d6281a7ff9235e5438c646eb549032b",
+      "sourceCases": {
+        "path": "pcg/results/workshop-plains50-resources-lowray-production-v2/round-00/review_cases.json",
+        "sha256": "09d5c6debbe0ab2b436ed1e57aa5f323acfc4b3148759fd2bebb9b8f340ee311"
+      },
+      "sourceControlPlan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 265
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 34
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "low-return-key"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 430,
+          "deadband": 4
+        }
+      ],
+      "explanation": [
+        "① 左岸向右走出，落到竖直侧壁下缘以下；上面瞄低铃时，弹道会被侧壁遮住。",
+        "② 在侧壁下方朝左下射中低铃，右侧紫色门区打开；同枪反冲把人物推向右上。",
+        "③ 收回高度，落到右岸宝箱台再离开。紫色大块是门，不是岩体；下方长台是原恢复区。"
+      ],
+      "moduleChanged": false,
+      "newPhysicsRun": false
+    }
+  ],
+  "approvalInferred": false
+}

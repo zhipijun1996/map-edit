@@ -22,7 +22,7 @@ def publish(folder):
   row=dict(moduleId=r['moduleId'],reviewId=r['reviewId'],reviewStage=stage,revision=index['id'],baseSourceSha256=r['baseSourceSha256'],file=r['file'],sha256=sha(file),title=title,decisionOnSource='PENDING'if stage=='reference_display'else'CHANGE',verbatim=r['verbatim'],summary=summary,beforeDiagram=r['beforeDiagram'],beforeVersion=r['beforeVersion'],physicsSummary=r.get('displaySummary','设计讨论阶段；定稿后统一实现与验证。'),notes=r.get('notes',[]));rows.append(row)
   diagram=dict(reviewId=r['reviewId'],moduleId=r['moduleId'],title=title,summary=summary,source=r['file'],sourceSha256=sha(file))
   if r.get('hookActionDiagram'):diagram['hookActionDiagram']=r['hookActionDiagram']
-  for key in ('actionDiagram','instructions','objectLabels','labelPositions','ghosts'):
+  for key in ('actionDiagram','instructions','objectLabels','labelPositions','ghosts','shotGuides'):
    if key in r:diagram[key]=r[key]
   diagrams.append(diagram)
  write(folder/'diagram-batch.json',dict(rows=diagrams));subprocess.run(['python3',str(REVIEW/'batch-001/render_diagrams.py'),'--manifest',str(folder/'diagram-batch.json'),'--out',str(folder/'images'),'--draft'],check=True)
