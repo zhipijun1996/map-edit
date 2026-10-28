@@ -34,6 +34,8 @@
 
 最新反馈016优先：用户“122-123-125保留”绑定当前已发布batch-010/feedback-001精确设计版本，实现交接共29项。126/128/129设计废弃；127/130待复审。127上增1格成4×2，原地面齿轮改左右、新增中央竖向齿轮，地刺保留，参数仅设计目标。130左1/右2/上1/下1裁为5×3；原高出口被裁，改(640,252)，末级原台下移74px至y284接岸，原底部危险随裁行移除。仅图文，不改真实Module、不跑物理；入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-011/feedback-001。
 
+最新反馈017优先：127按已发布设计保留；130按“增加port互通后保留”只补现有两口的exit→entry返程目标并绑定feedback-002结果版本，地貌不变。134按原参考Module版本原样保留，交接designFileKind=source_module_reference，核generationContract.contentVersion，不另造设计认可。实现交接共32项；131废弃；132/133/135待复审。132顶平台替换朝下尖刺，原地面齿轮保留；133右1/下1裁为3×1；135重排为2×2，仅两个岩台，左下(0,456)/右上(256,328)两口双向目标。真实物理与生产认可UNKNOWN，不改原Module或跑Godot。图文入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-012/feedback-001。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）

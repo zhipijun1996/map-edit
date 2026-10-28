@@ -1,0 +1,161 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-low-arch",
+  "reviewId": "132",
+  "title": "低矮拱顶",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-low-arch/module.mapnote.json",
+    "contentVersion": "sha256:6d82989e97d89ef82368e5ba223a57b57833a99b1baa65e83a974d026a70f91f",
+    "sha256": "ec5a70cd37507ab633739276c62f279e685b7f35d05880799737e15088d58d72"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 76,
+    "w": 640,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        268
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        640,
+        268
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "上面平台变成刺",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 300,
+      "w": 640,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-1",
+      "type": "hazard",
+      "x": 200,
+      "y": 160,
+      "w": 240,
+      "h": 18,
+      "rotation": 0,
+      "label": "顶部朝下尖刺",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false,
+      "orientation": "DOWN"
+    },
+    {
+      "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
+      "type": "hazard",
+      "x": 302,
+      "y": 290,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "原地面齿轮",
+      "note": "",
+      "sourceId": "arch_wheel",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7,
+          "period": 4,
+          "initial_phase": 0
+        }
+      },
+      "sourceType": "gear",
+      "shape": "gears",
+      "count": 1
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 76,
+      "w": 640,
+      "h": 256,
+      "points": [
+        {
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 150,
+          "y": 268
+        },
+        {
+          "x": 245,
+          "y": 232
+        },
+        {
+          "x": 320,
+          "y": 224
+        },
+        {
+          "x": 400,
+          "y": 232
+        },
+        {
+          "x": 485,
+          "y": 268
+        },
+        {
+          "x": 640,
+          "y": 268
+        }
+      ]
+    }
+  ],
+  "summary": "5×2 Block；上方平台替换为朝下尖刺，保留原地面齿轮。",
+  "designNotes": [
+    "上方x200–440、y160–178的原平台整体替换为朝下尖刺，不保留隐形安全踏面。",
+    "原地面、两侧口与地面齿轮不改；观察上下危险间的净空，选择跳跃/反冲高度。",
+    "图线仅表达从地面齿轮上方、顶部尖刺下方通过的意图。全身净空、资源、实际动作窗口、廉价绕行、恢复及回程UNKNOWN。"
+  ],
+  "designVersion": "sha256:2916ca9d0f08d666f79de3fa33b18fd894c0fba6dd8a6747f64bc68c3c2667c5"
+}
