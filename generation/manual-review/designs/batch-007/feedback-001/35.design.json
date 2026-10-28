@@ -1,0 +1,446 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-challenge-ferry-ascent",
+  "reviewId": "35",
+  "title": "摆渡上升挑战",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-challenge-ferry-ascent/module.mapnote.json",
+    "contentVersion": "sha256:4a7a1bdb1a79595596ca325941bd9cc690aa296ed29b40af9d7e34a52cd7c199",
+    "sha256": "1342f462d22216b01d3c5c8e029d3c33732523dc0538af424cd26cbf578b5534"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": -42,
+    "w": 1024,
+    "h": 1152
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        918
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1024,
+        22
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除左侧1列右侧1列block，中间三段分别增加1个空中怪物",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 950,
+      "w": 180,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/platform-1",
+      "type": "terrain",
+      "x": 620,
+      "y": 700,
+      "w": 120,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/platform-2",
+      "type": "terrain",
+      "x": 320,
+      "y": 398,
+      "w": 140,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/platform-3",
+      "type": "terrain",
+      "x": 800,
+      "y": 96,
+      "w": 200,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/hazard-0",
+      "type": "hazard",
+      "x": 44,
+      "y": 1000,
+      "w": 912,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/hazard-1",
+      "type": "hazard",
+      "x": 920,
+      "y": 350,
+      "w": 35,
+      "h": 500,
+      "rotation": 0,
+      "label": "原侧壁危险区",
+      "note": "",
+      "shape": "zone"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/hazard-2",
+      "type": "hazard",
+      "x": 740,
+      "y": 700,
+      "w": 60,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/saw-0",
+      "type": "hazard",
+      "x": 102,
+      "y": 522,
+      "w": 56,
+      "h": 56,
+      "rotation": 0,
+      "label": "原移动齿轮",
+      "note": "",
+      "sourceId": "lower_wall_saw",
+      "trackId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/saw-track-0",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      },
+      "shape": "gears",
+      "count": 1,
+      "sourceType": "gear"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/saw-track-0",
+      "type": "trackLine",
+      "x": 130,
+      "y": 420,
+      "w": 9.999999974752427e-07,
+      "h": 260.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 130,
+          "y": 420
+        },
+        {
+          "x": 130,
+          "y": 680
+        }
+      ],
+      "duration": 4,
+      "mode": "sine",
+      "initialPhase": 0
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-0",
+      "type": "platform",
+      "x": 190,
+      "y": 920,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "摆渡1",
+      "note": "",
+      "sourceId": "ascent_0",
+      "trackId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-0"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-0",
+      "type": "trackLine",
+      "x": 250,
+      "y": 792,
+      "w": 300.000001,
+      "h": 140.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 250,
+          "y": 932
+        },
+        {
+          "x": 550,
+          "y": 792
+        }
+      ],
+      "duration": 3,
+      "dwell": 1.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-1",
+      "type": "platform",
+      "x": 770,
+      "y": 618,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "摆渡2",
+      "note": "",
+      "sourceId": "ascent_1",
+      "trackId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-1"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-1",
+      "type": "trackLine",
+      "x": 500,
+      "y": 490,
+      "w": 330.000001,
+      "h": 140.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 830,
+          "y": 630
+        },
+        {
+          "x": 500,
+          "y": 490
+        }
+      ],
+      "duration": 3,
+      "dwell": 1.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-2",
+      "type": "platform",
+      "x": 200,
+      "y": 316,
+      "w": 120,
+      "h": 24,
+      "rotation": 0,
+      "label": "摆渡3",
+      "note": "",
+      "sourceId": "ascent_2",
+      "trackId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-2"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/moving-track-2",
+      "type": "trackLine",
+      "x": 260,
+      "y": 188,
+      "w": 440.000001,
+      "h": 140.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 260,
+          "y": 328
+        },
+        {
+          "x": 700,
+          "y": 188
+        }
+      ],
+      "duration": 3,
+      "dwell": 1.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/replay-shore-approach-exit",
+      "type": "terrain",
+      "x": 1000,
+      "y": 96,
+      "w": 24,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 6
+    },
+    {
+      "id": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/replay-independent-dock-exit",
+      "type": "terrain",
+      "x": 960,
+      "y": 54,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 7
+    },
+    {
+      "id": "design-ascent-air-enemy-1",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 416,
+      "y": 774,
+      "w": 28,
+      "h": 32,
+      "label": "第1段空中怪",
+      "mechanics": {
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "design-ascent-air-enemy-2",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 636,
+      "y": 464,
+      "w": 28,
+      "h": 32,
+      "label": "第2段空中怪",
+      "mechanics": {
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "design-ascent-air-enemy-3",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 506,
+      "y": 194,
+      "w": 28,
+      "h": 32,
+      "label": "第3段空中怪",
+      "mechanics": {
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -42,
+      "w": 1024,
+      "h": 1152,
+      "points": [
+        {
+          "x": 0,
+          "y": 918
+        },
+        {
+          "x": 100,
+          "y": 932
+        },
+        {
+          "x": 250,
+          "y": 902
+        },
+        {
+          "x": 550,
+          "y": 762
+        },
+        {
+          "x": 650,
+          "y": 682
+        },
+        {
+          "x": 830,
+          "y": 600
+        },
+        {
+          "x": 500,
+          "y": 460
+        },
+        {
+          "x": 390,
+          "y": 380
+        },
+        {
+          "x": 260,
+          "y": 298
+        },
+        {
+          "x": 700,
+          "y": 158
+        },
+        {
+          "x": 880,
+          "y": 78
+        },
+        {
+          "x": 990,
+          "y": 36
+        },
+        {
+          "x": 1024,
+          "y": 22
+        }
+      ]
+    }
+  ],
+  "summary": "8×9 Block；左右各裁1列；三段摆渡分别新增1只空中怪物。",
+  "designNotes": [
+    "左右各裁1列，从10×9变为8×9 Block；新左右边界x0/1024，原上下边界不变。",
+    "保留原三段摆渡平台及真实原运动轨迹、过渡岸、侧壁危险区和移动齿轮；图中虚线为原运动范围，实线为设计路线意图。",
+    "三段中间各加一只原plains_diver空中怪，中心分别(430,790)、(650,480)、(520,210)，供移动中观察、射击与选择转台时机；不改怪物或平台运行参数。",
+    "entry口移至(0,918)并复用原起点岸；exit移至(1024,22)。被裁掉的原最右出口小岸向内平移128px到x960–1024、y54，使出口仍有实际支撑，不新增接岸数量。",
+    "敌人活动范围、摆渡动态相位、三段连续资源/承载、到岸稳定、失败恢复与回程均待独立实现验证；仅声明entry→exit设计目标。"
+  ],
+  "designVersion": "sha256:3877f74f7c79229364ba4758c3735f3da370e8e51ed97dff62746b8fe463627d"
+}
