@@ -890,7 +890,11 @@
       "reviewRevision": "batch-004/design-feedback-001",
       "receivedFeedback": "删掉上方6行，左侧5列，下方3行，右侧5列block，下方port移除了，在中间镂空跳跃处下方添加危险地带。",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
-      "formalLibraryChanged": false
+      "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:64b5d57974080a1c26d39f2f6b3408e27fded8e48329ad6c79b36b9bf6c000bf",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "17保留"
     },
     {
       "reviewId": "18",
@@ -962,7 +966,11 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:4354356c9b1a1dd3584885a24177e9957510730f66dc7e2b169ec9b4ea0d9aa0",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "22",
@@ -977,22 +985,42 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:ea7f2e6aa380d8005cd2f3072f7d808ebfc180a1a3595d0ecc58e68270d05b64",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "23",
       "moduleId": "batch30-n11-e-e-width96",
       "title": "同侧折返·反冲入檐袋 / 东向镜像",
-      "summary": "11×5 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/batch30-n11-e-e-width96/module.mapnote.json",
-      "sourceSha256": "1f59559d1248e4813ba85aa2411b90007ea7b74ac5802eb23ab7719710f0825a",
-      "contentVersion": "sha256:499adf9d6b084e381469993250cad0688d1f606fd044495ed14575d8b63a4a57",
-      "diagram": "diagrams/batch30-n11-e-e-width96--1f59559d1248e481.svg",
-      "portCount": 2,
+      "summary": "6×3 Block；左缘危险带，下层入口加陆地怪；左下新增C空中仅出口。",
+      "source": "generation/manual-review/designs/batch-005/feedback-001/23.design.json",
+      "sourceSha256": "ae87584e2d3292952eccf7b59feccad6434b624dd1a01c792c8e84a8460986c2",
+      "contentVersion": "sha256:a9d7019bc4d157ae1ccb157e32ad51ed7b4e153f7a8e3e42128a6b2e7c8528ad",
+      "diagram": "designs/batch-005/feedback-001/images/23.png",
+      "portCount": 3,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "designVersion": "sha256:a9d7019bc4d157ae1ccb157e32ad51ed7b4e153f7a8e3e42128a6b2e7c8528ad",
+      "reviewStage": "design",
+      "designNotes": [
+        "左裁5列、底裁2行，从11×5变为6×3 Block；原右侧A/B口及上下两层平台保留，旧底部安全长台裁去。",
+        "左缘内侧24px画朝右的危险带，覆盖y128–512。",
+        "“下方最左侧空中出口”解释为左下角Block底边中心C(-320,512)，仅空中向下离开，不允许进入；不占用带危险的左边界。出口身体净空和离开状态待实现验证。",
+        "下层右侧B入口旁新增原有plains_sentry陆地怪，位置x280–308、y448–480，脚对齐下层平台；与入口留76px缓冲，宝箱保留。",
+        "只声明A→B、A→C和B→C三个设计目标；C不能作为入口，B→A未设计、不默认互通。向C走需要从下层平台外侧离台或由上层直接控制落点，同时避开左缘危险带。",
+        "裁剪后失败恢复与空中出口接入下游Module的连续状态UNKNOWN，不自动补安全台或传送。"
+      ],
+      "previousDiagram": "diagrams/batch30-n11-e-e-width96--1f59559d1248e481.svg",
+      "previousVersion": "sha256:499adf9d6b084e381469993250cad0688d1f606fd044495ed14575d8b63a4a57",
+      "reviewRevision": "batch-005/design-feedback-001",
+      "receivedFeedback": "删除左侧5列下方2行block，在module左侧边缘添加危险地带。在下方平台入口处增加陆地怪物。下方最左侧增加空中出口。",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false
     },
     {
       "reviewId": "24",
@@ -1007,22 +1035,41 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:99fc3183e77eba66d22f1a4f222c773b7947746a6ec7948edb4fadc7184f65fa",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "25",
       "moduleId": "batch30-n19-west-high-east-low",
       "title": "开脚下，落稳，再开侧面",
-      "summary": "8×8 Block；2 个逻辑 Port；2 条归档动作路线。",
-      "source": "./modules/batch30-n19-west-high-east-low/module.mapnote.json",
-      "sourceSha256": "daae0ccbbc630c2d53b066e43c5ffeb03f437a7a1b5899e5469624b123b38f84",
-      "contentVersion": "sha256:a1ca8835dec973b653fed18c18c9396e4a7869c45cbe20c1b88752ac60b014a8",
-      "diagram": "diagrams/batch30-n19-west-high-east-low--daae0ccbbc630c2d.svg",
+      "summary": "6×5 Block；左裁2列、顶裁1行、底裁2行；保留互补双门与中继台。",
+      "source": "generation/manual-review/designs/batch-005/feedback-001/25.design.json",
+      "sourceSha256": "c86479e0d18f36aa585f998e6001f4551306a65fb9c3c8ceb9e92479cdf32ff5",
+      "contentVersion": "sha256:6e1e8515ae086f4746694168221e277a64b252ee0ae1c5181df3a6b1d0ab4d37",
+      "diagram": "designs/batch-005/feedback-001/images/25.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "designVersion": "sha256:6e1e8515ae086f4746694168221e277a64b252ee0ae1c5181df3a6b1d0ab4d37",
+      "reviewStage": "design",
+      "designNotes": [
+        "左裁2列、顶裁1行、底裁2行，从8×8变为6×5 Block；边界x256–1024、y128–768。",
+        "A口移到新左边界(256,320)，保留原左岸剩余64px；B口保持(1024,704)，右岸裁薄为32px，对齐真实端口支撑。",
+        "双门保留G1初始关、G2初始开；上侧风铃和返回侧接收器控制原有同一组互补门，不新增机关。",
+        "先开脚下门落到中继台，再射铃换开右侧门到低岸；保持原玩法目标，全部技术状态UNKNOWN。",
+        "原y800恢复台与y928底台随裁剪移除，旧“漏中继台恢复”路线不沿用。裁后失误恢复方式、资源成本与回程尚未定稿，不把裁剪后的示意线当作通过证明。"
+      ],
+      "previousDiagram": "diagrams/batch30-n19-west-high-east-low--daae0ccbbc630c2d.svg",
+      "previousVersion": "sha256:a1ca8835dec973b653fed18c18c9396e4a7869c45cbe20c1b88752ac60b014a8",
+      "reviewRevision": "batch-005/design-feedback-001",
+      "receivedFeedback": "删掉左侧2列，上方1行，下方2行block",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false
     },
     {
       "reviewId": "26",
