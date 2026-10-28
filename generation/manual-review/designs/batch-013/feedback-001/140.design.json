@@ -1,0 +1,149 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-recoil-chasm",
+  "reviewId": "140",
+  "title": "反冲深沟",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-recoil-chasm/module.mapnote.json",
+    "contentVersion": "sha256:670a03edc2d870e303bf43579257a4e239899c876220c2d62c3c57e18a870118",
+    "sha256": "2c52acbafbfec2be2e983370d6c54b1d2a1a2abc7949c61a7cbd7b3934587ec9"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 504,
+    "w": 896,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        128,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1024,
+        568
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左2右3block",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-b97416e0f0f06f59a6384adb25800e6815c5d8174e0a079c9faae7c7b535790e/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 600,
+      "w": 172,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b97416e0f0f06f59a6384adb25800e6815c5d8174e0a079c9faae7c7b535790e/platform-1",
+      "type": "terrain",
+      "x": 860,
+      "y": 600,
+      "w": 164,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b97416e0f0f06f59a6384adb25800e6815c5d8174e0a079c9faae7c7b535790e/hazard-0",
+      "type": "hazard",
+      "x": 300,
+      "y": 680,
+      "w": 560,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 128,
+      "y": 504,
+      "w": 896,
+      "h": 256,
+      "points": [
+        {
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 260,
+          "y": 582
+        },
+        {
+          "x": 430,
+          "y": 544
+        },
+        {
+          "x": 650,
+          "y": 532
+        },
+        {
+          "x": 810,
+          "y": 552
+        },
+        {
+          "x": 920,
+          "y": 582
+        },
+        {
+          "x": 1024,
+          "y": 568
+        }
+      ]
+    }
+  ],
+  "summary": "7×2 Block；左裁2、右裁3，保留560px深沟和坑底危险区。",
+  "designNotes": [
+    "左裁2、右裁3，从12×2成为7×2，边界x128–1024、y504–760。",
+    "左岸保留x128–300、右岸x860–1024，原560px缺口及下方x300–860/y680–720危险区均不变；裁去旧边界连接片，不补桥或平台。",
+    "两口移至(128,568)/(1024,568)，台面均y600。仅保留entry→exit目标，未要求新增返程认证。",
+    "示意线表达反冲跨沟与落岸意图，不是真实轨迹；全身净空、空中资源、出入口稳定、时机扰动、廉价绕法及失败恢复/回程UNKNOWN。"
+  ],
+  "designVersion": "sha256:d679dc33c64d25b8ff55a755ad4c8e548f4190be0e78c1a5c729ed40423fe1ca"
+}

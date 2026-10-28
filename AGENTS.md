@@ -36,6 +36,10 @@
 
 最新反馈017优先：127按已发布设计保留；130按“增加port互通后保留”只补现有两口的exit→entry返程目标并绑定feedback-002结果版本，地貌不变。134按原参考Module版本原样保留，交接designFileKind=source_module_reference，核generationContract.contentVersion，不另造设计认可。实现交接共32项；131废弃；132/133/135待复审。132顶平台替换朝下尖刺，原地面齿轮保留；133右1/下1裁为3×1；135重排为2×2，仅两个岩台，左下(0,456)/右上(256,328)两口双向目标。真实物理与生产认可UNKNOWN，不改原Module或跑Godot。图文入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-012/feedback-001。
 
+最新反馈018优先：132/133/135按已发布batch-012/feedback-001精确设计版本保留，实现交接共35项；136/137/139设计废弃。138左裁1/右2成为3×3，两口双向目标；原出口岸被裁，最高原台上移56px至y44、裁短为64px接新出口，不新增冗余台。140左2/右3成为7×2，560px缺口和坑底危险区不改，仅声明原去程。138/140待复审。只更新设计图文，不修改真实Module、不跑物理。入口python3 tools/publish_design_review.py generation/manual-review/designs/batch-013/feedback-001。
+
+最新反馈019优先：第14批141–145全部按用户提供参考版本废弃；只记录设计决定，原件保留，不改库内容。已确认设计仍35项，138/140修订稿仍待复审，第13/14批的成员冻结，不因后批反馈跳过前批待审。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
