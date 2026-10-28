@@ -1,11 +1,11 @@
 ---
 name: pcg-map-director
-description: 标记旧Map生成器退役，约束当前仅迁移既有Module；保留MAP_FOUNDATION对未来在线Map的模型边界，不实现新生成器。
+description: 保留 MAP_FOUNDATION 对在线 Map 的模型边界，区分 Module 工作与 Map 授权，防止恢复退役入口或把局部认证冒称整图通过。
 ---
 
 # 当前状态：旧生成器退役，新Map不在本轮范围
 
-读根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）和[Module迁移skill](../pcg-module-migration/SKILL.md)。当前授权是**先本仓库既有Module、再主游戏Module**的最小修改迁移；新增内容暂停，不实现新Map、不恢复旧Map入口/固定骨架/物化链。历史Map代码、旧逻辑图、试件与报告只作参考和证据，不是新系统当前可用入口。
+读根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）和[Module迁移skill](../pcg-module-migration/SKILL.md)。Module 修改、确认设计实现和新生成按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)及当前授权分别执行，不能从历史迁移排序或旧任务限制推定权限。本 skill 不自行实现新Map、不恢复旧Map入口/固定骨架/物化链。历史Map代码、旧逻辑图、试件与报告只作参考和证据，不是新系统当前可用入口。
 
 旧 `block_grid.plan`、graph_map、produce等入口不再由本skill推荐执行为新Map流程；本轮不修复旧生成器、不另写替代Map，也不把逻辑图输出称可玩地图。用户以后单独授权新Map工作时，再依据届时可用认证库和真实实现安排；Guide推荐规模不自动触发开工。
 
@@ -24,4 +24,4 @@ description: 标记旧Map生成器退役，约束当前仅迁移既有Module；�
 
 只交既有内容的规范差距、最小修改、真实认证、身份/去重/引用和三去向记录。`modules/`与`modules-recycle/`由迁移流程整理，失败与近似待审原处保留；验证/回读之后才归档原件。技术通过、AI设计判断、人工观感、试玩与生产认可独立。
 
-本skill不宣称现有schema、消费者、库编译或验证器已经支持新模型。缺实现具体报告，不用新字段/旧pass重标完成，不commit、不发布或启动新的Map/Module生产。
+本skill不宣称现有schema、消费者、库编译或验证器已经支持新模型。缺实现具体报告，不用新字段/旧pass重标完成，不自行启动新的Map/Module生产；提交、推送、发布与合并遵循当前任务授权。
