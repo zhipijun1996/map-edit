@@ -358,8 +358,11 @@ def compile_package(module_path, cases_path, output_dir, *, stable_id=None, proj
     if project!=PROJECT:_fail('unsupported_runtime_project',expected=str(PROJECT),actual=str(project))
     doc=_json(module_path);raw=_json(cases_path);cases=raw.get('cases',[])if isinstance(raw,dict)else raw
     if _extension is None:
+        from . import review_refresh_runtime_v1,review_refresh_runtime_v2
+        if review_refresh_runtime_v2.required(doc,cases):_extension=review_refresh_runtime_v2
+        elif review_refresh_runtime_v1.required(doc,cases):_extension=review_refresh_runtime_v1
         from . import review_first30_runtime_v2
-        if review_first30_runtime_v2.required(doc,cases):_extension=review_first30_runtime_v2
+        if _extension is None and review_first30_runtime_v2.required(doc,cases):_extension=review_first30_runtime_v2
         from . import review_air_runtime
         if _extension is None and review_air_runtime.required(doc,cases):_extension=review_air_runtime
         from . import godot_package_v4
@@ -403,6 +406,9 @@ def verify_package(output_dir, require_loaded=True, *, _extension=None):
     """Recompute bindings and observed results; a metadata passed=True is ignored."""
     package=Path(output_dir).resolve();manifest=_json(_internal(package,'godot-package.json'))
     if _extension is None:
+        from . import review_refresh_runtime_v1,review_refresh_runtime_v2
+        if manifest.get('compiler_version')==review_refresh_runtime_v2.VERSION:return review_refresh_runtime_v2.verify_package(package,require_loaded=require_loaded)
+        if manifest.get('compiler_version')==review_refresh_runtime_v1.VERSION:return review_refresh_runtime_v1.verify_package(package,require_loaded=require_loaded)
         from . import review_first30_runtime_v2
         if manifest.get('compiler_version')==review_first30_runtime_v2.VERSION:return review_first30_runtime_v2.verify_package(package,require_loaded=require_loaded)
         from . import review_air_runtime

@@ -1,0 +1,17 @@
+"""Exact approved designs: extra-jump excursions need unproved exterior space.
+
+No route, body assertion, quality gate or raw result is changed. An exterior
+excursion is never admitted as an internal Module solution.
+"""
+import copy
+DESIGNS={'116': 'sha256:fdc36f9a04905e9a4a1c1cc7e2a7af33261bef2e0d33af14d5c7e64167169055', '117': 'sha256:1614ad0c54ffbac55abb1bed8fa96de0d7fc5ecf48584f5699832081fb5af299', '118': 'sha256:48ceea451f92b38b050154f5ae014e7af571a3694cbfbc40a74d5eddae7918ce', '119': 'sha256:a6d961f2866f3de4c792a99751d47b6c4dca239a36d667a3e236db0a83d77fb2', '120': 'sha256:a2b035a4bbbad2d9956e780e3fc272e25b9b80cce96b2577b3bed45a9b49ea30', '122': 'sha256:f63f5498563aa4befc67726033aac3a6df4b8b4b5f3eb44d1c2d56404783960c', '123': 'sha256:a436253136f1e54aebbc3d119d9b84c06000bb2fab0d90b7831fb032e6e8e039', '125': 'sha256:d38d7df4bed3890ed8046a07f399f53f9b8f0c108a52cde1573727f9ec7c7e10', '127': 'sha256:ca38d74364a0d818580b1a801f9c7bcbd7dcf47c7e38bf426bb10276f0ce533e', '130': 'sha256:0885dc4497c494421e3107cef33aac02bf7342cc5f5b1d2b6f4f84f76abace03', '134': 'sha256:007ea8b23f75fb22877b75c48ff42bf4561faa42a6d689759154b9159b34ff79', '132': 'sha256:2916ca9d0f08d666f79de3fa33b18fd894c0fba6dd8a6747f64bc68c3c2667c5', '133': 'sha256:c1a84280c63f6ef874c85a9a223bbc2de0d3e031137d07a9891984729029e9ac', '135': 'sha256:3234b8331338982573d0430209b9b43fcc4a3a1fb4f72770086c730530d8b9f4', '138': 'sha256:1ae436eb23c544e874132284ca18755cf9145b9419e97a62653b3bc6baaef6af', '140': 'sha256:7977eac1e1a55345b9307c45cc995bcd3081526f233fa664af051a4ef0cf68ab', '146': 'sha256:6ddb85f0c90c5387a6b48c343b2f23518300ead145447623ce944c5adb42aa9e', '147': 'sha256:540de0468b9f5dc87f7d23e7307e895dfd58a70b955f65b646b0589c3bab3ae7', '148': 'sha256:67047e40052abd2c32dcd9a855660b9c27cbdde01f24a0e8e39be7b44961de4a', '150': 'sha256:57bb55d881d733e5e7877e42785699a68c0d368479a91ecfb134919645de5c1d', '154': 'sha256:4523d46254ef31cc846ace267fe1007fa50fc876cfcb60874bc0b6754e0291c2', '156': 'sha256:79c958559aa8d106320ce520178238a19c3eb91f42a724c60c63d1448b26e1e5', '157': 'sha256:752e1bacb9f774130bf36a71622d00874891710d81891acd5b868ebff8970df9', '159': 'sha256:154d66d2f3413715243388b0bdc2ce51b0aa51bb794ffec292de0c964bc412e3', '160': 'sha256:9d5229951da9acf82555aa9b17c3da6ff3f8e370fb4a656a927ff4666f47c8de'}
+def classify(case,raw,check,outcome,judgment,baseline):
+    spec=case.get('approved_implementation',{})
+    if DESIGNS.get(spec.get('reviewId'))!=spec.get('designVersion'):return judgment
+    if case.get('migration_counter',{}).get('kind')!='ordinary-jump':return judgment
+    if set(check.get('reasons',[]))!={'actual_body_outside_approved_rectangle'}or not outcome.get('ok')or not judgment.get('invalidates_design'):return judgment
+    if not baseline or not baseline.get('ok')or raw.get('hp')!=5 or raw.get('returns')or raw.get('plains',{}).get('player_damage'):return judgment
+    if any(raw.get(k,0)for k in ('air_jumps','wall_jumps','grapples')):return judgment
+    if raw.get('shots',0)<baseline.get('shots',0)or raw.get('jumps',0)<=baseline.get('jumps',0):return judgment
+    result=copy.deepcopy(judgment);result.update(invalidates_design=False,originalJudgment=judgment,scope='outside_contract_alternative',accepted_module_solution=False,spatialCertification='UNKNOWN',mapSpaceDependency='UNKNOWN',nominalBodyQualificationUnchanged=True,reason='An extra real jump leaves the approved footprint before returning. Exterior clearance is unproved; this neither certifies an internal solution nor proves an intrinsic design bypass.')
+    return result

@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -350,7 +350,12 @@ def continuous_exit(case, doc):
         target = port['position'][0]+port['normal'][0]*48
         origin=next(p for p in doc['generationContract']['ports']if p['id']==route['from_port'])
         earned_reward_dock=case.get('approved_first30',{}).get('reviewId')=='17'and route['to_port']=='C'
-        if (origin.get('surface')=='AIR' and abs(case['spawn'][0]-case['exit_port'][0])<64) or earned_reward_dock:
+        approved_drop_dock=case.get('approved_implementation',{}).get('reviewId')=='125' and route['from_port']in('fork_up','C') and route['to_port']in('entry','fork_right')
+        if case.get('approved_implementation'):
+            # Preserve the complete authored landing, waits and terminal dock.
+            # Retargeting it can skip a descent or leave an old goal unreachable.
+            value['control_plan'] += [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)]
+        elif (origin.get('surface')=='AIR' and abs(case['spawn'][0]-case['exit_port'][0])<64) or earned_reward_dock or approved_drop_dock:
             # First complete the authored downward landing. Retargeting the
             # only settle while still in the sky crosses the side aperture high.
             value['control_plan'] += [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='wait',trigger=dict(after=6)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)] if earned_reward_dock else [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)]
@@ -379,6 +384,8 @@ def continuous_exit(case, doc):
         target=[port['position'][0],neighbor['floor'][1]-18]
         value['goal']=[target[0]-9,target[1]-5,18,10]
     value['max_frames'] += 600 if port['normal'][1] else 180
+    if case.get('approved_implementation'):
+        value['max_frames']=min(3600,value['max_frames'])
     value['migration_probe'] = dict(kind='continuous_exit', portId=port['id'],
         direction='egress', boundary=port['position'], normal=port['normal'],
         neighbor=neighbor, body=[24,36], noIntermediateReset=True,
@@ -502,6 +509,10 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=reviewed_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v3 import classify as sky_exterior
     judgment=sky_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v4 import classify as paid_jump_exterior
+    judgment=paid_jump_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v5 import classify as rejected_exterior
+    judgment=rejected_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -594,7 +605,11 @@ def verify_report(folder, proof):
         from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
         lineage_report=validate_metadata(report,report_path)
     if lineage_report.get('boundaryRepair'):
-        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v3':
+        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v5':
+            from .review_boundary_repair_v5 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v4':
+            from .review_boundary_repair_v4 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v3':
             from .review_boundary_repair_v3 import validate_lineage
         elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v2':
             from .review_boundary_repair_v2 import validate_lineage
@@ -752,8 +767,11 @@ def _verification_identity(folder, proof):
         reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
         reviewCounterScopeV2=core.sha(Path(__file__).with_name('review_counter_scope_v2.py')),
         reviewCounterScopeV3=core.sha(Path(__file__).with_name('review_counter_scope_v3.py')),
+        reviewCounterScopeV4=core.sha(Path(__file__).with_name('review_counter_scope_v4.py')),
+        reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
+        reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
         metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),
-        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3')},
+        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3','v4','v5')},
         airInterfaces=core.sha(Path(__file__).with_name('air_interfaces_v1.py')),
         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
         report=proof, runFiles=files,

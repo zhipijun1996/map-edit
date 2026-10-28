@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "sameOriginalConditionsReplayed": true,
+  "newIndependentPool": false,
+  "inputDifferences": [
+    {
+      "routeIndex": 0,
+      "field": "max_frames",
+      "first": 2400,
+      "repeat": 3600
+    },
+    {
+      "routeIndex": 1,
+      "field": "max_frames",
+      "first": 2400,
+      "repeat": 3600
+    }
+  ],
+  "reason": "The first run finished nominal held-out trials before a counter-only driver crash. The repair guards omitted-shot metadata; nominal controls and physical parameters stay identical. Generic preparation raised the per-case frame ceiling, but every observed trial finishes below the original 2400-frame ceiling, and statistics are identical. The second run replays the same conditions; it is not another independent pool.",
+  "checks": [
+    {
+      "routeIndex": 0,
+      "identicalControlsAndActualPhysicalParameters": true,
+      "identicalQualityStatistics": true,
+      "maximumObservedTicks": 173,
+      "firstObservedEvaluation": {
+        "path": "pcg/results/approved-r024-140-qualified-final-v1/holdout-0.json",
+        "sha256": "e97aad44be2f4abaa8905d0fb527ff19d13b304586b0652344923ade3cd779ce"
+      },
+      "repeatEvaluation": {
+        "path": "pcg/results/approved-r024-140-qualified-final-v2/holdout-0.json",
+        "sha256": "5934604f3068a4de5b33f4bd255aa36b690a3e76255ab1fdbe1b5605aa983664"
+      }
+    },
+    {
+      "routeIndex": 1,
+      "identicalControlsAndActualPhysicalParameters": true,
+      "identicalQualityStatistics": true,
+      "maximumObservedTicks": 175,
+      "firstObservedEvaluation": {
+        "path": "pcg/results/approved-r024-140-qualified-final-v1/holdout-1.json",
+        "sha256": "109ada832cd26775d2aea0b59fc1eab65e31b98b3e9c4164620b60bfdeb5cf69"
+      },
+      "repeatEvaluation": {
+        "path": "pcg/results/approved-r024-140-qualified-final-v2/holdout-1.json",
+        "sha256": "430414ef50fe23f4756614685a1e274c77fbbde64ad8962bc86c4d35b2bec33d"
+      }
+    }
+  ]
+}
