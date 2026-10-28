@@ -22,6 +22,12 @@
 
 最新反馈010优先：27/28/30按当前发布精确版本保留，实现交接共15项；31/33设计废弃。32左裁3/下裁3/右裁2成为5×8，保留原关墙刹车关系。34暂上加3行成为10×6，移除最右短台和地板下无通行作用危险区；顶边左右C/D为空中仅入，地面原口保留，共6条有向设计目标。35左右各裁1成为8×9，三段摆渡各加一只plains_diver；原出口小岸内移一格接新边界，原摆渡轨迹/齿轮/危险区不省略。全部新内容仅图文，技术UNKNOWN、不跑物理。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-007/feedback-001`。
 
+最新反馈011优先：32/34/35按已发布版本保留，实现交接共18项；38废弃。36左裁2/右裁3成为6×2；37左裁1/右裁2成为8×7，最高岸下移20px对齐新出口。39/40继续待审批：原Module及编译hooks已有2/1个hookBounce，原0×0点被矩形绘图漏显；仅reference_display补画蓝环和来源动作顺序，保持原模块SHA/参考版本/技术状态，不运行物理，不编造新通过。审计见feedback/manual-review/batch-008/hook-display-audit-v1.json。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-001`。
+
+最新反馈012优先：36/37按用户提供精确设计版本保留，实现清单共20项；38/40废弃。39仅图文裁剪：左右各3列/底2行为4×2，H1/H2坐标不变；主落地台暂右移64px到x344、为原出口小岸内移预留末端64px，主台至x448；原出口岸内移至x448–512、y18，保持新exit真实支撑。底部恢复台裁去，单向entry→exit为设计目标，完整身体/连续双钩/恢复技术UNKNOWN。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-002`，不实施、不跑Godot。
+
+最新反馈013优先：36/37/39按已发布版本保留（36/37重复确认不重复入库），实现交接共21项。用户要求后续先审无钩索平原、钩索最后：按generation/manual-review/order-policy.json重排未审批次，前8批及已收到意见的批次/稳定Module编号不变；批次与编号不再按数学连续区间对应，始终按reviewId查找。共享SVG渲染器的审阅模式补齐零尺寸hookBounce/hookHang的蓝环/H编号，图像缓存使用hooks-v1路径，原Module/参数/位置/内容版本不改。入口node tools/build_manual_review.mjs；不新建内容或跑物理。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
