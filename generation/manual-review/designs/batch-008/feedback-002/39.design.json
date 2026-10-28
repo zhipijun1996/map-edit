@@ -1,0 +1,184 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-forest-air-chain-geometry-hook-hook",
+  "reviewId": "39",
+  "title": "双钩连续腾空",
+  "summary": "4×2 Block；左右各裁3列、底裁2行；双钩保留，右侧落地台右移64px。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-forest-air-chain-geometry-hook-hook/module.mapnote.json",
+    "contentVersion": "sha256:d90ad114f248433642ba0b19b18579b326ebf72c2a459001571a01d2aaca6cfc",
+    "sha256": "b984a68ce8cd589a61caccc9d2ccb391c4ac844a61d8fc6457ca45cead10ef04"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": -206,
+    "w": 512,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        -14
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        512,
+        -14
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除左右各3列，下方2行block。右侧落地平台再往右一点。",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated action intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-c9c06db055b78968d6c4f3a940772b2633c8ee5a4a2fd0f4d12ad1d3e039ef2e/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 18,
+      "w": 80,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c9c06db055b78968d6c4f3a940772b2633c8ee5a4a2fd0f4d12ad1d3e039ef2e/platform-1",
+      "type": "platform",
+      "x": 344,
+      "y": -24,
+      "w": 104,
+      "h": 24,
+      "rotation": 0,
+      "label": "落地台：右移64px",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c9c06db055b78968d6c4f3a940772b2633c8ee5a4a2fd0f4d12ad1d3e039ef2e/hook-0",
+      "type": "hookBounce",
+      "x": 200,
+      "y": -40,
+      "w": 0,
+      "h": 0,
+      "rotation": 0,
+      "label": "",
+      "note": "位置已知；完整交互/碰撞尺寸 UNKNOWN",
+      "sourceId": "relay_a"
+    },
+    {
+      "id": "generated-c9c06db055b78968d6c4f3a940772b2633c8ee5a4a2fd0f4d12ad1d3e039ef2e/hook-1",
+      "type": "hookBounce",
+      "x": 330,
+      "y": -170,
+      "w": 0,
+      "h": 0,
+      "rotation": 0,
+      "label": "",
+      "note": "位置已知；完整交互/碰撞尺寸 UNKNOWN",
+      "sourceId": "relay_b"
+    },
+    {
+      "id": "generated-c9c06db055b78968d6c4f3a940772b2633c8ee5a4a2fd0f4d12ad1d3e039ef2e/replay-independent-dock-exit",
+      "type": "terrain",
+      "x": 448,
+      "y": 18,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 7
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -206,
+      "w": 512,
+      "h": 256,
+      "points": [
+        {
+          "x": 0,
+          "y": -14
+        },
+        {
+          "x": 60,
+          "y": 0
+        },
+        {
+          "x": 110,
+          "y": -55
+        },
+        {
+          "x": 200,
+          "y": -40
+        },
+        {
+          "x": 330,
+          "y": -170
+        },
+        {
+          "x": 396,
+          "y": -42
+        },
+        {
+          "x": 460,
+          "y": -20
+        },
+        {
+          "x": 484,
+          "y": 0
+        },
+        {
+          "x": 512,
+          "y": -14
+        }
+      ]
+    }
+  ],
+  "designNotes": [
+    "左右各裁3列、底裁2行，从10×4变为4×2 Block；新边界x0–512、y-206–50。",
+    "两个原弹起钩点保持坐标与类型：H1 relay_a=(200,-40)，H2 relay_b=(330,-170)。仍是连续双钩空中接力，要求grapple能力，不替换为普通跳跃。",
+    "“右侧落地平台再往右一点”暂按64px处理：主落地台从x280右移到344；末端为保留原ROCK出口接岸预留64px，主台裁到x448，台宽104px、顶部y-24不变。",
+    "原最右独立出口小岸从x832内移到x448–512，顶部仍为y18；exit移到(512,-14)，复用原接岸形成42px下落台阶，不新增平台。entry移到(0,-14)，直接保留左岸。",
+    "旧y220恢复长台与y118恢复步台随底部裁剪移除；不自动补底台或恢复资源。",
+    "仅声明entry→exit设计目标，不推断回程。双钩接触/弹起时的角色身体与上界净空、落岸容错、初始资源及失败恢复UNKNOWN，待独立实现验证。"
+  ],
+  "designVersion": "sha256:2e2ae49ecc229df5a54d13651163501cd5fc5e18aaaa80302704d5c86fccdcce"
+}

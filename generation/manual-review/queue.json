@@ -1382,7 +1382,11 @@
       "reviewRevision": "batch-008/design-feedback-001",
       "receivedFeedback": "删除左2右3列block",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
-      "formalLibraryChanged": false
+      "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:36fe14c96962bd96d170b6b49130ab3a2249049b7b87615ebe85c2c354af7b54",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "37",
@@ -1411,7 +1415,11 @@
       "reviewRevision": "batch-008/design-feedback-001",
       "receivedFeedback": "删除左1右2列block",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
-      "formalLibraryChanged": false
+      "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:9137784a54d781cfbfb16f30664cc4d287109413008dac55e83f4560d1526fce",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "38",
@@ -1436,36 +1444,32 @@
       "reviewId": "39",
       "moduleId": "game-forest-air-chain-geometry-hook-hook",
       "title": "双钩连续腾空",
-      "summary": "原内容已有2个弹起钩点；本次补画位置标记，原模块和参考版本不变。",
-      "source": "./modules/game-forest-air-chain-geometry-hook-hook/module.mapnote.json",
-      "sourceSha256": "b984a68ce8cd589a61caccc9d2ccb391c4ac844a61d8fc6457ca45cead10ef04",
-      "contentVersion": "sha256:d90ad114f248433642ba0b19b18579b326ebf72c2a459001571a01d2aaca6cfc",
-      "diagram": "designs/batch-008/feedback-001/images/39.png",
+      "summary": "4×2 Block；左右各裁3列、底裁2行；双钩保留，右侧落地台右移64px。",
+      "source": "generation/manual-review/designs/batch-008/feedback-002/39.design.json",
+      "sourceSha256": "1a501129d754884b11136dc215c565172c49ccfff921230fa99a06d594763c45",
+      "contentVersion": "sha256:2e2ae49ecc229df5a54d13651163501cd5fc5e18aaaa80302704d5c86fccdcce",
+      "diagram": "designs/batch-008/feedback-002/images/39.png",
       "portCount": 2,
       "category": "森林",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
-      "reviewStage": "reference_display",
+      "designVersion": "sha256:2e2ae49ecc229df5a54d13651163501cd5fc5e18aaaa80302704d5c86fccdcce",
+      "reviewStage": "design",
       "designNotes": [
-        "原Module中存在2个hookBounce钩点；零宽高表示位置点，不是删除或空Cell。",
-        "编译内容的hooks数组保留相同坐标；现有module_loader_v3.gd加载时创建GrappleAnchor，并按kind设置弹起/悬挂行为。",
-        "原网页矩形渲染将0×0钩点画成不可见矩形，属于图示漏显。本次改用蓝色圆环标记，保留原尺寸/坐标/模块SHA/参考版本。",
-        "需要grapple钩索能力；来源动作顺序为H1→H2连续腾空。虚蓝线只表达动作目标顺序，不是物理轨迹。",
-        "本次只静态读源码、原数据和编译包；不运行Godot、不新增通过证据，也不把人工疑问记录为批准。继续待审批。",
-        "relay_a：(200, -40)",
-        "relay_b：(330, -170)"
+        "左右各裁3列、底裁2行，从10×4变为4×2 Block；新边界x0–512、y-206–50。",
+        "两个原弹起钩点保持坐标与类型：H1 relay_a=(200,-40)，H2 relay_b=(330,-170)。仍是连续双钩空中接力，要求grapple能力，不替换为普通跳跃。",
+        "“右侧落地平台再往右一点”暂按64px处理：主落地台从x280右移到344；末端为保留原ROCK出口接岸预留64px，主台裁到x448，台宽104px、顶部y-24不变。",
+        "原最右独立出口小岸从x832内移到x448–512，顶部仍为y18；exit移到(512,-14)，复用原接岸形成42px下落台阶，不新增平台。entry移到(0,-14)，直接保留左岸。",
+        "旧y220恢复长台与y118恢复步台随底部裁剪移除；不自动补底台或恢复资源。",
+        "仅声明entry→exit设计目标，不推断回程。双钩接触/弹起时的角色身体与上界净空、落岸容错、初始资源及失败恢复UNKNOWN，待独立实现验证。"
       ],
-      "previousDiagram": "diagrams/game-forest-air-chain-geometry-hook-hook--b984a68ce8cd589a.svg",
+      "previousDiagram": "designs/batch-008/feedback-001/images/39.png",
       "previousVersion": "sha256:d90ad114f248433642ba0b19b18579b326ebf72c2a459001571a01d2aaca6cfc",
-      "reviewRevision": "batch-008/design-feedback-001",
-      "receivedFeedback": "说是钩索，但我没看到钩索相关的cell",
-      "physicsSummary": "钩点已存在；本次只补画原位置与动作意图，继续待审批。",
-      "formalLibraryChanged": false,
-      "receivedDecision": "PENDING",
-      "receivedDecisionVersion": "sha256:d90ad114f248433642ba0b19b18579b326ebf72c2a459001571a01d2aaca6cfc",
-      "receivedDecisionScope": "design_only",
-      "receivedDecisionNote": "说是钩索，但我没看到钩索相关的cell"
+      "reviewRevision": "batch-008/design-feedback-002",
+      "receivedFeedback": "删除左右各3列，下方2行block。右侧落地平台再往右一点。",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false
     },
     {
       "reviewId": "40",
@@ -1496,10 +1500,10 @@
       "receivedFeedback": "说是钩索，但我没看到钩索相关的cell？",
       "physicsSummary": "钩点已存在；本次只补画原位置与动作意图，继续待审批。",
       "formalLibraryChanged": false,
-      "receivedDecision": "PENDING",
+      "receivedDecision": "DISCARD",
       "receivedDecisionVersion": "sha256:3f62486eda423ca560dfa464150017ce458bd54968eeb007d2581b745965faef",
       "receivedDecisionScope": "design_only",
-      "receivedDecisionNote": "说是钩索，但我没看到钩索相关的cell？"
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "41",
