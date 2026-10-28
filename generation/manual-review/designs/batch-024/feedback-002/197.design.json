@@ -1,0 +1,267 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b",
+  "reviewId": "197",
+  "title": "下探露出弹道，同枪反冲回岸",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/module.mapnote.json",
+    "contentVersion": "sha256:638f5da1f6a51c211ad582f7bb0fb89c0d6281a7ff9235e5438c646eb549032b",
+    "sha256": "c40fef9f3ad250277b422575044b9533ec1c9a7f6ff83bc52abbd25e0721166a"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": -128,
+    "y": 90,
+    "w": 768,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        -128,
+        154
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        640,
+        538
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左3下2右6block，下方增加危险地带",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/platform-0",
+      "type": "terrain",
+      "x": -128,
+      "y": 186,
+      "w": 368,
+      "h": 94,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/platform-1",
+      "type": "terrain",
+      "x": 320,
+      "y": 570,
+      "w": 220,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/platform-3",
+      "type": "terrain",
+      "x": 200,
+      "y": 280,
+      "w": 40,
+      "h": 260,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/gate-0",
+      "type": "gate",
+      "x": 320,
+      "y": 280,
+      "w": 220,
+      "h": 290,
+      "rotation": 0,
+      "label": "low-return-key gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 0,
+        "carrierId": null,
+        "returnAccess": null
+      }
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/bell-0",
+      "type": "bell",
+      "x": 66,
+      "y": 803,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "low-return-key",
+      "note": "",
+      "targetId": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/gate-0",
+      "sourceId": "low-return-key"
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/cache-0",
+      "type": "reward",
+      "x": 412,
+      "y": 534,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 14",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 14,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            430,
+            552
+          ],
+          "region": [
+            400,
+            547,
+            60,
+            10
+          ],
+          "amount": 14
+        }
+      }
+    },
+    {
+      "id": "generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/migration-shore-exit",
+      "type": "terrain",
+      "x": 516,
+      "y": 570,
+      "w": 124,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 5
+    },
+    {
+      "id": "design-bottom-danger",
+      "type": "hazard",
+      "shape": "zone",
+      "orientation": "UP",
+      "x": -128,
+      "y": 842,
+      "w": 768,
+      "h": 16,
+      "label": "底部危险带",
+      "note": "替代被裁掉的原恢复长台；伤害/重试待实现验证"
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": -128,
+      "y": 90,
+      "w": 768,
+      "h": 768,
+      "points": [
+        {
+          "x": -128,
+          "y": 154
+        },
+        {
+          "x": 180,
+          "y": 168
+        },
+        {
+          "x": 265,
+          "y": 168
+        },
+        {
+          "x": 265,
+          "y": 640
+        },
+        {
+          "x": 300,
+          "y": 590
+        },
+        {
+          "x": 310,
+          "y": 530
+        },
+        {
+          "x": 430,
+          "y": 552
+        },
+        {
+          "x": 640,
+          "y": 538
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "summary": "6×6 Block；左裁3、右裁6、下裁2；底部增加危险带，保留下探击铃再反冲回岸。",
+  "designNotes": [
+    "15×8裁为6×6，边界x-128–640/y90–858；两口(-128,154)/(640,538)，由原y186/y570岸支撑。",
+    "原y990恢复长台被裁，底部y842–858横排危险带。原低铃保持(80,820)、完整铃身最底837，危险带在铃身下方5px；击铃弹道仍从右上方进入，不把铃埋进危险。",
+    "保留右侧整块门、低铃、遮挡岩唇、宝箱；低铃下探暴露弹道，同枪朝左下射击、反冲右上进入右岸。蓝虚线仅射击意图。",
+    "来源门openSeconds=0只保留待核字段，不解释为已求解时长。裁掉底台后不能沿用原恢复证据；危险成本、落空重试、身体净空、早射/越门绕法及门重闭恢复均UNKNOWN。"
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        265,
+        640
+      ],
+      "to": [
+        80,
+        820
+      ],
+      "label": "左下射铃 / 反冲右上",
+      "labelPosition": [
+        370,
+        730
+      ],
+      "recoil": [
+        [
+          290,
+          630
+        ],
+        [
+          340,
+          580
+        ]
+      ]
+    }
+  ],
+  "designVersion": "sha256:55a825da88c0cea19a212cd39562c09f374297b3911cf6df687d698070f9b677"
+}
