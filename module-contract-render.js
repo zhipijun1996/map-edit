@@ -16,11 +16,18 @@ export function renderContractSvg(doc,{review=false}={}){
  if(migrated)art+=text(left+25,y+188,'路线线条展示核心动作；接岸段另有验证','class="small" data-route-display-scope="core-action"');
  for(const r of c.space.actionClearance.regions)art+=rect(r,'fill="#4cb8bd" fill-opacity=".09" stroke="none"');
  for(const e of c.space.dynamicEnvelopes)if(e.region!==UNKNOWN)art+=rect(e.region,'fill="#df9a55" fill-opacity=".1" stroke="#b88436" stroke-dasharray="6 4"');
+ let hookIndex=0;
  for(const o of doc.objects){
   if(o.type==='route'||['entry','exit','anchor','note'].includes(o.type))continue;
   if(o.type.startsWith('track')){art+=`<polyline points="${o.points.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="#b88436" stroke-dasharray="6 4"/>`;continue;}
   const fill=colors[o.type]??'#888';
-  if(o.type==='gear')art+=`<circle cx="${o.x+o.w/2}" cy="${o.y+o.h/2}" r="${o.w/2}" fill="${fill}"/>`;
+  if(review&&(o.type==='hookBounce'||o.type==='hookHang')){
+   const cx=o.x+o.w/2,cy=o.y+o.h/2,label=`H${++hookIndex} ${o.type==='hookHang'?'悬挂':'弹起'}钩点`;
+   art+=`<g data-hook-id="${esc(o.id)}" data-hook-kind="${o.type}"><title>${esc(`${label} · ${o.sourceId??o.id} · (${cx}, ${cy})`)}</title><circle cx="${cx}" cy="${cy}" r="16" fill="#e2effb" stroke="#3b79c9" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="8" fill="none" stroke="#bf9436" stroke-width="2"/></g>`;
+   if(o.type==='hookHang')art+=`<path d="M${cx-12} ${cy-22}H${cx+12}" stroke="#3b79c9" stroke-width="3"/>`;
+   art+=text(cx+20,cy-18,label,'class="small" font-weight="700" style="paint-order:stroke;stroke:#faf9f2;stroke-width:4px;stroke-linejoin:round"');
+  }
+  else if(o.type==='gear')art+=`<circle cx="${o.x+o.w/2}" cy="${o.y+o.h/2}" r="${o.w/2}" fill="${fill}"/>`;
   else art+=rect(o,`fill="${fill}" fill-opacity=".85" stroke="#ffffff" stroke-width="1" transform="rotate(${o.rotation??0} ${o.x+o.w/2} ${o.y+o.h/2})"`);
   if(['bell','gate','enemy'].includes(o.type))art+=text(o.x,o.y-8,o.label||o.id.split('/').at(-1),'class="small"');
  }

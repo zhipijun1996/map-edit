@@ -26,6 +26,8 @@
 
 最新反馈012优先：36/37按用户提供精确设计版本保留，实现清单共20项；38/40废弃。39仅图文裁剪：左右各3列/底2行为4×2，H1/H2坐标不变；主落地台暂右移64px到x344、为原出口小岸内移预留末端64px，主台至x448；原出口岸内移至x448–512、y18，保持新exit真实支撑。底部恢复台裁去，单向entry→exit为设计目标，完整身体/连续双钩/恢复技术UNKNOWN。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-002`，不实施、不跑Godot。
 
+最新反馈013优先：36/37/39按已发布版本保留（36/37重复确认不重复入库），实现交接共21项。用户要求后续先审无钩索平原、钩索最后：按generation/manual-review/order-policy.json重排未审批次，前8批及已收到意见的批次/稳定Module编号不变；批次与编号不再按数学连续区间对应，始终按reviewId查找。共享SVG渲染器的审阅模式补齐零尺寸hookBounce/hookHang的蓝环/H编号，图像缓存使用hooks-v1路径，原Module/参数/位置/内容版本不改。入口node tools/build_manual_review.mjs；不新建内容或跑物理。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
