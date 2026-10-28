@@ -1,0 +1,248 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2",
+  "reviewId": "174",
+  "title": "左射开门，蹬墙折返",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/module.mapnote.json",
+    "contentVersion": "sha256:70bfb08aba91cf1c831fdba61be4dddb3f7b6b8a149b8fa297fb1a8a771b9c22",
+    "sha256": "769d8383208ed2d993db2902b6d8279fe5e5655630ca65f26a6676aa0bb0b236"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": -128,
+    "y": 86,
+    "w": 384,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        256,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        -128,
+        278
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左1上1右1下2block",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/platform-0",
+      "type": "terrain",
+      "x": 68,
+      "y": 438,
+      "w": 24,
+      "h": 60,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/platform-1",
+      "type": "terrain",
+      "x": 195,
+      "y": 120,
+      "w": 32,
+      "h": 270,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/platform-2",
+      "type": "platform",
+      "x": -128,
+      "y": 310,
+      "w": 168,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/gate-0",
+      "type": "gate",
+      "x": -20,
+      "y": 86,
+      "w": 10,
+      "h": 512,
+      "rotation": 0,
+      "label": "reverse-bell gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 1,
+        "carrierId": null,
+        "returnAccess": null
+      }
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/bell-0",
+      "type": "bell",
+      "x": -14,
+      "y": 463,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "reverse-bell",
+      "note": "",
+      "targetId": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/gate-0",
+      "sourceId": "reverse-bell"
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/cache-0",
+      "type": "reward",
+      "x": -98,
+      "y": 274,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 8",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 8,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            -80,
+            280
+          ],
+          "region": [
+            -110,
+            275,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      }
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/platform-1-lower-entry-window",
+      "type": "terrain",
+      "x": 195,
+      "y": 438,
+      "w": 32,
+      "h": 160,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 3,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/right-internal-approach",
+      "type": "terrain",
+      "x": 92,
+      "y": 438,
+      "w": 103,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "generated-09efd9583360ae3e414d7430c9b0e7e12a730b0fe8a5f19a90fc98c9b80c2ac2/right-external-approach",
+      "type": "terrain",
+      "x": 227,
+      "y": 438,
+      "w": 29,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 5
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": -128,
+      "y": 86,
+      "w": 384,
+      "h": 512,
+      "points": [
+        {
+          "x": 256,
+          "y": 406
+        },
+        {
+          "x": 100,
+          "y": 420
+        },
+        {
+          "x": 175,
+          "y": 345
+        },
+        {
+          "x": 175,
+          "y": 300
+        },
+        {
+          "x": 80,
+          "y": 282
+        },
+        {
+          "x": -80,
+          "y": 292
+        },
+        {
+          "x": -128,
+          "y": 278
+        }
+      ]
+    }
+  ],
+  "summary": "3×4 Block；左/右/上各裁1、下裁2，保留左射与蹬墙折返。",
+  "designNotes": [
+    "按左1/上1/右1/下2从5×7裁为3×4，边界x-128–256/y86–598；右入(256,406)、左出(-128,278)。",
+    "原左边界接岸被裁，左上可穿平台下移12px至y310，宝箱同步下移12px，使左口下32px有实际支撑；不额外补安全台。",
+    "原门裁到新上下边界，可蹬墙上段位置不动、下段只随底边裁短，右侧原接岸裁短。铃位置与原1秒时长初值保留。",
+    "仍需要wall_climb，射击→右反冲→贴墙→蹬墙左返。裁剪后净空/时机/资源、防夹、恢复和反向技术UNKNOWN，不沿用旧版实测通过。"
+  ],
+  "designVersion": "sha256:5bb3acc4f6f2de0d75e0d48504601c397bc330d5157de834f9a8ad43f38193cd"
+}
