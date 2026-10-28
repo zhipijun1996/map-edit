@@ -45,3 +45,5 @@ python3 -m unittest pcg.migration.tests.test_godot_package pcg.migration.tests.t
 索引重建和证据审计只读复核既有证明，不启动新的校准或留出。历史 Harness 的绝对 extends 需 `/workspace/map-edit-task-a` 指向当前仓库；可玩包不使用控制搜索。原游戏 870 个保护文件 SHA 不变；42 个框架回归通过（1 个跳过）。新增谱系/篡改检查见 [verification/evidence-audit.json](verification/evidence-audit.json)，视频抽帧/ffprobe 和仓库检查日志同目录。公网链接仅在匿名下载并核对 SHA 后写入单独回执。
 
 本轮归档核验通过：56 个运行目录、9 个精确恢复的原始资源、45,162 个逻辑文件；17 分片，172,460,023 字节，整包 SHA `a2cc9c382e9110bf19a8f5192c03b3e59dc9c382be8fe3b4c706eabfa00617dd`。
+
+公网下载已核验：匿名 HTTPS 下载 21 个当前可玩包 manifest、7 段新视频、17 个证据分片，共 45 文件、179,574,388 字节，SHA 全部一致。固定提交 URL 和逐项回执见 [public-downloads.json](public-downloads.json)。此检查下载的是可玩 manifest；完整包文件已随提交保存。
