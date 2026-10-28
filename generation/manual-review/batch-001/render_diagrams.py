@@ -38,7 +38,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,o.get('label','可穿平台'),18,anchor='middle')
   elif typ=='gate':
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
-   parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(x+w/2,y-10,o.get('diagramLabel',label+(' 初始开'if opened else' 初始关')),18,anchor='middle')
+   parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(X(o['diagramLabelPosition'][0]) if o.get('diagramLabelPosition') else x+w/2,Y(o['diagramLabelPosition'][1]) if o.get('diagramLabelPosition') else y-10,o.get('diagramLabel',label+(' 初始开'if opened else' 初始关')),18,anchor='middle')
    if o.get('diagramHint'):text(x+w/2,y+h+26,o['diagramHint'],18,anchor='middle')
   elif typ=='enemy':
    cx,cy=x+w/2,y+h/2;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" stroke="#8e432e" stroke-width="2"/>');text(cx,cy-23,'空中怪'if o.get('definition')=='plains_diver'else'陆上怪',20,anchor='middle')
@@ -78,6 +78,13 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   points=' '.join(f'{X(p["x"])},{Y(p["y"])}'for p in points);color=routecolors[i%len(routecolors)]
   start_marker=' marker-start="url(#arrow)"' if o.get('reviewBidirectional') else ''
   parts.append(f'<polyline{start_marker} points="{points}" stroke="{color}" stroke-opacity=".85" stroke-width="3.5" fill="none" marker-end="url(#arrow)"/>')
+ if design_only:
+  for shot in design.get('shotGuides',[]):
+   ax,ay=shot['from'];bx,by=shot['to'];cx,cy=X(ax),Y(ay)
+   parts.append(f'<circle cx="{cx}" cy="{cy}" r="7" fill="#3b79c9"/><path d="M{cx} {cy}L{X(bx)} {Y(by)}" fill="none" stroke="#3b79c9" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arrow)"/>')
+   lx,ly=shot.get('labelPosition',[ax,ay-20]);text(X(lx),Y(ly),shot['label'],18,anchor=shot.get('labelAnchor','middle'))
+   if shot.get('recoil'):
+    a,z=shot['recoil'];parts.append(f'<path d="M{X(a[0])} {Y(a[1])}L{X(z[0])} {Y(z[1])}" fill="none" stroke="#30905c" stroke-width="4" marker-end="url(#arrow)"/>')
  if reference_action:
   points=' '.join(f'{X(p["x"])},{Y(p["y"])}'for p in reference_action['points'])
   parts.append(f'<polyline data-source-action-order="true" points="{points}" stroke="#3b79c9" stroke-width="2.5" stroke-dasharray="7 6" fill="none" marker-end="url(#arrow)"/>')
@@ -116,6 +123,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   y+=210
  legend='图例：绿＝地貌　紫＝门（虚线＝开）　金＝风铃/奖励　红＝齿轮/荆棘　曲线＝路线意图'if any(o['type']=='hazard'for o in doc['objects'])else'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物'
  if hooks:legend='图例：蓝环＝原钩点　虚蓝线＝来源动作顺序示意　绿＝岩体/平台　曲线不代表真实轨迹' if reference_action else '图例：蓝环＝弹起钩点　绿＝岩体/落地台　曲线＝设计动作顺序，非真实轨迹'
+ if design_only and design.get('shotGuides'):legend='图例：蓝虚线＝射击意图　绿箭头＝反冲　金虚线＝机关关联　紫＝门　红＝荆棘'
  text(40,y+38,legend,20)
  text(40,y+72,('设计稿：每格 128 px；曲线仅表达玩法意图，不代表实际动作、可达性或技术认证。'if args.draft else'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。'),18)
  text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 设计讨论',16)
