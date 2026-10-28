@@ -52,6 +52,9 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
      cx,cy=x+(j+.5)*step,y+h/2;radius=min(h/2,step*.46)
      pts=' '.join(f'{cx+math.cos(a*math.pi/12)*(radius if a%2==0 else radius*.67)},{cy+math.sin(a*math.pi/12)*(radius if a%2==0 else radius*.67)}'for a in range(24))
      parts.append(f'<polygon points="{pts}" fill="#d65345" stroke="#923e36" stroke-width="1.5"/><circle cx="{cx}" cy="{cy}" r="{radius*.25}" fill="#fbfaf5"/>')
+    elif o.get('orientation')=='DOWN':
+     pts=f'{x+j*step},{y} {x+(j+.5)*step},{y+h} {x+(j+1)*step},{y}'
+     parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
     else:
      pts=f'{x+j*step},{y+h} {x+(j+.5)*step},{y} {x+(j+1)*step},{y+h}'
      parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
