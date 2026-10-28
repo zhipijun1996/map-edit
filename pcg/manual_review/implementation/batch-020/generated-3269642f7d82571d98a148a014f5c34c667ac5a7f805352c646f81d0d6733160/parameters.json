@@ -1,0 +1,155 @@
+{
+  "designVersion": "sha256:60490f7153062ab686cb339cc779d09a8fb00969994d5983e3c5603d6f29438b",
+  "content": {
+    "platforms": [
+      [
+        0,
+        186,
+        220,
+        94
+      ],
+      [
+        260,
+        90,
+        20,
+        330
+      ],
+      [
+        440,
+        570,
+        200,
+        32
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          540,
+          552
+        ],
+        "region": [
+          510,
+          547,
+          60,
+          10
+        ],
+        "amount": 12
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 190,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185,
+              164,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 293
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.5000000000000001,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 540,
+          "deadband": 4
+        },
+        {
+          "op": "settle",
+          "target_x": 616,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              611,
+              548,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    }
+  ],
+  "notes": [
+    "UNKNOWN permanent gate durations resolved to original permanent 0s for safe_lesson,sequence,shot_recoil_combo; 162 timed gate retains 3s",
+    "175 mounted original ShotLatch follows real carrier; no player/clock/resource writes"
+  ]
+}

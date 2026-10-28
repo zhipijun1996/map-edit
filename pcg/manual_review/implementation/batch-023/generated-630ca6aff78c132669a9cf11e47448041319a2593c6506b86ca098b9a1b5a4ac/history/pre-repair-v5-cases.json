@@ -1,0 +1,583 @@
+{
+  "cases": [
+    {
+      "id": "approved-review029-v1-194-entry-to-exit",
+      "family": "moving-ray-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          438,
+          240,
+          32
+        ],
+        [
+          460,
+          438,
+          255,
+          32
+        ],
+        [
+          250,
+          86,
+          495,
+          154
+        ],
+        [
+          715,
+          240,
+          30,
+          150
+        ],
+        [
+          691,
+          438,
+          77,
+          24
+        ]
+      ],
+      "spawn": [
+        24,
+        420
+      ],
+      "entry_port": [
+        24,
+        420
+      ],
+      "exit_port": [
+        744,
+        420
+      ],
+      "goal": [
+        737,
+        416,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -298,
+        1280,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "ray-shutter",
+          "start": [
+            140,
+            180
+          ],
+          "finish": [
+            140,
+            415
+          ],
+          "size": [
+            20,
+            110
+          ],
+          "travel_duration": 1.4,
+          "dwell_duration": 0.15,
+          "initial_phase": 0
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            20.0,
+            405.0
+          ],
+          "gate": [
+            440,
+            240,
+            20,
+            198
+          ],
+          "open_seconds": 0.7,
+          "return_access": [
+            670.0,
+            350.0
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            645.0,
+            420.0
+          ],
+          "region": [
+            615.0,
+            415.0,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "rule_parameters": {
+        "relationship": "moving-ray-window",
+        "interface": 1,
+        "receiver": [
+          645,
+          420
+        ],
+        "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+        "requested_geometry": [
+          [
+            -160,
+            438,
+            400,
+            100
+          ],
+          [
+            460,
+            438,
+            255,
+            100
+          ],
+          [
+            250,
+            80,
+            495,
+            160
+          ],
+          [
+            715,
+            240,
+            30,
+            198
+          ],
+          [
+            -200,
+            680,
+            1200,
+            60
+          ]
+        ],
+        "only_special_ability": "shot_recoil"
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 200,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              195,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ray-shutter",
+              "window": [
+                0.78,
+                0.805
+              ]
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 645,
+          "deadband": 4
+        },
+        {
+          "op": "settle",
+          "target_x": 744,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              739,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "plains50/machinery/moving-ray-window",
+        "version": 1,
+        "source_type": "actual_current_codex_subagent",
+        "author_task": "/root/plains50_machinery",
+        "parameters": {
+          "relationship": "moving-ray-window",
+          "interface": 1,
+          "receiver": [
+            645,
+            420
+          ],
+          "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+          "requested_geometry": [
+            [
+              -160,
+              438,
+              400,
+              100
+            ],
+            [
+              460,
+              438,
+              255,
+              100
+            ],
+            [
+              250,
+              80,
+              495,
+              160
+            ],
+            [
+              715,
+              240,
+              30,
+              198
+            ],
+            [
+              -200,
+              680,
+              1200,
+              60
+            ]
+          ],
+          "only_special_ability": "shot_recoil"
+        },
+        "registration_source": "pcg/manual_review/review029_author_v1.py"
+      },
+      "production_recipe": "moving-ray-window",
+      "rule_source_path": "pcg/prototype/creative_batches/plains50_machinery/recipes_v1.py",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/machinery/moving-ray-window/i1/v1",
+        "region": "plains",
+        "required_family": "moving-ray-window",
+        "objective": {
+          "relationship": "moving-ray-window",
+          "interface": 1,
+          "receiver": [
+            645,
+            420
+          ],
+          "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+          "requested_geometry": [
+            [
+              -160,
+              438,
+              400,
+              100
+            ],
+            [
+              460,
+              438,
+              255,
+              100
+            ],
+            [
+              250,
+              80,
+              495,
+              160
+            ],
+            [
+              715,
+              240,
+              30,
+              198
+            ],
+            [
+              -200,
+              680,
+              1200,
+              60
+            ]
+          ],
+          "only_special_ability": "shot_recoil"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 2400,
+          "max_height": 1600,
+          "max_port_span_x": 1900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "plains50-machinery/moving-ray-window"
+      ],
+      "adaptation_ancestor": {
+        "path": "generation/workshop/creative20-v1/cases/M17.json",
+        "sha256": "7a91a8d15714f2686b0e5dcebb46f3b7b9dd3533277fa5b1387a4e576167b359",
+        "scope": "Executable input ancestry, not evidence for new geometry"
+      },
+      "parent_family": "moving-ray-window",
+      "layout_title": "穿过移动挡板的射击窗口 / 接口2",
+      "route_spec": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            24,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            744,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 4
+        }
+      ],
+      "wall_platform_indices": [],
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "expected_reward": 12,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          86
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "194",
+        "designVersion": "sha256:008c90f7cbc2ef51d88b214456da3dfe97537acb66c88c9e9dffc413e2a5b5ee",
+        "rectangle": {
+          "x": 0,
+          "y": 86,
+          "w": 768,
+          "h": 384
+        },
+        "originalAuthor": "./modules/generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/module.mapnote.json"
+      }
+    }
+  ]
+}
