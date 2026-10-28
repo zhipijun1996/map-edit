@@ -1,22 +1,15 @@
 ---
 name: pcg-creative-producer
-description: 按 MAP_FOUNDATION 迁移既有内容，离线记录创意、真实 Route 发现、实现缺口与质量反馈；新 Module 生产恢复后再用于持续创作。
+description: 在授权模式下组织 Module 修改、确认设计实现和新创作，记录真实机制、空间因果、Route、缺口和分层质量反馈。
 ---
 
-当前实施采用最新已授权迁移顺序与三去向：先本仓库、后主游戏；技术合格可复用内容入根 `modules/`，事实已确认的完全重复非代表项/明确排除项入 `modules-recycle/`，近似待审、缺口或验证失败留原处。目标验证与回读、引用及可恢复归档检查完成后才归档原件，不提前搬走失败源。技术认证与人工观感/试玩/生产认可分开；旧Map生成器退役，本轮不实现新Map、不commit、不发布。工具能力以实际实现和回执为准。
+## 依据与工作模式
 
-## 依据与当前工作模式
+先读根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）、`AGENTS.md`、`pcg/WORKSPACE.md` 与实际源码/证据；按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)选择既有修改、确认设计实现或获准新生成。迁移专用去向与归档见 [迁移 skill](../pcg-module-migration/SKILL.md)，执行入口见 [Module 工厂](../pcg-module-factory/SKILL.md)，验证与媒体分别见 [物理 skill](../pcg-physics-contract/SKILL.md)、[视频 skill](../pcg-video-review/SKILL.md)。
 
-先读根目录 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范性）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐性）、[迁移状态](../../../pcg/migration/foundation-v1/status.json)，再读 `AGENTS.md`、`pcg/WORKSPACE.md` 及与本次任务有关的源码和证据。使用 [Module 工厂](../pcg-module-factory/SKILL.md)、[物理契约](../pcg-physics-contract/SKILL.md)、[视频审阅](../pcg-video-review/SKILL.md)；迁移实施见 [Module迁移skill](../pcg-module-migration/SKILL.md)。
+不把某轮任务的 MIGRATION、来源排序、不提交或生产数量写成永久权限。当前 AGENTS 若仍暂停新增，保持暂停；只有用户授权相应新工作才进入创作循环。已确认设计实现不重新发散创意，不擅自改方案。全量迁移的顺序及范围按当前任务确定；旧 Map 入口不恢复，Module 授权不自动包含 Map。
 
-`MAP_FOUNDATION` 是本系统设计与契约的首要依据；旧 skill、历史报告、实验接口与代码不能覆盖它。Guide 中 `4×3 / 3×4`、200 个模板、尺寸配比、区域规模及评分权重都是推荐起点，不能自动变成准入阈值或用户必须完成的数量。
-
-当前模式为 **MIGRATION，新 Module 生产已被用户暂停**。只做既有内容的清点、身份归并、迁移设计、必要修订及重验，顺序为：
-
-1. 本仓库既有 Module。
-2. 主游戏已有 Module。
-
-不继续旧“新增30/50件”循环，不续写新玩法提案或另起 Cell 实验。已保存草案与旧失败作为历史来源保留；必要迁移修订不算新原创。用户恢复新内容生产后，才启用本文最后一节的离线创作循环，不由时间经过或旧授权自动恢复。当前进度以迁移状态和实际回执为准；技能改写不表示新合同、消费者、认证或库编译器已经实现。
+Guide 的库规模、尺寸配比、区域规模和评分权重是推荐；不能变成用户必须完成的数量。技能文字更新不代表 schema、消费者、认证或编译器已经实现。技术结果、人工观感、试玩和生产认可分开；失败原处保留，归档原件前先完成目标验证/回读与引用检查。
 
 ## 内容与接口采用的新模型
 
@@ -76,4 +69,4 @@ AI 去重比较实际玩家判断、因果、空间展开、路线/风险收益�
 
 ## 后续创作与迁移的四角接口输出
 
-继续遵守[角落Port扩展](../../../docs/l4-mapgen/corner-port-relocation-v1.md)。逐Port记录四角`cornerRelocations`；可选位置仍是同一逻辑Port，不算更多口或新玩法。允许局部接口适配，保留核心玩法、原权限/路线及能力资源要求；需要真实地貌和原Harness认证的完整配置；不要求封旧开口或额外造墙，旧位置撤销逻辑Port资格，不能仅改箭头。未测UNKNOWN，只认证单口不推联合组合、封口兼容或镜像。当前新增生产仍暂停，全量迁移不因缺导出映射而停止在无需修改的少数对象上。
+继续遵守[角落Port扩展](../../../docs/l4-mapgen/corner-port-relocation-v1.md)。逐Port记录四角`cornerRelocations`；可选位置仍是同一逻辑Port，不算更多口或新玩法。允许局部接口适配，保留核心玩法、原权限/路线及能力资源要求；需要真实地貌和原Harness认证的完整配置；不要求封旧开口或额外造墙，旧位置撤销逻辑Port资格，不能仅改箭头。未测UNKNOWN，只认证单口不推联合组合、封口兼容或镜像。新增生产是否暂停由当前任务决定；全量迁移不因缺导出映射而停止在无需修改的少数对象上。

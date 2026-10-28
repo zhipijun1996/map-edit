@@ -1,15 +1,15 @@
 ---
 name: pcg-video-review
-description: 为地基迁移中的现有 Module 录制可下载真实 Godot 短片，绑定基础模板、方向、Route、连接子集与封口配置，并分开记录技术、AI及人工审核。
+description: 为已有修改、确认设计实现和获准新生成 Module 录制真实 Godot 短片，绑定版本与路线，分开记录严格比较、观感、试玩和生产认可。
 ---
 
 # 可追溯录像与观感审核
 
 用户偏好短视频下载与聊天反馈，不强制网页表单或亲自试玩。视频帮助判断可读性、节奏、动作关系和重复感；它不替代真实 Godot 认证、实际试玩或生产认可。
 
-先读 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)、[迁移状态](../../../pcg/migration/foundation-v1/status.json)及[Module迁移skill](../pcg-module-migration/SKILL.md)。按[物理合同](../pcg-physics-contract/SKILL.md)界定证据范围。当前生产暂停，只为本仓库、随后主游戏已有内容做迁移与重验，不借录像流程新增 Module。
+先读 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)、[迁移状态](../../../pcg/migration/foundation-v1/status.json)及[Module迁移skill](../pcg-module-migration/SKILL.md)。按[物理合同](../pcg-physics-contract/SKILL.md)界定证据范围。先按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)确定工作模式和精确授权，不借录像流程自行新增 Module 或恢复暂停任务。
 
-当前实施采用最新已授权迁移顺序与三去向：先本仓库、后主游戏；技术合格可复用内容入根 `modules/`，事实已确认的完全重复非代表项/明确排除项入 `modules-recycle/`，近似待审、缺口或验证失败留原处。目标验证与回读、引用及可恢复归档检查完成后才归档原件，不提前搬走失败源。技术认证与人工观感/试玩/生产认可分开；旧Map生成器退役，本轮不实现新Map、不commit、不发布。工具能力以实际实现和回执为准。
+已有内容迁移遵守目标回读、引用和可恢复归档要求，不提前搬走失败源；新生成只交付授权范围内的候选与认证。工具能力以实际实现和回执为准，提交/发布权限以当前任务为准。
 
 ## 1. 先定影片代表什么
 
@@ -73,7 +73,7 @@ ffmpeg 用于编码、压缩、明确标记的裁切或合集；保留时序，�
 4. **实际试玩**：有人真实操作后的手感、理解与难度证据。
 5. **生产认可**：独立明确记录，技术通过、AI肯定、整体批次正向反馈都不自动等于每个版本获准生产。
 
-收到意见后保存用户原话、稳定反馈ID、影片编号/视频 SHA、base/版本/方向、Route、connected subset/closure profile 和拟修订问题，类型标为 `video_observation`。AI解释与原话分开，不编造评分、通关率、试玩或批准。用户可直接聊天反馈；观感未审不阻断既有候选的迁移实现与离线实验，但当前新内容生产暂停规则仍适用。
+收到意见后保存用户原话、稳定反馈ID、影片编号/视频 SHA、base/版本/方向、Route、connected subset/closure profile 和拟修订问题，类型标为 `video_observation`。AI解释与原话分开，不编造评分、通关率、试玩或批准。用户可直接聊天反馈；观感未审不阻断既有候选的迁移实现与离线实验，新内容生产是否暂停按当前任务与 AGENTS 判断。
 
 先描述看见的实际行为，再区分推测与待验证项。真实失败、无聊、读不懂、廉价解和重复关系反馈到迁移优先级/设计修订；合理替代保留。返工涉及源、地貌、Port、封口或策略时新版本重绑并按物理合同重验，旧片不覆盖。
 
