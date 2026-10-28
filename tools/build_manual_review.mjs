@@ -38,7 +38,13 @@ if(fs.existsSync(path.join(root,revisionIndex))){
   if(revision.baseSourceSha256!==row.sourceSha256)throw Error('review revision base changed: '+row.moduleId);
   const raw=fs.readFileSync(path.join(root,revision.file));const hash=sha(raw);
   if(hash!==revision.sha256)throw Error('review revision source changed: '+row.moduleId);
-  const doc=JSON.parse(raw);const diagram='diagrams/'+row.moduleId+'--'+hash.slice(0,16)+'.svg';
+  const design=JSON.parse(raw);
+  if(revision.reviewStage==='design'){
+   if(design.schema!=='pcg/module-design/v1'||design.reviewStage!=='design')throw Error('invalid design review schema');
+   if(sha(fs.readFileSync(path.join(out,revision.diagram)))!==revision.diagramSha256)throw Error('design diagram hash changed');
+   return {...row,source:revision.file,sourceSha256:hash,contentVersion:design.designVersion,designVersion:design.designVersion,reviewStage:'design',technicalStatus:'design_only',diagram:revision.diagram,portCount:design.ports.length,previousDiagram:revision.beforeDiagram,previousVersion:revision.beforeVersion,summary:revision.summary,reviewRevision:revision.revision,receivedFeedback:revision.verbatim,physicsSummary:'设计讨论阶段；定稿后统一实现与验证。',formalLibraryChanged:false};
+  }
+  const doc=design;const diagram='diagrams/'+row.moduleId+'--'+hash.slice(0,16)+'.svg';
   let svg=renderContractSvg(doc,{review:true});
   // Presentation only: preserve actual complementary collision state and visible rewards.
   for(const object of doc.objects){
@@ -58,8 +64,8 @@ if(fs.existsSync(path.join(root,revisionIndex))){
   const displayed=revision.diagram??diagram;
   if(revision.diagram&&sha(fs.readFileSync(path.join(out,displayed)))!==revision.diagramSha256)throw Error('review diagram hash changed: '+row.moduleId);
   return {...row,source:revision.file,sourceSha256:hash,contentVersion:doc.generationContract.contentVersion,diagram:displayed,
-   previousDiagram:row.diagram,previousVersion:row.contentVersion,summary:revision.summary,reviewRevision:revision.revision,
-   receivedFeedback:revision.verbatim,decisionOnPreviousVersion:revision.decisionOnSource,technicalStatus:'revision_draft',
+   previousDiagram:revision.beforeDiagram??row.diagram,previousVersion:revision.beforeVersion??row.contentVersion,summary:revision.summary,reviewRevision:revision.revision,
+   portCount:doc.generationContract.ports.length,receivedFeedback:revision.verbatim,decisionOnPreviousVersion:revision.decisionOnSource,technicalStatus:'revision_draft',
    physicsSummary:revision.physicsSummary,formalLibraryChanged:false};
  });
 }

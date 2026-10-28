@@ -12,7 +12,11 @@ for row in manifest['rows']:
 esc=lambda s:html.escape(str(s),quote=True)
 rows=[]
 for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
- src=ROOT/entry['file'];doc=json.loads(src.read_text());gc=doc['generationContract'];b=gc['space']['bounds'];s=min(1250/b['w'],700/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175)
+ src=ROOT/entry['file'];doc=json.loads(src.read_text());design_only=doc.get('schema')=='pcg/module-design/v1'
+ if design_only:
+  design=doc;doc={'id':design['id'],'objects':design['visualObjects']};gc={'contentVersion':design['designVersion'],'space':{'bounds':design['bounds']},'foundation':{'widthBlocks':design['bounds']['w']//128,'heightBlocks':design['bounds']['h']//128},'routes':design['intendedRoutes'],'ports':design['ports'],'generation':{'portConnectivityIntent':design.get('connectivityIntent')}}
+ else:gc=doc['generationContract']
+ b=gc['space']['bounds'];s=min(1250/b['w'],700/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175)
  X=lambda x:L+(x-b['x'])*s;Y=lambda y:T+(y-b['y'])*s
  parts=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7Z" fill="context-stroke"/></marker></defs><style>text{{font-family:"Noto Sans CJK SC",sans-serif;fill:#263c37}} .label{{paint-order:stroke;stroke:#fbfaf5;stroke-width:5;stroke-linejoin:round}}</style><rect width="100%" height="100%" fill="#fbfaf5"/>']
  def text(x,y,t,size=21,fill='#263c37',anchor='start',weight=400):parts.append(f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" text-anchor="{anchor}" font-weight="{weight}" class="label">{esc(t)}</text>')
@@ -28,7 +32,8 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   if typ in ('route','entry','exit','anchor','note'):continue
   x,y,w,h=X(o['x']),Y(o['y']),o['w']*s,o['h']*s
   if typ in ('terrain','platform'):
-   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#a4b490" stroke="#697e60" stroke-width="1.5"/>')
+   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{'#c8d5b8'if typ=='platform'else'#a4b490'}" stroke="#697e60" stroke-width="1.5"/>')
+   if typ=='platform':text(x+w/2,y-10,o.get('label','可穿平台'),18,anchor='middle')
   elif typ=='gate':
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
    parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(x+w/2,y-10,label+(' 初始虚'if opened else' 初始实'),18,anchor='middle')
@@ -39,7 +44,9 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  # Actual archived core-route paths, without per-frame numbering.
  routecolors=['#157f84','#d28b25','#3c69b0','#a35b92']
  for i,r in enumerate(gc['routes']):
-  o=next(v for v in doc['objects']if v['id']==r['pathObjectId']);points=o.get('points',[]);stride=max(1,len(points)//80);points=points[::stride]+points[-1:]
+  o=next(v for v in doc['objects']if v['id']==r['pathObjectId'])
+  if o.get('reviewShowTrace') is False:continue
+  points=o.get('points',[]);stride=max(1,len(points)//80);points=points[::stride]+points[-1:]
   points=' '.join(f'{X(p["x"])},{Y(p["y"])}'for p in points);color=routecolors[i%len(routecolors)]
   parts.append(f'<polyline points="{points}" stroke="{color}" stroke-opacity=".85" stroke-width="3.5" fill="none" marker-end="url(#arrow)"/>')
  for o in doc['objects']:
@@ -49,10 +56,10 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
  for p in gc['ports']:
   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*13} {cy+ny*13}L{cx+nx*43} {cy+ny*43}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+nx*63,cy+8+ny*50,p['id'],28,anchor='middle',weight=700)
- y=Y(b['y']+b['h'])+38;text(40,y,('声明方向：'if args.draft else'归档路线：')+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']),22,weight=600)
+ y=Y(b['y']+b['h'])+38;caption=(('设计目标：四口两两可选，共 12 个有向关系；不是通行认证。'if design_only else'目标：A/B/C/D 四口两两可达，共 12 个方向；未验证方向保持 UNKNOWN。')if gc['generation'].get('portConnectivityIntent')=='all_distinct_ordered_pairs'else('声明方向：'if args.draft else'归档路线：')+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']));text(40,y,caption,22,weight=600)
  text(40,y+38,'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物',20)
- text(40,y+72,('每格 128 px；虚线外框不是墙。曲线是新版诊断轨迹，通过状态见网页；本轮仍待复审。'if args.draft else'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。'),18)
- text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 待人工审批',16)
+ text(40,y+72,('设计稿：每格 128 px；曲线仅表达玩法意图，不代表实际动作、可达性或技术认证。'if args.draft else'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。'),18)
+ text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 设计讨论',16)
  parts.append('</svg>');svg=out/f'{n:02d}.svg';svg.write_text(''.join(parts))
  rows.append(dict(reviewId=f'{n:02d}',title=title,summary=note,moduleId=entry['id'],source=entry['file'],sourceSha256=hashlib.sha256(src.read_bytes()).hexdigest(),contentVersion=gc['contentVersion'],diagram=f'{n:02d}.png',svg=svg.name,decision='PENDING',humanFeedback=[]))
 with sync_playwright() as p:
