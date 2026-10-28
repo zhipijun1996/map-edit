@@ -1,0 +1,161 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-high-perches",
+  "reviewId": "130",
+  "title": "高处落脚点",
+  "summary": "5×3 Block；左裁1、右裁2、上裁1、下裁1；末级台对齐新出口。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-high-perches/module.mapnote.json",
+    "contentVersion": "sha256:e952a11af106ee376e87a7323821099d0b8b34b606088e9dbf53b8494c95526d",
+    "sha256": "740c104592618afe01ef4fa5f68a9d372c8791c0bb9b54ca7355e9873738b36e"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 188,
+    "w": 640,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        508
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        640,
+        252
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左1右2上1下1block",
+  "designNotes": [
+    "按左1/右2/上1/下1裁剪，从8×5成为5×3，边界x0–640、y188–572。",
+    "原entry移到(0,508)，保留首台y540。原exit在y124，已被上裁移出边界；适配到新右边顶行中心(640,252)。",
+    "末级原岩台从y210下移74px至y284，右端裁到x640，对齐出口脚下32px支撑；不另补出口长台。前两级上攀台位置不改。",
+    "底部原危险带y585–615整体位于被裁行，按裁剪移除，不偷偷移回；旧危险/恢复结论不沿用。",
+    "仅保留entry→exit上攀设计目标。实际跳跃/反冲、身体净空、连续资源、失败恢复及回程UNKNOWN。"
+  ],
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 540,
+      "w": 100,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/platform-1",
+      "type": "terrain",
+      "x": 155,
+      "y": 430,
+      "w": 120,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/platform-2",
+      "type": "terrain",
+      "x": 330,
+      "y": 320,
+      "w": 120,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/platform-3",
+      "type": "terrain",
+      "x": 510,
+      "y": 284,
+      "w": 130,
+      "h": 30,
+      "rotation": 0,
+      "label": "末级落脚台适配新出口",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 188,
+      "w": 640,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 508
+        },
+        {
+          "x": 65,
+          "y": 522
+        },
+        {
+          "x": 210,
+          "y": 412
+        },
+        {
+          "x": 385,
+          "y": 302
+        },
+        {
+          "x": 560,
+          "y": 266
+        },
+        {
+          "x": 640,
+          "y": 252
+        }
+      ]
+    }
+  ],
+  "designVersion": "sha256:e367677a4dbb0fb1bc8d825b2a608a05a52581e67d436d40195262105370d7f2"
+}
