@@ -26,3 +26,5 @@ python3 -m pcg.manual_review.index_157_upper_block_v1
 ![157 新版空中轨迹抽帧](verification/air-frame.jpg)
 
 授权目标快照保留原设计的历史描述文字；当前尺寸由该快照的 `bounds` 和本轮授权差量明确为 6×2，旧 `summary` 中的 6×1 不代表本轮目标。实际样品与正式输入均使用新矩形。
+
+公网匿名下载核验通过：6 个文件、10,437,795 字节，包括当前结果/索引、可玩 manifest、影片和完整原始证据归档。固定实现提交 `7d7809ad05ea603999b5ee365fb0722aea203b57`，逐项 SHA 与 URL 见 [public-downloads.json](public-downloads.json)。
