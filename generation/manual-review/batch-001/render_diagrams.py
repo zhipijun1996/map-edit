@@ -45,9 +45,9 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
  for p in gc['ports']:
   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*13} {cy+ny*13}L{cx+nx*43} {cy+ny*43}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+nx*63,cy+8+ny*50,p['id'],28,anchor='middle',weight=700)
- y=Y(b['y']+b['h'])+38;text(40,y,'已验证方向：'+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']),22,weight=600)
+ y=Y(b['y']+b['h'])+38;text(40,y,'归档路线：'+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']),22,weight=600)
  text(40,y+38,'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱',20)
- text(40,y+72,'每格 128 px；虚线外框是占地，不是墙。路线显示归档核心动作；本图审阅原配置。',18)
+ text(40,y+72,'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。',18)
  text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 待人工审批',16)
  parts.append('</svg>');svg=out/f'{n:02d}.svg';svg.write_text(''.join(parts))
  rows.append(dict(reviewId=f'{n:02d}',title=title,summary=note,moduleId=entry['id'],source=entry['file'],sourceSha256=hashlib.sha256(src.read_bytes()).hexdigest(),contentVersion=gc['contentVersion'],diagram=f'{n:02d}.png',svg=svg.name,decision='PENDING',humanFeedback=[]))
