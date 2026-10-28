@@ -17,7 +17,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   design=doc;doc={'id':design['id'],'objects':design['visualObjects']};gc={'contentVersion':design['designVersion'],'space':{'bounds':design['bounds']},'foundation':{'widthBlocks':design['bounds']['w']//128,'heightBlocks':design['bounds']['h']//128},'routes':design['intendedRoutes'],'ports':design['ports'],'generation':{'portConnectivityIntent':design.get('connectivityIntent')}}
  else:gc=doc['generationContract']
  matrix=design.get('routeMatrix') if design_only else None
- b=gc['space']['bounds'];s=min(1250/b['w'],700/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175+(210 if matrix else 0))
+ b=gc['space']['bounds'];s=min(1250/b['w'],(1200 if design_only and b['h']>b['w']*1.6 else 700)/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175+(210 if matrix else 0))
  X=lambda x:L+(x-b['x'])*s;Y=lambda y:T+(y-b['y'])*s
  parts=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7Z" fill="context-stroke"/></marker></defs><style>text{{font-family:"Noto Sans CJK SC",sans-serif;fill:#263c37}} .label{{paint-order:stroke;stroke:#fbfaf5;stroke-width:5;stroke-linejoin:round}}</style><rect width="100%" height="100%" fill="#fbfaf5"/>']
  def text(x,y,t,size=21,fill='#263c37',anchor='start',weight=400):parts.append(f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" text-anchor="{anchor}" font-weight="{weight}" class="label">{esc(t)}</text>')
@@ -48,10 +48,10 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   elif typ=='hazard' and o.get('shape')=='zone':
    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#c75049" fill-opacity=".3" stroke="#903931" stroke-width="2"/>');text(x+w/2,y-9,o.get('label','危险区'),18,anchor='middle')
   elif typ=='hazard':
-   vertical=o.get('orientation')=='RIGHT';count=max(2,round(h/(w*1.3)))if vertical else max(2,round(w/(h*1.3)));count=max(1,int(o.get('count',count)));step=(h if vertical else w)/count
+   vertical=o.get('orientation') in ('LEFT','RIGHT');count=max(2,round(h/(w*1.3)))if vertical else max(2,round(w/(h*1.3)));count=max(1,int(o.get('count',count)));step=(h if vertical else w)/count
    for j in range(count):
     if vertical:
-     pts=f'{x},{y+j*step} {x+w},{y+(j+.5)*step} {x},{y+(j+1)*step}'
+     pts=(f'{x+w},{y+j*step} {x},{y+(j+.5)*step} {x+w},{y+(j+1)*step}' if o.get('orientation')=='LEFT' else f'{x},{y+j*step} {x+w},{y+(j+.5)*step} {x},{y+(j+1)*step}')
      parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
     elif o.get('shape')=='gears':
      cx,cy=x+(j+.5)*step,y+h/2;radius=min(h/2,step*.46)
