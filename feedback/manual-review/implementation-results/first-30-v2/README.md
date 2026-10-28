@@ -72,3 +72,5 @@ python3 -m unittest pcg.migration.tests.test_godot_package pcg.migration.tests.t
 审计重跑只读复核既有证明，不启动新校准/留出。重建历史 Harness 需与快照一致的 `/workspace/map-edit-task-a` 仓库符号链接；可玩包入口不使用 Harness 控制搜索。全部运行与原游戏提交 `12f6cb006d7119598e3235f4ca4f7323e4c9d092` 绑定，870 个保护文件无修改。
 
 验证：`npm run check` 全部通过，catalog 210 项；框架回归 42 项（1 项跳过）；新 Cell/AIR/反例范围/入口补证含真实正例及故障反例；归档逐项 SHA 完整核验通过。具体日志见 [verification](verification/)。
+
+公网交付已核验：从匿名 HTTPS 下载全部 16 段新视频、8 个归档分片和 15 个当前可玩 manifest，共 39 个文件，字节 SHA 全部匹配。固定提交的真实 URL 和结果见 [public-downloads.json](public-downloads.json)。
