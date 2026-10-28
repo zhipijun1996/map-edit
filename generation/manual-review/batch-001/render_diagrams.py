@@ -37,7 +37,8 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    if typ=='platform':text(x+w/2,y-10,o.get('label','可穿平台'),18,anchor='middle')
   elif typ=='gate':
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
-   parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(x+w/2,y-10,label+(' 初始开'if opened else' 初始关'),18,anchor='middle')
+   parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(x+w/2,y-10,o.get('diagramLabel',label+(' 初始开'if opened else' 初始关')),18,anchor='middle')
+   if o.get('diagramHint'):text(x+w/2,y+h+26,o['diagramHint'],18,anchor='middle')
   elif typ=='enemy':
    cx,cy=x+w/2,y+h/2;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" stroke="#8e432e" stroke-width="2"/>');text(cx,cy-23,'空中怪'if o.get('definition')=='plains_diver'else'陆上怪',20,anchor='middle')
   elif typ=='trackLine':
