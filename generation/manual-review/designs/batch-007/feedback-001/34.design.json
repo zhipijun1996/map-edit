@@ -1,0 +1,383 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-boss-approach",
+  "reviewId": "34",
+  "title": "Boss 前厅",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-boss-approach/module.mapnote.json",
+    "contentVersion": "sha256:4a4f52d4d1fb9162d2c47ecb6dbd11760455e7231455b0d357a94e827d6a3460",
+    "sha256": "5d408edec3bc449c5739f9aaa16b3ec53108738b35bbc0df217727853eb6cf08"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": -8,
+    "w": 1280,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1280,
+        568
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        64,
+        -8
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "AIR",
+      "permission": "IN",
+      "entryCondition": {
+        "grounded": false,
+        "travelDirection": "DOWNWARD",
+        "velocity": "TO_BE_VALIDATED"
+      },
+      "exitCondition": "NOT_ALLOWED"
+    },
+    {
+      "id": "D",
+      "position": [
+        1216,
+        -8
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "AIR",
+      "permission": "IN",
+      "entryCondition": {
+        "grounded": false,
+        "travelDirection": "DOWNWARD",
+        "velocity": "TO_BE_VALIDATED"
+      },
+      "exitCondition": "NOT_ALLOWED"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-entry",
+      "from": "C",
+      "to": "entry",
+      "pathObjectId": "design-route-C-to-entry",
+      "role": "ingress",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-exit",
+      "from": "C",
+      "to": "exit",
+      "pathObjectId": "design-route-C-to-exit",
+      "role": "ingress",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "D-to-entry",
+      "from": "D",
+      "to": "entry",
+      "pathObjectId": "design-route-D-to-entry",
+      "role": "ingress",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "D-to-exit",
+      "from": "D",
+      "to": "exit",
+      "pathObjectId": "design-route-D-to-exit",
+      "role": "ingress",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "做成空旷空间，上侧加高，上面右侧，上面左侧，增加空中入口。最右侧的短平台删除",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-345519f7fe76d0d2ed8ee9cbab508470564271fa4d07fb5201c009935a0c8fb5/platform-0",
+      "type": "terrain",
+      "x": 40,
+      "y": 600,
+      "w": 1200,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-345519f7fe76d0d2ed8ee9cbab508470564271fa4d07fb5201c009935a0c8fb5/migration-shore-entry",
+      "type": "terrain",
+      "x": 0,
+      "y": 600,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 2
+    },
+    {
+      "id": "generated-345519f7fe76d0d2ed8ee9cbab508470564271fa4d07fb5201c009935a0c8fb5/migration-shore-exit",
+      "type": "terrain",
+      "x": 1216,
+      "y": 600,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 3
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 0,
+          "y": 568
+        },
+        {
+          "x": 160,
+          "y": 582
+        },
+        {
+          "x": 1120,
+          "y": 582
+        },
+        {
+          "x": 1280,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 1280,
+          "y": 568
+        },
+        {
+          "x": 1120,
+          "y": 582
+        },
+        {
+          "x": 160,
+          "y": 582
+        },
+        {
+          "x": 0,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 64,
+          "y": -8
+        },
+        {
+          "x": 64,
+          "y": 180
+        },
+        {
+          "x": 96,
+          "y": 420
+        },
+        {
+          "x": 128,
+          "y": 582
+        },
+        {
+          "x": 0,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-C-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 64,
+          "y": -8
+        },
+        {
+          "x": 160,
+          "y": 220
+        },
+        {
+          "x": 320,
+          "y": 500
+        },
+        {
+          "x": 400,
+          "y": 582
+        },
+        {
+          "x": 1120,
+          "y": 582
+        },
+        {
+          "x": 1280,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-D-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 1216,
+          "y": -8
+        },
+        {
+          "x": 1120,
+          "y": 220
+        },
+        {
+          "x": 960,
+          "y": 500
+        },
+        {
+          "x": 880,
+          "y": 582
+        },
+        {
+          "x": 160,
+          "y": 582
+        },
+        {
+          "x": 0,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-D-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -8,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 1216,
+          "y": -8
+        },
+        {
+          "x": 1216,
+          "y": 180
+        },
+        {
+          "x": 1184,
+          "y": 420
+        },
+        {
+          "x": 1152,
+          "y": 582
+        },
+        {
+          "x": 1280,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "summary": "10×6 Block；上方暂加高3行，删除右侧短台；顶部左右新增空中仅入C/D。",
+  "routeCaption": "地面 entry↔exit；顶部C/D仅入，各通向两个地面口；共6个有向设计目标。",
+  "designNotes": [
+    "“上侧加高”暂按新增3行Block处理：从10×3变为10×6，顶部从y376移到-8，原地面y600与左右地面口高度不变。",
+    "删除最右侧原短台x1000–1220、y500；移除埋在整块地板下、不参与前厅通行的危险区。保留平坦地面，前厅上方保持空旷，不放敌人、Boss或新机关。",
+    "“上面左侧/上面右侧增加空中入口”解释为顶边两端Block中心C(64,-8)、D(1216,-8)，仅空中向下进入；进入速度/资源条件待验证。若偏好侧边上角入口可继续改图。",
+    "声明地面口双向2条、C/D分别到两个地面口4条设计目标；C/D不可作为出口，不默认入口互换。实际落地净空、资源和接缝连续状态UNKNOWN。"
+  ],
+  "designVersion": "sha256:e3990c52ab60a6d4095694b2db6ea39642e62cfcb3f73bac8f0d05a9f76f1adf"
+}
