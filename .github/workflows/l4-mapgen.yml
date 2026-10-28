@@ -1,0 +1,35 @@
+name: Legacy L4 research audit (manual only)
+# The old Map generator is retired. Keep historical audits explicitly opt-in.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  map-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r experiments/l4-mapgen/requirements.txt
+      - run: npm run check
+      - run: npm run check:mapgen
+      - run: python3 experiments/l4-mapgen/check_artifacts.py
+      - run: node --check experiments/l4-mapgen/viewer.js
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/open-valley-final-v2/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/valley-complete-release-v1/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/full-region-phase-aware-calibration-v1/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/ecosystem-stability-v2/maps/0/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/woven-release-v1/module-library/documents/manifest.json
+      - run: node pcg/map_directed/direct_join/verify_catalog.mjs pcg/results/content-routes-release-v1/module-library/documents/manifest.json
+      - run: python3 -m unittest discover -s pcg/map_directed/tests -v
+      - run: python3 -m unittest discover -s prototype/factory/tests -v
+        working-directory: pcg
+      - run: python3 -m unittest discover -s prototype/plains/tests -v
+        working-directory: pcg
+      - run: python3 -m unittest discover -s pcg/prototype/creative_batches/plains_workshop/tests -v

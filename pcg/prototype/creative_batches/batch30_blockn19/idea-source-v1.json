@@ -1,0 +1,1063 @@
+{
+  "source_type": "actual_current_codex_authorized_subagent",
+  "author": "/root/batch30_creative",
+  "card_source": "pcg/creative-production/batch30/block-next-ideas-v4.json",
+  "card_source_sha256": "fac274d6bdf4d2fb2cabd38adf0809cb383ecd3b7285232a5b82bd824f2a41fd",
+  "card_original": {
+    "source_type": "actual_current_codex_authorized_subagent",
+    "author": "/root/batch30_creative",
+    "exact_model_revision": "not_exposed",
+    "external_api_called": false,
+    "status": "proposal_existing_Cells_new_rule_missing",
+    "physics": "NOT_RUN",
+    "candidate_versions": [],
+    "human_video_observation": "UNKNOWN",
+    "human_playtest": "UNKNOWN",
+    "production_admitted": false,
+    "abilities": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "id": "B31-N19",
+    "title": "折角气闸：开脚下，落稳，再开侧面",
+    "priority": 3,
+    "player_observation": "入口高桥A横在脚下，侧下方可见中台与出口；侧门B当前开着，但击铃会撤桥并封侧门。下层还有同一铃的真实access。",
+    "player_decision": "先选择何处离开桥/何时撤支撑，落进能回枪的中台；身体完全低于桥后再从下层换态，让桥封回、侧出口打开。希望回程时反过来运用两种门角色。",
+    "causal_relationship": "同一pair连续两次互斥交换：第一次把支撑变成下行入口但封侧面；第二枪以原中台真实恢复为资源，把顶面封回并打开放行侧门。是空间折角的状态气闸，不是一个hidden二次命中计数器。",
+    "nonnegotiable": [
+      "第一次实际撤自己的脚下实门并下行",
+      "中台是真实落地/原资源恢复，不能声称保留唯一空中枪",
+      "第二次在身体已清空将关门A之后原子切换，真实侧门B打开",
+      "下层access可被真实弹丸命中，不被自己将开的门挡住；N10失败教训",
+      "失败保留所有原地貌和世界门态"
+    ],
+    "existing_rule_vs_missing": {
+      "existing": [
+        "C02真实XOR气闸与完整身体拒夹",
+        "原pair access receiver",
+        "trapdoor-commit撤支撑路线和原地面恢复"
+      ],
+      "missing": [
+        "横桥A/竖侧门B、下台access与连续两次换态新规则",
+        "下行方向与适用回程独立物理",
+        "两接口完整实体新版本，不能只继承C02矩形水平证据"
+      ],
+      "new_Cell_required": false
+    },
+    "sources": [
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v1.gd",
+        "sha256": "7f1cc7f20ef1f675c5fce34ea5568c1c94780f467f97577c050a1080b0cf8781"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v2.gd",
+        "sha256": "7d40cf6351c718a884049a96b1dc504d7d3beae815c496ec52f9f8aedcad5e66"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+        "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_blockpilot/rules_v1.py",
+        "sha256": "f8ab36a9b7dfe731d9818b72c2a726ad93ce219642ef3e3530a96cc6d0f416d5"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/plains50_resources/production_v1.py",
+        "sha256": "7c55db43f8d33dbb8421ee78553b5fa5507319901804af4cbad7101c8d112190"
+      }
+    ],
+    "parent_bindings": [
+      {
+        "contentVersion": "sha256:30f7380fbf6652b319cf468af648141e34403fd49951832a1ba0e45149980b85",
+        "record": {
+          "path": "pcg/map_directed/library/candidates/30f7380fbf6652b319cf468af648141e34403fd49951832a1ba0e45149980b85/record.json",
+          "sha256": "3d9699df2528621d9fccbd24d217eda3d8dead5932b63db045640b716e8ac4e2"
+        },
+        "document": {
+          "path": "pcg/map_directed/library/candidates/30f7380fbf6652b319cf468af648141e34403fd49951832a1ba0e45149980b85/module.mapnote.json",
+          "sha256": "3c66537781c02895d1bab52121aaf105e979b995ef3eea1b08735f16b3321e90"
+        },
+        "cases": {
+          "path": "pcg/map_directed/library/candidates/30f7380fbf6652b319cf468af648141e34403fd49951832a1ba0e45149980b85/cases.json",
+          "sha256": "bd22216a7ab693f1c826202abbad6e86c824ad5cf28398a69695771a58107285"
+        },
+        "technical_status": "passed_scoped_multi_route",
+        "source_read": true,
+        "qualification": "Existing exact parent only; no physics/state/Block qualification inherited by this proposal"
+      }
+    ],
+    "gate_pair_roles": {
+      "A": "起点横桥/下行闸口",
+      "B": "中台通向出口的竖闸"
+    },
+    "gate_state_table": [
+      {
+        "state": "initial",
+        "A_open": false,
+        "B_open": true
+      },
+      {
+        "state": "body_descends_to_M",
+        "A_open": true,
+        "B_open": false
+      },
+      {
+        "state": "body_below_A_second_switch",
+        "A_open": false,
+        "B_open": true
+      }
+    ],
+    "resources": "第一次射击不强制空中；原地面枪/反冲效果照实记录。中台后第二枪必须来自真实接地恢复或真实尚有资源，不能给剧情充能。gate拒绝不会返还枪。",
+    "reward": "出口侧廊有可见10币箱，门/中台/下一岸视觉上形成一眼可读折角；无奖请求另作新预算版本，不要求两次换态只是为了计数。",
+    "recovery": "若撤桥后偏离中台，完整保留更低底岸和两级原跳程回中台；pair保持A开B关，底部access须有实际射线。早关桥被拒绝后可以重新接地再射；不能因nominal未走底岸删恢复。",
+    "return_conditions": "优先A→B；B→A是希望提供Map foldback的额外需求，必须在已取一次奖的同世界再验。回程从B先穿仍开的B，到M后才开A，否则会把自己关在外面。若上穿后无法回高岸则明确needs_design/反向UNKNOWN，不改成免费补台。",
+    "nearest": [
+      "C02串联气闸",
+      "P50-G10撤脚下支撑",
+      "N04同门上穿回接",
+      "N08换层回程"
+    ],
+    "difference": "是C02有用的折角/地面资源层适配，0新基础家族声称。具体体验从空中同时过串门改为撤脚下→落层观察→再换侧闸；不是N04定时复位，也不宣称回程捷径。",
+    "cheap_counterexamples": [
+      "不撤A从边缘普通下落到M，直接穿初态B到奖",
+      "在固定安全岸预撤桥后下落，是否同成本完全省掉撤脚下因果",
+      "从桥上一次换态后绕B顶/底直接到奖",
+      "中台不真实落地就凭空二枪",
+      "下access射线被B/固定岩挡住，如N10",
+      "第二次开门时用关A推出/传送人物",
+      "回程用fresh重建代签已取奖状态",
+      "删底岸恢复来让counter不见"
+    ],
+    "first_eight_cases": [
+      "1 A→B实际两次切换、M落地/资源与奖事务",
+      "2 同一rule第二个起跳/射击时机+4f，核容错",
+      "3 完全不射或不撤A，从桥边自然落M去同奖counter",
+      "4 安全岸预撤A再下M，比较同目标总成本",
+      "5 撤A后忽略第二次切换，绕B顶/底counter",
+      "6 第一次故意漏接M，原底岸经原步阶回M并完成，世界不重置",
+      "7 在将关A身体净空不足时射，核整次拒绝、不返资源/不夹人",
+      "8 完成取奖后同世界B→A尝试，核B先通过再切A与真实返高岸"
+    ],
+    "first_falsifier": "若桥边自然落下且初态B开就可同成本取奖，折角闸没有作用，应重构真实岩体/输入路线或停止，不用must_toggle_twice字段假装必要。若回程失败保留UNKNOWN，不能拿单向成功签foldback。",
+    "budget": {
+      "max_rules": 2,
+      "max_probes": 80,
+      "first_batch": 8,
+      "regular_unchanged": true,
+      "selection": "先首probe查桥边直接下落，再名义/恢复；有效才扩第二接口，不从holdout调access"
+    },
+    "interfaces": [
+      {
+        "id": "N19/west_high_east_low",
+        "concept_only": true,
+        "units": "proposed_Godot_world_pixels",
+        "bounds": [
+          0,
+          0,
+          1024,
+          1024
+        ],
+        "block_size": 128,
+        "ownership_plan": {
+          "kind": "conservative_connected_rectangle_first_prototype",
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              7
+            ]
+          ],
+          "is_outer_frame": false,
+          "final_version_requires_all_solids_receivers_dynamic_envelopes_reward_and_full_body_sweeps": true
+        },
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                2
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              320.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              334.0
+            ],
+            "floor_y": 352.0,
+            "role": "西高桥接近",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                7,
+                5
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1024.0,
+              704.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1000.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "东下层侧廊继续",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "upper approach side rock",
+            "rect": [
+              0,
+              352,
+              320,
+              256
+            ]
+          },
+          {
+            "role": "upper far side rock; prevents walking past shaft",
+            "rect": [
+              576,
+              0,
+              128,
+              608
+            ]
+          },
+          {
+            "role": "M",
+            "rect": [
+              448,
+              608,
+              256,
+              48
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              832,
+              736,
+              192,
+              80
+            ]
+          },
+          {
+            "role": "internal recovery",
+            "rects": [
+              [
+                128,
+                928,
+                768,
+                32
+              ],
+              [
+                320,
+                800,
+                192,
+                40
+              ]
+            ]
+          }
+        ],
+        "features": [
+          {
+            "kind": "pair",
+            "bell": [
+              360,
+              280
+            ],
+            "gate_A": [
+              320,
+              352,
+              256,
+              20
+            ],
+            "gate_B": [
+              784,
+              0,
+              24,
+              736
+            ],
+            "lower_access": [
+              672,
+              560
+            ],
+            "initial_A_open": false
+          }
+        ],
+        "sketch": [
+          "A→厚高岸==横桥A(闭)==厚岩",
+          "                 ↓撤桥",
+          "             M落地回枪 ─ 侧门B(先关后开) → B",
+          "             原恢复底岸/步阶"
+        ],
+        "adaptation_notes": [
+          "上岸远侧厚岩延至y0，避免走过桥就能从外侧普通落到初态开的B；仍须首测桥边/顶绕反例，不是已证无绕法",
+          "首例高352到M608落差256，M到B736下行；返高256的实际能力/射向另测"
+        ],
+        "ordered_relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended_relation": "withdraw_floor_land_M_switch_side_exit",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended_relation": "desired_same_world_reverse_requires_actual_return",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "static_validation": "NOT_RUN",
+        "physics": "NOT_RUN",
+        "boundary_crossing": "UNKNOWN",
+        "same_world_continuity": "UNKNOWN"
+      },
+      {
+        "id": "N19/east_high_west_mid",
+        "concept_only": true,
+        "units": "proposed_Godot_world_pixels",
+        "bounds": [
+          0,
+          0,
+          1152,
+          1024
+        ],
+        "block_size": 128,
+        "ownership_plan": {
+          "kind": "conservative_connected_rectangle_first_prototype",
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              8,
+              6
+            ],
+            [
+              8,
+              7
+            ]
+          ],
+          "is_outer_frame": false,
+          "final_version_requires_all_solids_receivers_dynamic_envelopes_reward_and_full_body_sweeps": true
+        },
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                8,
+                2
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1152.0,
+              320.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1128.0,
+              334.0
+            ],
+            "floor_y": 352.0,
+            "role": "东高桥接近",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                0,
+                4
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              576.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              590.0
+            ],
+            "floor_y": 608.0,
+            "role": "西中层侧廊继续",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "upper approach side rock",
+            "rect": [
+              832,
+              352,
+              320,
+              256
+            ]
+          },
+          {
+            "role": "upper far side rock; prevents walking past shaft",
+            "rect": [
+              448,
+              0,
+              128,
+              608
+            ]
+          },
+          {
+            "role": "M",
+            "rect": [
+              448,
+              608,
+              256,
+              48
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              0,
+              608,
+              320,
+              80
+            ]
+          },
+          {
+            "role": "internal recovery",
+            "rects": [
+              [
+                128,
+                928,
+                896,
+                32
+              ],
+              [
+                640,
+                800,
+                192,
+                40
+              ]
+            ]
+          }
+        ],
+        "features": [
+          {
+            "kind": "pair",
+            "bell": [
+              792,
+              280
+            ],
+            "gate_A": [
+              576,
+              352,
+              256,
+              20
+            ],
+            "gate_B": [
+              344,
+              0,
+              24,
+              608
+            ],
+            "lower_access": [
+              480,
+              560
+            ],
+            "initial_A_open": false
+          }
+        ],
+        "sketch": [
+          "厚岩==横桥A(闭)==东高岸←A",
+          "          ↓撤桥",
+          "B←侧门B──M真实回枪",
+          "   完整内部底岸与恢复阶"
+        ],
+        "adaptation_notes": [
+          "真镜像且B提高128px，出门需中层横渡而不是第一接口下落抵岸",
+          "新侧门/下access/返高净空必须新证据；不把镜像视为原返向"
+        ],
+        "ordered_relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended_relation": "mirrored_floor_to_side_switch_with_mid_exit",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended_relation": "desired_same_world_reverse_from_mid_height",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "static_validation": "NOT_RUN",
+        "physics": "NOT_RUN",
+        "boundary_crossing": "UNKNOWN",
+        "same_world_continuity": "UNKNOWN"
+      }
+    ]
+  },
+  "interpretation": "First implement west-high/east-low A-to-B; reverse remains UNKNOWN. Move proposed lower access672560 out of actual far rock576..704 to536550 before firstphysics. All original proposed recovery solids retained. Farrockbottom608 would seal headroom aboveM; actual first rule has bottom480, unchanged footprint/top, before any physics.",
+  "human_approval": "UNKNOWN"
+}

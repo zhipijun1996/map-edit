@@ -1,0 +1,126 @@
+{
+  "schema": "map-notes/module-library-entry/v1",
+  "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786",
+  "contentVersion": "sha256:8e0ad37d208f3f69a020c44fd746a90f14ce46727d6e561b627af7eaea1423ce",
+  "technical_status": "passed_scoped_multi_route",
+  "technical_scope": "independent single-module route witnesses; no arbitrary-state or Map guarantee",
+  "cases_sha256": "ad0d901d32d561521262e2a22f269386f5fec64eede472e2514cffabfa5ea913",
+  "document_sha256": "e6bea9f5e8be3cc4ed0595a72b785357c1281184e46666adf4e593b28ee0bd60",
+  "demand_key": "d17c0691b7348cbc204a36e00106526ce2db079775f6e230e334af92ec9c4996",
+  "specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "workshop/one-shot-two-routes/1",
+    "region": "plains",
+    "required_family": "one-shot-two-routes",
+    "objective": {
+      "resource": "one original air shot, renewed only by actual ground contact or enemy hit",
+      "upper": [
+        380,
+        212
+      ],
+      "lower": [
+        680,
+        532
+      ]
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 3,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          -1
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main"
+      },
+      {
+        "from_port": "A",
+        "to_port": "C",
+        "role": "reward"
+      }
+    ],
+    "entry_y": 420,
+    "rise": -112,
+    "space": {
+      "max_width": 1800,
+      "max_height": 1000,
+      "max_port_span_x": 900
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "risk_reward": {
+      "amount": 12,
+      "mandatory_damage": false
+    },
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "supported, original fresh resources, exact capture before input",
+      "exit": "stable original ground state; universal transfer UNKNOWN"
+    },
+    "return_conditions": "UNKNOWN until continuous witness exists",
+    "budget": {
+      "generator_candidates": 12,
+      "director_revisions": 0
+    }
+  },
+  "quality_gates": [
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    },
+    {
+      "status": "awaiting_human_review",
+      "engineering_tier": "regular",
+      "reasons": [],
+      "offline_approved": false,
+      "formal_game_ready": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "pcg/results/workshop-five-holdout-v1/evaluations.json",
+      "sha256": "dadc7f96f1084f7a009d0c19fd019bea29a0bbc606fc8ccdafceed61c4f5f0e0"
+    },
+    {
+      "path": "pcg/results/workshop-five-holdout-v1/protocol.json",
+      "sha256": "5190e3a9b234651da0603c372c108c6076fb8c3af5d174783153536c15d5e02f"
+    },
+    {
+      "path": "pcg/results/workshop-five-holdout-v1/bound-counterexamples.json",
+      "sha256": "0b3ad4caa26ae7f7b37c06cdf12d96c81d61147e0d92fea331563410cec56362"
+    }
+  ],
+  "human_quality": "awaiting_review",
+  "human_reviews": [],
+  "production_admitted": false
+}

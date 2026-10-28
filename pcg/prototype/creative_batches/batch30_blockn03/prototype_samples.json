@@ -1,0 +1,2012 @@
+{
+  "schema": "pcg/unqualified-manual-prototypes/v1",
+  "cases": [
+    {
+      "id": "b31-block-n03-v2-i0-b-c0",
+      "family": "block128-real-reverse-intercept",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          768,
+          64
+        ],
+        [
+          1376,
+          224,
+          160,
+          96
+        ],
+        [
+          0,
+          224,
+          192,
+          96
+        ],
+        [
+          96,
+          864,
+          1344,
+          48
+        ]
+      ],
+      "spawn": [
+        24,
+        718
+      ],
+      "entry_port": [
+        24,
+        718
+      ],
+      "exit_port": [
+        1512,
+        206
+      ],
+      "goal": [
+        1487,
+        202,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -512,
+        -512,
+        2560,
+        2048
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "reverse-carrier",
+          "start": [
+            256,
+            480
+          ],
+          "finish": [
+            1280,
+            480
+          ],
+          "size": [
+            176,
+            20
+          ],
+          "travel_duration": 7.314285714285714,
+          "dwell_duration": 0.15,
+          "initial_phase": 0,
+          "control_mode": "reverse_on_hit",
+          "initial_clock_offset": 2.2071428571428573,
+          "initial_direction": 1,
+          "endpoint_policy": "hold_until_manual_reverse"
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "reverse-bell",
+          "bell": [
+            616,
+            432
+          ],
+          "gate": [
+            32,
+            32,
+            8,
+            8
+          ],
+          "ferry_id": "reverse-carrier",
+          "carrier_mount": "reverse-carrier",
+          "control_mode": "reverse_on_hit",
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "east-cache",
+          "position": [
+            1512,
+            206
+          ],
+          "region": [
+            1482,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        },
+        {
+          "id": "west-cache",
+          "position": [
+            24,
+            206
+          ],
+          "region": [
+            0,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": true,
+      "production_recipe": "block128-real-reverse-intercept",
+      "interface": 0,
+      "expected_reward": 12,
+      "required_rewards": [
+        "east-cache"
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1512,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 2
+        }
+      ],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0.0,
+            704.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              0,
+              5
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              718
+            ]
+          },
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32.0,
+            672.0,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1536.0,
+            192.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              11,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              1512,
+              206
+            ]
+          },
+          "stagingPosition": [
+            1512,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            1504.0,
+            160.0,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0.0,
+            192.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              0,
+              1
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              206
+            ]
+          },
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32.0,
+            160.0,
+            64,
+            64
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          0,
+          0,
+          1536,
+          1024
+        ]
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 732
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.31224989991991997,
+            0.95
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "reverse-carrier"
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1240
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 1512,
+          "deadband": 4
+        }
+      ],
+      "route_spec": {
+        "id": "keep-east",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false,
+        "required_rewards": [
+          "east-cache"
+        ]
+      },
+      "rule_parameters": {
+        "control": 0,
+        "boarding_hold": 20,
+        "boarding_dy": 0.95,
+        "target": "B",
+        "reverse_cell": "manual_reverse_on_hit/v1",
+        "same_initial_world": true,
+        "initial_center_x": 544,
+        "shot_after_jump_release": 0
+      },
+      "layout_title": "让台掉头，接住另一边的自己",
+      "idea_ids": [
+        "B31-N03"
+      ],
+      "generation_rule": {
+        "id": "B31-N03/manual-reverse-intercept",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn03/rules_v1.py",
+        "parameters": {
+          "control": 0,
+          "boarding_hold": 20,
+          "boarding_dy": 0.95,
+          "target": "B",
+          "reverse_cell": "manual_reverse_on_hit/v1",
+          "same_initial_world": true,
+          "initial_center_x": 544,
+          "shot_after_jump_release": 0
+        },
+        "new_cell_required": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            8,
+            5
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            2
+          ],
+          [
+            9,
+            3
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            9,
+            5
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            10,
+            3
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            10,
+            5
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            11,
+            2
+          ],
+          [
+            11,
+            3
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            11,
+            7
+          ]
+        ],
+        "occupancy_coverage": "declared entity + reserved action space",
+        "action_coverage": "partial; concrete policies require actual Godot verification",
+        "roles": [
+          "traversal"
+        ],
+        "port_bindings": [
+          {
+            "port_id": "A",
+            "cell": [
+              0,
+              5
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              718
+            ]
+          },
+          {
+            "port_id": "B",
+            "cell": [
+              11,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              1512,
+              206
+            ]
+          },
+          {
+            "port_id": "C",
+            "cell": [
+              0,
+              1
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              206
+            ]
+          }
+        ]
+      },
+      "layout_uid": "eb82d22ae8a44d39b9018defc54a8b3584872cb70ba6d76a8692927398e83221",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31/N03/three-port-east-or-reverse-west",
+        "region": "plains",
+        "required_family": "block128-real-reverse-intercept",
+        "objective": {
+          "recipe": "block128-real-reverse-intercept",
+          "roles": [
+            "traversal",
+            "fork"
+          ],
+          "physical_layout_sha256": "eb82d22ae8a44d39b9018defc54a8b3584872cb70ba6d76a8692927398e83221",
+          "decision": "retain east heading to B; reverse/catch/real refill and ride west to C"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "max_width": 1536,
+          "max_height": 1024,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Original supported A internal stage; signed carrier initially east-moving at authored playhead, same world for both routes",
+          "exit": "Observed stable highbank/resources only; arbitrary-state transfer UNKNOWN"
+        },
+        "return_conditions": "B->A/B->C/C->A/C->B UNKNOWN; retained bottom floor does not certify retry",
+        "budget": {
+          "generator_candidates": 8,
+          "director_revisions": 0
+        }
+      },
+      "review_warnings": [
+        "开发原型；两规则自动双路未通过，不是候选或人工批准"
+      ],
+      "play_hint": "跳上载台后可手动走向台中，跳起右下击铃反冲并观察真实反向落点；此修订尚未经自动验证"
+    },
+    {
+      "id": "b31-block-n03-v2-i0-c-c0",
+      "family": "block128-real-reverse-intercept",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          768,
+          64
+        ],
+        [
+          1376,
+          224,
+          160,
+          96
+        ],
+        [
+          0,
+          224,
+          192,
+          96
+        ],
+        [
+          96,
+          864,
+          1344,
+          48
+        ]
+      ],
+      "spawn": [
+        24,
+        718
+      ],
+      "entry_port": [
+        24,
+        718
+      ],
+      "exit_port": [
+        24,
+        206
+      ],
+      "goal": [
+        -1,
+        202,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -512,
+        -512,
+        2560,
+        2048
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "reverse-carrier",
+          "start": [
+            256,
+            480
+          ],
+          "finish": [
+            1280,
+            480
+          ],
+          "size": [
+            176,
+            20
+          ],
+          "travel_duration": 7.314285714285714,
+          "dwell_duration": 0.15,
+          "initial_phase": 0,
+          "control_mode": "reverse_on_hit",
+          "initial_clock_offset": 2.2071428571428573,
+          "initial_direction": 1,
+          "endpoint_policy": "hold_until_manual_reverse"
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "reverse-bell",
+          "bell": [
+            616,
+            432
+          ],
+          "gate": [
+            32,
+            32,
+            8,
+            8
+          ],
+          "ferry_id": "reverse-carrier",
+          "carrier_mount": "reverse-carrier",
+          "control_mode": "reverse_on_hit",
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "east-cache",
+          "position": [
+            1512,
+            206
+          ],
+          "region": [
+            1482,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        },
+        {
+          "id": "west-cache",
+          "position": [
+            24,
+            206
+          ],
+          "region": [
+            0,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": true,
+      "production_recipe": "block128-real-reverse-intercept",
+      "interface": 0,
+      "expected_reward": 12,
+      "required_rewards": [
+        "west-cache"
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1512,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 2
+        }
+      ],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0.0,
+            704.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              0,
+              5
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              718
+            ]
+          },
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32.0,
+            672.0,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1536.0,
+            192.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              11,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              1512,
+              206
+            ]
+          },
+          "stagingPosition": [
+            1512,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            1504.0,
+            160.0,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0.0,
+            192.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              0,
+              1
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              206
+            ]
+          },
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32.0,
+            160.0,
+            64,
+            64
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          0,
+          0,
+          1536,
+          1024
+        ]
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 732
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.31224989991991997,
+            0.95
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "reverse-carrier"
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "reverse-bell"
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "reverse-carrier"
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 300
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 24,
+          "deadband": 4
+        }
+      ],
+      "route_spec": {
+        "id": "reverse-west",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true,
+        "required_rewards": [
+          "west-cache"
+        ]
+      },
+      "rule_parameters": {
+        "control": 0,
+        "boarding_hold": 20,
+        "boarding_dy": 0.95,
+        "target": "C",
+        "reverse_cell": "manual_reverse_on_hit/v1",
+        "same_initial_world": true,
+        "initial_center_x": 544,
+        "shot_after_jump_release": 0
+      },
+      "layout_title": "让台掉头，接住另一边的自己",
+      "idea_ids": [
+        "B31-N03"
+      ],
+      "generation_rule": {
+        "id": "B31-N03/manual-reverse-intercept",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn03/rules_v1.py",
+        "parameters": {
+          "control": 0,
+          "boarding_hold": 20,
+          "boarding_dy": 0.95,
+          "target": "C",
+          "reverse_cell": "manual_reverse_on_hit/v1",
+          "same_initial_world": true,
+          "initial_center_x": 544,
+          "shot_after_jump_release": 0
+        },
+        "new_cell_required": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            8,
+            5
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            2
+          ],
+          [
+            9,
+            3
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            9,
+            5
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            10,
+            3
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            10,
+            5
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            11,
+            2
+          ],
+          [
+            11,
+            3
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            11,
+            7
+          ]
+        ],
+        "occupancy_coverage": "declared entity + reserved action space",
+        "action_coverage": "partial; concrete policies require actual Godot verification",
+        "roles": [
+          "traversal"
+        ],
+        "port_bindings": [
+          {
+            "port_id": "A",
+            "cell": [
+              0,
+              5
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              718
+            ]
+          },
+          {
+            "port_id": "B",
+            "cell": [
+              11,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              1512,
+              206
+            ]
+          },
+          {
+            "port_id": "C",
+            "cell": [
+              0,
+              1
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              24,
+              206
+            ]
+          }
+        ]
+      },
+      "layout_uid": "eb82d22ae8a44d39b9018defc54a8b3584872cb70ba6d76a8692927398e83221",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31/N03/three-port-east-or-reverse-west",
+        "region": "plains",
+        "required_family": "block128-real-reverse-intercept",
+        "objective": {
+          "recipe": "block128-real-reverse-intercept",
+          "roles": [
+            "traversal",
+            "fork"
+          ],
+          "physical_layout_sha256": "eb82d22ae8a44d39b9018defc54a8b3584872cb70ba6d76a8692927398e83221",
+          "decision": "retain east heading to B; reverse/catch/real refill and ride west to C"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "max_width": 1536,
+          "max_height": 1024,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Original supported A internal stage; signed carrier initially east-moving at authored playhead, same world for both routes",
+          "exit": "Observed stable highbank/resources only; arbitrary-state transfer UNKNOWN"
+        },
+        "return_conditions": "B->A/B->C/C->A/C->B UNKNOWN; retained bottom floor does not certify retry",
+        "budget": {
+          "generator_candidates": 8,
+          "director_revisions": 0
+        }
+      },
+      "review_warnings": [
+        "开发原型；两规则自动双路未通过，不是候选或人工批准"
+      ],
+      "play_hint": "跳上载台后可手动走向台中，跳起右下击铃反冲并观察真实反向落点；此修订尚未经自动验证"
+    }
+  ],
+  "technical_status": "needs_design",
+  "production_admitted": false
+}

@@ -1,0 +1,286 @@
+--- a/pcg/migration/physics.py
++++ b/pcg/migration/physics.py
+@@ -12,7 +12,7 @@
+ import types
+ from pathlib import Path
+ 
+-from . import core, causal_observer
++from . import core, causal_observer, causal_observer_v2, pool_protocols, holdout_guard
+ from pcg.prototype.workshop.engine import WorkshopEngine
+ from pcg.prototype.workshop.evaluate import evaluate
+ from pcg.prototype.factory.core.quality import digest, module_hash
+@@ -157,7 +157,7 @@
+     authors = [author_for(case) for case in cases]
+     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
+     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
+-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), protocol_path, *author_sources(authors, runners[0])]
++    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
+         extra_sources=sources, runner_script=runners[0])
+     deduplicate_snapshot(engine.out)
+@@ -469,7 +469,12 @@
+ 
+ def _counter_judgment(case,raw,author,baseline=None):
+     from pcg.prototype.creative_batches.batch30_runtime.produce_v1 import counter_classification
+-    check=causal_observer.correct(case,raw,checked_purpose(author,case,raw));outcome=_same_outcome(case,raw)
++    check=causal_observer.correct(case,raw,checked_purpose(author,case,raw))
++    if case.get('family')in('gate-brake-return','trapdoor-commit')and any(r in check.get('reasons',[])for r in('airborne_same_shot_gate_missing','self_support_removal_missing')):
++        try:assertion_source=causal_observer_v2._assertion_source(author)
++        except (AttributeError,TypeError,ValueError):assertion_source='UNKNOWN'
++        check=causal_observer_v2.correct(case,raw,check,assertion_source=assertion_source)
++    outcome=_same_outcome(case,raw)
+     judgment=counter_classification(case,raw,check,outcome,baseline=baseline)
+     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
+ 
+@@ -488,9 +493,11 @@
+     return dict(path=core.relative(path), sha256=core.sha(path))
+ 
+ 
+-def run(folder, name):
++def run(folder, name, protocol_path=None):
+     folder = Path(folder).resolve(); doc = core.read(folder/'module.mapnote.json')
+-    protocol_path = FULL_PROTOCOL if (folder/'adaptation.json').exists() or any(c.get('migration_adaptation') for c in core.read(folder/'cases.json')['cases']) else PROTOCOL
++    protocol_path = pool_protocols.runtime_protocol(folder, protocol_path, new_run=True)
++    holdout_guard.check(folder,protocol_path=protocol_path)
++    pool_protocols.assert_unstarted(folder,protocol_path)
+     protocol = core.read(protocol_path)
+     if doc['generationContract']['version'] != 2:
+         raise ValueError('migration_requires_v2')
+@@ -516,6 +523,7 @@
+         core.write(run_path/f'selection-{index}.json', dict(case_sha256=module_hash(base),
+             calibrationSha256=core.sha(run_path/f'calibration-{index}.json'),
+             holdoutSeed=protocol['holdoutSeed']+index*1009, revisions=0))
++        pool_protocols.reserve_holdout(folder,protocol_path,name)
+         holdout = evaluate(engine, [base], protocol['holdoutSeed']+index*1009,
+                            12, 'migration-holdout', purpose_fn=check)[0]
+         core.write(run_path/f'holdout-{index}.json', holdout)
+@@ -542,6 +550,8 @@
+         unknown=['unsearched port pairs', 'closure combinations', 'mirror', 'arbitrary entry states', 'full Map'],
+         humanReview='UNKNOWN', productionAdmitted=False)
+     if extended:report['counterexamples']=artifact(run_path/'counterexamples.json')
++    pool_binding=pool_protocols.report_binding(folder,protocol_path,name)
++    if pool_binding is not None:report['holdoutPool']=pool_binding
+     core.write(run_path/'migration-physics.json', report)
+     if engine.sim.cases > protocol['maximumAttemptsPerModule']:
+         raise ValueError('predeclared_migration_budget_exceeded')
+@@ -558,8 +568,10 @@
+         raise ValueError('physics_report_bound_to_another_version')
+     core.verify_artifacts([report[key] for key in ('sourceBinding','batches','protocol','probes')])
+     protocol = core.read(core.resolve_artifact(report['protocol']['path']))
+-    if protocol not in [core.read(PROTOCOL),core.read(FULL_PROTOCOL)]:
+-        raise ValueError('migration_protocol_changed')
++    pool_protocols.evidence_protocol(folder,protocol,report=report,report_path=report_path)
++    if report.get('offlineAnalysis'):
++        from .offline_reanalysis import validate_lineage
++        validate_lineage(report,report_path)
+     binding = core.read(core.resolve_artifact(report['sourceBinding']['path']))
+     input_binding = core.read(run_path/'input-binding.json')
+     physics_cases_path = Path(folder)/'physics-input-cases.json'
+@@ -696,7 +708,11 @@
+         for source in [Path(author.__file__), *getattr(author,'SOURCE_DEPENDENCIES',[])]:
+             live_sources[str(source)] = core.sha(source)
+     return digest(dict(schema='pcg/deep-physics-verification-cache/v1',
+-        verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)), report=proof, runFiles=files,
++        verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
++        causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
++        holdoutGuardSource=core.sha(Path(holdout_guard.__file__)),
++        registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
++        report=proof, runFiles=files,
+         protocolV1=core.sha(PROTOCOL), protocolV2=core.sha(FULL_PROTOCOL),
+         currentVersion=doc['generationContract']['contentVersion'],
+         routes=doc['generationContract']['routes'], ports=doc['generationContract']['ports'],
+--- a/pcg/migration/holdout_guard.py
++++ b/pcg/migration/holdout_guard.py
+@@ -71,9 +71,8 @@
+ 
+ 
+ def _effective_protocol(folder):
+-    from . import physics
+-    _,cases=_cases(folder)
+-    return physics.FULL_PROTOCOL if (Path(folder)/'adaptation.json').exists()or any(c.get('migration_adaptation')for c in cases)else physics.PROTOCOL
++    from .pool_protocols import runtime_protocol
++    return runtime_protocol(folder)
+ 
+ 
+ def _ingest(state,report_path):
+@@ -180,9 +179,9 @@
+ def register_pool(folder,pool_id):
+     """Allocate once after freezing a genuinely revised candidate, never reroll.
+ 
+-    This creates an auditable future protocol. The current physics CLI has one
+-    fixed protocol; this registration alone does not pretend that it can select
+-    or certify the new pool. Runtime protocol wiring is a separate explicit step.
++    Allocate conditions once after freezing the genuinely revised candidate,
++    then bind the registered protocol in its metadata. Actual quality, held-out
++    execution, raw verification and native package checks remain mandatory.
+     """
+     from . import physics
+     folder=Path(folder).resolve();core.safe_id(pool_id);refresh()
+@@ -195,33 +194,44 @@
+             raise ValueError('unchanged_physics_program_or_observer_only_change_requires_raw_reanalysis_not_new_seed')
+         registered=[p for p in state['independentPools']if p['source']['key']==identity['key']]
+         previous=next((p for p in registered if p['frozenCandidate']['programSignature']==signature),None)
+-        if previous:return dict(status='already_registered_no_reroll',registration=previous,requiresRuntimeProtocolIntegration=True)
++        if previous:
++            from .pool_protocols import bind_registered_pool
++            bind_registered_pool(folder,previous['id'])
++            return dict(status='already_registered_no_reroll',registration=previous,requiresRuntimeProtocolIntegration=False)
+         maximum=core.read(physics.FULL_PROTOCOL).get('maximumAdaptationRevisions',2)
+         if len(registered)>=maximum:raise ValueError('preregistered_revision_pool_budget_exhausted')
+         target=POOLS/pool_id
+         if target.exists()or any(p['id']==pool_id for p in state['independentPools']):raise ValueError('independent_pool_id_already_used')
+         # No caller seed argument exists. Conditions are allocated once only
+         # after candidate bytes are frozen, then checked against all started runs.
++        frozen=dict(contentVersion=version,documentSha256=core.sha(folder/'module.mapnote.json'),
++            canonicalCasesSha256=core.sha(canonical),programSignature=signature)
+         used={o['pool']['baseSeed']for o in state['observations']}
++        used.update(p['pool']['baseSeed']for p in state['independentPools'])
+         for file in (core.REPO/'pcg/results').glob('*/protocol.json'):
+             value=core.read(file)
+             if isinstance(value,dict)and'holdoutSeed'in value:used.add(value['holdoutSeed'])
+         seed=secrets.randbelow(2**31-1)+1
+         while seed in used:seed=secrets.randbelow(2**31-1)+1
++        allocation_nonce=secrets.token_hex(32)
++        if frozen['documentSha256']!=core.sha(folder/'module.mapnote.json')or frozen['canonicalCasesSha256']!=core.sha(canonical):
++            raise ValueError('candidate_bytes_changed_during_pool_allocation')
+         protocol=copy.deepcopy(core.read(physics.FULL_PROTOCOL));protocol['holdoutSeed']=seed
+         protocol['independentPoolId']=pool_id
+-        frozen=dict(contentVersion=version,documentSha256=core.sha(folder/'module.mapnote.json'),
+-            canonicalCasesSha256=core.sha(canonical),programSignature=signature)
+         declaration=dict(schema='pcg/independent-holdout-registration/v1',id=pool_id,source=identity,frozenCandidate=frozen,
+             pool=_pool(protocol),priorEvidence=[o['report']for o in observed],
+             seedAllocation='system entropy once after candidate freeze; no caller seed, no alternative-pool selection',
+-            runtimeProtocolIntegration='NOT_IMPLEMENTED_BY_THIS_REGISTRATION',humanApproval='UNKNOWN')
++            allocationNonce=allocation_nonce,candidateFrozenBeforeAllocation=True,
++            baseProtocol=dict(path=core.relative(physics.FULL_PROTOCOL),sha256=core.sha(physics.FULL_PROTOCOL)),
++            runtimeProtocolIntegration='REGISTERED_POOL_RUNTIME_V1',humanApproval='UNKNOWN')
+         target.mkdir(parents=True);core.write(target/'protocol.json',protocol);core.write(target/'registration.json',declaration)
+         row=dict(id=pool_id,source=identity,frozenCandidate=frozen,pool=declaration['pool'],poolKey=digest(declaration['pool']),
+             protocol=dict(path=core.relative(target/'protocol.json'),sha256=core.sha(target/'protocol.json')),
+             declaration=dict(path=core.relative(target/'registration.json'),sha256=core.sha(target/'registration.json')))
+         state['independentPools'].append(row);core.write(LOCKS,state)
+-        return dict(status='registered_frozen_future_pool',registration=row,requiresRuntimeProtocolIntegration=True)
++        from .pool_protocols import bind_registered_pool
++        bind_registered_pool(folder,pool_id)
++        return dict(status='registered_frozen_executable_pool',registration=row,requiresRuntimeProtocolIntegration=False)
+ 
+ 
+ if __name__=='__main__':
+--- a/pcg/migration/qualify.py
++++ b/pcg/migration/qualify.py
+@@ -5,7 +5,7 @@
+ import shutil
+ import time
+ from pathlib import Path
+-from . import core, physics, holdout_guard
++from . import core, physics, holdout_guard, pool_protocols
+ 
+ 
+ def run(prepared_root, clean_campaign, name, follow=False):
+@@ -40,8 +40,9 @@
+                     if report_path.exists():
+                         report=core.read(report_path)
+                     else:
+-                        holdout_guard.check(folder)
+-                        report=physics.run(folder,experiment)
++                        protocol_path=pool_protocols.runtime_protocol(folder,new_run=True)
++                        holdout_guard.check(folder,protocol_path=protocol_path)
++                        report=physics.run(folder,experiment,protocol_path=protocol_path)
+                     holdout_guard.observe_report(folder,report_path)
+                     row.update(actualAttempts=report['actualAttempts'],physicsReport=core.relative(report_path))
+                     if not report['passed']:
+--- a/pcg/migration/full_campaign.py
++++ b/pcg/migration/full_campaign.py
+@@ -2,7 +2,7 @@
+ from __future__ import annotations
+ import collections
+ from pathlib import Path
+-from . import core, holdout_guard
++from . import core, holdout_guard, pool_protocols
+ 
+ 
+ def generated_sources():
+@@ -58,8 +58,9 @@
+                             if report_path.exists():
+                                 report=core.read(report_path)
+                             else:
+-                                holdout_guard.check(prepared)
+-                                report=physics.run(prepared,experiment+'-physics')
++                                protocol_path=pool_protocols.runtime_protocol(prepared,new_run=True)
++                                holdout_guard.check(prepared,protocol_path=protocol_path)
++                                report=physics.run(prepared,experiment+'-physics',protocol_path=protocol_path)
+                             holdout_guard.observe_report(prepared,report_path)
+                             row['actualAttempts'] += report['actualAttempts']
+                             row['physicsReport'] = core.relative(report_path)
+--- a/pcg/migration/__main__.py
++++ b/pcg/migration/__main__.py
+@@ -12,7 +12,7 @@
+     prepare = commands.add_parser('prepare'); prepare.add_argument('source', type=Path); prepare.add_argument('--out', required=True, type=Path); prepare.add_argument('--id')
+     validate = commands.add_parser('validate'); validate.add_argument('folder', type=Path); validate.add_argument('--certified', action='store_true')
+     promote = commands.add_parser('promote'); promote.add_argument('folder', type=Path)
+-    replay = commands.add_parser('replay'); replay.add_argument('folder', type=Path); replay.add_argument('--name', required=True)
++    replay = commands.add_parser('replay'); replay.add_argument('folder', type=Path); replay.add_argument('--name', required=True); replay.add_argument('--protocol',type=Path)
+     certify = commands.add_parser('certify'); certify.add_argument('folder', type=Path); certify.add_argument('--report', type=Path, required=True)
+     package = commands.add_parser('package'); package.add_argument('folder', type=Path); package.add_argument('--out', type=Path, required=True)
+     refresh = commands.add_parser('refresh-package'); refresh.add_argument('folder',type=Path)
+@@ -32,7 +32,11 @@
+     elif args.command == 'promote': result = core.promote(args.folder)
+     elif args.command == 'replay':
+         from .physics import run
+-        result = run(args.folder, args.name)
++        from . import pool_protocols,holdout_guard
++        protocol_path=pool_protocols.runtime_protocol(args.folder,args.protocol,new_run=True)
++        holdout_guard.check(args.folder,protocol_path=protocol_path)
++        result = run(args.folder, args.name,protocol_path=protocol_path)
++        holdout_guard.observe_report(args.folder,core.REPO/'pcg/results'/args.name/'migration-physics.json')
+     elif args.command == 'certify': result = core.certify(args.folder, args.report)
+     elif args.command == 'package': result = core.package(args.folder, args.out)
+     elif args.command == 'refresh-package': result = core.refresh_package(args.folder)
+--- a/pcg/migration/core.py
++++ b/pcg/migration/core.py
+@@ -863,7 +863,7 @@
+     report = verify_report(folder, proof)
+     doc = read(folder/'module.mapnote.json')
+     for validation in doc['generationContract']['validations']:
+-        validation.update(result='pass', method='actual_godot_fixed_migration_protocol',
++        validation.update(result='pass', method='offline_reanalysis_of_actual_godot_evidence'if report.get('offlineAnalysis')else'actual_godot_fixed_migration_protocol',
+             artifacts=[proof, report['sourceBinding'], report['batches'], report['protocol'], report['probes']],
+             coverage={'policy': 'Original interior quality gates plus full-body boundary and continuous exit',
+                       'route': next(r for r in report['routes'] if r['routeId'] == validation['routeId']),
+--- a/pcg/migration/tests/test_holdout_guard.py
++++ b/pcg/migration/tests/test_holdout_guard.py
+@@ -9,11 +9,15 @@
+ 
+ class HoldoutGuardTests(unittest.TestCase):
+     def setUp(self):
++        protocols=[core.read(physics.PROTOCOL),core.read(physics.FULL_PROTOCOL)]
+         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+         self.root=Path(self.tmp.name);self.addCleanup(patch.stopall)
+         patch.object(core,'REPO',self.root).start()
+         patch.object(guard,'LOCKS',self.root/'state/locks.json').start()
+         patch.object(guard,'POOLS',self.root/'state/pools').start()
++        legacy=self.root/'state/protocol.json';full=self.root/'state/protocol-full-v2.json'
++        core.write(legacy,protocols[0]);core.write(full,protocols[1])
++        patch.object(physics,'PROTOCOL',legacy).start();patch.object(physics,'FULL_PROTOCOL',full).start()
+         self.seed=core.read(physics.FULL_PROTOCOL)['holdoutSeed']
+ 
+     def candidate(self,name='first',source='a'*64,version='b'*64,width=256):
+@@ -81,14 +85,12 @@
+         new=self.candidate('changed',version='c'*64,width=300)
+         with patch.object(guard.secrets,'randbelow',return_value=123456)as entropy:
+             first=guard.register_pool(new,'pool1');second=guard.register_pool(new,'another-name')
+-        self.assertEqual(entropy.call_count,1);self.assertTrue(first['requiresRuntimeProtocolIntegration'])
++        self.assertEqual(entropy.call_count,1);self.assertFalse(first['requiresRuntimeProtocolIntegration'])
+         self.assertEqual(second['status'],'already_registered_no_reroll')
+         protocol=self.root/first['registration']['protocol']['path']
+-        with self.assertRaises(guard.HoldoutConflict)as error:guard.check(new,protocol_path=protocol)
+-        self.assertIn('registered_pool_not_selected_by_actual_harness_protocol',error.exception.details['conflicts'])
+-        with patch.object(physics,'FULL_PROTOCOL',protocol):
+-            self.assertEqual(guard.check(new)['status'],'independent_registered_pool')
+-        with self.assertRaises(guard.HoldoutConflict):guard.check(new)
++        self.assertEqual(guard.check(new,protocol_path=protocol)['status'],'independent_registered_pool')
++        self.assertEqual(guard.check(new)['status'],'independent_registered_pool')
++        self.assertIn('allocationNonce',core.read(self.root/first['registration']['declaration']['path']))
+ 
+     def test_registered_conditions_do_not_follow_later_program_changes(self):
+         candidate=self.candidate();self.report(candidate)

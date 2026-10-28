@@ -1,0 +1,19 @@
+{
+  "schema": "pcg/batch30-d04-continuous-fixtures/v1",
+  "scope": "Validation-only same-world A-B-A and A-B-C-chest-A; zero new Modules and no artificial duplicate A port",
+  "registered_before_execution": true,
+  "maximum_actual_cases": 900,
+  "planned_actual_cases_upper_bound": 880,
+  "calibration_seed": 261028010,
+  "holdout_seed": 261028011,
+  "calibration": {"interfaces": [0, 1], "return_controls": [0, 1, 2, 3], "routes_per_control": 2, "original_regular_trials_per_level": 12, "maximum_cases": 576},
+  "selection": "For each interface, require BOTH fixture routes to pass original regular calibration. Among passing joint controls maximize minimum mild/moderate rate, then sum of all rates, then lowest control index. No held data used. Freeze exact first successful clean calibration witness for each selected route before holdout.",
+  "counters": {"selected_control_alternatives_per_interface": 64, "adaptive_same_task_per_interface": 16, "maximum_cases": 160, "comparison": "api_v3.fixture_task_outcome ignores final desired park; compare actual same A-B-C-chest-A task, HP5, capabilities, shots/jumps/ticks. Report all successes; action-component Pareto cheaper and no slower is a refutation candidate, not automatically rejected for missing authored control words."},
+  "holdout": {"maximum_selected_routes": 4, "original_regular_trials_per_level": 12, "maximum_cases": 144, "selection_frozen_before_execution": true},
+  "original_physics_unchanged": true,
+  "original_regular_gate_unchanged": true,
+  "holdout_for_tuning": false,
+  "new_modules": 0,
+  "human_fun_approval": "UNKNOWN",
+  "production_admitted": false
+}

@@ -1,0 +1,179 @@
+{
+  "schema": "pcg/core-experience-review/v1",
+  "reviewer": "/root/batch30_core_critic",
+  "status": "partial_D03_only_waiting_for_D04_D05",
+  "source_type": "actual_independent_current_codex_review",
+  "human_approval": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false,
+  "new_physics_cases": 0,
+  "samples": [
+    {
+      "proposal": "PR-D03",
+      "sample": "v5 prototype, not an admitted Module or final repaired candidate",
+      "video": {
+        "path": "generation/workshop/plains30-v1/prototypes/D03-v5-core/finite-enemy-routes.mp4",
+        "sha256": "3e781b24df79c5b2971b487c263f145e1a2feccf051a1dbbe909b15d16948efd"
+      },
+      "manifest": {
+        "path": "generation/workshop/plains30-v1/prototypes/D03-v5-core/manifest.json",
+        "sha256": "ff2db65db1a9fd513de50844ca0e94d98156be3ba9364e0e4f3a13160c8f1dd7"
+      },
+      "native_trace": {
+        "path": "generation/workshop/plains30-v1/prototypes/D03-v5-core/finite-enemy-routes.trace.json",
+        "sha256": "b7c3710be8d2dd1cae673b3654c5efbf44dfa88e51fd25c75986ee91a12f7d87"
+      },
+      "actual_review_method": "18 extracted frames at0.5s cadence plus full465frame native-state timeline and original rule reading; not claimed continuous movie viewing or human play",
+      "sample_times_seconds": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5
+      ],
+      "observed_timeline": [
+        {
+          "frame": 0,
+          "position": [
+            80.0,
+            409.547515869141
+          ],
+          "enemy_hp": [
+            [
+              3.0,
+              false
+            ]
+          ],
+          "coins": 0,
+          "support": ""
+        },
+        {
+          "frame": 27,
+          "position": [
+            167.170837402344,
+            187.803405761719
+          ],
+          "enemy_hp": [
+            [
+              2.0,
+              false
+            ]
+          ],
+          "coins": 0,
+          "support": ""
+        },
+        {
+          "frame": 53,
+          "position": [
+            289.337951660156,
+            1.50145399570465
+          ],
+          "enemy_hp": [
+            [
+              1.0,
+              false
+            ]
+          ],
+          "coins": 0,
+          "support": ""
+        },
+        {
+          "frame": 94,
+          "position": [
+            466.505035400391,
+            -38.0748291015625
+          ],
+          "enemy_hp": [
+            [
+              1.0,
+              false
+            ]
+          ],
+          "coins": 12,
+          "support": "Platform1"
+        },
+        {
+          "frame": 163,
+          "position": [
+            323.994140625,
+            -70.7543258666992
+          ],
+          "enemy_hp": [
+            [
+              0.0,
+              true
+            ]
+          ],
+          "coins": 12,
+          "support": ""
+        },
+        {
+          "frame": 447,
+          "position": [
+            -459.408416748047,
+            -38.0747756958008
+          ],
+          "enemy_hp": [
+            [
+              0.0,
+              true
+            ]
+          ],
+          "coins": 24,
+          "support": "Platform2"
+        }
+      ],
+      "mechanics_demonstrated": [
+        "real shared enemy3→2→1 from airborne hits; first actual chest12 coins",
+        "enemy genuinely killed on return; HP/death persist through subsequent staged movement",
+        "later second chest makes24 coins with actual intermediate ground supports",
+        "no new character ability or actor-position/resource writes inferred from this trace"
+      ],
+      "design_finding": "The causal/resource-state consequence is visible in data and sampled footage; this is materially different from a pure walking junction. It is still not a complete demonstration of meaningful pre-commit resource allocation.",
+      "issues": [
+        {
+          "id": "D03-readability",
+          "severity": "design_revision",
+          "finding": "At initial decision, default camera shows only east high destination while west reward is off-screen, and east reward is partly covered by topUI. A player cannot compare two destinations from the shown entry view.",
+          "falsifiable_repair": "Reframe entry or recompose actual geometry so both high destinations, enemy and first relevant staged supports are visible before commitment; keep physics unchanged for presentation-only repair."
+        },
+        {
+          "id": "D03-choice-comparison",
+          "severity": "evidence_gap",
+          "finding": "This single clip chooses east-air then intentionally spends the final enemyHP before west-staged. It does not show a1HP-only air attempt versus conserving thatHP and using staged route, or the opposite allocation order.",
+          "falsifiable_repair": "Provide matched world-state policies/route-cost table for opposite resource allocations and enemy-exhausted recovery, keeping reward/exit outcomes explicit."
+        },
+        {
+          "id": "D03-dominance",
+          "severity": "design_risk",
+          "finding": "Both rewards are12 coins and banks are similar; east is closer. Whether there are meaningful reasons to spend scarce hits on the west route is not established. Different port names are not evidence of different benefits.",
+          "falsifiable_repair": "Compare air versus staged costs/risk for both destinations and actual intended onward use; do not add arbitrary decoration or inflate reward just to pass a checklist."
+        },
+        {
+          "id": "D03-spatial-identity",
+          "severity": "presentation_design_risk",
+          "finding": "Geometry in sampled footage remains floating rectangular supports/step routes. The new resource relation has more gameplay content, but not yet evidence of finished spatial composition or human enjoyment.",
+          "falsifiable_repair": "Review silhouette/negative space and observational flow separately from the proven causal sequence; no automatic art/fun approval."
+        }
+      ],
+      "technical_status": "Root reports known moderate robustness failures under repair; this review does not override that result"
+    }
+  ],
+  "pending_proposals": [
+    "PR-D04",
+    "human-d05-bell-carrier-catch"
+  ]
+}

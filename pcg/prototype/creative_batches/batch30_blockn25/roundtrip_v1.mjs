@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {blankDocument,createObject,validateDocument,pathPoint,progressAt} from '../../../../model.js';
+const [input,output]=process.argv.slice(2);
+const source=JSON.parse(fs.readFileSync(input)),points=source.points.map(([x,y])=>({x,y}));
+const d=blankDocument('N25轨迹Cell重载试件：不是已验Module');d.id='n25-loop-cell-trajectory';d.updatedAt='2026-10-27T00:00:00Z';d.canvas={width:1536,height:1280,units:'Godot pixels',positionPrecision:'exact'};
+d.capabilityRequirements={version:1,status:'defined',allOf:['move','jump','shot_recoil'],anyOfGroups:[],note:'Original movement and one-air-shot; trajectory Cell fixture only.'};
+const rail=createObject('trackLine',points[0].x,points[0].y,{id:'n25-cell-loop',points,duration:8,dwell:0,mode:'loop',initialPhase:0});
+const deck=createObject('platform',points[0].x-80,points[0].y-12,{id:'n25-cell-deck',w:160,h:24,trackId:rail.id,rotation:0});d.objects=[rail,deck];
+const doc=validateDocument(d);const samples=Array.from({length:65},(_,i)=>{const t=i/4;return {time:t,point:pathPoint(rail,progressAt(rail,t))};});
+const sourceFiles=['../../../../model.js','../../../../capabilities.js','../../../../difficulty.js'].map(p=>({path:fileURLToPath(new URL(p,import.meta.url)),sha256:createHash('sha256').update(fs.readFileSync(new URL(p,import.meta.url))).digest('hex')}));
+fs.writeFileSync(output,JSON.stringify({document:doc,samples,sourceFiles,scope:'ActualoriginalJSvalidatedtrajectoryonly; GenerationContract/MapconsumerinstallationUNKNOWN'},null,2));
+console.log(JSON.stringify({points:points.length,mode:rail.mode,period:rail.duration,position0:samples[0].point,position8:samples[32].point}));

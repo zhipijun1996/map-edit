@@ -1,0 +1,171 @@
+{
+  "schema": "pcg/A3-current-Map-input/v1",
+  "repository": "zhipijun1996/map-edit",
+  "ref": "6c864ae6423b6409990564371aca34a322b66253",
+  "source_binding": {
+    "challenge_specifications_git_blob_sha": "469c3087173ae14399ce286395e8be8b2a22e61a",
+    "exploration_git_blob_sha": "6a3bae56619e85c63c101fbbeefea8d52e43cac2",
+    "path": "generation/maps/map-requirements-review-v2/plan-0"
+  },
+  "request": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "block-demand/exp0_0",
+    "map_seed": "requirements-review-0",
+    "region": "plains",
+    "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+    "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+    "objective": {
+      "node": "exp0_0",
+      "roles": [
+        "traversal"
+      ],
+      "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+      "preserve_all_edges": [
+        "e23",
+        "e24"
+      ]
+    },
+    "block_grid": {
+      "size": 128,
+      "shape": "connected_polyomino",
+      "port_anchors": "boundary_cell_centers",
+      "map_added_terrain": 0
+    },
+    "ports": {
+      "count": 2,
+      "directions": "joint_space_search",
+      "required_pairs": "explicit_ordered_matrix"
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "resource_state": {
+      "entry": "UNKNOWN until measured state contract",
+      "exit": "UNKNOWN until measured state contract",
+      "reset_between_components": false
+    },
+    "relations": "UNKNOWN until exact module directions are independently verified",
+    "difficulty": {
+      "intent": 2,
+      "human_score": null
+    },
+    "route_membership": {
+      "main": [],
+      "branches": [
+        "expedition_0"
+      ]
+    },
+    "rewards": [],
+    "return_conditions": {
+      "branches": [
+        {
+          "id": "expedition_0",
+          "nodes": [
+            "exp0_0",
+            "exp0_1",
+            "exp0_2"
+          ],
+          "entry": "r9",
+          "rejoin": "r9",
+          "reward": "exp0_2",
+          "kind": "foldback"
+        }
+      ]
+    },
+    "budget": {
+      "generator_calls": 4,
+      "local_revisions": 2,
+      "may_delete_required_edges": false
+    }
+  },
+  "graph": {
+    "initial_abilities": [
+      "jump",
+      "shot_recoil"
+    ],
+    "nodes": [
+      {
+        "id": "r9",
+        "role": "hub",
+        "label": "场所 9",
+        "ideal": [
+          -10,
+          -31
+        ],
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 1,
+        "intent": "regional-route-choice"
+      },
+      {
+        "id": "exp0_0",
+        "role": "challenge",
+        "label": "进阶挑战 1.1",
+        "ideal": [
+          2,
+          -44
+        ],
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 2,
+        "intent": "optional expedition, distinct rejoin and earned fast return"
+      },
+      {
+        "id": "exp0_1",
+        "role": "challenge",
+        "label": "进阶挑战 1.2",
+        "ideal": [
+          11,
+          -48
+        ],
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 2,
+        "intent": "optional expedition, distinct rejoin and earned fast return"
+      }
+    ],
+    "edges": [
+      {
+        "id": "e23",
+        "from": "r9",
+        "to": "exp0_0",
+        "requires": [
+          "shot_recoil"
+        ],
+        "switch": null,
+        "cost": 2,
+        "purpose": "reward_challenge",
+        "bidirectional": true
+      },
+      {
+        "id": "e24",
+        "from": "exp0_0",
+        "to": "exp0_1",
+        "requires": [],
+        "switch": null,
+        "cost": 2,
+        "purpose": "reward_challenge",
+        "bidirectional": true
+      }
+    ]
+  },
+  "required_pairs_source": "pcg/creative-production/batch30/map-constraint-source-v2/pcg/map_directed/graph_map/domains.py",
+  "edge_to_port": {
+    "e23": "A",
+    "e24": "B"
+  },
+  "reward_variant": {
+    "actual_request": [],
+    "registered_module_rewards": [],
+    "explicit_change": "Original A3 technical sample had12currency; new actualMap traversal variant deliberatelyhas0rewards. Human A3 original textdoesnotrequirechest; originaltwo12currencyversions remainunchanged. This isnot a claim thatoldrewardmotivation ispreserved."
+  }
+}

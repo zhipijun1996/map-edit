@@ -1,0 +1,64 @@
+{
+  "schema": "pcg/bounded-control-repair-campaign/v1",
+  "source": ".cache/migration/full-v6/08aed42071a32fe5eab6004cffb6158b56bb000895d78e9b6eeb0f53d4bfd4b5",
+  "prefix": "08aed42071a3",
+  "plans": [
+    {
+      "kind": "aim_actual_bell",
+      "reason": "A fixed world-space direction misses the bell when timing shifts the real muzzle. Aim at the existing receiver using the original muzzle compensation, retaining aim perturbation."
+    },
+    {
+      "kind": "aim_actual_bell_earlier_release",
+      "hold": 10,
+      "reason": "If receiver aiming is insufficient, shorten the authored hold by two frames to widen the shot approach while retaining the same native bell and recoil."
+    }
+  ],
+  "maximumRevisions": 2,
+  "rows": [
+    {
+      "revision": 1,
+      "status": "package_ready",
+      "experiment": "foundation-robustness-v1-08aed42071a3-r1",
+      "prepared": ".cache/migration/foundation-robustness-v1/08aed42071a32fe5eab6004cffb6158b56bb000895d78e9b6eeb0f53d4bfd4b5-r1",
+      "contentVersion": "sha256:dcef279a35648491cd3d84bc36d69a926e7bcbf85a7ef0f99fde8f16688a84a9",
+      "plan": {
+        "kind": "aim_actual_bell",
+        "reason": "A fixed world-space direction misses the bell when timing shifts the real muzzle. Aim at the existing receiver using the original muzzle compensation, retaining aim perturbation."
+      },
+      "cleanReport": "pcg/results/foundation-robustness-v1-08aed42071a3-r1-clean/clean-preflight.json",
+      "cleanPassed": true,
+      "actualAttempts": 91,
+      "physicsReport": "pcg/results/foundation-robustness-v1-08aed42071a3-r1-physics/migration-physics.json",
+      "physicsPassed": true,
+      "ready": ".cache/migration/foundation-robustness-v1/08aed42071a32fe5eab6004cffb6158b56bb000895d78e9b6eeb0f53d4bfd4b5-r1-ready",
+      "packageResult": {
+        "status": "package_loaded",
+        "moduleId": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85",
+        "out": "/workspace/map-edit-task-a/.cache/migration/foundation-robustness-v1/08aed42071a32fe5eab6004cffb6158b56bb000895d78e9b6eeb0f53d4bfd4b5-r1-ready",
+        "load": {
+          "passed": true,
+          "compiled": true,
+          "loaded": true,
+          "stable_id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85",
+          "runtime_dependencies": 892,
+          "canonical_cases": 1,
+          "manifest_sha256": "7457a141b881b71976a5c14c6625475805c325fadc468bf0cc975ae4fa41aed6",
+          "observed": [
+            {
+              "case_id": "compact-bell-59296f7c9ebd-forward-nominal-clean-0",
+              "actual_frames": 74,
+              "hp": 5,
+              "coins": 0,
+              "stable_frames": 6
+            }
+          ],
+          "evidence": {
+            "path": "load-evidence/index.json",
+            "sha256": "a1c6724a446093610e99178110b275b4fedd69274c99ceeedfcc3ba9e608869d"
+          },
+          "foundation_route_certification": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,652 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_playful_module_variants__rooted_double_window",
+      "family": "original-game-forest_playful_module_variants__rooted_double_window",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ],
+        [
+          -220.0,
+          -520.0,
+          430.0,
+          410.0
+        ],
+        [
+          210.0,
+          -520.0,
+          120.0,
+          426.0
+        ],
+        [
+          210.0,
+          -24.0,
+          120.0,
+          164.0
+        ],
+        [
+          210.0,
+          420.0,
+          120.0,
+          70.0
+        ],
+        [
+          330.0,
+          -24.0,
+          270.0,
+          24.0
+        ],
+        [
+          -310.0,
+          220.0,
+          500.0,
+          40.0
+        ],
+        [
+          350.0,
+          300.0,
+          350.0,
+          40.0
+        ],
+        [
+          330.0,
+          460.0,
+          370.0,
+          30.0
+        ],
+        [
+          270.0,
+          350.0,
+          60.0,
+          16.0
+        ],
+        [
+          -305.0,
+          118.0,
+          65.0,
+          20.0
+        ]
+      ],
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "entry_port": [
+        0.0,
+        0.0
+      ],
+      "exit_port": [
+        380.0,
+        -42.0
+      ],
+      "goal": [
+        368.0,
+        -46.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -310.0,
+        -776.0,
+        1010.0,
+        1394.0
+      ],
+      "one_way_platform_indices": [
+        5,
+        9,
+        10
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 200.0,
+          "y": -40.0,
+          "kind": "bounce",
+          "source_id": "upper_window_ring"
+        },
+        {
+          "x": 120.0,
+          "y": 155.0,
+          "kind": "bounce",
+          "source_id": "lower_window_ring"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 380.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "crown",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [
+          {
+            "action": "H",
+            "anchor": "upper_window_ring"
+          },
+          {
+            "action": "R",
+            "direction": [
+              -1.0,
+              0.0
+            ]
+          }
+        ],
+        "admission": {
+          "geometry": "candidate",
+          "motor": "unverified",
+          "production_pool": false,
+          "visual": "unverified"
+        },
+        "alternate_port_contract": {
+          "lower": "inner_root",
+          "native_verified": false,
+          "upper": "crown",
+          "world_must_bind_different_destinations": true
+        },
+        "bible_sha256": "a7bad8323af64a7be0577132e5d988a6e1b781d9e1ac1639d37f9d65935194e3",
+        "chain_contract": {
+          "continuous_airborne": false,
+          "fixed_anchor_does_not_refill_shots": true,
+          "hook_restoration": "actual_contact_kick_completion",
+          "midair_floor_allowed": true,
+          "native_verified": false,
+          "production_pool": false,
+          "receiving_supports": [
+            "trunk_between_windows",
+            "crown"
+          ]
+        },
+        "comparisons": [
+          "ordinary_jump_no_hook_no_shoot",
+          "normal_shots_without_hook",
+          "hook_without_shoot",
+          "intentional_miss_then_local_retry"
+        ],
+        "danger_faces": [],
+        "danger_hosts": [],
+        "derivations": [
+          "old_complete_double_window_geometry_retained",
+          "explicit_upper_and_lower_world_ports",
+          "roots_and_fruit_hosts_share_actual_collision_bodies"
+        ],
+        "difficulty": "normal",
+        "entry_support_id": "entry",
+        "evidence_scope": "New solid trunk and lower-window return: NO inherited directional/narrow native approval. No enemies/rewards/seed variation/Boss integration yet.",
+        "exit_support_id": "crown",
+        "goal": [
+          380.0,
+          -42.0
+        ],
+        "hook_anchors": [
+          {
+            "fruit_presentation": "rooted_fruit",
+            "fruit_role": "main",
+            "host_support_id": "trunk_above_window",
+            "id": "upper_window_ring",
+            "position": [
+              200.0,
+              -40.0
+            ],
+            "stem_root": [
+              216.0,
+              -98.0
+            ]
+          },
+          {
+            "fruit_presentation": "rooted_fruit",
+            "fruit_role": "return",
+            "host_support_id": "inner_root",
+            "id": "lower_window_ring",
+            "position": [
+              120.0,
+              155.0
+            ],
+            "stem_root": [
+              120.0,
+              220.0
+            ]
+          }
+        ],
+        "id": "rooted_double_window",
+        "identity": "one solid trunk with an upper forward window and a lower inward return to another root",
+        "native_verified": false,
+        "nodes": {
+          "D": {
+            "position": [
+              120.0,
+              202.0
+            ],
+            "role": "inner_recovery",
+            "support_id": "inner_root"
+          },
+          "E": {
+            "position": [
+              380.0,
+              -42.0
+            ],
+            "role": "outer_crown_observe",
+            "support_id": "crown"
+          },
+          "M": {
+            "position": [
+              0.0,
+              0.0
+            ],
+            "role": "belly_observe",
+            "support_id": "entry"
+          },
+          "R": {
+            "position": [
+              420.0,
+              282.0
+            ],
+            "role": "outer_recovery",
+            "support_id": "outer_root"
+          }
+        },
+        "play_contract": {
+          "counterexample": "Compare ordinary jump/recoil at the upper window and a no-enemy lower return; bind the two exit ports to genuinely different world nodes.",
+          "decision": "Cross the upper window toward the crown, or use the outer-root descent to approach the lower opening and return inward.",
+          "observe": "Two openings belong to one real trunk. The upper crown and the lower inward root are separate destinations.",
+          "recovery": "The solid inner root and outer root receive failed crossings; they must connect into the world's root loop, not a copied ladder."
+        },
+        "ports": {
+          "crown": {
+            "native_verified": false,
+            "position": [
+              380.0,
+              -42.0
+            ],
+            "role": "upper_forward_destination",
+            "support_id": "crown"
+          },
+          "entry": {
+            "native_verified": false,
+            "position": [
+              0.0,
+              0.0
+            ],
+            "role": "upper_window_departure",
+            "support_id": "entry"
+          },
+          "inner_root": {
+            "native_verified": false,
+            "position": [
+              120.0,
+              202.0
+            ],
+            "role": "different_inward_root_destination",
+            "support_id": "inner_root"
+          },
+          "outer_root": {
+            "native_verified": false,
+            "position": [
+              420.0,
+              282.0
+            ],
+            "role": "lower_window_approach",
+            "support_id": "outer_root"
+          }
+        },
+        "production_pool": false,
+        "recovery": {
+          "miss_supports": [
+            "outer_root",
+            "inner_root",
+            "outer_sump"
+          ],
+          "mode": "actual_lower_root_ports",
+          "native_verified": false,
+          "safe_ports": [
+            "outer_root",
+            "inner_root"
+          ]
+        },
+        "requires": [
+          "grapple"
+        ],
+        "resource_contract": {
+          "health_override": false,
+          "new_abilities": false,
+          "physics_override": false,
+          "shot_refill_override": false
+        },
+        "return": {
+          "different_exit_port": "inner_root",
+          "native_verified": false,
+          "route": "outer_descent_then_lower_inward_return"
+        },
+        "return_style": "deep_zeroR",
+        "routes": {
+          "lower_inward_return": {
+            "action_program": [
+              {
+                "action": "H",
+                "anchor": "lower_window_ring"
+              },
+              {
+                "action": "R",
+                "direction": [
+                  1.0,
+                  0.0
+                ]
+              }
+            ],
+            "from_port": "outer_root",
+            "jump_before_hook": true,
+            "kind": "airborne_chain",
+            "path": [
+              [
+                420.0,
+                282.0
+              ],
+              [
+                370.0,
+                282.0
+              ],
+              [
+                120.0,
+                202.0
+              ]
+            ],
+            "takeoff": [
+              370.0,
+              282.0
+            ],
+            "to_port": "inner_root"
+          },
+          "main": {
+            "action_program": [
+              {
+                "action": "H",
+                "anchor": "upper_window_ring"
+              },
+              {
+                "action": "R",
+                "direction": [
+                  -1.0,
+                  0.0
+                ]
+              }
+            ],
+            "from_port": "entry",
+            "kind": "airborne_chain",
+            "native_verified": false,
+            "path": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                380.0,
+                -42.0
+              ]
+            ],
+            "to_port": "crown"
+          },
+          "outer_descent": {
+            "from_port": "crown",
+            "kind": "drop_through",
+            "path": [
+              [
+                380.0,
+                -42.0
+              ],
+              [
+                640.0,
+                -42.0
+              ],
+              [
+                640.0,
+                282.0
+              ],
+              [
+                420.0,
+                282.0
+              ]
+            ],
+            "steps": [
+              {
+                "from_support_id": "crown",
+                "kind": "drop_through",
+                "landing": [
+                  640.0,
+                  282.0
+                ],
+                "path": [
+                  [
+                    568.0,
+                    -42.0
+                  ],
+                  [
+                    640.0,
+                    -42.0
+                  ],
+                  [
+                    640.0,
+                    282.0
+                  ]
+                ],
+                "support_id": "outer_root",
+                "takeoff": [
+                  568.0,
+                  -42.0
+                ]
+              },
+              {
+                "kind": "walk",
+                "landing": [
+                  420.0,
+                  282.0
+                ],
+                "support_id": "outer_root"
+              }
+            ],
+            "to_port": "outer_root"
+          }
+        },
+        "scene_language": {
+          "belly_roof": "hollow_trunk",
+          "crown": "living_bough",
+          "entry": "root_ground",
+          "inner_recovery_step": "living_bough",
+          "inner_root": "root_ground",
+          "outer_recovery_step": "living_bough",
+          "outer_root": "root_ground",
+          "outer_sump": "hollow_trunk",
+          "trunk_above_window": "hollow_trunk",
+          "trunk_below_window": "hollow_trunk",
+          "trunk_between_windows": "hollow_trunk"
+        },
+        "source_factory": {
+          "path": "res://scripts/generation/forest_hollow_trunk_geometry.gd",
+          "sha256": "17e4f89d4180a03a20e01f0cec68738971769c99846b41b3210e26d50f4d4a4c",
+          "version": "forest-hollow-trunk-double-window-candidate-v4"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "version": "forest-old-language-variants-v1",
+        "windows": [
+          {
+            "anchor_id": "upper_window_ring",
+            "clear_rect": [
+              210.0,
+              -94.0,
+              120.0,
+              70.0
+            ],
+            "from": "M",
+            "id": "upper_window",
+            "to": "E"
+          },
+          {
+            "anchor_id": "lower_window_ring",
+            "clear_rect": [
+              210.0,
+              140.0,
+              120.0,
+              280.0
+            ],
+            "from": "R",
+            "id": "lower_window",
+            "to": "D"
+          }
+        ],
+        "world_bounds": [
+          -342.0,
+          -552.0,
+          1074.0,
+          1074.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            0.0,
+            0.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "crown",
+          "position": [
+            380.0,
+            -42.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              380.0,
+              -42.0
+            ],
+            "role": "upper_forward_destination",
+            "support_id": "crown"
+          },
+          "support_index": 5
+        },
+        {
+          "id": "inner_root",
+          "position": [
+            120.0,
+            202.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              120.0,
+              202.0
+            ],
+            "role": "different_inward_root_destination",
+            "support_id": "inner_root"
+          },
+          "support_index": 6
+        },
+        {
+          "id": "outer_root",
+          "position": [
+            420.0,
+            282.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "sourcePort": {
+            "native_verified": false,
+            "position": [
+              420.0,
+              282.0
+            ],
+            "role": "lower_window_approach",
+            "support_id": "outer_root"
+          },
+          "support_index": 7
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_playful_module_variants.gd",
+          "path": "library/source/scripts/generation/forest_playful_module_variants.gd",
+          "sha256": "c6f258e5bddad4fc8877b8a34753238d0f74a86f7a5120652b19bc062375cac2",
+          "gitBlobSha": "642141825ece21f0a58285da07c27889fe7b35e3",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "43a4596c114a6ee9d9db25bd84912bcf10ab17c67ea464d52699acba8d01c2b3",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [
+        "action_program"
+      ],
+      "module_sha256": "83c05140e2f2bda9c734c28dc9b99fc89fea6aea83e13a036424595841a50af3"
+    }
+  ]
+}

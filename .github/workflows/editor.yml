@@ -7,6 +7,10 @@ on:
       - '*.css'
       - 'package.json'
       - 'library/**'
+      - 'modules/**'
+      - 'modules-recycle/**'
+      - 'MAP_FOUNDATION.md'
+      - 'MAP_GENERATION_GUIDE.md'
       - 'tools/**'
       - '.github/workflows/editor.yml'
       - '.github/workflows/pages.yml'
@@ -17,6 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # These structural checks read library data, not archived experiment payloads.
+          sparse-checkout: |
+            /*
+            !/pcg/archives/
+            !/pcg/results/
+            !/generation/*
+            /generation/contracts/
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

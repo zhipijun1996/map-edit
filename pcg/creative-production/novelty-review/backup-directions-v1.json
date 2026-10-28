@@ -1,0 +1,62 @@
+{
+  "schema":"pcg/novelty-backups/v1",
+  "source_type":"actual_codex_subagent_reasoning",
+  "exact_model_revision":"unavailable",
+  "status":"unvalidated_proposals_not_counted",
+  "directions":[
+    {
+      "id":"trapdoor-commit",
+      "suggested_owner":"resource_routes",
+      "status":"proposal_unique_hypothesis",
+      "observation_decision":"Read the route under a supporting bridge, choose a lateral departure direction, then deliberately remove the support beneath oneself.",
+      "causality":"A horizontal original ShotLatch gate supplies actual body support while closed. Shooting the original bell removes that support and commits the player to falling into a newly opened lower route.",
+      "resource_world_change":"Permanent world collision changes from supporting bridge to open shaft; not a temporary gate sprint.",
+      "necessary_terrain":"Rock limits the useful bell line of sight to the bridge position. Lower exit is offset and cannot be reached by dropping around the intact bridge.",
+      "original_cell_binding":"ShotLatch.setup arbitrary gate Rect2 and original gate collision_layer=1/0; same actual player motor.",
+      "cheap_counters":["shoot from safe bank then approach","drop beside intact bridge","straight drop without lateral commitment","roof bypass","open while airborne from any easier point"],
+      "family_boundary":"Do not force recoil/airborne words. If the result is only shoot-to-open-floor then walk forward, reconsider puzzle depth, but the self-removal of support is distinct from timed-cache and brake-under-ledge."
+    },
+    {
+      "id":"park-moving-cover",
+      "suggested_owner":"resource_routes or machinery",
+      "status":"proposal_unique_hypothesis",
+      "observation_decision":"Read a moving slab relative to enemy fire, then stop it where it can shield a ground route rather than serve as a ride.",
+      "causality":"Original ModuleMovingPlatform is an AnimatableBody2D on collision layer1. Original EnemyAttackProjectile sweeps mask1 and is disposed on nonplayer collision. Original ShotLatch.bind_motion can stop the slab at a useful blocking position.",
+      "resource_world_change":"Player changes persistent location of physical cover; subsequent projectile reaches slab instead of player.",
+      "necessary_terrain":"Player must cross a line-of-fire region that has no static cover and cannot be bypassed by killing/shooting from safety at lower cost.",
+      "original_cell_binding":"All three bindings read from actual source; no projectile deletion or artificial hit-ignore.",
+      "cheap_counters":["leave slab moving","stop slab elsewhere","cross without slab","kill shooter safely","stay behind existing rock","ride slab instead"],
+      "family_boundary":"Unlike chase-landing, no support/ride is needed; unlike closing-shield, cover placement is a player-controlled spatial variable instead of automatic gate closure. Needs real interception evidence and legitimate unshielded alternatives."
+    },
+    {
+      "id":"bait-charger-out-of-blockade",
+      "suggested_owner":"enemy_world",
+      "status":"proposal_unique_hypothesis",
+      "observation_decision":"Expose the player on one side of a blocking charger, make it commit away from the desired crossing, then pass through the body space it vacated during recovery.",
+      "causality":"Original EnemyAttackBehavior locks brain.direction at telegraph entry and charger moves toward home.x plus signed patrol_half_width; it then has a real recovery period. Movement must change physical occupancy, not simply dodge a projectile.",
+      "resource_world_change":"A living threat is repositioned by its own committed attack rather than player hit knockback or death.",
+      "necessary_terrain":"An alcove allows the player to get around the committed charge while enemy body otherwise blocks the narrow target passage.",
+      "original_cell_binding":"Original plains_charger is already permitted by PlainsCells. Important: charger requires floor under its leading foot and EnemyMotor has no gravity; do not propose luring it into a pit or synthetic falling death.",
+      "cheap_counters":["direct walking","direct jumping","wait for any phase without bait","kill blocker","bait from same target route","cross without enemy moving"],
+      "family_boundary":"Different from telegraph-underpass only if relocating the enemy body is necessary, not merely an alternate timing cue. Compare against live-knockback-aperture too; voluntary enemy motion versus shot motion alone is insufficient unless player must choose an exposing lure position and exploit recovery."
+    },
+    {
+      "id":"sliding-wall-height-window",
+      "suggested_owner":"jump_wall",
+      "status":"proposal_unique_hypothesis",
+      "observation_decision":"Attach high on a wall while a hazard crosses the side exit; decide when to kick away before continuing descent makes the exit unreachable.",
+      "causality":"Original wall_attach sets wall_slide_limit=wall_fall_speed(75); it does not stop the body and no stamina expenditure was found. The player has both a hazard phase constraint and a monotonically decreasing launch-height budget.",
+      "resource_world_change":"Height is spent while observing. Waiting indefinitely is impossible even though wall-jump readiness may remain available.",
+      "necessary_terrain":"Finite high wall, lower failure zone, side target requiring sufficient launch height, and original moving saw crossing that departure route.",
+      "original_cell_binding":"Original TraversalAbility.wall_attach/wall_jump, original saw, actual body coordinates and HP.",
+      "cheap_counters":["kick immediately every phase","wait at entry then identical safe jump","stay on wall indefinitely","single wall kick without saw timing","climb back up for unlimited observation"],
+      "family_boundary":"Unlike grapple/hang-phase, the observation position is not stable and time changes remaining reachable space. If entrance waiting perfectly replaces wall timing or single-wall relaunch freely restores height, merge/reject rather than count a saw added to wall jumping."
+    }
+  ],
+  "non_directions":[
+    "Extra ordinary intermediate islands: serial segments, not a family.",
+    "Same reaction with different resource name: restoration source alone not a family.",
+    "Adding a saw to an existing route: not a family without new observation/decision.",
+    "More hooks, doors, shots, enemies, or boxes: counts do not establish a new player decision."
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "cases": [
+    {
+      "id": "evac-v9-2.6-800",
+      "family": "evacuate-rejoin",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          650,
+          245,
+          160,
+          60
+        ],
+        [
+          1320,
+          438,
+          230,
+          100
+        ],
+        [
+          -256,
+          438,
+          120,
+          24
+        ],
+        [
+          1526,
+          438,
+          138,
+          24
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        1430,
+        420
+      ],
+      "goal": [
+        1405,
+        416,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [
+        {
+          "source_id": "transport-interdict",
+          "origin": [
+            750,
+            420
+          ],
+          "travel": [
+            0,
+            20
+          ],
+          "radius": 120,
+          "period": 3.2,
+          "initial_phase": 0,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [
+        {
+          "platform_id": "carrier",
+          "start": [
+            300,
+            448
+          ],
+          "finish": [
+            1060,
+            448
+          ],
+          "size": [
+            140,
+            20
+          ],
+          "travel_duration": 2.6,
+          "dwell_duration": 1.2,
+          "initial_phase": 0.0
+        }
+      ],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            720,
+            227
+          ],
+          "region": [
+            690,
+            222,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "max_frames": 2000,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 210
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "carrier",
+              "window": [
+                0,
+                0.02
+              ]
+            },
+            "min_after": 0,
+            "timeout": 900
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "carrier"
+            },
+            "min_after": 0,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 500
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.5,
+            0.8660254
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 710
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 800
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "carrier"
+            },
+            "min_after": 0,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.97,
+            0.243
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 1430,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "creative-machinery/evacuate-rejoin",
+        "version": 9,
+        "source_type": "llm_subagent_proposal",
+        "source_task": "/root/machinery_creator",
+        "parameters": {
+          "relationship": "continuous support evacuation and future interception",
+          "saw_radius": 120,
+          "human_fun": "unreviewed",
+          "source_task": "/root/machinery_creator"
+        }
+      },
+      "production_recipe": "evacuate-rejoin",
+      "parent_family": "moving_platform",
+      "rule_parameters": {
+        "relationship": "continuous support evacuation and future interception",
+        "saw_radius": 120,
+        "human_fun": "unreviewed",
+        "source_task": "/root/machinery_creator"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "creative-machinery/v9/evacuate-rejoin",
+        "region": "plains",
+        "required_family": "evacuate-rejoin",
+        "objective": {
+          "relationship": "evacuate same moving support before hazard, refuge, intercept same support beyond hazard"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 0,
+        "space": {
+          "max_width": 1900,
+          "max_height": 1400,
+          "max_port_span_x": 1400
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 8,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "machinery/evacuate-rejoin"
+      ],
+      "factory_id": "f7521feda7db586d9cd6541e13f9d27d4a9829d2a8e2f5704c9e15d46c3260a0",
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "evac-v9-2.6-800",
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main"
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -232,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 3
+        },
+        {
+          "id": "exit",
+          "position": [
+            1640,
+            420
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 4
+        }
+      ],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -256,
+            406
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            420
+          ],
+          "aperture": [
+            -288,
+            374,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            1664,
+            406
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1640,
+            420
+          ],
+          "aperture": [
+            1632,
+            374,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": 86,
+          "w": 1920,
+          "h": 512
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                80,
+                420
+              ],
+              "stagingPosition": [
+                80,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                406
+              ],
+              "stagingPosition": [
+                -232,
+                420
+              ],
+              "supportIndex": 3,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                1430,
+                420
+              ],
+              "stagingPosition": [
+                1430,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                1664,
+                406
+              ],
+              "stagingPosition": [
+                1640,
+                420
+              ],
+              "supportIndex": 4,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          2
+        ],
+        "validation": "UNKNOWN"
+      }
+    }
+  ]
+}

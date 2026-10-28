@@ -1,0 +1,757 @@
+{
+  "cases": [
+    {
+      "id": "bell_lift-probe1-land320",
+      "family": "bell_lift",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -120,
+          438,
+          360,
+          60
+        ],
+        [
+          237.11807121041414,
+          338,
+          192,
+          72
+        ],
+        [
+          -350,
+          620,
+          1600,
+          48
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "goal": [
+        361.11807121041414,
+        296,
+        66.0,
+        48
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        403.11807121041414,
+        320
+      ],
+      "world_bounds": [
+        -5000,
+        -5000,
+        15000,
+        15000
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 10
+          },
+          "direction": [
+            -0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 403.11807121041414,
+          "deadband": 6
+        }
+      ],
+      "max_frames": 480,
+      "trace_all": false,
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "pit_pressure",
+          "platform_index": 2,
+          "face": "top",
+          "start_offset": 0,
+          "length": 1600,
+          "depth": 20,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "lift_bell",
+          "bell": [
+            104.51972961425801,
+            462.3077146410942
+          ],
+          "gate": [
+            361.11807121041414,
+            158,
+            24,
+            180
+          ],
+          "open_seconds": 1.6,
+          "prompt": "SHOOT DOWN / LIFT + OPEN"
+        }
+      ],
+      "enemies": [],
+      "synthesis": {
+        "method": "decision_relations+actual_flight+original_cells",
+        "prefab_modules": 0,
+        "landing_reference_frame": 49,
+        "decision_hypothesis": "bell_lift"
+      },
+      "entry_normal": [
+        -1,
+        0
+      ],
+      "exit_normal": [
+        1,
+        0
+      ],
+      "map_demand": {
+        "request_sha256": "106d17051ad652d4a786c7a8efa270ed50f6ffd15b66c83cccf438082a615cfa",
+        "request": {
+          "schema": "map-notes/challenge-specification/v1",
+          "map_seed": "map-growth-01",
+          "region": "plains",
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "No advanced movement ability"
+          },
+          "resource_state": {
+            "entry": "grounded at a supported safe port; exact snapshot must be captured before input",
+            "exit": "stable landing; observed resources do not imply arbitrary-state guarantees",
+            "reset_between_components": false
+          },
+          "adaptation": {
+            "allowed": [
+              "translation",
+              "explicit separately versioned connector Cell"
+            ],
+            "forbidden": [
+              "scaling",
+              "rotation",
+              "implicit mirrored traversal",
+              "invented ports",
+              "removing required exploration routes"
+            ]
+          },
+          "validation": {
+            "engine": "Godot 4.7.2",
+            "method": "existing PlainsEngine and exact-instance continuous map runner",
+            "requires_whole_map_validation": true
+          },
+          "budget": {
+            "director_revisions": 1,
+            "generator_calls": 2,
+            "unbounded_search": false
+          },
+          "id": "bell-terrace-ascent",
+          "objective": "After rejoining, ascend 100 world units to the bell terrace with one jump/recoil relation.",
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from": "entry",
+              "to": "exit",
+              "role": "main"
+            }
+          ],
+          "difficulty": {
+            "intent": "one short action after supported recovery",
+            "human_score": null,
+            "evidence": "UNKNOWN"
+          },
+          "risk_reward": {
+            "optional": false,
+            "amount": 0,
+            "mandatory_damage": false
+          },
+          "space": {
+            "max_width": 2000,
+            "max_height": 800,
+            "max_port_span_x": 900
+          },
+          "entry_y": 420,
+          "rise": 100,
+          "require_bell": true,
+          "required_family": "bell_lift"
+        },
+        "adapter_source_sha256": "02135e15513b714f3976d6e941a54afb683d2aae2a9967663043e939c5b544f3"
+      }
+    },
+    {
+      "id": "bell_lift-probe6-land320",
+      "family": "bell_lift",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -120,
+          438,
+          360,
+          60
+        ],
+        [
+          224.58580067552367,
+          338,
+          192,
+          72
+        ],
+        [
+          -350,
+          620,
+          1600,
+          48
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "goal": [
+        348.58580067552367,
+        296,
+        66.0,
+        48
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        390.58580067552367,
+        320
+      ],
+      "world_bounds": [
+        -5000,
+        -5000,
+        15000,
+        15000
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.25,
+            0.9682458365518543
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 390.58580067552367,
+          "deadband": 6
+        }
+      ],
+      "max_frames": 480,
+      "trace_all": false,
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "pit_pressure",
+          "platform_index": 2,
+          "face": "top",
+          "start_offset": 0,
+          "length": 1600,
+          "depth": 20,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "lift_bell",
+          "bell": [
+            129.414825439453,
+            414.7979687452316
+          ],
+          "gate": [
+            348.58580067552367,
+            158,
+            24,
+            180
+          ],
+          "open_seconds": 1.6,
+          "prompt": "SHOOT DOWN / LIFT + OPEN"
+        }
+      ],
+      "enemies": [],
+      "synthesis": {
+        "method": "decision_relations+actual_flight+original_cells",
+        "prefab_modules": 0,
+        "landing_reference_frame": 55,
+        "decision_hypothesis": "bell_lift"
+      },
+      "entry_normal": [
+        -1,
+        0
+      ],
+      "exit_normal": [
+        1,
+        0
+      ],
+      "map_demand": {
+        "request_sha256": "106d17051ad652d4a786c7a8efa270ed50f6ffd15b66c83cccf438082a615cfa",
+        "request": {
+          "schema": "map-notes/challenge-specification/v1",
+          "map_seed": "map-growth-01",
+          "region": "plains",
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "No advanced movement ability"
+          },
+          "resource_state": {
+            "entry": "grounded at a supported safe port; exact snapshot must be captured before input",
+            "exit": "stable landing; observed resources do not imply arbitrary-state guarantees",
+            "reset_between_components": false
+          },
+          "adaptation": {
+            "allowed": [
+              "translation",
+              "explicit separately versioned connector Cell"
+            ],
+            "forbidden": [
+              "scaling",
+              "rotation",
+              "implicit mirrored traversal",
+              "invented ports",
+              "removing required exploration routes"
+            ]
+          },
+          "validation": {
+            "engine": "Godot 4.7.2",
+            "method": "existing PlainsEngine and exact-instance continuous map runner",
+            "requires_whole_map_validation": true
+          },
+          "budget": {
+            "director_revisions": 1,
+            "generator_calls": 2,
+            "unbounded_search": false
+          },
+          "id": "bell-terrace-ascent",
+          "objective": "After rejoining, ascend 100 world units to the bell terrace with one jump/recoil relation.",
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from": "entry",
+              "to": "exit",
+              "role": "main"
+            }
+          ],
+          "difficulty": {
+            "intent": "one short action after supported recovery",
+            "human_score": null,
+            "evidence": "UNKNOWN"
+          },
+          "risk_reward": {
+            "optional": false,
+            "amount": 0,
+            "mandatory_damage": false
+          },
+          "space": {
+            "max_width": 2000,
+            "max_height": 800,
+            "max_port_span_x": 900
+          },
+          "entry_y": 420,
+          "rise": 100,
+          "require_bell": true,
+          "required_family": "bell_lift"
+        },
+        "adapter_source_sha256": "02135e15513b714f3976d6e941a54afb683d2aae2a9967663043e939c5b544f3"
+      }
+    },
+    {
+      "id": "bell_lift-probe7-land320",
+      "family": "bell_lift",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -120,
+          438,
+          360,
+          60
+        ],
+        [
+          257.9698944363861,
+          338,
+          192,
+          72
+        ],
+        [
+          -350,
+          620,
+          1600,
+          48
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "goal": [
+        381.9698944363861,
+        296,
+        66.0,
+        48
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        423.9698944363861,
+        320
+      ],
+      "world_bounds": [
+        -5000,
+        -5000,
+        15000,
+        15000
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 423.9698944363861,
+          "deadband": 6
+        }
+      ],
+      "max_frames": 480,
+      "trace_all": false,
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "pit_pressure",
+          "platform_index": 2,
+          "face": "top",
+          "start_offset": 0,
+          "length": 1600,
+          "depth": 20,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "lift_bell",
+          "bell": [
+            104.51972961425801,
+            404.0410520434382
+          ],
+          "gate": [
+            381.9698944363861,
+            158,
+            24,
+            180
+          ],
+          "open_seconds": 1.6,
+          "prompt": "SHOOT DOWN / LIFT + OPEN"
+        }
+      ],
+      "enemies": [],
+      "synthesis": {
+        "method": "decision_relations+actual_flight+original_cells",
+        "prefab_modules": 0,
+        "landing_reference_frame": 54,
+        "decision_hypothesis": "bell_lift"
+      },
+      "entry_normal": [
+        -1,
+        0
+      ],
+      "exit_normal": [
+        1,
+        0
+      ],
+      "map_demand": {
+        "request_sha256": "106d17051ad652d4a786c7a8efa270ed50f6ffd15b66c83cccf438082a615cfa",
+        "request": {
+          "schema": "map-notes/challenge-specification/v1",
+          "map_seed": "map-growth-01",
+          "region": "plains",
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "No advanced movement ability"
+          },
+          "resource_state": {
+            "entry": "grounded at a supported safe port; exact snapshot must be captured before input",
+            "exit": "stable landing; observed resources do not imply arbitrary-state guarantees",
+            "reset_between_components": false
+          },
+          "adaptation": {
+            "allowed": [
+              "translation",
+              "explicit separately versioned connector Cell"
+            ],
+            "forbidden": [
+              "scaling",
+              "rotation",
+              "implicit mirrored traversal",
+              "invented ports",
+              "removing required exploration routes"
+            ]
+          },
+          "validation": {
+            "engine": "Godot 4.7.2",
+            "method": "existing PlainsEngine and exact-instance continuous map runner",
+            "requires_whole_map_validation": true
+          },
+          "budget": {
+            "director_revisions": 1,
+            "generator_calls": 2,
+            "unbounded_search": false
+          },
+          "id": "bell-terrace-ascent",
+          "objective": "After rejoining, ascend 100 world units to the bell terrace with one jump/recoil relation.",
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from": "entry",
+              "to": "exit",
+              "role": "main"
+            }
+          ],
+          "difficulty": {
+            "intent": "one short action after supported recovery",
+            "human_score": null,
+            "evidence": "UNKNOWN"
+          },
+          "risk_reward": {
+            "optional": false,
+            "amount": 0,
+            "mandatory_damage": false
+          },
+          "space": {
+            "max_width": 2000,
+            "max_height": 800,
+            "max_port_span_x": 900
+          },
+          "entry_y": 420,
+          "rise": 100,
+          "require_bell": true,
+          "required_family": "bell_lift"
+        },
+        "adapter_source_sha256": "02135e15513b714f3976d6e941a54afb683d2aae2a9967663043e939c5b544f3"
+      }
+    }
+  ],
+  "failures": [
+    {
+      "stage": "motion_materialization",
+      "case_id": "bell_lift-probe0",
+      "reason": "no_measured_landing_for_requested_height",
+      "evidence": {
+        "batch": "0001-demand-motion-106d17051ad652d4",
+        "index": 0,
+        "output": "physics/0001-demand-motion-106d17051ad652d4.output.json.gz",
+        "raw_output_sha256": "d5534db277427070b3b8cf38714e3a87ca6dbb24685395285fe213fada0e445b"
+      }
+    },
+    {
+      "stage": "motion_materialization",
+      "case_id": "bell_lift-probe2",
+      "reason": "no_measured_landing_for_requested_height",
+      "evidence": {
+        "batch": "0001-demand-motion-106d17051ad652d4",
+        "index": 2,
+        "output": "physics/0001-demand-motion-106d17051ad652d4.output.json.gz",
+        "raw_output_sha256": "d5534db277427070b3b8cf38714e3a87ca6dbb24685395285fe213fada0e445b"
+      }
+    },
+    {
+      "stage": "motion_materialization",
+      "case_id": "bell_lift-probe3",
+      "reason": "no_measured_landing_for_requested_height",
+      "evidence": {
+        "batch": "0001-demand-motion-106d17051ad652d4",
+        "index": 3,
+        "output": "physics/0001-demand-motion-106d17051ad652d4.output.json.gz",
+        "raw_output_sha256": "d5534db277427070b3b8cf38714e3a87ca6dbb24685395285fe213fada0e445b"
+      }
+    },
+    {
+      "stage": "motion_materialization",
+      "case_id": "bell_lift-probe4",
+      "reason": "no_measured_landing_for_requested_height",
+      "evidence": {
+        "batch": "0001-demand-motion-106d17051ad652d4",
+        "index": 4,
+        "output": "physics/0001-demand-motion-106d17051ad652d4.output.json.gz",
+        "raw_output_sha256": "d5534db277427070b3b8cf38714e3a87ca6dbb24685395285fe213fada0e445b"
+      }
+    },
+    {
+      "stage": "motion_materialization",
+      "case_id": "bell_lift-probe5",
+      "reason": "no_measured_landing_for_requested_height",
+      "evidence": {
+        "batch": "0001-demand-motion-106d17051ad652d4",
+        "index": 5,
+        "output": "physics/0001-demand-motion-106d17051ad652d4.output.json.gz",
+        "raw_output_sha256": "d5534db277427070b3b8cf38714e3a87ca6dbb24685395285fe213fada0e445b"
+      }
+    }
+  ]
+}

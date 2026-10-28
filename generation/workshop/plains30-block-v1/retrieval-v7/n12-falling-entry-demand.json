@@ -1,0 +1,104 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "id": "B31-N12/three-side-port-interface0",
+  "source_type": "explicit_model_authored_interface_demand",
+  "region": "plains",
+  "required_family": "one-shot-two-routes",
+  "objective": {
+    "recipe": "investment-fork",
+    "physical_layout_sha256": "2fdacdd5fc9a9647112e30aa44509746768f11d790d4ed21bdc19aab1f4abc7e",
+    "roles": [
+      "fork",
+      "reward"
+    ],
+    "resource": "Oneoriginalairshot choosesupperinvestmentorfarlowerbank",
+    "new_family": false
+  },
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": []
+  },
+  "ports": {
+    "count": 3,
+    "required_normals": [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ]
+  },
+  "relations": [
+    {
+      "from_port": "A",
+      "to_port": "B",
+      "role": "reward",
+      "required_entry_state": {
+        "grounded": false,
+        "velocity_y": 300
+      }
+    },
+    {
+      "from_port": "A",
+      "to_port": "C",
+      "role": "main"
+    }
+  ],
+  "space": {
+    "block_size": 128,
+    "max_width": 1408,
+    "max_height": 1152,
+    "max_port_span_x": 1280,
+    "port_profiles": [
+      "ground64/v1"
+    ]
+  },
+  "boundary_policy": "open",
+  "enclosing_walls": false,
+  "risk_reward": {
+    "mandatory_damage": false,
+    "reward_sites": [
+      {
+        "id": "upper-cache",
+        "position": [
+          488,
+          206
+        ],
+        "region": [
+          458,
+          200,
+          60,
+          12
+        ],
+        "amount": 12
+      }
+    ]
+  },
+  "difficulty": {
+    "intent": "regular",
+    "human_score": null
+  },
+  "resource_state": {
+    "reset_between_components": false,
+    "entry": "ActualsupportedAinternalstageoriginalfullresources, oneairshot only",
+    "exit": "Observedactualhighorlowgroundstage; no seam/return guaranteed"
+  },
+  "return_conditions": "OnlyA->B/A->C; other4pairs/oldrejoin/fourthport/floortoretryUNKNOWN",
+  "budget": {
+    "generator_candidates": 6,
+    "director_revisions": 0
+  }
+}

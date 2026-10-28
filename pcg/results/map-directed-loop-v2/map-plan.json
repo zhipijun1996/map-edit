@@ -1,0 +1,221 @@
+{
+  "schema": "mapgen-experiment/v1",
+  "version": "map-directed-loop/v1",
+  "seed": "map-growth-01",
+  "source_algorithm": "map-notes/region-network-v2",
+  "source_cycle": [
+    4,
+    7,
+    18,
+    13
+  ],
+  "mission_graph": {
+    "entry": "entry",
+    "goal": "exit",
+    "objectives": [
+      {
+        "id": "entry",
+        "role": "start",
+        "label": "溪谷入口"
+      },
+      {
+        "id": "observation",
+        "role": "observation",
+        "label": "下层观察岸"
+      },
+      {
+        "id": "rejoin",
+        "role": "rejoin",
+        "label": "汇合休整岸"
+      },
+      {
+        "id": "reward",
+        "role": "reward",
+        "label": "高台可选奖励"
+      },
+      {
+        "id": "exit",
+        "role": "goal",
+        "label": "钟台出口"
+      }
+    ],
+    "dependency_edges": [
+      {
+        "from": "rejoin",
+        "to": "exit",
+        "type": "main_progression"
+      }
+    ],
+    "intent": {
+      "main": "short lower observation route then a single ascent",
+      "optional": "recoil bell ascent to a rewarded upper ledge, then rejoin or return to entrance",
+      "rhythm": [
+        "observe",
+        "choose low route or recoil reward",
+        "grounded recovery",
+        "single ascent",
+        "completion"
+      ],
+      "space_theme": "windchime plains creek bank, high ledge and bell terrace"
+    }
+  },
+  "exploration_graph": {
+    "entry": "entry",
+    "goal": "exit",
+    "initial_abilities": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "nodes": [
+      {
+        "id": "entry",
+        "role": "start",
+        "label": "溪谷入口",
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 1,
+        "ideal": [
+          44,
+          2
+        ],
+        "source_region_node": "r4"
+      },
+      {
+        "id": "observation",
+        "role": "observation",
+        "label": "下层观察岸",
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 1,
+        "ideal": [
+          23,
+          8
+        ],
+        "source_region_node": "r7"
+      },
+      {
+        "id": "rejoin",
+        "role": "rejoin",
+        "label": "汇合休整岸",
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 1,
+        "ideal": [
+          26,
+          -8
+        ],
+        "source_region_node": "r18"
+      },
+      {
+        "id": "reward",
+        "role": "reward",
+        "label": "高台可选奖励",
+        "grants": [],
+        "opens": [],
+        "reward": 12,
+        "risk": 2,
+        "ideal": [
+          42,
+          -11
+        ],
+        "source_region_node": "r13"
+      },
+      {
+        "id": "exit",
+        "role": "goal",
+        "label": "钟台出口",
+        "grants": [],
+        "opens": [],
+        "reward": 0,
+        "risk": 1,
+        "ideal": [
+          0,
+          0
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "e0",
+        "from": "entry",
+        "to": "observation",
+        "requires": [],
+        "switch": null,
+        "cost": 1,
+        "purpose": "main",
+        "bidirectional": false
+      },
+      {
+        "id": "e1",
+        "from": "observation",
+        "to": "rejoin",
+        "requires": [],
+        "switch": null,
+        "cost": 1,
+        "purpose": "main",
+        "bidirectional": false
+      },
+      {
+        "id": "e2",
+        "from": "entry",
+        "to": "reward",
+        "requires": [
+          "shot_recoil"
+        ],
+        "switch": null,
+        "cost": 2,
+        "purpose": "reward",
+        "bidirectional": false
+      },
+      {
+        "id": "e3",
+        "from": "reward",
+        "to": "rejoin",
+        "requires": [],
+        "switch": null,
+        "cost": 1.5,
+        "purpose": "reward_rejoin",
+        "bidirectional": false
+      },
+      {
+        "id": "e4",
+        "from": "rejoin",
+        "to": "exit",
+        "requires": [
+          "shot_recoil"
+        ],
+        "switch": null,
+        "cost": 1.5,
+        "purpose": "main_ascent",
+        "bidirectional": false
+      },
+      {
+        "id": "e5",
+        "from": "reward",
+        "to": "entry",
+        "requires": [],
+        "switch": null,
+        "cost": 1.5,
+        "purpose": "reward_return",
+        "bidirectional": false
+      }
+    ],
+    "branches": []
+  },
+  "logic_validation": {
+    "ok": true,
+    "reachable_states": 5,
+    "reachable_nodes": 5,
+    "unsafe_states": 0,
+    "ability_lock_correct": true,
+    "boss_gate_correct": true,
+    "scope": "monotonic capabilities/switches; no consumables, combat or physical resources"
+  },
+  "physics": {
+    "status": "unverified"
+  }
+}

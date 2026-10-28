@@ -1,0 +1,791 @@
+{
+  "cases": [
+    {
+      "id": "b30-block-c02-v2-i0-c0-reward0",
+      "family": "block128-serial-airlock",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -78,
+          352,
+          400,
+          118
+        ],
+        [
+          672,
+          480,
+          224,
+          82
+        ],
+        [
+          332,
+          12,
+          370,
+          50
+        ],
+        [
+          -418,
+          832,
+          1160,
+          40
+        ],
+        [
+          -398,
+          722,
+          100,
+          28
+        ],
+        [
+          -308,
+          602,
+          100,
+          28
+        ],
+        [
+          -218,
+          482,
+          100,
+          28
+        ],
+        [
+          -128,
+          352,
+          100,
+          46
+        ],
+        [
+          -512,
+          352,
+          408,
+          24
+        ]
+      ],
+      "spawn": [
+        -104,
+        334
+      ],
+      "entry_port": [
+        -104,
+        334
+      ],
+      "exit_port": [
+        872,
+        462
+      ],
+      "goal": [
+        847,
+        458,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "airlock-pair",
+          "bell": [
+            302,
+            337
+          ],
+          "gate": [
+            352,
+            62,
+            20,
+            770
+          ],
+          "paired_gate": [
+            632,
+            62,
+            20,
+            770
+          ],
+          "initial_open": "A",
+          "open_seconds": 0,
+          "return_access": [
+            512,
+            732
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 1200,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 307
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 10
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "airlock-pair"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 872,
+          "deadband": 4
+        }
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -488,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 8
+        },
+        {
+          "id": "B",
+          "position": [
+            872,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "cross-A-swap-cross-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "interface": 0,
+      "production_recipe": "block128-serial-airlock",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "required_rewards": [],
+      "idea_ids": [
+        "B30-C02"
+      ],
+      "native_scene": "/workspace/map-edit-task-a/pcg/prototype/creative_batches/batch30_cell/main_v3.tscn",
+      "layout_uid": "aabc25e0f4316b52eee974af2be3d7fd5ba306e9235259ca92500cee9aafdc30",
+      "layout_title": "Block128 空中换门 / 下沉一格接收岸",
+      "rule_parameters": {
+        "interface": 0,
+        "control": 0,
+        "hold": 12,
+        "shot_after_release": 10,
+        "core": "full body clears A before original air shot closes it and opens B; same recoil crosses unsupported middle",
+        "bank": [
+          590,
+          530,
+          280,
+          100
+        ],
+        "gate_B": [
+          550,
+          130,
+          20,
+          770
+        ]
+      },
+      "generation_rule": {
+        "id": "batch30/block-native-C02",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockpilot/rules_v2.py",
+        "parameters": {
+          "source_case_id": "b30-c02-v2-i0-c0",
+          "source_layout_uid": "08a67d6c5190487ad61a795b592d2e7e41c5f46de414a020a73c49724f3134e4",
+          "source_physics_inherited": false,
+          "translation": [
+            82,
+            -68
+          ],
+          "terminal_edits": [
+            {
+              "kind": "entry_terminal_top",
+              "index": 0,
+              "before": [
+                -78,
+                370,
+                400,
+                100
+              ],
+              "after": [
+                -78,
+                352,
+                400,
+                118
+              ],
+              "delta": -18
+            },
+            {
+              "kind": "entry_terminal_top",
+              "index": 7,
+              "before": [
+                -128,
+                370,
+                100,
+                28
+              ],
+              "after": [
+                -128,
+                352,
+                100,
+                46
+              ],
+              "delta": -18
+            },
+            {
+              "kind": "exit_terminal_top_and_right_cut",
+              "index": 1,
+              "before": [
+                672,
+                462,
+                280,
+                100
+              ],
+              "after": [
+                672,
+                480,
+                224,
+                82
+              ],
+              "delta": 18,
+              "extension": 0
+            }
+          ],
+          "entry_rebound_to_original_support": 7,
+          "retained_recovery_platform_indices": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "deleted_platform_indices": [],
+          "map_added_platforms": 0,
+          "reward_request": {
+            "currency": 0,
+            "removed_original_chest": true,
+            "major_item_service": "NOT_SUPPORTED"
+          }
+        },
+        "registration_source": "pcg/migration/compat_runners/runner_746c3347ea64.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/block-C02/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "block128-serial-airlock",
+        "objective": {
+          "recipe": "block128-serial-airlock",
+          "interface": 0,
+          "physical_layout_sha256": "aabc25e0f4316b52eee974af2be3d7fd5ba306e9235259ca92500cee9aafdc30",
+          "core": "full body clears A before original air shot closes it and opens B; same recoil crosses unsupported middle",
+          "receiver": [
+            730,
+            512
+          ],
+          "role": "descending_receiver",
+          "source_relationship": "serial-airlock-recoil",
+          "block_contract": "map-notes/block-grid/v1",
+          "source_map_request": {
+            "id": "block-demand/exp1_0",
+            "sha256": "961940758f937fb3069e0374a679154fa160563fd653cdc9acebb47085ad2ff9",
+            "preserve_all_edges": [
+              "e26",
+              "e27"
+            ]
+          }
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "cross-A-swap-cross-B"
+          }
+        ],
+        "space": {
+          "max_width": 1536,
+          "max_height": 1024,
+          "max_port_span_x": 1280,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Original supported body at interior W staging; true boundary crossing is separate fixture, no reset",
+          "exit": "observed stable B with A closed/B open; arbitrary states UNKNOWN"
+        },
+        "return_conditions": "Original recovery geometry retained; new continuous recovery and reverse remain UNKNOWN until exact verification",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -512,
+            320
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -488,
+            334
+          ],
+          "aperture": [
+            -544,
+            288,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            896,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            872,
+            462
+          ],
+          "aperture": [
+            864,
+            416,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          -116,
+          316,
+          435,
+          36
+        ],
+        [
+          288,
+          32,
+          448,
+          576
+        ],
+        [
+          672,
+          444,
+          224,
+          36
+        ]
+      ],
+      "block_adaptation": {
+        "source_case_id": "b30-c02-v2-i0-c0",
+        "source_layout_uid": "08a67d6c5190487ad61a795b592d2e7e41c5f46de414a020a73c49724f3134e4",
+        "source_physics_inherited": false,
+        "translation": [
+          82,
+          -68
+        ],
+        "terminal_edits": [
+          {
+            "kind": "entry_terminal_top",
+            "index": 0,
+            "before": [
+              -78,
+              370,
+              400,
+              100
+            ],
+            "after": [
+              -78,
+              352,
+              400,
+              118
+            ],
+            "delta": -18
+          },
+          {
+            "kind": "entry_terminal_top",
+            "index": 7,
+            "before": [
+              -128,
+              370,
+              100,
+              28
+            ],
+            "after": [
+              -128,
+              352,
+              100,
+              46
+            ],
+            "delta": -18
+          },
+          {
+            "kind": "exit_terminal_top_and_right_cut",
+            "index": 1,
+            "before": [
+              672,
+              462,
+              280,
+              100
+            ],
+            "after": [
+              672,
+              480,
+              224,
+              82
+            ],
+            "delta": 18,
+            "extension": 0
+          }
+        ],
+        "entry_rebound_to_original_support": 7,
+        "retained_recovery_platform_indices": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "deleted_platform_indices": [],
+        "map_added_platforms": 0,
+        "reward_request": {
+          "currency": 0,
+          "removed_original_chest": true,
+          "major_item_service": "NOT_SUPPORTED"
+        }
+      },
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/exp1_0",
+        "map_seed": "requirements-review-0",
+        "region": "plains",
+        "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+        "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+        "objective": {
+          "node": "exp1_0",
+          "roles": [
+            "traversal"
+          ],
+          "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+          "preserve_all_edges": [
+            "e26",
+            "e27"
+          ]
+        },
+        "block_grid": {
+          "size": 128,
+          "shape": "connected_polyomino",
+          "port_anchors": "boundary_cell_centers",
+          "map_added_terrain": 0
+        },
+        "ports": {
+          "count": 2,
+          "directions": "joint_space_search",
+          "required_pairs": "explicit_ordered_matrix"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "resource_state": {
+          "entry": "UNKNOWN until measured state contract",
+          "exit": "UNKNOWN until measured state contract",
+          "reset_between_components": false
+        },
+        "relations": "UNKNOWN until exact module directions are independently verified",
+        "difficulty": {
+          "intent": 3,
+          "human_score": null
+        },
+        "route_membership": {
+          "main": [],
+          "branches": [
+            "expedition_1"
+          ]
+        },
+        "rewards": [],
+        "return_conditions": {
+          "branches": [
+            {
+              "id": "expedition_1",
+              "nodes": [
+                "exp1_0",
+                "exp1_1",
+                "exp1_2",
+                "exp1_3",
+                "exp1_4"
+              ],
+              "entry": "r2",
+              "rejoin": "r2",
+              "reward": "exp1_4",
+              "kind": "loop_back"
+            }
+          ]
+        },
+        "budget": {
+          "generator_calls": 4,
+          "local_revisions": 2,
+          "may_delete_required_edges": false
+        }
+      },
+      "map_request_response": {
+        "status": "candidate_for_joint_mapping",
+        "request_id": "block-demand/exp1_0",
+        "source_request_sha256": "961940758f937fb3069e0374a679154fa160563fd653cdc9acebb47085ad2ff9",
+        "satisfied_static_fields": [
+          "traversal role",
+          "Block128",
+          "connected reserved cells",
+          "boundary-center ground64 ports",
+          "required recoil/jump available",
+          "rewards=[]"
+        ],
+        "unresolved": [
+          "joint port-edge assignment",
+          "input/output state entailment",
+          "regional branch return composition",
+          "human difficulty intent"
+        ],
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "explicit_reverse_supported": false,
+        "may_delete_required_edges": false,
+        "map_added_terrain": 0,
+        "production_admitted": false
+      },
+      "factory_id": "583a6b7373babdc839fc6905d87a8bb0885c849d099f39b2aec05a597888d490",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b30-block-c02-v2-i0-c0-reward0",
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -512,
+          "y": 0,
+          "w": 1408,
+          "h": 896
+        },
+        "portAdaptations": [
+          {
+            "portId": "A",
+            "before": {
+              "position": [
+                -128,
+                320
+              ],
+              "stagingPosition": [
+                -104,
+                334
+              ]
+            },
+            "after": {
+              "position": [
+                -512,
+                320
+              ],
+              "stagingPosition": [
+                -488,
+                334
+              ],
+              "supportIndex": 8,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "B",
+            "before": {
+              "position": [
+                896,
+                448
+              ],
+              "stagingPosition": [
+                872,
+                462
+              ]
+            },
+            "after": {
+              "position": [
+                896,
+                448
+              ],
+              "stagingPosition": [
+                872,
+                462
+              ],
+              "supportIndex": 1,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          1,
+          7
+        ],
+        "validation": "UNKNOWN"
+      },
+      "migration_compat": {
+        "schema": "pcg/migration-purpose-compatibility/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_blockpilot/api_v2.py",
+        "runnerSource": "pcg/prototype/creative_batches/batch30_cell/runner_v3.gd",
+        "legacyOwnership": "superseded_by_exact_foundation_rectangle",
+        "foundationRectangle": {
+          "x": -512,
+          "y": 0,
+          "w": 1408,
+          "h": 896
+        },
+        "originalBlockGridSha256": "6c1dd380f71191d741a0b8f4e5d08ffdd08777ec6be3e03a7ecab5456e365801",
+        "interpretation": "Original causal assertions retained; only retired ownership data and actual original runner binding adapted."
+      }
+    }
+  ]
+}

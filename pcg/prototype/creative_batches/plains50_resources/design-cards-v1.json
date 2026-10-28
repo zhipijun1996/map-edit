@@ -1,0 +1,743 @@
+{
+  "schema": "pcg/plains50-resource-designs/v1",
+  "author_task": "/root/plains50_resources",
+  "model": "current Codex conversation; exact revision not exposed",
+  "source_type": "actual_model_design_and_recipe_implementation",
+  "scope": "plains move/jump/shot_recoil only; two spatial demands per recipe; candidate success requires separate original physical evidence",
+  "cards": [
+    {
+      "id": "P50-R01",
+      "recipe": "sightline-backtrack",
+      "title": "先去东侧看清，开门后向西",
+      "observation": "西边出口后的宝箱先可见，东侧岩屏遮住远铃射线。",
+      "decision": "先偏离出口方向，找到真实可射角度；命中后折返。",
+      "causality": "投射物命中远铃永久开西门，射击反冲仍按原组件；不要求身体越过整块岩屏。",
+      "cells": [
+        "opaque terrain",
+        "ShotLatch permanent door",
+        "original projectile/recoil",
+        "SimpleRoomReward"
+      ],
+      "resources": "原地面补充/枪冷却；永久门状态本次世界保留。",
+      "terrain": "窄/宽两屏分别改变枪口获得射界的位置，西出口距离不同。",
+      "reward": "西门后可见宝箱，真实稳定接触取得12币。",
+      "failure_recovery": "失败可在同一宽地面恢复；本模块发布路线只声称去程，持续失败再试与通用回程UNKNOWN。",
+      "direction": "entry向东探身，exit朝西；不是入口出口默认互换。",
+      "cheap_solutions": [
+        "原地跳射",
+        "地面预开",
+        "浅东移射线",
+        "不射直接西走",
+        "越屏跳"
+      ],
+      "difference": "沿用M10家族的两个新空间需求，不计新家族。",
+      "interfaces": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/sightline-backtrack/i0",
+          "region": "plains",
+          "required_family": "sightline-backtrack",
+          "objective": {
+            "relationship": "leave exit direction to expose remote shot ray, permanently unlock west route, then backtrack",
+            "screen": [
+              140,
+              -500,
+              100,
+              890
+            ],
+            "peek_x": 370,
+            "exit_x": -455
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 12,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/sightline-backtrack/i1",
+          "region": "plains",
+          "required_family": "sightline-backtrack",
+          "objective": {
+            "relationship": "leave exit direction to expose remote shot ray, permanently unlock west route, then backtrack",
+            "screen": [
+              140,
+              -500,
+              150,
+              890
+            ],
+            "peek_x": 410,
+            "exit_x": -365
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 0,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 12,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "P50-R02",
+      "recipe": "trapdoor-commit",
+      "title": "撤掉脚下桥，承诺进入下层",
+      "observation": "脚下桥和下方宝箱同时可见，远铃由岩屏遮住。",
+      "decision": "进入可射站位后决定是否撤掉支撑下降；合理空中开桥也接受。",
+      "causality": "同一真实投射物关掉桥碰撞，人体随后失去支撑并落入下层。",
+      "cells": [
+        "ShotLatch removable bridge",
+        "opaque terrain",
+        "original gravity",
+        "SimpleRoomReward"
+      ],
+      "resources": "原枪与地面恢复，无自造掉落奖励或资源重置。",
+      "terrain": "210宽/340深与230宽/220深的两种下层接收空间。",
+      "reward": "底层宝箱可见，14币真实接触领取。",
+      "failure_recovery": "下层是安全稳定出口；本次未保证回到上层，不能补传送或猜恢复。",
+      "direction": "两个竖向落差需求，声明上层→下层，反向UNKNOWN。",
+      "cheap_solutions": [
+        "不射直接绕桥",
+        "桥外提前开",
+        "空中开桥",
+        "普通跳越",
+        "原地提前射击"
+      ],
+      "difference": "沿用M12承诺下降关系，真实新下层接口不新增家族。",
+      "interfaces": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/trapdoor-commit/i0",
+          "region": "plains",
+          "required_family": "trapdoor-commit",
+          "objective": {
+            "relationship": "open own real support bridge and commit into lower reward route",
+            "bridge": [
+              240,
+              438,
+              210,
+              20
+            ],
+            "shaft_drop": 340,
+            "lower_width": 210
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": -340,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 14,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/trapdoor-commit/i1",
+          "region": "plains",
+          "required_family": "trapdoor-commit",
+          "objective": {
+            "relationship": "open own real support bridge and commit into lower reward route",
+            "bridge": [
+              240,
+              438,
+              230,
+              20
+            ],
+            "shaft_drop": 220,
+            "lower_width": 230
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": -220,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 14,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "P50-R03",
+      "recipe": "ordered-target-transaction",
+      "title": "先留进度，再把第二枪送对铃",
+      "observation": "两个接收器在入口都可见可射，同门连线表明先后。",
+      "decision": "选择目标次序；第一次提交进度保留，错序后仍可重新完成。",
+      "causality": "两个真实ShotLatch接收器按sequence_step非交换提交，第二步解除远门。",
+      "cells": [
+        "original ShotLatch sequence_offset",
+        "original projectile/recoil",
+        "support bank",
+        "SimpleRoomReward"
+      ],
+      "resources": "允许正确地面顺序后再跃迁，不强行把空中射击说成唯一解。",
+      "terrain": "更高近岸与较低远岸两种落点需求；同一关门边界需身体穿过。",
+      "reward": "新岸可见16币宝箱，实际落稳领取。",
+      "failure_recovery": "持续的第一步进度是原ShotLatch机制；完整失败回程无证据则UNKNOWN。",
+      "direction": "entry→高侧岸；反向进入初始机关状态未知。",
+      "cheap_solutions": [
+        "交换两个目标",
+        "只射第二铃",
+        "只射第一铃",
+        "正确地面两枪",
+        "错序后恢复",
+        "普通跳越门"
+      ],
+      "difference": "沿用M19事务关系，不把只换按键顺序算新家族。",
+      "interfaces": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/ordered-target-transaction/i0",
+          "region": "plains",
+          "required_family": "ordered-target-transaction",
+          "objective": {
+            "relationship": "two simultaneously visible projectile receivers commit noncommuting persistent gate state; partial first progress remains",
+            "first": [
+              20,
+              350
+            ],
+            "second": [
+              140,
+              430
+            ],
+            "landing": [
+              310,
+              280,
+              220,
+              70
+            ],
+            "both_entry_visible": true
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 158,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 16,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/ordered-target-transaction/i1",
+          "region": "plains",
+          "required_family": "ordered-target-transaction",
+          "objective": {
+            "relationship": "two simultaneously visible projectile receivers commit noncommuting persistent gate state; partial first progress remains",
+            "first": [
+              20,
+              350
+            ],
+            "second": [
+              140,
+              430
+            ],
+            "landing": [
+              320,
+              310,
+              220,
+              70
+            ],
+            "both_entry_visible": true
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 420,
+          "rise": 128,
+          "space": {
+            "max_width": 2300,
+            "max_height": 1800,
+            "max_port_span_x": 1100
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 16,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "P50-R04",
+      "recipe": "low-ray-recoil-return",
+      "title": "先落出遮檐，再用低铃一枪回升",
+      "observation": "侧袋宝箱可见，但横墙遮住地面到低处铃的射线。",
+      "decision": "下降到能看见低铃、又保留足够回升高度的位置，再射击。",
+      "causality": "同一枪打低铃解除侧袋阻挡，同时产生朝右上的反冲，把已下降身体送回侧袋。",
+      "cells": [
+        "original ShotLatch permanent gate",
+        "opaque side lip",
+        "original projectile and recoil",
+        "SimpleRoomReward"
+      ],
+      "resources": "唯一原空中枪；失败下落到安全地面的恢复只来自原组件，不允许自动回满判定。",
+      "terrain": "新v2低铃向左移造成真实遮挡，两种侧袋高度520/570与墙底500/540。",
+      "reward": "侧袋14币先可见，身体实际落稳接触取得。",
+      "failure_recovery": "底部安全落地只作可观察状态；从底部重试/返回尚未声明，保持UNKNOWN。",
+      "direction": "高入口→下降后的侧向较低出口，所用反冲轨迹包含真实上升；反向UNKNOWN。",
+      "cheap_solutions": [
+        "站岸直接开",
+        "早跳射",
+        "未落出遮墙就射",
+        "只坠落不射",
+        "普通跳越门"
+      ],
+      "difference": "新关系候选：低处射界与同枪回升耦合；不同于无机关的过檐后刹车。AI新颖性待审，不自认新家族。",
+      "interfaces": [
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/low-ray-recoil-return/i0",
+          "region": "plains",
+          "required_family": "low-ray-recoil-return",
+          "objective": {
+            "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+            "pocket_y": 520,
+            "wall_bottom": 500,
+            "low_bell": [
+              80,
+              820
+            ],
+            "landing_x": 405
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 162,
+          "rise": -340,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1800,
+            "max_port_span_x": 1000
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 14,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "plains50/resources/low-ray-recoil-return/i1",
+          "region": "plains",
+          "required_family": "low-ray-recoil-return",
+          "objective": {
+            "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+            "pocket_y": 570,
+            "wall_bottom": 540,
+            "low_bell": [
+              80,
+              820
+            ],
+            "landing_x": 430
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "entry",
+              "to_port": "exit",
+              "role": "reward"
+            }
+          ],
+          "entry_y": 162,
+          "rise": -390,
+          "space": {
+            "max_width": 2400,
+            "max_height": 1800,
+            "max_port_span_x": 1000
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "risk_reward": {
+            "amount": 14,
+            "mandatory_damage": false
+          },
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "original supported resources",
+            "exit": "observed only"
+          },
+          "return_conditions": "UNKNOWN",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        }
+      ]
+    }
+  ],
+  "unimplemented_human_idea": {
+    "id": "PR-D03",
+    "status": "needs_generation_rule",
+    "resource_mechanism_probe": "pcg/results/workshop-plains50-D03-resource-probe-v1",
+    "gaps": [
+      "No continuous same-world two-reward route generator implemented.",
+      "No verified enemy-dead alternative for every untouched reward.",
+      "Fresh independent routes do not prove shared3HP scarcity."
+    ],
+    "not_substituted_by": "P50-R04 is separately named proposal, never claims PR-D03 completion."
+  },
+  "human_approval": "UNKNOWN",
+  "production_admitted": false
+}

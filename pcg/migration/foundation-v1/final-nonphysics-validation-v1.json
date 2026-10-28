@@ -1,0 +1,53 @@
+{
+  "schema": "pcg/final-nonphysics-validation/v1",
+  "createdUtc": "2026-10-27T18:36:43.097475+00:00",
+  "migrationTests": {
+    "command": "python3 -m unittest discover -s pcg/migration/tests -v",
+    "tests": 366,
+    "skipped": 1,
+    "passed": true
+  },
+  "factoryTests": {
+    "command": "cd pcg && python3 -m unittest discover -s prototype/factory/tests -v",
+    "tests": 26,
+    "passed": true
+  },
+  "earlierFailure": {
+    "errors": 7,
+    "reason": "Exact duplicate source was correctly moved by deduplication WAL; forest test fixture hardcoded its former current directory.",
+    "repair": "Fixture now resolves the existing ledger relocation, retaining negative semantic/runtime/capability checks.",
+    "source": {
+      "path": "pcg/migration/tests/test_forest_equivalence.py",
+      "sha256": "6ecb7cb1ac0225ee26bd86ae398b4c54b01dadad26f7c09dc5c3f5de0711abf7"
+    }
+  },
+  "logs": [
+    {
+      "path": "pcg/results/foundation-migration-final-validation-v2/migration-before-relocation-fixture.log",
+      "sha256": "97afcf8a8763b6bcaa578cf41bcbef457d06fbb42b677df575ee3cb6ce74faae"
+    },
+    {
+      "path": "pcg/results/foundation-migration-final-validation-v2/forest-relocation-fixture.log",
+      "sha256": "f77891c4a735308255154d8721421629f64333f2d42c362c4be22dffd182433c"
+    },
+    {
+      "path": "pcg/results/foundation-migration-final-validation-v2/migration-final.log",
+      "sha256": "c698ae43fea788d18858e8430ca30fccb927218a3e9cff40e36465cfa25c2d5a"
+    },
+    {
+      "path": "pcg/results/foundation-migration-final-validation-v2/factory-final.log",
+      "sha256": "173a45b98ca5db4f8d282ff2c22880cfc17c65c2392ecb571ed22153d8b0e567"
+    },
+    {
+      "path": "pcg/results/foundation-migration-final-validation-v2/migration-after-query.log",
+      "sha256": "d2c1ecda60c917f3c2dfed5a405ea25b8ba7599227db6dfbeb30027d1f0ec925"
+    }
+  ],
+  "newGodotExperiments": 0,
+  "queryGuardTests": {
+    "command": "python3 -m unittest pcg.migration.tests.test_query -v",
+    "count": 38,
+    "passed": true,
+    "scope": "Static guard and actual current alias data negatives; no new physical certification."
+  }
+}

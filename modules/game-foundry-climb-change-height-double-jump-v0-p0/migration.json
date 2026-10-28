@@ -1,0 +1,271 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-foundry-climb-change-height-double-jump-v0-p0",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-foundry-climb-change-height-double-jump-v0-p0",
+  "sourceVersion": "sha256:53952010d42c4189a04054de1b13d70140fb7697aa8c3962930934795e6b9aef",
+  "sourceFiles": {
+    "cases.json": "8ec62805fc30038d95b66bc987c36260bd427fb18e1a53dcf8962aaa5f8ceaba",
+    "record.json": "1bc7430b1c9bc30fd48d0057107a0069b8db97aafb1438a2af0dc2f753d59c1e",
+    "module.mapnote.json": "74822b90372f8c4105881c68268b6f2c1b7c1e07d9a985d35d2a3f4caf5e2191",
+    "source.json": "a5f7e8d492dd5d291ad902f1d3fb2aa8caf8cd9ef3b46dcc79115170bb8e18c1"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 76.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": -30,
+      "w": 1760,
+      "h": 390
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": -52.0,
+      "w": 1792,
+      "h": 512
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 4,
+        "objectId": "generated-e23389f3d411f4fbfa8ca7fc5fe01c148ca75fd362b82e3954a94c72e0e78858/platform-4",
+        "before": [
+          1120.0,
+          110.0,
+          640.0,
+          32.0
+        ],
+        "after": [
+          1120.0,
+          172.0,
+          640.0,
+          8
+        ],
+        "topDelta": 62.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 4,
+        "platformIndex": 6,
+        "objectId": "generated-e23389f3d411f4fbfa8ca7fc5fe01c148ca75fd362b82e3954a94c72e0e78858/migration-shore-exit",
+        "rect": [
+          1736.0,
+          172.0,
+          56.0,
+          8
+        ],
+        "length": 32.0,
+        "thickness": 8,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            282
+          ],
+          "stagingPosition": [
+            20,
+            282
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            268.0
+          ],
+          "stagingPosition": [
+            24,
+            282.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            1740,
+            92
+          ],
+          "stagingPosition": [
+            1740,
+            92
+          ]
+        },
+        "after": {
+          "position": [
+            1792,
+            140.0
+          ],
+          "stagingPosition": [
+            1768,
+            154.0
+          ],
+          "supportIndex": 6,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-foundry__climb_change_height-double_jump-v0-p0",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "b54fbff0aaf924bfd316c2bac7193a836cbb6661cb5f410c73b44a6f42606203"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        },
+        {
+          "face": "RIGHT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 300.0,
+          "dockFloor": 300,
+          "supportIndex": 7,
+          "boundary": [
+            -128,
+            268
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 4,
+          "originalFloor": 110.0,
+          "dockFloor": 172,
+          "supportIndex": 9,
+          "boundary": [
+            1920,
+            140
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/migration-physics.json",
+      "sha256": "efe814f840320c3b477cc76d9c53f2963399db72ba4e38500c9efaa9e3da87b2"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/source_binding.json",
+      "sha256": "b30c5eb9bcc58e38969718f2968864eb9a3ad189e90e9cbb988a11e49466dcce"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/batches.json",
+      "sha256": "11b3873c159a67af22e1d03149fb11fddf74df806b0fc6f3862f38854cce5511"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/boundary-probes.json",
+      "sha256": "0db93b5bc900d8cfc458ae049f8c8aed7e789dde7666bff380583758e1601636"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/migration-physics.json",
+    "sha256": "efe814f840320c3b477cc76d9c53f2963399db72ba4e38500c9efaa9e3da87b2"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/boundary-probes.json",
+      "sha256": "0db93b5bc900d8cfc458ae049f8c8aed7e789dde7666bff380583758e1601636"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/game-foundry-climb-change-height-double-jump-v0-p0/5bf18f2287ded3e4f41eddebce0b96d7a96862588cd81f4bf9f05654d87ad077.json",
+        "sha256": "64255c33fcc84707d4f1fc535eedadebba0a820d3024aad3f2c1cf6efbd69389"
+      },
+      "previousUnresolved": [
+        "actual routes",
+        "external mechanisms",
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unsearched pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-double-jump-v0-p0-feedback-quality-v5/migration-physics.json",
+        "sha256": "efe814f840320c3b477cc76d9c53f2963399db72ba4e38500c9efaa9e3da87b2"
+      }
+    }
+  ]
+}

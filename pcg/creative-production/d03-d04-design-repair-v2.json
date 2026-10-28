@@ -1,0 +1,60 @@
+{
+  "schema": "pcg/design-logic-revision/v1",
+  "source_type": "actual_current_codex_design_revision",
+  "revision": 2,
+  "original_design": {
+    "path": "pcg/creative-production/plains-five-designs-v1.json",
+    "sha256": "a298f6dbc92d3e931166b3a8e68e0e71162b419798b6f464a183e7cea36b37e9"
+  },
+  "human_request": {
+    "path": "pcg/feedback/workshop/idea-sources/human-d03-d04-clarify-and-repair/v1.json",
+    "sha256": "2a9d7caf97ceb6af49c0d7a2516f23cc1eca3925cfc11429512410852df8c8cf"
+  },
+  "design_document": {
+    "path": "docs/l4-mapgen/d03-d04-design-repair-v2.md",
+    "sha256": "48f70b98824ddc579c2da46205f5578a146893fd61ec220a163a3a8e6c5c2a6e"
+  },
+  "proposals": [
+    {
+      "id": "PR-D03",
+      "core_tradeoff": "air-hit refund helps the current route while consuming finite shared enemy health for later routes",
+      "design_flaws": [
+        "enemy-death softlock",
+        "irrelevant HP consumption when all paths equally easy",
+        "hidden retry punishment",
+        "arbitrary mandatory shot count"
+      ],
+      "repair_constraints": [
+        "always available main exit and enemy-dead reward alternatives",
+        "actual air-route advantage versus short staged ground-refill route",
+        "visible real HP and persistent world across retries",
+        "costs derived from real geometry; accept equivalent strategies"
+      ],
+      "status": "specified_requires_geometry_and_physics",
+      "physics": "NOT_RUN"
+    },
+    {
+      "id": "PR-D04",
+      "core_tradeoff": "parked platform aids either immediate reward access or direct return; the outgoing shot leaves a meaningful future state",
+      "design_flaws": [
+        "two positions serving identical access",
+        "free safe remote retiming erases planning",
+        "wrong-park softlock",
+        "waiting or empty walking used as penalty"
+      ],
+      "repair_constraints": [
+        "physically distinct access from two platform positions",
+        "visible rock-based receiver occlusion and playable access to adjustment point",
+        "continuous recovery for misplaced platform",
+        "one-world reward/return comparisons; no forced irreversible choice"
+      ],
+      "status": "specified_requires_geometry_and_physics",
+      "physics": "NOT_RUN"
+    }
+  ],
+  "new_modules": 0,
+  "new_physics_cases": 0,
+  "human_design_approval": "UNKNOWN",
+  "human_playtest": "UNKNOWN",
+  "production_admitted": false
+}

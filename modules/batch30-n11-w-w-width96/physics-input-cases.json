@@ -1,0 +1,830 @@
+{
+  "cases": [
+    {
+      "id": "b30-blockn11-v1-i0-w96-c0",
+      "family": "block128-underledge-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -256,
+          224,
+          426,
+          84
+        ],
+        [
+          0,
+          480,
+          96,
+          51
+        ],
+        [
+          -310,
+          708,
+          1240,
+          60
+        ],
+        [
+          -384,
+          224,
+          152,
+          24
+        ],
+        [
+          -384,
+          480,
+          408,
+          24
+        ]
+      ],
+      "spawn": [
+        -232,
+        206
+      ],
+      "entry_port": [
+        -232,
+        206
+      ],
+      "exit_port": [
+        24,
+        462
+      ],
+      "goal": [
+        17,
+        458,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -1270,
+        -972,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            35,
+            462
+          ],
+          "region": [
+            5,
+            457,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 1500,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 0,
+        "width": 96,
+        "control": 0,
+        "mirror": false,
+        "translation": [
+          -70,
+          28
+        ],
+        "outward_sign": 1,
+        "upper_lip": 170,
+        "shoot_x": 275,
+        "outward_offset": 105,
+        "upper_before": [
+          -230,
+          208,
+          400,
+          100
+        ],
+        "upper_after": [
+          -256,
+          224,
+          426,
+          84
+        ],
+        "bag_before": [
+          -25,
+          466,
+          100,
+          65
+        ],
+        "bag_after": [
+          0,
+          480,
+          96,
+          51
+        ],
+        "original_floor": [
+          -310,
+          708,
+          1240,
+          60
+        ],
+        "retained_original_bottoms": true,
+        "bounded_shore_edits": {
+          "A_side_extension": 26,
+          "A_top": 16,
+          "B_outward_trim": 25,
+          "B_top": 14,
+          "B_inward_extension": 21
+        }
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 275
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 9
+          },
+          "value": -1
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 24,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/N11",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn11/rules_v1.py",
+        "parameters": {
+          "interface": 0,
+          "width": 96,
+          "control": 0,
+          "mirror": false,
+          "translation": [
+            -70,
+            28
+          ],
+          "outward_sign": 1,
+          "upper_lip": 170,
+          "shoot_x": 275,
+          "outward_offset": 105,
+          "upper_before": [
+            -230,
+            208,
+            400,
+            100
+          ],
+          "upper_after": [
+            -256,
+            224,
+            426,
+            84
+          ],
+          "bag_before": [
+            -25,
+            466,
+            100,
+            65
+          ],
+          "bag_after": [
+            0,
+            480,
+            96,
+            51
+          ],
+          "original_floor": [
+            -310,
+            708,
+            1240,
+            60
+          ],
+          "retained_original_bottoms": true,
+          "bounded_shore_edits": {
+            "A_side_extension": 26,
+            "A_top": 16,
+            "B_outward_trim": 25,
+            "B_top": 14,
+            "B_inward_extension": 21
+          }
+        },
+        "registration_source": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -360,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 3
+        },
+        {
+          "id": "B",
+          "position": [
+            -360,
+            462
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "block128-underledge-brake-return",
+      "challenge_route": true,
+      "expected_reward": 10,
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "idea_ids": [
+        "B31-N11"
+      ],
+      "layout_title": "同侧折返·反冲入檐袋 / 西向",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "required_rewards": [
+          "visible-cache"
+        ],
+        "require_bell": false
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -384,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -360,
+            206
+          ],
+          "aperture": [
+            -416,
+            160,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            -384,
+            448
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -360,
+            462
+          ],
+          "aperture": [
+            -416,
+            416,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          0,
+          0,
+          512,
+          708
+        ]
+      ],
+      "layout_uid": "af3ab9bbf48c2a3a8f66af48bcfeeaeca81303ae4d45f22c3b41e64d72220ef0",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/W-W/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 0,
+          "physical_layout_sha256": "af3ab9bbf48c2a3a8f66af48bcfeeaeca81303ae4d45f22c3b41e64d72220ef0",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                35,
+                462
+              ],
+              "region": [
+                5,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "走出岩唇，身体低于檐底后向外射击，反冲折回袋内取箱。落底后可付费跳射恢复。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/W-W/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 0,
+          "physical_layout_sha256": "af3ab9bbf48c2a3a8f66af48bcfeeaeca81303ae4d45f22c3b41e64d72220ef0",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                35,
+                462
+              ],
+              "region": [
+                5,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "map_shape_demand": {
+        "id": "N11/W_to_W",
+        "concept_only": true,
+        "units": "proposed_Godot_pixels",
+        "block_size": 128,
+        "bounds": [
+          -384,
+          0,
+          1408,
+          768
+        ],
+        "ports": [
+          {
+            "id": "A",
+            "cell": [
+              -2,
+              1
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "anchor": [
+              -256,
+              192
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              -232,
+              206
+            ],
+            "floor_y": 224,
+            "outward_cell": [
+              -3,
+              1
+            ],
+            "role": "upper ingress"
+          },
+          {
+            "id": "B",
+            "cell": [
+              0,
+              3
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "anchor": [
+              0,
+              448
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24,
+              462
+            ],
+            "floor_y": 480,
+            "outward_cell": [
+              -1,
+              3
+            ],
+            "role": "under-ledge west continuation"
+          }
+        ],
+        "adaptation_class": "bounded_shore_adapter_new_control",
+        "solid_sketch": [
+          {
+            "role": "upper",
+            "rect": [
+              -256,
+              224,
+              426,
+              84
+            ]
+          },
+          {
+            "role": "pocket",
+            "rect": [
+              0,
+              480,
+              75,
+              51
+            ]
+          },
+          {
+            "role": "originalfloor",
+            "rect": [
+              -310,
+              708,
+              1240,
+              60
+            ]
+          }
+        ],
+        "notes": [
+          "rules.brake(0), DX=-70 DY28. Upperleft-230→-256 extend26; pocketleft-25→0 trim25.",
+          "Upper180+28→224 +16; pocket438+28→480 +14. Keep upperbottom308.",
+          "Real walk dock[-232,206]→translated originalstart[110,206]. Actual B24 vs old35 requiresnewstop, notteleport."
+        ],
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended": "requested",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended": "not_requested_no_negative_claim",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "B_CSPsameface_shape_requirement_plus_explicitA4currencyadaptation",
+        "registered_normals": [
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        "ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "currency_allocation": {
+          "amount": 10,
+          "status": "preservedparentproposal_requiresactualMapbudgetbinding"
+        },
+        "map_added_terrain": 0,
+        "production_admitted": false,
+        "unresolved": [
+          "ActualMapedgeassignment/allrequiredpairs",
+          "Rewardbudgetbinding",
+          "Arbitraryingress/resources",
+          "Boundarycrossing",
+          "Genericrecovery/seam/fullMap"
+        ]
+      },
+      "factory_id": "e7d58e12325989b227ef5db8d2367e96161e8e58886edefef3c8d86d9138a79d",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b30-blockn11-v1-i0-w96-c0",
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -384,
+          "y": 128,
+          "w": 1408,
+          "h": 640
+        },
+        "portAdaptations": [
+          {
+            "portId": "A",
+            "before": {
+              "position": [
+                -256,
+                192
+              ],
+              "stagingPosition": [
+                -232,
+                206
+              ]
+            },
+            "after": {
+              "position": [
+                -384,
+                192
+              ],
+              "stagingPosition": [
+                -360,
+                206
+              ],
+              "supportIndex": 3,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "B",
+            "before": {
+              "position": [
+                0,
+                448
+              ],
+              "stagingPosition": [
+                24,
+                462
+              ]
+            },
+            "after": {
+              "position": [
+                -384,
+                448
+              ],
+              "stagingPosition": [
+                -360,
+                462
+              ],
+              "supportIndex": 4,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      },
+      "migration_compat": {
+        "schema": "pcg/migration-purpose-compatibility/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_blockn11/api_v1.py",
+        "runnerSource": "pcg/prototype/workshop/runner.gd",
+        "legacyOwnership": "superseded_by_exact_foundation_rectangle",
+        "foundationRectangle": {
+          "x": -384,
+          "y": 128,
+          "w": 1408,
+          "h": 640
+        },
+        "originalBlockGridSha256": "fc87e04971b07625990d30529894edc0bfff803ccb3797ccb8bfa5a77a938541",
+        "interpretation": "Original causal assertions retained; only retired ownership data and actual original runner binding adapted."
+      }
+    }
+  ]
+}

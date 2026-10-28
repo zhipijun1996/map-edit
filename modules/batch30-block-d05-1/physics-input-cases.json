@@ -1,0 +1,719 @@
+{
+  "cases": [
+    {
+      "id": "b30-block-d05-v1-i1-c1",
+      "family": "block128-bell-carrier-catch",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -128,
+          352,
+          400,
+          100
+        ],
+        [
+          1212,
+          224,
+          324,
+          140
+        ],
+        [
+          732,
+          284,
+          35,
+          50
+        ],
+        [
+          -568,
+          674,
+          2300,
+          60
+        ],
+        [
+          -528,
+          594,
+          120,
+          30
+        ],
+        [
+          -388,
+          514,
+          120,
+          30
+        ],
+        [
+          -248,
+          434,
+          120,
+          30
+        ],
+        [
+          -640,
+          352,
+          536,
+          24
+        ],
+        [
+          1512,
+          224,
+          280,
+          24
+        ]
+      ],
+      "spawn": [
+        -104,
+        334
+      ],
+      "entry_port": [
+        -104,
+        334
+      ],
+      "exit_port": [
+        1512,
+        206
+      ],
+      "goal": [
+        1487,
+        202,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1168,
+        -1086,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "catch-deck",
+          "start": [
+            392,
+            364
+          ],
+          "finish": [
+            982,
+            364
+          ],
+          "size": [
+            240,
+            22
+          ],
+          "travel_duration": 0.7866666666666666,
+          "dwell_duration": 0.2,
+          "initial_phase": 0
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "catch-bell",
+          "bell": [
+            472,
+            244
+          ],
+          "gate": [
+            -368,
+            -586,
+            10,
+            10
+          ],
+          "open_seconds": 0,
+          "ferry_id": "catch-deck",
+          "carrier_mount": "catch-deck"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            1512,
+            206
+          ],
+          "region": [
+            1482,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 1500,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 387
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 0,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 457
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "catch-bell"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 6,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 937
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 16
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.8,
+            0.6
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1512,
+          "deadband": 4
+        }
+      ],
+      "interface": 1,
+      "production_recipe": "block128-bell-carrier-catch",
+      "expected_reward": 12,
+      "rule_parameters": {
+        "interface": 1,
+        "control": 1,
+        "speed": 750,
+        "first_shot_tick": 20,
+        "carrier_mount": "catch-deck",
+        "first_departure_x": 457,
+        "second_departure_x": 937,
+        "roof": [
+          700,
+          370,
+          35,
+          50
+        ],
+        "purpose": "same air shot starts moving support and creates interception landing, then actual grounded resource renewal supports second jump"
+      },
+      "generation_rule": {
+        "id": "human-d05/block128-bell-carrier-catch",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockd05/rules_v1.py",
+        "parameters": {
+          "source_case": "b30-d05-api2-i1-c1",
+          "translation": [
+            32,
+            -86
+          ],
+          "terminal_edit": {
+            "index": 1,
+            "before": [
+              1212,
+              214,
+              340,
+              150
+            ],
+            "after": [
+              1212,
+              224,
+              324,
+              140
+            ],
+            "top_delta": 10,
+            "right_trim": 16
+          },
+          "entry_rebound_to_original_bank": true,
+          "retained_recovery_platform_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "deleted_platform_indices": [],
+          "mounted_bell_full_envelope": true,
+          "map_added_terrain": 0,
+          "inherited_physics": false
+        },
+        "registration_source": "pcg/migration/compat_runners/runner_716f489f403d.py"
+      },
+      "idea_ids": [
+        "human-d05-bell-carrier-catch"
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -616,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "B",
+          "position": [
+            1768,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 8
+        }
+      ],
+      "route_spec": {
+        "id": "air-start-interception",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "layout_uid": "564734b3d072050dc06ead9bf18b0b2c02120573f73b94c400b2cbc8a4a24968",
+      "layout_title": "Block128 风铃台追接 / 向内扩40接收岸",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/block-D05/1",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "block128-bell-carrier-catch",
+        "objective": {
+          "recipe": "block128-bell-carrier-catch",
+          "interface": 1,
+          "physical_layout_sha256": "564734b3d072050dc06ead9bf18b0b2c02120573f73b94c400b2cbc8a4a24968",
+          "core": "same air shot recoils actor and starts its mounted-bell carrier; carrier intercepts actor before grounded renewal and second bank jump",
+          "block_contract": "map-notes/block-grid/v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "air-start-interception"
+          }
+        ],
+        "space": {
+          "max_width": 2560,
+          "max_height": 1536,
+          "max_port_span_x": 1664,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                1512,
+                206
+              ],
+              "region": [
+                1482,
+                200,
+                60,
+                12
+              ],
+              "amount": 12
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Supported internal A dock and initially parked original carrier; boundary ingress/phase entailment UNKNOWN",
+          "exit": "observed stable B only; arbitrary carrier phase UNKNOWN"
+        },
+        "return_conditions": "All original failure floor/stairs retained; exact new same-world retry, reverse and boundaries UNKNOWN until separately verified",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -640,
+            320
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -616,
+            334
+          ],
+          "aperture": [
+            -672,
+            288,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1792,
+            192
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1768,
+            206
+          ],
+          "aperture": [
+            1760,
+            160,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          -128,
+          -512,
+          1664,
+          1152
+        ],
+        [
+          -640,
+          384,
+          768,
+          384
+        ]
+      ],
+      "block_adaptation": {
+        "source_case": "b30-d05-api2-i1-c1",
+        "translation": [
+          32,
+          -86
+        ],
+        "terminal_edit": {
+          "index": 1,
+          "before": [
+            1212,
+            214,
+            340,
+            150
+          ],
+          "after": [
+            1212,
+            224,
+            324,
+            140
+          ],
+          "top_delta": 10,
+          "right_trim": 16
+        },
+        "entry_rebound_to_original_bank": true,
+        "retained_recovery_platform_indices": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "deleted_platform_indices": [],
+        "mounted_bell_full_envelope": true,
+        "map_added_terrain": 0,
+        "inherited_physics": false
+      },
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockd05/main_v1.tscn",
+      "native_scene": "res://prototype/creative_batches/batch30_blockd05/main_v1.tscn",
+      "factory_id": "e66587ada72f3f5b10d573a75978ddd58e29723f8e47298373a376ef76002bb0",
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b30-block-d05-v1-i1-c1",
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -640,
+          "y": 0,
+          "w": 2432,
+          "h": 768
+        },
+        "portAdaptations": [
+          {
+            "portId": "A",
+            "before": {
+              "position": [
+                -128,
+                320
+              ],
+              "stagingPosition": [
+                -104,
+                334
+              ]
+            },
+            "after": {
+              "position": [
+                -640,
+                320
+              ],
+              "stagingPosition": [
+                -616,
+                334
+              ],
+              "supportIndex": 7,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "B",
+            "before": {
+              "position": [
+                1536,
+                192
+              ],
+              "stagingPosition": [
+                1512,
+                206
+              ]
+            },
+            "after": {
+              "position": [
+                1792,
+                192
+              ],
+              "stagingPosition": [
+                1768,
+                206
+              ],
+              "supportIndex": 8,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      },
+      "migration_compat": {
+        "schema": "pcg/migration-purpose-compatibility/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_blockd05/api_v1.py",
+        "runnerSource": "pcg/prototype/creative_batches/batch30_d05/runner_v1.gd",
+        "legacyOwnership": "superseded_by_exact_foundation_rectangle",
+        "foundationRectangle": {
+          "x": -640,
+          "y": 0,
+          "w": 2432,
+          "h": 768
+        },
+        "originalBlockGridSha256": "a49bc69218fdb4fa04cf4ec00cd9d8e7bd45ed320e85dbbb512a1571fff68364",
+        "interpretation": "Original causal assertions retained; only retired ownership data and actual original runner binding adapted."
+      }
+    }
+  ]
+}

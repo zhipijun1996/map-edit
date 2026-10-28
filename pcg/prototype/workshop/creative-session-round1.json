@@ -1,0 +1,17 @@
+{
+  "schema": "pcg/llm-session-creative-round/v1",
+  "provider": "current_codex_conversation",
+  "generation_mode": "actual conversation LLM proposals, saved by the assistant; not an external CLI response",
+  "external_cli_call": "workshop-creative-llm-round1-v1 failed with expired login/401; no template response substituted",
+  "target": "20 distinct playable gameplay relationships; dimensions and seeds do not count",
+  "baseline_relationships": ["thorn-slot", "chase-landing", "timed-cache", "brake-under-ledge", "one-shot-two-routes", "air-refund"],
+  "feedback_used": ["ground-open floor drop bypass", "static-dock carrier bypass", "generic action words do not establish novelty", "hook and wall contacts do not refund air shots"],
+  "proposals": [
+    {"id":"P07-late-air-jump","title":"过檐再抬升","capabilities":["move","jump","double_jump"],"decision":"先保持低轨迹过岩檐，再决定何时用第二跳抬到高岸。","causality":"早用二段跳撞顶并浪费次数；檐外释放第二跳才有抬升空间。","geometry":"低檐覆盖前段，接收面高于普通单跳上限。","reward":"高岸可见箱。","failure":"保留低岸；通用返回未知。","directions":"仅正向，回程另验。","falsifiers":["普通跳直接到高岸","在檐下提前第二跳仍取得同样结果"],"difference":"判断二段跳的空间释放位置；不是反冲窄通道或单纯加高平台。","implementation":"原动作编译器测量双跳轨迹，加保护实际身体轨迹的低檐；检查真实air_jump位置。"},
+    {"id":"P08-wall-renew-air-jump","title":"蹬墙续跳越顶","capabilities":["move","jump","double_jump","wall_climb"],"decision":"借有限墙面刷新空中跳，再离墙抬升越出墙顶。","causality":"墙跳真实恢复额外跳跃；接收面高过只蹬有限墙顶的范围。","geometry":"有限墙面和偏离墙顶的接收面迫使离墙后使用恢复的跳。","reward":"越顶岸箱。","failure":"原低岸恢复，连续回程未知。","directions":"蹬离方向与上岸方向明确，反向不推断。","falsifiers":["不用空中跳只重复蹬墙到目标","普通二段跳直接到目标"],"difference":"把墙作为跳跃资源恢复点，不是把敌人换皮成墙。","implementation":"复用墙接触/跳恢复绑定和测量构造，验证wall_jump后真实air_jump与资源恢复。"},
+    {"id":"P09-anchor-launch","title":"挂点停稳再跃出","capabilities":["move","jump","grapple"],"decision":"抓住深沟上方挂点，观察对岸后主动选择离钩起跳。","causality":"真实挂接提供停稳状态；anchor_jump把悬停转换成可控离台。","geometry":"沟宽超过普通跳，对岸在挂点前方，不能只是站电梯等待。","reward":"对岸箱。","failure":"下岸存在但返回未验，不宣称安全重试。","directions":"离钩朝目标岸，倒向单独未知。","falsifiers":["不用钩索单跳通过","只挂接自然落下就到岸"],"difference":"以主动停止和再次起跳控制运动，与自动弹钩和空中射击回充不同。","implementation":"原hang锚点+anchor_jump；测量构造对岸，不要求一帧放钩。"},
+    {"id":"P10-bounce-brake","title":"弹钩借速后刹入高岸","capabilities":["move","jump","grapple","shot_recoil"],"decision":"接受弹钩的自动加速，再把仅剩的一枪用于调整落点。","causality":"bounce自动脱离，不能像hang停住；反冲用来制动/修正而非把挂钩当补弹。","geometry":"高岸偏离不射击的自然弹射轨迹。","reward":"偏置高岸箱。","failure":"低岸恢复，精确连续重试未知。","directions":"先借速再修正，返回不能沿用。","falsifiers":["不用钩索一枪直接到岸","弹钩后不射击自然落到箱"],"difference":"利用不可悬停的自动弹射及其后果，不能只改hang动作词。","implementation":"原bounce锚点与真实弹射状态；先测轨迹再放接收面，检查弹射后射击作用。"},
+    {"id":"P11-step-off-wall-kick","title":"踏空贴壁起跳","capabilities":["move","wall_climb"],"decision":"本接口没有普通跳能力，必须主动走出断崖，在下坠中抓住对面墙面再蹬回高岸。","causality":"wall_jump独立于普通jump能力绑定，真实墙接触把下坠变成向上离墙。","geometry":"入口岸与墙隔开短沟，接收岸高于步行和自然落下可达区。","reward":"蹬回岸箱。","failure":"下岸恢复，普通jump不能被暗中授予。","directions":"先向墙右行，再左向蹬离；反向未知。","falsifiers":["只走路落到出口","disabled jump仍被使用","不接触墙也通过"],"difference":"主动踏空换取可用动作；不能把它混算为普通跳加墙踢的参数变体。","implementation":"Registry已有wall_climb无jump绑定，真实接触/蹬墙测量。"}
+  ],
+  "status": "proposals_only_not_counted_until_physical_and_novelty_gates"
+}

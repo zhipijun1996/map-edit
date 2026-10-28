@@ -1,0 +1,245 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-plains-wind-spire",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-plains-wind-spire",
+  "sourceVersion": "sha256:cdf194bb1defa7d52ed9dc23b916a0d67d90b953d922a86995d1e55a1b72f91a",
+  "sourceFiles": {
+    "cases.json": "91ad01497ae78a091f0e952f4209b9663e8c737be3b9ea9e40eeb4c37735668e",
+    "record.json": "14a29c159e997d1c760d9f7a5e9070f787dcc0373735a4db9a308d8a258e713c",
+    "module.mapnote.json": "997bf7129a3077e16e4b0b1f03740b15b175460d0b162f5cae26ff742e136a41",
+    "source.json": "7a4bc71461a1224640673c5f70b0693616cd450b470f727786ee489b87433de3"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 56.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 364,
+      "w": 800,
+      "h": 1866
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 312.0,
+      "w": 896,
+      "h": 1920
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 20,
+        "objectId": "generated-381562b28587de076ad2eed7b8ce7ea171ce8dffc71f5d2e9480b86942d80c1f/platform-20",
+        "before": [
+          665.0,
+          400.0,
+          135.0,
+          30.0
+        ],
+        "after": [
+          665.0,
+          408.0,
+          135.0,
+          22.0
+        ],
+        "topDelta": 8.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 20,
+        "platformIndex": 21,
+        "objectId": "generated-381562b28587de076ad2eed7b8ce7ea171ce8dffc71f5d2e9480b86942d80c1f/migration-shore-exit",
+        "rect": [
+          776.0,
+          408.0,
+          120.0,
+          22.0
+        ],
+        "length": 96.0,
+        "thickness": 22.0,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            2182
+          ],
+          "stagingPosition": [
+            20,
+            2182
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            2168.0
+          ],
+          "stagingPosition": [
+            24,
+            2182.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            780,
+            382
+          ],
+          "stagingPosition": [
+            780,
+            382
+          ]
+        },
+        "after": {
+          "position": [
+            896,
+            376.0
+          ],
+          "stagingPosition": [
+            872,
+            390.0
+          ],
+          "supportIndex": 21,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-plains_wind_spire",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "4e06040da7bb7bf89972b58c9484070e04590c0afdf1000a481c4b1270d597ee"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 2200.0,
+          "dockFloor": 2200,
+          "supportIndex": 22,
+          "boundary": [
+            -128,
+            2168
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 20,
+          "originalFloor": 400.0,
+          "dockFloor": 408,
+          "supportIndex": 24,
+          "boundary": [
+            896,
+            376
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    },
+    "originalInputRoutines": {
+      "minimumShots": 0,
+      "minimumJumps": 20,
+      "sourceRoutines": "Pinned actual original input methods; sourcegeometryunchanged",
+      "variant": 0,
+      "gain": 5.5
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/migration-physics.json",
+      "sha256": "3b74c0608d6b6396d2e6a8fd0c1f28cd5b5e3cf5791b06e7f97d9d3d19c619b0"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/source_binding.json",
+      "sha256": "b9b23cddc8736ebe3369d0d574628cbe7c1866d53ed98807e4ba539e7e7fe999"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/batches.json",
+      "sha256": "d3e4f7d33942ef56e4c1b0474da13cff862a465d662a02c574737755499d05d7"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/boundary-probes.json",
+      "sha256": "32974df16fb9e7d38a5ba590c680bcc4be0ca1c69a6f6884ef95d2af81326ce5"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/migration-physics.json",
+    "sha256": "3b74c0608d6b6396d2e6a8fd0c1f28cd5b5e3cf5791b06e7f97d9d3d19c619b0"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-plains-wind-spire-source-quality-v9/boundary-probes.json",
+      "sha256": "32974df16fb9e7d38a5ba590c680bcc4be0ca1c69a6f6884ef95d2af81326ce5"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  }
+}

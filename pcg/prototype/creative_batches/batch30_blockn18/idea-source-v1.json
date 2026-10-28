@@ -1,0 +1,1421 @@
+{
+  "source_type": "actual_current_codex_authorized_subagent",
+  "card_source": "pcg/creative-production/batch30/block-next-ideas-v4.json",
+  "card_sha256": "fac274d6bdf4d2fb2cabd38adf0809cb383ecd3b7285232a5b82bd824f2a41fd",
+  "card_original": {
+    "source_type": "actual_current_codex_authorized_subagent",
+    "author": "/root/batch30_creative",
+    "exact_model_revision": "not_exposed",
+    "external_api_called": false,
+    "status": "proposal_existing_Cells_new_rule_missing",
+    "physics": "NOT_RUN",
+    "candidate_versions": [],
+    "human_video_observation": "UNKNOWN",
+    "human_playtest": "UNKNOWN",
+    "production_admitted": false,
+    "abilities": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "id": "B31-N18",
+    "title": "一块挡板，两扇射窗：选这一拍去哪个岸",
+    "priority": 4,
+    "player_observation": "高低两只铃在同一运动挡板后。挡板竖直往返，遮住高射线时露低射线；对应的两个外接岸和门同时可见。",
+    "player_decision": "从共同M选择当前能打穿的射窗，或先调整自己起跳/移动来等待另一可读窗口。打低铃反冲向右上去高岸；打高铃反冲向右下抢入较低侧廊。",
+    "causal_relationship": "弹丸必须实际穿过自动挡板的空窗；目标高低同时决定原门打开及人物反冲分量，世界窗口选择与身体目的地耦合。同一挡板不是两套独立开关装饰。",
+    "nonnegotiable": [
+      "同一个自动往返挡板真实阻弹；两射线的开放区间存在可读差异",
+      "两支共享完整layout、相位、M资源和两个门初态",
+      "低侧廊也有真实开门/跨空腔挑战，不能是落空恢复口",
+      "不乘挡板、不新增反转/暂停或自动停靠行为"
+    ],
+    "existing_rule_vs_missing": {
+      "existing": [
+        "moving-ray-window已执行原实心运动挡板/弹丸拦截规则",
+        "ShotLatch独立门/永久开门",
+        "原ModuleMovingPlatformDefinition两点pingpong"
+      ],
+      "missing": [
+        "双射窗+两外接目的地新规则/共同相位选择调度",
+        "实际两射线弹丸首碰撞日志、两个目的地独立regular",
+        "动态全包络和四口第二入口的独立原物理"
+      ],
+      "new_Cell_required": false
+    },
+    "sources": [
+      {
+        "path": "pcg/prototype/godot/scripts/world/shot_latch.gd",
+        "sha256": "a982e1ceab32390bea30eab7843a382910b33a503338351bcd0bdc1fce825929"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/generation/module_moving_platform.gd",
+        "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/generation/module_moving_platform_definition.gd",
+        "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/resource_routes/moving-ray-v1.py",
+        "sha256": "5d19cd311a987dd1da74f583c8899658d3532ee22d718d9c673c06e7be46292c"
+      }
+    ],
+    "parent_bindings": [
+      {
+        "contentVersion": "sha256:7acc4cdfa042dedb338ace59d782444bf4a2fa12fccd88397e8bd42c1c489a51",
+        "record": {
+          "path": "pcg/map_directed/library/candidates/7acc4cdfa042dedb338ace59d782444bf4a2fa12fccd88397e8bd42c1c489a51/record.json",
+          "sha256": "d9cb3f9b1c3c22d79d835798e09fe8bd963dc3f6415912b5f76c2a774d65b102"
+        },
+        "document": {
+          "path": "pcg/map_directed/library/candidates/7acc4cdfa042dedb338ace59d782444bf4a2fa12fccd88397e8bd42c1c489a51/module.mapnote.json",
+          "sha256": "9a07ba5424070a1452285501f5db3a362f523565d5439ce74b8515281ac051f9"
+        },
+        "cases": {
+          "path": "pcg/map_directed/library/candidates/7acc4cdfa042dedb338ace59d782444bf4a2fa12fccd88397e8bd42c1c489a51/case.json",
+          "sha256": "f95e80ed2d57a2f8e9e792bfa111e01e6b73476ff4f50d78fe67a87742dba22d"
+        },
+        "technical_status": "passed_scoped",
+        "source_read": true,
+        "qualification": "Existing exact parent only; no physics/state/Block qualification inherited by this proposal"
+      }
+    ],
+    "resources": "M真实落地回充后一枪。两门先用原永久开门减少层间timer冲突；重试时已开门保持已开，目标receiver退层是原行为。额外地面预开+自由空枪允许，但按同目标资源和时间比较。",
+    "reward": "先编译无奖fork；两个出口连接高原/低侧廊两个地域。若Map要货币，各岸可等额6币，但必须独立奖励重绑/取奖验证，不能靠奖励强制选某窗。",
+    "recovery": "内部底岸/两级回M固定支撑，打在挡板上的枪确实消耗原资源；漏铃不假开门。恢复过程中挡板继续走、已开门保持其原状态；不重定相。",
+    "return_conditions": "三口A→B/A→C；四口增加D→B/D→C。选择不保证永久排他，先后开两门是合法后续方案；反向与同世界连续返回均UNKNOWN。",
+    "nearest": [
+      "P50-G08 moving-ray-window",
+      "N09移动门",
+      "N10近receiver失活",
+      "N12单枪投资分叉",
+      "N14取得有利射位"
+    ],
+    "difference": "是已有射窗家族的真正多出口空间组合：同一运动遮挡对两靶形成相异窗口，选择靶同时给身体不同运动；不是N10串联第二靶、不是N09门本体追人，也不认定新基础家族。",
+    "cheap_counterexamples": [
+      "地面等任意相位预开后零难度走到两岸",
+      "从M不用任何命中普通跳/自由枪到同一关门后目标",
+      "两条射线事实上同开同关，挡板对选择没有作用",
+      "玩家可骑挡板作为免费电梯到两出口",
+      "一开始可从侧面越过遮挡，双窗只有装饰",
+      "低路实际只是底岸或给高路漏接保底",
+      "另一入口使用不同initial_phase制造假选择",
+      "等整周期严格支配所有主动观察而空腔动作也无差异"
+    ],
+    "first_eight_cases": [
+      "1 同一M/相位实际低铃→高B，核弹丸首碰撞与高岸",
+      "2 同一M/相位高铃→低C，允许调整起跳但不改世界",
+      "3 在低铃被挡相位发同枪：应真实打挡板、门不变",
+      "4 在高铃被挡相位发同枪：同上",
+      "5 低路普通跳/自由枪不击铃counter",
+      "6 地面预开再走/跳同目标，比较实际总成本",
+      "7 漏铃落底后世界继续的真实恢复，不能重定相",
+      "8 从第二入口D进共同M选其中一支；四口另支仍UNKNOWN直到补测"
+    ],
+    "first_falsifier": "若两窗没有实质不同可射带，或低支只剩地面安全口，拒绝fork；若地面等窗明显支配全部名义，只保留已有G08的适配价值，不以射窗词发明新族。",
+    "budget": {
+      "max_rules": 2,
+      "max_probes": 80,
+      "first_batch": 8,
+      "regular_unchanged": true,
+      "selection": "首批先一窗/两路；有限phase分布原校准，不从holdout挑相位；不修原物理"
+    },
+    "interfaces": [
+      {
+        "id": "N18/three_right_fan",
+        "concept_only": true,
+        "units": "proposed_Godot_world_pixels",
+        "bounds": [
+          0,
+          0,
+          1280,
+          1024
+        ],
+        "block_size": 128,
+        "ownership_plan": {
+          "kind": "conservative_connected_rectangle_first_prototype",
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              8,
+              6
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              9,
+              3
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              9,
+              6
+            ],
+            [
+              9,
+              7
+            ]
+          ],
+          "is_outer_frame": false,
+          "final_version_requires_all_solids_receivers_dynamic_envelopes_reward_and_full_body_sweeps": true
+        },
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                5
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              704.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "西低处进入M",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                9,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "东高原继续",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                9,
+                4
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              576.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              590.0
+            ],
+            "floor_y": 608.0,
+            "role": "东下侧廊继续",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "A shore",
+            "rect": [
+              0,
+              736,
+              256,
+              64
+            ]
+          },
+          {
+            "role": "M",
+            "rect": [
+              480,
+              608,
+              192,
+              48
+            ]
+          },
+          {
+            "role": "high relay",
+            "rect": [
+              800,
+              352,
+              192,
+              64
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              1088,
+              224,
+              192,
+              64
+            ]
+          },
+          {
+            "role": "C shore",
+            "rect": [
+              832,
+              608,
+              448,
+              80
+            ]
+          },
+          {
+            "role": "internal recovery",
+            "rects": [
+              [
+                128,
+                928,
+                1024,
+                32
+              ],
+              [
+                352,
+                800,
+                192,
+                40
+              ]
+            ]
+          }
+        ],
+        "features": [
+          {
+            "kind": "original auto pingpong shutter",
+            "start": [
+              600,
+              400
+            ],
+            "finish": [
+              600,
+              640
+            ],
+            "size": [
+              20,
+              96
+            ],
+            "travel_duration_domain": [
+              1.2,
+              1.6
+            ],
+            "dwell_duration": 0.15,
+            "initial_phase": 0
+          },
+          {
+            "id": "high_bell_opens_low_C",
+            "bell": [
+              560,
+              430
+            ],
+            "gate": [
+              1056,
+              0,
+              24,
+              608
+            ],
+            "open_seconds": 0
+          },
+          {
+            "id": "low_bell_opens_high_B",
+            "bell": [
+              560,
+              570
+            ],
+            "gate": [
+              1056,
+              0,
+              24,
+              352
+            ],
+            "open_seconds": 0
+          },
+          {
+            "role": "common air decision band",
+            "rect": [
+              624,
+              480,
+              32,
+              48
+            ]
+          }
+        ],
+        "sketch": [
+          "[高铃] * --同一竖移挡板-- M上空 → 反冲右下 → C侧廊",
+          "[低铃] * --同一竖移挡板-- M上空 ↗ 反冲右上 → 中台→B高原",
+          "A→低岸→M；两条路线之外才是内部恢复底岸"
+        ],
+        "adaptation_notes": [
+          "挡板包络[590,352,20,336]必须全部保留；两靶均28×34原receiver",
+          "先用近距离两铃和静态永久门，不靠极短timer掩盖2段高路时间",
+          "靶与枪口实际三角关系/6度扰动需首批求解；概念坐标未证明射界"
+        ],
+        "ordered_relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended_relation": "low_receiver_clear_window_high_recoil",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "intended_relation": "high_receiver_clear_window_downward_recoil",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "C",
+            "to_port": "A",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "static_validation": "NOT_RUN",
+        "physics": "NOT_RUN",
+        "boundary_crossing": "UNKNOWN",
+        "same_world_continuity": "UNKNOWN"
+      },
+      {
+        "id": "N18/four_staggered_inputs",
+        "concept_only": true,
+        "units": "proposed_Godot_world_pixels",
+        "bounds": [
+          0,
+          0,
+          1280,
+          1152
+        ],
+        "block_size": 128,
+        "ownership_plan": {
+          "kind": "conservative_connected_rectangle_first_prototype",
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              0,
+              6
+            ],
+            [
+              0,
+              7
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              8,
+              6
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              8,
+              8
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              9,
+              3
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              9,
+              6
+            ],
+            [
+              9,
+              7
+            ],
+            [
+              9,
+              8
+            ]
+          ],
+          "is_outer_frame": false,
+          "final_version_requires_all_solids_receivers_dynamic_envelopes_reward_and_full_body_sweeps": true
+        },
+        "ports": [
+          {
+            "id": "A",
+            "grid": {
+              "cell": [
+                0,
+                6
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              832.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              846.0
+            ],
+            "floor_y": 864.0,
+            "role": "西下层进入",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "D",
+            "grid": {
+              "cell": [
+                0,
+                4
+              ],
+              "edge": "W",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              0.0,
+              576.0
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "staging": [
+              24.0,
+              590.0
+            ],
+            "floor_y": 608.0,
+            "role": "西中层另一路进入同M",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "B",
+            "grid": {
+              "cell": [
+                9,
+                1
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              192.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              206.0
+            ],
+            "floor_y": 224.0,
+            "role": "东高原继续",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "id": "C",
+            "grid": {
+              "cell": [
+                9,
+                5
+              ],
+              "edge": "E",
+              "profile": "ground64/v1"
+            },
+            "anchor": [
+              1280.0,
+              704.0
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              1256.0,
+              718.0
+            ],
+            "floor_y": 736.0,
+            "role": "更深东侧廊继续",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "solid_sketch": [
+          {
+            "role": "A shore",
+            "rect": [
+              0,
+              864,
+              256,
+              64
+            ]
+          },
+          {
+            "role": "D shore",
+            "rect": [
+              0,
+              608,
+              256,
+              64
+            ]
+          },
+          {
+            "role": "A to M internal step",
+            "rect": [
+              288,
+              736,
+              192,
+              40
+            ]
+          },
+          {
+            "role": "M",
+            "rect": [
+              480,
+              608,
+              192,
+              48
+            ]
+          },
+          {
+            "role": "high relay",
+            "rect": [
+              800,
+              352,
+              192,
+              64
+            ]
+          },
+          {
+            "role": "B shore",
+            "rect": [
+              1088,
+              224,
+              192,
+              64
+            ]
+          },
+          {
+            "role": "C shore",
+            "rect": [
+              832,
+              736,
+              448,
+              80
+            ]
+          },
+          {
+            "role": "internal recovery",
+            "rect": [
+              128,
+              1056,
+              1024,
+              32
+            ]
+          }
+        ],
+        "features": [
+          {
+            "kind": "original auto pingpong shutter",
+            "start": [
+              600,
+              400
+            ],
+            "finish": [
+              600,
+              640
+            ],
+            "size": [
+              20,
+              96
+            ],
+            "travel_duration_domain": [
+              1.2,
+              1.6
+            ],
+            "dwell_duration": 0.15,
+            "initial_phase": 0
+          },
+          {
+            "id": "high_bell_opens_low_C",
+            "bell": [
+              560,
+              430
+            ],
+            "gate": [
+              1056,
+              0,
+              24,
+              736
+            ],
+            "open_seconds": 0
+          },
+          {
+            "id": "low_bell_opens_high_B",
+            "bell": [
+              560,
+              570
+            ],
+            "gate": [
+              1056,
+              0,
+              24,
+              352
+            ],
+            "open_seconds": 0
+          }
+        ],
+        "sketch": [
+          "B←标记在东高处；低铃→高路",
+          "D→中层----同一M⇄两射窗----→C更低侧廊",
+          "A→下层→真实一级上M（不设新初态）"
+        ],
+        "adaptation_notes": [
+          "输入由同侧不同高度进入共同点；A接近比D多一次真实上台，mask/相位同一",
+          "C向下多128px改变身体抢入节奏；不是只改总宽度或Seed"
+        ],
+        "ordered_relations": [
+          {
+            "from_port": "A",
+            "to_port": "D",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended_relation": "low_window_high_choice",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "intended_relation": "high_window_low_choice",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "D",
+            "to_port": "A",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "D",
+            "to_port": "B",
+            "intended_relation": "same_world_mid_ingress_high_choice",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "D",
+            "to_port": "C",
+            "intended_relation": "same_world_mid_ingress_low_choice",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "D",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "C",
+            "to_port": "A",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "C",
+            "to_port": "D",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "intended_relation": "not_requested_no_negative_claim",
+            "evidence_status": "UNKNOWN"
+          }
+        ],
+        "static_validation": "NOT_RUN",
+        "physics": "NOT_RUN",
+        "boundary_crossing": "UNKNOWN",
+        "same_world_continuity": "UNKNOWN"
+      }
+    ]
+  },
+  "interpretation": "One3portfork first. Concept overlapping tall independent gates would requirebothbellsforhighB; firstactualrule separates high0..384 and low448..608 by originalstaticroof. A thin fixed slotted rock grille preventsbodyusing20pxwideautooccluderasfreeelevatorwhileallowingrealbullets; alloriginalrecoveryfloor/stairsolidskept. First8 useactual supportedMspawn aslocalnon-enrollmentcorefixture; fullAingress must beindependentlyexecutedbeforeModuleclaim.",
+  "human_fun": "UNKNOWN"
+}

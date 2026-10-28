@@ -1,0 +1,22 @@
+{
+  "schema": "pcg/creative-design-card/v1",
+  "id": "resource-routes/sequence-spatial-lock/v1",
+  "title": "两个空间站位的有序射线开锁",
+  "source_type": "llm_subagent_proposal",
+  "author_task": "/root/resource_routes_creator",
+  "mechanism": "第一铃永久去掉中途隔断；玩家穿过后才能接近隔着岩石的第二铃，第二枪打开出口。顺序是原ShotLatch序列而非两个独立门。",
+  "supported_cells_and_resources": "原ShotLatch.sequence_offset/sequence_gate_rect在setup前接入。落地回充和冷却保持原版。",
+  "cheap_falsifiers": "只射第二铃、提前同站位两枪、不开第一门绕过",
+  "ports": {
+    "count": 2,
+    "reverse": "UNKNOWN"
+  },
+  "budget": {
+    "interfaces": 1,
+    "controls_per_interface": 4,
+    "cycles_per_batch": 4
+  },
+  "success": "真实Godot无伤稳定到达/领取，因果事件与实际帧满足；≥18同几何反例，原regular校准与独立holdout",
+  "status": "proposal",
+  "human_fun": "unreviewed"
+}

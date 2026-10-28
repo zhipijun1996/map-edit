@@ -1,0 +1,21 @@
+{
+ "schema":"pcg/d05-recovery-validation-protocol/v2",
+ "prior":"protocol-v1.json",
+ "previous_actual_cases":104,
+ "previous_holdout_cases":0,
+ "reason":"All4 previous recovery controls failed moderate screen. Some intended wrong first shots actually grazed bell under real timing/aim perturbation; other failures correctly missed retry deck. Keep failed104 immutable.",
+ "repair_domain":"Validation-only first wrong shot now vertically down [0,1], clear of actual bell to its left. Original four recovery controls and all frozen core geometry/nominal catch actions unchanged. This creates the intended actual missed-bell event rather than accidentally starting its world mechanism.",
+ "maximum_actual_cases":896,
+ "combined_fixture_actual_budget":1000,
+ "combined_full_budget":1600,
+ "calibration_seed":261029010,
+ "holdout_seed":261029011,
+ "screen":"2interfaces x4controls x(clean1+mild6+moderate6)=104; retain clean1,mild>=5/6,moderate>=4/6",
+ "full_calibration":"Original evaluate12 samples clean,mild,moderate for each retained control, at most288",
+ "selection":"Per interface original regular calibration gate; maximum minimum mild/mod rate, then average, then lowest control ID; freeze before holdout, no held fallback selection",
+ "holdout":"Two selected interfaces x36 original independently seeded cases=72; original regular gates unchanged",
+ "expected_maximum_new":464,
+ "strict_purpose":"Unchanged originalv1 strict wrong shot/no start, actual floor/stairs/A, real retry first-catch/refill and reward check",
+ "human_approval":"UNKNOWN",
+ "production_admitted":false
+}

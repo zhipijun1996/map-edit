@@ -1,0 +1,281 @@
+{
+  "id": "forest_exploration_modules__backbranch_turn",
+  "kind": "forest",
+  "title": "背枝折返",
+  "sourcePath": "scripts/generation/forest_exploration_modules.gd",
+  "sourceDocument": "library/modules/forest_exploration_modules__backbranch_turn.json",
+  "sourceDocumentSha256": "319e16a45e708be9069fe1cf119325269e109cbc9edaaf2f890357b86aa97696",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "sourceArtifact": {
+    "kind": "generation",
+    "originalPath": "scripts/generation/forest_exploration_modules.gd",
+    "path": "library/source/scripts/generation/forest_exploration_modules.gd",
+    "sha256": "951123639e721c5f5f422b9c3b1c06bbcd04d9fcb46b4dc82e39cecefc372641",
+    "gitBlobSha": "bde620e0a7d5e8a3a09fdb63e7bc828d300bb367",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "action": "reused_exact_existing_copy"
+  },
+  "method": "build",
+  "arguments": [
+    "backbranch_turn"
+  ],
+  "data": {
+    "action_program": [
+      {
+        "action": "H",
+        "anchor": "side_fruit"
+      },
+      {
+        "action": "R",
+        "direction": [
+          1,
+          0.5
+        ]
+      }
+    ],
+    "admission": {
+      "geometry": "candidate",
+      "motor": "unverified",
+      "production_pool": false,
+      "visual": "unverified"
+    },
+    "danger_faces": [],
+    "danger_hosts": [],
+    "danger_surfaces": [],
+    "dangers": [],
+    "departure": {
+      "ground_required": false,
+      "kind": "drop_through",
+      "landing": [
+        440.0,
+        150.0
+      ],
+      "path": [
+        [
+          380.0,
+          0.0
+        ],
+        [
+          440.0,
+          0.0
+        ],
+        [
+          440.0,
+          150.0
+        ]
+      ]
+    },
+    "difficulty": "hard",
+    "entry_support_id": "entry",
+    "exit_support_id": "crown",
+    "goal": [
+      100.0,
+      40.0
+    ],
+    "height": 640.0,
+    "hook_anchors": [
+      {
+        "fruit_presentation": "rooted_fruit",
+        "fruit_role": "optional",
+        "host_support_id": "entry",
+        "id": "side_fruit",
+        "position": [
+          246.0,
+          78.0
+        ],
+        "stem_root": [
+          246.0,
+          42.0
+        ]
+      }
+    ],
+    "id": "backbranch_turn",
+    "identity": "drop outside a broken branch and turn back behind the departure",
+    "main_route_kind": "air_chain",
+    "platforms": [
+      {
+        "id": "entry",
+        "one_way": true,
+        "rect": [
+          200.0,
+          18.0,
+          220.0,
+          24.0
+        ]
+      },
+      {
+        "id": "crown",
+        "one_way": false,
+        "rect": [
+          60.0,
+          58.0,
+          90.0,
+          100.0
+        ]
+      },
+      {
+        "id": "west_upper",
+        "one_way": false,
+        "rect": [
+          20.0,
+          -82.0,
+          40.0,
+          100.0
+        ]
+      },
+      {
+        "id": "west_lower",
+        "one_way": false,
+        "rect": [
+          20.0,
+          98.0,
+          40.0,
+          60.0
+        ]
+      },
+      {
+        "id": "broken_upper",
+        "one_way": false,
+        "rect": [
+          150.0,
+          -82.0,
+          80.0,
+          100.0
+        ]
+      },
+      {
+        "id": "broken_lower",
+        "one_way": false,
+        "rect": [
+          150.0,
+          98.0,
+          80.0,
+          140.0
+        ]
+      },
+      {
+        "id": "recovery",
+        "one_way": false,
+        "rect": [
+          0.0,
+          338.0,
+          610.0,
+          40.0
+        ]
+      },
+      {
+        "id": "recovery_step",
+        "one_way": true,
+        "rect": [
+          500.0,
+          238.0,
+          100.0,
+          24.0
+        ]
+      },
+      {
+        "id": "retry_step",
+        "one_way": true,
+        "rect": [
+          500.0,
+          128.0,
+          100.0,
+          24.0
+        ]
+      }
+    ],
+    "requires": [
+      "grapple"
+    ],
+    "resource_contract": {
+      "health_override": false,
+      "new_abilities": false,
+      "physics_override": false,
+      "shot_refill_override": false
+    },
+    "reward_position": [
+      100.0,
+      40.0
+    ],
+    "reward_support_id": "crown",
+    "risk_reward": {
+      "coins": 8,
+      "notes": 1,
+      "optional": true,
+      "return_required": true,
+      "tier": "high"
+    },
+    "routes": {
+      "recovery": [
+        {
+          "kind": "walk",
+          "landing": [
+            540.0,
+            320.0
+          ],
+          "support_id": "recovery"
+        },
+        {
+          "from_support_id": "recovery",
+          "kind": "jump_rise",
+          "landing": [
+            540.0,
+            220.0
+          ],
+          "support_id": "recovery_step",
+          "takeoff": [
+            540.0,
+            320.0
+          ]
+        },
+        {
+          "from_support_id": "recovery_step",
+          "kind": "jump_rise",
+          "landing": [
+            540.0,
+            110.0
+          ],
+          "support_id": "retry_step",
+          "takeoff": [
+            540.0,
+            220.0
+          ]
+        },
+        {
+          "from_support_id": "retry_step",
+          "kind": "jump_gap",
+          "landing": [
+            380.0,
+            0.0
+          ],
+          "support_id": "entry",
+          "takeoff": [
+            520.0,
+            110.0
+          ]
+        }
+      ]
+    },
+    "source_geometry": {
+      "factory": "res://scripts/generation/forest_bible_backbranch_geometry.gd",
+      "translation": [
+        -1640.0,
+        -982.0
+      ],
+      "version": "forest-bible-backbranch-v3"
+    },
+    "spawn": [
+      380.0,
+      0.0
+    ],
+    "steps": [],
+    "version": "forest-exploration-modules-v1",
+    "width": 800.0,
+    "world_bounds": [
+      0.0,
+      -182.0,
+      800.0,
+      640.0
+    ]
+  }
+}

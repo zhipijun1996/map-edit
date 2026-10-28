@@ -1,0 +1,462 @@
+{
+  "cases": [
+    {
+      "id": "timed-cache-1-clean-0",
+      "family": "timed-cache",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          428,
+          400,
+          110
+        ],
+        [
+          480,
+          428,
+          290,
+          100
+        ],
+        [
+          250,
+          80,
+          550,
+          160
+        ],
+        [
+          770,
+          240,
+          30,
+          140
+        ],
+        [
+          -200,
+          680,
+          1200,
+          60
+        ],
+        [
+          -256,
+          428,
+          120,
+          24
+        ],
+        [
+          746,
+          428,
+          278,
+          24
+        ]
+      ],
+      "spawn": [
+        80,
+        410
+      ],
+      "entry_port": [
+        80,
+        410
+      ],
+      "exit_port": [
+        705,
+        410
+      ],
+      "goal": [
+        680,
+        406,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            190,
+            405
+          ],
+          "gate": [
+            460,
+            240,
+            20,
+            188
+          ],
+          "open_seconds": 0.65,
+          "return_access": [
+            710,
+            350
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            705,
+            410
+          ],
+          "region": [
+            675,
+            405,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 720,
+      "trace_all": false,
+      "rule_parameters": {
+        "gate_window_seconds": 0.65,
+        "door_x": 460,
+        "body_size": [
+          24,
+          36
+        ],
+        "timer_policy": "solve from actual hit and complete-body crossing; safe close retained"
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 205
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 705,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/timed-cache",
+        "version": 1,
+        "parameters": {
+          "gate_window_seconds": 0.65,
+          "door_x": 460,
+          "body_size": [
+            24,
+            36
+          ],
+          "timer_policy": "solve from actual hit and complete-body crossing; safe close retained"
+        },
+        "source_type": "executable_rule",
+        "human_fun": "unreviewed"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "workshop/timed-cache/1",
+        "region": "plains",
+        "required_family": "timed-cache",
+        "objective": {
+          "gate_window_seconds": 0.65,
+          "door_x": 460,
+          "body_size": [
+            24,
+            36
+          ],
+          "timer_policy": "solve from actual hit and complete-body crossing; safe close retained"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 10,
+        "space": {
+          "max_width": 1800,
+          "max_height": 1000,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "supported, original fresh resources, exact capture before input",
+          "exit": "stable original ground state; universal transfer UNKNOWN"
+        },
+        "return_conditions": "UNKNOWN until continuous witness exists",
+        "budget": {
+          "generator_candidates": 12,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "human-A3-short-gate"
+      ],
+      "factory_id": "6ecb317fb48385f475efb4fb95cd4f63041baa6c5133692617800ef41a21b5f1",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "timed-cache-1",
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main"
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -232,
+            410
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        },
+        {
+          "id": "exit",
+          "position": [
+            1000,
+            410
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 6
+        }
+      ],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -256,
+            396
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -232,
+            410
+          ],
+          "aperture": [
+            -288,
+            364,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            1024,
+            396
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            410
+          ],
+          "aperture": [
+            992,
+            364,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -256,
+          "y": 76,
+          "w": 1280,
+          "h": 768
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                80,
+                420
+              ],
+              "stagingPosition": [
+                80,
+                420
+              ]
+            },
+            "after": {
+              "position": [
+                -256,
+                396
+              ],
+              "stagingPosition": [
+                -232,
+                410
+              ],
+              "supportIndex": 5,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                705,
+                410
+              ],
+              "stagingPosition": [
+                705,
+                410
+              ]
+            },
+            "after": {
+              "position": [
+                1024,
+                396
+              ],
+              "stagingPosition": [
+                1000,
+                410
+              ],
+              "supportIndex": 6,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      }
+    }
+  ]
+}

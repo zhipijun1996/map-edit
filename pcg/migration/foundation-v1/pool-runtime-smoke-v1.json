@@ -1,0 +1,251 @@
+{
+  "schema": "pcg/registered-pool-runtime-smoke/v1",
+  "status": "passed",
+  "source": "modules/game-micro-board",
+  "originalHashes": {
+    "module.mapnote.json": "61e998323768a7fee193bf39e38dc667dcc75301a2d181c0474170d94980eeb0",
+    "migration.json": "94c52e3b21663d76427efe8fbff85b4382d692a88eb802ae6e7d18361017e2c2",
+    "physics-input-cases.json": "33e8fd3c4ec8925a95067b22a2d42f06962256df4676ee3683fbe7eed964fc9a",
+    "cases.json": "3dcf6e9f737a28dfb22a261234b65aa718ca4a642e114a39a577ee083b02d198"
+  },
+  "experiment": "foundation-migration-registered-pool-smoke-v1",
+  "productionAdmitted": false,
+  "promoted": false,
+  "humanReview": "UNKNOWN",
+  "purpose": "Real independent-pool runtime only; no new library template.",
+  "candidate": ".cache/migration/pool-runtime-smoke-v1/candidate",
+  "newContentVersion": "sha256:dcf58a28b73a63970e0ec390f9d436b736d9ba7d2a4f74f5dc8b1d4bccab3e8d",
+  "originalContentVersion": "sha256:f815a168170c2857b6e9ef92e14335ef0d9d6b263a83749588ad02bd32acd55a",
+  "changes": [
+    {
+      "caseId": "game-micro_board-policy-walk",
+      "op": "settle",
+      "beforeDeadband": 3,
+      "afterDeadband": 2
+    }
+  ],
+  "defaultOldPoolRejection": {
+    "status": "holdout_pool_locked",
+    "phase": "holdout_guard",
+    "source": {
+      "sourceVersion": "sha256:1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b",
+      "sourcePath": "pcg/migration/game-sources/game-micro-board",
+      "key": "1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b"
+    },
+    "candidateContentVersion": "sha256:dcf58a28b73a63970e0ec390f9d436b736d9ba7d2a4f74f5dc8b1d4bccab3e8d",
+    "requestedPool": {
+      "baseSeed": 2710271901,
+      "routeSeedStride": 1009,
+      "trialsPerNoiseLevel": 12,
+      "mild": {
+        "timingFrames": 1,
+        "aimDegrees": 2
+      },
+      "moderate": {
+        "timingFrames": 3,
+        "aimDegrees": 6
+      }
+    },
+    "conflicts": [
+      "holdout_conditions_already_observed_for_original_source"
+    ],
+    "previousEvidence": [
+      {
+        "routeId": "main",
+        "failed": false,
+        "report": {
+          "path": "pcg/results/foundation-migration-original-microboard-quality-v1/migration-physics.json",
+          "sha256": "59aae798a7feeb6b31505887b862283e5db3507d0139f80ba2e86e8a90b9d438"
+        },
+        "holdout": {
+          "path": "pcg/results/foundation-migration-original-microboard-quality-v1/holdout-0.json",
+          "sha256": "5faab158dd61854db1e220af0d75cbff7ec39051bd9019b4424bdcc5abfc7181"
+        }
+      }
+    ],
+    "searched": [
+      "original sourceVersion across all template names and route labels",
+      "actual held-out seed/perturbation conditions"
+    ],
+    "negotiable": [
+      "reuse unchanged full-report evidence without new physics",
+      "for observer-only changes, re-analyse original raw with explicit source binding",
+      "freeze a genuine revised candidate and independently preregister a fresh executable pool"
+    ],
+    "automaticRetry": false
+  },
+  "registration": {
+    "status": "registered_frozen_executable_pool",
+    "registration": {
+      "id": "runtime-smoke-microboard-policy-v1",
+      "source": {
+        "sourceVersion": "sha256:1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b",
+        "sourcePath": "pcg/migration/game-sources/game-micro-board",
+        "key": "1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b"
+      },
+      "frozenCandidate": {
+        "contentVersion": "sha256:dcf58a28b73a63970e0ec390f9d436b736d9ba7d2a4f74f5dc8b1d4bccab3e8d",
+        "documentSha256": "7c0a5d5057c2b80d5e5b857bfb0c3013090f99a1a9fc18f3fb0d5461058315cb",
+        "canonicalCasesSha256": "7abb641343a28cdb619942c0aa4f7241aa56fde0bb861577a61b9879a24295d1",
+        "programSignature": "d8179c97693290cb66905382d45dde54d508ea05037ef8fbffb881f96c6914d0"
+      },
+      "pool": {
+        "baseSeed": 713620020,
+        "routeSeedStride": 1009,
+        "trialsPerNoiseLevel": 12,
+        "mild": {
+          "timingFrames": 1,
+          "aimDegrees": 2
+        },
+        "moderate": {
+          "timingFrames": 3,
+          "aimDegrees": 6
+        }
+      },
+      "poolKey": "e99844750104c76eaf0a594f0a1d9d708f9250ec80789e427f92ea9bfe5aea5b",
+      "protocol": {
+        "path": "pcg/migration/foundation-v1/holdout-pools/runtime-smoke-microboard-policy-v1/protocol.json",
+        "sha256": "3025d685decf37662084ecb7b1fd6cd42f1e43bff5b49b1bd091e4f2e72afa91"
+      },
+      "declaration": {
+        "path": "pcg/migration/foundation-v1/holdout-pools/runtime-smoke-microboard-policy-v1/registration.json",
+        "sha256": "ba5945623f7f1808529a99bf7b7e008774f73a403c8094d97e6964ebc063148b"
+      }
+    },
+    "requiresRuntimeProtocolIntegration": false
+  },
+  "protocol": {
+    "path": "pcg/migration/foundation-v1/holdout-pools/runtime-smoke-microboard-policy-v1/protocol.json",
+    "sha256": "3025d685decf37662084ecb7b1fd6cd42f1e43bff5b49b1bd091e4f2e72afa91"
+  },
+  "report": {
+    "path": "pcg/results/foundation-migration-registered-pool-smoke-v1/migration-physics.json",
+    "sha256": "bd35cc6d7184e0d44dab6fa4e49d4d3f4c63069b5f190c3259f211a1bae23bbf"
+  },
+  "reportPassed": true,
+  "actualAttempts": 66,
+  "deepVerification": "pass",
+  "repeatConsumptionRejection": "registered_holdout_pool_already_started_reuse_report_only",
+  "unchangedCurrentSourceHashes": {
+    "module.mapnote.json": "61e998323768a7fee193bf39e38dc667dcc75301a2d181c0474170d94980eeb0",
+    "migration.json": "94c52e3b21663d76427efe8fbff85b4382d692a88eb802ae6e7d18361017e2c2",
+    "physics-input-cases.json": "33e8fd3c4ec8925a95067b22a2d42f06962256df4676ee3683fbe7eed964fc9a",
+    "cases.json": "3dcf6e9f737a28dfb22a261234b65aa718ca4a642e114a39a577ee083b02d198"
+  },
+  "actualRunRepeatRejection": {
+    "conflict": {
+      "status": "holdout_pool_locked",
+      "phase": "holdout_guard",
+      "source": {
+        "sourceVersion": "sha256:1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b",
+        "sourcePath": "pcg/migration/game-sources/game-micro-board",
+        "key": "1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b"
+      },
+      "candidateContentVersion": "sha256:dcf58a28b73a63970e0ec390f9d436b736d9ba7d2a4f74f5dc8b1d4bccab3e8d",
+      "requestedPool": {
+        "baseSeed": 713620020,
+        "routeSeedStride": 1009,
+        "trialsPerNoiseLevel": 12,
+        "mild": {
+          "timingFrames": 1,
+          "aimDegrees": 2
+        },
+        "moderate": {
+          "timingFrames": 3,
+          "aimDegrees": 6
+        }
+      },
+      "conflicts": [
+        "holdout_conditions_already_observed_for_original_source"
+      ],
+      "previousEvidence": [
+        {
+          "routeId": "main",
+          "failed": false,
+          "report": {
+            "path": "pcg/results/foundation-migration-registered-pool-smoke-v1/migration-physics.json",
+            "sha256": "bd35cc6d7184e0d44dab6fa4e49d4d3f4c63069b5f190c3259f211a1bae23bbf"
+          },
+          "holdout": {
+            "path": "pcg/results/foundation-migration-registered-pool-smoke-v1/holdout-0.json",
+            "sha256": "92f36cafd1024639200c1c5140f283b907636862caa048393780d5fffb8f725d"
+          }
+        }
+      ],
+      "searched": [
+        "original sourceVersion across all template names and route labels",
+        "actual held-out seed/perturbation conditions"
+      ],
+      "negotiable": [
+        "reuse unchanged full-report evidence without new physics",
+        "for observer-only changes, re-analyse original raw with explicit source binding",
+        "freeze a genuine revised candidate and independently preregister a fresh executable pool"
+      ],
+      "automaticRetry": false
+    },
+    "engineDirectoryCreated": false
+  },
+  "actualControlEffect": {
+    "realRunnerParameterChanged": true,
+    "onlyMetadataChanged": false,
+    "observation": "All25 matching-seed old/new calibration trajectories are identical: sampled discrete positions enter both tolerance bands on the same frame. This run proves registered-pool runtime execution, not changed player motion or a distinct gameplay module.",
+    "identicalCalibrationRows": 25,
+    "observedDifferentCalibrationRows": 0,
+    "noPostHoldoutAdjustment": true
+  },
+  "actualQualityCounts": {
+    "main": {
+      "calibration": {
+        "clean": {
+          "trials": 1,
+          "passed": 1
+        },
+        "mild": {
+          "trials": 12,
+          "passed": 12
+        },
+        "moderate": {
+          "trials": 12,
+          "passed": 12
+        }
+      },
+      "holdout": {
+        "clean": {
+          "trials": 1,
+          "passed": 1
+        },
+        "mild": {
+          "trials": 12,
+          "passed": 12
+        },
+        "moderate": {
+          "trials": 12,
+          "passed": 12
+        }
+      }
+    }
+  },
+  "artifactSize": "12MB real experiment directory; source snapshot hardlinks reuse existing frozen bytes.",
+  "actualCliRepeatRejection": {
+    "command": [
+      "python3",
+      "-m",
+      "pcg.migration",
+      "replay",
+      ".cache/migration/pool-runtime-smoke-v1/candidate",
+      "--name",
+      "foundation-migration-registered-pool-smoke-v1-cli-repeat-forbidden",
+      "--protocol",
+      "pcg/migration/foundation-v1/holdout-pools/runtime-smoke-microboard-policy-v1/protocol.json"
+    ],
+    "exitCode": 2,
+    "status": "needs_repair",
+    "engineDirectoryCreated": false,
+    "conflicts": [
+      {
+        "code": "{\"automaticRetry\"",
+        "reason": "{\"automaticRetry\": false, \"candidateContentVersion\": \"sha256:dcf58a28b73a63970e0ec390f9d436b736d9ba7d2a4f74f5dc8b1d4bccab3e8d\", \"conflicts\": [\"holdout_conditions_already_observed_for_original_source\"], \"negotiable\": [\"reuse unchanged full-report evidence without new physics\", \"for observer-only changes, re-analyse original raw with explicit source binding\", \"freeze a genuine revised candidate and independently preregister a fresh executable pool\"], \"phase\": \"holdout_guard\", \"previousEvidence\": [{\"failed\": false, \"holdout\": {\"path\": \"pcg/results/foundation-migration-registered-pool-smoke-v1/holdout-0.json\", \"sha256\": \"92f36cafd1024639200c1c5140f283b907636862caa048393780d5fffb8f725d\"}, \"report\": {\"path\": \"pcg/results/foundation-migration-registered-pool-smoke-v1/migration-physics.json\", \"sha256\": \"bd35cc6d7184e0d44dab6fa4e49d4d3f4c63069b5f190c3259f211a1bae23bbf\"}, \"routeId\": \"main\"}], \"requestedPool\": {\"baseSeed\": 713620020, \"mild\": {\"aimDegrees\": 2, \"timingFrames\": 1}, \"moderate\": {\"aimDegrees\": 6, \"timingFrames\": 3}, \"routeSeedStride\": 1009, \"trialsPerNoiseLevel\": 12}, \"searched\": [\"original sourceVersion across all template names and route labels\", \"actual held-out seed/perturbation conditions\"], \"source\": {\"key\": \"1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b\", \"sourcePath\": \"pcg/migration/game-sources/game-micro-board\", \"sourceVersion\": \"sha256:1a09e1cd8ef2096a765088070e61401926f4ddafca565d835b00b15b2a5d4e9b\"}, \"status\": \"holdout_pool_locked\"}"
+      }
+    ]
+  }
+}

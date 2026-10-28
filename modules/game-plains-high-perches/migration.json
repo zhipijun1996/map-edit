@@ -1,0 +1,271 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-plains-high-perches",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-plains-high-perches",
+  "sourceVersion": "sha256:b90fd616fbd931323da58e475ede57c9cab367ff0b76f55719a6cea964901596",
+  "sourceFiles": {
+    "cases.json": "1d2060ed4d288cfd662f5d352eedb556138cd29836b99e052dda4989052dded7",
+    "record.json": "80c0be6c83effad3a511e218237a9153c5d6a168dd745fae39c2e9f34040982e",
+    "module.mapnote.json": "05a76ce2be9ba08d41b7b01b7c788d5a40bf8db663288e423ca67104899fe9f8",
+    "source.json": "3690c3a04af85cd8f4ba300fc64406c82b4fa251e6ceb64718593af869a33d10"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 60.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 174,
+      "w": 710,
+      "h": 441
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 60.0,
+      "w": 768,
+      "h": 640
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 3,
+        "objectId": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/platform-3",
+        "before": [
+          510.0,
+          210.0,
+          200.0,
+          30.0
+        ],
+        "after": [
+          510.0,
+          156.0,
+          200.0,
+          84.0
+        ],
+        "topDelta": -54.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 3,
+        "platformIndex": 4,
+        "objectId": "generated-740dd978c774fdce987adfb458f47abda7139e541ff53288e4bb15dea288bd86/migration-shore-exit",
+        "rect": [
+          686.0,
+          156.0,
+          82.0,
+          24
+        ],
+        "length": 58.0,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            522
+          ],
+          "stagingPosition": [
+            20,
+            522
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            508.0
+          ],
+          "stagingPosition": [
+            24,
+            522.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            690,
+            192
+          ],
+          "stagingPosition": [
+            690,
+            192
+          ]
+        },
+        "after": {
+          "position": [
+            768,
+            124.0
+          ],
+          "stagingPosition": [
+            744,
+            138.0
+          ],
+          "supportIndex": 4,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-plains_high_perches",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "de9def498b34edc04c38afa87252fbb5bc23208859ca9f31a1c8bd48c5dd5bf0"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        },
+        {
+          "face": "RIGHT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 540.0,
+          "dockFloor": 540,
+          "supportIndex": 5,
+          "boundary": [
+            -128,
+            508
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 3,
+          "originalFloor": 210.0,
+          "dockFloor": 156,
+          "supportIndex": 7,
+          "boundary": [
+            896,
+            124
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/migration-physics.json",
+      "sha256": "9b00af0cf5c420f3a5ccd4e4eebeab091b3bee7ea159392cd46c45df69a73867"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/source_binding.json",
+      "sha256": "d3a41def8c0995e228f49ce4c27b5edb10fc4920b3857d160a626233fdae06c8"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/batches.json",
+      "sha256": "ec3b2e77f5c686cf5475037c04cf285d6a3a7ae74b9d3593796e25e6fa374e75"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/boundary-probes.json",
+      "sha256": "c2f822ee01dd7cf05a68414513374bc672db206ab507e254b15a703b60a03251"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/migration-physics.json",
+    "sha256": "9b00af0cf5c420f3a5ccd4e4eebeab091b3bee7ea159392cd46c45df69a73867"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/boundary-probes.json",
+      "sha256": "c2f822ee01dd7cf05a68414513374bc672db206ab507e254b15a703b60a03251"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/game-plains-high-perches/348f60ce541728254c79b2a4afc2fee4f10ed536f16a1cb601aa0ec6c300eda7.json",
+        "sha256": "d6f61c6d0b4598eb3b7276a9978e67b09471700046f62f7c2ace60eed04e0fa8"
+      },
+      "previousUnresolved": [
+        "actual routes",
+        "external mechanisms",
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unsearched pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-original-game-plains-high-perches-feedback-quality-v6/migration-physics.json",
+        "sha256": "9b00af0cf5c420f3a5ccd4e4eebeab091b3bee7ea159392cd46c45df69a73867"
+      }
+    }
+  ]
+}

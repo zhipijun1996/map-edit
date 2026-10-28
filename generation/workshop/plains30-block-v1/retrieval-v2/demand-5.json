@@ -1,0 +1,106 @@
+{
+  "schema": "map-notes/challenge-specification/v1",
+  "id": "block-demand/C07/horizontal",
+  "source_type": "task_a_derived_current_Map_contract_demand",
+  "region": "plains",
+  "required_family": "block128-new-wall-collision-brake",
+  "objective": {
+    "recipe": "block128-new-wall-collision-brake",
+    "interface": 0,
+    "physical_layout_sha256": "040a1946a78a807130cdc09f564df46e4693726c87ca5ff929e9c7ff1577c3dd",
+    "core": "Samefallingshot builds actual collisionbrake, then efficient pocket/onwardreward route; actual paid extra-groundjump alternatives allowed",
+    "independent_new_family_claim": false,
+    "canonical_pair": {
+      "open_a": true,
+      "open_b": false
+    },
+    "alternative_pair_states": [
+      {
+        "open_a": true,
+        "open_b": false
+      },
+      {
+        "open_a": false,
+        "open_b": true
+      }
+    ]
+  },
+  "capabilities": {
+    "version": 1,
+    "status": "defined",
+    "allOf": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": []
+  },
+  "ports": {
+    "count": 2,
+    "required_normals": [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "block_profiles": [
+      "ground64/v1"
+    ]
+  },
+  "relations": [
+    {
+      "from_port": "A",
+      "to_port": "B",
+      "role": "main",
+      "route_id": "brake"
+    }
+  ],
+  "space": {
+    "block_size": 128,
+    "max_width": 1280,
+    "max_height": 1408,
+    "boundary_policy": "open",
+    "ownership_shape": "connected_polyomino"
+  },
+  "boundary_policy": "open",
+  "enclosing_walls": false,
+  "difficulty": {
+    "intent": "regular",
+    "human_score": null
+  },
+  "risk_reward": {
+    "mandatory_damage": false,
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          744,
+          462
+        ],
+        "region": [
+          719,
+          457,
+          50,
+          10
+        ],
+        "amount": 12
+      }
+    ],
+    "pocket": "internalcollisiontransfer",
+    "recovery_steps": "retained; newbodyownership recovery proof required"
+  },
+  "resource_state": {
+    "reset_between_components": false,
+    "entry": "Original fresh supported A dock, frontgate closed/backbrake open",
+    "exit": "Observed stableB and real12coin; nominalfrontopen/backbrakeclosed, costedalternatives report actualstates; generictransferUNKNOWN"
+  },
+  "return_conditions": "B->A, boundarycrossing, rightstairs recovery and all seamsUNKNOWN until newexactevidence",
+  "budget": {
+    "generator_candidates": 4,
+    "director_revisions": 0
+  }
+}

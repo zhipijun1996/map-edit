@@ -1,0 +1,42 @@
+{
+  "schema": "pcg/module-migration-protocol/v2",
+  "foundationVersion": "1.0",
+  "geometryPolicy": "minimal_actual_shore_and_corner_adaptation_preserve_original_core",
+  "selection": "canonical_adapted_program_frozen_after_clean_preflight_before_calibration_and_independent_holdout",
+  "calibrationSeed": 2710271401,
+  "holdoutSeed": 11290419,
+  "trialsPerNoiseLevel": 12,
+  "thresholds": {
+    "clean": 0.9,
+    "mild": 0.85,
+    "moderate": 0.65
+  },
+  "maximumAttemptsPerModule": 1000,
+  "maximumAttemptsThisBatch": 60000,
+  "boundaryVerticalOffsets": [
+    -2,
+    0,
+    2
+  ],
+  "boundaryDirections": [
+    "ingress",
+    "egress"
+  ],
+  "bodySize": [
+    24,
+    36
+  ],
+  "counterexamples": "preserve and verify original frozen counter artifacts; no new necessity claim",
+  "holdoutPolicy": "One independent holdout per frozen revision after passing calibration; never choose/revise from holdout results; failure preserved.",
+  "unsupported": [
+    "uncertified closure combinations",
+    "uncertified mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "humanApproval": "UNKNOWN",
+  "maximumAdaptationRevisions": 2,
+  "cleanPreflight": "Diagnostic Godot replay before full calibration; never counts as technical admission.",
+  "sourceSnapshot": "Exact existing Engine source manifest, content-addressed hardlinks retain identical frozen paths/bytes.",
+  "independentPoolId": "corner-open-v3-batch2-pool-23ac3011d283f6ce"
+}

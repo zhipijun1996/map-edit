@@ -1,0 +1,158 @@
+{
+  "case": {
+    "id": "bell_lift-probe0-vertical-180",
+    "family": "bell_lift",
+    "capabilities": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "platforms": [
+      [
+        -16,
+        438,
+        224,
+        32
+      ],
+      [
+        16,
+        258,
+        192,
+        16
+      ]
+    ],
+    "spawn": [
+      80,
+      420
+    ],
+    "goal": [
+      124,
+      216,
+      32,
+      32
+    ],
+    "entry_port": [
+      80,
+      420
+    ],
+    "exit_port": [
+      140,
+      240
+    ],
+    "world_bounds": [
+      -64,
+      48,
+      400,
+      512
+    ],
+    "control_plan": [
+      {
+        "op": "axis",
+        "trigger": {
+          "after": 0
+        },
+        "value": 0
+      },
+      {
+        "op": "jump",
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "jump_release",
+        "trigger": {
+          "after": 8
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 10
+        },
+        "direction": [
+          0,
+          1
+        ]
+      },
+      {
+        "op": "settle",
+        "trigger": {
+          "after": 6
+        },
+        "target_x": 140,
+        "deadband": 4
+      }
+    ],
+    "max_frames": 600,
+    "trace_all": false,
+    "one_way_platform_indices": [
+      1
+    ],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "vertical_bell",
+        "bell": [
+          84.567497253418,
+          415.709716796875
+        ],
+        "gate": [
+          112,
+          158,
+          16,
+          100
+        ],
+        "open_seconds": 1.6,
+        "prompt": "RECOIL UP / CACHE"
+      }
+    ],
+    "enemies": [],
+    "synthesis": {
+      "method": "actual vertical crossing at180; no invented movement equation",
+      "probe_evidence": {
+        "batch": "0000-vertical-probes",
+        "index": 0,
+        "output": "physics/0000-vertical-probes.output.json.gz",
+        "raw_output_sha256": "81d59c6634e4c3be5be29902099bd50ac8d81b86772bed3e830800139b884db6"
+      },
+      "nominal_selected_before_physics": true
+    }
+  },
+  "ok": true,
+  "reason": "settled_goal",
+  "purpose": {
+    "ok": true,
+    "reasons": [],
+    "behavior": {
+      "reversals": 0,
+      "gear_crossings": 0,
+      "landings": 1,
+      "ground_jumps": 1,
+      "sequence": [
+        "jump",
+        "recoil_up",
+        "open_bell",
+        "land_recover"
+      ],
+      "signature": "af811eb80da03696",
+      "air_shots": 1,
+      "refunds": 0,
+      "continuous_two_air_shots": false,
+      "opened_bells": [
+        "vertical_bell"
+      ],
+      "air_enemy_hits": 0
+    }
+  },
+  "evidence": {
+    "batch": "0001-vertical-calibration",
+    "index": 0,
+    "output": "physics/0001-vertical-calibration.output.json.gz",
+    "raw_output_sha256": "3bb5c592f1bebde2d4173b8607b9ec4a4f0a53302f1462caf159b0230f781211"
+  }
+}

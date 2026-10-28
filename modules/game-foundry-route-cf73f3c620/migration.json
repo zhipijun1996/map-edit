@@ -1,0 +1,265 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-foundry-route-cf73f3c620",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-foundry-route-cf73f3c620",
+  "sourceVersion": "sha256:88b1ab5f6c0387902a851e1b55faa0857a028c08948b39853814f8c0a938ca32",
+  "sourceFiles": {
+    "cases.json": "37ad980d64a448fa90db0a7feb45612ec065cd232b3407298086ec7ccc7ef31d",
+    "record.json": "9da8a10f4fe8c468659bae5ca8b0845421912dfde10eeb109298a8aa31e07603",
+    "module.mapnote.json": "e04717fc34a2e31b785c396cf7c80192652a6a056b6e6a612f7f4444bc817d37",
+    "source.json": "8a5950b06ae03af50a048144cf6c9637e43ac0d9ed9a74a9184caa0ea761b261"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 40.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 260,
+      "w": 5540,
+      "h": 960
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 168.0,
+      "w": 5632,
+      "h": 1152
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 18,
+        "objectId": "generated-ad3af8424ac5e19fa4d29bd48f2d9a8404a3fecfff3e27199d707d1b835624c3/platform-18",
+        "before": [
+          5380.0,
+          400.0,
+          160.0,
+          32.0
+        ],
+        "after": [
+          5380.0,
+          392.0,
+          160.0,
+          40.0
+        ],
+        "topDelta": -8.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 18,
+        "platformIndex": 19,
+        "objectId": "generated-ad3af8424ac5e19fa4d29bd48f2d9a8404a3fecfff3e27199d707d1b835624c3/migration-shore-exit",
+        "rect": [
+          5516.0,
+          392.0,
+          116.0,
+          24
+        ],
+        "length": 92.0,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            1142
+          ],
+          "stagingPosition": [
+            20,
+            1142
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            1128.0
+          ],
+          "stagingPosition": [
+            24,
+            1142.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            5520,
+            382
+          ],
+          "stagingPosition": [
+            5520,
+            382
+          ]
+        },
+        "after": {
+          "position": [
+            5632,
+            360.0
+          ],
+          "stagingPosition": [
+            5608,
+            374.0
+          ],
+          "supportIndex": 19,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-foundry__route-cf73f3c620",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "affa1712bc4a3466a1f1a108772c836d13a1f96abb3e93f9260bf5e3191856c0"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 1160.0,
+          "dockFloor": 1160,
+          "supportIndex": 20,
+          "boundary": [
+            -128,
+            1128
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 18,
+          "originalFloor": 400.0,
+          "dockFloor": 392,
+          "supportIndex": 22,
+          "boundary": [
+            5632,
+            360
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/migration-physics.json",
+      "sha256": "feb80ac38737e2494312d80e81ac099883e1eec2457f1dd4bda8ea1b190d4266"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/source_binding.json",
+      "sha256": "515392e526925a718a4963f51cf3da66af98d38bc47b0596fff54cf4493614fb"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/batches.json",
+      "sha256": "5a3dd21f165c30d9fd6319f2ce102f4532af5749a1ef041a97fd9cdcf6733f9c"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/boundary-probes.json",
+      "sha256": "89d8709fc7d0f8244c86633e17e6969093a51ef8d5386c50e3c7dba5c79bae1f"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/migration-physics.json",
+    "sha256": "feb80ac38737e2494312d80e81ac099883e1eec2457f1dd4bda8ea1b190d4266"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/boundary-probes.json",
+      "sha256": "89d8709fc7d0f8244c86633e17e6969093a51ef8d5386c50e3c7dba5c79bae1f"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/game-foundry-route-cf73f3c620/b63b77a7550b234be5c29f3e0f511eec5a6e7d2413fb053face20044a2596b15.json",
+        "sha256": "eed001b8f5e383fda5ee792a746e3fe2ac2aaba0eed8dbb9f886ed2b7146ba96"
+      },
+      "previousUnresolved": [
+        "actual routes",
+        "external mechanisms",
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unsearched pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-original-game-foundry-route-cf73f3c620-budget-quality-v6/migration-physics.json",
+        "sha256": "feb80ac38737e2494312d80e81ac099883e1eec2457f1dd4bda8ea1b190d4266"
+      }
+    }
+  ]
+}

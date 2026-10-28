@@ -1,0 +1,21 @@
+{
+ "schema":"pcg/d05-moving-missed-catch-validation/v1",
+ "prior":"protocol-v2.json",
+ "previous_actual_cases":424,
+ "maximum_actual_cases":576,
+ "combined_fixture_budget":1000,
+ "calibration_seed":261029120,
+ "holdout_seed":261029121,
+ "controls":[{"id":0,"incoming_x":[365,390]},{"id":1,"incoming_x":[390,420]},{"id":2,"incoming_x":[420,450]},{"id":3,"incoming_x":[360,365]}],
+ "hypothesis":"After a real air-hit starts carrier but actor steers left and misses it, lower terrain returns actor to A. Watch actual left-moving deck, shoot its moving bell near dock to pause, board and retry true first-catch programme in the same world.",
+ "query_extension":"New isolated runner only reads actual carrier global x, running and PhysicsServer2D body velocity in trigger.carrier_observation. Parent original grounded condition, input scheduling, all physics and core unchanged. It does not infer controlled phase from module.clock.",
+ "screen":"2interfaces x4controls x(clean1+mild6+moderate6)=104; retain clean1,mild>=5/6,moderate>=4/6",
+ "full_calibration":"Original evaluate12 clean/mild/mod samples for retained controls, maximum288",
+ "selection":"Per-interface original regular passing control, highest min mild/mod rate, then average, then lowest control ID. Freeze before new held, no fallback after held.",
+ "holdout":"Original regular36 per selected interface, max72, new independent seed261029121 never used in previous recovery cycles",
+ "expected_maximum_new":464,
+ "strict_purpose":"Actual initial air-shot starts; first postshot landing is lower floor, carrier remains running through actual stairs and A; ground pause near dock then air restart and true first catch/refill; final reward and stableB; no world resets, damage or forbidden abilities",
+ "scope":"Recovery fixture only, not a new Module/family. Waiting for one useful incoming dock phase is measured as real retry cost.",
+ "human_approval":"UNKNOWN",
+ "production_admitted":false
+}

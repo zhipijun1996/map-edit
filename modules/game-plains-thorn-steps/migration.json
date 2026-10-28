@@ -1,0 +1,271 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-plains-thorn-steps",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-plains-thorn-steps",
+  "sourceVersion": "sha256:de09e369f9b40a9465d2ffbc40f43195ec694a86a461b781ebedac5f1602b5d6",
+  "sourceFiles": {
+    "cases.json": "f4b41824da972021442b0aca738d61fc3052d5e1ccf37c7e9822befdcca31fb9",
+    "record.json": "40e064071b51aba9d394dc4ddb83f6b7f58f5ebbc0c532745cbf5c76fa320f25",
+    "module.mapnote.json": "f4a9f53c4f0a8fd820859f99c27a5858a5650a2d48ba5b034dd509e5e109eeae",
+    "source.json": "990cd13c75df3af7454ec51dc5671ba9a9af13fc7f2592431ddfa64928016b6b"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 76.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 144,
+      "w": 480,
+      "h": 226
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 76.0,
+      "w": 512,
+      "h": 384
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 2,
+        "objectId": "generated-2e372fecb586f89562fcb5c49fe5b21349578be630ac0544b8aea4097fedc3fc/platform-2",
+        "before": [
+          345.0,
+          180.0,
+          135.0,
+          30.0
+        ],
+        "after": [
+          345.0,
+          172.0,
+          135.0,
+          38.0
+        ],
+        "topDelta": -8.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 2,
+        "platformIndex": 3,
+        "objectId": "generated-2e372fecb586f89562fcb5c49fe5b21349578be630ac0544b8aea4097fedc3fc/migration-shore-exit",
+        "rect": [
+          456.0,
+          172.0,
+          56.0,
+          24
+        ],
+        "length": 32.0,
+        "thickness": 24,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            282
+          ],
+          "stagingPosition": [
+            20,
+            282
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            268.0
+          ],
+          "stagingPosition": [
+            24,
+            282.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            460,
+            162
+          ],
+          "stagingPosition": [
+            460,
+            162
+          ]
+        },
+        "after": {
+          "position": [
+            512,
+            140.0
+          ],
+          "stagingPosition": [
+            488,
+            154.0
+          ],
+          "supportIndex": 3,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-plains_thorn_steps",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "e7c9bf23eecc946953ef0296eea7f07965333c8a36094be4d7e4e3f0b772df80"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        },
+        {
+          "face": "RIGHT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 300.0,
+          "dockFloor": 300,
+          "supportIndex": 4,
+          "boundary": [
+            -128,
+            268
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 2,
+          "originalFloor": 180.0,
+          "dockFloor": 172,
+          "supportIndex": 6,
+          "boundary": [
+            640,
+            140
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/migration-physics.json",
+      "sha256": "13f058d4701e68645975bee5d96d7406cc324a6a7c46fbbeea96c75dbbc220d5"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/source_binding.json",
+      "sha256": "d3a41def8c0995e228f49ce4c27b5edb10fc4920b3857d160a626233fdae06c8"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/batches.json",
+      "sha256": "332e10d8149c0f79fc2e3ece52fb2ab28e8fd184b40ad668163fa05277823ca2"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/boundary-probes.json",
+      "sha256": "466a12f8fac624bf6291275b0ccc0b777fa2f3ad148f38ddfaeab1646d0acedd"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/migration-physics.json",
+    "sha256": "13f058d4701e68645975bee5d96d7406cc324a6a7c46fbbeea96c75dbbc220d5"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/boundary-probes.json",
+      "sha256": "466a12f8fac624bf6291275b0ccc0b777fa2f3ad148f38ddfaeab1646d0acedd"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  },
+  "diagnosticsReconciliationHistory": [
+    {
+      "receipt": {
+        "path": "pcg/migration/foundation-v1/metadata-diagnostics-receipts-v1/game-plains-thorn-steps/2466e747f69e1cbb9e0a703a43a8c6b93b8bbccd7f47e8a458b6d7f1bc3fd593.json",
+        "sha256": "bfb963a0399f99f66e14a867a8c1f22da160a95ad519f8b12857fc8ac0ac8981"
+      },
+      "previousUnresolved": [
+        "actual routes",
+        "external mechanisms",
+        "boundary crossing",
+        "closure profiles",
+        "mirror",
+        "unsearched pairs"
+      ],
+      "synchronizedUnknown": [
+        "unsearched port pairs",
+        "closure combinations",
+        "mirror",
+        "arbitrary entry states",
+        "full Map"
+      ],
+      "physicsReport": {
+        "path": "pcg/results/foundation-migration-original-game-plains-thorn-steps-feedback-quality-v6/migration-physics.json",
+        "sha256": "13f058d4701e68645975bee5d96d7406cc324a6a7c46fbbeea96c75dbbc220d5"
+      }
+    }
+  ]
+}

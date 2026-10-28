@@ -1,0 +1,460 @@
+{
+  "cases": [
+    {
+      "id": "p50-resource-lowray-v2-i1-d34",
+      "family": "low-ray-recoil-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -160,
+          186,
+          400,
+          94
+        ],
+        [
+          320,
+          570,
+          220,
+          80
+        ],
+        [
+          -400,
+          990,
+          1700,
+          70
+        ],
+        [
+          200,
+          280,
+          40,
+          260
+        ],
+        [
+          -512,
+          186,
+          376,
+          24
+        ],
+        [
+          516,
+          570,
+          892,
+          24
+        ]
+      ],
+      "spawn": [
+        180,
+        168
+      ],
+      "entry_port": [
+        180,
+        168
+      ],
+      "exit_port": [
+        430,
+        552
+      ],
+      "goal": [
+        405,
+        548,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "low-return-key",
+          "bell": [
+            80,
+            820
+          ],
+          "gate": [
+            320,
+            280,
+            220,
+            290
+          ],
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            430,
+            552
+          ],
+          "region": [
+            400,
+            547,
+            60,
+            10
+          ],
+          "amount": 14
+        }
+      ],
+      "max_frames": 900,
+      "trace_all": false,
+      "production_recipe": "low-ray-recoil-return",
+      "rule_parameters": {
+        "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+        "pocket_y": 570,
+        "wall_bottom": 540,
+        "low_bell": [
+          80,
+          820
+        ],
+        "landing_x": 430
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 265
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 34
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "low-return-key"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 430,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/low-ray-recoil-return",
+        "version": 1,
+        "parameters": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 570,
+          "wall_bottom": 540,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 430
+        },
+        "source_type": "current_codex_subagent_authored_proposal",
+        "human_fun": "unreviewed",
+        "author_task": "/root/plains50_resources"
+      },
+      "interface": 1,
+      "rule_source_path": "pcg/prototype/creative_batches/plains50_resources/lowray_v2.py",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/low-ray-recoil-return/i1",
+        "region": "plains",
+        "required_family": "low-ray-recoil-return",
+        "objective": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 570,
+          "wall_bottom": 540,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 430
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 162,
+        "rise": -390,
+        "space": {
+          "max_width": 2400,
+          "max_height": 1800,
+          "max_port_span_x": 1000
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "plains50/resources/low-ray-recoil-return/v2"
+      ],
+      "factory_id": "769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b",
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 9,
+          "safe_stable": 9,
+          "rate": 0.75,
+          "wilson95": [
+            0.46768966087934005,
+            0.9110599603710386
+          ]
+        }
+      },
+      "review_alias": "p50-resource-lowray-v2-i1-d34",
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main"
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -488,
+            168
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "exit",
+          "position": [
+            1384,
+            552
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "block_ports": {
+        "entry": {
+          "id": "entry",
+          "position": [
+            -512,
+            154
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            -488,
+            168
+          ],
+          "aperture": [
+            -544,
+            122,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            24,
+            14
+          ]
+        },
+        "exit": {
+          "id": "exit",
+          "position": [
+            1408,
+            538
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1384,
+            552
+          ],
+          "aperture": [
+            1376,
+            506,
+            64,
+            64
+          ],
+          "crossing_offset": [
+            -24,
+            14
+          ]
+        }
+      },
+      "migration_adaptation": {
+        "rectangle": {
+          "x": -512,
+          "y": 90,
+          "w": 1920,
+          "h": 1024
+        },
+        "portAdaptations": [
+          {
+            "portId": "entry",
+            "before": {
+              "position": [
+                180,
+                162
+              ],
+              "stagingPosition": [
+                180,
+                162
+              ]
+            },
+            "after": {
+              "position": [
+                -512,
+                154
+              ],
+              "stagingPosition": [
+                -488,
+                168
+              ],
+              "supportIndex": 4,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          },
+          {
+            "portId": "exit",
+            "before": {
+              "position": [
+                430,
+                552
+              ],
+              "stagingPosition": [
+                430,
+                552
+              ]
+            },
+            "after": {
+              "position": [
+                1408,
+                538
+              ],
+              "stagingPosition": [
+                1384,
+                552
+              ],
+              "supportIndex": 5,
+              "surface": "ROCK"
+            },
+            "connectorPlatforms": [],
+            "routeContinuationRequired": false
+          }
+        ],
+        "changedShoreIndices": [
+          0,
+          1
+        ],
+        "validation": "UNKNOWN"
+      }
+    }
+  ]
+}

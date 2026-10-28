@@ -1,0 +1,143 @@
+{
+  "schema": "pcg/original-game-source-package/v1",
+  "sourceType": "original_game",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "contentVersion": "sha256:d4d112624a87df38de7085437f4aab3fbb3d74c202b58d36b42d797d55d43ed3",
+  "document_sha256": "4927e40af0db2c7d23c1deec9c00a71a0b3c3bbdd6fb13921629a35d446baf69",
+  "cases_sha256": "6c7fb072148727e6dac1bc767bef0d2aa3ce96129a7d305d0b508c98bb77a105",
+  "technical_status": "source_import_unverified",
+  "evidence": [],
+  "specification": {
+    "id": "game-forest-air-chain-geometry-recoil-hook"
+  },
+  "originalSource": {
+    "id": "forest_air_chain_geometry__recoil_hook",
+    "kind": "forest",
+    "title": "反冲 → 钩索",
+    "sourcePath": "scripts/generation/forest_air_chain_geometry.gd",
+    "sourceDocument": "library/modules/forest_air_chain_geometry__recoil_hook.json",
+    "sourceDocumentSha256": "2bdd32c8d3501bce94fffad419a660e94dc7f964e8b7484b91a5959ec2dcf0ed",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "sourceArtifact": {
+      "kind": "generation",
+      "originalPath": "scripts/generation/forest_air_chain_geometry.gd",
+      "path": "library/source/scripts/generation/forest_air_chain_geometry.gd",
+      "sha256": "4d900bcbf8303a43ac73e9a75ac1d58a1dbde6e7616f83ace48e73f252a4543a",
+      "gitBlobSha": "bde32566b61e96561b759ba4f14a06874df20f55",
+      "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+      "action": "reused_exact_existing_copy"
+    },
+    "method": "build",
+    "arguments": [
+      "recoil_hook"
+    ],
+    "data": {
+      "action_program": [
+        {
+          "action": "R",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "action": "H",
+          "anchor": "relay_a"
+        }
+      ],
+      "chain_contract": {
+        "continuous_airborne": true,
+        "fixed_anchor_does_not_refill_shots": true,
+        "hook_restoration": "actual_contact_kick_completion",
+        "midair_floor_allowed": false,
+        "native_verified": false,
+        "production_pool": false
+      },
+      "dangers": [],
+      "goal": [
+        355.0,
+        -42.0
+      ],
+      "hook_anchors": [
+        {
+          "id": "relay_a",
+          "position": [
+            300.0,
+            -70.0
+          ]
+        }
+      ],
+      "id": "recoil_hook",
+      "platforms": [
+        {
+          "id": "entry",
+          "one_way": false,
+          "rect": [
+            -220.0,
+            18.0,
+            300.0,
+            60.0
+          ]
+        },
+        {
+          "id": "crown",
+          "one_way": true,
+          "rect": [
+            250.0,
+            -24.0,
+            320.0,
+            24.0
+          ]
+        },
+        {
+          "id": "recovery",
+          "one_way": false,
+          "rect": [
+            -310.0,
+            220.0,
+            1190.0,
+            40.0
+          ]
+        },
+        {
+          "id": "recovery_step",
+          "one_way": true,
+          "rect": [
+            -305.0,
+            118.0,
+            65.0,
+            20.0
+          ]
+        }
+      ],
+      "recovery": {
+        "exit": "entry",
+        "support": "recovery",
+        "via": "recovery_step",
+        "walk_x": -275.0
+      },
+      "return": {
+        "goal_support": "entry",
+        "via": "recovery"
+      },
+      "scene_language": {
+        "crown": "living_bough",
+        "entry": "root_ground",
+        "recovery": "root_catch",
+        "recovery_step": "root_step",
+        "root_arch": "hollow_trunk"
+      },
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "version": "forest-air-chain-golden-v1",
+      "world_bounds": [
+        -320.0,
+        -450.0,
+        1250.0,
+        800.0
+      ]
+    }
+  }
+}

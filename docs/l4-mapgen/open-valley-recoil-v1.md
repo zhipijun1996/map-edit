@@ -1,0 +1,60 @@
+# 平原开放风谷：反冲与联动机关样品
+
+用户否决上一版规整盒子、Module外墙和低机关密度。本轮沿用 PR #1 分支，检查最新 main 仍为 b9318cf。正式游戏与12f6cb0/870保护原件不改，在独立实验路径实现7个开放地形Module样品。
+
+实际交付见 `generation/maps/open-valley-v1`：Godot整图、空中击铃截图、约12秒主线与约27秒奖励回程原生视频。正常1倍60Hz，分别658、1571帧，与headless的坐标、速度、输入、资源、机关、伤害和支撑逐字段一致。完整片段保留等待，未用旧视频替换。手动消费沿用原键鼠Router。
+
+## 实际玩法
+
+主路线从西风崖口经过迎风脊、风铃望台、断索悬桥到东岸，10.97秒实际仿真中执行3次空中射击。三次都真实击中风铃，身体分别在14、11、18帧与已经开启的门区域相交；同一枪同时提供反冲位移和门的状态变化。两类动作来源是垂直180高度反冲与斜向180高度反冲，不能把3次摆放称3种新玩法。
+
+下层路线包含移动齿轮穿越与可选180高度鸣钟挑战。新增“联动风铃”由已有Cell组合：原ShotLatch打开自己的真实门，opened信号启动原ModuleMovingPlatform。平台初始停靠，钟命中后原平台计时开始，不直接移动玩家、不补资源。真实奖励服务只在击铃并站稳奖励落点后发放8金币；随后可乘平台回到悬桥，经另一侧回到西岸。
+
+两处齿轮分别位于下层通道和悬桥，升降平台只有一处；不是批量添加同类电梯。返回迎风脊还使用向后射击的反冲越门。普通跳跃仍用于局部衔接，不将每个移动步骤都强制射击。
+
+## 空间与接口
+
+`open_valley/director.py` 输出原Mission/Exploration职责及Challenge Specification；这是一个确定性的空间语法样品，不是多Seed品质基准。主支分叉在西岸、汇合在东岸，升降捷径构成第二个关联回环。两个回环的数目仅描述规划拓扑。
+
+`prototype/plains/open_landforms.py` 创建完整地形与机关。Module没有默认四面外墙，外接框只作粗范围；多个外接框可覆盖同一片空气，碰撞和动作路线分别检查。地形由真实矩形碰撞实体并集构成，尚未加入斜坡物理，轮廓仍有阶梯感。
+
+复用 `direct_join/canonical.py`、既有Map Notes+generationContract导出器、同一对象拼装器及审计。新增公共 `assemble_modules` 只负责已有Module对象的平移和显式共享落点去重，不创建连接地形。7份标准文档重读后得到96个世界静态对象（97个源对象，共享落点去重1组）；8处接缝重合，Map补路地形0。未知通用进入状态/有向关系依然UNKNOWN，隔离候选不等于生产准入。
+
+场景复用官方原有PlainsTileComposer的精确并集地形材质、PixelPlainsParallax与风铃地标。审阅框和内部Cell ID默认隐藏。悬索绘制只是背景装饰，不作为可站立地面；录像和截图中的实际地形一致，未通过画面隐藏或新增碰撞。
+
+## 实测结果和失败
+
+- `open-valley-final-v2`：5/5条连续整图策略通过，实际落地记录覆盖8条连接的16个允许方向。每条从原入口开始，途中不重建/传送/补血或回满射击。
+- `open-valley-holdout-v2`：预先固定的4个新机关相位 .08/.31/.62/.86 × 5路线，20/20通过。只覆盖机关初相位，不代表人为瞄准和时机误差下的成功率。
+- `open-valley-negative-v2`：逐项省略3个主线射击，再分别延长普通跳跃，以及省略奖励射击，共7个反例均失败。结论只针对这些输入策略，开放空间可能允许其他走法，不声称全局不存在替代路线。
+- `open-valley-library-reuse-v1`：独立进程精确匹配7/7份已登记候选，生成调用0，再次用原Godot跑通主线。仍要求新摆放重验。
+
+首次相位留出 `open-valley-holdout-v1` 为15/20，升降台会截住跨井跳跃；完整失败保留。返工把Module谷底改为连续地形，平台承担垂直捷径，再使用上述新相位留出，不将旧失败重标成功。前期还保留桥面下穿落空、反向落点不足、跳跃净空越界、齿轮截住回程等失败。
+
+`mechanics.gd` 仅连接已有钟/门/平台信号，原物理执行不变。`carrier_pilot.gd` 对受铃控制的平台读取其原始motion_clock，避免用全局时间错误判断停靠。原CandidateLibrary的整图候选登记改为核验真实输出中的全部方向覆盖，不再固定“14条”案例数量。
+
+开放空气还可能产生额外跳落通路。本轮规划图不是完整物理可达图，且没有加入新的全局能力锁，因此不把现有通过结果外推成任意能力锁合法性证明。此样品未签正式Runtime帧率/内存预算；软件GPU写电影耗时不等于正式游戏帧率。没有真人操作/趣味评分或生产批准。
+
+## 后续Cell优先级
+
+1. **射击停靠台**：空中击铃使移动平台停在可落脚位置，同时反冲调整自身轨迹。底层已有ShotLatch.bind_motion启停接口，仍需接入合同和真实落点测试。
+2. **敌人回充接力**：空中击中原敌人回充，再打第二枪完成下一段位移。现有Plains敌人/射击资源支持相关行为；需要完整连续动作与目标移动验证，不将站立靶当敌人生态。
+3. **顺序双铃**：先击铃改变路线，再从另一个角度击第二铃。原ShotLatch已有顺序机制，但当前Plains Harness尚未完整暴露此参数，不能仅在JSON写名称当实现。
+
+先验证每种Cell如何改变移动决策、动作关系和路线选择，再扩大密度；不以机关数量评分。
+
+## 复现
+
+恢复 `godot-runtime-v1`、官方4.7.2引擎及 `open-valley-sample-v1` 归档后，在仓库根运行：
+
+```sh
+python pcg/tools/restore_archive.py open-valley-sample-v1 --extract
+python -m pcg.map_directed.open_valley.run --name fresh-open-valley --mode full
+python -m pcg.map_directed.open_valley.run --name fresh-open-states --mode holdout
+python -m pcg.map_directed.open_valley.run --name fresh-open-negatives --mode negative
+```
+
+复用候选证据缺失时会拒绝，先恢复原件；不绕过哈希核验。生成日志、标准Module文档、全部失败、冻结源码和真实原始输出都在该归档。默认精确复用这个样品；不同需求的部分库匹配仍是后续工作。
+
+
+[整图、两段新短视频](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-OPEN-VALLEY-01/eec8561bf4080306f61f4a7a1978d8560160dae9/a894e0b1a182/report.html) · [Godot手动试玩](https://zhipijun1996.github.io/gunman-rush-previews/launchers/MAPGEN-OPEN-VALLEY-01/eec8561bf4080306f61f4a7a1978d8560160dae9/a894e0b1a182/)。公网字节校验和浏览器回执见交付目录PUBLICATION；源代码/候选/失败归档均在map-edit同一PR分支。

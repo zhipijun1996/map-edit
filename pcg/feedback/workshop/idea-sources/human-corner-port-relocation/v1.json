@@ -1,0 +1,28 @@
+{
+  "schema": "pcg/human-idea-source/v1",
+  "id": "human-corner-port-relocation",
+  "version": 1,
+  "source_type": "human_idea",
+  "category": "module_interface_extension",
+  "original_text": "顺带再提出一个任务，对于port在边角block的（比如左上，右上，左下，右下）。比如左下角的block，原本port是该block的左边。我希望可以增加一个属性，该port是否可以无损迁移到下方。也就是换了一个方向，但是离之前的最近。这样可以大幅度增加map匹配的灵活度。在刚刚的全量修正任务增加一个顺便的判断。以及增加4个角port的迁移允许属性",
+  "clarification": {
+    "question": "角落 Port 换边时，“无损”是否允许小幅修改接口附近的地形或表面类型，前提是保留原玩法、通行权限和路线功能，并重新验证？",
+    "answer": "允许局部适配 (Recommended)"
+  },
+  "interpretation": {
+    "target": "Same corner Block, adjacent exterior side midpoint; preserve logical Port ID.",
+    "lossless": "Preserve core gameplay, permissions, original directed route functions, required abilities and resources; allow local real support, surface and closure adaptation with fresh evidence.",
+    "corner_attributes": ["TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"],
+    "unverified": "UNKNOWN; unavailable to Map matching.",
+    "combination_policy": "Select only a complete offline-certified configuration; individual alternatives do not imply combination or mirror permission."
+  },
+  "links": {
+    "contract": "docs/l4-mapgen/corner-port-relocation-v1.md",
+    "assessment": "pcg/migration/corners.py",
+    "experiment": "pcg/migration/corner_experiment.py",
+    "skill": ".agents/skills/pcg-module-migration/SKILL.md"
+  },
+  "human_review": "UNKNOWN",
+  "production_approval": "UNKNOWN",
+  "new_gameplay_family_count": 0
+}

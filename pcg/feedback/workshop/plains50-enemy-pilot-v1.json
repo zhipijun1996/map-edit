@@ -1,0 +1,136 @@
+{
+  "schema": "pcg/production-rule-feedback/v1",
+  "id": "plains50-enemy-pilot-v1",
+  "type": "technical_experiment",
+  "source_task": "/root/plains50_enemy",
+  "source_recipe_file": "pcg/prototype/creative_batches/plains50_enemy/rules_v1.py",
+  "rule_source_sha256": "301def5dae4fe566c4f89d7d23298c47f08720ae9ef874b8306e169d9e71dff1",
+  "stage": "pilot_before_full_validation",
+  "pilot_results": [
+    {
+      "run": "pcg/results/workshop-plains50-enemy-probe-v1-attack-relay",
+      "cases": 8,
+      "purpose_passes": 4,
+      "failures": [
+        {
+          "case": "p50-enemy-attack-relay-d0-c0",
+          "reasons": [
+            "trigger_timeout/1/grounded",
+            "actual_reward_missing",
+            "actual_full_body_gate_crossing_missing",
+            "native_enemy_world_relation_missing"
+          ]
+        },
+        {
+          "case": "p50-enemy-attack-relay-d0-c1",
+          "reasons": [
+            "trigger_timeout/1/grounded",
+            "actual_reward_missing",
+            "actual_full_body_gate_crossing_missing",
+            "native_enemy_world_relation_missing"
+          ]
+        },
+        {
+          "case": "p50-enemy-attack-relay-d0-c2",
+          "reasons": [
+            "trigger_timeout/1/grounded",
+            "actual_reward_missing",
+            "actual_full_body_gate_crossing_missing",
+            "native_enemy_world_relation_missing"
+          ]
+        },
+        {
+          "case": "p50-enemy-attack-relay-d0-c3",
+          "reasons": [
+            "trigger_timeout/1/grounded",
+            "actual_reward_missing",
+            "actual_full_body_gate_crossing_missing",
+            "native_enemy_world_relation_missing"
+          ]
+        }
+      ],
+      "summary_sha256": "43d0ca3548b78333d3117cb9c7a823b67c8a928dc78fade51c89d9997b11a7cc"
+    },
+    {
+      "run": "pcg/results/workshop-plains50-enemy-probe-v1-clear-sightline",
+      "cases": 8,
+      "purpose_passes": 8,
+      "failures": [],
+      "summary_sha256": "a87ca600ad4c250e4cac50b72db09f48dd5ce274efa3feda604359bba1d19a36"
+    },
+    {
+      "run": "pcg/results/workshop-plains50-enemy-probe-v1-displace-landing",
+      "cases": 8,
+      "purpose_passes": 5,
+      "failures": [
+        {
+          "case": "p50-enemy-displace-landing-d0-c3",
+          "reasons": [
+            "real_damage",
+            "player_harm",
+            "no_recoil",
+            "reward_not_actually_claimed",
+            "enemy_occupancy_not_actually_changed"
+          ]
+        },
+        {
+          "case": "p50-enemy-displace-landing-d1-c2",
+          "reasons": [
+            "real_damage",
+            "player_harm",
+            "no_recoil",
+            "reward_not_actually_claimed",
+            "enemy_occupancy_not_actually_changed"
+          ]
+        },
+        {
+          "case": "p50-enemy-displace-landing-d1-c3",
+          "reasons": [
+            "real_damage",
+            "player_harm",
+            "no_recoil",
+            "reward_not_actually_claimed",
+            "enemy_occupancy_not_actually_changed"
+          ]
+        }
+      ],
+      "summary_sha256": "8d937171000a77526ae161f3df8308a866fa438d304de212551207ca9fd24044"
+    },
+    {
+      "run": "pcg/results/workshop-plains50-enemy-probe-v1-live-enemy-sensor",
+      "cases": 4,
+      "purpose_passes": 2,
+      "failures": [
+        {
+          "case": "p50-enemy-live-enemy-sensor-d0-c0",
+          "reasons": [
+            "reward_not_claimed"
+          ]
+        },
+        {
+          "case": "p50-enemy-live-enemy-sensor-d0-c1",
+          "reasons": [
+            "reward_not_claimed"
+          ]
+        }
+      ],
+      "summary_sha256": "f0f90f59aefdd8c811c4006327f0bc04fff7fd9f895f81828d5d92caa1e14751"
+    }
+  ],
+  "resolved_conditions": [
+    {
+      "problem": "Attack-relay ingressx50 outside actual native enemy detection; no attack commitment/projectile occurs before timeout.",
+      "revision": "r2 ingressox80 preserves original physical visibility; its full regular/held then verified."
+    },
+    {
+      "problem": "Moving reward.position alone retains stale actual pickup region; nominal visible box and actual transaction can diverge.",
+      "revision": "r2 binds region to [position.x-30,position.y-5,60,10]; original reward Cell unchanged."
+    }
+  ],
+  "remaining_screen_conditions": "Higher/lower displace-entry timing choices are selected only from equal six-mild screen, then original calibration/held. Failed controls not renamed as success.",
+  "resolved_by_rule": "pcg/prototype/creative_batches/plains50_enemy/rules_v2.py",
+  "resolved_by_sha256": "bdff82ef1ecd3fa2571c41f396cc72064ef3078ece0ba66a2dcd947d9270337a",
+  "not_a_withdrawal": "Pilot never enrolled; historical original versions remain intact.",
+  "human_fun": "UNKNOWN",
+  "production_admitted": false
+}

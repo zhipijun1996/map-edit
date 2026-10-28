@@ -1,0 +1,150 @@
+{
+  "schema": "pcg/production-rule-feedback/v1",
+  "type": "technical_experiment",
+  "production_recipe": "evacuate-rejoin",
+  "flag": "controls_issue",
+  "stage": "calibration_failed",
+  "source_task": "/root/plains50_machinery",
+  "rule_source_sha256": "77644e541df8f945c6b0f7fcb4a2ef27c483d8061fabde0398d117254db58a07",
+  "failed_specification": {
+    "schema": "map-notes/challenge-specification/v1",
+    "id": "plains50/machinery/evacuate-rejoin/i1/v1",
+    "region": "plains",
+    "required_family": "evacuate-rejoin",
+    "objective": {
+      "relationship": "evacuate-rejoin",
+      "interface": 1,
+      "receiver": [
+        1465,
+        412
+      ],
+      "ancestry": "Old relationship adapted to explicit new receiving/refuge geometry, not a new family",
+      "requested_geometry": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          645,
+          250,
+          175,
+          60
+        ],
+        [
+          1350,
+          430,
+          220,
+          100
+        ]
+      ],
+      "only_special_ability": "shot_recoil"
+    },
+    "capabilities": {
+      "version": 1,
+      "status": "defined",
+      "allOf": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "anyOfGroups": []
+    },
+    "ports": {
+      "count": 2,
+      "required_normals": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "relations": [
+      {
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "reward"
+      }
+    ],
+    "entry_y": 420,
+    "rise": 8,
+    "space": {
+      "max_width": 2400,
+      "max_height": 1600,
+      "max_port_span_x": 1900
+    },
+    "boundary_policy": "open",
+    "enclosing_walls": false,
+    "risk_reward": {
+      "amount": 8,
+      "mandatory_damage": false
+    },
+    "difficulty": {
+      "intent": "regular",
+      "human_score": null
+    },
+    "resource_state": {
+      "reset_between_components": false,
+      "entry": "original supported resources",
+      "exit": "observed only"
+    },
+    "return_conditions": "UNKNOWN",
+    "budget": {
+      "generator_candidates": 1,
+      "director_revisions": 0
+    }
+  },
+  "stats": {
+    "clean": {
+      "trials": 12,
+      "purpose_valid": 12,
+      "safe_stable": 12,
+      "rate": 1.0,
+      "wilson95": [
+        0.7574992425007574,
+        1.0
+      ]
+    },
+    "mild": {
+      "trials": 12,
+      "purpose_valid": 12,
+      "safe_stable": 12,
+      "rate": 1.0,
+      "wilson95": [
+        0.7574992425007574,
+        1.0
+      ]
+    },
+    "moderate": {
+      "trials": 12,
+      "purpose_valid": 7,
+      "safe_stable": 7,
+      "rate": 0.5833333333333334,
+      "wilson95": [
+        0.3195073356553728,
+        0.8067425380947535
+      ]
+    }
+  },
+  "quality_gate": {
+    "status": "rework",
+    "requested_tier": "regular",
+    "reasons": [
+      "insufficient_perturbation_robustness"
+    ],
+    "offline_approved": false,
+    "formal_game_ready": false
+  },
+  "calibration_source": {
+    "path": "pcg/results/workshop-plains50-machinery-production-v1/round-01/calibration-evaluations.json",
+    "sha256": "fc459d4ff3e170dad1460b22bbe8e264b9b8b3d7affb64838c61c4eaebea01d3"
+  },
+  "holdout": "NOT_RUN for failed wide-low interface",
+  "next_revision": "Try separately declared negotiated wide-same-height refuge; do not claim original y250 requirement satisfied; rerun full original gates and cheap alternatives",
+  "production_admitted": false
+}

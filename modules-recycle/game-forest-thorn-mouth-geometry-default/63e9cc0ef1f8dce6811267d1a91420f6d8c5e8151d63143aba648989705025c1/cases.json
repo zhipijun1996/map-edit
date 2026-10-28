@@ -1,0 +1,289 @@
+{
+  "cases": [
+    {
+      "id": "game-forest_thorn_mouth_geometry__default",
+      "family": "original-game-forest_thorn_mouth_geometry__default",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -220.0,
+          18.0,
+          300.0,
+          60.0
+        ],
+        [
+          -220.0,
+          -520.0,
+          570.0,
+          410.0
+        ],
+        [
+          250.0,
+          -24.0,
+          320.0,
+          60.0
+        ],
+        [
+          -310.0,
+          140.0,
+          1190.0,
+          40.0
+        ],
+        [
+          -305.0,
+          78.0,
+          65.0,
+          20.0
+        ]
+      ],
+      "spawn": [
+        0.0,
+        0.0
+      ],
+      "entry_port": [
+        0.0,
+        0.0
+      ],
+      "exit_port": [
+        355.0,
+        -42.0
+      ],
+      "goal": [
+        343.0,
+        -46.0,
+        24,
+        8
+      ],
+      "world_bounds": [
+        -310.0,
+        -776.0,
+        1190.0,
+        1084.0
+      ],
+      "one_way_platform_indices": [
+        4
+      ],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          210.0,
+          -138.0,
+          60.0,
+          44.0
+        ],
+        [
+          210.0,
+          -24.0,
+          60.0,
+          52.0
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 200.0,
+          "y": -40.0,
+          "kind": "bounce",
+          "source_id": "side_ring"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 355.0,
+          "deadband": 3
+        }
+      ],
+      "max_frames": 1200,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/migration/game_adapter.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "main",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "require_bell": false,
+        "via_ports": []
+      },
+      "source_behavior": {
+        "action_program": [
+          {
+            "action": "H",
+            "anchor": "side_ring"
+          },
+          {
+            "action": "R",
+            "direction": [
+              -1,
+              0
+            ]
+          }
+        ],
+        "allowed_seams": [
+          {
+            "platform_id": "entry",
+            "side": "left",
+            "top": 18.0
+          },
+          {
+            "platform_id": "crown",
+            "side": "right",
+            "top": -24.0
+          }
+        ],
+        "chain_contract": {
+          "continuous_airborne": true,
+          "fixed_anchor_does_not_refill_shots": true,
+          "hook_restoration": "actual_contact_kick_completion",
+          "midair_floor_allowed": false,
+          "native_verified": false,
+          "production_pool": false
+        },
+        "damage_mode": "production_environment_policy",
+        "goal": [
+          355.0,
+          -42.0
+        ],
+        "hook_anchors": [
+          {
+            "id": "side_ring",
+            "position": [
+              200.0,
+              -40.0
+            ]
+          }
+        ],
+        "id": "thorn_mouth",
+        "observations": [
+          {
+            "platform_id": "entry",
+            "see": [
+              "side_ring",
+              "upper_thorns",
+              "lower_thorns",
+              "crown"
+            ]
+          },
+          {
+            "platform_id": "crown",
+            "see": [
+              "right_drop",
+              "recovery"
+            ]
+          }
+        ],
+        "protected_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ],
+        "recovery": {
+          "exit": "entry",
+          "support": "recovery",
+          "via": "recovery_step",
+          "walk_x": -275.0
+        },
+        "return": {
+          "drop_outside_x": 600.0,
+          "goal_support": "entry",
+          "via": "recovery"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "steps": [
+          {
+            "anchor_id": "side_ring",
+            "direction": "horizontal",
+            "id": "side_catch",
+            "then": "away_kick"
+          },
+          {
+            "action": "shoot_left_recoil_right",
+            "id": "thorn_mouth",
+            "then": "stable_crown"
+          }
+        ],
+        "version": "forest-thorn-mouth-chain-v1",
+        "world_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            0.0,
+            0.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "sourceRoles": [
+            "entry"
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            355.0,
+            -42.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "sourceRoles": [
+            "exit"
+          ],
+          "support_index": 2
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_thorn_mouth_geometry.gd",
+          "path": "library/source/scripts/generation/forest_thorn_mouth_geometry.gd",
+          "sha256": "7d95f34daacd91b0efe8d185bd1c67a7dd4ed2477b85d464b71807be2ec34ee2",
+          "gitBlobSha": "ab6ce42758f3030cfbd0c4301731ee15a9b7d9b1",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "c79667584738007a6bbe4543aa4f7f997339ef1cf814b4b9cded9bb835750885",
+        "adapterVersion": 1
+      },
+      "decoder_pending_behavior": [
+        "action_program"
+      ],
+      "module_sha256": "8de7ddbc40305ebab1ceb866d3c2e7a5f33d9e4c23de797f4f3bf90f67cbb7e0"
+    }
+  ]
+}

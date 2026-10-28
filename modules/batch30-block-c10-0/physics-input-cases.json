@@ -1,0 +1,1939 @@
+{
+  "cases": [
+    {
+      "id": "b30-block-c10-v2-i0-main-c0-d24",
+      "family": "block128-retained-shot-recovery",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -128,
+          352,
+          328,
+          54
+        ],
+        [
+          500,
+          224,
+          268,
+          124
+        ],
+        [
+          270,
+          518,
+          130,
+          40
+        ],
+        [
+          250,
+          378,
+          20,
+          140
+        ],
+        [
+          400,
+          378,
+          20,
+          140
+        ]
+      ],
+      "spawn": [
+        -104,
+        334
+      ],
+      "entry_port": [
+        -104,
+        334
+      ],
+      "exit_port": [
+        744,
+        206
+      ],
+      "goal": [
+        719,
+        202,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1112,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "recovery-pair",
+          "bell": [
+            500,
+            538
+          ],
+          "return_access": [
+            350,
+            468
+          ],
+          "gate": [
+            250,
+            -312,
+            20,
+            690
+          ],
+          "paired_gate": [
+            270,
+            378,
+            130,
+            30
+          ],
+          "initial_open": "A",
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            744,
+            206
+          ],
+          "region": [
+            714,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 900,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 180
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.6,
+            0.8
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -104,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            744,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "nominal",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "interface": 0,
+      "production_recipe": "block128-retained-shot-recovery",
+      "challenge_route": true,
+      "expected_reward": 12,
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "idea_ids": [
+        "B30-C10"
+      ],
+      "native_scene": "res://prototype/creative_batches/batch30_blockc10/main_v1.tscn",
+      "layout_title": "Block128 留枪入洞，再返岸重试",
+      "rule_parameters": {
+        "interface": 0,
+        "route": "main",
+        "control": 0,
+        "correction_delay": 0,
+        "core": "actual retained shot simultaneously opens recovery cavity and redirects a real miss; internal cavity is not map port",
+        "block_main_release_delay": 24
+      },
+      "generation_rule": {
+        "id": "batch30/block-native-C10",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockc10/rules_v2.py",
+        "parameters": {
+          "source_case": "b30-c10-v3-i0-main-c0",
+          "translation": [
+            0,
+            -112
+          ],
+          "terminal_edits": [
+            {
+              "index": 0,
+              "before": [
+                -100,
+                326,
+                300,
+                80
+              ],
+              "after": [
+                -128,
+                352,
+                328,
+                54
+              ],
+              "top_delta": 26,
+              "outward_extension": 28
+            },
+            {
+              "index": 1,
+              "before": [
+                500,
+                248,
+                240,
+                100
+              ],
+              "after": [
+                500,
+                224,
+                268,
+                124
+              ],
+              "top_delta": -24,
+              "outward_extension": 28
+            }
+          ],
+          "retained_internal_recovery_indices": [
+            2,
+            3,
+            4
+          ],
+          "deleted_platform_indices": [],
+          "map_added_terrain": 0,
+          "inherited_physics": false,
+          "actual_return_settle_x": -104
+        },
+        "control_revision": {
+          "main_release_delay": 24,
+          "actual_A_wait_x": -97
+        },
+        "registration_source": "pcg/prototype/creative_batches/batch30_blockc10/api_v2.py",
+        "registration_version": 2
+      },
+      "layout_uid": "b50e8db84cef789ab64904dd969c7d6b2bf7f6ae5759ba0c83086453d0d899ae",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/block-C10/0",
+        "source_type": "model_authored_challenge_specification",
+        "region": "plains",
+        "required_family": "block128-retained-shot-recovery",
+        "objective": {
+          "recipe": "block128-retained-shot-recovery",
+          "interface": 0,
+          "physical_layout_sha256": "b50e8db84cef789ab64904dd969c7d6b2bf7f6ae5759ba0c83086453d0d899ae",
+          "content_role": "conditional_recovery_switch",
+          "core": "Retained real airborne shot reverses an actual missed bank into opened internal roof cavity; real air access restores paired world and continuous retry. Recovery cavity is not external port.",
+          "strategy_variants": [
+            "nominal",
+            "miss_restore_retry"
+          ],
+          "normal_route_may_remain_valid": true,
+          "core_conditional_recovery_is_actual_witness_not_forced_player_sequence": true,
+          "block_contract": "map-notes/block-grid/v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "nominal"
+          },
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "miss-restore-retry"
+          }
+        ],
+        "space": {
+          "max_width": 1024,
+          "max_height": 1280,
+          "max_port_span_x": 896,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                744,
+                206
+              ],
+              "region": [
+                714,
+                200,
+                60,
+                12
+              ],
+              "amount": 12
+            }
+          ],
+          "recovery_cavity": "internal no bonus; does not increase map port count"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actual supported A internal dock, original Aopen/Bclosed, real single air shot; boundary ingress/unknown state entailment not proven",
+          "exit": "Observed stableB after nominal or exact continued miss/restoration; other world/resource entering states UNKNOWN"
+        },
+        "return_conditions": "Both canonical witnesses required: nominal plus real miss->internal cavity->restore->newA dock->retryB. Generic recovery, B->A and boundary crossing remain UNKNOWN.",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            -1,
+            -4
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -4
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            -4
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            2,
+            -2
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            -4
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            3,
+            -2
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            -4
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            4,
+            -2
+          ],
+          [
+            4,
+            -1
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            -4
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            5,
+            -2
+          ],
+          [
+            5,
+            -1
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "occupancy_coverage": "declared entity + reserved action space",
+        "action_coverage": "partial; concrete policies require actual Godot verification",
+        "roles": [
+          "traversal",
+          "conditional_recovery"
+        ],
+        "port_bindings": [
+          {
+            "port_id": "A",
+            "cell": [
+              -1,
+              2
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              -104,
+              334
+            ]
+          },
+          {
+            "port_id": "B",
+            "cell": [
+              5,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              744,
+              206
+            ]
+          }
+        ]
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -128.0,
+            320.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              -1,
+              2
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              -104,
+              334
+            ]
+          },
+          "stagingPosition": [
+            -104,
+            334
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -160.0,
+            288.0,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            768.0,
+            192.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              5,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              744,
+              206
+            ]
+          },
+          "stagingPosition": [
+            744,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            736.0,
+            160.0,
+            64,
+            64
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          -128,
+          -512,
+          896,
+          1280
+        ]
+      ],
+      "block_adaptation": {
+        "source_case": "b30-c10-v3-i0-main-c0",
+        "translation": [
+          0,
+          -112
+        ],
+        "terminal_edits": [
+          {
+            "index": 0,
+            "before": [
+              -100,
+              326,
+              300,
+              80
+            ],
+            "after": [
+              -128,
+              352,
+              328,
+              54
+            ],
+            "top_delta": 26,
+            "outward_extension": 28
+          },
+          {
+            "index": 1,
+            "before": [
+              500,
+              248,
+              240,
+              100
+            ],
+            "after": [
+              500,
+              224,
+              268,
+              124
+            ],
+            "top_delta": -24,
+            "outward_extension": 28
+          }
+        ],
+        "retained_internal_recovery_indices": [
+          2,
+          3,
+          4
+        ],
+        "deleted_platform_indices": [],
+        "map_added_terrain": 0,
+        "inherited_physics": false,
+        "actual_return_settle_x": -104
+      },
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockc10/main_v1.tscn",
+      "factory_id": "4fb1ebbaab1614514ce70d775d37b8e21ac000738b2431c3c2b94605e3e791fe",
+      "factory_evidence": {
+        "batch": "0000-clean-screen",
+        "index": 0,
+        "output": "physics/0000-clean-screen.output.json.gz",
+        "raw_output_sha256": "dd442c46762d881cee4a60a72d8eeb9873e4f05913fd8a98962506ff408af39e"
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "module_sha256": "3c874e7d6ad1b19629bf3e82d233d33538cbf6e47e89b626fdfa9e7f4531af1e",
+      "review_alias": "b30-block-c10-v2-i0-main-c0-d24"
+    },
+    {
+      "id": "b30-block-c10-v2-i0-retry-c0-d24",
+      "family": "block128-retained-shot-recovery",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -128,
+          352,
+          328,
+          54
+        ],
+        [
+          500,
+          224,
+          268,
+          124
+        ],
+        [
+          270,
+          518,
+          130,
+          40
+        ],
+        [
+          250,
+          378,
+          20,
+          140
+        ],
+        [
+          400,
+          378,
+          20,
+          140
+        ]
+      ],
+      "spawn": [
+        -104,
+        334
+      ],
+      "entry_port": [
+        -104,
+        334
+      ],
+      "exit_port": [
+        744,
+        206
+      ],
+      "goal": [
+        719,
+        202,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1112,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "recovery-pair",
+          "bell": [
+            500,
+            538
+          ],
+          "return_access": [
+            350,
+            468
+          ],
+          "gate": [
+            250,
+            -312,
+            20,
+            690
+          ],
+          "paired_gate": [
+            270,
+            378,
+            130,
+            30
+          ],
+          "initial_open": "A",
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            744,
+            206
+          ],
+          "region": [
+            714,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 1400,
+      "trace_all": false,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 180
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 440
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "recovery-pair"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 330,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "recovery-pair",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": -104,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": -97
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 180
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.6,
+            0.8
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            -104,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            744,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "miss-restore-retry",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "interface": 0,
+      "production_recipe": "block128-retained-shot-recovery",
+      "challenge_route": true,
+      "expected_reward": 12,
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "idea_ids": [
+        "B30-C10"
+      ],
+      "native_scene": "res://prototype/creative_batches/batch30_blockc10/main_v1.tscn",
+      "layout_title": "Block128 留枪入洞，再返岸重试",
+      "rule_parameters": {
+        "interface": 0,
+        "route": "retry",
+        "control": 0,
+        "correction_delay": 0,
+        "core": "actual retained shot simultaneously opens recovery cavity and redirects a real miss; internal cavity is not map port",
+        "block_main_release_delay": 24
+      },
+      "generation_rule": {
+        "id": "batch30/block-native-C10",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockc10/rules_v2.py",
+        "parameters": {
+          "source_case": "b30-c10-v3-i0-retry-c0",
+          "translation": [
+            0,
+            -112
+          ],
+          "terminal_edits": [
+            {
+              "index": 0,
+              "before": [
+                -100,
+                326,
+                300,
+                80
+              ],
+              "after": [
+                -128,
+                352,
+                328,
+                54
+              ],
+              "top_delta": 26,
+              "outward_extension": 28
+            },
+            {
+              "index": 1,
+              "before": [
+                500,
+                248,
+                240,
+                100
+              ],
+              "after": [
+                500,
+                224,
+                268,
+                124
+              ],
+              "top_delta": -24,
+              "outward_extension": 28
+            }
+          ],
+          "retained_internal_recovery_indices": [
+            2,
+            3,
+            4
+          ],
+          "deleted_platform_indices": [],
+          "map_added_terrain": 0,
+          "inherited_physics": false,
+          "actual_return_settle_x": -104
+        },
+        "control_revision": {
+          "main_release_delay": 24,
+          "actual_A_wait_x": -97
+        },
+        "registration_source": "pcg/prototype/creative_batches/batch30_blockc10/api_v2.py",
+        "registration_version": 2
+      },
+      "layout_uid": "b50e8db84cef789ab64904dd969c7d6b2bf7f6ae5759ba0c83086453d0d899ae",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/block-C10/0",
+        "source_type": "model_authored_challenge_specification",
+        "region": "plains",
+        "required_family": "block128-retained-shot-recovery",
+        "objective": {
+          "recipe": "block128-retained-shot-recovery",
+          "interface": 0,
+          "physical_layout_sha256": "b50e8db84cef789ab64904dd969c7d6b2bf7f6ae5759ba0c83086453d0d899ae",
+          "content_role": "conditional_recovery_switch",
+          "core": "Retained real airborne shot reverses an actual missed bank into opened internal roof cavity; real air access restores paired world and continuous retry. Recovery cavity is not external port.",
+          "strategy_variants": [
+            "nominal",
+            "miss_restore_retry"
+          ],
+          "normal_route_may_remain_valid": true,
+          "core_conditional_recovery_is_actual_witness_not_forced_player_sequence": true,
+          "block_contract": "map-notes/block-grid/v1"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "nominal"
+          },
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "miss-restore-retry"
+          }
+        ],
+        "space": {
+          "max_width": 1024,
+          "max_height": 1280,
+          "max_port_span_x": 896,
+          "block_size": 128,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                650,
+                342
+              ],
+              "region": [
+                620,
+                337,
+                60,
+                10
+              ],
+              "amount": 12
+            }
+          ],
+          "recovery_cavity": "internal no bonus; does not increase map port count"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actual supported A internal dock, original Aopen/Bclosed, real single air shot; boundary ingress/unknown state entailment not proven",
+          "exit": "Observed stableB after nominal or exact continued miss/restoration; other world/resource entering states UNKNOWN"
+        },
+        "return_conditions": "Both canonical witnesses required: nominal plus real miss->internal cavity->restore->newA dock->retryB. Generic recovery, B->A and boundary crossing remain UNKNOWN.",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            -1,
+            -4
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -4
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            -4
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            2,
+            -2
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            -4
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            3,
+            -2
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            -4
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            4,
+            -2
+          ],
+          [
+            4,
+            -1
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            -4
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            5,
+            -2
+          ],
+          [
+            5,
+            -1
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "occupancy_coverage": "declared entity + reserved action space",
+        "action_coverage": "partial; concrete policies require actual Godot verification",
+        "roles": [
+          "traversal",
+          "conditional_recovery"
+        ],
+        "port_bindings": [
+          {
+            "port_id": "A",
+            "cell": [
+              -1,
+              2
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              -104,
+              334
+            ]
+          },
+          {
+            "port_id": "B",
+            "cell": [
+              5,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              744,
+              206
+            ]
+          }
+        ]
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            -128.0,
+            320.0
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              -1,
+              2
+            ],
+            "edge": "W",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              -104,
+              334
+            ]
+          },
+          "stagingPosition": [
+            -104,
+            334
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -160.0,
+            288.0,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            768.0,
+            192.0
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "grid": {
+            "cell": [
+              5,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "stagingPosition": [
+              744,
+              206
+            ]
+          },
+          "stagingPosition": [
+            744,
+            206
+          ],
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            736.0,
+            160.0,
+            64,
+            64
+          ]
+        }
+      },
+      "block_reservations": [
+        [
+          -128,
+          -512,
+          896,
+          1280
+        ]
+      ],
+      "block_adaptation": {
+        "source_case": "b30-c10-v3-i0-retry-c0",
+        "translation": [
+          0,
+          -112
+        ],
+        "terminal_edits": [
+          {
+            "index": 0,
+            "before": [
+              -100,
+              326,
+              300,
+              80
+            ],
+            "after": [
+              -128,
+              352,
+              328,
+              54
+            ],
+            "top_delta": 26,
+            "outward_extension": 28
+          },
+          {
+            "index": 1,
+            "before": [
+              500,
+              248,
+              240,
+              100
+            ],
+            "after": [
+              500,
+              224,
+              268,
+              124
+            ],
+            "top_delta": -24,
+            "outward_extension": 28
+          }
+        ],
+        "retained_internal_recovery_indices": [
+          2,
+          3,
+          4
+        ],
+        "deleted_platform_indices": [],
+        "map_added_terrain": 0,
+        "inherited_physics": false,
+        "actual_return_settle_x": -104
+      },
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockc10/main_v1.tscn",
+      "factory_id": "4f13d9ef30887f5b4ef57cef1951aad653f7c394fa8411a762e14bd0dbe8a2b7",
+      "factory_evidence": {
+        "batch": "0000-clean-screen",
+        "index": 1,
+        "output": "physics/0000-clean-screen.output.json.gz",
+        "raw_output_sha256": "dd442c46762d881cee4a60a72d8eeb9873e4f05913fd8a98962506ff408af39e"
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "module_sha256": "cbf8068b69193334fe394775d81c42b421d4612a9bec9e0045fcca75c8fb7c5f",
+      "review_alias": "b30-block-c10-v2-i0-retry-c0-d24"
+    }
+  ]
+}

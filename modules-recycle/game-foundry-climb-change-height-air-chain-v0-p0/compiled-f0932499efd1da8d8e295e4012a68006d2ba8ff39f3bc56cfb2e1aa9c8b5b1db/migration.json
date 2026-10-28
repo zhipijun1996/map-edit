@@ -1,0 +1,245 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-foundry-climb-change-height-air-chain-v0-p0",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-foundry-climb-change-height-air-chain-v0-p0",
+  "sourceVersion": "sha256:62408e343af396830dbb41bff5ba805ebc4b0f6e01b52d6b89217613e837667f",
+  "sourceFiles": {
+    "cases.json": "29d0b64c6c52b3e4c3add58c9bf8ac1e479f216020261efb9f0245759be16108",
+    "record.json": "ff7ea0df4a8a1c8b0b86ed0b84d9f5f28a620904a4aea8cb783576b47a0487d8",
+    "module.mapnote.json": "5e3602434485ea34ffedeffa11065ff40ecef88f3be305bb0a2b8d059cb2bf71",
+    "source.json": "f8daf22bcf1f07b15dc9da36eef0821bea93f38397a671e7319ccce8270b526a"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 76.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": -30,
+      "w": 1760,
+      "h": 390
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": -52.0,
+      "w": 1792,
+      "h": 512
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 4,
+        "objectId": "generated-92cc796488cd42b5a788f6ba4a0c2ba94855211a2f834ea205e8c6d24f67fc34/platform-4",
+        "before": [
+          1120.0,
+          110.0,
+          640.0,
+          32.0
+        ],
+        "after": [
+          1120.0,
+          172.0,
+          640.0,
+          8
+        ],
+        "topDelta": 62.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 4,
+        "platformIndex": 6,
+        "objectId": "generated-92cc796488cd42b5a788f6ba4a0c2ba94855211a2f834ea205e8c6d24f67fc34/migration-shore-exit",
+        "rect": [
+          1736.0,
+          172.0,
+          56.0,
+          8
+        ],
+        "length": 32.0,
+        "thickness": 8,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            282
+          ],
+          "stagingPosition": [
+            20,
+            282
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            268.0
+          ],
+          "stagingPosition": [
+            24,
+            282.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            1740,
+            92
+          ],
+          "stagingPosition": [
+            1740,
+            92
+          ]
+        },
+        "after": {
+          "position": [
+            1792,
+            140.0
+          ],
+          "stagingPosition": [
+            1768,
+            154.0
+          ],
+          "supportIndex": 6,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-foundry__climb_change_height-air_chain-v0-p0",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "b54fbff0aaf924bfd316c2bac7193a836cbb6661cb5f410c73b44a6f42606203"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        },
+        {
+          "face": "RIGHT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 300.0,
+          "dockFloor": 300,
+          "supportIndex": 7,
+          "boundary": [
+            -128,
+            268
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 4,
+          "originalFloor": 110.0,
+          "dockFloor": 172,
+          "supportIndex": 9,
+          "boundary": [
+            1920,
+            140
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/migration-physics.json",
+      "sha256": "638d4491f31ca491822160226d1a94f418b12fc95e2e63e333710c2419c1fe6a"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/source_binding.json",
+      "sha256": "b30c5eb9bcc58e38969718f2968864eb9a3ad189e90e9cbb988a11e49466dcce"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/batches.json",
+      "sha256": "d83002a6aed8c0af6037b32f7a7b6564fa7a2e0e997ad516eba4d94e735d0f9c"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/protocol.json",
+      "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+    },
+    {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/boundary-probes.json",
+      "sha256": "1603a46d603ab3a7de4009b8ebbb5d80e2639caf07416b11aeae252241d3d954"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "actual routes",
+    "external mechanisms",
+    "boundary crossing",
+    "closure profiles",
+    "mirror",
+    "unsearched pairs"
+  ],
+  "physicsReport": {
+    "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/migration-physics.json",
+    "sha256": "638d4491f31ca491822160226d1a94f418b12fc95e2e63e333710c2419c1fe6a"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/foundation-migration-original-game-foundry-climb-change-height-air-chain-v0-p0-feedback-quality-v5/boundary-probes.json",
+      "sha256": "1603a46d603ab3a7de4009b8ebbb5d80e2639caf07416b11aeae252241d3d954"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  }
+}

@@ -1,0 +1,387 @@
+{
+  "schema": "pcg/module-migration/v1",
+  "moduleId": "game-foundry-climb-change-height-base-v1-p0",
+  "sourceType": "original_game",
+  "sourcePath": "pcg/migration/game-sources/game-foundry-climb-change-height-base-v1-p0",
+  "sourceVersion": "sha256:49b75a77a3d7e0d3aba126dce968d7bfc13f2aa777360b96752240df185cda76",
+  "sourceFiles": {
+    "cases.json": "ad38b8e491fc0e9b348719ecb16e31413806b5647249247c73ff1372d90924d7",
+    "record.json": "214a4c1c3770c8ea7617d64dfc7375144642afd13eeb600936a3e8789a946117",
+    "module.mapnote.json": "ca46e2b883e466272857e14fb5a4e7ba4ff73c705fbb1e181de564e03fbfa1b7",
+    "source.json": "c8da4428fc4bafff551e47b13eba04b31ffe03ab9747dab3749b73aa8843e570"
+  },
+  "status": "passed_scoped",
+  "humanReview": "UNKNOWN",
+  "productionAdmitted": false,
+  "internalGeometryChanged": true,
+  "adaptation": {
+    "schema": "pcg/module-geometry-adaptation/v1",
+    "translation": [
+      0,
+      0
+    ],
+    "frameOriginPhase": 76.0,
+    "beforeBounds": {
+      "x": 0,
+      "y": 114,
+      "w": 1820,
+      "h": 218
+    },
+    "afterBounds": {
+      "x": 0,
+      "y": 76.0,
+      "w": 1920,
+      "h": 256
+    },
+    "internalGeometryChanged": true,
+    "edits": [
+      {
+        "kind": "endpoint_shore",
+        "platformIndex": 7,
+        "objectId": "generated-ce1533849dfde5b48549fa5f4ba3fc1403c5e77f500a33e6dfbbe9e4c16fa99c/platform-7",
+        "before": [
+          1725.0,
+          150.0,
+          95.0,
+          30.0
+        ],
+        "after": [
+          1725.0,
+          172.0,
+          95.0,
+          8
+        ],
+        "topDelta": 22.0,
+        "leftExtension": 0.0,
+        "rightExtension": 0.0
+      },
+      {
+        "kind": "boundary_connector",
+        "portId": "exit",
+        "sourcePlatformIndex": 7,
+        "platformIndex": 8,
+        "objectId": "generated-ce1533849dfde5b48549fa5f4ba3fc1403c5e77f500a33e6dfbbe9e4c16fa99c/migration-shore-exit",
+        "rect": [
+          1796.0,
+          172.0,
+          124.0,
+          8
+        ],
+        "length": 100.0,
+        "thickness": 8,
+        "preservesOriginalBankSpan": true,
+        "validation": "UNKNOWN"
+      }
+    ],
+    "portAdaptations": [
+      {
+        "portId": "entry",
+        "before": {
+          "position": [
+            20,
+            282
+          ],
+          "stagingPosition": [
+            20,
+            282
+          ]
+        },
+        "after": {
+          "position": [
+            0,
+            268.0
+          ],
+          "stagingPosition": [
+            24,
+            282.0
+          ],
+          "supportIndex": 0,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      },
+      {
+        "portId": "exit",
+        "before": {
+          "position": [
+            1800,
+            132
+          ],
+          "stagingPosition": [
+            1800,
+            132
+          ]
+        },
+        "after": {
+          "position": [
+            1920,
+            140.0
+          ],
+          "stagingPosition": [
+            1896,
+            154.0
+          ],
+          "supportIndex": 8,
+          "surface": "ROCK"
+        },
+        "connectorPlatforms": [],
+        "routeContinuationRequired": false
+      }
+    ],
+    "status": "adapted_unverified",
+    "missingPhysicsClaims": [
+      "entry from new boundary through original core",
+      "continuous exit",
+      "cheap bypass counterexamples",
+      "recovery and declared return"
+    ],
+    "coreRestoration": {
+      "schema": "pcg/imported-original-core-shore-repair/v1",
+      "originalCoreRectanglesExact": true,
+      "originalEntityAndRewardPositionsExact": true,
+      "sourceReplayInputAuthorityPreserved": [
+        {
+          "caseId": "game-foundry__climb_change_height-base-v1-p0",
+          "recordedFrames": 0,
+          "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "controlPlanSha256": "2f9233a1563cf5be326543571cd5a9dd31948f19b558bcdbf57b7c000a481baa"
+        }
+      ],
+      "boundaryExpansions": [
+        {
+          "face": "LEFT",
+          "blocks": 1,
+          "pixels": 128,
+          "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
+        }
+      ],
+      "ports": [
+        {
+          "portId": "entry",
+          "originalSupportIndex": 0,
+          "originalFloor": 300.0,
+          "dockFloor": 300,
+          "supportIndex": 9,
+          "boundary": [
+            -128,
+            268
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        },
+        {
+          "portId": "exit",
+          "originalSupportIndex": 7,
+          "originalFloor": 150.0,
+          "dockFloor": 172,
+          "supportIndex": 11,
+          "boundary": [
+            1920,
+            140
+          ],
+          "oldFootprintPreserved": true,
+          "validation": "UNKNOWN"
+        }
+      ],
+      "validation": "UNKNOWN",
+      "internalGeometryChanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/migration-physics.json",
+      "sha256": "f6b1ac45cb9046d9bb45e58f2df7f014d1aaa8af83bff8fbb6790d393b7e7f8f"
+    },
+    {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/source_binding.json",
+      "sha256": "b439d3e4735420ed4d653123d6f1dcf80aabe4620067602368250b35f98d8250"
+    },
+    {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/batches.json",
+      "sha256": "df698d5a3e40120a3efea9e2c721e187262de09da28e5aba5ca68afcbd79be28"
+    },
+    {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/protocol.json",
+      "sha256": "1246db762fbc39c249a5686bde3014b966a6c02c69faaf6a4b7347868dc261a7"
+    },
+    {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/boundary-probes.json",
+      "sha256": "ab50a77eee76707e7be8a8455653148116a7c6317974521cac5e6f1511887e2b"
+    }
+  ],
+  "runtimeBaseline": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+  "originalGameSourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "unresolved": [
+    "unsearched port pairs",
+    "closure combinations",
+    "mirror",
+    "arbitrary entry states",
+    "full Map"
+  ],
+  "cornerConfiguration": {
+    "id": "entry-bottom-left-open-v2",
+    "portId": "entry",
+    "corner": "BOTTOM_LEFT",
+    "baseContentVersion": "sha256:bae428401a7addb241860ae2900d1e8ec82d1d77cbf59f69536f0d81e87684a6",
+    "baseDocumentSha256": "60b50d0b3a4740f481db938d2664f1ea5070b154fbbbd02737df4dc7471b3c8d",
+    "basePhysicsInputSha256": "6429259574c3030a9acfaef745e0c07755b15bcbc908bd96346fb7d7c12521d5",
+    "source": "modules/game-foundry-climb-change-height-base-v1-p0",
+    "originalPort": {
+      "id": "entry",
+      "objectId": "generated-ce1533849dfde5b48549fa5f4ba3fc1403c5e77f500a33e6dfbbe9e4c16fa99c/port-entry",
+      "position": [
+        -128,
+        268
+      ],
+      "connection": {
+        "status": "UNKNOWN",
+        "region": "UNKNOWN"
+      },
+      "support": {
+        "objectId": "generated-ce1533849dfde5b48549fa5f4ba3fc1403c5e77f500a33e6dfbbe9e4c16fa99c/replay-independent-dock-entry",
+        "face": "top",
+        "status": "source_derived"
+      },
+      "normal": [
+        -1,
+        0
+      ],
+      "orientationSource": "design proposal, not evidence of allowed movement",
+      "motion": {
+        "ingress": {
+          "directions": "UNKNOWN",
+          "modes": "UNKNOWN"
+        },
+        "egress": {
+          "directions": "UNKNOWN",
+          "modes": "UNKNOWN"
+        }
+      },
+      "preconditions": {
+        "ingress": {
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "unspecified",
+            "allOf": [],
+            "anyOfGroups": [],
+            "note": ""
+          },
+          "equipment": "UNKNOWN",
+          "grounded": "UNKNOWN",
+          "velocity": "UNKNOWN",
+          "remainingJumps": "UNKNOWN",
+          "airShots": "UNKNOWN",
+          "stamina": "UNKNOWN",
+          "health": "UNKNOWN",
+          "shotCooldown": "UNKNOWN",
+          "traversalState": "UNKNOWN",
+          "mechanisms": "UNKNOWN",
+          "phase": "UNKNOWN",
+          "recoveryConditions": "UNKNOWN"
+        },
+        "egress": {
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "unspecified",
+            "allOf": [],
+            "anyOfGroups": [],
+            "note": ""
+          },
+          "equipment": "UNKNOWN",
+          "grounded": "UNKNOWN",
+          "velocity": "UNKNOWN",
+          "remainingJumps": "UNKNOWN",
+          "airShots": "UNKNOWN",
+          "stamina": "UNKNOWN",
+          "health": "UNKNOWN",
+          "shotCooldown": "UNKNOWN",
+          "traversalState": "UNKNOWN",
+          "mechanisms": "UNKNOWN",
+          "phase": "UNKNOWN",
+          "recoveryConditions": "UNKNOWN"
+        }
+      },
+      "seamIds": [
+        "entry-seam"
+      ],
+      "routeRoles": [
+        "main:entry"
+      ],
+      "sourceRoles": [
+        "entry"
+      ],
+      "sourcePort": {},
+      "stagingPosition": [
+        -104,
+        282
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "permissionStatus": "declared_pending_boundary_probe",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            -64,
+            332
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      }
+    },
+    "retiredSidePolicy": "preserve_geometry_no_extra_closure"
+  },
+  "holdoutPool": {
+    "id": "corner-open-v2-batch1-pool-2b48f8289f3586a2",
+    "protocol": {
+      "path": "pcg/migration/foundation-v1/holdout-pools/corner-open-v2-batch1-pool-2b48f8289f3586a2/protocol.json",
+      "sha256": "1246db762fbc39c249a5686bde3014b966a6c02c69faaf6a4b7347868dc261a7"
+    },
+    "declaration": {
+      "path": "pcg/migration/foundation-v1/holdout-pools/corner-open-v2-batch1-pool-2b48f8289f3586a2/registration.json",
+      "sha256": "4c18bb7f125031313c368360922fe943685d5783b617aac7c081345cc0a311a7"
+    },
+    "registryEntrySha256": "c625b969a54a29c471c90d1f1613cda4dd426a1b0124bbbf743ca46ef2c485a9"
+  },
+  "physicsReport": {
+    "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/migration-physics.json",
+    "sha256": "f6b1ac45cb9046d9bb45e58f2df7f014d1aaa8af83bff8fbb6790d393b7e7f8f"
+  },
+  "boundaryProbe": {
+    "passed": true,
+    "artifact": {
+      "path": "pcg/results/corner-open-v2-batch1-full-2b48f8289f3586a2/boundary-probes.json",
+      "sha256": "ab50a77eee76707e7be8a8455653148116a7c6317974521cac5e6f1511887e2b"
+    }
+  },
+  "godotLoad": {
+    "passed": true,
+    "evidence": "load-evidence/index.json",
+    "scope": "actual replay of every frozen canonical case on the declared runtime"
+  }
+}

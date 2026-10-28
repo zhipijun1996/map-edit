@@ -1,0 +1,232 @@
+{
+  "schema": "pcg/N10-idea-source/v1",
+  "source_type": "actual_current_codex_authorized_subagent",
+  "source_file": "pcg/creative-production/batch30/block-next-ideas-v2.json",
+  "source_sha256": "35b615d3a85589d0ed5582ef2e0fc0e8be8f8aa9d203177754cc50f791ace62d",
+  "original_card": {
+    "id": "B31-N10",
+    "title": "趁近铃没醒，第二枪打到它后面的铃",
+    "priority": 2,
+    "status": "proposal_existing_cells_rule_missing",
+    "junction_role": "two_port_target_resource_window",
+    "observe": "同一窄而可读射窗后有前后两只铃：近A控制第一门，远B控制最终门。近A开后实际接收器暂时不再挡弹；玩家能看见它会随第一门关闭恢复。中间小岸可真实回枪。",
+    "decide": "第一枪击近A并反冲过第一门，落中岸回枪；趁近A接收器仍不碰弹时，第二枪沿共同射窗打远B并继续。若太晚，第二枪被近A重新截走，必须接受回落重试或付费重新准备。",
+    "causal_relationship": "第一个世界目标被激活后，**目标自身的弹丸碰撞消失**而露出后一目标；真实落地恢复要在这个世界窗口内完成。顺序来自真实拦弹/失活，而不只是程序要求先A后B。",
+    "nonnegotiable": [
+      "两独立原ShotLatch，第一timed、第二可permanent",
+      "真实第一弹丸只击近A，第二弹丸通过其disabled碰撞击远B",
+      "第二枪先有中岸真实接地回充",
+      "近A复位后实际重新拦弹，错序/晚射有可恢复后果"
+    ],
+    "cells_existing": [
+      "original timed ShotLatch disables own bell_body collision while open",
+      "original permanent ShotLatch for far target",
+      "original fixed landing renewal and recoil"
+    ],
+    "missing": [
+      "actual collinear visibility/receiver geometry rule",
+      "timer interval including ground renewal/cooldown and body motion",
+      "readable near-target inactive/active feedback"
+    ],
+    "resources": "一空中枪，固定中岸真实恢复；不借敌人返枪，不给sequence虚构第二枪。地面提前开近A或多一轮准备是可能合法付费策略，不按动作词拒绝。",
+    "reward": "远B门后可见宝箱与真实出口，近A无独立奖励。用户看得见为什么第二枪打不到远环，不能只靠文字解释。",
+    "recovery": "晚射重新命中A会真的重开它但不打开B；玩家落回宽中岸后可再准备，实际timer/资源连续，不软锁。",
+    "directions": "先A→B；回程近环状态和永久远门状态改变，另验，不外推互换。",
+    "cheap": [
+      "从其他射位直接绕近A击远B",
+      "普通跳直接越两门或绕侧",
+      "第一枪就同时命中两环",
+      "近环原碰撞其实未关闭/未恢复",
+      "用抽象sequence字段代替真实弹丸遮挡",
+      "中岸落地本身耗时过长导致只剩一帧窗",
+      "近门防夹一直延迟关闭被误当正常timer窗口"
+    ],
+    "nearest": [
+      "P50-G03 clear enemy absorber",
+      "P50-G11 two-target ordered transaction",
+      "P50-G21 prepared timed door"
+    ],
+    "difference": "近目标的暂时失活给第二弹丸通行权，且这段窗口要容纳真实接地回枪。不是又一套两铃顺序标签；若真实近靶遮挡不能成立或任意顺序同成本，则按既有顺序机关适配。",
+    "novelty": "physical receiver-release/resource-window hypothesis; independent family UNKNOWN",
+    "first_probe": "固定短射距先做三对照：近A活时射far被near截；开near后far弹实际通过；near复位再次截。然后才放身体两段。门/中岸要离原grow24区域，不能由防夹一直hold近环失活。",
+    "budget": "建议2rule/80probe；所有靶尽量距发射处<=约200–230，给6deg扰动空间。timer初域约1.8–2.8s仅候选，按实际第一跳/回充/第二发飞行求解；不指定一帧。",
+    "author": "/root/block_next_creative",
+    "source_type": "actual_current_codex_authorized_subagent",
+    "capabilities": [
+      "move",
+      "jump",
+      "shot_recoil"
+    ],
+    "geometry": {
+      "concept_only": true,
+      "bounds": [
+        0,
+        0,
+        1280,
+        1152
+      ],
+      "bounding_blocks": [
+        10,
+        9
+      ],
+      "block_size": 128,
+      "ownership": "Initially reserve connected rectangle, not solid perimeter. Freeze physical/interactions/full dynamic/body space before tests, never add port outward-neighbour cells.",
+      "ports": [
+        {
+          "id": "A",
+          "cell": [
+            0,
+            5
+          ],
+          "edge": "W",
+          "profile": "ground64/v1",
+          "anchor": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "staging": [
+            24,
+            718
+          ],
+          "floor_y": 736,
+          "role": "first-shot ingress"
+        },
+        {
+          "id": "B",
+          "cell": [
+            9,
+            4
+          ],
+          "edge": "E",
+          "profile": "ground64/v1",
+          "anchor": [
+            1280,
+            576
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "staging": [
+            1256,
+            590
+          ],
+          "floor_y": 608,
+          "role": "far-door continuation"
+        }
+      ],
+      "solid_sketch": [
+        {
+          "role": "A shore",
+          "rect": [
+            0,
+            736,
+            704,
+            64
+          ]
+        },
+        {
+          "role": "middle renewal dock",
+          "rect": [
+            752,
+            736,
+            160,
+            64
+          ]
+        },
+        {
+          "role": "B shore",
+          "rect": [
+            1088,
+            608,
+            192,
+            96
+          ]
+        },
+        {
+          "role": "first gate",
+          "rect": [
+            736,
+            128,
+            16,
+            736
+          ]
+        },
+        {
+          "role": "second gate",
+          "rect": [
+            960,
+            128,
+            24,
+            736
+          ]
+        },
+        {
+          "role": "retry floor",
+          "rect": [
+            96,
+            928,
+            1088,
+            40
+          ]
+        }
+      ],
+      "features": [
+        {
+          "role": "near A receiver candidate",
+          "position": [
+            640,
+            672
+          ],
+          "mode": "timed, own bell collision disabled while open"
+        },
+        {
+          "role": "far B receiver candidate",
+          "position": [
+            608,
+            704
+          ],
+          "mode": "permanent ordinary latch"
+        },
+        {
+          "role": "shared visible angular corridor",
+          "note": "true collinearity/short firing positions must be solved; coordinates do not prove near covers far shot cone"
+        },
+        {
+          "role": "middle safe close separation",
+          "note": "middle supported body outside first gate grow24; closure is real, not indefinitely blocked"
+        },
+        {
+          "role": "projectile clearance",
+          "note": "Both targets above736 launch shore; initial belowshore sketch832/864 would hit own rock and is discarded before any probe. Short nearer target pair remains a geometry hypothesis."
+        }
+      ]
+    },
+    "executable_generation_rule": "MISSING",
+    "physics": "NOT_RUN_BY_DESIGN_AGENT",
+    "candidate_versions": [],
+    "human_video_observation": "UNKNOWN",
+    "human_playtest": "UNKNOWN",
+    "production_admitted": false,
+    "relations": [
+      {
+        "from_port": "A",
+        "to_port": "B",
+        "intended_relation": "receiver_release_then_far_hit",
+        "evidence": "UNKNOWN"
+      },
+      {
+        "from_port": "B",
+        "to_port": "A",
+        "intended_relation": "not_requested_no_no_path_claim",
+        "evidence": "UNKNOWN"
+      }
+    ]
+  },
+  "interpretation": "Physicalline-of-fireocclusionmustbeauthoredwithrealrocks; originalconceptcentresaloneinsufficient. Groundalternativeassessedbyactualresource/window/costnotairword.",
+  "novelty": "Extension/compositionofexistingG03/G11/G21; independentfamilyUNKNOWN"
+}

@@ -1,0 +1,20 @@
+{
+  "schema":"pcg/batch30-C02-protocol/v1",
+  "registered_before_execution":true,
+  "idea_id":"B30-C02",
+  "maximum_rule_revisions":3,
+  "maximum_probe_cases":220,
+  "maximum_interfaces":2,
+  "maximum_full_cases":1600,
+  "calibration_seed":261031037,
+  "holdout":"root controlled original regular independent holdout; not used by prototypes",
+  "core":"Full body passes initially open A, a single airborne shot swaps A closed/B open and recoils through B onto destination; no intermediate landing between A and B",
+  "v1_geometry_domain":"A x270..290; B x550..570, both y130..900; roof bottom130; departure225; receiver220,405; destination begins680 top438. Lower recovery900 below practical one-shot climb; stairs entirely west of entry.",
+  "v1_control_domain":{"jump_hold":12,"shot_after_release":[10,14,18,22],"aim":"original real bell targeting with actual projectile flight"},
+  "selection":"First clean valid control, then mild6/moderate6 on fixed controls. Select maximum minimum rate then earlier index, only before root full calibration. Nominal geometry frozen before counterexamples; original regular gate unchanged.",
+  "counter_policy":"Real same-goal reward and stable destination, body safety and original resources. Ground early swap, no shot, under/over gates, ground middle toggle, long jump, alternate shot angles. Do not infer no_path from finite failures.",
+  "failure_recovery":"Lower safe floor and original stationary stairs to entry; repeated pair receiver allows restore A after falling; exact continuous recovery must be separately tested",
+  "new_cells":0,
+  "human_fun_approval":"UNKNOWN",
+  "production_admitted":false
+}

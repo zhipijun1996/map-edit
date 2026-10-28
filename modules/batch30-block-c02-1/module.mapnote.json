@@ -1,0 +1,4239 @@
+{
+  "schema": "gunman-rush-level-sketch/v1",
+  "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910",
+  "title": "Block128 空中换门 / 同高接收岸",
+  "description": "平原动作内容候选：核心动作/世界后果、技术覆盖、人工观感分别记录；未验方向与Map状态保持UNKNOWN。",
+  "constraints": "UNKNOWN不得作为有效地图接口。",
+  "canvas": {
+    "width": 1408,
+    "height": 896,
+    "origin": [
+      0,
+      0
+    ],
+    "units": "godot_world_unit",
+    "positionPrecision": "exact"
+  },
+  "objects": [
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-0",
+      "type": "terrain",
+      "x": -78,
+      "y": 352,
+      "w": 400,
+      "h": 118,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-1",
+      "type": "terrain",
+      "x": 632,
+      "y": 352,
+      "w": 264,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-2",
+      "type": "terrain",
+      "x": 332,
+      "y": 12,
+      "w": 330,
+      "h": 50,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-3",
+      "type": "terrain",
+      "x": -418,
+      "y": 832,
+      "w": 1160,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-4",
+      "type": "terrain",
+      "x": -398,
+      "y": 722,
+      "w": 100,
+      "h": 28,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 4,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-5",
+      "type": "terrain",
+      "x": -308,
+      "y": 602,
+      "w": 100,
+      "h": 28,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 5,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-6",
+      "type": "terrain",
+      "x": -218,
+      "y": 482,
+      "w": 100,
+      "h": 28,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 6,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-7",
+      "type": "terrain",
+      "x": -128,
+      "y": 352,
+      "w": 100,
+      "h": 46,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 7,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+      "type": "gate",
+      "x": 352,
+      "y": 62,
+      "w": 20,
+      "h": 770,
+      "rotation": 0,
+      "label": "airlock-pair gate",
+      "note": "",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "A",
+        "gateA": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+        "gateB": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes",
+        "member": "A",
+        "openSeconds": 0
+      }
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/bell-0",
+      "type": "bell",
+      "x": 288,
+      "y": 320,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "airlock-pair",
+      "note": "",
+      "targetId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+      "sourceId": "airlock-pair",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "A",
+        "gateA": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+        "gateB": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes"
+      },
+      "targetIds": [
+        "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+        "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0"
+      ]
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/port-A",
+      "type": "entry",
+      "x": -524,
+      "y": 302,
+      "w": 24,
+      "h": 36,
+      "rotation": 0,
+      "label": "A",
+      "note": "实际支撑位置；连接接缝与跨模块状态仍未验证"
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/port-B",
+      "type": "exit",
+      "x": 884,
+      "y": 302,
+      "w": 24,
+      "h": 36,
+      "rotation": 0,
+      "label": "B",
+      "note": "实际支撑位置；连接接缝与跨模块状态仍未验证"
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/route-cross-A-swap-cross-B",
+      "type": "route",
+      "x": -104,
+      "y": 158.409210205078,
+      "w": 976.25830178125,
+      "h": 175.590790794922,
+      "rotation": 0,
+      "label": "A → B / cross-A-swap-cross-B",
+      "note": "",
+      "points": [
+        {
+          "x": -104,
+          "y": 334
+        },
+        {
+          "x": -99.6666641235352,
+          "y": 333.925262451172,
+          "action": ""
+        },
+        {
+          "x": -95.3333358764648,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": -91,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": -86.6666641235352,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": -82.3333282470703,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -77.9999923706055,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -73.6666564941406,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -69.3333206176758,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -64.9999847412109,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -60.6666488647461,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -56.3333168029785,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -51.9999847412109,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -47.6666526794434,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -43.3333206176758,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -38.9999885559082,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -34.6666564941406,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -30.333324432373,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -25.9999923706055,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -21.6666603088379,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -17.3333282470703,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -12.9999952316284,
+          "y": 333.924041748047,
+          "action": ""
+        },
+        {
+          "x": -8.66666126251221,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": -4.333327293396,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 0.00000619888305664062,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 4.33333969116211,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 8.66667366027832,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 13.0000076293945,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 17.3333415985107,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 21.6666736602783,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 26.0000057220459,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 30.3333377838135,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 34.6666717529297,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 39.0000038146973,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 43.3333358764648,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 47.6666679382324,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 52,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 56.3333320617676,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 60.6666641235352,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 65,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 69.3333358764648,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 73.6666717529297,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 78.0000076293945,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 82.3333435058594,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 86.6666793823242,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 91.0000152587891,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 95.3333511352539,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 99.6666870117188,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 104.000022888184,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 108.333358764648,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 112.666694641113,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 117.000030517578,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 121.333366394043,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 125.666702270508,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 130.000045776367,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 134.333374023438,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 138.666702270508,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 143.000030517578,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 147.333358764648,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 151.666687011719,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 156.000015258789,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 160.333343505859,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 164.66667175293,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 169,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 173.33332824707,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 177.666656494141,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 181.999984741211,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 186.333312988281,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 190.666641235352,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 194.999969482422,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 199.333297729492,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 203.666625976562,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 207.999954223633,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 212.333282470703,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 216.666610717773,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 220.999938964844,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 225.333267211914,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 229.666595458984,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 233.999923706055,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 238.333251953125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 242.666580200195,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 246.999908447266,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 251.333236694336,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 255.666564941406,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 259.999908447266,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 264.333251953125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 268.666595458984,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 272.999938964844,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 277.333282470703,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 281.666625976562,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 285.999969482422,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 290.333312988281,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 294.666656494141,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 299,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 303.333343505859,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 307.666687011719,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 312.000457763672,
+          "y": 323.546447753906,
+          "action": "ground_jump"
+        },
+        {
+          "x": 316.333801269531,
+          "y": 313.168670654297,
+          "action": ""
+        },
+        {
+          "x": 320.667144775391,
+          "y": 302.790893554688,
+          "action": ""
+        },
+        {
+          "x": 325.00048828125,
+          "y": 292.413116455078,
+          "action": ""
+        },
+        {
+          "x": 329.333831787109,
+          "y": 282.035339355469,
+          "action": ""
+        },
+        {
+          "x": 333.667175292969,
+          "y": 271.657562255859,
+          "action": ""
+        },
+        {
+          "x": 338.000518798828,
+          "y": 261.27978515625,
+          "action": ""
+        },
+        {
+          "x": 342.333862304688,
+          "y": 251.046447753906,
+          "action": ""
+        },
+        {
+          "x": 346.667205810547,
+          "y": 241.535339355469,
+          "action": ""
+        },
+        {
+          "x": 351.000549316406,
+          "y": 232.746444702148,
+          "action": ""
+        },
+        {
+          "x": 355.333892822266,
+          "y": 224.679779052734,
+          "action": ""
+        },
+        {
+          "x": 359.667236328125,
+          "y": 217.335327148438,
+          "action": ""
+        },
+        {
+          "x": 364.000579833984,
+          "y": 218.057556152344,
+          "action": ""
+        },
+        {
+          "x": 368.333923339844,
+          "y": 219.501998901367,
+          "action": ""
+        },
+        {
+          "x": 372.667266845703,
+          "y": 221.668670654297,
+          "action": ""
+        },
+        {
+          "x": 377.000610351562,
+          "y": 224.557556152344,
+          "action": ""
+        },
+        {
+          "x": 381.333953857422,
+          "y": 228.168670654297,
+          "action": ""
+        },
+        {
+          "x": 385.667297363281,
+          "y": 232.501998901367,
+          "action": ""
+        },
+        {
+          "x": 390.000640869141,
+          "y": 237.557556152344,
+          "action": ""
+        },
+        {
+          "x": 394.333984375,
+          "y": 243.335342407227,
+          "action": ""
+        },
+        {
+          "x": 398.667327880859,
+          "y": 249.835342407227,
+          "action": ""
+        },
+        {
+          "x": 403.000671386719,
+          "y": 257.057556152344,
+          "action": ""
+        },
+        {
+          "x": 417.078796386719,
+          "y": 245.313705444336,
+          "action": "shot"
+        },
+        {
+          "x": 431.156921386719,
+          "y": 233.569854736328,
+          "action": ""
+        },
+        {
+          "x": 445.235046386719,
+          "y": 221.82600402832,
+          "action": ""
+        },
+        {
+          "x": 459.313171386719,
+          "y": 210.082153320312,
+          "action": ""
+        },
+        {
+          "x": 473.391296386719,
+          "y": 198.338302612305,
+          "action": ""
+        },
+        {
+          "x": 487.469421386719,
+          "y": 186.594451904297,
+          "action": ""
+        },
+        {
+          "x": 501.547546386719,
+          "y": 174.850601196289,
+          "action": ""
+        },
+        {
+          "x": 515.625671386719,
+          "y": 163.106750488281,
+          "action": ""
+        },
+        {
+          "x": 521.256896972656,
+          "y": 158.409210205078,
+          "action": ""
+        },
+        {
+          "x": 525.590209960938,
+          "y": 158.409210205078,
+          "action": ""
+        },
+        {
+          "x": 529.923522949219,
+          "y": 158.409210205078,
+          "action": ""
+        },
+        {
+          "x": 534.2568359375,
+          "y": 158.409210205078,
+          "action": ""
+        },
+        {
+          "x": 538.590148925781,
+          "y": 158.409210205078,
+          "action": ""
+        },
+        {
+          "x": 542.923461914062,
+          "y": 158.410446166992,
+          "action": ""
+        },
+        {
+          "x": 547.256774902344,
+          "y": 158.441909790039,
+          "action": ""
+        },
+        {
+          "x": 551.590087890625,
+          "y": 158.578048706055,
+          "action": ""
+        },
+        {
+          "x": 555.923400878906,
+          "y": 158.925476074219,
+          "action": ""
+        },
+        {
+          "x": 560.256713867188,
+          "y": 159.608352661133,
+          "action": ""
+        },
+        {
+          "x": 564.590026855469,
+          "y": 160.753784179688,
+          "action": ""
+        },
+        {
+          "x": 568.92333984375,
+          "y": 162.477157592773,
+          "action": ""
+        },
+        {
+          "x": 573.256652832031,
+          "y": 164.867553710938,
+          "action": ""
+        },
+        {
+          "x": 577.589965820312,
+          "y": 167.973114013672,
+          "action": ""
+        },
+        {
+          "x": 581.923278808594,
+          "y": 171.800888061523,
+          "action": ""
+        },
+        {
+          "x": 586.256591796875,
+          "y": 176.350891113281,
+          "action": ""
+        },
+        {
+          "x": 590.589904785156,
+          "y": 181.623107910156,
+          "action": ""
+        },
+        {
+          "x": 594.923217773438,
+          "y": 187.617553710938,
+          "action": ""
+        },
+        {
+          "x": 599.256530761719,
+          "y": 194.334228515625,
+          "action": ""
+        },
+        {
+          "x": 603.58984375,
+          "y": 201.77311706543,
+          "action": ""
+        },
+        {
+          "x": 607.923156738281,
+          "y": 209.934234619141,
+          "action": ""
+        },
+        {
+          "x": 612.256469726562,
+          "y": 218.817565917969,
+          "action": ""
+        },
+        {
+          "x": 616.589782714844,
+          "y": 228.423126220703,
+          "action": ""
+        },
+        {
+          "x": 620.923095703125,
+          "y": 238.750900268555,
+          "action": ""
+        },
+        {
+          "x": 625.256408691406,
+          "y": 249.800903320312,
+          "action": ""
+        },
+        {
+          "x": 629.589721679688,
+          "y": 261.573120117188,
+          "action": ""
+        },
+        {
+          "x": 633.923034667969,
+          "y": 274.067565917969,
+          "action": ""
+        },
+        {
+          "x": 638.25634765625,
+          "y": 287.284240722656,
+          "action": ""
+        },
+        {
+          "x": 642.589660644531,
+          "y": 300.617584228516,
+          "action": ""
+        },
+        {
+          "x": 646.922973632812,
+          "y": 313.950927734375,
+          "action": ""
+        },
+        {
+          "x": 651.256286621094,
+          "y": 327.284271240234,
+          "action": ""
+        },
+        {
+          "x": 655.589660644531,
+          "y": 333.925262451172,
+          "action": ""
+        },
+        {
+          "x": 659.922973632812,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 664.25634765625,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 668.589721679688,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 672.923095703125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 677.256469726562,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 681.58984375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 685.923217773438,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 690.256591796875,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 694.589965820312,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 698.92333984375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 703.256713867188,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 707.590087890625,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 711.923461914062,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 716.2568359375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 720.590209960938,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 724.923583984375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 729.256958007812,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 733.59033203125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 737.923706054688,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 742.257080078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 746.590454101562,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 750.923828125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 755.257202148438,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 759.590576171875,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 763.923950195312,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 768.25732421875,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 772.590698242188,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 776.924072265625,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 781.257446289062,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 785.5908203125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 789.924194335938,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 794.257568359375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 798.590942382812,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 802.92431640625,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 807.257690429688,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 811.591064453125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 815.924438476562,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 820.2578125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 824.591186523438,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 828.924560546875,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 833.257934570312,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 837.59130859375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 841.924682617188,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 846.258056640625,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 850.591430664062,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 854.9248046875,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 859.258178710938,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 863.591552734375,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 867.924926757812,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        },
+        {
+          "x": 872.25830078125,
+          "y": 333.92529296875,
+          "action": ""
+        }
+      ],
+      "duration": 3.55,
+      "mode": "once",
+      "sourceRoute": "cross-A-swap-cross-B",
+      "trajectory": "recorded_actual_physics"
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/return-bell-0",
+      "type": "bell",
+      "x": 498,
+      "y": 715,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "返回侧接收器",
+      "note": "原 add_access_bell，与主铃共享事务",
+      "targetId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+      "sourceId": "airlock-pair/return",
+      "mechanics": {
+        "service": "ShotLatch.add_access_bell",
+        "returnSideOnly": true
+      }
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+      "type": "gate",
+      "x": 592,
+      "y": 62,
+      "w": 20,
+      "h": 770,
+      "rotation": 0,
+      "label": "airlock-pair / B",
+      "note": "与A门互斥的真实第二碰撞门，非装饰",
+      "sourceId": "airlock-pair/B",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "A",
+        "gateA": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+        "gateB": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes",
+        "member": "B"
+      }
+    },
+    {
+      "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/migration-shore-A",
+      "type": "terrain",
+      "x": -512,
+      "y": 352,
+      "w": 408,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 8
+    }
+  ],
+  "updatedAt": "2026-10-27T01:44:09.205Z",
+  "intent": {
+    "operation": "new_module"
+  },
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+  },
+  "difficulty": {
+    "version": 1,
+    "scale": "gunman-rush/module-difficulty/v1",
+    "score": null,
+    "note": ""
+  },
+  "source": {
+    "repository": "zhipijun1996/map-edit",
+    "commit": "823579a6f24c09ea48fec4ca3140750d8a57c301",
+    "path": "pcg/prototype/creative_batches/batch30_blockpilot/rules_v2.py",
+    "moduleId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910",
+    "kind": "generated",
+    "category": "平原",
+    "method": "actual_flight_and_pressure_relations",
+    "arguments": [],
+    "integration": {
+      "isIntegrated": false,
+      "usage": "not_integrated",
+      "label": "未接入 · 研究候选",
+      "reason": "生成与回放证据未写回正式游戏地图消费者。",
+      "checkedCommit": "823579a6f24c09ea48fec4ca3140750d8a57c301",
+      "evidence": [],
+      "verification": "research_output_only"
+    }
+  },
+  "generationContract": {
+    "version": 2,
+    "kind": "module",
+    "contentVersion": "sha256:5b03da782f724d41b4cba3085ac239e06c61773277538aacab3b57a4f68fb69d",
+    "seed": {
+      "status": "not_used",
+      "value": null,
+      "reason": "Deterministic registered rules; phase/noise seeds are validation only"
+    },
+    "generation": {
+      "source": {
+        "cases": {
+          "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/review_cases.json",
+          "sha256": "5b896aca3208a5cb85075a8b3334235102f7958cae826f4b185fd6f60d529daa"
+        },
+        "run": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock",
+        "sourceCaseId": "UNKNOWN",
+        "moduleSha256": "UNKNOWN",
+        "physicsSourceCommit": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
+        "sourceManifestSha256": "3168acd446fbb0037b820abb9dcd52cf33ab6204d278fb9fb1469c78a3e9937a",
+        "geometryDefinitionSha256": "5af32a7abdcc4eb21f6f502974c535d2fa86505798953ccf412048dcbb2ae19e",
+        "routeCases": [
+          {
+            "routeId": "cross-A-swap-cross-B",
+            "sourceCaseId": "b30-block-c02-v2-i1-c0-reward0",
+            "moduleSha256": "fd478ed6c78eb7c5c12f358c1f803f437fdb24c83d7776defc9d3366c939a60c",
+            "artifacts": [
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/physics/0000-clean-screen.output.json.gz",
+                "sha256": "7c263df7ea0a94138583fdccd22a37278c6ac1ba1cbcba6abbe26eb4c96d0e64"
+              },
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/physics/0000-clean-screen.input.json",
+                "sha256": "e4d2261bd4abda35ce2e58584d42413d84b133160c7062362eb952cba0a2e5e7"
+              },
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/source_binding.json",
+                "sha256": "492088ce6fa29c0844a7a47c91ae7434059f31223b2257a3eb752b502a8586cc"
+              },
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/batches.json",
+                "sha256": "b6af1ea81db0ccc4365c8201f7f9ad8ba706deeb6d0e75509ebc59f71feed818"
+              },
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/physics/0000-clean-screen.execution.json",
+                "sha256": "b1d6a8211fb1a5e46215b3e67f506e90a3df486e42daf3dc06bc165fc6b30900"
+              },
+              {
+                "path": "pcg/results/workshop-batch30-blockpilot-full-v1/block128-serial-airlock/protocol.json",
+                "sha256": "b3c562e30f4c4558cb53b5ee7ed8282e6117a1c9bb888dcf2697cece1e360ac0"
+              }
+            ]
+          }
+        ],
+        "workshopSpecification": {
+          "schema": "map-notes/challenge-specification/v1",
+          "id": "batch30/block-C02/1",
+          "source_type": "model_authored_challenge_spec",
+          "region": "plains",
+          "required_family": "block128-serial-airlock",
+          "objective": {
+            "recipe": "block128-serial-airlock",
+            "interface": 1,
+            "physical_layout_sha256": "5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910",
+            "core": "full body clears A before original air shot closes it and opens B; same recoil crosses unsupported middle",
+            "receiver": [
+              690,
+              382
+            ],
+            "role": "rising_receiver",
+            "source_relationship": "serial-airlock-recoil",
+            "block_contract": "map-notes/block-grid/v1",
+            "source_map_request": {
+              "id": "block-demand/exp1_0",
+              "sha256": "961940758f937fb3069e0374a679154fa160563fd653cdc9acebb47085ad2ff9",
+              "preserve_all_edges": [
+                "e26",
+                "e27"
+              ]
+            }
+          },
+          "capabilities": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": []
+          },
+          "ports": {
+            "count": 2,
+            "required_normals": [
+              [
+                -1,
+                0
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          "relations": [
+            {
+              "from_port": "A",
+              "to_port": "B",
+              "role": "main",
+              "route_id": "cross-A-swap-cross-B"
+            }
+          ],
+          "space": {
+            "max_width": 1536,
+            "max_height": 1024,
+            "max_port_span_x": 1280,
+            "block_size": 128,
+            "port_profiles": [
+              "ground64/v1"
+            ]
+          },
+          "boundary_policy": "open",
+          "enclosing_walls": false,
+          "difficulty": {
+            "intent": "regular",
+            "human_score": null
+          },
+          "risk_reward": {
+            "mandatory_damage": false,
+            "reward_sites": []
+          },
+          "resource_state": {
+            "reset_between_components": false,
+            "entry": "Original supported body at interior W staging; true boundary crossing is separate fixture, no reset",
+            "exit": "observed stable B with A closed/B open; arbitrary states UNKNOWN"
+          },
+          "return_conditions": "Original recovery geometry retained; new continuous recovery and reverse remain UNKNOWN until exact verification",
+          "budget": {
+            "generator_candidates": 4,
+            "director_revisions": 0
+          }
+        },
+        "ideaIds": [
+          "B30-C02"
+        ],
+        "batchAdapter": "pcg/prototype/creative_batches/batch30_runtime/export_v1.mjs",
+        "exportSourceFiles": [
+          {
+            "path": "model.js",
+            "sha256": "c3550bc2c4b85ec5292915f313b2d3710054347b5dfa9d41f21bce68223e9334"
+          },
+          {
+            "path": "capabilities.js",
+            "sha256": "7022bd4fe74cd911ea9d007c9baba6ed5df534ccc4e9fc4c95c79ea97c5540c5"
+          },
+          {
+            "path": "difficulty.js",
+            "sha256": "d55173bc4d97a06f592f5873d481244f8a36dea22681887b50d1df3d4fc20992"
+          },
+          {
+            "path": "module-contract.js",
+            "sha256": "f591d1ee73aa81ae511f26d60ad1419e4aa63fcc397c78a1efb135366923dcce"
+          },
+          {
+            "path": "module-contract-render.js",
+            "sha256": "87faf877b768842a164b48a2277dedd2721ac8ac9f3ef2974d81966bbb1f9cf0"
+          },
+          {
+            "path": "tools/export-module-contracts.mjs",
+            "sha256": "c6e3d996ffcf440521e2437dd05a19d7c4fc043e207cb9a830eaf51df5be8260"
+          },
+          {
+            "path": "pcg/prototype/workshop/export.mjs",
+            "sha256": "8703f0cf26dd24d011d97be43972f9880dcfabadd68240de581a380bc643ce58"
+          },
+          {
+            "path": "pcg/prototype/creative_batches/batch30_runtime/export_v1.mjs",
+            "sha256": "78a4d22362e745629135935a84f787e480e45639f69bafba5de8fe6c0fa578cb"
+          },
+          {
+            "path": "module-block-grid.js",
+            "sha256": "4021062d23e6d72187e50a80e2b65163d272c31a5d125d17a3f9195c54a88e28"
+          },
+          {
+            "path": "pcg/prototype/creative_batches/batch30_runtime/export_block_v1.mjs",
+            "sha256": "c79fc0fdd46a353b7b840ce3992e4bad153f1c03fb3887d8c2a15c0297b90553"
+          }
+        ],
+        "blockContractUpstream": "a685faebdb7596b0808538ab9ef299d6455d2320"
+      },
+      "parameters": {
+        "producerArguments": {
+          "id": "batch30/block-native-C02",
+          "version": 2,
+          "source_path": "pcg/prototype/creative_batches/batch30_blockpilot/rules_v2.py",
+          "parameters": {
+            "source_case_id": "b30-c02-v2-i1-c0",
+            "source_layout_uid": "a320d37432764e6779d2497c482751c9a1033a08e824747a9575dcf22c68a35a",
+            "source_physics_inherited": false,
+            "translation": [
+              82,
+              -68
+            ],
+            "terminal_edits": [
+              {
+                "kind": "entry_terminal_top",
+                "index": 0,
+                "before": [
+                  -78,
+                  370,
+                  400,
+                  100
+                ],
+                "after": [
+                  -78,
+                  352,
+                  400,
+                  118
+                ],
+                "delta": -18
+              },
+              {
+                "kind": "entry_terminal_top",
+                "index": 7,
+                "before": [
+                  -128,
+                  370,
+                  100,
+                  28
+                ],
+                "after": [
+                  -128,
+                  352,
+                  100,
+                  46
+                ],
+                "delta": -18
+              },
+              {
+                "kind": "exit_terminal_top_and_right_cut",
+                "index": 1,
+                "before": [
+                  632,
+                  332,
+                  280,
+                  100
+                ],
+                "after": [
+                  632,
+                  352,
+                  264,
+                  80
+                ],
+                "delta": 20,
+                "extension": 0
+              }
+            ],
+            "entry_rebound_to_original_support": 7,
+            "retained_recovery_platform_indices": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "deleted_platform_indices": [],
+            "map_added_platforms": 0,
+            "reward_request": {
+              "currency": 0,
+              "removed_original_chest": true,
+              "major_item_service": "NOT_SUPPORTED"
+            }
+          },
+          "registration_source": "pcg/prototype/creative_batches/batch30_blockpilot/api_v2.py"
+        },
+        "family": "block128-serial-airlock",
+        "controlPlan": "UNKNOWN",
+        "challengeRequirements": "UNKNOWN",
+        "synthesis": "UNKNOWN",
+        "routePrograms": [
+          {
+            "routeId": "cross-A-swap-cross-B",
+            "from": "A",
+            "to": "B",
+            "program": [
+              {
+                "op": "axis",
+                "trigger": {
+                  "after": 0
+                },
+                "value": 1
+              },
+              {
+                "op": "wait",
+                "trigger": {
+                  "dynamic": {
+                    "kind": "actor_x",
+                    "direction": "gte",
+                    "value": 307
+                  },
+                  "timeout": 180
+                }
+              },
+              {
+                "op": "jump",
+                "trigger": {
+                  "after": 0
+                }
+              },
+              {
+                "op": "jump_release",
+                "trigger": {
+                  "after": 12
+                }
+              },
+              {
+                "op": "shoot",
+                "trigger": {
+                  "after": 10
+                },
+                "aim_cell": {
+                  "kind": "bell",
+                  "id": "airlock-pair"
+                }
+              },
+              {
+                "op": "settle",
+                "trigger": {
+                  "after": 6
+                },
+                "target_x": 872,
+                "deadband": 4
+              }
+            ],
+            "viaPorts": []
+          }
+        ],
+        "workshop": {
+          "interface": 1,
+          "control": 0,
+          "hold": 12,
+          "shot_after_release": 10,
+          "core": "full body clears A before original air shot closes it and opens B; same recoil crosses unsupported middle",
+          "bank": [
+            550,
+            400,
+            280,
+            100
+          ],
+          "gate_B": [
+            510,
+            130,
+            20,
+            770
+          ]
+        }
+      },
+      "migration": {
+        "sourcePath": "pcg/map_directed/library/candidates/edb7ee7a3d7cb43010f3dc4c6396b3894cd21686d648da9188247a226110c337",
+        "sourceVersion": "sha256:edb7ee7a3d7cb43010f3dc4c6396b3894cd21686d648da9188247a226110c337",
+        "sourceDocumentSha256": "782e9da6bdd0603778cc367d60bb0f3c157621828678eecc030dbf01e922440f",
+        "policy": "minimal_actual_boundary_adaptation",
+        "moduleId": "batch30-block-c02-1",
+        "legacyEvidencePolicy": "Historical artifacts remain bound to their original content version.",
+        "compatibilityBindings": [
+          {
+            "caseId": "b30-block-c02-v2-i1-c0-reward0",
+            "schema": "pcg/migration-purpose-compatibility/v1",
+            "originalAuthorSource": "pcg/prototype/creative_batches/batch30_blockpilot/api_v2.py",
+            "runnerSource": "pcg/prototype/creative_batches/batch30_cell/runner_v3.gd",
+            "legacyOwnership": "superseded_by_exact_foundation_rectangle",
+            "foundationRectangle": {
+              "x": -512,
+              "y": 0,
+              "w": 1408,
+              "h": 896
+            },
+            "originalBlockGridSha256": "26ea7954fc384acf6240cee41aaf78a2f2aa6632e50170b6ee13cb8e3527c56c",
+            "interpretation": "Original causal assertions retained; only retired ownership data and actual original runner binding adapted."
+          }
+        ],
+        "correctiveRevision": {
+          "previousContentVersion": "sha256:cfed60c01d3a576a5c16d39b1fe197c889ac9199cb8718083426abde971413bc",
+          "internalWaypoints": [],
+          "compatibilityBindings": [
+            {
+              "caseId": "b30-block-c02-v2-i1-c0-reward0",
+              "schema": "pcg/migration-purpose-compatibility/v1",
+              "originalAuthorSource": "pcg/prototype/creative_batches/batch30_blockpilot/api_v2.py",
+              "runnerSource": "pcg/prototype/creative_batches/batch30_cell/runner_v3.gd",
+              "legacyOwnership": "superseded_by_exact_foundation_rectangle",
+              "foundationRectangle": {
+                "x": -512,
+                "y": 0,
+                "w": 1408,
+                "h": 896
+              },
+              "originalBlockGridSha256": "26ea7954fc384acf6240cee41aaf78a2f2aa6632e50170b6ee13cb8e3527c56c",
+              "interpretation": "Original causal assertions retained; only retired ownership data and actual original runner binding adapted."
+            }
+          ],
+          "policy": "Preserve original real assertions; explicit internal docks and retired ownership replaced, no gate lowered."
+        }
+      }
+    },
+    "designStatus": "declared",
+    "space": {
+      "units": "godot_world_unit",
+      "axes": {
+        "x": "right",
+        "y": "down"
+      },
+      "localOrigin": [
+        0,
+        0
+      ],
+      "actorBody": {
+        "shape": "rectangle",
+        "size": [
+          24,
+          36
+        ],
+        "source": {
+          "path": "pcg/prototype/godot/scenes/player/player.tscn",
+          "sha256": "75ea76ff43b9b8cb3410096d01bfde92c678c56bd31ea3cf6a0bfd438fd9acd8"
+        }
+      },
+      "bounds": {
+        "x": -512,
+        "y": 0,
+        "w": 1408,
+        "h": 896
+      },
+      "boundsCoverage": "Complete rectangular Module footprint; internal geometry preserved.",
+      "occupancy": {
+        "status": "partial",
+        "objectIds": [
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-0",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-1",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-2",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-3",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-4",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-5",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-6",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-7",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/bell-0",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/return-bell-0",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+          "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/migration-shore-A"
+        ],
+        "regions": [],
+        "coverage": "known cells; full action and projectile reservations UNKNOWN"
+      },
+      "actionClearance": {
+        "status": "partial",
+        "regions": [
+          {
+            "x": -116,
+            "y": 315.925262451172,
+            "w": 28.3333358764648,
+            "h": 36.07473754882801
+          },
+          {
+            "x": -111.6666641235352,
+            "y": 315.925262451172,
+            "w": 28.333328247070398,
+            "h": 36.00003051757801
+          },
+          {
+            "x": -107.3333358764648,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": -103,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": -98.6666641235352,
+            "y": 315.924041748047,
+            "w": 28.3333358764649,
+            "h": 36.00125122070301
+          },
+          {
+            "x": -94.3333282470703,
+            "y": 315.924041748047,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": -89.9999923706055,
+            "y": 315.924041748047,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": -85.6666564941406,
+            "y": 315.924041748047,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": -81.3333206176758,
+            "y": 315.924041748047,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": -76.9999847412109,
+            "y": 315.924041748047,
+            "w": 28.333335876464794,
+            "h": 36
+          },
+          {
+            "x": -72.6666488647461,
+            "y": 315.924041748047,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": -68.3333168029785,
+            "y": 315.924041748047,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": -63.9999847412109,
+            "y": 315.924041748047,
+            "w": 28.3333320617675,
+            "h": 36
+          },
+          {
+            "x": -59.6666526794434,
+            "y": 315.924041748047,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": -55.3333206176758,
+            "y": 315.924041748047,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": -50.9999885559082,
+            "y": 315.924041748047,
+            "w": 28.333332061767607,
+            "h": 36
+          },
+          {
+            "x": -46.6666564941406,
+            "y": 315.924041748047,
+            "w": 28.333332061767596,
+            "h": 36
+          },
+          {
+            "x": -42.333324432373004,
+            "y": 315.924041748047,
+            "w": 28.3333320617675,
+            "h": 36
+          },
+          {
+            "x": -37.9999923706055,
+            "y": 315.924041748047,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": -33.666660308837905,
+            "y": 315.924041748047,
+            "w": 28.333332061767603,
+            "h": 36
+          },
+          {
+            "x": -29.3333282470703,
+            "y": 315.924041748047,
+            "w": 28.333333015441898,
+            "h": 36
+          },
+          {
+            "x": -24.9999952316284,
+            "y": 315.924041748047,
+            "w": 28.33333396911619,
+            "h": 36.00125122070301
+          },
+          {
+            "x": -20.66666126251221,
+            "y": 315.92529296875,
+            "w": 28.33333396911621,
+            "h": 36
+          },
+          {
+            "x": -16.333327293396,
+            "y": 315.92529296875,
+            "w": 28.333333492279056,
+            "h": 36
+          },
+          {
+            "x": -11.999993801116943,
+            "y": 315.92529296875,
+            "w": 28.333333492279053,
+            "h": 36
+          },
+          {
+            "x": -7.66666030883789,
+            "y": 315.92529296875,
+            "w": 28.33333396911621,
+            "h": 36
+          },
+          {
+            "x": -3.3333263397216797,
+            "y": 315.92529296875,
+            "w": 28.33333396911618,
+            "h": 36
+          },
+          {
+            "x": 1.0000076293944993,
+            "y": 315.92529296875,
+            "w": 28.3333339691162,
+            "h": 36
+          },
+          {
+            "x": 5.3333415985106996,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 9.666673660278299,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 14.000005722045898,
+            "y": 315.92529296875,
+            "w": 28.333332061767603,
+            "h": 36
+          },
+          {
+            "x": 18.3333377838135,
+            "y": 315.92529296875,
+            "w": 28.3333339691162,
+            "h": 36
+          },
+          {
+            "x": 22.6666717529297,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 27.0000038146973,
+            "y": 315.92529296875,
+            "w": 28.3333320617675,
+            "h": 36
+          },
+          {
+            "x": 31.3333358764648,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 35.6666679382324,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 40,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 44.3333320617676,
+            "y": 315.92529296875,
+            "w": 28.3333320617676,
+            "h": 36
+          },
+          {
+            "x": 48.6666641235352,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 53,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 57.3333358764648,
+            "y": 315.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 61.6666717529297,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 66.0000076293945,
+            "y": 315.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 70.3333435058594,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 74.6666793823242,
+            "y": 315.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 79.0000152587891,
+            "y": 315.92529296875,
+            "w": 28.3333358764648,
+            "h": 36
+          },
+          {
+            "x": 83.3333511352539,
+            "y": 315.92529296875,
+            "w": 28.3333358764649,
+            "h": 36
+          },
+          {
+            "x": 87.6666870117188,
+            "y": 315.92529296875,
+            "w": 28.3333358764652,
+            "h": 36
+          },
+          {
+            "x": 92.000022888184,
+            "y": 315.92529296875,
+            "w": 28.33333587646399,
+            "h": 36
+          },
+          {
+            "x": 96.333358764648,
+            "y": 315.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 100.666694641113,
+            "y": 315.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 105.000030517578,
+            "y": 315.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 109.333366394043,
+            "y": 315.92529296875,
+            "w": 28.333335876465,
+            "h": 36
+          },
+          {
+            "x": 113.666702270508,
+            "y": 315.92529296875,
+            "w": 28.33334350585899,
+            "h": 36
+          },
+          {
+            "x": 118.00004577636699,
+            "y": 315.92529296875,
+            "w": 28.333328247071023,
+            "h": 36
+          },
+          {
+            "x": 122.33337402343801,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 126.66670227050801,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 131.000030517578,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 135.333358764648,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 139.666687011719,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 144.000015258789,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 148.333343505859,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 152.66667175293,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 157,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 161.33332824707,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 165.666656494141,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 169.999984741211,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 174.333312988281,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 178.666641235352,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 182.999969482422,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 187.333297729492,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 191.666625976562,
+            "y": 315.92529296875,
+            "w": 28.333328247071023,
+            "h": 36
+          },
+          {
+            "x": 195.999954223633,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 200.333282470703,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 204.666610717773,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 208.999938964844,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 213.333267211914,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 217.666595458984,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 221.999923706055,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 226.333251953125,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 230.666580200195,
+            "y": 315.92529296875,
+            "w": 28.333328247070995,
+            "h": 36
+          },
+          {
+            "x": 234.999908447266,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 239.333236694336,
+            "y": 315.92529296875,
+            "w": 28.33332824707,
+            "h": 36
+          },
+          {
+            "x": 243.666564941406,
+            "y": 315.92529296875,
+            "w": 28.33334350586003,
+            "h": 36
+          },
+          {
+            "x": 247.99990844726602,
+            "y": 315.92529296875,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 252.333251953125,
+            "y": 315.92529296875,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 256.666595458984,
+            "y": 315.92529296875,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 260.999938964844,
+            "y": 315.92529296875,
+            "w": 28.333343505859034,
+            "h": 36
+          },
+          {
+            "x": 265.333282470703,
+            "y": 315.92529296875,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 269.666625976562,
+            "y": 315.92529296875,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 273.999969482422,
+            "y": 315.92529296875,
+            "w": 28.333343505859034,
+            "h": 36
+          },
+          {
+            "x": 278.333312988281,
+            "y": 315.92529296875,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 282.666656494141,
+            "y": 315.92529296875,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 287,
+            "y": 315.92529296875,
+            "w": 28.333343505858977,
+            "h": 36
+          },
+          {
+            "x": 291.333343505859,
+            "y": 315.92529296875,
+            "w": 28.33334350586,
+            "h": 36
+          },
+          {
+            "x": 295.666687011719,
+            "y": 305.546447753906,
+            "w": 28.33377075195301,
+            "h": 46.37884521484398
+          },
+          {
+            "x": 300.000457763672,
+            "y": 295.168670654297,
+            "w": 28.333343505859034,
+            "h": 46.377777099609034
+          },
+          {
+            "x": 304.333801269531,
+            "y": 284.790893554688,
+            "w": 28.33334350586,
+            "h": 46.37777709960898
+          },
+          {
+            "x": 308.667144775391,
+            "y": 274.413116455078,
+            "w": 28.333343505858977,
+            "h": 46.37777709961
+          },
+          {
+            "x": 313.00048828125,
+            "y": 264.035339355469,
+            "w": 28.333343505858977,
+            "h": 46.377777099609034
+          },
+          {
+            "x": 317.333831787109,
+            "y": 253.65756225585898,
+            "w": 28.33334350586,
+            "h": 46.37777709961
+          },
+          {
+            "x": 321.667175292969,
+            "y": 243.27978515625,
+            "w": 28.333343505859034,
+            "h": 46.37777709960898
+          },
+          {
+            "x": 326.000518798828,
+            "y": 233.046447753906,
+            "w": 28.33334350586,
+            "h": 46.233337402344006
+          },
+          {
+            "x": 330.333862304688,
+            "y": 223.535339355469,
+            "w": 28.333343505858977,
+            "h": 45.51110839843699
+          },
+          {
+            "x": 334.667205810547,
+            "y": 214.746444702148,
+            "w": 28.333343505859034,
+            "h": 44.788894653320995
+          },
+          {
+            "x": 339.000549316406,
+            "y": 206.679779052734,
+            "w": 28.33334350586,
+            "h": 44.066665649414006
+          },
+          {
+            "x": 343.333892822266,
+            "y": 199.335327148438,
+            "w": 28.333343505858977,
+            "h": 43.344451904295994
+          },
+          {
+            "x": 347.667236328125,
+            "y": 199.335327148438,
+            "w": 28.333343505858977,
+            "h": 36.722229003905994
+          },
+          {
+            "x": 352.000579833984,
+            "y": 200.057556152344,
+            "w": 28.33334350586,
+            "h": 37.44444274902298
+          },
+          {
+            "x": 356.333923339844,
+            "y": 201.501998901367,
+            "w": 28.333343505859034,
+            "h": 38.16667175293
+          },
+          {
+            "x": 360.667266845703,
+            "y": 203.668670654297,
+            "w": 28.333343505858977,
+            "h": 38.88888549804702
+          },
+          {
+            "x": 365.000610351562,
+            "y": 206.557556152344,
+            "w": 28.33334350586,
+            "h": 39.61111450195298
+          },
+          {
+            "x": 369.333953857422,
+            "y": 210.168670654297,
+            "w": 28.333343505859034,
+            "h": 40.33332824707
+          },
+          {
+            "x": 373.667297363281,
+            "y": 214.501998901367,
+            "w": 28.33334350586,
+            "h": 41.05555725097702
+          },
+          {
+            "x": 378.000640869141,
+            "y": 219.557556152344,
+            "w": 28.333343505858977,
+            "h": 41.77778625488298
+          },
+          {
+            "x": 382.333984375,
+            "y": 225.335342407227,
+            "w": 28.333343505858977,
+            "h": 42.5
+          },
+          {
+            "x": 386.667327880859,
+            "y": 231.835342407227,
+            "w": 28.33334350586,
+            "h": 43.22221374511699
+          },
+          {
+            "x": 391.000671386719,
+            "y": 227.313705444336,
+            "w": 38.078125,
+            "h": 47.74385070800798
+          },
+          {
+            "x": 405.078796386719,
+            "y": 215.569854736328,
+            "w": 38.078125,
+            "h": 47.74385070800798
+          },
+          {
+            "x": 419.156921386719,
+            "y": 203.82600402832,
+            "w": 38.078125,
+            "h": 47.74385070800801
+          },
+          {
+            "x": 433.235046386719,
+            "y": 192.082153320312,
+            "w": 38.078125,
+            "h": 47.74385070800801
+          },
+          {
+            "x": 447.313171386719,
+            "y": 180.338302612305,
+            "w": 38.078125,
+            "h": 47.74385070800699
+          },
+          {
+            "x": 461.391296386719,
+            "y": 168.594451904297,
+            "w": 38.078125,
+            "h": 47.74385070800801
+          },
+          {
+            "x": 475.469421386719,
+            "y": 156.850601196289,
+            "w": 38.078125,
+            "h": 47.74385070800798
+          },
+          {
+            "x": 489.547546386719,
+            "y": 145.106750488281,
+            "w": 38.078125,
+            "h": 47.74385070800801
+          },
+          {
+            "x": 503.625671386719,
+            "y": 140.409210205078,
+            "w": 29.631225585937045,
+            "h": 40.69754028320298
+          },
+          {
+            "x": 509.256896972656,
+            "y": 140.409210205078,
+            "w": 28.333312988281932,
+            "h": 36
+          },
+          {
+            "x": 513.590209960938,
+            "y": 140.409210205078,
+            "w": 28.333312988281023,
+            "h": 36
+          },
+          {
+            "x": 517.923522949219,
+            "y": 140.409210205078,
+            "w": 28.333312988281023,
+            "h": 36
+          },
+          {
+            "x": 522.2568359375,
+            "y": 140.409210205078,
+            "w": 28.333312988281023,
+            "h": 36
+          },
+          {
+            "x": 526.590148925781,
+            "y": 140.409210205078,
+            "w": 28.333312988281023,
+            "h": 36.00123596191398
+          },
+          {
+            "x": 530.923461914062,
+            "y": 140.410446166992,
+            "w": 28.333312988281932,
+            "h": 36.03146362304702
+          },
+          {
+            "x": 535.256774902344,
+            "y": 140.441909790039,
+            "w": 28.333312988281023,
+            "h": 36.136138916015994
+          },
+          {
+            "x": 539.590087890625,
+            "y": 140.578048706055,
+            "w": 28.333312988281023,
+            "h": 36.347427368164006
+          },
+          {
+            "x": 543.923400878906,
+            "y": 140.925476074219,
+            "w": 28.333312988281932,
+            "h": 36.682876586914006
+          },
+          {
+            "x": 548.256713867188,
+            "y": 141.608352661133,
+            "w": 28.333312988281023,
+            "h": 37.145431518555
+          },
+          {
+            "x": 552.590026855469,
+            "y": 142.753784179688,
+            "w": 28.333312988281023,
+            "h": 37.723373413085
+          },
+          {
+            "x": 556.92333984375,
+            "y": 144.477157592773,
+            "w": 28.333312988281023,
+            "h": 38.390396118165
+          },
+          {
+            "x": 561.256652832031,
+            "y": 146.867553710938,
+            "w": 28.333312988281023,
+            "h": 39.10556030273398
+          },
+          {
+            "x": 565.589965820312,
+            "y": 149.973114013672,
+            "w": 28.333312988281932,
+            "h": 39.82777404785102
+          },
+          {
+            "x": 569.923278808594,
+            "y": 153.800888061523,
+            "w": 28.333312988281023,
+            "h": 40.55000305175798
+          },
+          {
+            "x": 574.256591796875,
+            "y": 158.350891113281,
+            "w": 28.333312988281023,
+            "h": 41.272216796875
+          },
+          {
+            "x": 578.589904785156,
+            "y": 163.623107910156,
+            "w": 28.333312988281932,
+            "h": 41.99444580078202
+          },
+          {
+            "x": 582.923217773438,
+            "y": 169.617553710938,
+            "w": 28.333312988281023,
+            "h": 42.71667480468699
+          },
+          {
+            "x": 587.256530761719,
+            "y": 176.334228515625,
+            "w": 28.333312988281023,
+            "h": 43.438888549805
+          },
+          {
+            "x": 591.58984375,
+            "y": 183.77311706543,
+            "w": 28.333312988281023,
+            "h": 44.161117553710994
+          },
+          {
+            "x": 595.923156738281,
+            "y": 191.934234619141,
+            "w": 28.333312988281023,
+            "h": 44.88333129882801
+          },
+          {
+            "x": 600.256469726562,
+            "y": 200.817565917969,
+            "w": 28.333312988281932,
+            "h": 45.605560302734006
+          },
+          {
+            "x": 604.589782714844,
+            "y": 210.423126220703,
+            "w": 28.333312988281023,
+            "h": 46.32777404785199
+          },
+          {
+            "x": 608.923095703125,
+            "y": 220.750900268555,
+            "w": 28.333312988281023,
+            "h": 47.05000305175699
+          },
+          {
+            "x": 613.256408691406,
+            "y": 231.800903320312,
+            "w": 28.333312988281932,
+            "h": 47.77221679687602
+          },
+          {
+            "x": 617.589721679688,
+            "y": 243.573120117188,
+            "w": 28.333312988281023,
+            "h": 48.494445800780966
+          },
+          {
+            "x": 621.923034667969,
+            "y": 256.067565917969,
+            "w": 28.333312988281023,
+            "h": 49.216674804687045
+          },
+          {
+            "x": 626.25634765625,
+            "y": 269.284240722656,
+            "w": 28.333312988281023,
+            "h": 49.33334350586
+          },
+          {
+            "x": 630.589660644531,
+            "y": 282.617584228516,
+            "w": 28.333312988281023,
+            "h": 49.33334350585898
+          },
+          {
+            "x": 634.922973632812,
+            "y": 295.950927734375,
+            "w": 28.333312988281932,
+            "h": 49.33334350585898
+          },
+          {
+            "x": 639.256286621094,
+            "y": 309.284271240234,
+            "w": 28.333374023437045,
+            "h": 42.64099121093801
+          },
+          {
+            "x": 643.589660644531,
+            "y": 315.925262451172,
+            "w": 28.333312988281023,
+            "h": 36.00003051757801
+          },
+          {
+            "x": 647.922973632812,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 652.25634765625,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 656.589721679688,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 660.923095703125,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 665.256469726562,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 669.58984375,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 673.923217773438,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 678.256591796875,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 682.589965820312,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 686.92333984375,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 691.256713867188,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 695.590087890625,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 699.923461914062,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 704.2568359375,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 708.590209960938,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 712.923583984375,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 717.256958007812,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 721.59033203125,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 725.923706054688,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 730.257080078125,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 734.590454101562,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 738.923828125,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 743.257202148438,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 747.590576171875,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 751.923950195312,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 756.25732421875,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 760.590698242188,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 764.924072265625,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 769.257446289062,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 773.5908203125,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 777.924194335938,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 782.257568359375,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 786.590942382812,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 790.92431640625,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 795.257690429688,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 799.591064453125,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 803.924438476562,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 808.2578125,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 812.591186523438,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 816.924560546875,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 821.257934570312,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 825.59130859375,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 829.924682617188,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 834.258056640625,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 838.591430664062,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 842.9248046875,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 847.258178710938,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 851.591552734375,
+            "y": 315.92529296875,
+            "w": 28.333374023437045,
+            "h": 36
+          },
+          {
+            "x": 855.924926757812,
+            "y": 315.92529296875,
+            "w": 28.333374023437955,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          },
+          {
+            "x": 860.25830078125,
+            "y": 315.92529296875,
+            "w": 24,
+            "h": 36
+          }
+        ],
+        "coverage": "union_of_independent_recorded_policy_body_sweeps",
+        "unverified": [
+          "all allowed entry states",
+          "alternative policies",
+          "unobserved projectile paths",
+          "cross-route entry/exit state composition"
+        ]
+      },
+      "dynamicEnvelopes": [
+        {
+          "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+          "region": {
+            "x": 592,
+            "y": 62,
+            "w": 20,
+            "h": 770
+          },
+          "status": "source_derived",
+          "coverage": "fixed collision area; open/closed state is complementary to gate A"
+        }
+      ],
+      "seams": [
+        {
+          "id": "A-seam",
+          "portId": "A",
+          "region": {
+            "x": -544,
+            "y": 288,
+            "w": 64,
+            "h": 64
+          },
+          "status": "UNKNOWN",
+          "allowedOverlap": []
+        },
+        {
+          "id": "B-seam",
+          "portId": "B",
+          "region": {
+            "x": 864,
+            "y": 288,
+            "w": 64,
+            "h": 64
+          },
+          "status": "UNKNOWN",
+          "allowedOverlap": []
+        }
+      ],
+      "transforms": [
+        {
+          "id": "identity",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "translation",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": [],
+          "note": "任意平移尚未验证；本项不是自由平移许可"
+        },
+        {
+          "id": "mirror-x",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 0,
+          "mirrorX": true,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "rotate-90",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "rotation": 90,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        },
+        {
+          "id": "scale-2",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": [
+            2,
+            2
+          ],
+          "rotation": 0,
+          "mirrorX": false,
+          "status": "UNKNOWN",
+          "validationIds": []
+        }
+      ],
+      "physicalBoundsBeforeBlockOwnership": {
+        "x": -418,
+        "y": 12,
+        "w": 1314,
+        "h": 860
+      }
+    },
+    "ports": [
+      {
+        "id": "A",
+        "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/port-A",
+        "position": [
+          -512,
+          320
+        ],
+        "connection": {
+          "status": "declared",
+          "region": {
+            "x": -160,
+            "y": 288,
+            "w": 64,
+            "h": 64
+          }
+        },
+        "support": {
+          "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/migration-shore-A",
+          "face": "top",
+          "status": "source_derived"
+        },
+        "normal": [
+          -1,
+          0
+        ],
+        "orientationSource": "Upstream Block boundary normal; actual staging and boundary crossing remain distinct.",
+        "motion": {
+          "ingress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          },
+          "egress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          }
+        },
+        "preconditions": {
+          "ingress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "egress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "seamIds": [
+          "A-seam"
+        ],
+        "routeRoles": [
+          "cross-A-swap-cross-B:entry"
+        ],
+        "crossing_offset": [
+          0,
+          14
+        ],
+        "stagingPosition": [
+          -488,
+          334
+        ],
+        "face": "LEFT",
+        "surface": "ROCK",
+        "permission": "INOUT",
+        "permissionStatus": "declared_pending_boundary_probe",
+        "cornerRelocations": {
+          "TOP_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "TOP_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          }
+        }
+      },
+      {
+        "id": "B",
+        "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/port-B",
+        "position": [
+          896,
+          320
+        ],
+        "connection": {
+          "status": "declared",
+          "region": {
+            "x": 864,
+            "y": 288,
+            "w": 64,
+            "h": 64
+          }
+        },
+        "support": {
+          "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-1",
+          "face": "top",
+          "status": "source_derived"
+        },
+        "normal": [
+          1,
+          0
+        ],
+        "orientationSource": "Upstream Block boundary normal; actual staging and boundary crossing remain distinct.",
+        "motion": {
+          "ingress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          },
+          "egress": {
+            "directions": "UNKNOWN",
+            "modes": "UNKNOWN"
+          }
+        },
+        "preconditions": {
+          "ingress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "egress": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "seamIds": [
+          "B-seam"
+        ],
+        "routeRoles": [
+          "cross-A-swap-cross-B:exit"
+        ],
+        "crossing_offset": [
+          0,
+          14
+        ],
+        "stagingPosition": [
+          872,
+          334
+        ],
+        "face": "RIGHT",
+        "surface": "ROCK",
+        "permission": "INOUT",
+        "permissionStatus": "declared_pending_boundary_probe",
+        "cornerRelocations": {
+          "TOP_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "TOP_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_LEFT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          },
+          "BOTTOM_RIGHT": {
+            "applicable": false,
+            "allowed": false,
+            "reason": "port_not_on_this_corner_block_outer_face",
+            "profileId": null
+          }
+        }
+      }
+    ],
+    "relations": [
+      {
+        "from": "A",
+        "to": "A",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "status": "path",
+        "routeIds": [
+          "cross-A-swap-cross-B"
+        ],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "UNKNOWN",
+        "routeIds": [],
+        "conditions": "UNKNOWN"
+      }
+    ],
+    "routes": [
+      {
+        "id": "cross-A-swap-cross-B",
+        "from": "A",
+        "to": "B",
+        "role": "main",
+        "pathObjectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/route-cross-A-swap-cross-B",
+        "capabilityRequirements": {
+          "version": 1,
+          "status": "partial",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": [],
+          "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+        },
+        "difficulty": {
+          "version": 1,
+          "scale": "gunman-rush/module-difficulty/v1",
+          "score": null,
+          "note": ""
+        },
+        "availability": "UNKNOWN",
+        "transfer": {
+          "status": "observed_only",
+          "requires": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "ensures": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
+        },
+        "return": {
+          "status": "UNKNOWN",
+          "routeId": "UNKNOWN",
+          "conditions": "UNKNOWN",
+          "note": "另方向采用独立进入条件验证，不能由新建场景的满资源推断当前出口可返回"
+        },
+        "onward": {
+          "status": "UNKNOWN",
+          "target": "UNKNOWN",
+          "requiredState": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "note": "Only this local route and declared continuous visits were witnessed; arbitrary return, placement and seams remain UNKNOWN."
+        },
+        "resourcePressure": {
+          "status": "partial",
+          "observedShots": 1,
+          "observedJumps": 1,
+          "phaseWaits": [
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 307
+                },
+                "timeout": 180
+              }
+            }
+          ],
+          "rewardGrant": 0,
+          "note": "Actual original reward transactions and sampled movement/resource costs; variants do not transfer approval."
+        },
+        "validationIds": [
+          "migration-cross-A-swap-cross-B"
+        ],
+        "evidenceStatus": "pass",
+        "requiredAbilities": [
+          "jump",
+          "move",
+          "shot_recoil"
+        ],
+        "actionTags": [
+          "jump",
+          "jump_release",
+          "settle",
+          "shoot"
+        ],
+        "durationSeconds": "UNKNOWN",
+        "resourceProfile": {
+          "status": "UNKNOWN"
+        },
+        "initialConditions": {
+          "status": "UNKNOWN"
+        },
+        "localDisplacementBlocks": [
+          11,
+          0
+        ]
+      }
+    ],
+    "unlocks": [
+      {
+        "id": "airlock-pair",
+        "trigger": {
+          "objectId": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/bell-0",
+          "condition": "eligible original player projectile hit committed by ShotLatch"
+        },
+        "changes": {
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0"
+          ],
+          "mechanism": {
+            "kind": "complementary_gates",
+            "initialOpen": "A",
+            "gateA": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+            "gateB": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+            "invariant": "exactly_one_open",
+            "switch": "eligible original projectile atomically swaps complementary collision states",
+            "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+            "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes"
+          },
+          "automaticClose": false,
+          "note": "A repeated switch, not a permanent unlock or one-way proof"
+        },
+        "before": {
+          "from": "A",
+          "to": "B",
+          "status": "UNKNOWN",
+          "conditions": [
+            {
+              "field": "mechanisms.airlock-pair.open_a",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "after": {
+          "from": "A",
+          "to": "B",
+          "status": "UNKNOWN",
+          "conditions": [
+            {
+              "field": "mechanisms.airlock-pair.open_a",
+              "op": "eq",
+              "value": false
+            }
+          ]
+        },
+        "affectedRouteIds": [
+          "cross-A-swap-cross-B"
+        ]
+      }
+    ],
+    "composition": {
+      "components": [],
+      "connections": [],
+      "exports": [],
+      "cells": [
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-0",
+          "contentVersion": "sha256:27ba749d787a53b73853b0f0018c3e5fc412dff438f27ed70a5f6aec30fcadb4",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-0"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-1",
+          "contentVersion": "sha256:1a265b392bb51c8529f13915184235faad911ff6f6274d1038e61ca6d5c0890e",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-1"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-2",
+          "contentVersion": "sha256:8d5d0a363d100f50dcc9ba89f138744f30b7194730d31f8b0ba7a775de9c9e31",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-2"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-3",
+          "contentVersion": "sha256:e01fed2fdf17c7c73c28a3069395c29de5724a714252bb4dac6105ebc762ef58",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-3"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-4",
+          "contentVersion": "sha256:da72c24db5af47801dc9cc2173e3226dd034a8c246c3040902e5b0affaf15f5e",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-4"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-5",
+          "contentVersion": "sha256:327dade5a6771ec58ad5d96012cdae0cbf2ca6ecac077e2410cf5f0fe10e0434",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-5"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-6",
+          "contentVersion": "sha256:2c7702c17978af11224b1ad6baac9c5f21b4bb1a6675bc31bd79fa468372de25",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-6"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-7",
+          "contentVersion": "sha256:6b8c7133acdde9bcbcdebf6680bd0cb728c901378df5d1c5f4f627e30a101aba",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/platform-7"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0",
+          "contentVersion": "sha256:5db07772174ea3e6589809775e2f4c462610324b8c5be20fa2469d7347e0288b",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/gate-0"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/bell-0",
+          "contentVersion": "sha256:a6cbf62ce51912c571467e6a16d739d070f3e7a72a15f0b1aaaf785899fa0e47",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/bell-0"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/return-bell-0",
+          "contentVersion": "sha256:64948893002a02899ded7a51bd726d1871242e362e1deb4fa7b9fca34f24daba",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/return-bell-0"
+          ]
+        },
+        {
+          "id": "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0",
+          "contentVersion": "sha256:082f8b99d6904ab55e623454048d22e58263034e4c8359240bdfa7449cccd41b",
+          "objectIds": [
+            "generated-5a2f64d4244101e3f2c6fd6fd351815bb6722296e0dbc0450c24f09cd6971910/paired-gate-0"
+          ]
+        }
+      ]
+    },
+    "validations": [
+      {
+        "id": "migration-cross-A-swap-cross-B",
+        "kind": "physics",
+        "contentVersion": "sha256:5b03da782f724d41b4cba3085ac239e06c61773277538aacab3b57a4f68fb69d",
+        "routeId": "cross-A-swap-cross-B",
+        "from": "A",
+        "to": "B",
+        "capabilityConfiguration": {
+          "available": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "equipment": "UNKNOWN",
+          "originalSnapshot": {
+            "base_max_air_shots": 1,
+            "declared": [
+              "move",
+              "jump",
+              "shot_recoil"
+            ],
+            "double_enabled": false,
+            "grapple_enabled": false,
+            "hook_range": 231,
+            "jump_enabled": true,
+            "maximum_jumps": 1,
+            "move_enabled": true,
+            "shoot_enabled": true,
+            "wall_enabled": false
+          }
+        },
+        "entryState": {
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "Actual sampled configuration, not a minimum-ability proof"
+          },
+          "equipment": "UNKNOWN",
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "airlock-pair",
+                "open": true,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "recoveryConditions": "UNKNOWN"
+        },
+        "method": "actual_godot_fixed_migration_protocol",
+        "coverage": {
+          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
+          "route": {
+            "routeId": "cross-A-swap-cross-B",
+            "passed": true,
+            "calibration": {
+              "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/calibration-0.json",
+              "sha256": "622389550770102c79e42c774cd38496d12a14aa41bb2c38389a1bdc05fade40"
+            },
+            "holdout": {
+              "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/holdout-0.json",
+              "sha256": "4e010b9c1c9942f0ec61c4e4aabe9a5745d390bbe91c306fadd6f1db2f4c3330"
+            }
+          },
+          "arbitraryEntryStates": "UNKNOWN",
+          "fullMap": "UNKNOWN"
+        },
+        "result": "pass",
+        "failures": [],
+        "unverified": [
+          "unsearched port pairs",
+          "closure combinations",
+          "mirror",
+          "arbitrary entry states",
+          "full Map"
+        ],
+        "artifacts": [
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/migration-physics.json",
+            "sha256": "4ab5756c700fddaf1f1ba482261aa01d701553ad059338335c736f4fa0618334"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/source_binding.json",
+            "sha256": "817892c07bbee8d0fc49a0bb1dde8e6649bf78b850f7b6a46d54cc28bfeb417f"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/batches.json",
+            "sha256": "ba31cd383de5970439b076a95f6e77e56c408e45514ed37a7a0f09c059bd242d"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/protocol.json",
+            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
+          },
+          {
+            "path": "pcg/results/foundation-migration-full-quality-v2-edb7ee7a3d7c/boundary-probes.json",
+            "sha256": "72f41291324bf4647c645f76cc9995678c369ce7fec2fcafc6bf82cad97813b9"
+          }
+        ],
+        "sourceCaseSha256": "fd478ed6c78eb7c5c12f358c1f803f437fdb24c83d7776defc9d3366c939a60c",
+        "sourceCaseId": "b30-block-c02-v2-i1-c0-reward0",
+        "observedEntry": {
+          "position": [
+            -104,
+            334
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "airlock-pair",
+                "open": true,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ]
+        },
+        "observedExit": {
+          "position": [
+            872.25830078125,
+            333.92529296875
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              0,
+              0
+            ],
+            "y": [
+              0,
+              0
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "airlock-pair",
+                "open": false,
+                "open_count": 1,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [],
+            "events": [
+              {
+                "direction": [
+                  -0.767897069454193,
+                  0.640573263168335
+                ],
+                "frame": 117,
+                "muzzle": [
+                  388.341125488281,
+                  264.973449707031
+                ],
+                "origin": [
+                  403.000671386719,
+                  257.057556152344
+                ],
+                "shot_id": 1,
+                "type": "shot_origin"
+              },
+              {
+                "direction": [
+                  -0.767897069454193,
+                  0.640573263168335
+                ],
+                "frame": 122,
+                "point": [
+                  318.988891601562,
+                  322.826507568359
+                ],
+                "type": "projectile_impact"
+              },
+              {
+                "count": 1,
+                "frame": 122,
+                "id": "airlock-pair",
+                "type": "bell_open"
+              }
+            ],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 3.61666666666666,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ],
+          "batchMechanisms": {
+            "carriers": [],
+            "coins": 0,
+            "events": [],
+            "paired_gates": [
+              {
+                "blocked_count": 0,
+                "events": [
+                  {
+                    "airborne": true,
+                    "frame": 122,
+                    "id": "airlock-pair",
+                    "open": "B",
+                    "switch_count": 1,
+                    "type": "pair_switch"
+                  }
+                ],
+                "gate_a_disabled": false,
+                "gate_a_layer": 1,
+                "gate_b_disabled": true,
+                "gate_b_layer": 0,
+                "id": "airlock-pair",
+                "open_a": false,
+                "open_b": true,
+                "switch_count": 1
+              }
+            ]
+          }
+        },
+        "observedFirstPostAction": {
+          "position": [
+            -99.6666641235352,
+            333.925262451172
+          ],
+          "grounded": true,
+          "velocity": {
+            "x": [
+              260.000152587891,
+              260.000152587891
+            ],
+            "y": [
+              -4.4842529296875,
+              -4.4842529296875
+            ]
+          },
+          "remainingJumps": [
+            1,
+            1
+          ],
+          "airShots": [
+            1,
+            1
+          ],
+          "stamina": [
+            100,
+            100
+          ],
+          "health": [
+            5,
+            5
+          ],
+          "shotCooldown": [
+            0,
+            0
+          ],
+          "traversalState": "free",
+          "mechanisms": {
+            "bells": [
+              {
+                "id": "airlock-pair",
+                "open": true,
+                "open_count": 0,
+                "sequence_step": 0
+              }
+            ],
+            "enemies": [],
+            "events": [],
+            "player_damage": []
+          },
+          "phase": {
+            "moduleClock": 0.0833333333333333,
+            "saws": [],
+            "movingPlatforms": []
+          },
+          "body": [
+            24,
+            36
+          ]
+        }
+      }
+    ],
+    "visualization": {
+      "contentVersion": "sha256:5b03da782f724d41b4cba3085ac239e06c61773277538aacab3b57a4f68fb69d",
+      "path": "thumbnail.svg"
+    },
+    "staticChecks": {
+      "result": "pass",
+      "contentVersion": "sha256:5b03da782f724d41b4cba3085ac239e06c61773277538aacab3b57a4f68fb69d",
+      "method": "existing schema + physical geometry identity + explicit ordered port pairs",
+      "scope": "2 actual support references; per-route scoped physics. No automatic assembly or universal connectivity claim."
+    },
+    "foundation": {
+      "version": "1.0",
+      "blockSize": 128,
+      "widthBlocks": 11,
+      "heightBlocks": 7
+    },
+    "legacyCertification": {
+      "contentVersion": "sha256:edb7ee7a3d7cb43010f3dc4c6396b3894cd21686d648da9188247a226110c337",
+      "scope": "Historical witness only; not a v2 certificate."
+    },
+    "closures": [],
+    "mirror": {
+      "status": "UNKNOWN",
+      "validationIds": []
+    },
+    "portConfigurations": [],
+    "internalWaypoints": []
+  }
+}

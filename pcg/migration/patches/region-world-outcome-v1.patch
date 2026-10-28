@@ -1,0 +1,47 @@
+--- a/pcg/migration/physics.py
++++ b/pcg/migration/physics.py
+@@ -12,7 +12,7 @@
+ import types
+ from pathlib import Path
+ 
+-from . import core, causal_observer, causal_observer_v2, causal_observer_v3, pool_protocols, holdout_guard
++from . import core, causal_observer, causal_observer_v2, causal_observer_v3, pool_protocols, holdout_guard, region_outcomes
+ from pcg.prototype.workshop.engine import WorkshopEngine
+ from pcg.prototype.workshop.evaluate import evaluate
+ from pcg.prototype.factory.core.quality import digest, module_hash
+@@ -157,7 +157,7 @@
+     authors = [author_for(case) for case in cases]
+     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
+     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
+-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
++    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
+         extra_sources=sources, runner_script=runners[0])
+     deduplicate_snapshot(engine.out)
+@@ -320,7 +320,7 @@
+         required=set(case.get('required_rewards',case.get('route_spec',{}).get('required_rewards',[])))
+         claimed={event['id']for event in raw.get('workshop',{}).get('events',[])
+                  if event.get('type')=='chest_claim'and event.get('accepted')}
+-        outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)
++        outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw)
+     return dict(passed=bool(raw.get('ok') and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
+                 stableExit=bool(raw.get('ok')), bodyPassedBothSides=inward and outward,
+                 requiredWorldOutcomeSatisfied=outcome,
+@@ -456,7 +456,7 @@
+     required=set(case.get('required_rewards',case.get('route_spec',{}).get('required_rewards',[])))
+     claimed={e['id']for e in raw.get('workshop',{}).get('events',[])if e.get('type')=='chest_claim'and e.get('accepted')}
+     okay=bool(raw.get('ok')and raw.get('hp')==5 and not raw.get('plains',{}).get('player_damage')and not raw.get('returns')
+-        and required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw))
++        and required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw))
+     park=case.get('required_carrier_park')
+     if park:
+         final=raw.get('frames',[{}])[-1]
+@@ -712,7 +712,7 @@
+     return digest(dict(schema='pcg/deep-physics-verification-cache/v1',
+         verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
+         causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), causalObserverV3=core.sha(Path(causal_observer_v3.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
+-        holdoutGuardSource=core.sha(Path(holdout_guard.__file__)),
++        holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
+         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
+         report=proof, runFiles=files,
+         protocolV1=core.sha(PROTOCOL), protocolV2=core.sha(FULL_PROTOCOL),

@@ -1,0 +1,94 @@
+{
+  "schema": "pcg/N06-explicit-geometric-repair/v1",
+  "registered_before_execution": true,
+  "parent_cycle": "batch30_blockn06",
+  "parent_status": "needs_design",
+  "parent_actual_cases": 52,
+  "parent_rule_versions": 2,
+  "parent_held_cases": 0,
+  "new_maximum_geometry_rules": 1,
+  "new_maximum_actual_cases": 28,
+  "lineage_maximum_actual_cases": 80,
+  "rootfull_index": 16,
+  "interfaces": [
+    0
+  ],
+  "required_routes": [
+    [
+      "A",
+      "B"
+    ],
+    [
+      "A",
+      "C"
+    ]
+  ],
+  "world_modifications": {
+    "M_before": [
+      544,
+      608,
+      192,
+      64
+    ],
+    "M_after": [
+      480,
+      608,
+      256,
+      64
+    ],
+    "bell_before": [
+      800,
+      672
+    ],
+    "bell_after": [
+      800,
+      560
+    ]
+  },
+  "unchanged": [
+    "Bothbridges",
+    "All3ports/anchors/docks",
+    "Originalfloor/stairs",
+    "Original2controlparameterdomainandexactplans",
+    "Originalpairedgatev3/Motor/physics/resources",
+    "Blockownership/reservations",
+    "Originalquality/regular/fullstandards"
+  ],
+  "budget": {
+    "clean": 4,
+    "noise": 24
+  },
+  "controls": [
+    0,
+    1
+  ],
+  "selection": {
+    "registered_before_clean": true,
+    "method": "maximum_minimum_complete_body_support_margin",
+    "body_width": 24,
+    "score": "min(first_M.x-12-M.left, M.right-first_M.x-12, first_corresponding_bridge.x-12-bridge.left, bridge.right-first_corresponding_bridge.x-12)",
+    "eligible": "purpose-valid actualclean only, eachroute independently",
+    "sort": "score descending thencontrolindexascending",
+    "freeze": "beforeanynoise",
+    "no_oldfirstvalid": true
+  },
+  "noise": {
+    "seed": 271129714,
+    "levels": [
+      "mild",
+      "moderate"
+    ],
+    "replicates": 6,
+    "per_exact_route": 12,
+    "held": false
+  },
+  "counters": {
+    "probe_actual_cases": 0,
+    "rootfull_minimum_per_route": 18,
+    "ordinary_template_repair": "includeactualjumpbeforejump_release;newsourcebinding, oldwronginputsremain"
+  },
+  "stop": "Ifrequiredcleanmissingorselectednoiseunreliable returnneeds_design; nosecondworldrule/nochangedseed/noloweredquality",
+  "independent_new_family_claim": false,
+  "human_fun": "UNKNOWN",
+  "production_admitted": false
+}

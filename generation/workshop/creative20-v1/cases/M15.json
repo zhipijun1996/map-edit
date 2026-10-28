@@ -1,0 +1,1398 @@
+{
+  "cases": [
+    {
+      "id": "grapple-hazard-window-v7-16",
+      "family": "grapple-hazard-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -160,
+          438,
+          400,
+          100
+        ],
+        [
+          -800,
+          950,
+          2200,
+          60
+        ],
+        [
+          260.0,
+          248,
+          180,
+          80
+        ]
+      ],
+      "spawn": [
+        80,
+        420
+      ],
+      "entry_port": [
+        80,
+        420
+      ],
+      "exit_port": [
+        350,
+        230
+      ],
+      "goal": [
+        325,
+        226,
+        50,
+        8
+      ],
+      "world_bounds": [
+        -1200,
+        -1000,
+        4000,
+        2400
+      ],
+      "one_way_platform_indices": [
+        2
+      ],
+      "hazards": [],
+      "thorns": [],
+      "saws": [
+        {
+          "source_id": "departure-saw",
+          "origin": [
+            285,
+            190
+          ],
+          "travel": [
+            0,
+            140
+          ],
+          "radius": 18,
+          "period": 3.0,
+          "initial_phase": 0.15
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 210,
+          "y": 230,
+          "kind": "hang"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            350,
+            230
+          ],
+          "region": [
+            320,
+            225,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 650,
+      "trace_all": false,
+      "production_recipe": "hazard-window",
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 16
+          },
+          "aim_target": [
+            210,
+            230
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "hook_hang",
+            "min_after": 1,
+            "timeout": 160
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "saw_phase",
+              "id": "departure-saw",
+              "window": [
+                0.05,
+                0.1
+              ]
+            },
+            "min_after": 6,
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "hook_hang",
+            "min_after": 3,
+            "timeout": 160
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 5
+          },
+          "target_x": 350,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "creative/grapple/hazard-window",
+        "version": 1,
+        "parameters": {
+          "relationship": "hazard-window",
+          "interface": 0,
+          "delay": 16,
+          "contact_restores": "double_jump and grapple only; never airShots"
+        },
+        "source_type": "llm_subagent_proposal",
+        "source_task": "/root/grapple_creator"
+      },
+      "rule_parameters": {
+        "relationship": "hazard-window",
+        "interface": 0,
+        "delay": 16,
+        "contact_restores": "double_jump and grapple only; never airShots"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v7",
+        "id": "creative/grapple/hazard-window/v7/0",
+        "region": "plains",
+        "required_family": "grapple-hazard-window",
+        "objective": {
+          "recipe": "hazard-window",
+          "interface": 0
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "grapple"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 420,
+        "rise": 190,
+        "space": {
+          "max_width": 2200,
+          "max_height": 1400,
+          "max_port_span_x": 900
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 12,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "grapple/hazard-window-v7"
+      ],
+      "factory_id": "26a6e51bb63c52a26a653d068d7fd5fbed9603855102133ccecfa32f544151cc",
+      "factory_evidence": {
+        "batch": "0000-clean-screen",
+        "index": 2,
+        "output": "physics/0000-clean-screen.output.json.gz",
+        "raw_output_sha256": "f3d0cad14a987531a8e386028800648055407d7c345728b3cb9791d23e5548da"
+      },
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.139830097556114,
+                -0.990175545215607
+              ],
+              "plan_index": 3,
+              "type": "grapple"
+            }
+          ]
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 8,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 162,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 9,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 174,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 0.0,
+          "requested": []
+        }
+      ],
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "module_sha256": "351e5bdc85de246aa1cf56ae4e24145e6299f7377d2a1d82f13f1c955b1ef33e",
+      "review_alias": "grapple-hazard-window-v7-16"
+    }
+  ]
+}

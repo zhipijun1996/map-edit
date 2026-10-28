@@ -1,0 +1,417 @@
+{
+  "id": "forest_exploration_modules__mushroom_fork",
+  "kind": "forest",
+  "title": "蘑菇分岔",
+  "sourcePath": "scripts/generation/forest_exploration_modules.gd",
+  "sourceDocument": "library/modules/forest_exploration_modules__mushroom_fork.json",
+  "sourceDocumentSha256": "2cd1e49390fe4899d728333a77b9a2f90e7cc289faeaaa76e2fcadd972ceff50",
+  "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+  "sourceArtifact": {
+    "kind": "generation",
+    "originalPath": "scripts/generation/forest_exploration_modules.gd",
+    "path": "library/source/scripts/generation/forest_exploration_modules.gd",
+    "sha256": "951123639e721c5f5f422b9c3b1c06bbcd04d9fcb46b4dc82e39cecefc372641",
+    "gitBlobSha": "bde620e0a7d5e8a3a09fdb63e7bc828d300bb367",
+    "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+    "action": "reused_exact_existing_copy"
+  },
+  "method": "build",
+  "arguments": [
+    "mushroom_fork"
+  ],
+  "data": {
+    "action_program": [],
+    "admission": {
+      "geometry": "candidate",
+      "motor": "unverified",
+      "production_pool": false,
+      "visual": "unverified"
+    },
+    "danger_faces": [],
+    "danger_hosts": [],
+    "danger_surfaces": [],
+    "dangers": [],
+    "difficulty": "easy",
+    "entry_support_id": "entry",
+    "exit_support_id": "exit",
+    "goal": [
+      920.0,
+      -18.0
+    ],
+    "height": 460.0,
+    "hook_anchors": [],
+    "id": "mushroom_fork",
+    "identity": "visible upper mushroom branch and lower safe passage rejoin",
+    "main_route_kind": "ordinary_sequence",
+    "platforms": [
+      {
+        "id": "entry",
+        "one_way": false,
+        "rect": [
+          0.0,
+          0.0,
+          240.0,
+          40.0
+        ]
+      },
+      {
+        "id": "mushroom_a",
+        "one_way": true,
+        "rect": [
+          304.0,
+          -48.0,
+          200.0,
+          20.0
+        ]
+      },
+      {
+        "id": "mushroom_b",
+        "one_way": true,
+        "rect": [
+          584.0,
+          -48.0,
+          200.0,
+          20.0
+        ]
+      },
+      {
+        "id": "exit",
+        "one_way": false,
+        "rect": [
+          848.0,
+          0.0,
+          112.0,
+          40.0
+        ]
+      },
+      {
+        "id": "lower_root",
+        "one_way": false,
+        "rect": [
+          208.0,
+          48.0,
+          672.0,
+          40.0
+        ]
+      },
+      {
+        "id": "catch",
+        "one_way": false,
+        "rect": [
+          -160.0,
+          144.0,
+          1120.0,
+          40.0
+        ]
+      },
+      {
+        "id": "catch_step_low",
+        "one_way": true,
+        "rect": [
+          -144.0,
+          96.0,
+          128.0,
+          16.0
+        ]
+      },
+      {
+        "id": "catch_step_high",
+        "one_way": true,
+        "rect": [
+          -128.0,
+          48.0,
+          128.0,
+          16.0
+        ]
+      }
+    ],
+    "requires": [
+      "grapple"
+    ],
+    "resource_contract": {
+      "health_override": false,
+      "new_abilities": false,
+      "physics_override": false,
+      "shot_refill_override": false
+    },
+    "reward_position": [
+      672.0,
+      -66.0
+    ],
+    "reward_support_id": "mushroom_b",
+    "risk_reward": {
+      "coins": 2,
+      "notes": 0,
+      "optional": false,
+      "return_required": true,
+      "tier": "low"
+    },
+    "routes": {
+      "lower_bypass": [
+        {
+          "from_support_id": "entry",
+          "kind": "drop_through",
+          "landing": [
+            272.0,
+            30.0
+          ],
+          "path": [
+            [
+              224.0,
+              -18.0
+            ],
+            [
+              272.0,
+              -18.0
+            ],
+            [
+              272.0,
+              30.0
+            ]
+          ],
+          "support_id": "lower_root",
+          "takeoff": [
+            224.0,
+            -18.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            816.0,
+            30.0
+          ],
+          "support_id": "lower_root"
+        },
+        {
+          "from_support_id": "lower_root",
+          "kind": "jump_rise",
+          "landing": [
+            872.0,
+            -18.0
+          ],
+          "support_id": "exit",
+          "takeoff": [
+            816.0,
+            30.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            920.0,
+            -18.0
+          ],
+          "support_id": "exit"
+        }
+      ],
+      "main": [
+        {
+          "kind": "walk",
+          "landing": [
+            208.0,
+            -18.0
+          ],
+          "support_id": "entry"
+        },
+        {
+          "from_support_id": "entry",
+          "kind": "jump_gap",
+          "landing": [
+            336.0,
+            -66.0
+          ],
+          "support_id": "mushroom_a",
+          "takeoff": [
+            208.0,
+            -18.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            472.0,
+            -66.0
+          ],
+          "support_id": "mushroom_a"
+        },
+        {
+          "from_support_id": "mushroom_a",
+          "kind": "jump_gap",
+          "landing": [
+            616.0,
+            -66.0
+          ],
+          "support_id": "mushroom_b",
+          "takeoff": [
+            472.0,
+            -66.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            752.0,
+            -66.0
+          ],
+          "support_id": "mushroom_b"
+        },
+        {
+          "from_support_id": "mushroom_b",
+          "kind": "jump_gap",
+          "landing": [
+            880.0,
+            -18.0
+          ],
+          "support_id": "exit",
+          "takeoff": [
+            752.0,
+            -66.0
+          ]
+        },
+        {
+          "kind": "walk",
+          "landing": [
+            920.0,
+            -18.0
+          ],
+          "support_id": "exit"
+        }
+      ],
+      "recovery": [
+        {
+          "kind": "walk",
+          "landing": [
+            -80.0,
+            126.0
+          ],
+          "support_id": "catch"
+        },
+        {
+          "from_support_id": "catch",
+          "kind": "jump_rise",
+          "landing": [
+            -80.0,
+            78.0
+          ],
+          "support_id": "catch_step_low",
+          "takeoff": [
+            -80.0,
+            126.0
+          ]
+        },
+        {
+          "from_support_id": "catch_step_low",
+          "kind": "jump_rise",
+          "landing": [
+            -64.0,
+            30.0
+          ],
+          "support_id": "catch_step_high",
+          "takeoff": [
+            -80.0,
+            78.0
+          ]
+        },
+        {
+          "from_support_id": "catch_step_high",
+          "kind": "jump_rise",
+          "landing": [
+            32.0,
+            -18.0
+          ],
+          "support_id": "entry",
+          "takeoff": [
+            -32.0,
+            30.0
+          ]
+        }
+      ]
+    },
+    "spawn": [
+      40.0,
+      -18.0
+    ],
+    "steps": [
+      {
+        "kind": "walk",
+        "landing": [
+          208.0,
+          -18.0
+        ],
+        "support_id": "entry"
+      },
+      {
+        "from_support_id": "entry",
+        "kind": "jump_gap",
+        "landing": [
+          336.0,
+          -66.0
+        ],
+        "support_id": "mushroom_a",
+        "takeoff": [
+          208.0,
+          -18.0
+        ]
+      },
+      {
+        "kind": "walk",
+        "landing": [
+          472.0,
+          -66.0
+        ],
+        "support_id": "mushroom_a"
+      },
+      {
+        "from_support_id": "mushroom_a",
+        "kind": "jump_gap",
+        "landing": [
+          616.0,
+          -66.0
+        ],
+        "support_id": "mushroom_b",
+        "takeoff": [
+          472.0,
+          -66.0
+        ]
+      },
+      {
+        "kind": "walk",
+        "landing": [
+          752.0,
+          -66.0
+        ],
+        "support_id": "mushroom_b"
+      },
+      {
+        "from_support_id": "mushroom_b",
+        "kind": "jump_gap",
+        "landing": [
+          880.0,
+          -18.0
+        ],
+        "support_id": "exit",
+        "takeoff": [
+          752.0,
+          -66.0
+        ]
+      },
+      {
+        "kind": "walk",
+        "landing": [
+          920.0,
+          -18.0
+        ],
+        "support_id": "exit"
+      }
+    ],
+    "version": "forest-exploration-modules-v1",
+    "width": 960.0,
+    "world_bounds": [
+      -160.0,
+      -240.0,
+      1120.0,
+      460.0
+    ]
+  }
+}

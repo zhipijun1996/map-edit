@@ -20,7 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.ref }}
+          # Offline raw archives stay in Git; they are not Pages input assets.
+          sparse-checkout: |
+            /*
+            !/pcg/archives/
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -34,16 +39,10 @@ jobs:
       - name: Check plains decision contracts
         run: python3 -m unittest discover -s prototype/plains/tests -v
         working-directory: pcg
-      - name: Verify generation videos and archived data
-        run: python3 tools/check_generation.py
-      - name: Prepare static files
-        run: |
-          mkdir -p dist/library
-          cp index.html style.css app.js model.js capabilities.js difficulty.js library-client.js repository-library-client.js module-contract.js module-block-grid.js module-contract-render.js dist/
-          cp library/catalog.json library/coverage.json dist/library/
-          cp -r library/modules library/thumbnails library/workshop dist/library/
-          cp -r generation dist/generation
-          touch dist/.nojekyll
+      - name: Verify published videos, contracts and traces (offline archives not run)
+        run: python3 tools/check_generation.py --web-only
+      - name: Prepare current-only editor and historical video assets
+        run: python3 tools/build_editor_site.py --out dist
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
