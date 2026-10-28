@@ -1,0 +1,180 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85",
+  "reviewId": "191",
+  "title": "紧凑钟台：下射抬升穿门",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/module.mapnote.json",
+    "contentVersion": "sha256:dcef279a35648491cd3d84bc36d69a926e7bcbf85a7ef0f99fde8f16688a84a9",
+    "sha256": "99b1d91f84e65e1cdecf166d01262cee19c0fa8857b68df8007c5838eef16fdc"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 114,
+    "w": 384,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        128,
+        434
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        512,
+        306
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左3下2",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 466,
+      "w": 112,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/platform-1",
+      "type": "terrain",
+      "x": 224.58580067552367,
+      "y": 338,
+      "w": 192.0,
+      "h": 72,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/gate-0",
+      "type": "gate",
+      "x": 348.58580067552367,
+      "y": 158,
+      "w": 24.0,
+      "h": 180,
+      "rotation": 0,
+      "label": "lift_bell gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 1.6
+      }
+    },
+    {
+      "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/bell-0",
+      "type": "bell",
+      "x": 144,
+      "y": 397.7979687452316,
+      "w": 28,
+      "h": 34.0,
+      "rotation": 0,
+      "label": "lift_bell",
+      "note": "",
+      "targetId": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/gate-0",
+      "sourceId": "lift_bell",
+      "mechanics": {
+        "runtimeParameters": {
+          "prompt": "SHOOT DOWN / LIFT + OPEN"
+        }
+      },
+      "diagramLabel": "下射铃（内移）"
+    },
+    {
+      "id": "generated-59296f7c9ebdbbc68e0913efe12ce46af74300db662d08af14337f205f6dae85/migration-shore-exit",
+      "type": "terrain",
+      "x": 392.58580067552367,
+      "y": 338,
+      "w": 119.41419932447633,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 128,
+      "y": 114,
+      "w": 384,
+      "h": 384,
+      "points": [
+        {
+          "x": 128,
+          "y": 434
+        },
+        {
+          "x": 180,
+          "y": 448
+        },
+        {
+          "x": 200,
+          "y": 300
+        },
+        {
+          "x": 285,
+          "y": 300
+        },
+        {
+          "x": 400,
+          "y": 320
+        },
+        {
+          "x": 512,
+          "y": 306
+        }
+      ]
+    }
+  ],
+  "summary": "3×3 Block；左裁3、下裁2；完整铃体移入边界，保留1.6秒初值。",
+  "designNotes": [
+    "从6×5裁为3×3，边界x128–512/y114–498，底部岩台与地刺随下裁删除，不悄悄搬回。",
+    "左口(128,434)、右口(512,306)分别由原y466/y338岸支撑；左岸保留112px，低岸厚32px。",
+    "左裁会切掉原风铃左半，故将完整铃体移至x144，y397.7979687452316不变；原门、上岸和1.6秒时长作为待验初值保留。",
+    "下射同枪反冲抬升并穿门为设计目标；来源标题的“独立留出”仅是旧版本历史，新裁剪版不继承holdout/PASS。身体、时机、防夹、恢复及回程UNKNOWN。"
+  ],
+  "designVersion": "sha256:f64e14e3c9dce30981a1b4d7b10eea09278e613b2d8556e36945c2a7d529728d"
+}
