@@ -10,6 +10,8 @@
 
 用户最新允许另开独立Codex会话并行实现已保留设计。设计会话仍不改真实Module、不运行物理；独立实现会话在专用分支/worktree按 `docs/module-review-implementation-handoff.md` 和 `feedback/manual-review/implementation-handoff-v1.json` 实现01–05的精确确认版本，允许补全真实参数并用原Harness验证，不改设计页、不扩大到06–10或旧批处理。当前07已澄清为两门之间偏下；06仅澄清横向风铃门图意。
 
+最新反馈005优先：06取消所有门，改为同一风铃同步控制上方两路径平台齿轮伸出/收起，平台本体保留；暂按初始伸出绘图，Cell支持和参数未实现。07右裁1列成为4×5 Block，双门之间底部增加横排危险带，风铃维持中间偏下。10精确版本已保留并加入独立实现交接清单；当前实现范围01–05及10共6项，06/07未定，08/09废弃。新图入口：`python3 tools/publish_design_review.py generation/manual-review/designs/batch-002/feedback-003`。本会话仍只做图文。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
