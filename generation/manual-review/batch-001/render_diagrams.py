@@ -92,6 +92,9 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in reward:
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
  for p in gc['ports']:
+  if design_only and p.get('face')=='TOP' and p.get('permission')=='INOUT' and p.get('surface')=='ONE_WAY_PLATFORM':
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx} {cy-29}V{cy+29}" stroke="#256776" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>');text(cx+18,cy-18,p['id']+' 可穿·双向',22,weight=700)
+   continue
   if design_only and p.get('permission')=='OUT' and p.get('surface')=='AIR':
    cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx-nx*30} {cy-ny*30}L{cx+nx*20} {cy+ny*20}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+24,cy+5,p['id']+' 空中仅出',22,weight=700)
    continue

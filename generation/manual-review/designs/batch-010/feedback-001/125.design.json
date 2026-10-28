@@ -1,0 +1,854 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-fork-paths",
+  "reviewId": "125",
+  "title": "分岔路径",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-fork-paths/module.mapnote.json",
+    "contentVersion": "sha256:632e058a0bb34c731f3779e762a9f95fde9bf2818ee00b0185331bbd56248089",
+    "sha256": "60c8de79f913d4f4e4d47def9acae116407ec6e853cc6d66a117d7ffdeaa9f4f"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": -8,
+    "w": 512,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        128,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "fork_right",
+      "position": [
+        640,
+        568
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "fork_up",
+      "position": [
+        640,
+        56
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        448,
+        -8
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "supportObjectId": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-5",
+      "motionCondition": "双向垂直跨界；真实动作与资源状态待验证"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-fork_right",
+      "from": "entry",
+      "to": "fork_right",
+      "pathObjectId": "design-route-entry-to-fork_right",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_right-to-entry",
+      "from": "fork_right",
+      "to": "entry",
+      "pathObjectId": "design-route-fork_right-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "entry-to-fork_up",
+      "from": "entry",
+      "to": "fork_up",
+      "pathObjectId": "design-route-entry-to-fork_up",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_up-to-entry",
+      "from": "fork_up",
+      "to": "entry",
+      "pathObjectId": "design-route-fork_up-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_right-to-fork_up",
+      "from": "fork_right",
+      "to": "fork_up",
+      "pathObjectId": "design-route-fork_right-to-fork_up",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_up-to-fork_right",
+      "from": "fork_up",
+      "to": "fork_right",
+      "pathObjectId": "design-route-fork_up-to-fork_right",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "entry-to-C",
+      "from": "entry",
+      "to": "C",
+      "pathObjectId": "design-route-entry-to-C",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-entry",
+      "from": "C",
+      "to": "entry",
+      "pathObjectId": "design-route-C-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_right-to-C",
+      "from": "fork_right",
+      "to": "C",
+      "pathObjectId": "design-route-fork_right-to-C",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-fork_right",
+      "from": "C",
+      "to": "fork_right",
+      "pathObjectId": "design-route-C-to-fork_right",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "fork_up-to-C",
+      "from": "fork_up",
+      "to": "C",
+      "pathObjectId": "design-route-fork_up-to-C",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-fork_up",
+      "from": "C",
+      "to": "fork_up",
+      "pathObjectId": "design-route-C-to-fork_up",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除左一列右2列下一行block.，增加上方port，可以互相route",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 600,
+      "w": 512,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-1",
+      "type": "platform",
+      "x": 220,
+      "y": 510,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-2",
+      "type": "platform",
+      "x": 390,
+      "y": 420,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-3",
+      "type": "platform",
+      "x": 220,
+      "y": 330,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-4",
+      "type": "platform",
+      "x": 390,
+      "y": 240,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 4,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/platform-5",
+      "type": "platform",
+      "x": 416,
+      "y": 88,
+      "w": 160,
+      "h": 24,
+      "rotation": 0,
+      "label": "顶口可穿平台",
+      "note": "",
+      "sourceIndex": 5,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b50c29ad3e3147dc04672a726ccde548a12b4620a151074b116510a44440b440/solid-side-dock-fork_up",
+      "type": "terrain",
+      "x": 576,
+      "y": 88,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "sourceIndex": 8,
+      "label": "原高侧口接岸",
+      "note": "Local ROCK landing zone; original interior one-way platform retained"
+    },
+    {
+      "id": "design-route-entry-to-fork_right",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 220,
+          "y": 582
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 640,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-fork_right-to-entry",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 568
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 220,
+          "y": 582
+        },
+        {
+          "x": 128,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-entry-to-fork_up",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 180,
+          "y": 582
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 640,
+          "y": 56
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-fork_up-to-entry",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 56
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 180,
+          "y": 582
+        },
+        {
+          "x": 128,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-fork_right-to-fork_up",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 568
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 640,
+          "y": 56
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-fork_up-to-fork_right",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 56
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 540,
+          "y": 70
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 640,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-entry-to-C",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 180,
+          "y": 582
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": -8
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-C-to-entry",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 448,
+          "y": -8
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 180,
+          "y": 582
+        },
+        {
+          "x": 128,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-fork_right-to-C",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 568
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 280,
+          "y": 492
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 280,
+          "y": 312
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": -8
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-fork_right",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 448,
+          "y": -8
+        },
+        {
+          "x": 470,
+          "y": 70
+        },
+        {
+          "x": 450,
+          "y": 222
+        },
+        {
+          "x": 450,
+          "y": 402
+        },
+        {
+          "x": 540,
+          "y": 582
+        },
+        {
+          "x": 640,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-fork_up-to-C",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 640,
+          "y": 56
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 500,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": -8
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-fork_up",
+      "type": "route",
+      "x": 128,
+      "y": -8,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 448,
+          "y": -8
+        },
+        {
+          "x": 480,
+          "y": 70
+        },
+        {
+          "x": 600,
+          "y": 70
+        },
+        {
+          "x": 640,
+          "y": 56
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "summary": "4×5 Block；左裁1、右裁2、底裁1；保留原三口并新增顶口C，四口十二向设计。",
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "designNotes": [
+    "左裁1、右裁2、底裁1，从7×6变为4×5，边界x128–640、y-8–632；原地面裁薄至32px。",
+    "原模块已含entry、fork_right、fork_up三个侧口；本次按“增加上方port”新增C，保留全部旧口，因此总计四口，不把原高侧口偷偷替换掉。",
+    "C=(448,-8)，TOP/ONE_WAY_PLATFORM/INOUT。为顶口支撑与原高侧口真实接岸，原最上层可穿台向左展开为x416–576、y88；原高侧岩体岸内移为x576–640、y88，截断的小连接片合并进该接岸。",
+    "保留四层原交替可穿台，用来从任意低口上攀到高侧口/顶部口，并提供分层回落选择；可穿平台允许原下跳/离台动作，不加传送或资源恢复。",
+    "四口12个不同端口间有向关系逐条列为设计目标；低口横行、上攀、回落和上层转口的动作关系分别记录。不是由一个方向成功推断全互通。",
+    "原型不含新增机关或敌人。跳跃/反冲能力、全身净空、顶口跨界、连续资源、失败恢复及全部回程均UNKNOWN。"
+  ],
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "fork_right",
+      "fork_up",
+      "C"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "fork_right",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "entry",
+        "to": "fork_up",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "entry",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_right",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_right",
+        "to": "fork_right",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "fork_right",
+        "to": "fork_up",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_right",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_up",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_up",
+        "to": "fork_right",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "fork_up",
+        "to": "fork_up",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "fork_up",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "fork_right",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "fork_up",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "C",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:d38d7df4bed3890ed8046a07f399f53f9b8f0c108a52cde1573727f9ec7c7e10"
+}
