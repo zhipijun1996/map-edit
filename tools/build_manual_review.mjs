@@ -39,6 +39,11 @@ if(fs.existsSync(path.join(root,revisionIndex))){
   const raw=fs.readFileSync(path.join(root,revision.file));const hash=sha(raw);
   if(hash!==revision.sha256)throw Error('review revision source changed: '+row.moduleId);
   const design=JSON.parse(raw);
+  if(revision.reviewStage==='reference_display'){
+   if(hash!==row.sourceSha256||design.generationContract.contentVersion!==row.contentVersion)throw Error('reference display changed content');
+   if(sha(fs.readFileSync(path.join(out,revision.diagram)))!==revision.diagramSha256)throw Error('reference display image changed');
+   return {...row,reviewStage:'reference_display',diagram:revision.diagram,designNotes:revision.notes??[],previousDiagram:revision.beforeDiagram,previousVersion:revision.beforeVersion,summary:revision.summary,reviewRevision:revision.revision,receivedFeedback:revision.verbatim,physicsSummary:revision.physicsSummary,formalLibraryChanged:false};
+  }
   if(revision.reviewStage==='design'){
    if(design.schema!=='pcg/module-design/v1'||design.reviewStage!=='design')throw Error('invalid design review schema');
    if(sha(fs.readFileSync(path.join(out,revision.diagram)))!==revision.diagramSha256)throw Error('design diagram hash changed');
