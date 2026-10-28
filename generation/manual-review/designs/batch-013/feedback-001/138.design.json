@@ -1,0 +1,215 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-perch-double",
+  "reviewId": "138",
+  "title": "双重高台",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-perch-double/module.mapnote.json",
+    "contentVersion": "sha256:246f4d4b51486a750b19b0555b347ca028a0a81fd8305526a7679dc29403a4d4",
+    "sha256": "b360b7ef70283145989941b747da1286d416324c794e2cd18cbbc86ba01afcca"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": -52,
+    "w": 384,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        268
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        384,
+        12
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左1右2block，互通",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-112c3cfd960270004f1c077f2e7ac7d026696d90e1f1c97c92c47ebce2ea6b21/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 300,
+      "w": 80,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-112c3cfd960270004f1c077f2e7ac7d026696d90e1f1c97c92c47ebce2ea6b21/platform-1",
+      "type": "terrain",
+      "x": 140,
+      "y": 200,
+      "w": 100,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-112c3cfd960270004f1c077f2e7ac7d026696d90e1f1c97c92c47ebce2ea6b21/platform-2",
+      "type": "terrain",
+      "x": 320,
+      "y": 44,
+      "w": 64,
+      "h": 30,
+      "rotation": 0,
+      "label": "最高台接新出口",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": -52,
+      "w": 384,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 40,
+          "y": 282
+        },
+        {
+          "x": 190,
+          "y": 182
+        },
+        {
+          "x": 352,
+          "y": 26
+        },
+        {
+          "x": 384,
+          "y": 12
+        }
+      ]
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": -52,
+      "w": 384,
+      "h": 384,
+      "points": [
+        {
+          "x": 384,
+          "y": 12
+        },
+        {
+          "x": 352,
+          "y": 26
+        },
+        {
+          "x": 190,
+          "y": 182
+        },
+        {
+          "x": 40,
+          "y": 282
+        },
+        {
+          "x": 0,
+          "y": 268
+        }
+      ]
+    }
+  ],
+  "summary": "3×3 Block；左裁1、右裁2；两口双向，上攀与分层回落。",
+  "designNotes": [
+    "左裁1、右裁2，从6×3成为3×3，边界x0–384、y-52–332。",
+    "入口(0,268)由原首台y300支撑；出口(384,12)保留原高度，由最高台接岸。",
+    "原出口独立岸和连接片位于被裁两列，均移除。最高原台x320–440裁短为x320–384，并从y100上移56px到y44，接住出口脚下32px；不额外补一块重叠安全台。",
+    "中间原台x140–240/y200保留；两个方向分别表达跳跃/反冲上攀和分层回落。上移后高度关系、身体净空、连续资源、稳定到岸及失败恢复UNKNOWN。"
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:1ae436eb23c544e874132284ca18755cf9145b9419e97a62653b3bc6baaef6af"
+}
