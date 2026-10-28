@@ -1,0 +1,282 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "block-demand-a1-bidirectional-risk-reward-1",
+  "reviewId": "27",
+  "title": "A1 尖刺窄通道 / 四格双向口",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/block-demand-a1-bidirectional-risk-reward-1/module.mapnote.json",
+    "contentVersion": "sha256:55bd353bfac6eec98572907853a14da63fa73e93686ea3e3cab164688f92b297",
+    "sha256": "3ed47c4dd0e0baeb0c261e8739c68d3cc5d730e066b49b33d0aa2a011946cc7e"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 128,
+    "w": 512,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        128,
+        320
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "B",
+      "position": [
+        640,
+        320
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "design-route-A-to-B",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "B-to-A",
+      "from": "B",
+      "to": "A",
+      "pathObjectId": "design-route-B-to-A",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除上方2行，下方3行，左侧3列，右侧3列block。两个port互通",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 352,
+      "w": 144,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-1",
+      "type": "terrain",
+      "x": 522,
+      "y": 352,
+      "w": 118,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-2",
+      "type": "terrain",
+      "x": 292,
+      "y": 128,
+      "w": 270,
+      "h": 66,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-3",
+      "type": "terrain",
+      "x": 312,
+      "y": 358,
+      "w": 170,
+      "h": 26,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/thorn-0",
+      "type": "hazard",
+      "x": 292,
+      "y": 194,
+      "w": 270,
+      "h": 12,
+      "rotation": 180,
+      "label": "上壁尖刺",
+      "note": "原碰撞危险面",
+      "hostId": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-2",
+      "sourceId": "upper-slot",
+      "sourceType": "spike",
+      "shape": "spikes",
+      "orientation": "DOWN"
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/thorn-1",
+      "type": "hazard",
+      "x": 312,
+      "y": 346,
+      "w": 170,
+      "h": 12,
+      "rotation": 0,
+      "label": "下壁尖刺",
+      "note": "原碰撞危险面",
+      "hostId": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/platform-3",
+      "sourceId": "lower-slot",
+      "sourceType": "spike",
+      "shape": "spikes",
+      "orientation": "UP"
+    },
+    {
+      "id": "generated-334be4cbe65329c911fd9fbb53c3af599f1c3848e4874d3c4cecf1f6fe45efd4/cache-0",
+      "type": "reward",
+      "x": 584,
+      "y": 316,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 8",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 8,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            744,
+            334
+          ],
+          "region": [
+            719,
+            329,
+            50,
+            10
+          ],
+          "amount": 8
+        }
+      }
+    },
+    {
+      "id": "design-route-A-to-B",
+      "type": "route",
+      "x": 128,
+      "y": 128,
+      "w": 512,
+      "h": 256,
+      "points": [
+        {
+          "x": 128,
+          "y": 320
+        },
+        {
+          "x": 220,
+          "y": 334
+        },
+        {
+          "x": 270,
+          "y": 318
+        },
+        {
+          "x": 335,
+          "y": 270
+        },
+        {
+          "x": 430,
+          "y": 250
+        },
+        {
+          "x": 510,
+          "y": 282
+        },
+        {
+          "x": 565,
+          "y": 334
+        },
+        {
+          "x": 640,
+          "y": 320
+        }
+      ]
+    },
+    {
+      "id": "design-route-B-to-A",
+      "type": "route",
+      "x": 128,
+      "y": 128,
+      "w": 512,
+      "h": 256,
+      "points": [
+        {
+          "x": 640,
+          "y": 320
+        },
+        {
+          "x": 565,
+          "y": 334
+        },
+        {
+          "x": 500,
+          "y": 286
+        },
+        {
+          "x": 415,
+          "y": 284
+        },
+        {
+          "x": 330,
+          "y": 288
+        },
+        {
+          "x": 275,
+          "y": 318
+        },
+        {
+          "x": 220,
+          "y": 334
+        },
+        {
+          "x": 128,
+          "y": 320
+        }
+      ]
+    }
+  ],
+  "summary": "4×2 Block；四边裁剪，保留上下尖刺窄通道；A/B双向通行设计。",
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "designNotes": [
+    "顶裁2行、底裁3行、左右各裁3列，从10×7变为4×2 Block；边界x128–640、y128–384。",
+    "A口移至(128,320)、B口移至(640,320)，保留各自裁剪后的岸面。宝箱随右岸裁剪内移至x584–620，保持可见并留在真实岸上。",
+    "上壁尖刺朝下、下壁尖刺朝上，原窄通道的作用保留；底部旧恢复长台被裁去。",
+    "明确声明A→B、B→A两个独立设计目标，双向动作与真实身体净空、普通跳跃/越顶反例、瞄准容错与失败恢复均待实现验证，技术UNKNOWN。"
+  ],
+  "designVersion": "sha256:b88b52c66ec8d7acc562ef3a2e965b6d30788484f116ae8b47a5d861bd5fe1f3"
+}

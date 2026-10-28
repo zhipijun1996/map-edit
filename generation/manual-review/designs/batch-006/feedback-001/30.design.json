@@ -1,0 +1,308 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "block-demand-c01-0",
+  "reviewId": "30",
+  "title": "Block128换脚桥 / 横向断拱",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/block-demand-c01-0/module.mapnote.json",
+    "contentVersion": "sha256:83676c64a0507756488ded9d1eba5001a7a949aab867c59d3a5ee4306aa66e8e",
+    "sha256": "33968d63988f3adde6ff722b9d849d39cc6d7e5e43214dbae426c9638b962524"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 0,
+    "w": 1408,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        128,
+        320
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "B",
+      "position": [
+        1536,
+        192
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "design-route-A-to-B",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删掉下方4行，左侧2列右侧1列block。下方增加危险地带",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 352,
+      "w": 112,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/platform-1",
+      "type": "terrain",
+      "x": 1380,
+      "y": 224,
+      "w": 156,
+      "h": 140,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/platform-2",
+      "type": "terrain",
+      "x": 128,
+      "y": 74,
+      "w": 222,
+      "h": 120,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+      "type": "gate",
+      "x": 220,
+      "y": 352,
+      "w": 340,
+      "h": 24,
+      "rotation": 0,
+      "label": "bridge-pair gate",
+      "note": "",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "B",
+        "gateA": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+        "gateB": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes",
+        "member": "A",
+        "openSeconds": 0
+      },
+      "diagramLabel": "G1 脚下桥 · 初始实体"
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/bell-0",
+      "type": "bell",
+      "x": 426,
+      "y": 287,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "bridge-pair",
+      "note": "",
+      "targetId": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+      "sourceId": "bridge-pair",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "B",
+        "gateA": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+        "gateB": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes"
+      },
+      "targetIds": [
+        "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+        "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/paired-gate-0"
+      ],
+      "diagramLabel": "换桥铃"
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/cache-0",
+      "type": "reward",
+      "x": 1472,
+      "y": 188,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            1490,
+            206
+          ],
+          "region": [
+            1460,
+            201,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/paired-gate-0",
+      "type": "gate",
+      "x": 820,
+      "y": 264,
+      "w": 270,
+      "h": 24,
+      "rotation": 0,
+      "label": "bridge-pair / B",
+      "note": "与A门互斥的真实第二碰撞门，非装饰",
+      "sourceId": "bridge-pair/B",
+      "mechanics": {
+        "kind": "complementary_gates",
+        "initialOpen": "B",
+        "gateA": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/gate-0",
+        "gateB": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/paired-gate-0",
+        "invariant": "exactly_one_open",
+        "switch": "eligible original projectile atomically swaps complementary collision states",
+        "antiPinch": "reject entire switch while the closing gate overlaps the player or another real character body",
+        "resourcePolicy": "original projectile, recoil, cooldown and hit recovery unchanged; no scripted resource writes",
+        "member": "B"
+      },
+      "diagramLabel": "G2 远桥 · 初始虚"
+    },
+    {
+      "id": "generated-c3bf100095a73dcb091659c4753ac01749cfd62c8f9b070969bcd2426477327a/migration-shore-B",
+      "type": "terrain",
+      "x": 1512,
+      "y": 224,
+      "w": 24,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 7
+    },
+    {
+      "id": "design-bridge-bottom-hazard",
+      "type": "hazard",
+      "shape": "spikes",
+      "x": 240,
+      "y": 368,
+      "w": 1140,
+      "h": 16,
+      "label": "换桥区下方危险带",
+      "mechanics": {
+        "kind": "design_static_hazard",
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "design-route-A-to-B",
+      "type": "route",
+      "x": 128,
+      "y": 0,
+      "w": 1408,
+      "h": 384,
+      "points": [
+        {
+          "x": 128,
+          "y": 320
+        },
+        {
+          "x": 210,
+          "y": 334
+        },
+        {
+          "x": 370,
+          "y": 334
+        },
+        {
+          "x": 520,
+          "y": 334
+        },
+        {
+          "x": 650,
+          "y": 240
+        },
+        {
+          "x": 780,
+          "y": 130
+        },
+        {
+          "x": 930,
+          "y": 246
+        },
+        {
+          "x": 1040,
+          "y": 246
+        },
+        {
+          "x": 1130,
+          "y": 140
+        },
+        {
+          "x": 1290,
+          "y": 53
+        },
+        {
+          "x": 1410,
+          "y": 170
+        },
+        {
+          "x": 1490,
+          "y": 206
+        },
+        {
+          "x": 1536,
+          "y": 192
+        }
+      ]
+    }
+  ],
+  "summary": "11×3 Block；底裁4行、左裁2列、右裁1列；换脚桥下方增加危险带。",
+  "designNotes": [
+    "底裁4行、左裁2列、右裁1列，从14×7变为11×3 Block；A口移至(128,320)，B口移至(1536,192)，端口均在Block外边中心。",
+    "保留原互补换脚桥：G1初始实体、G2初始无实体；击中同一风铃使脚下桥消失、远桥变实，空中转移到新落脚点。",
+    "危险带覆盖两岸之间x240–1380，位于y368–384，低于G1桥面y352共16px。设计目标是桥面安全、落入下方受罚；真实接触、厚度与防夹仍需物理验证。",
+    "旧y714底台及低位恢复台随裁剪移除，不增设安全底台；失误恢复方式与资源成本尚未定稿。",
+    "仅声明A→B设计目标，不从一次路线推断回程；桥切换时机、反冲容错、奖励与到岸稳定状态UNKNOWN。"
+  ],
+  "designVersion": "sha256:eb09d3b4b9822c9132cd3d8590f967d0c687f8a891a56db2354b83499fa5182f"
+}
