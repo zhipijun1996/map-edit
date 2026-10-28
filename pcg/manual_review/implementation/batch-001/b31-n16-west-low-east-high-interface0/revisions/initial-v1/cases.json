@@ -1,0 +1,653 @@
+{
+  "cases": [
+    {
+      "id": "approved-b001-05-A-to-B-v1",
+      "family": "wall-projection-unlock",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          256,
+          608,
+          352,
+          32
+        ],
+        [
+          608,
+          352,
+          416,
+          288
+        ]
+      ],
+      "spawn": [
+        280,
+        590
+      ],
+      "entry_port": [
+        280,
+        590
+      ],
+      "exit_port": [
+        1000,
+        334
+      ],
+      "goal": [
+        993,
+        330,
+        14,
+        8
+      ],
+      "world_bounds": [
+        0,
+        -384,
+        1280,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "wall-bell",
+          "bell": [
+            520.0,
+            568.0
+          ],
+          "gate": [
+            848,
+            0,
+            24,
+            352
+          ],
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [
+        {
+          "id": "human-f02-high-sentry",
+          "definition": "plains_sentry",
+          "position": [
+            784.0,
+            336.0
+          ],
+          "initial_idle_cooldown": 0.0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "crest-cache",
+          "position": [
+            944,
+            334
+          ],
+          "region": [
+            920,
+            328,
+            48,
+            12
+          ],
+          "amount": 8
+        }
+      ],
+      "max_frames": 1300,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            280,
+            590
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            334
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "required_rewards": [
+        "crest-cache"
+      ],
+      "expected_reward": 8,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 580
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "wall-bell"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1000,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "wall-projection-unlock",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N16"
+      ],
+      "layout_title": "斜射开高门 / 原墙可投影",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn16/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn16/main_v1.tscn",
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true,
+        "required_rewards": [
+          "crest-cache"
+        ]
+      },
+      "rule_parameters": {
+        "launch": 580,
+        "hold": 24,
+        "wall_x": 608,
+        "wall_top352": true,
+        "projection_observation_not_goal_predicate": true,
+        "preparation_trigger": 580,
+        "new_family": false
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ]
+        ]
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            256,
+            576
+          ],
+          "stagingPosition": [
+            280,
+            590
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            320
+          ],
+          "stagingPosition": [
+            1000,
+            334
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      },
+      "block_reservations": [],
+      "layout_uid": "dc9aa3f0ab0d9582113eaec2fc16dff9388d0c78d8b3a8d46a87716fc833c069",
+      "generation_rule": {
+        "id": "B31-N16/wall-collision-projection",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn16/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "launch": 580,
+          "hold": 24,
+          "wall_x": 608,
+          "wall_top352": true,
+          "projection_observation_not_goal_predicate": true,
+          "preparation_trigger": 580,
+          "new_family": false
+        },
+        "registration_source": "pcg/manual_review/approved_r05_v1.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N16/west-low-east-high-interface0",
+        "source_type": "explicit_model_authored_interface_demand",
+        "region": "plains",
+        "required_family": "wall-projection-unlock",
+        "objective": {
+          "recipe": "wall-projection-unlock",
+          "physical_layout_sha256": "dc9aa3f0ab0d9582113eaec2fc16dff9388d0c78d8b3a8d46a87716fc833c069",
+          "core": "Originalsame-shotopensactualdoorandcrestswall;wallprojectionobservednotforcedcounterwords",
+          "new_family": false,
+          "family_interpretation": "Existingdirectionalrecoiladaptation, wallprojectionoptionalrealobservation. Detached1gun/1jumpallowed."
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "crest-cache",
+              "position": [
+                944,
+                334
+              ],
+              "region": [
+                920,
+                328,
+                48,
+                12
+              ],
+              "amount": 8
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "ActualsupportedAoriginalfullresources;permanentdoorclosed",
+          "exit": "ActualsupportedBdooropen/cacheonce;arbitrarytransferUNKNOWN"
+        },
+        "return_conditions": "Reverse/genericrecovery/seams/fullMapUNKNOWN;first8specificretryfixtureonly",
+        "budget": {
+          "generator_candidates": 3,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "向左下击铃，用同枪反冲登高岸。近墙可把多余横冲交给真实碰撞，离墙一段距离也能同成本到达。门永久打开，失败落回原岸可真落地后再试。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N16/west-low-east-high-interface0",
+        "source_type": "explicit_model_authored_interface_demand",
+        "region": "plains",
+        "required_family": "wall-projection-unlock",
+        "objective": {
+          "recipe": "wall-projection-unlock",
+          "physical_layout_sha256": "dc9aa3f0ab0d9582113eaec2fc16dff9388d0c78d8b3a8d46a87716fc833c069",
+          "core": "Originalsame-shotopensactualdoorandcrestswall;wallprojectionobservednotforcedcounterwords",
+          "new_family": false,
+          "family_interpretation": "Existingdirectionalrecoiladaptation, wallprojectionoptionalrealobservation. Detached1gun/1jumpallowed."
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "crest-cache",
+              "position": [
+                944,
+                334
+              ],
+              "region": [
+                920,
+                328,
+                48,
+                12
+              ],
+              "amount": 8
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "ActualsupportedAoriginalfullresources;permanentdoorclosed",
+          "exit": "ActualsupportedBdooropen/cacheonce;arbitrarytransferUNKNOWN"
+        },
+        "return_conditions": "Reverse/genericrecovery/seams/fullMapUNKNOWN;first8specificretryfixtureonly",
+        "budget": {
+          "generator_candidates": 3,
+          "director_revisions": 0
+        }
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_Wlow_Ehigh_8coin_demand",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "new_gameplay_family": false,
+        "novelty": "Originalmust-wallhypothesisrefutedbyequalcost/fasterdetachedroute; foldasexistingdirectionalrecoiladaptation",
+        "map_added_terrain": 0,
+        "new_Cell": false,
+        "wall_projection": "Realoptionalmechanismobservation_notnecessarysolutionpredicate",
+        "recovery": "Onecleanactualsameworldmiss/land/refill/retryonly;generic/reversequalificationUNKNOWN",
+        "unresolved": [
+          "ActualMapincidentallpairs/rewardallocation",
+          "Reversefreshcloseddoor/arbitraryentry/resources",
+          "Genericfailure/retry/return",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "review_alias": "b31-blockn16-v2-i0-x580-h24",
+      "wall_platform_indices": [],
+      "human_review_revision": {
+        "id": "batch-001/revision-002",
+        "sourceVersion": "sha256:e5bdfe1e5c6e7cbed71a226604a27277266e49cc8f761841808b134175bc5883"
+      },
+      "approved_implementation": {
+        "reviewId": "05",
+        "designVersion": "sha256:72dda21f3e90a63e5a7dc4fb94734da96471ddd97a5134720442792f5d3f61e3",
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn16/api_v1.py",
+        "rectangle": {
+          "x": 256,
+          "y": 0,
+          "w": 768,
+          "h": 640
+        }
+      }
+    }
+  ]
+}
