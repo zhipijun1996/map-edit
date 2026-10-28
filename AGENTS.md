@@ -1,4 +1,4 @@
-# 最新工作方式：只迭代设计稿，定稿后再实现（优先于下方全部历史任务）
+# 最新工作方式：本会话图文设计，独立会话实现已确认版本（优先于下方历史任务）
 
 用户明确要求先在网页快速迭代示意图与文字，设计完成后再改真实Module与参数。当前只编辑 `generation/manual-review/designs/` 的 `pcg/module-design/v1` 设计文件并重绘；不修改真实Module/cases/运行时或物理参数，不调用Module工厂、编译器、Godot或质量搜索。旧实现草稿与实测原样保留、暂停后续工作；正式库不变。
 
@@ -7,6 +7,8 @@
 图文更新入口：`python3 tools/publish_design_review.py generation/manual-review/designs/batch-001/feedback-002`。仅做绘图所需的Block/Port静态一致性和手机网页检查，不以全量测试、归档或物理实验阻塞改图发布。
 
 最新反馈003：01–05精确设计版本已收到保留，仍暂停实施；08/09设计废弃、原件保留。06三口两两互通且只留单风铃门，上裁1/下裁2；07左裁6/下裁2，原话“风景”暂释风铃上移1格、双门互补；10左裁8/下裁3/右裁3，裁掉起跳岸/停台初位须在图稿标出局部重排解释。仅更新batch-002的06/07/10设计稿。
+
+用户最新允许另开独立Codex会话并行实现已保留设计。设计会话仍不改真实Module、不运行物理；独立实现会话在专用分支/worktree按 `docs/module-review-implementation-handoff.md` 和 `feedback/manual-review/implementation-handoff-v1.json` 实现01–05的精确确认版本，允许补全真实参数并用原Harness验证，不改设计页、不扩大到06–10或旧批处理。当前07已澄清为两门之间偏下；06仅澄清横向风铃门图意。
 
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
