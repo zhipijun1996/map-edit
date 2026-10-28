@@ -623,7 +623,11 @@
       "reviewRevision": "batch-002/design-feedback-003",
       "receivedFeedback": "感觉这个门没有设计，位置很奇怪。改成不要门，风铃控制上方两个路径平台是否长齿轮，风铃开关切换状态齿轮收起来这种感觉",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
-      "formalLibraryChanged": false
+      "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "07",
@@ -652,7 +656,11 @@
       "reviewRevision": "batch-002/design-feedback-003",
       "receivedFeedback": "最右一列也可以删除冗余。module最下面，门中间的位置，放置一横排危险地带（比如荆棘地刺齿轮等）",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
-      "formalLibraryChanged": false
+      "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:5bd449804b5a095fb2e78187623cf918262f5ba21f1881494adbf72159d449dd",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "08",
@@ -737,22 +745,41 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:82374627863e068ffa5be344f3a2882abc661934a8865981eb26cec874a21a2b",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "12",
       "moduleId": "batch30-block-n04-0-2",
       "title": "穿过的门，回来接住你",
-      "summary": "10×8 Block；4 个逻辑 Port；4 条归档动作路线。",
-      "source": "./modules/batch30-block-n04-0-2/module.mapnote.json",
-      "sourceSha256": "e2dcdc130fa833361cf421cf28167bb3c57016f44c73e5d78fb0ae9d809834b8",
-      "contentVersion": "sha256:c7818bef95e1b8c1a5f99fef66fbe6e89ee80fed24a274186366bcb479280a07",
-      "diagram": "diagrams/batch30-block-n04-0-2--e2dcdc130fa83336.svg",
-      "portCount": 4,
+      "summary": "10×5 Block；上裁2行、下裁1行；新增顶边空中仅入E口，补全16个有向设计目标。",
+      "source": "generation/manual-review/designs/batch-003/feedback-001/12.design.json",
+      "sourceSha256": "f1279a5be6efc51d7f8fc4fc6eee8553552bb439b64d21a72f9f6e1b9413033d",
+      "contentVersion": "sha256:bfaa7f2430ed82ecb0111ac4b8a1e7b5e1f33729b278200afaa180e8d14c676c",
+      "diagram": "designs/batch-003/feedback-001/images/12.png",
+      "portCount": 5,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "designVersion": "sha256:bfaa7f2430ed82ecb0111ac4b8a1e7b5e1f33729b278200afaa180e8d14c676c",
+      "reviewStage": "design",
+      "designNotes": [
+        "顶裁2行、底裁1行，尺寸从10×8变为10×5 Block；四个侧口和既有机关/奖励保留，底部原岩体裁薄至32px。",
+        "新入口E位于顶边Block中心(704,256)，只允许空中向下进入，不允许离开。具体速度、资源和到达窗口待实现验证。",
+        "设计解释：四个原侧口A/B/C/D之间补全12个有向关系，E到四个侧口再增加4个；所有16条均是设计目标，技术状态UNKNOWN。自环未请求，其他口到E明确禁止。",
+        "为使上层/顶口可回到低口，新增控制同一扇门的上侧回落铃；从上方跳起向上射铃，以向下反冲穿门回落。原下侧起跳铃保留，用来上穿并由关门后的平台接住。此新增是供本轮复审的设计适配。",
+        "门持续时间不照搬旧0.2秒；按弹丸飞行、人物运动与全身穿越时间求解，保留防夹要求。底部失败恢复、端口连续状态和全方向路线均待实际验证。"
+      ],
+      "previousDiagram": "diagrams/batch30-block-n04-0-2--e2dcdc130fa83336.svg",
+      "previousVersion": "sha256:c7818bef95e1b8c1a5f99fef66fbe6e89ee80fed24a274186366bcb479280a07",
+      "reviewRevision": "batch-003/design-feedback-001",
+      "receivedFeedback": "删掉最下面1行和最上面2行block，上方增加空中只能进的入口，port之间的route补全",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false
     },
     {
       "reviewId": "13",
@@ -767,7 +794,11 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:a425028bec89973936e3c9e44fae6fdd0b82ebb450640895cbaa2c70878e59c7",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "14",
@@ -782,7 +813,11 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:5a6c4bd08343f0de36333b57c8dc1b58a678a3da3a811d5dd6b259cb1d4a3c93",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "15",
@@ -797,7 +832,11 @@
       "category": "平原",
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
-      "humanFeedback": []
+      "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:080006a983901b456e813ef5e2b56bde153e8baecf0ae6ac7a37be0bfd9120d7",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": ""
     },
     {
       "reviewId": "16",
