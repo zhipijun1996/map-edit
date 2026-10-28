@@ -1,0 +1,199 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-bramble-ridge",
+  "reviewId": "120",
+  "title": "荆棘山脊",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-bramble-ridge/module.mapnote.json",
+    "contentVersion": "sha256:c962cc34cc22fe8ae748f65cbdbd8a49ef0ead86619f6bf4e3e170ed3c125851",
+    "sha256": "a852af576ca7c4b9e655676593a9d2ff6c28aa9c59987dfff49b53878f8a67be"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 176,
+    "w": 896,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        368
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        896,
+        368
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删除右侧一列cell",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 400,
+      "w": 110,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/platform-1",
+      "type": "terrain",
+      "x": 160,
+      "y": 330,
+      "w": 110,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/platform-2",
+      "type": "terrain",
+      "x": 330,
+      "y": 260,
+      "w": 140,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/platform-3",
+      "type": "terrain",
+      "x": 530,
+      "y": 330,
+      "w": 130,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/platform-4",
+      "type": "terrain",
+      "x": 740,
+      "y": 400,
+      "w": 156,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 4,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b93eff937b0a1eebee6706b8298db1ad967bc2d59f53c3adb947ba83480f9dec/hazard-0",
+      "type": "hazard",
+      "x": 110,
+      "y": 475,
+      "w": 630,
+      "h": 35,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 176,
+      "w": 896,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 368
+        },
+        {
+          "x": 90,
+          "y": 382
+        },
+        {
+          "x": 170,
+          "y": 312
+        },
+        {
+          "x": 240,
+          "y": 312
+        },
+        {
+          "x": 340,
+          "y": 242
+        },
+        {
+          "x": 440,
+          "y": 242
+        },
+        {
+          "x": 550,
+          "y": 312
+        },
+        {
+          "x": 640,
+          "y": 312
+        },
+        {
+          "x": 760,
+          "y": 382
+        },
+        {
+          "x": 896,
+          "y": 368
+        }
+      ]
+    }
+  ],
+  "summary": "7×3 Block；右裁1列，保留原山脊起伏与下方危险带。",
+  "designNotes": [
+    "右裁1列，用户原话“cell”按128px Block解释，从8×3变为7×3；上下和左边界不变。",
+    "exit移至(896,368)，直接裁短原最右低岸；左起岸、三段起伏和原下方危险带不变，不额外添加连接平台。",
+    "仅声明entry→exit设计目标；各段跳跃与反冲、真实身体净空、到岸稳定和失误恢复UNKNOWN，待独立实现验证。"
+  ],
+  "designVersion": "sha256:a2b035a4bbbad2d9956e780e3fc272e25b9b80cce96b2577b3bed45a9b49ea30"
+}
