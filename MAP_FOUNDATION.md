@@ -1,7 +1,7 @@
 # 《失序之钟》随机 Map 系统：基础模型与强制契约
 
 > **文档代号：** `MAP_FOUNDATION`  
-> **版本：** 1.0  
+> **版本：** 1.1  
 > **状态：** 规范性文件（Normative）  
 > **适用对象：** 《失序之钟》的 Module 制作器、Module 库、Map 生成器、验证器及 Godot 运行时。  
 > **规范优先级：** 本文件是 Map 系统的最高优先级设计依据。当算法实现、模块数据、推荐方案、其他设计文档或 Codex 任务描述与本文件冲突时，以本文件为准；如确实需要改变基本模型，应先修订本文件并升级版本。  
@@ -62,11 +62,12 @@ Module 的 Block 占用始终是矩形，尺寸可以因 Module 而异。一个 
 
 一个实例由如下信息决定：
 
-`Instance = (module_id, origin_x, origin_y, mirror_x, connections, closures)`
+`Instance = (module_id, origin_x, origin_y, mirror_x, port_configuration_id, connections, closures)`
 
 - `module_id`：基础 Module 模板 ID。
 - `(origin_x, origin_y)`：整数 Block 坐标。
 - `mirror_x`：本次是否水平镜像。
+- `port_configuration_id`：本次选用的已认证完整接口配置 ID，默认 `base`（原配置）；见 3.5。
 - `connections`：此次实例实际与其他实例配对的 Port。
 - `closures`：此次实例未连接 Port 的封口配置。
 
@@ -131,6 +132,24 @@ Port 的初始权限为：
 空中 `OUTPUT` 若未对接合法的相邻 `INPUT`，则必须作为**无效输出**处理并完成封口，不能保留可穿越的开放边界。岩体与可穿平台 Port 同样遵循上述未启用接口规则。
 
 封口既可以是标准的、可复用的局部荆棘方案，也可以是 Module 自带的天然封闭边界。在线程序仅选择、实例化已认证的封口方案；封口的形态与碰撞效果由离线制作与验证确定。
+
+### 3.5 角落 Port 的可选换边
+
+位于角落 Block 外侧边中心的 Port，可离线适配到**同一 Block 相邻外侧边中心**，不改变 Module 的矩形占用：
+
+| `cornerRelocations` 键 | 可选换边 |
+|---|---|
+| `TOP_LEFT` | `LEFT ↔ TOP` |
+| `TOP_RIGHT` | `RIGHT ↔ TOP` |
+| `BOTTOM_LEFT` | `LEFT ↔ BOTTOM` |
+| `BOTTOM_RIGHT` | `RIGHT ↔ BOTTOM` |
+
+- 每口以 `cornerRelocations` 的四个键记录 `applicable`、`allowed`（`true / false / "UNKNOWN"`）、`reason`；适用项另记录 `targetFace`、`targetPosition`、`proposedSurface`、`permission`、`profileId`（完整配置 ID）。非适用项为 `allowed=false`；适用但未验证项为 `"UNKNOWN"`，不能用于匹配。
+- 原口和换边口是**同一逻辑 Port 的互斥位置**，保持 ID 与初始权限，不增加 Port 或基础模板数量。允许必要的局部地貌、支撑和封口适配；“无损”要求保留核心挑战、奖励、失败恢复、原有有向路线功能及必要能力/资源条件，不要求轨迹或每个像素相同。
+- 所选配置仍须遵守 3.1～3.4：`ROCK` 不能直接变成上下口，须实际适配为合法地貌；底边 `AIR INPUT/INOUT` 仍非法。旧开口须合法关闭，实际新口地貌、碰撞、完整角色身体通行、受影响路线与接缝须离线验证，不能只移动标记。
+- `allowed=true` 必须绑定基础版本、目标完整配置及真实验证证据。多个 Port 同时换边、与镜像或封口组合，须有对应联合认证；单项通过不推定组合通过。在线只选择已认证完整配置，按其实际 Port、Route 与封口数据匹配，不临时修改地形或机关。
+
+文档 1.1 新增此可选扩展；既有模板和证据不自动升级，缺少字段的模板保持原认证范围，换边视为 `UNKNOWN`。字段与独立配置回执格式见[角落 Port 换边扩展](docs/l4-mapgen/corner-port-relocation-v1.md)。
 
 ## 4. Module Route：内部的有向动作关系
 
