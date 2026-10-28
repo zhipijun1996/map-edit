@@ -23,3 +23,5 @@ python3 tools/publish_design_review.py generation/manual-review/designs/batch-00
 ```
 
 本入口只重绘和更新网页，不导入工厂/编译器/Harness，不运行Godot。设计“保留”与实现、技术、试玩和生产批准分开；旧实现意见保留在原浏览器存储空间，不自动转移成设计认可。已有实现草稿和实验保留并暂停，直到设计定稿。
+
+批次更新会合并 revisions 索引，不覆盖其他批次。已收到的人工设计意见在 `feedback/manual-review/received-design-decisions-v1.json` 按版本绑定；新版改图重新待审，旧版保留/废弃不继承到新版本。08、09 的设计废弃只改变审阅状态，当前阶段保留原库与历史图。

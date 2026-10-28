@@ -17,6 +17,9 @@ def publish(folder):
  write(folder/'diagram-batch.json',dict(rows=diagrams));subprocess.run(['python3',str(REVIEW/'batch-001/render_diagrams.py'),'--manifest',str(folder/'diagram-batch.json'),'--out',str(folder/'images'),'--draft'],check=True)
  for r in rows:
   file=folder/'images'/(r['reviewId']+'.png');r.update(diagram=file.relative_to(REVIEW).as_posix(),diagramSha256=sha(file))
+ prior=read(REVIEW/'revisions/latest.json')['rows'] if (REVIEW/'revisions/latest.json').exists() else []
+ updated={r['moduleId'] for r in rows}
+ rows=sorted([r for r in prior if r['moduleId'] not in updated]+rows,key=lambda r:int(r['reviewId']))
  write(REVIEW/'revisions/latest.json',dict(schema='pcg/manual-review-revisions/v1',reviewStage='design',rows=rows,formalLibraryChanged=False))
  subprocess.run(['node',str(ROOT/'tools/build_manual_review.mjs')],cwd=ROOT,check=True)
 if __name__=='__main__':
