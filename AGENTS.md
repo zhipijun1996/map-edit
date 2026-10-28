@@ -22,6 +22,8 @@
 
 最新反馈010优先：27/28/30按当前发布精确版本保留，实现交接共15项；31/33设计废弃。32左裁3/下裁3/右裁2成为5×8，保留原关墙刹车关系。34暂上加3行成为10×6，移除最右短台和地板下无通行作用危险区；顶边左右C/D为空中仅入，地面原口保留，共6条有向设计目标。35左右各裁1成为8×9，三段摆渡各加一只plains_diver；原出口小岸内移一格接新边界，原摆渡轨迹/齿轮/危险区不省略。全部新内容仅图文，技术UNKNOWN、不跑物理。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-007/feedback-001`。
 
+最新反馈011优先：32/34/35按已发布版本保留，实现交接共18项；38废弃。36左裁2/右裁3成为6×2；37左裁1/右裁2成为8×7，最高岸下移20px对齐新出口。39/40继续待审批：原Module及编译hooks已有2/1个hookBounce，原0×0点被矩形绘图漏显；仅reference_display补画蓝环和来源动作顺序，保持原模块SHA/参考版本/技术状态，不运行物理，不编造新通过。审计见feedback/manual-review/batch-008/hook-display-audit-v1.json。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-001`。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
