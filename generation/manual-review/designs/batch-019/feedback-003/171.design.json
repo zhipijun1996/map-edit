@@ -1,0 +1,279 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
+  "reviewId": "171",
+  "title": "窄道中段触发，两侧夹击",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/module.mapnote.json",
+    "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
+    "sha256": "ceb14e7dc6bbbdde95e0b2497962633b77a550ee95e7f1e8305202b2c120c289"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 384,
+    "y": 214,
+    "w": 256,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        384,
+        406
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        640,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "171再删左2block则19批ok",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
+      "type": "terrain",
+      "x": 384,
+      "y": 438,
+      "w": 256,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2",
+      "type": "terrain",
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 182,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "design-corridor-middle-trigger",
+      "type": "triggerZone",
+      "x": 482,
+      "y": 396,
+      "w": 60,
+      "h": 42,
+      "diagramLabel": "中段触发区",
+      "diagramLabelPosition": [
+        512,
+        367
+      ],
+      "targetIds": [
+        "design-ambush-left",
+        "design-ambush-right"
+      ],
+      "mechanics": {
+        "kind": "player_enter_spawn_wave",
+        "oneShotPerAttempt": true,
+        "technicalStatus": "UNKNOWN"
+      }
+    },
+    {
+      "id": "design-ambush-left",
+      "type": "enemy",
+      "definition": "plains_sentry",
+      "x": 392,
+      "y": 406,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "左侧出怪",
+      "spawnCondition": {
+        "triggerId": "design-corridor-middle-trigger",
+        "event": "player_enter",
+        "initialPresent": false
+      },
+      "movementIntent": {
+        "direction": "toward_corridor_center",
+        "targetX": 512,
+        "speed": "UNKNOWN",
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "design-ambush-right",
+      "type": "enemy",
+      "definition": "plains_sentry",
+      "x": 596,
+      "y": 406,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "右侧出怪",
+      "spawnCondition": {
+        "triggerId": "design-corridor-middle-trigger",
+        "event": "player_enter",
+        "initialPresent": false
+      },
+      "movementIntent": {
+        "direction": "toward_corridor_center",
+        "targetX": 512,
+        "speed": "UNKNOWN",
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 256,
+      "points": [
+        {
+          "x": 384,
+          "y": 406
+        },
+        {
+          "x": 512,
+          "y": 420
+        },
+        {
+          "x": 640,
+          "y": 406
+        }
+      ]
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 256,
+      "points": [
+        {
+          "x": 640,
+          "y": 406
+        },
+        {
+          "x": 512,
+          "y": 417
+        },
+        {
+          "x": 384,
+          "y": 406
+        }
+      ]
+    }
+  ],
+  "summary": "2×2 Block；再左裁2格，中段触发两侧夹击，两口双向。",
+  "movementGuides": [
+    {
+      "from": [
+        406,
+        422
+      ],
+      "to": [
+        472,
+        422
+      ]
+    },
+    {
+      "from": [
+        610,
+        422
+      ],
+      "to": [
+        552,
+        422
+      ]
+    }
+  ],
+  "designNotes": [
+    "沿上一轮4×2设计再左裁2格，本版为2×2，边界x384–640/y214–470。左右口(384,406)/(640,406)，y438原地面支撑，窄道净空仍42px。",
+    "只保留原地面和上岩层；原门、攻击继电器、旧怪、小高台与宝箱均已移除，不沿用诱敌开门机制。",
+    "新窄道中点x512；触发区x482–542/y396–438。左生成点x392、右生成点x596，均为28×32真实身体设计目标，脚底y438，初始不存在。",
+    "玩家从任一端进入中段后，两只怪向x512移动；暂定每次尝试一波、双向共用一次触发，不额外封口。刷怪生命周期、向内移动Cell支持和失败重试均待实现。",
+    "本轮“再删左2则19批ok”条件保留绑定此版；两向路线、全身净空、夹击容错、资源、撤退和技术状态仍UNKNOWN。"
+  ],
+  "requiredImplementationChanges": [
+    "缺少本稿已实现的玩家中段触发刷怪规则：需绑定真实玩家Area2D进入事件与两实体生成/重试生命周期。",
+    "plains_sentry的持续向内移动不可由图标推断；需核查真实敌人运动Cell并隔离补足，不用脚本伪造通关。"
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:786f516dc9834fc2692f5a97f2965930869885feb0f8d1b7e72b49975701b061"
+}

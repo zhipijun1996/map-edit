@@ -18,7 +18,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  else:gc=doc['generationContract']
  matrix=design.get('routeMatrix') if design_only else None
  review_meta=manifest['rows'][n-1];instructions=review_meta.get('instructions',[])
- b=gc['space']['bounds'];s=min(1250/b['w'],(1200 if design_only and b['h']>b['w']*1.6 else 700)/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175+(210 if matrix else 0))+(len(instructions)*32+20 if instructions else 0)
+ b=gc['space']['bounds'];s=min(1250/b['w'],(1200 if (design_only or instructions) and b['h']>b['w']*1.6 else 700)/b['h']);W=1440;L=(W-b['w']*s)/2;T=130;H=round(T+b['h']*s+175+(210 if matrix else 0))+(len(instructions)*32+20 if instructions else 0)
  X=lambda x:L+(x-b['x'])*s;Y=lambda y:T+(y-b['y'])*s
  parts=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7Z" fill="context-stroke"/></marker></defs><style>text{{font-family:"Noto Sans CJK SC",sans-serif;fill:#263c37}} .label{{paint-order:stroke;stroke:#fbfaf5;stroke-width:5;stroke-linejoin:round}}</style><rect width="100%" height="100%" fill="#fbfaf5"/>']
  def text(x,y,t,size=21,fill='#263c37',anchor='start',weight=400):parts.append(f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" text-anchor="{anchor}" font-weight="{weight}" class="label">{esc(t)}</text>')
@@ -33,23 +33,25 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in doc['objects']:
   typ=o['type']
   if typ in ('route','entry','exit','anchor','note'):continue
+  if typ in ('wallSpike','spike','gear'):
+   o=dict(o,type='hazard',sourceType=typ,**(dict(shape='gears',count=1) if typ=='gear' else dict(orientation=('LEFT' if o.get('rotation',0)%360==180 else 'RIGHT') if typ=='wallSpike' else 'UP')));typ='hazard'
   x,y,w,h=X(o['x']),Y(o['y']),o['w']*s,o['h']*s
   if typ in ('terrain','platform'):
    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{'#c8d5b8'if typ=='platform'else'#a4b490'}" stroke="#697e60" stroke-width="1.5"/>')
-   if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,o.get('label','可穿平台'),18,anchor='middle')
+   if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,review_meta.get('objectLabels',{}).get(o['id'],('接口支撑' if o.get('label')=='Local boundary connector' else (o.get('label') or '可穿平台'))),18,anchor='middle')
   elif typ=='gate':
    if (o.get('mechanics')or{}).get('collision')=='disabled_by_original_bind_motion':continue
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
    parts.append(f'<rect x="{x}" y="{y}" width="{max(w,5)}" height="{max(h,5)}" fill="#9865bc" fill-opacity="{.13 if opened else .85}" stroke="#8056a2" stroke-width="2" '+('stroke-dasharray="6 4"'if opened else'')+'/>');text(X(o['diagramLabelPosition'][0]) if o.get('diagramLabelPosition') else x+w/2,Y(o['diagramLabelPosition'][1]) if o.get('diagramLabelPosition') else y-10,o.get('diagramLabel',label+(' 初始开'if opened else' 初始关')),18,anchor='middle')
    if o.get('diagramHint'):text(x+w/2,y+h+26,o['diagramHint'],18,anchor='middle')
-  elif typ=='switch':
-   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#e4bf5f" fill-opacity=".45" stroke="#9d7a29" stroke-width="2" stroke-dasharray="4 3"/>');lp=review_meta.get('labelPositions',{}).get(o['id']);text(X(lp[0]) if lp else x+w/2,Y(lp[1]) if lp else y-10,review_meta.get('objectLabels',{}).get(o['id'],'实体检测区'),18,anchor='middle')
+  elif typ in ('switch','triggerZone'):
+   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#e4bf5f" fill-opacity=".45" stroke="#9d7a29" stroke-width="2" stroke-dasharray="4 3"/>');lp=o.get('diagramLabelPosition') or review_meta.get('labelPositions',{}).get(o['id']);text(X(lp[0]) if lp else x+w/2,Y(lp[1]) if lp else y-10,review_meta.get('objectLabels',{}).get(o['id'],o.get('diagramLabel','实体检测区')),18,anchor='middle')
    target=next((v for v in doc['objects']if v['id']==o.get('targetId')),None)
    if target:parts.append(f'<path d="M{x+w/2} {y+h/2}L{X(target["x"]+target["w"]/2)} {Y(target["y"]+target["h"]/2)}" stroke="#ad8a35" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>')
    enemy_id=(o.get('mechanics')or{}).get('enemyObjectId');enemy=next((v for v in doc['objects']if v['id']==enemy_id),None)
    if enemy:parts.append(f'<path d="M{X(enemy["x"]+enemy["w"]/2)} {Y(enemy["y"]+enemy["h"]/2)}L{x+w/2} {y+h/2}" stroke="#ad8a35" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>')
   elif typ=='enemy':
-   cx,cy=x+w/2,y+h/2;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" stroke="#8e432e" stroke-width="2"/>');text(cx,cy-23,'空中怪'if o.get('definition')=='plains_diver'else'陆上怪',20,anchor='middle')
+   cx,cy=x+w/2,y+h/2;conditional=bool(o.get('spawnCondition'));parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" fill-opacity="{.25 if conditional else 1}" stroke="#8e432e" stroke-width="2" '+('stroke-dasharray="5 4"'if conditional else'')+'/>');text(cx,cy-23,o.get('diagramLabel','空中怪'if o.get('definition')=='plains_diver'else'陆上怪'),20,anchor='middle')
   elif typ in ('hookBounce','hookHang'):
    cx,cy=x+w/2,y+h/2;radius=max(9,12*s);label='H'+str(len(hooks)+1);hooks[o['id']]=label
    parts.append(f'<circle data-hook-id="{esc(o["id"])}" cx="{cx}" cy="{cy}" r="{radius}" fill="#e2effb" stroke="#3b79c9" stroke-width="3"/><circle cx="{cx}" cy="{cy}" r="{radius*.55}" fill="none" stroke="#bf9436" stroke-width="2"/>');text(cx,cy-radius-8,label+' · '+o.get('sourceId','')+(' 弹起'if typ=='hookBounce'else' 悬挂'),18,anchor='middle')
@@ -80,8 +82,13 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in doc['objects']:
   if o.get('wallClimbable'):
    parts.append(f'<path d="M{X(o["x"])} {Y(o["y"])}V{Y(o["y"]+o["h"])}" stroke="#3b79c9" stroke-width="4" stroke-dasharray="5 4"/>');text(X(o['x'])+16,Y(o['y'])+28,'可蹬墙',18)
- for ghost in review_meta.get('ghosts',[]):
+ for ghost in review_meta.get('ghosts',[])+(design.get('diagramGhosts',[]) if design_only else []):
   x,y,w,h=X(ghost['x']),Y(ghost['y']),ghost['w']*s,ghost['h']*s;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#dbecf6" fill-opacity=".5" stroke="#3b79c9" stroke-width="2" stroke-dasharray="5 4"/>');text(x+w/2,y-12,ghost['label'],18,anchor='middle')
+  if ghost.get('bellOffset'):
+   gx,gy=ghost['x']+ghost['w']/2+ghost['bellOffset'][0],ghost['y']+ghost['h']/2+ghost['bellOffset'][1];parts.append(f'<circle cx="{X(gx)}" cy="{Y(gy)}" r="10" fill="#dfbc51" fill-opacity=".4" stroke="#9d7a29" stroke-width="2" stroke-dasharray="3 3"/><path d="M{X(gx)} {Y(gy)}L{x+w/2} {y}" stroke="#ad8a35" stroke-dasharray="4 4"/>')
+ if design_only:
+  for guide in design.get('movementGuides',[]):
+   a,z=guide['from'],guide['to'];parts.append(f'<path d="M{X(a[0])} {Y(a[1])}L{X(z[0])} {Y(z[1])}" stroke="#cc7133" stroke-width="3" stroke-dasharray="5 4" marker-end="url(#arrow)"/>')
  # Actual archived core-route paths, without per-frame numbering.
  routecolors=['#157f84','#d28b25','#3c69b0','#a35b92']
  for i,r in enumerate(gc['routes']):
@@ -91,8 +98,8 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   points=' '.join(f'{X(p["x"])},{Y(p["y"])}'for p in points);color=routecolors[i%len(routecolors)]
   start_marker=' marker-start="url(#arrow)"' if o.get('reviewBidirectional') else ''
   parts.append(f'<polyline{start_marker} points="{points}" stroke="{color}" stroke-opacity=".85" stroke-width="3.5" fill="none" marker-end="url(#arrow)"/>')
- if design_only:
-  for shot in design.get('shotGuides',[]):
+ if design_only or review_meta.get('shotGuides'):
+  for shot in (design.get('shotGuides',[]) if design_only else review_meta.get('shotGuides',[])):
    ax,ay=shot['from'];bx,by=shot['to'];cx,cy=X(ax),Y(ay)
    parts.append(f'<circle cx="{cx}" cy="{cy}" r="7" fill="#3b79c9"/><path d="M{cx} {cy}L{X(bx)} {Y(by)}" fill="none" stroke="#3b79c9" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arrow)"/>')
    lx,ly=shot.get('labelPosition',[ax,ay-20]);text(X(lx),Y(ly),shot['label'],18,anchor=shot.get('labelAnchor','middle'))
@@ -137,7 +144,11 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  legend='图例：绿＝地貌　紫＝门（虚线＝开）　金＝风铃/奖励　红＝齿轮/荆棘　曲线＝路线意图'if any(o['type']=='hazard'for o in doc['objects'])else'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物'
  if hooks:legend='图例：蓝环＝原钩点　虚蓝线＝来源动作顺序示意　绿＝岩体/平台　曲线不代表真实轨迹' if reference_action else '图例：蓝环＝弹起钩点　绿＝岩体/落地台　曲线＝设计动作顺序，非真实轨迹'
  if design_only and design.get('shotGuides'):legend='图例：蓝虚线＝射击意图　绿箭头＝反冲　金虚线＝机关关联　紫＝门　红＝荆棘'
- if instructions:legend='图例：金框＝状态检测（非风铃）　蓝虚线＝动作/载台时刻示意　紫＝门　绿＝地貌'
+ if design_only and any(o['type']=='triggerZone' for o in doc['objects']):legend='图例：金框＝中段触发区　虚线怪影＝触发后出现　橙虚线＝向内移动意图'
+ if instructions:
+  if any(o['type']=='switch'for o in doc['objects']):legend='图例：金框＝状态检测（非风铃）　蓝虚线＝动作/载台时刻示意　紫＝门　绿＝地貌'
+  elif review_meta.get('shotGuides'):legend='图例：蓝虚线＝射击/动作意图　绿箭头＝反冲　金＝风铃/奖励　紫＝门'
+  else:legend='图例：红＝原危险面/齿轮　蓝色墙边＝可蹬墙　蓝虚线＝动作意图　绿＝地貌'
  if instructions:
   for j,line in enumerate(instructions):text(40,y+35+j*32,line,20)
   y+=len(instructions)*32+20

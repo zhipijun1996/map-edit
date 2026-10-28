@@ -1,0 +1,366 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9",
+  "reviewId": "175",
+  "title": "同一载台，先作钥匙再来接人",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/module.mapnote.json",
+    "contentVersion": "sha256:c820c87af82607a2e859a4667df96f4475cc6e9b2751a422ea55de52ce133aa0",
+    "sha256": "01feb4b666c849bc8608883152dba25580e708f9452e3d9581822b7046872b59"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 640,
+    "y": -170,
+    "w": 1280,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        640,
+        406
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1920,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左7上1，风铃改为在载台上，载台不要和岩体重叠",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/platform-0",
+      "type": "terrain",
+      "x": 640,
+      "y": 438,
+      "w": 480,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/platform-1",
+      "type": "terrain",
+      "x": 1660,
+      "y": 438,
+      "w": 240,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-0",
+      "type": "platform",
+      "x": 728,
+      "y": 390,
+      "w": 144,
+      "h": 20,
+      "rotation": 0,
+      "label": "载台",
+      "note": "",
+      "sourceId": "key-carrier",
+      "trackId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-track-0",
+      "mechanics": {
+        "control": "original ShotLatch.bind_motion start/pause",
+        "initialRunning": false,
+        "clock": "original ModuleMovingPlatform.motion_clock",
+        "bellId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/bell-0",
+        "status": "DESIGN_TARGET_ONLY"
+      }
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-track-0",
+      "type": "trackLine",
+      "x": 800,
+      "y": 400,
+      "w": 700,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 800,
+          "y": 400
+        },
+        {
+          "x": 1500,
+          "y": 400
+        }
+      ],
+      "duration": 3.2,
+      "dwell": 0.5,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/bell-0",
+      "type": "bell",
+      "x": 786,
+      "y": 337,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "key-control",
+      "note": "",
+      "targetId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-0",
+      "sourceId": "key-control",
+      "mechanics": {
+        "runtimeParameters": {
+          "inactiveGate": [
+            -100,
+            -100,
+            10,
+            10
+          ],
+          "ferry_id": "key-carrier"
+        },
+        "attachmentMode": "follow_carrier_transform",
+        "carrierId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-0",
+        "localOffsetFromCarrierCenter": [
+          0,
+          -46
+        ],
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "diagramLabel": "载台铃 · 随台"
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/gate-1",
+      "type": "gate",
+      "x": 1000,
+      "y": -170,
+      "w": 24,
+      "h": 608,
+      "rotation": 0,
+      "label": "dock-gate gate",
+      "note": "",
+      "mechanics": {
+        "kind": "carrier_occupancy_gate",
+        "holdWhileOccupied": true,
+        "closeDelaySeconds": 0.18,
+        "safeClose": "original ShotLatch anti-pinch close",
+        "openSeconds": 0.18
+      }
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/bell-1",
+      "type": "switch",
+      "x": 880,
+      "y": 385,
+      "w": 40,
+      "h": 30,
+      "rotation": 0,
+      "label": "载台实体Dock",
+      "note": "原生Area2D只感应指定ModuleMovingPlatform实体；不是可射击铃",
+      "targetId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/gate-1",
+      "sourceId": "dock-gate",
+      "mechanics": {
+        "service": "CarrierDockLatch",
+        "platformId": "key-carrier",
+        "sensor": "native Area2D body_entered/body_exited",
+        "source": {
+          "platform_id": "key-carrier",
+          "rect": [
+            880,
+            385,
+            40,
+            30
+          ]
+        },
+        "runtimeParameters": {
+          "disabledReceiverPosition": [
+            -500,
+            -500
+          ],
+          "carrier_dock": {
+            "platform_id": "key-carrier",
+            "rect": [
+              880,
+              385,
+              40,
+              30
+            ]
+          }
+        },
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "diagramLabel": "载台检测区",
+      "diagramLabelPosition": [
+        900,
+        300
+      ]
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/cache-0",
+      "type": "reward",
+      "x": 1752,
+      "y": 402,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 8",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 8,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            1770,
+            420
+          ],
+          "region": [
+            1740,
+            415,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      }
+    },
+    {
+      "id": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/migration-shore-exit",
+      "type": "terrain",
+      "x": 1876,
+      "y": 438,
+      "w": 44,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 3
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 640,
+      "y": -170,
+      "w": 1280,
+      "h": 768,
+      "points": [
+        {
+          "x": 640,
+          "y": 406
+        },
+        {
+          "x": 750,
+          "y": 420
+        },
+        {
+          "x": 940,
+          "y": 420
+        },
+        {
+          "x": 1080,
+          "y": 420
+        },
+        {
+          "x": 1450,
+          "y": 372
+        },
+        {
+          "x": 1680,
+          "y": 420
+        },
+        {
+          "x": 1770,
+          "y": 420
+        },
+        {
+          "x": 1920,
+          "y": 406
+        }
+      ]
+    }
+  ],
+  "summary": "10×6 Block；左裁7、上裁1；铃随载台，载台全程悬于岩体上方。",
+  "designNotes": [
+    "从17×7裁为10×6，边界x640–1920/y-170–598；左右口(640,406)/(1920,406)，原岸y438保留。",
+    "旧载台初位、检测区和主铃在裁掉区域，整套适配至边界内：载台初始中心(800,400)，144×20；中心轨迹(800,400)→(1500,400)，周期暂保留3.2秒/停留0.5秒。",
+    "台面y390、底y410，原岩体顶y438，整段运动都与岩体相隔28px，不只检查初始画面。最右行程台边x1572，右岸x1660，留88px最后跳跃距离。",
+    "唯一控制铃位于载台上方，初始中心(800,354)、相对载台中心(0,-46)；碰撞体/接收器应跟随载台全程移动。旧固定返回铃移除，过门后回射同一个载台铃重新启台。",
+    "检测区移至x880–920/y385–415；让载台停在约x900压区持续开门，人过x1000高门后从右侧射回载台铃，启台脱区，再接台跨沟。虚框只是同一台的不同时刻。",
+    "保留原启停、实体Dock判定与防夹目标；随台铃绑定尚需Cell适配。移动平台自身mask为0的参考机制不等于本版本已验证，人物承载/门台交互/弹道/冷却/失败返回全部UNKNOWN。"
+  ],
+  "requiredImplementationChanges": [
+    "实现并校验随台风铃的可视体、真实弹丸碰撞接收器与坐标一并跟随；原bind_motion不自动代表已有该行为。",
+    "重绑定Dock、铃与新轨迹，重验停台区间、启停时机、过门后回射、门防夹与接台跳岸。"
+  ],
+  "diagramGhosts": [
+    {
+      "x": 828,
+      "y": 390,
+      "w": 144,
+      "h": 20,
+      "label": "同一台停此压区",
+      "bellOffset": [
+        0,
+        -46
+      ]
+    },
+    {
+      "x": 1428,
+      "y": 390,
+      "w": 144,
+      "h": 20,
+      "label": "同一台接人",
+      "bellOffset": [
+        0,
+        -46
+      ]
+    }
+  ],
+  "motionAttachment": {
+    "carrierObjectId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/moving-0",
+    "bellObjectId": "generated-1ff2da49936b180bfa76a3285e8392db0f5945aff17b746dac48511bfe9b23a9/bell-0",
+    "localOffsetFromCarrierCenter": [
+      0,
+      -46
+    ],
+    "status": "DESIGN_TARGET_ONLY"
+  },
+  "designVersion": "sha256:4e079780331a39a2674c9aa09f074bccb0ad2bbe201580a842fa22e2e5f8982f"
+}

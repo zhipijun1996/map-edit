@@ -1,0 +1,275 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba",
+  "reviewId": "200",
+  "title": "空中命中续枪，回身上同侧高岸",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/module.mapnote.json",
+    "contentVersion": "sha256:4ff4ed4c4e06eda4bafab540aa99370267f345c810cfd8809406c246f318b50b",
+    "sha256": "5602080323b5ebac9cae7efb5bc0f52533c7ac9f9702dd792acf77e1a523bc9a"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": -128,
+    "y": -106,
+    "w": 384,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        -128,
+        470
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        -128,
+        86
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删右7下2左3block，双向",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/platform-0",
+      "type": "terrain",
+      "x": -128,
+      "y": 502,
+      "w": 368,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/platform-1",
+      "type": "terrain",
+      "x": -60,
+      "y": 118,
+      "w": 180,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/enemy-0",
+      "type": "enemy",
+      "x": 111,
+      "y": 470,
+      "w": 28,
+      "h": 32,
+      "rotation": 0,
+      "label": "ammo-sentry",
+      "note": "",
+      "sourceId": "ammo-sentry",
+      "definition": "plains_sentry",
+      "mechanics": {
+        "runtimeParameters": {
+          "initial_idle_cooldown": 0.6
+        }
+      }
+    },
+    {
+      "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/cache-0",
+      "type": "reward",
+      "x": 12,
+      "y": 82,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 16",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 16,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            30,
+            100
+          ],
+          "region": [
+            0,
+            95,
+            60,
+            10
+          ],
+          "amount": 16
+        }
+      }
+    },
+    {
+      "id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/migration-shore-exit",
+      "type": "terrain",
+      "x": -128,
+      "y": 118,
+      "w": 92,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": -128,
+      "y": -106,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": -128,
+          "y": 470
+        },
+        {
+          "x": 80,
+          "y": 484
+        },
+        {
+          "x": 180,
+          "y": 390
+        },
+        {
+          "x": 210,
+          "y": 250
+        },
+        {
+          "x": 160,
+          "y": 60
+        },
+        {
+          "x": 30,
+          "y": 100
+        },
+        {
+          "x": -128,
+          "y": 86
+        }
+      ]
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": -128,
+      "y": -106,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": -128,
+          "y": 86
+        },
+        {
+          "x": 30,
+          "y": 100
+        },
+        {
+          "x": 160,
+          "y": 80
+        },
+        {
+          "x": 190,
+          "y": 300
+        },
+        {
+          "x": 170,
+          "y": 484
+        },
+        {
+          "x": -128,
+          "y": 470
+        }
+      ]
+    }
+  ],
+  "summary": "3×5 Block；右裁7、下裁2、左裁3；同侧上下两口双向。",
+  "designNotes": [
+    "13×7裁为3×5，边界x-128–256/y-106–534；原y680底部恢复长台被裁，旧落空恢复证据不沿用。",
+    "两口都保留LEFT面，不改成左右相对口：低口(-128,470)、高口(-128,86)，由y502/y118原岸支撑；低岸裁薄32px。",
+    "去程目标：先跳起命中陆怪，利用真实空中命中续枪，再朝右下补射，把反冲转向左上高岸取16金币；不自动回满其他资源。",
+    "返程单独提出从高岸向右离台、落回低岸，再到低口；不推断回程可复现去程枪法，敌人存活/已击杀状态和资源连续性必须分别验证。",
+    "能力、身体净空、连枪/冷却、命中提交、反向状态、稳定落岸及裁掉恢复台后的失败成本全部UNKNOWN。"
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:8351104645b1a749f58f5ed5011af6bc7612cf3a1c89b52fb70d08e76a5a32df"
+}
