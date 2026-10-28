@@ -1,0 +1,2221 @@
+{
+  "designVersion": "sha256:bfaa7f2430ed82ecb0111ac4b8a1e7b5e1f33729b278200afaa180e8d14c676c",
+  "content": {
+    "platforms": [
+      [
+        0,
+        736,
+        256,
+        64
+      ],
+      [
+        1024,
+        736,
+        256,
+        64
+      ],
+      [
+        0,
+        352,
+        320,
+        224
+      ],
+      [
+        960,
+        352,
+        320,
+        224
+      ],
+      [
+        320,
+        352,
+        64,
+        448
+      ],
+      [
+        896,
+        352,
+        64,
+        448
+      ],
+      [
+        0,
+        864,
+        1280,
+        32
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "return-catch",
+        "bell": [
+          640.0,
+          745.0
+        ],
+        "gate": [
+          384,
+          608,
+          512,
+          24
+        ],
+        "open_seconds": 2.4,
+        "return_access": [
+          704.0,
+          487.0
+        ]
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "high-B",
+        "position": [
+          24.0,
+          334.0
+        ],
+        "region": [
+          -6.0,
+          328.0,
+          60,
+          12
+        ],
+        "amount": 12
+      },
+      {
+        "id": "high-C",
+        "position": [
+          1256.0,
+          334.0
+        ],
+        "region": [
+          1226.0,
+          328.0,
+          60,
+          12
+        ],
+        "amount": 12
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 640
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 420
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.35,
+            0.9367496997597597
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "A-to-C",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 640
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 860
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.35,
+            0.9367496997597597
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "D-to-B",
+        "from_port": "D",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 640
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 420
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.35,
+            0.9367496997597597
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "D-to-C",
+        "from_port": "D",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 640
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 860
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.35,
+            0.9367496997597597
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 10
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 620
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 240,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 246
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "C-to-A",
+        "from_port": "C",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 660
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 240,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 246
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "B-to-D",
+        "from_port": "B",
+        "to_port": "D",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 620
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1040,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1034
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "C-to-D",
+        "from_port": "C",
+        "to_port": "D",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 660
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1040,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1034
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "A-to-D",
+        "from_port": "A",
+        "to_port": "D",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1040,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1034
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "D-to-A",
+        "from_port": "D",
+        "to_port": "A",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 240,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 246
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "B-to-C",
+        "from_port": "B",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 620
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1010,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.6939740629158989,
+            0.72
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1250
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "C-to-B",
+        "from_port": "C",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 660
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 270,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.6939740629158989,
+            0.72
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 30
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "E-to-B",
+        "from_port": "E",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 270,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.6939740629158989,
+            0.72
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 30
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "E-to-C",
+        "from_port": "E",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1010,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.6939740629158989,
+            0.72
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1250
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "E-to-A",
+        "from_port": "E",
+        "to_port": "A",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 240,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 246
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "E-to-D",
+        "from_port": "E",
+        "to_port": "D",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-catch",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1040,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 1034
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false
+}

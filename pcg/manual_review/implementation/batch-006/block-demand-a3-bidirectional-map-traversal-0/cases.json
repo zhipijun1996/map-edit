@@ -1,0 +1,1444 @@
+{
+  "cases": [
+    {
+      "id": "approved-first30-28-A-to-B-control-v3-control-v4",
+      "family": "block128-human-A3-bidirectional",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          128,
+          352,
+          144,
+          100
+        ],
+        [
+          492,
+          352,
+          276,
+          100
+        ],
+        [
+          282,
+          128,
+          486,
+          26
+        ],
+        [
+          738,
+          154,
+          30,
+          134
+        ],
+        [
+          744,
+          352,
+          24,
+          24
+        ]
+      ],
+      "spawn": [
+        152,
+        334
+      ],
+      "entry_port": [
+        152,
+        334
+      ],
+      "exit_port": [
+        744,
+        334
+      ],
+      "goal": [
+        737,
+        330,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        -256,
+        1152,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          272,
+          480,
+          220,
+          32
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            222.0,
+            319.0
+          ],
+          "gate": [
+            472,
+            154,
+            20,
+            198
+          ],
+          "open_seconds": 0.55,
+          "return_access": [
+            702.0,
+            264.0
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 0,
+        "control": 0,
+        "route": "outbound",
+        "source": "originalhumanA3timed-0",
+        "translation": [
+          32,
+          -86
+        ],
+        "bank_B_top_delta": 0,
+        "bank_B_extension": 6,
+        "old_farwall": [
+          762,
+          154,
+          30,
+          198
+        ],
+        "new_farwall": [
+          738,
+          154,
+          30,
+          134
+        ],
+        "real_farwall_floor_opening": [
+          738,
+          288,
+          30,
+          64
+        ],
+        "original_recovery_bank_preserved": true,
+        "original_anti_pinch_unchanged": true,
+        "explicit_Map_no_reward_variant": true,
+        "original_currency_removed_explicitly": 12
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 112
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 237
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 744,
+          "deadband": 4
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/blockA3",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blocka3/rules_v1.py",
+        "parameters": {
+          "interface": 0,
+          "control": 0,
+          "route": "outbound",
+          "source": "originalhumanA3timed-0",
+          "translation": [
+            32,
+            -86
+          ],
+          "bank_B_top_delta": 0,
+          "bank_B_extension": 6,
+          "old_farwall": [
+            762,
+            154,
+            30,
+            198
+          ],
+          "new_farwall": [
+            738,
+            154,
+            30,
+            134
+          ],
+          "real_farwall_floor_opening": [
+            738,
+            288,
+            30,
+            64
+          ],
+          "original_recovery_bank_preserved": true,
+          "original_anti_pinch_unchanged": true,
+          "explicit_Map_no_reward_variant": true,
+          "original_currency_removed_explicitly": 12
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "expected_reward": 0,
+      "required_rewards": [],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            152,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            744,
+            334
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "block128-human-A3-bidirectional",
+      "challenge_route": true,
+      "idea_ids": [
+        "human-A3-short-gate"
+      ],
+      "native_scene": "res://prototype/creative_batches/batch30_blocka3/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blocka3/main_v1.tscn",
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "block_reservations": [
+        [
+          12,
+          128,
+          744,
+          526
+        ]
+      ],
+      "layout_uid": "36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab",
+      "layout_title": "A3 短时风铃门 / 东岸地面口",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/A3-bidirectional/Map-traversal-0",
+        "source_type": "human_A3_and_actual6c_Map_exp0_0",
+        "region": "plains",
+        "required_family": "block128-human-A3-bidirectional",
+        "objective": {
+          "recipe": "block128-human-A3-bidirectional",
+          "interface": 0,
+          "physical_layout_sha256": "36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab",
+          "roles": [
+            "traversal"
+          ],
+          "core": "Sameairshot opens actualshortgate andrecoilsactor through realbody aperture; independent returnreceiver recovery",
+          "human_idea": "human-A3-short-gate",
+          "explicit_no_reward_variant": true,
+          "original_human_text_requires_chest": false,
+          "independent_new_family_claim": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "block_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "outbound"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return",
+            "route_id": "return"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 896,
+          "boundary_policy": "open",
+          "ownership_shape": "connected_irregular_cells"
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [],
+          "reason": "Explicit actualMap no-reward traversal variant; old12currencyversions unchanged"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Bothauthoredworlds originalgateclosed, truegroundeddock, originalfreshresources; genericopengatestateUNKNOWN",
+          "exit": "Observedstableactualdock/resources andactualgatetimer only; no genericstateensures"
+        },
+        "return_conditions": "B->A mustpass independently; exactsameworlddelayedcloseddoorreturn fixtureseparate. No boundarycrossing/fullMap promise",
+        "budget": {
+          "generator_candidates": 3,
+          "director_revisions": 0
+        }
+      },
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/exp0_0",
+        "map_seed": "requirements-review-0",
+        "region": "plains",
+        "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+        "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+        "objective": {
+          "node": "exp0_0",
+          "roles": [
+            "traversal"
+          ],
+          "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+          "preserve_all_edges": [
+            "e23",
+            "e24"
+          ]
+        },
+        "block_grid": {
+          "size": 128,
+          "shape": "connected_polyomino",
+          "port_anchors": "boundary_cell_centers",
+          "map_added_terrain": 0
+        },
+        "ports": {
+          "count": 2,
+          "directions": "joint_space_search",
+          "required_pairs": "explicit_ordered_matrix"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "resource_state": {
+          "entry": "UNKNOWN until measured state contract",
+          "exit": "UNKNOWN until measured state contract",
+          "reset_between_components": false
+        },
+        "relations": "UNKNOWN until exact module directions are independently verified",
+        "difficulty": {
+          "intent": 2,
+          "human_score": null
+        },
+        "route_membership": {
+          "main": [],
+          "branches": [
+            "expedition_0"
+          ]
+        },
+        "rewards": [],
+        "return_conditions": {
+          "branches": [
+            {
+              "id": "expedition_0",
+              "nodes": [
+                "exp0_0",
+                "exp0_1",
+                "exp0_2"
+              ],
+              "entry": "r9",
+              "rejoin": "r9",
+              "reward": "exp0_2",
+              "kind": "foldback"
+            }
+          ]
+        },
+        "budget": {
+          "generator_calls": 4,
+          "local_revisions": 2,
+          "may_delete_required_edges": false
+        }
+      },
+      "actual_Map_context": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/exp0_0",
+        "map_seed": "requirements-review-0",
+        "region": "plains",
+        "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+        "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+        "objective": {
+          "node": "exp0_0",
+          "roles": [
+            "traversal"
+          ],
+          "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+          "preserve_all_edges": [
+            "e23",
+            "e24"
+          ]
+        },
+        "block_grid": {
+          "size": 128,
+          "shape": "connected_polyomino",
+          "port_anchors": "boundary_cell_centers",
+          "map_added_terrain": 0
+        },
+        "ports": {
+          "count": 2,
+          "directions": "joint_space_search",
+          "required_pairs": "explicit_ordered_matrix"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "resource_state": {
+          "entry": "UNKNOWN until measured state contract",
+          "exit": "UNKNOWN until measured state contract",
+          "reset_between_components": false
+        },
+        "relations": "UNKNOWN until exact module directions are independently verified",
+        "difficulty": {
+          "intent": 2,
+          "human_score": null
+        },
+        "route_membership": {
+          "main": [],
+          "branches": [
+            "expedition_0"
+          ]
+        },
+        "rewards": [],
+        "return_conditions": {
+          "branches": [
+            {
+              "id": "expedition_0",
+              "nodes": [
+                "exp0_0",
+                "exp0_1",
+                "exp0_2"
+              ],
+              "entry": "r9",
+              "rejoin": "r9",
+              "reward": "exp0_2",
+              "kind": "foldback"
+            }
+          ]
+        },
+        "budget": {
+          "generator_calls": 4,
+          "local_revisions": 2,
+          "may_delete_required_edges": false
+        }
+      },
+      "map_request_response": {
+        "status": "candidate_for_joint_mapping",
+        "request_id": "block-demand/exp0_0",
+        "source_request_sha256": "b5ca0fd3132186857b3f416b03afcb6a06dfa50ea9e6cbe94e1720cb5c40f8cd",
+        "actual_Map_context": "block-demand/exp0_0",
+        "required_graph_pairs": [
+          [
+            "e23",
+            "e24"
+          ],
+          [
+            "e24",
+            "e23"
+          ]
+        ],
+        "proposed_edge_to_port": {
+          "e23": "A",
+          "e24": "B"
+        },
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "explicit_Map_no_reward_variant": true,
+        "original_human_A3_requires_chest": false,
+        "map_added_terrain": 0,
+        "may_delete_required_relations": false,
+        "production_admitted": false,
+        "unresolved": [
+          "Jointspatialassignmenttoe23/e24",
+          "Arbitraryingressresources/gatephase",
+          "Boundarycrossing",
+          "Regionalreturncomposition",
+          "FullMap"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b30-blocka3-v1-i0-outbound-c0",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "28",
+        "designVersion": "sha256:d1ec00347488acc4e66f84e24f220214edffcfe9e7c790803b6429c573061086",
+        "rectangle": {
+          "x": 128,
+          "y": 128,
+          "w": 640,
+          "h": 384
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "air_port_contracts": []
+    },
+    {
+      "id": "approved-first30-28-B-to-A-control-v3-control-v4",
+      "family": "block128-human-A3-bidirectional",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          128,
+          352,
+          144,
+          100
+        ],
+        [
+          492,
+          352,
+          276,
+          100
+        ],
+        [
+          282,
+          128,
+          486,
+          26
+        ],
+        [
+          738,
+          154,
+          30,
+          134
+        ],
+        [
+          744,
+          352,
+          24,
+          24
+        ]
+      ],
+      "spawn": [
+        744,
+        334
+      ],
+      "entry_port": [
+        744,
+        334
+      ],
+      "exit_port": [
+        152,
+        334
+      ],
+      "goal": [
+        145,
+        330,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        -256,
+        1152,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          272,
+          480,
+          220,
+          32
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "short-bell",
+          "bell": [
+            222.0,
+            319.0
+          ],
+          "gate": [
+            472,
+            154,
+            20,
+            198
+          ],
+          "open_seconds": 0.55,
+          "return_access": [
+            702.0,
+            264.0
+          ]
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 0,
+        "control": 2,
+        "route": "return",
+        "source": "originalhumanA3timed-0",
+        "translation": [
+          32,
+          -86
+        ],
+        "bank_B_top_delta": 0,
+        "bank_B_extension": 6,
+        "old_farwall": [
+          762,
+          154,
+          30,
+          198
+        ],
+        "new_farwall": [
+          738,
+          154,
+          30,
+          134
+        ],
+        "real_farwall_floor_opening": [
+          738,
+          288,
+          30,
+          64
+        ],
+        "original_recovery_bank_preserved": true,
+        "original_anti_pinch_unchanged": true,
+        "explicit_Map_no_reward_variant": true,
+        "original_currency_removed_explicitly": 12
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 600,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 606
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "short-bell",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 15,
+            "timeout": 90
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 152,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.916515138991168,
+            0.4
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/blockA3",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blocka3/rules_v1.py",
+        "parameters": {
+          "interface": 0,
+          "control": 2,
+          "route": "return",
+          "source": "originalhumanA3timed-0",
+          "translation": [
+            32,
+            -86
+          ],
+          "bank_B_top_delta": 0,
+          "bank_B_extension": 6,
+          "old_farwall": [
+            762,
+            154,
+            30,
+            198
+          ],
+          "new_farwall": [
+            738,
+            154,
+            30,
+            134
+          ],
+          "real_farwall_floor_opening": [
+            738,
+            288,
+            30,
+            64
+          ],
+          "original_recovery_bank_preserved": true,
+          "original_anti_pinch_unchanged": true,
+          "explicit_Map_no_reward_variant": true,
+          "original_currency_removed_explicitly": 12
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "expected_reward": 0,
+      "required_rewards": [],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            152,
+            334
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            744,
+            334
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 1
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "block128-human-A3-bidirectional",
+      "challenge_route": true,
+      "idea_ids": [
+        "human-A3-short-gate"
+      ],
+      "native_scene": "res://prototype/creative_batches/batch30_blocka3/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blocka3/main_v1.tscn",
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "block_reservations": [
+        [
+          12,
+          128,
+          744,
+          526
+        ]
+      ],
+      "layout_uid": "36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab",
+      "layout_title": "A3 短时风铃门 / 东岸地面口",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/A3-bidirectional/Map-traversal-0",
+        "source_type": "human_A3_and_actual6c_Map_exp0_0",
+        "region": "plains",
+        "required_family": "block128-human-A3-bidirectional",
+        "objective": {
+          "recipe": "block128-human-A3-bidirectional",
+          "interface": 0,
+          "physical_layout_sha256": "36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab",
+          "roles": [
+            "traversal"
+          ],
+          "core": "Sameairshot opens actualshortgate andrecoilsactor through realbody aperture; independent returnreceiver recovery",
+          "human_idea": "human-A3-short-gate",
+          "explicit_no_reward_variant": true,
+          "original_human_text_requires_chest": false,
+          "independent_new_family_claim": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "block_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "outbound"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "role": "return",
+            "route_id": "return"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 896,
+          "boundary_policy": "open",
+          "ownership_shape": "connected_irregular_cells"
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [],
+          "reason": "Explicit actualMap no-reward traversal variant; old12currencyversions unchanged"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Bothauthoredworlds originalgateclosed, truegroundeddock, originalfreshresources; genericopengatestateUNKNOWN",
+          "exit": "Observedstableactualdock/resources andactualgatetimer only; no genericstateensures"
+        },
+        "return_conditions": "B->A mustpass independently; exactsameworlddelayedcloseddoorreturn fixtureseparate. No boundarycrossing/fullMap promise",
+        "budget": {
+          "generator_candidates": 3,
+          "director_revisions": 0
+        }
+      },
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/exp0_0",
+        "map_seed": "requirements-review-0",
+        "region": "plains",
+        "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+        "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+        "objective": {
+          "node": "exp0_0",
+          "roles": [
+            "traversal"
+          ],
+          "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+          "preserve_all_edges": [
+            "e23",
+            "e24"
+          ]
+        },
+        "block_grid": {
+          "size": 128,
+          "shape": "connected_polyomino",
+          "port_anchors": "boundary_cell_centers",
+          "map_added_terrain": 0
+        },
+        "ports": {
+          "count": 2,
+          "directions": "joint_space_search",
+          "required_pairs": "explicit_ordered_matrix"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "resource_state": {
+          "entry": "UNKNOWN until measured state contract",
+          "exit": "UNKNOWN until measured state contract",
+          "reset_between_components": false
+        },
+        "relations": "UNKNOWN until exact module directions are independently verified",
+        "difficulty": {
+          "intent": 2,
+          "human_score": null
+        },
+        "route_membership": {
+          "main": [],
+          "branches": [
+            "expedition_0"
+          ]
+        },
+        "rewards": [],
+        "return_conditions": {
+          "branches": [
+            {
+              "id": "expedition_0",
+              "nodes": [
+                "exp0_0",
+                "exp0_1",
+                "exp0_2"
+              ],
+              "entry": "r9",
+              "rejoin": "r9",
+              "reward": "exp0_2",
+              "kind": "foldback"
+            }
+          ]
+        },
+        "budget": {
+          "generator_calls": 4,
+          "local_revisions": 2,
+          "may_delete_required_edges": false
+        }
+      },
+      "actual_Map_context": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/exp0_0",
+        "map_seed": "requirements-review-0",
+        "region": "plains",
+        "exploration_sha256": "9e19db6e338dd97f460274814086a0183cd4944d9f2bef4cb8000b2afdd46e3c",
+        "policy_sha256": "bf9513e93b13a1e68b4105fa0416fc2405c151e796e1fc324b6d6b4c3d533b46",
+        "objective": {
+          "node": "exp0_0",
+          "roles": [
+            "traversal"
+          ],
+          "main_or_optional": "optional expedition, distinct rejoin and earned fast return",
+          "preserve_all_edges": [
+            "e23",
+            "e24"
+          ]
+        },
+        "block_grid": {
+          "size": 128,
+          "shape": "connected_polyomino",
+          "port_anchors": "boundary_cell_centers",
+          "map_added_terrain": 0
+        },
+        "ports": {
+          "count": 2,
+          "directions": "joint_space_search",
+          "required_pairs": "explicit_ordered_matrix"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "resource_state": {
+          "entry": "UNKNOWN until measured state contract",
+          "exit": "UNKNOWN until measured state contract",
+          "reset_between_components": false
+        },
+        "relations": "UNKNOWN until exact module directions are independently verified",
+        "difficulty": {
+          "intent": 2,
+          "human_score": null
+        },
+        "route_membership": {
+          "main": [],
+          "branches": [
+            "expedition_0"
+          ]
+        },
+        "rewards": [],
+        "return_conditions": {
+          "branches": [
+            {
+              "id": "expedition_0",
+              "nodes": [
+                "exp0_0",
+                "exp0_1",
+                "exp0_2"
+              ],
+              "entry": "r9",
+              "rejoin": "r9",
+              "reward": "exp0_2",
+              "kind": "foldback"
+            }
+          ]
+        },
+        "budget": {
+          "generator_calls": 4,
+          "local_revisions": 2,
+          "may_delete_required_edges": false
+        }
+      },
+      "map_request_response": {
+        "status": "candidate_for_joint_mapping",
+        "request_id": "block-demand/exp0_0",
+        "source_request_sha256": "b5ca0fd3132186857b3f416b03afcb6a06dfa50ea9e6cbe94e1720cb5c40f8cd",
+        "actual_Map_context": "block-demand/exp0_0",
+        "required_graph_pairs": [
+          [
+            "e23",
+            "e24"
+          ],
+          [
+            "e24",
+            "e23"
+          ]
+        ],
+        "proposed_edge_to_port": {
+          "e23": "A",
+          "e24": "B"
+        },
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "explicit_Map_no_reward_variant": true,
+        "original_human_A3_requires_chest": false,
+        "map_added_terrain": 0,
+        "may_delete_required_relations": false,
+        "production_admitted": false,
+        "unresolved": [
+          "Jointspatialassignmenttoe23/e24",
+          "Arbitraryingressresources/gatephase",
+          "Boundarycrossing",
+          "Regionalreturncomposition",
+          "FullMap"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b30-blocka3-v1-i0-return-c2",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "28",
+        "designVersion": "sha256:d1ec00347488acc4e66f84e24f220214edffcfe9e7c790803b6429c573061086",
+        "rectangle": {
+          "x": 128,
+          "y": 128,
+          "w": 640,
+          "h": 384
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "air_port_contracts": []
+    }
+  ]
+}

@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -238,6 +238,9 @@ def _vertical_inner_dock(case, port):
 def seam_cases(case, doc):
     fixtures = []
     for port in doc['generationContract']['ports']:
+        if port.get('surface')=='AIR':
+            from .air_interfaces_v1 import local_cases
+            fixtures.extend(local_cases(case,port));continue
         nx, ny = port['normal']; bx, by = port['position']
         permission = port.get('permission','INOUT')
         directions = (['ingress'] if permission=='INPUT' else ['egress'] if permission=='OUTPUT' else ['ingress','egress'])
@@ -336,6 +339,9 @@ def continuous_exit(case, doc):
     value = fresh(case, 'continuous-exit')
     route = case['route_spec']
     port = next(p for p in doc['generationContract']['ports'] if p['id'] == route['to_port'])
+    if port.get('surface')=='AIR':
+        from .air_interfaces_v1 import exit
+        return exit(case,port)
     neighbor = exterior_floor(value, port)
     settle_indices = [i for i, command in enumerate(value['control_plan']) if command['op'] == 'settle']
     if not settle_indices:
@@ -384,6 +390,9 @@ def continuous_entry(case, doc):
     """
     value=fresh(case,'continuous-entry')
     port=next(p for p in doc['generationContract']['ports']if p['id']==case['route_spec']['from_port'])
+    if port.get('surface')=='AIR':
+        from .air_interfaces_v1 import entry
+        return entry(case,port)
     neighbor=exterior_floor(value,port)
     target=case['spawn'];nx,ny=port['normal']
     if nx:
@@ -400,6 +409,9 @@ def continuous_entry(case, doc):
         boundary=port['position'],normal=port['normal'],neighbor=neighbor,body=[24,36],
         noIntermediateReset=True,originalRouteId=case['route_spec']['id'],
         scope='boundary to canonical starting dock; interior continuation phase not asserted')
+    # Entrance docking must not inherit the original route's AIR exit goal.
+    if case.get('approved_first30') and any(p['id']==case['route_spec']['to_port'] and p.get('surface')=='AIR' for p in doc['generationContract']['ports']):
+        value['route_spec']=dict(case['route_spec'],to_port=case['route_spec']['from_port'])
     value['module_sha256']=module_hash(value)
     return value
 
@@ -478,6 +490,10 @@ def _counter_judgment(case,raw,author,baseline=None):
         check=causal_observer_v3.correct(case,raw,check,assertion_source=assertion_source)
     outcome=_same_outcome(case,raw)
     judgment=counter_classification(case,raw,check,outcome,baseline=baseline)
+    from .review_counter_scope_v1 import classify
+    judgment=classify(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v2 import classify as reviewed_exterior
+    judgment=reviewed_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -565,6 +581,9 @@ def verify_report(folder, proof):
     core.verify_artifacts([proof])
     report_path = core.resolve_artifact(proof['path']); run_path = report_path.parent
     report = core.read(report_path)
+    if report.get('boundaryRepair'):
+        from .review_boundary_repair_v1 import validate_lineage
+        validate_lineage(report,report_path)
     doc = core.read(Path(folder)/'module.mapnote.json')
     if report['schema'] != 'pcg/foundation-migration-physics/v1' or report['contentVersion'] != doc['generationContract']['contentVersion']:
         raise ValueError('physics_report_bound_to_another_version')
@@ -713,6 +732,9 @@ def _verification_identity(folder, proof):
         verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
         causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), causalObserverV3=core.sha(Path(causal_observer_v3.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
         holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
+        reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
+        reviewCounterScopeV2=core.sha(Path(__file__).with_name('review_counter_scope_v2.py')),
+        airInterfaces=core.sha(Path(__file__).with_name('air_interfaces_v1.py')),
         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
         report=proof, runFiles=files,
         protocolV1=core.sha(PROTOCOL), protocolV2=core.sha(FULL_PROTOCOL),

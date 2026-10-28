@@ -1,0 +1,235 @@
+{
+  "designVersion": "sha256:b88b52c66ec8d7acc562ef3a2e965b6d30788484f116ae8b47a5d861bd5fe1f3",
+  "content": {
+    "platforms": [
+      [
+        128,
+        352,
+        144,
+        32
+      ],
+      [
+        522,
+        352,
+        118,
+        32
+      ],
+      [
+        292,
+        128,
+        270,
+        66
+      ],
+      [
+        312,
+        358,
+        170,
+        26
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [
+      {
+        "surface_id": "upper-slot",
+        "platform_index": 2,
+        "face": "bottom",
+        "start_offset": 0,
+        "length": 270,
+        "depth": 12
+      },
+      {
+        "surface_id": "lower-slot",
+        "platform_index": 3,
+        "face": "top",
+        "start_offset": 0,
+        "length": 170,
+        "depth": 12
+      }
+    ],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          602.0,
+          334.0
+        ],
+        "region": [
+          577.0,
+          329.0,
+          50,
+          10
+        ],
+        "amount": 8
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 112
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 237
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 8
+          },
+          "direction": [
+            -0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 616,
+          "deadband": 4
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 562
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 10
+          },
+          "direction": [
+            0.9886859966642595,
+            0.15
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 152,
+          "deadband": 4
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false
+}

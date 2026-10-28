@@ -358,8 +358,10 @@ def compile_package(module_path, cases_path, output_dir, *, stable_id=None, proj
     if project!=PROJECT:_fail('unsupported_runtime_project',expected=str(PROJECT),actual=str(project))
     doc=_json(module_path);raw=_json(cases_path);cases=raw.get('cases',[])if isinstance(raw,dict)else raw
     if _extension is None:
+        from . import review_first30_runtime_v2
+        if review_first30_runtime_v2.required(doc,cases):_extension=review_first30_runtime_v2
         from . import review_air_runtime
-        if review_air_runtime.required(doc,cases):_extension=review_air_runtime
+        if _extension is None and review_air_runtime.required(doc,cases):_extension=review_air_runtime
         from . import godot_package_v4
         from . import godot_package_v5
         if _extension is None and godot_package_v5.required(doc,cases):_extension=godot_package_v5
@@ -401,6 +403,8 @@ def verify_package(output_dir, require_loaded=True, *, _extension=None):
     """Recompute bindings and observed results; a metadata passed=True is ignored."""
     package=Path(output_dir).resolve();manifest=_json(_internal(package,'godot-package.json'))
     if _extension is None:
+        from . import review_first30_runtime_v2
+        if manifest.get('compiler_version')==review_first30_runtime_v2.VERSION:return review_first30_runtime_v2.verify_package(package,require_loaded=require_loaded)
         from . import review_air_runtime
         if manifest.get('compiler_version')==review_air_runtime.VERSION:return review_air_runtime.verify_package(package,require_loaded=require_loaded)
         from . import godot_package_v4
@@ -477,7 +481,8 @@ def verify_package(output_dir, require_loaded=True, *, _extension=None):
             if actual.get('hp')!=5:_fail('load_player_harm',case_id=case['id'])
         goal=case['goal']
         def stable(frame):return goal[0]<=frame['x']<goal[0]+goal[2] and goal[1]<=frame['y']<goal[1]+goal[3] and frame.get('grounded') and sum(v*v for v in frame.get('velocity',[1e9,1e9]))<=1
-        if len(frames)<6 or not all(stable(f)for f in frames[-6:])or receipt.get('stable_frames',0)<6 or receipt.get('hp')!=5 or receipt.get('damage')or receipt.get('returns'):_fail('load_terminal_not_safe_stable',case_id=case['id'])
+        air_passage=bool(_extension and hasattr(_extension,'air_terminal') and _extension.air_terminal(case,receipt))
+        if not air_passage and (len(frames)<6 or not all(stable(f)for f in frames[-6:])or receipt.get('stable_frames',0)<6 or receipt.get('hp')!=5 or receipt.get('damage')or receipt.get('returns')):_fail('load_terminal_not_safe_stable',case_id=case['id'])
         claimed={e['id']for e in receipt.get('package',{}).get('workshop',{}).get('events',[])if e.get('type')=='chest_claim'and e.get('accepted')}
         if not set(case.get('required_rewards',[]))<=claimed or receipt.get('coins',0)<case.get('expected_reward',0):_fail('load_reward_missing',case_id=case['id'])
         log=paths['stdout'].read_text();events=[json.loads(line.split('GODOT_PACKAGE_LOAD ',1)[1])for line in log.splitlines()if line.startswith('GODOT_PACKAGE_LOAD ')]

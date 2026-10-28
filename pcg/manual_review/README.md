@@ -1,3 +1,5 @@
+> 最新前 30 项实现与废弃删除交付见 [first-30-v2](../../feedback/manual-review/implementation-results/first-30-v2/README.md)。下文保留旧反馈 001 的历史状态。
+
 # 首批人工审批修订
 
 本轮只执行 `feedback/manual-review/batch-001/human-feedback-001.json` 的五项反馈。正式 `modules/`、其版本、认证与索引保持原样；新版是待复审、未完整认证的隔离候选。

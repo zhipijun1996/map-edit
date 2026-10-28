@@ -1,0 +1,136 @@
+{
+  "designVersion": "sha256:5bd449804b5a095fb2e78187623cf918262f5ba21f1881494adbf72159d449dd",
+  "content": {
+    "platforms": [
+      [
+        256,
+        352,
+        66,
+        118
+      ],
+      [
+        672,
+        480,
+        96,
+        82
+      ],
+      [
+        332,
+        12,
+        370,
+        50
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        372,
+        608,
+        260,
+        32
+      ]
+    ],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "airlock-pair",
+        "bell": [
+          502.0,
+          544.0
+        ],
+        "gate": [
+          352,
+          62,
+          20,
+          578
+        ],
+        "open_seconds": 0,
+        "paired_gate": [
+          632,
+          62,
+          20,
+          578
+        ],
+        "initial_open": "A"
+      }
+    ],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 420,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 414
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 744,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "airlock-pair"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false
+}
