@@ -42,17 +42,25 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    if o.get('diagramHint'):text(x+w/2,y+h+26,o['diagramHint'],18,anchor='middle')
   elif typ=='enemy':
    cx,cy=x+w/2,y+h/2;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" stroke="#8e432e" stroke-width="2"/>');text(cx,cy-23,'空中怪'if o.get('definition')=='plains_diver'else'陆上怪',20,anchor='middle')
+  elif typ=='hazard' and o.get('shape')=='zone':
+   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#c75049" fill-opacity=".3" stroke="#903931" stroke-width="2"/>');text(x+w/2,y-9,o.get('label','危险区'),18,anchor='middle')
   elif typ=='hazard':
-   count=max(2,round(w/(h*1.3)));step=w/count
+   vertical=o.get('orientation')=='RIGHT';count=max(2,round(h/(w*1.3)))if vertical else max(2,round(w/(h*1.3)));count=max(1,int(o.get('count',count)));step=(h if vertical else w)/count
    for j in range(count):
-    if o.get('shape')=='gears':
+    if vertical:
+     pts=f'{x},{y+j*step} {x+w},{y+(j+.5)*step} {x},{y+(j+1)*step}'
+     parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
+    elif o.get('shape')=='gears':
      cx,cy=x+(j+.5)*step,y+h/2;radius=min(h/2,step*.46)
      pts=' '.join(f'{cx+math.cos(a*math.pi/12)*(radius if a%2==0 else radius*.67)},{cy+math.sin(a*math.pi/12)*(radius if a%2==0 else radius*.67)}'for a in range(24))
      parts.append(f'<polygon points="{pts}" fill="#d65345" stroke="#923e36" stroke-width="1.5"/><circle cx="{cx}" cy="{cy}" r="{radius*.25}" fill="#fbfaf5"/>')
+    elif o.get('orientation')=='DOWN':
+     pts=f'{x+j*step},{y} {x+(j+.5)*step},{y+h} {x+(j+1)*step},{y}'
+     parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
     else:
      pts=f'{x+j*step},{y+h} {x+(j+.5)*step},{y} {x+(j+1)*step},{y+h}'
      parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
-   text(x+w/2,y-9,o.get('label','危险带'),18,anchor='middle')
+   text(x if vertical else x+w/2,y-9,o.get('label','危险带'),18,anchor='start'if vertical else'middle')
   elif typ=='trackLine':
    pts=' '.join(f'{X(p["x"])},{Y(p["y"])}' for p in o.get('points',[]))
    parts.append(f'<polyline points="{pts}" fill="none" stroke="#667e91" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>')
@@ -78,8 +86,11 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in reward:
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
  for p in gc['ports']:
+  if design_only and p.get('permission')=='OUT' and p.get('surface')=='AIR':
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx-nx*30} {cy-ny*30}L{cx+nx*20} {cy+ny*20}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+24,cy+5,p['id']+' 空中仅出',22,weight=700)
+   continue
   if design_only and p.get('permission')=='IN':
-   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*43} {cy+ny*43}L{cx-nx*25} {cy-ny*25}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx-18,cy-18,p['id']+' 空中仅入',22,anchor='end',weight=700)
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*43} {cy+ny*43}L{cx-nx*25} {cy-ny*25}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+18 if cx<260 else cx-18,cy-18,p['id']+' 空中仅入',22,anchor='start'if cx<260 else'end',weight=700)
    continue
   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*13} {cy+ny*13}L{cx+nx*43} {cy+ny*43}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+nx*63,cy+8+ny*50,p['id'],28,anchor='middle',weight=700)
  y=Y(b['y']+b['h'])+38;caption=design['routeCaption'] if design_only and design.get('routeCaption') else((f'设计目标：{len(gc["ports"])}口两两互通，共 {len(gc["ports"])*(len(gc["ports"])-1)} 个有向关系；不是通行认证。'if design_only else'目标：A/B/C/D 四口两两可达，共 12 个方向；未验证方向保持 UNKNOWN。')if gc['generation'].get('portConnectivityIntent')=='all_distinct_ordered_pairs'else('声明方向：'if args.draft else'归档路线：')+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']));text(40,y,caption,22,weight=600)
