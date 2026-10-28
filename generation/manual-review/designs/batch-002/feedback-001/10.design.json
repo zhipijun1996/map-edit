@@ -1,0 +1,275 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "batch30-block-d05-0",
+  "reviewId": "10",
+  "title": "Block128 风铃台追接 / 窄接收岸",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/batch30-block-d05-0/module.mapnote.json",
+    "contentVersion": "sha256:a46085cb86a8725196db4fc01427df10bdc661f0c6093517184b765ebb5797b2",
+    "sha256": "a91190676a7c238a769954ba969960337fe374ab62348bee28535704e8699483"
+  },
+  "blockSize": 128,
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        384,
+        320
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "B",
+      "position": [
+        1408,
+        192
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "design-route-A-to-B",
+      "role": "main",
+      "status": "DESIGN_TARGET"
+    }
+  ],
+  "humanFeedback": "删除左侧8列和下方3行和右侧3列block。",
+  "approvalMeaning": "Design preference only; no implementation, technical or production approval",
+  "routeMeaning": "Illustrated intent only; not physical evidence",
+  "designNotes": [
+    "裁剪会移除原起跳岸和停台起点：图稿将起跳岸移到新A口并缩为1格，移动台及台上风铃同步右移240px。",
+    "移动轨迹改为台中心x632至982；右岸宝箱随新边界内移。以上仅为裁剪后设计适配，待人工确认。",
+    "底部恢复地貌裁去；新失败恢复和实际追接距离待定稿后实现验证。"
+  ],
+  "summary": "8×3 Block；左裁8列、下裁3行、右裁3列，保留风铃移动台追接。",
+  "connectivityIntent": null,
+  "bounds": {
+    "x": 384,
+    "y": 0,
+    "w": 1024,
+    "h": 384
+  },
+  "visualObjects": [
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/platform-0",
+      "type": "terrain",
+      "x": 384,
+      "y": 352,
+      "w": 128,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/platform-1",
+      "type": "terrain",
+      "x": 1252,
+      "y": 224,
+      "w": 156,
+      "h": 140,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/platform-2",
+      "type": "terrain",
+      "x": 732,
+      "y": 284,
+      "w": 35,
+      "h": 50,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-0",
+      "type": "platform",
+      "x": 512,
+      "y": 353,
+      "w": 240,
+      "h": 22,
+      "rotation": 0,
+      "label": "追接移动台",
+      "note": "",
+      "sourceId": "catch-deck",
+      "trackId": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-track-0",
+      "mechanics": {
+        "control": "original ShotLatch.bind_motion start/pause",
+        "initialRunning": false,
+        "clock": "original ModuleMovingPlatform.motion_clock",
+        "bellId": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/bell-0"
+      }
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-track-0",
+      "type": "trackLine",
+      "x": 632,
+      "y": 364,
+      "w": 350.000001,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 632,
+          "y": 364
+        },
+        {
+          "x": 982,
+          "y": 364
+        }
+      ],
+      "duration": 0.7866666666666666,
+      "dwell": 0.2,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/bell-0",
+      "type": "bell",
+      "x": 698,
+      "y": 227,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "catch-bell",
+      "note": "",
+      "targetId": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-0",
+      "sourceId": "catch-bell",
+      "hostId": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-0",
+      "mechanics": {
+        "kind": "carrier_mounted_original_receiver",
+        "hostId": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/moving-0",
+        "localReceiverOffset": [
+          80,
+          -120
+        ],
+        "attachment": "Original ShotLatch is reparented to original carrier with global transform preserved; receiver body and aim target move together",
+        "sourceField": "carrier_mount",
+        "runtimeParameters": {
+          "inactiveGate": [
+            -368,
+            -586,
+            10,
+            10
+          ],
+          "ferry_id": "catch-deck",
+          "carrier_mount": "catch-deck"
+        }
+      }
+    },
+    {
+      "id": "generated-6f784f9c22392b8f90d3d4d3ed64bb17baaa1ad9f146ea4233278f0e5a2833bc/cache-0",
+      "type": "reward",
+      "x": 1348,
+      "y": 188,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            1512,
+            206
+          ],
+          "region": [
+            1482,
+            200,
+            60,
+            12
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "design-route-A-to-B",
+      "type": "route",
+      "x": 384,
+      "y": 0,
+      "w": 1024,
+      "h": 384,
+      "points": [
+        {
+          "x": 384,
+          "y": 320
+        },
+        {
+          "x": 490,
+          "y": 320
+        },
+        {
+          "x": 555,
+          "y": 220
+        },
+        {
+          "x": 680,
+          "y": 145
+        },
+        {
+          "x": 810,
+          "y": 205
+        },
+        {
+          "x": 900,
+          "y": 335
+        },
+        {
+          "x": 990,
+          "y": 270
+        },
+        {
+          "x": 1110,
+          "y": 150
+        },
+        {
+          "x": 1250,
+          "y": 165
+        },
+        {
+          "x": 1320,
+          "y": 192
+        },
+        {
+          "x": 1408,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "designVersion": "sha256:ce1bba997d04e956e14494b5949568ce0c031d58b2fc42207c948c4b05c1c856"
+}

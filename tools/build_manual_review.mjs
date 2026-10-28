@@ -42,7 +42,7 @@ if(fs.existsSync(path.join(root,revisionIndex))){
   if(revision.reviewStage==='design'){
    if(design.schema!=='pcg/module-design/v1'||design.reviewStage!=='design')throw Error('invalid design review schema');
    if(sha(fs.readFileSync(path.join(out,revision.diagram)))!==revision.diagramSha256)throw Error('design diagram hash changed');
-   return {...row,source:revision.file,sourceSha256:hash,contentVersion:design.designVersion,designVersion:design.designVersion,reviewStage:'design',technicalStatus:'design_only',diagram:revision.diagram,portCount:design.ports.length,previousDiagram:revision.beforeDiagram,previousVersion:revision.beforeVersion,summary:revision.summary,reviewRevision:revision.revision,receivedFeedback:revision.verbatim,physicsSummary:'设计讨论阶段；定稿后统一实现与验证。',formalLibraryChanged:false};
+   return {...row,title:design.title,source:revision.file,sourceSha256:hash,contentVersion:design.designVersion,designVersion:design.designVersion,reviewStage:'design',designNotes:design.designNotes??[],technicalStatus:'design_only',diagram:revision.diagram,portCount:design.ports.length,previousDiagram:revision.beforeDiagram,previousVersion:revision.beforeVersion,summary:revision.summary,reviewRevision:revision.revision,receivedFeedback:revision.verbatim,physicsSummary:'设计讨论阶段；定稿后统一实现与验证。',formalLibraryChanged:false};
   }
   const doc=design;const diagram='diagrams/'+row.moduleId+'--'+hash.slice(0,16)+'.svg';
   let svg=renderContractSvg(doc,{review:true});
@@ -67,6 +67,15 @@ if(fs.existsSync(path.join(root,revisionIndex))){
    previousDiagram:revision.beforeDiagram??row.diagram,previousVersion:revision.beforeVersion??row.contentVersion,summary:revision.summary,reviewRevision:revision.revision,
    portCount:doc.generationContract.ports.length,receivedFeedback:revision.verbatim,decisionOnPreviousVersion:revision.decisionOnSource,technicalStatus:'revision_draft',
    physicsSummary:revision.physicsSummary,formalLibraryChanged:false};
+ });
+}
+// Chat feedback is authoritative only for the exact reviewed design/reference version.
+const decisionsPath='feedback/manual-review/received-design-decisions-v1.json';
+if(fs.existsSync(path.join(root,decisionsPath))){
+ const receipts=new Map(read(decisionsPath).rows.map(r=>[r.moduleId,r]));
+ rows=rows.map(row=>{const receipt=receipts.get(row.moduleId);
+  if(!receipt||receipt.version!==row.contentVersion)return row;
+  return {...row,receivedDecision:receipt.decision,receivedDecisionVersion:receipt.version,receivedDecisionScope:'design_only',receivedDecisionNote:receipt.verbatim};
  });
 }
 // Frozen batch membership remains stable when new entries are appended or old entries disappear.
