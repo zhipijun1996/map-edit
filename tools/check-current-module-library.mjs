@@ -92,6 +92,27 @@ badTarget=true;await assert.rejects(()=>configClient.cornerModule(configEntry,co
 const wrongBase={...configEntry,contentVersion:'sha256:'+'0'.repeat(64)};
 assert.deepEqual(await configClient.cornerConfigurations(wrongBase),[],'A certified configuration cannot transfer to another base version');
 assert.throws(()=>configClient.configurationPath(configPrefix+'../foreign.json',configEntry),/路径/);
+// v2 open-side receipt doubles retain artifact/identity checks; no closure requirement.
+badTarget=false;
+const adaptation={schema:'pcg/corner-interface-adaptation/v2',retiredSidePolicy:'preserve_geometry_no_extra_closure',baseDocumentSha256:one.entry.contentSha256,targetDocumentSha256:hash(targetBytes)};
+let adaptationBytes=Buffer.from(JSON.stringify(adaptation));
+const openReceipt={...receipt,schema:'pcg/corner-port-configuration/v2',retiredSidePolicy:'preserve_geometry_no_extra_closure',adaptation:{path:configPrefix+'corner-adaptation.json',sha256:hash(adaptationBytes)}};
+let openBytes=Buffer.from(JSON.stringify(openReceipt));
+const openEntry={...configEntry,cornerConfigurationReceipts:[{path:configPrefix+'receipt.json',sha256:hash(openBytes)}]};
+const openClient=new CurrentModuleLibraryClient(root,async url=>{
+  if(url.endsWith('/receipt.json'))return new Response(openBytes);
+  if(url.endsWith('/corner-adaptation.json'))return new Response(adaptationBytes);
+  if(url.endsWith('/godot-package.json'))return new Response(manifestBytes);
+  if(url.endsWith('/module.mapnote.json'))return new Response(targetBytes);
+  throw Error('Unexpected open configuration request '+url);
+});
+const openConfigurations=await openClient.cornerConfigurations(openEntry);assert.equal(openConfigurations.length,1);
+assert.equal((await openClient.cornerModule(openEntry,openConfigurations[0])).generationContract.contentVersion,targetDoc.generationContract.contentVersion);
+const malformed={...openReceipt,retiredSidePolicy:'closed'};openBytes=Buffer.from(JSON.stringify(malformed));
+assert.deepEqual(await openClient.cornerConfigurations({...openEntry,cornerConfigurationReceipts:[{path:configPrefix+'receipt.json',sha256:hash(openBytes)}]}),[],'v2 never accepts a different retired-side policy');
+const relabelled={...openReceipt,retiredOpeningReport:{testOnly:true}};openBytes=Buffer.from(JSON.stringify(relabelled));
+assert.deepEqual(await openClient.cornerConfigurations({...openEntry,cornerConfigurationReceipts:[{path:configPrefix+'receipt.json',sha256:hash(openBytes)}]}),[],'v1 closure evidence cannot be relabelled as v2');
+adaptationBytes=Buffer.from('{}');await assert.rejects(()=>openClient.cornerModule(openEntry,openReceipt),/SHA256/,'Open-side policy still needs exact adaptation artifact bytes');
 const categoryClient=new CurrentModuleLibraryClient(root,fetcher);
 assert.equal(categoryClient.displayCategory(one.entry),one.entry.category,'An unloaded document keeps its explicit catalog category');
 categoryClient.documents.set(one.entry.contentVersion,{doc:{source:{kind:'forest'}}});

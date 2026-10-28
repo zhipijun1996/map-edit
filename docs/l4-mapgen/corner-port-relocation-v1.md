@@ -1,6 +1,6 @@
-# 角落 Port 换边：离线配置扩展 v1
+# 角落 Port 换边：离线配置扩展 v2（保留 v1 历史认证）
 
-本扩展来自用户在全量迁移任务中的追加需求。它补充既有 `MAP_FOUNDATION.md`，不修改其已冻结原文。完整矩形、外边中心、surface、初始权限、有向 Route、局部封口和真实物理验证继续适用。
+本扩展来自用户在全量迁移任务中的追加需求，现与 `MAP_FOUNDATION` 1.2 对齐：需要时岩体可改为可穿平台，**不要求封旧开口，也不为换边额外加墙**。旧位置只撤销逻辑 Port 资格，其开放几何保留，Map 对相邻空间的实际通行影响另行验收；不据此增加连接边或授予整图资格。历史 v1 规则及真实闭口样品保留原证据，不重标为 v2。完整矩形、外边中心、surface、初始权限、有向 Route、局部封口和真实物理验证继续适用。
 
 ## 语义
 
@@ -13,7 +13,7 @@
 | `BOTTOM_LEFT` | `LEFT ↔ BOTTOM` |
 | `BOTTOM_RIGHT` | `RIGHT ↔ BOTTOM` |
 
-原口与换边口是同一逻辑 Port，ID、初始权限保持，不同时开放，不新增 Port 数或模板数。矩形不变，不旋转 Module；局部可微调接岸、平台、封口和合法表面类型。核心挑战、奖励、恢复、原有有向路线功能及必要能力/资源要求必须保留。无损表示这些玩法功能不丢失，不表示角色运动时间和每一像素完全不变；相关差异和重新验证要记录。
+原口与换边口是同一逻辑 Port，ID、初始权限保持，不同时开放，不新增 Port 数或模板数。矩形不变，不旋转 Module；局部可微调接岸、平台和合法表面类型。核心挑战、奖励、恢复、原有有向路线功能及必要能力/资源要求必须保留。无损表示这些玩法功能不丢失，不表示角色运动时间和每一像素完全不变；相关差异和重新验证要记录。
 
 `ROCK` 仍仅左右可用，转为上下方向时必须使用实际合法接口，例如真实 `ONE_WAY_PLATFORM`。底边 `AIR INPUT/INOUT` 仍非法。更改 surface 会改变可匹配对象，消费者必须读取所选配置，不能沿用原口类型。
 
@@ -43,11 +43,11 @@ python3 -m pcg.migration.corners
 - `id`、`status`、`validationIds`；状态采用现有 `declared / verified / failed / UNKNOWN`。
 - `relocations`：`[{portId, corner}]`，同一逻辑Port只能选择一次。
 - `routeIds`：配置保留的全部声明路线；已认证配置必须覆盖原路线，不能删除不利方向救过。
-- `configuration: {path, sha256}`：实际可加载配置工件，包含完整地貌修改、支撑、旧开口关闭、新口位置/法线/surface、对应路线和封口。
+- `configuration: {path, sha256}`：实际可加载配置工件，包含完整地貌修改、支撑、新口位置/法线/surface、对应路线和其他未连接 Port 的封口。
 
 制作阶段的内联配置若声明已认证，结构校验要求引用的当前版本通过记录同时绑定 `coverage.portConfigurationId`、`coverage.configurationSha256` 和精确配置工件。结构校验仍不是物理认证。
 
-**实际发布使用外部认证回执，避免认证状态变化使基础内容哈希循环失效。** 基础 `module.mapnote.json` 冻结后不再因可选配置通过而重写；配置位于 `modules/<moduleId>/port-configurations/<configurationId>/`，含完整目标doc、输入、真实Godot包及 `receipt.json`。回执 schema 为 `pcg/corner-port-configuration/v1`，绑定 `moduleId`、`baseContentVersion`、`baseDocumentSha256`、`configurationId`、`relocations`、精确目标doc的 `configuration {path,sha256,contentVersion}`、`physicsReport {path,sha256}` 和 `package {path,sha256}`。`allowed=true / technicalStatus=verified` 只有重算验证真实raw、目标包实际加载以及上述身份匹配后才生效。
+**实际发布使用外部认证回执，避免认证状态变化使基础内容哈希循环失效。** 基础 `module.mapnote.json` 冻结后不再因可选配置通过而重写；配置位于 `modules/<moduleId>/port-configurations/<configurationId>/`，含完整目标doc、输入、真实Godot包及 `receipt.json`。当前回执 schema 为 `pcg/corner-port-configuration/v2`，绑定 `moduleId`、`baseContentVersion`、`baseDocumentSha256`、`configurationId`、`relocations`、精确目标doc的 `configuration {path,sha256,contentVersion}`、`physicsReport {path,sha256}` 和 `package {path,sha256}`。v2 另须 `retiredSidePolicy="preserve_geometry_no_extra_closure"` 和 `adaptation {path,sha256}`，后者绑定真实基础/目标文档SHA与选中Port/角落。消费者直接复核静态占用和材质差分：仅角落目标短支撑窗口可变为可穿平台或作必要的短外延，不能新增实体闭口墙，窗口外碰撞与机关/奖励保持。v2 不要求也不接受 `retiredOpeningReport`；v1 继续按其原闭口证据核验。`allowed=true / technicalStatus=verified` 只有重算验证真实raw、目标包实际加载以及上述身份匹配后才生效。
 
 库索引的 `cornerConfigurationReceipts:[{path,sha256}]` 仅由 `corners.verified_receipts` 输出。它重验真实物理及原生包证据，并核对选中口是最近同Block换边、权限不扩展、未选中口不变、全部原路线及能力要求保留。网页先校验回执和基础SHA，再加载实际目标配置；不在浏览器内改地形。旧回执与当前基础版本不符时不可使用，不能由回执里的pass字段自行准入。
 
@@ -55,7 +55,7 @@ python3 -m pcg.migration.corners
 
 ## 验证范围
 
-复用现有Godot Harness、角色身体/反冲/承载/资源和质量门槛。按受影响范围验证完整身体净空、真实支撑、进入/离开、相关原路线、初始机关权限、恢复、回程、旧开口关闭、必要接缝和廉价绕行。反例发现的新路线必须反映到实际图，不仅保留规划路线。可选换边失败不阻断原配置迁移。
+复用现有Godot Harness、角色身体/反冲/承载/资源和质量门槛。按受影响范围验证完整身体净空、真实支撑、进入/离开、相关原路线、初始机关权限、恢复、回程、必要接缝和廉价绕行；v2 不以封旧开口为测试目标。反例发现的新路线必须反映到实际图，不仅保留规划路线。可选换边失败不阻断原配置迁移。
 
 报告分别统计适用、通过、拒绝和UNKNOWN，绑定来源文档SHA与版本。单独的角落评估只产生UNKNOWN候选；通过数量必须来自真实认证回执，不能把几何角落判定当成真实可用换边。
 

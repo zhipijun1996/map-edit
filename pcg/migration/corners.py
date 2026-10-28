@@ -128,6 +128,109 @@ def audit_inventory(root=None):
     return report
 
 
+OPEN_RECEIPT_SCHEMA = 'pcg/corner-port-configuration/v2'
+OPEN_RETIRED_SIDE_POLICY = 'preserve_geometry_no_extra_closure'
+
+
+def verify_open_geometry(base, target, relocations):
+    """Check local material/occupancy changes, without simulating any physics.
+
+    Splitting existing rocks may add objects but may not add solid coverage.
+    Only a short target dock and its downward slice may become one-way. Actual
+    body passage, routes and resource semantics remain real Harness obligations.
+    """
+    b = base['generationContract']['space']['bounds']
+    size = base['generationContract']['foundation']['blockSize']
+    before = {o['id']: o for o in base['objects']}
+    after = {o['id']: o for o in target['objects']}
+    windows = []; markers = set()
+    for relocation in relocations:
+        port = next(p for p in base['generationContract']['ports'] if p['id'] == relocation['portId'])
+        corner = relocation['corner']; option = options(base, port)[corner]
+        host = before.get(port.get('support', {}).get('objectId'))
+        if not host or host['type'] not in ('terrain', 'platform') or host.get('trackId'):
+            raise ValueError('corner_open_static_source_support_required')
+        left = b['x'] if corner.endswith('LEFT') else b['x'] + b['w'] - size
+        top = b['y'] if corner.startswith('TOP') else b['y'] + b['h'] - size
+        tx = option['targetPosition'][0]
+        # 64px is a bound on local support adaptation, not an invented bridge.
+        # The current adapter uses 48px so a body has tolerance at a narrow bank.
+        windows.append((max(left, tx-32), max(top, host['y']), min(left+size, tx+32), top+size))
+        markers.add(port['objectId'])
+    def static(o):
+        return o['type'] in ('terrain', 'platform') and not o.get('trackId')
+    # Preserve all mechanisms, rewards, route drawings and unselected markers.
+    old_other = {k:v for k,v in before.items() if not static(v)}
+    new_other = {k:v for k,v in after.items() if not static(v)}
+    if set(old_other) != set(new_other): raise ValueError('corner_open_nonterrain_object_set_changed')
+    for key, original in old_other.items():
+        changed = new_other[key]
+        if key in markers:
+            original = {k:v for k,v in original.items() if k not in ('x','y')}
+            changed = {k:v for k,v in changed.items() if k not in ('x','y')}
+        if original != changed: raise ValueError('corner_open_nonterrain_object_changed:'+key)
+    old_rects = [o for o in before.values() if static(o)]
+    new_rects = [o for o in after.values() if static(o)]
+    for o in old_rects + new_rects:
+        if o.get('rotation', 0) != 0 or o['w'] <= 0 or o['h'] <= 0:
+            raise ValueError('corner_open_axis_aligned_positive_static_rectangles_required')
+    xs = sorted({v for o in old_rects+new_rects for v in (o['x'],o['x']+o['w'])}
+                | {v for w in windows for v in (w[0],w[2])})
+    ys = sorted({v for o in old_rects+new_rects for v in (o['y'],o['y']+o['h'])}
+                | {v for w in windows for v in (w[1],w[3])})
+    xi = {v:i for i,v in enumerate(xs)}; yi = {v:i for i,v in enumerate(ys)}
+    def raster(rects):
+        cells = {}
+        for o in rects:
+            tag = (o['type'], bool(o.get('wallClimbable',False)))
+            for x in range(xi[o['x']], xi[o['x']+o['w']]):
+                for y in range(yi[o['y']], yi[o['y']+o['h']]):
+                    cells.setdefault((x,y), set()).add(tag)
+        return cells
+    a, z = raster(old_rects), raster(new_rects)
+    changed_cells = 0
+    for cell in a.keys() | z.keys():
+        old, new = a.get(cell,set()), z.get(cell,set())
+        if old == new: continue
+        x,y = cell; px=(xs[x]+xs[x+1])/2; py=(ys[y]+ys[y+1])/2
+        if not any(l <= px <= r and t <= py <= bottom for l,t,r,bottom in windows):
+            raise ValueError('corner_open_geometry_change_outside_local_target_dock')
+        if any(kind=='terrain' for kind,wall in new-old):
+            raise ValueError('corner_open_added_solid_closure_or_collision')
+        if any(kind=='platform' and wall for kind,wall in new-old):
+            raise ValueError('corner_open_added_wall_climb_surface')
+        changed_cells += 1
+    return dict(passed=True, changedPartitionCells=changed_cells,
+                retiredSidePolicy=OPEN_RETIRED_SIDE_POLICY,
+                scope='Exact local static occupancy/material difference only; not physics or Map certification.')
+
+
+def _verify_open_adaptation(base_folder, folder, base, target, receipt):
+    from . import core
+    if receipt.get('retiredSidePolicy') != OPEN_RETIRED_SIDE_POLICY:
+        raise ValueError('corner_open_retired_side_policy_required')
+    if 'retiredOpeningReport' in receipt:
+        raise ValueError('corner_open_receipt_cannot_relabel_legacy_closed_policy')
+    proof = receipt.get('adaptation')
+    if not isinstance(proof, dict) or not proof.get('path') or not proof.get('sha256'):
+        raise ValueError('corner_open_actual_adaptation_artifact_required')
+    path = core.resolve_artifact(proof['path'])
+    if path.resolve() != (folder/'corner-adaptation.json').resolve():
+        raise ValueError('corner_open_adaptation_artifact_path_changed')
+    core.verify_artifacts([proof]); report = core.read(path)
+    expected = dict(schema='pcg/corner-interface-adaptation/v2',
+        retiredSidePolicy=OPEN_RETIRED_SIDE_POLICY,
+        baseDocumentSha256=core.sha(base_folder/'module.mapnote.json'),
+        targetDocumentSha256=core.sha(folder/'module.mapnote.json'))
+    if any(report.get(key) != value for key,value in expected.items()):
+        raise ValueError('corner_open_adaptation_not_bound_to_actual_documents')
+    if len(receipt['relocations']) == 1:
+        selection = receipt['relocations'][0]
+        if report.get('selectedPortId') != selection['portId'] or report.get('corner') != selection['corner']:
+            raise ValueError('corner_open_adaptation_selection_mismatch')
+    verify_open_geometry(base, target, receipt['relocations'])
+
+
 def verified_receipts(module_id, document_sha256, content_version):
     """Return only independently rederived, current external configurations.
 
@@ -152,7 +255,7 @@ def verified_receipts(module_id, document_sha256, content_version):
             # Old configuration evidence remains on disk but grants no rights
             # to an edited base. It is not a reason to reject the base itself.
             continue
-        if receipt.get('schema') != 'pcg/corner-port-configuration/v1' or receipt.get('moduleId') != module_id:
+        if receipt.get('schema') not in ('pcg/corner-port-configuration/v1', OPEN_RECEIPT_SCHEMA) or receipt.get('moduleId') != module_id:
             raise ValueError('corner_configuration_receipt_identity_mismatch')
         if receipt.get('allowed') is not True or receipt.get('technicalStatus') != 'verified':
             continue
@@ -210,8 +313,11 @@ def verified_receipts(module_id, document_sha256, content_version):
         if not core.contract(folder/'module.mapnote.json')['versionMatches']:
             raise ValueError('corner_configuration_stale_content_version')
         physics.verify_report(folder,receipt['physicsReport'])
-        from .corner_experiment import verify_closed
-        verify_closed(folder,receipt['retiredOpeningReport'])
+        if receipt['schema'] == OPEN_RECEIPT_SCHEMA:
+            _verify_open_adaptation(base_folder, folder, base, target_doc, receipt)
+        else:
+            from .corner_experiment import verify_closed
+            verify_closed(folder,receipt['retiredOpeningReport'])
         verify_package(folder,require_loaded=True)
         result.append(dict(path=core.relative(path),sha256=core.sha(path)))
     return result

@@ -21,6 +21,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+          # Offline raw archives stay in Git; they are not Pages input assets.
+          sparse-checkout: |
+            /*
+            !/pcg/archives/
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -34,8 +39,8 @@ jobs:
       - name: Check plains decision contracts
         run: python3 -m unittest discover -s prototype/plains/tests -v
         working-directory: pcg
-      - name: Verify generation videos and archived data
-        run: python3 tools/check_generation.py
+      - name: Verify published videos, contracts and traces (offline archives not run)
+        run: python3 tools/check_generation.py --web-only
       - name: Prepare current-only editor and historical video assets
         run: python3 tools/build_editor_site.py --out dist
       - uses: actions/configure-pages@v5

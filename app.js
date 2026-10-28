@@ -5,6 +5,8 @@ import {TYPES,SCHEMA,uid,clone,createObject,blankDocument,validateDocument,pathP
 import {CurrentModuleLibraryClient} from './current-module-library-client.js';
 import {cornerRelocationRows,FACE_NAMES} from './corner-port-view.js';
 import {foundationReview,physicalPortGroups,portCounts,renderFoundationReview} from './module-review-overlay.js';
+import {loadCornerBatch,moduleCornerProgress,stageLabel,loadCornerPreview} from './corner-batch-review.js';
+import {renderMirrorReview} from './module-mirror-review.js';
 const $=s=>document.querySelector(s), svg=$('#canvas'), NS='http://www.w3.org/2000/svg';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Math.round(n*100)/100;
@@ -16,7 +18,7 @@ let doc=clone(saved.documents.find(d=>d.id===saved.activeId)??saved.documents[0]
 let selected=null,tool='select',undo=[],redo=[],gesture=null,pointers=new Map(),drawing=null,playing=false,time=0,lastFrame=0,saveTimer=null,toastTimer;
 let camera={x:0,y:0,w:1600,h:900},lastPanTool='select',libraryData=null,routeView='all';
 const currentModuleLibraryClient=new CurrentModuleLibraryClient(location.href);
-let libraryPreviewObserver=null;
+let libraryPreviewObserver=null,libraryBatchData=null;
 let archiveCornerRows=[];
 let archiveConfigurationContext=null;
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,3200);}
@@ -38,7 +40,7 @@ function renderRevisionInfo(){
   const generated=s?.kind==='generated',archive=doc.intent?.archiveOrigin;
   let html=`<div class="revision-card"><label class="field">本次用途<select id="revision-operation">${generated?option('new_module','生成候选草稿（未接入）',op)+option('new_variant','派生新变体',op):s?option('modify_existing','修改原模块',op)+option('new_variant','基于它新增变体',op):option('new_module','新增模块',op)}</select></label>`;
   if(s){
-    const status=archive?{usage:'unverified',label:'当前库基线 · 技术范围通过',reason:`${archive.mapReady?'通用 Map 接入已认证':'通用 Map 接入未认证'}；人工评审 ${archive.humanReview==='UNKNOWN'?'待评':archive.humanReview}。编辑后的内容需重新验证。`}:s.integration;
+    const status=archive?{usage:'unverified',label:archive.experimental?'换边试验 · 未认证':'当前库基线 · 技术范围通过',reason:archive.experimental?'这是冻结换边草案的审阅副本，预检或质量阶段不能替代完整认证；不提供给 Map 匹配。':`${archive.mapReady?'通用 Map 接入已认证':'通用 Map 接入未认证'}；人工评审 ${archive.humanReview==='UNKNOWN'?'待评':archive.humanReview}。编辑后的内容需重新验证。`}:s.integration;
     html+=`<div class="revision-source">${archive?'当前库基线':generated?'来源候选':'原模块'}：<b>${esc(s.moduleId)}</b><br>${integrationBadge(status)}<p>${esc(status?.reason??'本草稿尚无当前版本的接入审查信息。')}</p><span>来源版本 ${esc(archive?.contentVersion??s.commit?.slice(0,8)??'本地目录')}</span></div>`;
     if(status?.evidence?.length)html+=`<details class="integration-evidence"><summary>查看接入依据</summary>${status.evidence.map(e=>`<a href="${esc('https://github.com/zhipijun1996/gunman-rush/blob/'+status.checkedCommit+'/'+e.path+'#L'+e.line)}" target="_blank" rel="noopener">${esc(e.path.split('/').at(-1))} ↗</a>`).join('')}<p>依据是来源版本的游戏入口调用链；不表示此修改稿已应用或通过物理验证。</p></details>`;
   }
@@ -49,7 +51,7 @@ function renderRevisionInfo(){
   if(doc.generationContract){let current=false;try{current=validateGenerationContract(doc).versionMatches;}catch{}const c=doc.generationContract;html+=`<div class="revision-warning" data-contract-state="${current?'current':'stale'}"><b>生成契约：${current?'当前内容版本':'已变更 / 证据不可沿用'}</b><br>${esc(c.contentVersion)}<p>静态检查、物理见证与正式接入分别记录。UNKNOWN 接口不可自动拼装；编辑后需重新导出和验证。</p><p>${c.version===2?`${portCounts(c.ports).physical} 个物理 Port · ${c.ports.length} 个逻辑名`:`${c.ports?.length??0} 个逻辑口（旧合同）`} · 有向关系 ${c.relations?.length??0} · 物理记录 ${c.validations?.filter(v=>v.kind==='physics').length??0}</p></div>`;}
   const corners=archiveCornerRows.length?archiveCornerRows:cornerRelocationRows(doc);
   if(corners.length)html+=`<details class="revision-warning" data-corner-port-options><summary>角落 Port 换边 · ${corners.length} 项${archiveCornerRows.length?'来源版本记录':''}</summary><p>同一 Port 的替代方向，不能同时作为两个出口。未验证的方向不能用于 Map 匹配；编辑后需重新认证。</p>${corners.map(o=>`<p data-corner-option="${esc(o.portId+'/'+o.corner)}" data-relocation-allowed="${o.allowed}"><b>${esc(o.portId)} · ${esc(o.cornerName)}</b>：${esc(FACE_NAMES[o.sourceFace]??o.sourceFace)} → ${esc(FACE_NAMES[o.targetFace]??o.targetFace)}<br>${esc(o.statusLabel)}${o.proposedSurface?' · '+esc(o.proposedSurface):''}${o.reason?'<br><small>'+esc(o.reason)+'</small>':''}</p>`).join('')}</details>`;
-  if(archiveConfigurationContext?.receipts.length)html+=`<details class="revision-warning"><summary>打开已认证的接口配置</summary><p>读取离线编译的配置副本；当前草稿先自动保存。</p>${archiveConfigurationContext.receipts.map(r=>`<button data-open-port-configuration="${esc(r.configurationId)}">${esc(r.relocations.map(p=>`${p.portId} → ${FACE_NAMES[p.targetFace]??p.targetFace}`).join('，'))}</button>`).join('')}</details>`;
+  if(archiveConfigurationContext?.receipts.length)html+=`<details class="revision-warning"><summary>打开已认证的接口配置</summary><p>读取离线编译的配置副本；当前草稿先自动保存。</p>${archiveConfigurationContext.receipts.map(r=>`<button data-open-port-configuration="${esc(r.configurationId)}">${esc(r.relocations.map(p=>`${p.portId} → ${FACE_NAMES[p.targetFace]??p.targetFace}`).join('，'))} · ${r.retiredSidePolicy==='preserve_geometry_no_extra_closure'?'不额外封旧口':'历史 v1 配置'}</button>`).join('')}</details>`;
   html+='</div>';$('#revision-info').innerHTML=html;
   $('#revision-operation').onchange=e=>{snapshot();doc.intent={...doc.intent,operation:e.target.value};changed();};
   const input=$('#revision-info [data-prop="suggestedModuleId"]');if(input)input.onchange=()=>{snapshot();doc.intent={...doc.intent,suggestedModuleId:input.value.slice(0,100)};changed();};
@@ -288,23 +290,50 @@ function showProjects(){
   document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{const d=saved.documents.find(d=>d.id===b.dataset.openDraft);$('#dialog').close();loadDocument(d);});
   document.querySelectorAll('[data-delete-draft]').forEach(b=>b.onclick=()=>{if(!confirm('删除这份本机草稿？已导出的工程文件不受影响。'))return;const id=b.dataset.deleteDraft;saved.documents=saved.documents.filter(d=>d.id!==id);if(doc.id===id){doc=newDraft();syncFields();fit();}persist();showProjects();});
 }
+function batchSummary(data){
+  if(!data)return '换边批次状态尚未发布；已认证配置按当前目录显示。';
+  const counts=Object.entries(data.counts??{}).map(([status,n])=>stageLabel(status)+' '+n).join(' · ');
+  const stamp=data.createdUtc?new Date(data.createdUtc).toLocaleString('zh-CN'):'';
+  return `${data.batchId??'当前目录'} · ${data.currentOptions??data.rows.length} 个换边选项 · ${counts||'待开始'}${stamp?' · 快照 '+stamp:''}`;
+}
+async function showCornerProgress(entry){
+  const progress=moduleCornerProgress(libraryBatchData,entry);
+  dialog(entry.title+' · 换边进度',`<p>当前目录中 ${progress.certified} 份已认证配置。岩体可按需要改为可穿平台；换边不额外封旧开口，旧位置不作为另一个连接口。</p><p class="review-notice">草案仅供审阅。预检通过不等于完整认证；只有正式目录列出的配置可供匹配。</p><div class="corner-progress-list">${progress.rows.map(row=>`<article class="corner-progress-row" data-corner-batch-key="${esc(row.key)}"><b>${esc(row.portId)} · ${esc(row.corner)} → ${esc(FACE_NAMES[row.targetFace]??row.targetFace)}</b><span data-corner-stage="${esc(row.status)}">${esc(stageLabel(row.status))}</span>${row.failures?.routes||row.failures?.boundaryProbes||row.failures?.counters?`<small>原路线 ${row.failures.routes} 项未通过 · 出入口 ${row.failures.boundaryProbes} 项未通过 · 反例 ${row.failures.counters} 项</small>`:''}${row.reason?`<small class="corner-failure-reason">${esc(row.reason)}</small>`:''}${row.preview?`<button data-open-corner-proposal="${esc(row.key)}">查看冻结换边草案（未认证）</button>`:''}</article>`).join('')||'<p>这个模块尚无当前版本的批次记录。</p>'}</div><button id="back-current-library">返回新版库</button>`);
+  $('#back-current-library').onclick=showLibrary;
+  document.querySelectorAll('[data-open-corner-proposal]').forEach(button=>button.onclick=async()=>{
+    const row=progress.rows.find(r=>r.key===button.dataset.openCornerProposal);button.disabled=true;
+    try{const reference=await loadCornerPreview(row,entry,currentModuleLibraryClient.baseURL),copy=makeRevision(reference,'new_variant');
+      copy.title=entry.title+' · 换边试验审阅副本';
+      copy.intent.archiveOrigin={id:entry.id,moduleId:entry.moduleId,contentVersion:row.preview.contentVersion,technicalStatus:'prepared_unverified',mapReady:false,humanReview:'UNKNOWN',experimental:true,batchId:libraryBatchData.batchId,portId:row.portId,corner:row.corner};
+      $('#dialog').close();loadDocument(copy,[],null);toast('已打开未认证换边草案；当前正式模板未改动');
+    }catch(error){button.disabled=false;toast('草案打开失败：'+error.message);}
+  });
+}
+async function showMirrorPreview(entry){
+  try{
+    const reference=await currentModuleLibraryClient.module(entry),status=reference.generationContract?.mirror?.status??'UNKNOWN';
+    dialog(entry.title+' · 左右镜像预览',`<p class="review-notice">同一模板的几何方向预览；当前镜像认证状态：${esc(status==='verified'?'已认证':status==='failed'?'未通过':'未验证')}。图中 Port ID、初始权限和路线起止身份保持原样；预览不生成新模板，也不授予物理或 Map 使用资格。</p><div class="mirror-review-figure">${renderMirrorReview(reference)}</div><button id="back-mirror-library">返回新版库</button>`);
+    $('#back-mirror-library').onclick=showLibrary;
+  }catch(error){toast('镜像预览失败：'+error.message);}
+}
 async function showLibrary(){
   const client=currentModuleLibraryClient;
   dialog('新版 Module 库','<p>正在读取当前新版模块…</p>');
   try{
     libraryData=await client.load();
+    try{libraryBatchData=await loadCornerBatch(client.baseURL,libraryData);}catch{libraryBatchData=null;}
     const categoryOf=m=>client.displayCategory(m),countOf=m=>portCounts(m.ports??[]);
     const cats=[...new Set(libraryData.modules.map(categoryOf))];
     const counts=[...new Set(libraryData.modules.map(m=>countOf(m).physical))].sort((a,b)=>a-b);
     const commit=client.snapshotCommit??libraryData.sourceCommit;
-    dialog('新版 Module 库',`<div class="library-version"><span>${libraryData.modules.length} 份当前 Module / Macro · ${commit?`版本 <code>${esc(commit.slice(0,8))}</code>`:'本地目录'}</span><button id="update-library">↻ 更新新版 Module</button></div><p id="repository-library-notice" role="status">仅显示新地基当前目录。按物理口计数；同位置逻辑别名单列，路线身份保持原样。打开的是编辑副本。</p><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="名称 / ID / 动作"></label><label class="field">地区<select id="library-category"><option value="">全部地区</option>${cats.map(c=>option(c,c,'')).join('')}</select></label><label class="field">Map 接入<select id="library-readiness"><option value="">全部状态</option><option value="ready">通用接入已认证</option><option value="pending">通用接入未认证</option></select></label><label class="field">模块难度<select id="library-difficulty"><option value="">全部难度</option><option value="unrated">未评分</option>${DIFFICULTY_LEVELS.map(level=>option(String(level.score),`${level.score} · ${level.name}`,'')).join('')}</select></label><label class="field">物理 Port 数量<select id="library-ports"><option value="">全部物理口</option>${counts.map(n=>option(String(n),`${n} 个物理口`,'')).join('')}</select></label><label class="field">逻辑别名<select id="library-port-aliases"><option value="">全部</option><option value="yes">包含同口别名</option><option value="no">无同口别名</option></select></label></div><div id="library-results"></div>`);
+    dialog('新版 Module 库',`<div class="library-version"><span>${libraryData.modules.length} 份当前 Module / Macro · ${commit?`版本 <code>${esc(commit.slice(0,8))}</code>`:'本地目录'}</span><button id="update-library">↻ 更新新版 Module</button></div><p id="repository-library-notice" role="status">仅显示新地基当前目录。按物理口计数；同位置逻辑别名单列，路线身份保持原样。打开的是编辑副本。</p><div id="corner-batch-summary" class="batch-summary" role="status">${esc(batchSummary(libraryBatchData))}</div><div class="library-filters"><label class="field">搜索模块<input id="library-search" placeholder="名称 / ID / 动作"></label><label class="field">地区<select id="library-category"><option value="">全部地区</option>${cats.map(c=>option(c,c,'')).join('')}</select></label><label class="field">Map 接入<select id="library-readiness"><option value="">全部状态</option><option value="ready">通用接入已认证</option><option value="pending">通用接入未认证</option></select></label><label class="field">模块难度<select id="library-difficulty"><option value="">全部难度</option><option value="unrated">未评分</option>${DIFFICULTY_LEVELS.map(level=>option(String(level.score),`${level.score} · ${level.name}`,'')).join('')}</select></label><label class="field">物理 Port 数量<select id="library-ports"><option value="">全部物理口</option>${counts.map(n=>option(String(n),`${n} 个物理口`,'')).join('')}</select></label><label class="field">逻辑别名<select id="library-port-aliases"><option value="">全部</option><option value="yes">包含同口别名</option><option value="no">无同口别名</option></select></label><label class="field">角口换边<select id="library-corner-stage"><option value="">全部进度</option><option value="certified">有已认证配置</option><option value="pending">待测 / 处理中</option><option value="failed">失败 / 待修</option></select></label></div><div id="library-results"></div>`);
     const list=()=>{
       libraryPreviewObserver?.disconnect();
-      const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value,difficulty=$('#library-difficulty').value,ports=$('#library-ports').value,ready=$('#library-readiness').value,aliases=$('#library-port-aliases').value;
-      const mods=libraryData.modules.filter(m=>{const n=countOf(m);return (!ports||n.physical===Number(ports))&&(!aliases||(n.logical>n.physical)===(aliases==='yes'))&&(!cat||categoryOf(m)===cat)&&(!ready||m.mapReady===(ready==='ready'))&&(!difficulty||(difficulty==='unrated'?m.difficulty?.score==null:m.difficulty?.score===Number(difficulty)))&&JSON.stringify([m.title,m.id,m.moduleId,m.tags,requirementSummary(m.capabilityRequirements)]).toLowerCase().includes(q);});
+      const q=$('#library-search').value.toLowerCase(),cat=$('#library-category').value,difficulty=$('#library-difficulty').value,ports=$('#library-ports').value,ready=$('#library-readiness').value,aliases=$('#library-port-aliases').value,cornerStage=$('#library-corner-stage').value;
+      const mods=libraryData.modules.filter(m=>{const n=countOf(m),progress=moduleCornerProgress(libraryBatchData,m),failure=progress.rows.some(r=>['preflight_failed','quality_failed','native_failed','tooling_gap'].includes(r.status)),pending=progress.rows.some(r=>!['verified','preflight_failed','quality_failed','native_failed','tooling_gap'].includes(r.status));return (!cornerStage||(cornerStage==='certified'?progress.certified>0:cornerStage==='failed'?failure:pending))&&(!ports||n.physical===Number(ports))&&(!aliases||(n.logical>n.physical)===(aliases==='yes'))&&(!cat||categoryOf(m)===cat)&&(!ready||m.mapReady===(ready==='ready'))&&(!difficulty||(difficulty==='unrated'?m.difficulty?.score==null:m.difficulty?.score===Number(difficulty)))&&JSON.stringify([m.title,m.id,m.moduleId,m.tags,requirementSummary(m.capabilityRequirements)]).toLowerCase().includes(q);});
       $('#library-results').innerHTML=mods.map(m=>{
-        const n=countOf(m),image=client.thumbnail(m),aliasGroups=physicalPortGroups(m.ports??[]).filter(p=>p.ids.length>1);
-        return `<article class="module-card" data-module="${esc(m.id)}" data-physical-port-count="${n.physical}" data-logical-port-count="${n.logical}"><a class="module-preview" href="${esc(image)}" target="_blank" rel="noopener" title="查看布局预览"><img data-module-preview="${esc(m.id)}" src="${esc(image)}" alt="${esc(m.title)}布局预览" loading="lazy"></a><b>${esc(m.title)}</b><small>${esc(m.moduleId??m.id)}</small><small>${esc(categoryOf(m))} · ${n.physical} 个物理 Port${n.logical!==n.physical?' / '+n.logical+' 个逻辑名':''} · ${m.foundation.widthBlocks}×${m.foundation.heightBlocks} Block</small>${aliasGroups.length?`<small class="port-alias-note">同口别名：${aliasGroups.map(g=>esc(g.ids.join(' = '))).join('；')}</small>`:''}<span class="integration-badge">技术范围通过</span><small>${m.mapReady?'通用 Map 接入已认证':'通用 Map 接入未认证'} · 人工评审 ${esc(m.humanReview==='UNKNOWN'?'待评':m.humanReview)}</small><small class="module-difficulty">${esc(difficultySummary(m.difficulty))}</small><small>${esc(requirementSummary(m.capabilityRequirements))}</small><div class="module-actions"><button data-copy-module="${esc(m.id)}">打开编辑副本</button></div></article>`;
+        const n=countOf(m),image=client.thumbnail(m),progress=moduleCornerProgress(libraryBatchData,m),aliasGroups=physicalPortGroups(m.ports??[]).filter(p=>p.ids.length>1);
+        return `<article class="module-card" data-module="${esc(m.id)}" data-physical-port-count="${n.physical}" data-logical-port-count="${n.logical}"><a class="module-preview" href="${esc(image)}" target="_blank" rel="noopener" title="查看布局预览"><img data-module-preview="${esc(m.id)}" src="${esc(image)}" alt="${esc(m.title)}布局预览" loading="lazy"></a><b>${esc(m.title)}</b><small>${esc(m.moduleId??m.id)}</small><small>${esc(categoryOf(m))} · ${n.physical} 个物理 Port${n.logical!==n.physical?' / '+n.logical+' 个逻辑名':''} · ${m.foundation.widthBlocks}×${m.foundation.heightBlocks} Block</small>${aliasGroups.length?`<small class="port-alias-note">同口别名：${aliasGroups.map(g=>esc(g.ids.join(' = '))).join('；')}</small>`:''}<span class="integration-badge">技术范围通过</span><small class="corner-progress-line" data-certified-corner-count="${progress.certified}">角口已认证 ${progress.certified} 份配置${progress.rows.length?' · '+Object.entries(progress.counts).map(([status,n])=>esc(stageLabel(status))+' '+n).join(' / '):' · 无当前批次项'}</small><small>${m.mapReady?'通用 Map 接入已认证':'通用 Map 接入未认证'} · 人工评审 ${esc(m.humanReview==='UNKNOWN'?'待评':m.humanReview)}</small><small class="mirror-status">左右镜像：${progress.mirrorStatus==='verified'?'已认证':progress.mirrorStatus==='failed'?'未通过':'可预览 · 未认证'}</small><small class="module-difficulty">${esc(difficultySummary(m.difficulty))}</small><small>${esc(requirementSummary(m.capabilityRequirements))}</small><div class="module-actions"><button data-copy-module="${esc(m.id)}">打开编辑副本</button><button data-mirror-preview="${esc(m.id)}">左右镜像预览</button><button data-corner-progress="${esc(m.id)}">换边进度</button></div></article>`;
       }).join('')||'<p>没有匹配的当前模块</p>';
       document.querySelectorAll('[data-copy-module]').forEach(button=>button.onclick=async()=>{try{
         const m=libraryData.modules.find(m=>m.id===button.dataset.copyModule);
@@ -313,10 +342,12 @@ async function showLibrary(){
         d.title=m.title.slice(0,180)+' · 编辑副本';d.intent.archiveOrigin={id:m.id,moduleId:m.moduleId,contentVersion:m.contentVersion,technicalStatus:m.technicalStatus,mapReady:m.mapReady,humanReview:m.humanReview};
         $('#dialog').close();loadDocument(d,corners,{entry:m,receipts});toast('已打开新版编辑副本，库内原版本保留');
       }catch(error){toast('模块打开失败：'+error.message);}});
+      document.querySelectorAll('[data-corner-progress]').forEach(button=>button.onclick=()=>showCornerProgress(libraryData.modules.find(m=>m.id===button.dataset.cornerProgress)));
+      document.querySelectorAll('[data-mirror-preview]').forEach(button=>button.onclick=()=>showMirrorPreview(libraryData.modules.find(m=>m.id===button.dataset.mirrorPreview)));
       const observer=libraryPreviewObserver=new IntersectionObserver(entries=>{for(const item of entries)if(item.isIntersecting){observer.unobserve(item.target);const entry=libraryData.modules.find(m=>m.id===item.target.dataset.modulePreview);client.reviewThumbnail(entry).then(url=>{if(item.target.isConnected){item.target.src=url;item.target.closest('a').href=url;}}).catch(()=>{});}}, {root:$('#library-results')});
       document.querySelectorAll('[data-module-preview]').forEach(img=>observer.observe(img));
     };
-    for(const selector of ['#library-search','#library-category','#library-difficulty','#library-ports','#library-readiness','#library-port-aliases'])$(selector)[selector==='#library-search'?'oninput':'onchange']=list;
+    for(const selector of ['#library-search','#library-category','#library-difficulty','#library-ports','#library-readiness','#library-port-aliases','#library-corner-stage'])$(selector)[selector==='#library-search'?'oninput':'onchange']=list;
     $('#update-library').onclick=updateCurrentModules;list();
   }catch(error){
     dialog('新版 Module 库',`<p>${esc(error.message)}</p><p>本机草稿保留。</p><div class="dialog-actions"><button id="retry-library">重试</button><button id="fetch-current-library">从仓库更新新版</button></div>`);

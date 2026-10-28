@@ -43,5 +43,22 @@ class ScratchEvidence(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'restore_only'):
             snapshot.restore('.cache/migration/../../../AGENTS.md',checksum,self.out)
 
+    def test_bounded_prefix_keeps_unselected_history_out(self):
+        other=self.source.parent.parent/'unselected'/'cases.json'
+        other.parent.mkdir();other.write_text('{"large_history":true}\n')
+        result=snapshot.capture(self.out,source_prefixes=['.cache/migration/example'],include_tool_sources=False)
+        index=core.read(self.out/'index.json')
+        self.assertEqual(set(index['files']),{self.relative})
+        self.assertEqual(index['currentToolSources'],{})
+        self.assertEqual(result['lastCapture']['sourcePrefixes'],['.cache/migration/example'])
+        self.source.unlink();snapshot.restore(self.relative,index['files'][self.relative][0]['sha256'],self.out)
+        self.assertEqual(self.source.read_bytes(),b'{"revision":1}\n')
+
+    def test_bounded_prefix_rejects_escape_and_empty_selection(self):
+        for prefixes in ([],['.cache/migration/../../../AGENTS.md']):
+            with self.assertRaisesRegex(ValueError,'prefix_(selection_must_not_be_empty|outside_migration_scratch)'):
+                snapshot.capture(self.out,source_prefixes=prefixes)
+        self.assertFalse(self.out.exists())
+
 
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,125 @@
+test_annotation_resets_stale_certification_before_freeze (pcg.migration.tests.test_corners.CornerTests.test_annotation_resets_stale_certification_before_freeze) ... ok
+test_assessment_does_not_modify_frozen_document (pcg.migration.tests.test_corners.CornerTests.test_assessment_does_not_modify_frozen_document) ... ok
+test_bottom_air_input_requires_actual_surface_adaptation (pcg.migration.tests.test_corners.CornerTests.test_bottom_air_input_requires_actual_surface_adaptation) ... ok
+test_external_receipt_cannot_rebind_changed_base_bytes (pcg.migration.tests.test_corners.CornerTests.test_external_receipt_cannot_rebind_changed_base_bytes) ... ok
+test_four_corner_pairs_both_directions_with_negative_origin (pcg.migration.tests.test_corners.CornerTests.test_four_corner_pairs_both_directions_with_negative_origin) ... ok
+test_non_corner_and_internal_marker_are_not_candidates (pcg.migration.tests.test_corners.CornerTests.test_non_corner_and_internal_marker_are_not_candidates) ... ok
+test_pass_fields_without_actual_configuration_artifact_are_rejected (pcg.migration.tests.test_corners.CornerTests.test_pass_fields_without_actual_configuration_artifact_are_rejected) ... ok
+test_rock_vertical_is_tooling_work_not_permission_by_marker (pcg.migration.tests.test_corners.CornerTests.test_rock_vertical_is_tooling_work_not_permission_by_marker) ... ok
+test_same_ability_names_cannot_hide_increased_native_air_capacity (pcg.migration.tests.test_corners.CornerTests.test_same_ability_names_cannot_hide_increased_native_air_capacity) ... ok
+test_single_block_has_two_distinct_nearest_options_for_one_port (pcg.migration.tests.test_corners.CornerTests.test_single_block_has_two_distinct_nearest_options_for_one_port) ... ok
+test_stale_configuration_is_preserved_but_not_eligible (pcg.migration.tests.test_corners.CornerTests.test_stale_configuration_is_preserved_but_not_eligible) ... ok
+test_unverified_preparation_cannot_write_into_current_or_recycle (pcg.migration.tests.test_corners.CornerTests.test_unverified_preparation_cannot_write_into_current_or_recycle) ... ok
+test_changed_receipt_bytes_are_rejected (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_changed_receipt_bytes_are_rejected) ... ERROR
+test_initial_conditional_permissions_remain_exact_and_detached (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_initial_conditional_permissions_remain_exact_and_detached) ... ERROR
+test_real_whole_configuration_opens_only_its_certified_selection (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_real_whole_configuration_opens_only_its_certified_selection) ... ERROR
+test_receipt_target_must_still_match_nearest_same_corner_face (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_receipt_target_must_still_match_nearest_same_corner_face) ... ERROR
+test_repeated_receipt_does_not_duplicate_configuration_identity (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_repeated_receipt_does_not_duplicate_configuration_identity) ... ERROR
+test_source_booleans_without_verified_receipt_never_grant_permission (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_source_booleans_without_verified_receipt_never_grant_permission) ... ERROR
+
+======================================================================
+ERROR: test_changed_receipt_bytes_are_rejected (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_changed_receipt_bytes_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 42, in test_changed_receipt_bytes_are_rejected
+    doc,refs=self.fixture();bad=copy.deepcopy(refs);bad[0]['sha256']='0'*64
+             ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+======================================================================
+ERROR: test_initial_conditional_permissions_remain_exact_and_detached (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_initial_conditional_permissions_remain_exact_and_detached)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 54, in test_initial_conditional_permissions_remain_exact_and_detached
+    doc,_=self.fixture();p=doc['generationContract']['ports'][0]
+          ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+======================================================================
+ERROR: test_real_whole_configuration_opens_only_its_certified_selection (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_real_whole_configuration_opens_only_its_certified_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 19, in test_real_whole_configuration_opens_only_its_certified_selection
+    doc,refs=self.fixture();before=copy.deepcopy(doc);ports=corners.compiled_ports(doc,refs)
+             ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+======================================================================
+ERROR: test_receipt_target_must_still_match_nearest_same_corner_face (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_receipt_target_must_still_match_nearest_same_corner_face)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 45, in test_receipt_target_must_still_match_nearest_same_corner_face
+    doc,refs=self.fixture();original=core.read
+             ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+======================================================================
+ERROR: test_repeated_receipt_does_not_duplicate_configuration_identity (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_repeated_receipt_does_not_duplicate_configuration_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 38, in test_repeated_receipt_does_not_duplicate_configuration_identity
+    doc,refs=self.fixture();ports=corners.compiled_ports(doc,refs+refs)
+             ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+======================================================================
+ERROR: test_source_booleans_without_verified_receipt_never_grant_permission (pcg.migration.tests.test_compiled_corner_ports.ActualCompiledPorts.test_source_booleans_without_verified_receipt_never_grant_permission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 32, in test_source_booleans_without_verified_receipt_never_grant_permission
+    doc,_=self.fixture()
+          ^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/tests/test_compiled_corner_ports.py", line 14, in fixture
+    refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/corners.py", line 313, in verified_receipts
+    if not core.contract(folder/'module.mapnote.json')['versionMatches']:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-task-a/pcg/migration/core.py", line 111, in contract
+    raise ValueError('foundation_source_changed_rebind_standard_before_migration:'+source['repository_path'])
+ValueError: foundation_source_changed_rebind_standard_before_migration:MAP_FOUNDATION.md
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.077s
+
+FAILED (errors=6)

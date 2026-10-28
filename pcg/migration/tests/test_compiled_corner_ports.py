@@ -12,7 +12,8 @@ class ActualCompiledPorts(unittest.TestCase):
     def fixture(self):
         doc=core.read(BASE/'module.mapnote.json')
         refs=corners.verified_receipts(BASE.name,core.sha(BASE/'module.mapnote.json'),doc['generationContract']['contentVersion'])
-        self.assertEqual(len(refs),1)
+        refs=[ref for ref in refs if ref['path']==core.relative(RECEIPT)]
+        self.assertEqual(len(refs),1)  # This regression binds the historical v1 sample.
         return doc,refs
     def test_real_whole_configuration_opens_only_its_certified_selection(self):
         doc,refs=self.fixture();before=copy.deepcopy(doc);ports=corners.compiled_ports(doc,refs)

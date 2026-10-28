@@ -110,7 +110,7 @@ export class CurrentModuleLibraryClient extends LibraryClient{
     for(const ref of entry.cornerConfigurationReceipts??[]){
       try{
         const receipt=await this.configurationArtifact(ref,entry);
-        if(receipt.schema!=='pcg/corner-port-configuration/v1'||receipt.moduleId!==entry.id||receipt.baseContentVersion!==entry.contentVersion||receipt.baseDocumentSha256!==entry.contentSha256||receipt.allowed!==true||receipt.technicalStatus!=='verified'||!Array.isArray(receipt.relocations)||!receipt.relocations.length)continue;
+        if(!['pcg/corner-port-configuration/v1','pcg/corner-port-configuration/v2'].includes(receipt.schema)||receipt.moduleId!==entry.id||receipt.baseContentVersion!==entry.contentVersion||receipt.baseDocumentSha256!==entry.contentSha256||receipt.allowed!==true||receipt.technicalStatus!=='verified'||!Array.isArray(receipt.relocations)||!receipt.relocations.length)continue;
         const selected=new Set();
         let valid=true;
         for(const r of receipt.relocations){
@@ -120,6 +120,10 @@ export class CurrentModuleLibraryClient extends LibraryClient{
         if(!valid)continue;
         this.configurationPath(receipt.configuration?.path,entry);this.configurationPath(receipt.package?.path,entry);
         if(!HASH.test(receipt.configuration?.sha256)||!HASH.test(receipt.package?.sha256)||!HASH.test(receipt.physicsReport?.sha256))continue;
+        if(receipt.schema==='pcg/corner-port-configuration/v2'){
+          if(receipt.retiredSidePolicy!=='preserve_geometry_no_extra_closure'||receipt.retiredOpeningReport!==undefined||!HASH.test(receipt.adaptation?.sha256))continue;
+          this.configurationPath(receipt.adaptation?.path,entry);
+        }
         receipts.push(receipt);
       }catch{/* A failed optional configuration never replaces the valid base. */}
     }
@@ -131,6 +135,10 @@ export class CurrentModuleLibraryClient extends LibraryClient{
     const checked=checkedDocument(doc,{...entry,contentSha256:receipt.configuration.sha256,contentVersion:receipt.configuration.contentVersion});
     const manifest=await this.configurationArtifact(receipt.package,entry);
     if(manifest.schema!=='pcg/godot-module-package/v1'||manifest.stable_id!==entry.id||manifest.source?.module_sha256!==receipt.configuration.sha256)throw Error('角落 Port 编译包与配置内容不一致');
+    if(receipt.schema==='pcg/corner-port-configuration/v2'){
+      const adaptation=await this.configurationArtifact(receipt.adaptation,entry);
+      if(adaptation.schema!=='pcg/corner-interface-adaptation/v2'||adaptation.retiredSidePolicy!=='preserve_geometry_no_extra_closure'||adaptation.baseDocumentSha256!==entry.contentSha256||adaptation.targetDocumentSha256!==receipt.configuration.sha256)throw Error('角落 Port 适配证据与配置内容不一致');
+    }
     return structuredClone(checked);
   }
   checkUpdate(progress=()=>{}){

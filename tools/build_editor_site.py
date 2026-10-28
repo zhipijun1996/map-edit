@@ -77,13 +77,29 @@ def build(destination, include_history=True):
             if receipt['baseContentVersion'] != entry['contentVersion'] or receipt['baseDocumentSha256'] != entry['contentSha256']:
                 raise ValueError('web_corner_receipt_base_mismatch')
             fetches.append(str(receipt_path))
-            for field in ('configuration', 'package'):
+            for field in ('configuration', 'package', *(['adaptation'] if receipt.get('schema')=='pcg/corner-port-configuration/v2' else [])):
                 target = asset(receipt[field]['path'], receipt[field]['sha256'], 'corner_'+field)
                 fetches.append(str(target))
             target_thumbnail = relative(receipt['configuration']['path']).parent/'thumbnail.svg'
             if (ROOT/target_thumbnail).is_file(): asset(target_thumbnail, purpose='corner_thumbnail')
     aliases = ROOT/'modules/aliases.json'
     if aliases.is_file(): asset('modules/aliases.json', purpose='current_aliases')
+    batch_path = ROOT/'modules/corner-batch-status.json'
+    if batch_path.is_file():
+        # The exported snapshot is metadata, never a source of Map permission.
+        batch = json.loads(batch_path.read_text())
+        if batch.get('schema') != 'map-notes/corner-batch-status/v1':
+            raise ValueError('unsupported_corner_batch_web_status')
+        asset('modules/corner-batch-status.json', purpose='corner_batch_progress')
+        for row in batch.get('rows', []):
+            preview = row.get('preview')
+            if preview:
+                if preview.get('certified') is not False:
+                    raise ValueError('corner_review_asset_cannot_certify')
+                path = relative(preview['path'])
+                if not path.as_posix().startswith('generation/module-review/corner-batches/'):
+                    raise ValueError('corner_review_asset_outside_review_directory')
+                asset(path, preview['sha256'], 'uncertified_corner_review_document')
     inventory_path = Path('pcg/migration/foundation-v1/corner-port-inventory-v1.json')
     if (ROOT/inventory_path).is_file():
         original = json.loads((ROOT/inventory_path).read_text())

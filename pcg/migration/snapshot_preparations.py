@@ -14,17 +14,30 @@ SUFFIXES={'.json','.py','.gd','.tscn','.mjs','.md','.tres','.uid','.svg','.log'}
 DEFAULT=core.REPO/'pcg/results/foundation-migration-preparation-snapshots-v2'
 
 
-def capture(out=DEFAULT):
+def capture(out=DEFAULT, *, source_prefixes=None, include_tool_sources=True):
     out=Path(out).resolve();source=core.REPO/'.cache/migration'
     if not out.is_relative_to(core.REPO/'pcg/results'):
         raise ValueError('evidence_snapshot_must_live_in_existing_experiment_archive_namespace')
+    # Optional bounded captures avoid copying unrelated historical preparations.
+    roots=[source]
+    if source_prefixes is not None:
+        if not source_prefixes:raise ValueError('snapshot_prefix_selection_must_not_be_empty')
+        roots=[]
+        for prefix in source_prefixes:
+            root=Path(prefix)
+            if not root.is_absolute():root=core.REPO/root
+            root=root.resolve()
+            if not root.is_relative_to(source.resolve()):raise ValueError('snapshot_prefix_outside_migration_scratch')
+            if not root.exists():raise ValueError('snapshot_prefix_missing:'+str(prefix))
+            roots.append(root)
     out.mkdir(parents=True,exist_ok=True)
     index_path=out/'index.json'
     index=core.read(index_path)if index_path.exists()else dict(
         schema='pcg/migration-scratch-evidence/v1',purpose='immutable_experiment_input_evidence_not_a_candidate_library',
         sourceRoot=core.relative(source),files={},missingHistoricalByteImages='Not reconstructed or claimed by this snapshot.')
     captured=skipped=0
-    for path in sorted(source.rglob('*')):
+    paths=sorted({p for root in roots for p in (root.rglob('*') if root.is_dir() else [root])})
+    for path in paths:
         if not path.is_file()or path.suffix not in SUFFIXES or any(p in ('.godot','__pycache__','frozen-sources','deep-verification')for p in path.parts):
             continue
         try:
@@ -51,7 +64,8 @@ def capture(out=DEFAULT):
     # Current migration source is a separate analysis/build tool snapshot. It is
     # never substituted for a historical run's already-frozen source image.
     tools={}
-    for path in sorted((core.REPO/'pcg/migration').rglob('*')):
+    tool_paths=sorted((core.REPO/'pcg/migration').rglob('*')) if include_tool_sources else []
+    for path in tool_paths:
         if not path.is_file()or path.suffix not in {'.py','.gd','.mjs'}or'__pycache__'in path.parts:continue
         data=path.read_bytes();checksum=hashlib.sha256(data).hexdigest()
         target=out/'tool-source'/path.relative_to(core.REPO/'pcg/migration')
@@ -63,6 +77,9 @@ def capture(out=DEFAULT):
     index['sourcePaths']=len(index['files'])
     index['observedVersions']=sum(map(len,index['files'].values()))
     index['lastCapture']=dict(newObservedVersions=captured,mutatingOrMissingFilesSkipped=skipped)
+    if source_prefixes is not None:
+        index['lastCapture']['sourcePrefixes']=[core.relative(p) for p in roots]
+        index['lastCapture']['toolSourcesIncluded']=include_tool_sources
     core.write(index_path,index)
     return {k:v for k,v in index.items()if k not in ('files','currentToolSources')}
 
@@ -88,7 +105,9 @@ def restore(source_path,checksum,out=DEFAULT):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--out',type=Path,default=DEFAULT)
-    p.add_argument('--restore-path');p.add_argument('--sha256');a=p.parse_args()
+    p.add_argument('--restore-path');p.add_argument('--sha256')
+    p.add_argument('--source-prefix',action='append',help='Repository-relative .cache/migration prefix; repeat for bounded capture')
+    p.add_argument('--no-tool-sources',action='store_true');a=p.parse_args()
     if a.restore_path and not a.sha256:p.error('--restore-path needs exact --sha256')
-    result=restore(a.restore_path,a.sha256,a.out)if a.restore_path else capture(a.out)
+    result=restore(a.restore_path,a.sha256,a.out)if a.restore_path else capture(a.out,source_prefixes=a.source_prefix,include_tool_sources=not a.no_tool_sources)
     print(__import__('json').dumps(result,ensure_ascii=False))

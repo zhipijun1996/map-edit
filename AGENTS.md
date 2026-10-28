@@ -1,6 +1,8 @@
 # 当前工作规范：既有 Module 最小修改迁移
 
-用户最新补充授权：本轮迁移与新版专用编辑器完成、验收及证据归档后，**提交并推送 GitHub**；此前“不 commit、不发布”仅作为历史限制保留，不阻止本轮已授权的 Git 提交/推送。本轮未要求部署公网网站。编辑器只展示新版 Module，并清楚显示 Block 与真实 Port。
+用户最新补充授权：本轮迁移与新版专用编辑器完成、验收及证据归档后，**提交并推送 GitHub**；此前“不 commit、不发布”仅作为历史限制保留，不阻止本轮已授权的 Git 提交/推送。用户随后明确要求更新线上编辑器；允许将已验收变更合并到 main 并通过现有 Pages 工作流发布，保留工坊分支作为更新源。编辑器只展示新版 Module，并清楚显示 Block 与真实 Port。
+
+用户最新换边规则：需要时可将岩体改为可穿平台，**不要求封旧开口，不为换边额外加墙**。旧位置撤销逻辑Port资格，原位置与新位置不作为两个连接口；开放几何保留，Map相邻空间验收独立记录。新v2配置按该规则批量适配并使用原Harness验证；已有v1闭口配置及历史证据保留原样。
 
 最高模型依据为根 [MAP_FOUNDATION.md](MAP_FOUNDATION.md)，[MAP_GENERATION_GUIDE.md](MAP_GENERATION_GUIDE.md)为推荐；当前执行 [pcg-module-migration](.agents/skills/pcg-module-migration/SKILL.md)。用户已授权执行迁移，**先本仓库既有Module，再主游戏Module**；新增生产暂停，旧Map生成器退役，本轮不实现新Map、不commit、不发布。旧状态文件若仍写主游戏优先，属于待同步旧状态，不能覆盖最新授权。
 
