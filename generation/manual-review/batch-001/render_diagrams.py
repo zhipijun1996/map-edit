@@ -41,6 +41,17 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    if o.get('diagramHint'):text(x+w/2,y+h+26,o['diagramHint'],18,anchor='middle')
   elif typ=='enemy':
    cx,cy=x+w/2,y+h/2;parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#dc714d" stroke="#8e432e" stroke-width="2"/>');text(cx,cy-23,'空中怪'if o.get('definition')=='plains_diver'else'陆上怪',20,anchor='middle')
+  elif typ=='hazard':
+   count=max(2,round(w/(h*1.3)));step=w/count
+   for j in range(count):
+    if o.get('shape')=='gears':
+     cx,cy=x+(j+.5)*step,y+h/2;radius=min(h/2,step*.46)
+     pts=' '.join(f'{cx+math.cos(a*math.pi/12)*(radius if a%2==0 else radius*.67)},{cy+math.sin(a*math.pi/12)*(radius if a%2==0 else radius*.67)}'for a in range(24))
+     parts.append(f'<polygon points="{pts}" fill="#d65345" stroke="#923e36" stroke-width="1.5"/><circle cx="{cx}" cy="{cy}" r="{radius*.25}" fill="#fbfaf5"/>')
+    else:
+     pts=f'{x+j*step},{y+h} {x+(j+.5)*step},{y} {x+(j+1)*step},{y+h}'
+     parts.append(f'<polygon points="{pts}" fill="#c75049" stroke="#903931" stroke-width="1.5"/>')
+   text(x+w/2,y-9,o.get('label','危险带'),18,anchor='middle')
   elif typ=='trackLine':
    pts=' '.join(f'{X(p["x"])},{Y(p["y"])}' for p in o.get('points',[]))
    parts.append(f'<polyline points="{pts}" fill="none" stroke="#667e91" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>')
@@ -58,16 +69,18 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in doc['objects']:
   if o['type']=='bell':
    for target in o.get('targetIds',[o.get('targetId')]):
-    gate=next((g for g in doc['objects'] if g['id']==target and g['type']=='gate'),None)
+    gate=next((g for g in doc['objects'] if g['id']==target and g['type'] in ('gate','hazard')),None)
     if gate:
-     parts.append(f'<path d="M{X(o["x"]+o["w"]/2)} {Y(o["y"]+o["h"]/2)}L{X(gate["x"]+gate["w"]/2)} {Y(o["y"]+o["h"]/2)}" stroke="#ad8a35" stroke-width="1.5" stroke-dasharray="4 5"/>')
+     target_y=gate['y']+gate['h']/2 if gate['type']=='hazard' else o['y']+o['h']/2
+     parts.append(f'<path d="M{X(o["x"]+o["w"]/2)} {Y(o["y"]+o["h"]/2)}L{X(gate["x"]+gate["w"]/2)} {Y(target_y)}" stroke="#ad8a35" stroke-width="1.5" stroke-dasharray="4 5"/>')
    cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="#dfbc51" stroke="#9d7a29" stroke-width="2"/>');text(cx,cy-18,bells[o['id']],19,anchor='middle')
  for o in reward:
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
  for p in gc['ports']:
   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*13} {cy+ny*13}L{cx+nx*43} {cy+ny*43}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+nx*63,cy+8+ny*50,p['id'],28,anchor='middle',weight=700)
  y=Y(b['y']+b['h'])+38;caption=((f'设计目标：{len(gc["ports"])}口两两互通，共 {len(gc["ports"])*(len(gc["ports"])-1)} 个有向关系；不是通行认证。'if design_only else'目标：A/B/C/D 四口两两可达，共 12 个方向；未验证方向保持 UNKNOWN。')if gc['generation'].get('portConnectivityIntent')=='all_distinct_ordered_pairs'else('声明方向：'if args.draft else'归档路线：')+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']));text(40,y,caption,22,weight=600)
- text(40,y+38,'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物',20)
+ legend='图例：绿＝地貌　紫＝门（虚线＝开）　金＝风铃/奖励　红＝齿轮/荆棘　曲线＝路线意图'if any(o['type']=='hazard'for o in doc['objects'])else'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物'
+ text(40,y+38,legend,20)
  text(40,y+72,('设计稿：每格 128 px；曲线仅表达玩法意图，不代表实际动作、可达性或技术认证。'if args.draft else'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。'),18)
  text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 设计讨论',16)
  parts.append('</svg>');svg=out/f'{review_id}.svg';svg.write_text(''.join(parts))
