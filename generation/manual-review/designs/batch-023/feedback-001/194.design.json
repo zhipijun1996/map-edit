@@ -1,0 +1,290 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac",
+  "reviewId": "194",
+  "title": "穿过移动挡板的射击窗口 / 接口2",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/module.mapnote.json",
+    "contentVersion": "sha256:82fbfeda592cd00655f8a6618c4db8c1a10effa1710cd498203d2b536ed060a1",
+    "sha256": "c9b0ed48f587e531d2b9247f0ffa17f816dc91fa1e84995e4789f406e336e25b"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 86,
+    "w": 768,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        406
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        768,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左2上1右2下3",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 438,
+      "w": 240,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/platform-1",
+      "type": "terrain",
+      "x": 460,
+      "y": 438,
+      "w": 255,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/platform-2",
+      "type": "terrain",
+      "x": 250,
+      "y": 86,
+      "w": 495,
+      "h": 154,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/platform-3",
+      "type": "terrain",
+      "x": 715,
+      "y": 240,
+      "w": 30,
+      "h": 150,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/moving-0",
+      "type": "platform",
+      "x": 130,
+      "y": 125,
+      "w": 20,
+      "h": 110,
+      "rotation": 0,
+      "label": "移动挡板 · 非载台",
+      "note": "",
+      "sourceId": "ray-shutter",
+      "trackId": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/moving-track-0"
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/moving-track-0",
+      "type": "trackLine",
+      "x": 140,
+      "y": 180,
+      "w": 9.999999974752427e-07,
+      "h": 235,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 140,
+          "y": 180
+        },
+        {
+          "x": 140,
+          "y": 415
+        }
+      ],
+      "duration": 1.4,
+      "dwell": 0.15,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/gate-0",
+      "type": "gate",
+      "x": 440,
+      "y": 240,
+      "w": 20,
+      "h": 198,
+      "rotation": 0,
+      "label": "short-bell gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 0.7,
+        "carrierId": null,
+        "returnAccess": [
+          670,
+          350
+        ]
+      }
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/bell-0",
+      "type": "bell",
+      "x": 6,
+      "y": 388,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "short-bell",
+      "note": "",
+      "targetId": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/gate-0",
+      "sourceId": "short-bell"
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/cache-0",
+      "type": "reward",
+      "x": 627,
+      "y": 402,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            645,
+            420
+          ],
+          "region": [
+            615,
+            415,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/return-bell-0",
+      "type": "bell",
+      "x": 656,
+      "y": 333,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "返回侧接收器",
+      "note": "原 add_access_bell，与主铃共享事务",
+      "targetId": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/gate-0",
+      "sourceId": "short-bell/return",
+      "mechanics": {
+        "service": "ShotLatch.add_access_bell",
+        "returnSideOnly": true
+      }
+    },
+    {
+      "id": "generated-630ca6aff78c132669a9cf11e47448041319a2593c6506b86ca098b9a1b5a4ac/migration-shore-exit",
+      "type": "terrain",
+      "x": 691,
+      "y": 438,
+      "w": 77,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 6
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 86,
+      "w": 768,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 406
+        },
+        {
+          "x": 200,
+          "y": 420
+        },
+        {
+          "x": 270,
+          "y": 340
+        },
+        {
+          "x": 450,
+          "y": 400
+        },
+        {
+          "x": 645,
+          "y": 420
+        },
+        {
+          "x": 768,
+          "y": 406
+        }
+      ]
+    }
+  ],
+  "summary": "6×3 Block；左裁2、上裁1、右裁2、下裁3；挡板开出射击窗口。",
+  "designNotes": [
+    "从10×7裁为6×3，边界x0–768/y86–470；左右口(0,406)/(768,406)均由y438原岸支撑。",
+    "原底部恢复台裁掉，岩层仅随边界裁剪；原短门、主铃、返回侧铃及12金币宝箱位置不变，0.7秒仅来源待验初值。",
+    "挡板高110px、初始中心(140,180)不变；原轨迹下端500会超出新边界，收回到415，使整段外形y125–470完整落在模块内。周期1.4秒/停留0.15秒保留，射击相位窗口需重新校准。",
+    "它是挡子弹的移动挡板，不是运输载台；择时向左射铃、借反冲向右穿短门是原玩法意图。净空、弹道遮挡、窗口、防夹、恢复/回程全部UNKNOWN。"
+  ],
+  "designVersion": "sha256:008c90f7cbc2ef51d88b214456da3dfe97537acb66c88c9e9dffc413e2a5b5ee"
+}
