@@ -24,6 +24,8 @@
 
 最新反馈011优先：32/34/35按已发布版本保留，实现交接共18项；38废弃。36左裁2/右裁3成为6×2；37左裁1/右裁2成为8×7，最高岸下移20px对齐新出口。39/40继续待审批：原Module及编译hooks已有2/1个hookBounce，原0×0点被矩形绘图漏显；仅reference_display补画蓝环和来源动作顺序，保持原模块SHA/参考版本/技术状态，不运行物理，不编造新通过。审计见feedback/manual-review/batch-008/hook-display-audit-v1.json。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-001`。
 
+最新反馈012优先：36/37按用户提供精确设计版本保留，实现清单共20项；38/40废弃。39仅图文裁剪：左右各3列/底2行为4×2，H1/H2坐标不变；主落地台暂右移64px到x344、为原出口小岸内移预留末端64px，主台至x448；原出口岸内移至x448–512、y18，保持新exit真实支撑。底部恢复台裁去，单向entry→exit为设计目标，完整身体/连续双钩/恢复技术UNKNOWN。入口`python3 tools/publish_design_review.py generation/manual-review/designs/batch-008/feedback-002`，不实施、不跑Godot。
+
 ## 以下为历史授权与记录；与上述设计阶段冲突时暂停执行
 
 # 当前用户工作方式：每批 5 个 Module 人工审批（优先于下方批量任务）
