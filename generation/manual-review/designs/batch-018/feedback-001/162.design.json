@@ -1,0 +1,222 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-plains-windchime-rush",
+  "reviewId": "162",
+  "title": "风铃限时冲关",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-plains-windchime-rush/module.mapnote.json",
+    "contentVersion": "sha256:f90a712b885aa9669190b14314fa3d7e090675ac86934becac28a5a9749bd338",
+    "sha256": "0d38d8ae9dd43b649e745c4d482935858c014988a28ccba1c680ab3a3a6af70c"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 76,
+    "w": 896,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        268
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        896,
+        268
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "右侧门需要高一些，不然可以直接跳过去，左删1block",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 300,
+      "w": 280,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/platform-1",
+      "type": "terrain",
+      "x": 410,
+      "y": 300,
+      "w": 390,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/hazard-0",
+      "type": "hazard",
+      "x": 280,
+      "y": 380,
+      "w": 130,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/gate-0",
+      "type": "gate",
+      "x": 700,
+      "y": 76,
+      "w": 24,
+      "h": 224,
+      "rotation": 0,
+      "label": "windchime_plains_windchime_rush gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 3,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "diagramLabel": "限时高门 · 3s待验",
+      "diagramLabelPosition": [
+        785,
+        138
+      ]
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/bell-0",
+      "type": "bell",
+      "x": 156,
+      "y": 218,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "windchime_plains_windchime_rush",
+      "note": "",
+      "targetId": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/gate-0",
+      "sourceId": "windchime_plains_windchime_rush",
+      "mechanics": {
+        "runtimeParameters": {
+          "prompt": "RING / JUMP / REACH THE END GATE",
+          "kind": "timed",
+          "link_color": "e8bd65",
+          "sequence_offset": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/replay-shore-approach-exit",
+      "type": "terrain",
+      "x": 800,
+      "y": 300,
+      "w": 32,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "generated-5b4ff529967eb33cac5c29bf9077970d4f6935ac0662bd905a51ed640c07e4f9/replay-independent-dock-exit",
+      "type": "terrain",
+      "x": 832,
+      "y": 300,
+      "w": 64,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 5
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 76,
+      "w": 896,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 170,
+          "y": 282
+        },
+        {
+          "x": 275,
+          "y": 260
+        },
+        {
+          "x": 345,
+          "y": 238
+        },
+        {
+          "x": 430,
+          "y": 282
+        },
+        {
+          "x": 660,
+          "y": 282
+        },
+        {
+          "x": 750,
+          "y": 282
+        },
+        {
+          "x": 896,
+          "y": 268
+        }
+      ]
+    }
+  ],
+  "summary": "7×3 Block；左裁1格，上增1格；右门加高至224px。",
+  "designNotes": [
+    "左裁1格，宽8→7；为加高门，暂上增1格，高2→3，边界x0–896/y76–460。",
+    "原门x700–724、顶y210/高90；现顶y76/高224、底y300不变，门顶接新边界，图内不留从门上绕行的缺口。边界不是实体墙，真实跳跃/反冲越顶及跨模块绕行仍须分别验证。",
+    "保留两岸、130px缺口及坑底危险区；原3秒开门时长仅作为来源初始设计值保留，不称已校准，需重验窗口、延误重试、防夹与全身通过。",
+    "左口改(0,268)，右口(896,268)不动，均保留y300支撑；仅entry→exit目标，技术UNKNOWN。"
+  ],
+  "designVersion": "sha256:07720fc9a3863b782da195a983900fb8538d7609f5790ce5225ce047e4cf3619"
+}
