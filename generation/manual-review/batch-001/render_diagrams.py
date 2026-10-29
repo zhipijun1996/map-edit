@@ -117,7 +117,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
      parts.append(f'<path d="M{X(o["x"]+o["w"]/2)} {Y(o["y"]+o["h"]/2)}L{X(gate["x"]+gate["w"]/2)} {Y(target_y)}" stroke="#ad8a35" stroke-width="1.5" stroke-dasharray="4 5"/>')
    cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="#dfbc51" stroke="#9d7a29" stroke-width="2"/>');text(cx,cy-18,o.get('diagramLabel',bells[o['id']]),19,anchor='middle')
  for o in reward:
-  cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
+  cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,o.get('diagramLabel',f'宝箱 {amount}'),19,anchor='middle')
  port_labels={p['id']:p.get('diagramLabel',p['id'])for p in gc['ports']}
  for p in gc['ports']:
   plabel=port_labels[p['id']]
