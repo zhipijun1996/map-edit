@@ -118,26 +118,28 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="#dfbc51" stroke="#9d7a29" stroke-width="2"/>');text(cx,cy-18,o.get('diagramLabel',bells[o['id']]),19,anchor='middle')
  for o in reward:
   cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);amount=(o.get('mechanics')or{}).get('amount','');parts.append(f'<rect x="{cx-13}" y="{cy-11}" width="26" height="22" rx="3" fill="#ecc65b" stroke="#956b25" stroke-width="2"/>');text(cx,cy-21,f'宝箱 {amount}',19,anchor='middle')
+ port_labels={p['id']:p.get('diagramLabel',p['id'])for p in gc['ports']}
  for p in gc['ports']:
+  plabel=port_labels[p['id']]
   if design_only and p.get('face')=='TOP' and p.get('permission')=='INOUT' and p.get('surface')=='ONE_WAY_PLATFORM':
-   cx,cy=X(p['position'][0]),Y(p['position'][1]);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx} {cy-29}V{cy+29}" stroke="#256776" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>');text(cx+18,cy-18,p['id']+' 可穿·双向',22,weight=700)
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx} {cy-29}V{cy+29}" stroke="#256776" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>');text(cx+18,cy-18,plabel+' 可穿·双向',22,weight=700)
    continue
   if design_only and p.get('permission')=='OUT' and p.get('surface')=='AIR':
-   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx-nx*30} {cy-ny*30}L{cx+nx*20} {cy+ny*20}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+24,cy+5,p['id']+' 空中仅出',22,weight=700)
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx-nx*30} {cy-ny*30}L{cx+nx*20} {cy+ny*20}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+24,cy+5,plabel+' 空中仅出',22,weight=700)
    continue
   if design_only and p.get('permission')=='IN':
-   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*43} {cy+ny*43}L{cx-nx*25} {cy-ny*25}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+18 if cx<260 else cx-18,cy-18,p['id']+' 空中仅入',22,anchor='start'if cx<260 else'end',weight=700)
+   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*43} {cy+ny*43}L{cx-nx*25} {cy-ny*25}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>');text(cx+18 if cx<260 else cx-18,cy-18,plabel+' 空中仅入',22,anchor='start'if cx<260 else'end',weight=700)
    continue
   cx,cy=X(p['position'][0]),Y(p['position'][1]);nx,ny=p['normal'];parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx+nx*13} {cy+ny*13}L{cx+nx*43} {cy+ny*43}" stroke="#256776" stroke-width="3" marker-end="url(#arrow)"/>')
-  if len(p['id'])>2:text(cx+nx*18,cy-20,p['id'],22,anchor='end'if nx<0 else'start',weight=700)
-  else:text(cx+nx*63,cy+8+ny*50,p['id'],28,anchor='middle',weight=700)
+  if len(plabel)>2:text(cx+nx*18,cy-20,plabel,22,anchor='end'if nx<0 else'start',weight=700)
+  else:text(cx+nx*63,cy+8+ny*50,plabel,28,anchor='middle',weight=700)
  y=Y(b['y']+b['h'])+38;caption=reference_action['caption'] if reference_action else design['routeCaption'] if design_only and design.get('routeCaption') else((f'设计目标：{len(gc["ports"])}口两两互通，共 {len(gc["ports"])*(len(gc["ports"])-1)} 个有向关系；不是通行认证。'if design_only else'目标：A/B/C/D 四口两两可达，共 12 个方向；未验证方向保持 UNKNOWN。')if gc['generation'].get('portConnectivityIntent')=='all_distinct_ordered_pairs'else('声明方向：'if args.draft else'归档路线：')+'　 /　'.join(r['from']+' → '+r['to'] for r in gc['routes']));text(40,y,caption,22,weight=600)
  if matrix:
   order=matrix['portOrder'];cells={(c['from'],c['to']):c['status']for c in matrix['cells']};left=400;top=y+19;cw=100;rh=29
   for row in range(len(order)+1):
    for col in range(len(order)+1):
     status=cells.get((order[row-1],order[col-1]))if row and col else None
-    label=('起点→终点'if row==0 and col==0 else order[col-1]if row==0 else order[row-1]if col==0 else{'DESIGN_TARGET':'目标','FORBIDDEN_EGRESS':'禁止','NOT_REQUESTED_SELF_LOOP':'—'}[status])
+    label=('起点→终点'if row==0 and col==0 else port_labels[order[col-1]]if row==0 else port_labels[order[row-1]]if col==0 else{'DESIGN_TARGET':'目标','FORBIDDEN_EGRESS':'禁止','NOT_REQUESTED_SELF_LOOP':'—'}[status])
     fill='#e3eee1'if status=='DESIGN_TARGET'else'#f4dddd'if status=='FORBIDDEN_EGRESS'else'#f1f0e9'
     parts.append(f'<rect x="{left+col*cw}" y="{top+row*rh}" width="{cw}" height="{rh}" fill="{fill}" stroke="#c7d0c4"/>');text(left+(col+.5)*cw,top+row*rh+21,label,17,anchor='middle')
   y+=210
