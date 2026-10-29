@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -295,6 +295,7 @@ def _original_pickups_satisfied(case,raw):
     return all(state.get(key,0)>=amount for key,amount in totals.items())
 
 def crossing(case, raw):
+    from .review_boundary_observer_v1 import observe
     probe = case['migration_probe']; bx, by = probe['boundary']; nx, ny = probe['normal']
     frames = raw.get('frames', [])
     # Entire rectangle must pass the boundary; a center crossing is insufficient.
@@ -326,8 +327,10 @@ def crossing(case, raw):
         claimed={event['id']for event in raw.get('workshop',{}).get('events',[])
                  if event.get('type')=='chest_claim'and event.get('accepted')}
         outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw)
-    return dict(passed=bool(raw.get('ok') and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
-                stableExit=bool(raw.get('ok')), bodyPassedBothSides=inward and outward,
+    observation=observe(case,raw)
+    stable=bool(raw.get('ok')) or bool(observation and observation['stableExit'])
+    result=dict(passed=bool(stable and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
+                stableExit=stable, bodyPassedBothSides=inward and outward,
                 requiredWorldOutcomeSatisfied=outcome,
                 aperture=aperture, apertureViolationFrames=violations,
                 actualCrossingFrames=crossing_segments, directionOrdered=ordered,
@@ -335,6 +338,8 @@ def crossing(case, raw):
                 minimumSignedDistance=min(distances, default=None),
                 maximumSignedDistance=max(distances, default=None),
                 neighbor=probe['neighbor'])
+    if observation:result['observationReanalysis']=observation
+    return result
 
 
 def continuous_exit(case, doc):
@@ -519,6 +524,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=compact_bell_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v7 import classify as low_return_exterior
     judgment=low_return_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v8 import classify as approved040_exterior
+    judgment=approved040_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -779,6 +786,8 @@ def _verification_identity(folder, proof):
         reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
         reviewCounterScopeV6=core.sha(Path(__file__).with_name('review_counter_scope_v6.py')),
         reviewCounterScopeV7=core.sha(Path(__file__).with_name('review_counter_scope_v7.py')),
+        reviewCounterScopeV8=core.sha(Path(__file__).with_name('review_counter_scope_v8.py')),
+        reviewBoundaryObserverV1=core.sha(Path(__file__).with_name('review_boundary_observer_v1.py')),
         onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
         reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
         metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),

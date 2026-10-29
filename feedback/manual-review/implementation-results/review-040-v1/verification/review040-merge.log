@@ -1,0 +1,128 @@
+Merge made by the 'ort' strategy.
+ AGENTS.md                                          |  16 +
+ docs/module-review-implementation-handoff.md       |   6 +-
+ .../batch-025/human-feedback-033.json              |  27 +
+ .../batch-026/human-feedback-032.json              |  55 ++
+ .../batch-027/human-feedback-034.json              |  49 ++
+ .../batch-028/human-feedback-035.json              |  59 ++
+ .../batch-029/human-feedback-036.json              |  58 ++
+ .../batch-029/human-feedback-037.json              | 298 +++++++
+ .../batch-029/human-feedback-038.json              | 295 +++++++
+ .../batch-041/human-feedback-039.json              |  49 ++
+ .../batch-042/human-feedback-040.json              |  76 ++
+ .../manual-review/implementation-handoff-v1.json   | 219 ++++-
+ .../received-design-decisions-v1.json              | 821 ++++++++++++++++++-
+ .../manual-review/batch-001/render_diagrams.py     |  16 +-
+ .../designs/batch-026/feedback-001/206.design.json | 323 ++++++++
+ .../batch-026/feedback-001/diagram-batch.json      |  17 +
+ .../designs/batch-026/feedback-001/images/206.png  | Bin 0 -> 147144 bytes
+ .../designs/batch-026/feedback-001/images/206.svg  |   1 +
+ .../designs/batch-026/feedback-001/index.json      |  21 +
+ .../designs/batch-028/feedback-001/220.design.json | 603 ++++++++++++++
+ .../batch-028/feedback-001/diagram-batch.json      |  17 +
+ .../designs/batch-028/feedback-001/images/220.png  | Bin 0 -> 166211 bytes
+ .../designs/batch-028/feedback-001/images/220.svg  |   1 +
+ .../designs/batch-028/feedback-001/index.json      |  21 +
+ .../designs/batch-028/feedback-002/220.design.json | 646 +++++++++++++++
+ .../batch-028/feedback-002/diagram-batch.json      |  17 +
+ .../designs/batch-028/feedback-002/images/220.png  | Bin 0 -> 167220 bytes
+ .../designs/batch-028/feedback-002/images/220.svg  |   1 +
+ .../designs/batch-028/feedback-002/index.json      |  21 +
+ .../designs/batch-029/feedback-001/223.design.json | 884 +++++++++++++++++++++
+ .../designs/batch-029/feedback-001/225.design.json | 551 +++++++++++++
+ .../batch-029/feedback-001/diagram-batch.json      |  30 +
+ .../designs/batch-029/feedback-001/images/223.png  | Bin 0 -> 171374 bytes
+ .../designs/batch-029/feedback-001/images/223.svg  |   1 +
+ .../designs/batch-029/feedback-001/images/225.png  | Bin 0 -> 157375 bytes
+ .../designs/batch-029/feedback-001/images/225.svg  |   1 +
+ .../designs/batch-029/feedback-001/index.json      |  35 +
+ .../designs/batch-029/feedback-002/225.design.json | 479 +++++++++++
+ .../batch-029/feedback-002/diagram-batch.json      |  17 +
+ .../designs/batch-029/feedback-002/images/225.png  | Bin 0 -> 162508 bytes
+ .../designs/batch-029/feedback-002/images/225.svg  |   1 +
+ .../designs/batch-029/feedback-002/index.json      |  21 +
+ .../designs/batch-041/feedback-001/115.design.json | 286 +++++++
+ .../designs/batch-041/feedback-001/166.design.json | 223 ++++++
+ .../designs/batch-041/feedback-001/167.design.json | 876 ++++++++++++++++++++
+ .../batch-041/feedback-001/diagram-batch.json      |  43 +
+ .../designs/batch-041/feedback-001/images/115.png  | Bin 0 -> 148872 bytes
+ .../designs/batch-041/feedback-001/images/115.svg  |   1 +
+ .../designs/batch-041/feedback-001/images/166.png  | Bin 0 -> 143539 bytes
+ .../designs/batch-041/feedback-001/images/166.svg  |   1 +
+ .../designs/batch-041/feedback-001/images/167.png  | Bin 0 -> 142316 bytes
+ .../designs/batch-041/feedback-001/images/167.svg  |   1 +
+ .../designs/batch-041/feedback-001/index.json      |  49 ++
+ .../designs/batch-042/feedback-001/169.design.json | 260 ++++++
+ .../designs/batch-042/feedback-001/41.design.json  | 199 +++++
+ .../designs/batch-042/feedback-001/42.design.json  | 494 ++++++++++++
+ .../batch-042/feedback-001/diagram-batch.json      |  43 +
+ .../designs/batch-042/feedback-001/images/169.png  | Bin 0 -> 139505 bytes
+ .../designs/batch-042/feedback-001/images/169.svg  |   1 +
+ .../designs/batch-042/feedback-001/images/41.png   | Bin 0 -> 126647 bytes
+ .../designs/batch-042/feedback-001/images/41.svg   |   1 +
+ .../designs/batch-042/feedback-001/images/42.png   | Bin 0 -> 178924 bytes
+ .../designs/batch-042/feedback-001/images/42.svg   |   1 +
+ .../designs/batch-042/feedback-001/index.json      |  49 ++
+ generation/manual-review/index.html                |   2 +-
+ generation/manual-review/queue.json                | 709 ++++++++++++++---
+ generation/manual-review/revisions/latest.json     | 190 +++++
+ 67 files changed, 9056 insertions(+), 126 deletions(-)
+ create mode 100644 feedback/manual-review/batch-025/human-feedback-033.json
+ create mode 100644 feedback/manual-review/batch-026/human-feedback-032.json
+ create mode 100644 feedback/manual-review/batch-027/human-feedback-034.json
+ create mode 100644 feedback/manual-review/batch-028/human-feedback-035.json
+ create mode 100644 feedback/manual-review/batch-029/human-feedback-036.json
+ create mode 100644 feedback/manual-review/batch-029/human-feedback-037.json
+ create mode 100644 feedback/manual-review/batch-029/human-feedback-038.json
+ create mode 100644 feedback/manual-review/batch-041/human-feedback-039.json
+ create mode 100644 feedback/manual-review/batch-042/human-feedback-040.json
+ create mode 100644 generation/manual-review/designs/batch-026/feedback-001/206.design.json
+ create mode 100644 generation/manual-review/designs/batch-026/feedback-001/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-026/feedback-001/images/206.png
+ create mode 100644 generation/manual-review/designs/batch-026/feedback-001/images/206.svg
+ create mode 100644 generation/manual-review/designs/batch-026/feedback-001/index.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-001/220.design.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-001/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-001/images/220.png
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-001/images/220.svg
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-001/index.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-002/220.design.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-002/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-002/images/220.png
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-002/images/220.svg
+ create mode 100644 generation/manual-review/designs/batch-028/feedback-002/index.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/223.design.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/225.design.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/images/223.png
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/images/223.svg
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/images/225.png
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/images/225.svg
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-001/index.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-002/225.design.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-002/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-002/images/225.png
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-002/images/225.svg
+ create mode 100644 generation/manual-review/designs/batch-029/feedback-002/index.json
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/115.design.json
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/166.design.json
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/167.design.json
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/115.png
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/115.svg
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/166.png
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/166.svg
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/167.png
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/images/167.svg
+ create mode 100644 generation/manual-review/designs/batch-041/feedback-001/index.json
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/169.design.json
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/41.design.json
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/42.design.json
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/diagram-batch.json
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/169.png
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/169.svg
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/41.png
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/41.svg
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/42.png
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/images/42.svg
+ create mode 100644 generation/manual-review/designs/batch-042/feedback-001/index.json

@@ -1,0 +1,30 @@
+202 prepared 2 routes
+204 prepared 1 routes
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_review040_v1.py", line 101, in <module>
+    if not sys.argv[1:]or r['reviewId']in sys.argv[1:]:prepare(r)
+                                                       ^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_review040_v1.py", line 87, in prepare
+    scope={**shared.__dict__,'AUTH':AUTH,'dock':dock,'plan_for':plan_for,'decode':decode};exec(compile(text,__file__,'exec'),scope);scope['prepare'](row)
+                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_review040_v1.py", line 77, in prepare
+    else:p=at(1050,582)+phase('ferry',[.5,.52])+jump(940,542,hold=10)+[axis(0),phase('ferry',[0,.03])]+jump(300,582,hold=8)
+                                                                                                                     ^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/core.py", line 118, in contract
+    raise ValueError(result.stderr.strip() or result.stdout.strip())
+ValueError: file:///workspace/map-edit-approved-implementation/module-contract.js:34
+const need=(ok,msg)=>{if(!ok)throw Error('Module contract: '+msg);};
+                                   ^
+
+Error: Module contract: route role
+    at need (file:///workspace/map-edit-approved-implementation/module-contract.js:34:36)
+    at validateGenerationContract (file:///workspace/map-edit-approved-implementation/module-contract.js:90:119)
+    at renderContractSvg (file:///workspace/map-edit-approved-implementation/module-contract-render.js:7:2)
+    at file:///workspace/map-edit-approved-implementation/pcg/migration/document.mjs:14:61
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0

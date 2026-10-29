@@ -1,0 +1,138 @@
+{
+  "schema": "pcg/approved-design-implementation-result/v9",
+  "reviewId": "115",
+  "moduleId": "game-moving-transfer",
+  "design": {
+    "path": "generation/manual-review/designs/batch-041/feedback-001/115.design.json",
+    "sha256": "64b31e28e821390dca1a8d39c19b92ea9309cbdfbf76422ae90b58c29876d1bc"
+  },
+  "designVersion": "sha256:426f590e3a4132aaa0c5013eb451db3bb4e47d09394e082d73e3a46a33640108",
+  "authorization": {
+    "path": "feedback/manual-review/implementation-results/review-040-v1/authorization/request.json",
+    "sha256": "2081f5d455a0f24635cb878e2ba069d1e21a87f20199ec06d5e2312d67d081b9"
+  },
+  "status": "UNQUALIFIED",
+  "implementationVersion": "sha256:1f783f9d2f0de3d252a642579bc9d8f741d3e20e00438d79feb9a3c8694607b8",
+  "module": {
+    "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/module.mapnote.json",
+    "sha256": "0e232081e805733440f3208afb95d5e6b4d99f7e651cbdee64b1c07d63f3051d"
+  },
+  "parameters": {
+    "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/parameters.json",
+    "sha256": "9ed1af706884c19add9127148dea1d46f3b030ecabcfffac209ebb09104ef773"
+  },
+  "physicsCases": {
+    "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/physics-input-cases.json",
+    "sha256": "25572f36c45bf65795cf8e5a768dd063590325cf96391a3537279b6dde7d59cc"
+  },
+  "humanPlaytest": "UNKNOWN",
+  "productionApproval": false,
+  "scope": {
+    "orientation": "identity",
+    "mirror": "UNKNOWN",
+    "closureConfigurations": "UNKNOWN",
+    "fullMap": "UNKNOWN"
+  },
+  "formalAttempts": 0,
+  "holdout": "NOT_RUN",
+  "blocker": {
+    "reason": "Forward route control is unreliable; reverse is clean/mild/moderate 1/6/6. Random ferry phase can put the carried enemy on the left lip. The final bank-fire program also fires again before returning to x240, recoils outside the rectangle and times out.",
+    "nextAction": "Add a live staging-position and inactive-burst predicate before every bank shot; clear the actual left-lip enemy before recoil boarding. Retest both directions in a separately registered bounded round.",
+    "designDefectProven": false
+  },
+  "budgetExhausted": true,
+  "stoppingRecord": {
+    "path": "feedback/manual-review/implementation-results/review-040-v1/verification/revision-budget.json",
+    "sha256": "f361c77dc3bdecc5fdc1d04ea3fbc6afc4b0fa7992f6179f78011e37a364faff"
+  },
+  "screen": {
+    "path": "pcg/results/approved-r040-115-control-screen-v10/screen.json",
+    "sha256": "8a2e0128bdc68c2f550fd8eef336d6e2d0f4b8120f5a0e7ebf9fa7fae49802f6"
+  },
+  "screenCounts": {
+    "entry-to-exit": {
+      "clean": 0,
+      "mild": 1,
+      "moderate": 1
+    },
+    "exit-to-entry": {
+      "clean": 1,
+      "mild": 6,
+      "moderate": 6
+    }
+  },
+  "canonicalDelivery": {
+    "artifact": {
+      "path": "pcg/results/approved-r040-115-partial-delivery-v2/canonical.json",
+      "sha256": "609dd887b56a43adbf9943c191815ceb531b5164035b1282a8efb12b1a541dac"
+    },
+    "successfulRoutes": [
+      "exit-to-entry"
+    ],
+    "failedRoutes": [
+      {
+        "route": "entry-to-exit",
+        "reasons": [
+          "actual_body_outside_approved_rectangle",
+          "trigger_timeout/9/grounded",
+          "actual_carrier_support_missing"
+        ]
+      }
+    ]
+  },
+  "nativePlayable": {
+    "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/playable",
+    "manifest": {
+      "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/playable/godot-package.json",
+      "sha256": "9f6387a87e1a2e00b29d22df7ad2105b961dc8c8d3f26b935ab37a3fe118ab62"
+    },
+    "result": {
+      "path": "pcg/manual_review/implementation/review-040-final-v1/game-moving-transfer/package-result.json",
+      "sha256": "36efc694917b9804d8d3c3d8f100de6214bd8d939994b42e673cdce39be89a08"
+    },
+    "passed": true,
+    "replayCases": 1,
+    "wholeModuleQualification": "UNQUALIFIED"
+  },
+  "videos": [
+    {
+      "routeId": "exit-to-entry",
+      "manifest": {
+        "path": "feedback/manual-review/implementation-results/review-040-v1/videos/115-exit-to-entry-v3/manifest.json",
+        "sha256": "53b9d6dba342e445f5864441dca238ffe5e4db8f2de4890747b8bc40ed99e60a"
+      },
+      "movie": {
+        "path": "feedback/manual-review/implementation-results/review-040-v1/videos/115-exit-to-entry-v3/original-game-moving_transfer.mp4",
+        "sha256": "1b8844d6bc0fc1055f2014cbbc0ec8509d2022173339af9967ab4078dcf8f52f"
+      },
+      "durationSeconds": 34.6,
+      "comparison": "FAIL; review-only",
+      "differenceFields": {
+        "workshop": 2011
+      },
+      "nativeOutcome": {
+        "frame": 2011,
+        "hp": 5.0,
+        "id": "approved-review040-final-v1-115-exit-to-entry-migration-unqualified-partial-delivery",
+        "position": [
+          152.220550537109,
+          581.925231933594
+        ],
+        "safe": true,
+        "stable_frames": 23,
+        "workshop": {
+          "carriers": [
+            {
+              "clock": 0.0,
+              "controlled": false,
+              "id": "ferry",
+              "running": true
+            }
+          ],
+          "coins": 0,
+          "events": []
+        }
+      }
+    }
+  ]
+}

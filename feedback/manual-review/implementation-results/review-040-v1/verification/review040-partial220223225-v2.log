@@ -1,0 +1,29 @@
+220 UNQUALIFIED_NATIVE_SAMPLE True 5
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_review040_v3.py", line 31, in <module>
+    if r['reviewId']in sys.argv[2:]:globals()[sys.argv[1]](r)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_review040_v3.py", line 27, in partial
+    scope={**previous.__dict__};exec(compile(source,__file__,'exec'),scope);scope['partial'](row)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_review040_v3.py", line 9, in partial
+    from .finalize_review040_v1 import AUTH,folder_for,qualify,decode,ROOT
+                                                                           
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 523, in run_package_validation
+    return verify_package(package,require_loaded=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 415, in verify_package
+    if manifest.get('compiler_version')==review_air_runtime.VERSION:return review_air_runtime.verify_package(package,require_loaded=require_loaded)
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/review_air_runtime.py", line 23, in verify_package
+    return base.verify_package(output_dir,require_loaded=require_loaded,_extension=sys.modules[__name__])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 480, in verify_package
+    if execution.get('returncode')!=0 or execution.get('timed_out') or execution.get('command_sha256')!=sha(paths['command']):_fail('load_execution_failed',case_id=case['id'])
+                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 41, in _fail
+    def _fail(code, **details): raise PackageError(code, details)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pcg.migration.godot_package.PackageError: load_execution_failed: {'case_id': 'approved-review040-final-v1-223-C-to-A-migration-unqualified-partial-delivery'}

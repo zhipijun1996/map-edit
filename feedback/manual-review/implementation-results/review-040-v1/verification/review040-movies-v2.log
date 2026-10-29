@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/record_review040_v2.py", line 10, in <module>
+    if r['reviewId']in sys.argv[1:]:run(r)
+                                    ^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/record_review040_v2.py", line 6, in run
+    scope={**previous.__dict__};exec(compile(source,__file__,'exec'),scope);scope['run'](row)
+                                                                            ^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/record_review040_v2.py", line 12, in run
+  File "/workspace/map-edit-approved-implementation/pcg/prototype/workshop/record.py", line 35, in record
+    with log.open('w')as f:subprocess.run(command,env=dict(os.environ,DISPLAY=display,LIBGL_ALWAYS_SOFTWARE='1'),stdout=f,stderr=subprocess.STDOUT,timeout=240,check=True)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/map-edit-approved-implementation/pcg/toolchain/Godot_v4.7.2-stable_linux.x86_64', '--path', '/workspace/map-edit-approved-implementation/pcg/prototype/godot', '--audio-driver', 'Dummy', '--write-movie', '/workspace/map-edit-approved-implementation/feedback/manual-review/implementation-results/review-040-v1/videos/202-entry-to-exit-v2/brake-gate-catch.avi', '--fixed-fps', '60', '/workspace/map-edit-approved-implementation/pcg/manual_review/runtime/review040_movie_v1.tscn', '--', '--cases-json', '/workspace/map-edit-approved-implementation/feedback/manual-review/implementation-results/review-040-v1/videos/202-entry-to-exit-v2/review_cases.json', '--case', '0', '--trace-json', '/workspace/map-edit-approved-implementation/feedback/manual-review/implementation-results/review-040-v1/videos/202-entry-to-exit-v2/brake-gate-catch.trace.json']' returned non-zero exit status 1.
