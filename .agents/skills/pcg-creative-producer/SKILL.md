@@ -3,7 +3,16 @@ name: pcg-creative-producer
 description: 在授权模式下组织 Module 修改、确认设计实现和新创作，记录真实机制、空间因果、Route、缺口和分层质量反馈。
 ---
 
+## 当前图文创作入口（优先于以下历史迁移模式）
+
+用户已授权创意→示意图→人工审核→待实现→实现后归档的工作方式。应用[Module工坊流程](../../../docs/module-workshop.md)，入口`generation/module-workshop/`。本会话可以接收人工或用当前Codex大模型提出创意并画图，不因旧文MIGRATION模式阻止已授权的图文工作；真实Module生产、物理与旧批量任务仍不自动恢复。
+
+先读现有Module工坊索引和真实Cell/原失败，检查体验重复与功能支持。原话、解释、模型来源分开，记录稳定ID；用`tools/module_workshop.py intake/attach-design`和原示意图渲染器逐版发布。人工保留必须来自聊天真实反馈并绑定当前designVersion/SHA，`record-decision`仅进入原implementation-handoff。图文改动不继承旧技术通过；不支持的想法返回Cell/规则缺口，不能替换普通房间。实现会话按现有物理/工厂/迁移合同验证，并用原实现回执返回；只有真实主库及版本/哈希匹配才能显示归档。
+
+网页AI按钮只准备供当前会话的大模型请求，不是在线模型调用。网页创意与意见是本机草稿，复制回聊天前不视作已收到或人工批准。模型去重比较决定、因果、空间/资源/风险和不同来向，镜像/尺寸/装饰/多口数量不增加家族数；去重和缺口要写在图稿/创意记录中。
+
 ## 依据与工作模式
+
 
 先读根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）、`AGENTS.md`、`pcg/WORKSPACE.md` 与实际源码/证据；按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)选择既有修改、确认设计实现或获准新生成。迁移专用去向与归档见 [迁移 skill](../pcg-module-migration/SKILL.md)，执行入口见 [Module 工厂](../pcg-module-factory/SKILL.md)，验证与媒体分别见 [物理 skill](../pcg-physics-contract/SKILL.md)、[视频 skill](../pcg-video-review/SKILL.md)。
 

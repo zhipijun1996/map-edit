@@ -5,16 +5,21 @@ ROOT=Path(__file__).resolve().parents[1];REVIEW=ROOT/'generation/manual-review'
 def read(p):return json.loads(p.read_text())
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def write(p,v):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+def seal_design(d):
+ version_data={k:v for k,v in d.items()if k!='designVersion'};d['designVersion']='sha256:'+hashlib.sha256(json.dumps(version_data,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+ assert d['schema']=='pcg/module-design/v1'and d['reviewStage']=='design';b=d['bounds'];assert b['w']>0 and b['h']>0 and b['w']%128==0 and b['h']%128==0
+ for p in d['ports']:
+  x,y=p['position'];side=p['face'];edge=x if side in('LEFT','RIGHT')else y;origin=b['y']if side in('LEFT','RIGHT')else b['x'];along=y if side in('LEFT','RIGHT')else x
+  assert origin<along<origin+(b['h']if side in('LEFT','RIGHT')else b['w'])
+  assert edge=={'LEFT':b['x'],'RIGHT':b['x']+b['w'],'TOP':b['y'],'BOTTOM':b['y']+b['h']}[side]and abs((along-origin)/128-.5-round((along-origin)/128-.5))<1e-6
+ ids={p['id']for p in d['ports']};assert len(ids)==len(d['ports']);assert all(v['from']in ids and v['to']in ids for v in d['intendedRoutes'])
+ return d
 def publish(folder):
  folder=folder.resolve();assert folder.is_relative_to(REVIEW/'designs');index=read(folder/'index.json');rows=[];diagrams=[]
  for r in index['rows']:
   file=ROOT/r['file'];d=read(file);stage=r.get('reviewStage','design')
   if stage=='design':
-   version_data={k:v for k,v in d.items()if k!='designVersion'};d['designVersion']='sha256:'+hashlib.sha256(json.dumps(version_data,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest();write(file,d);assert d['schema']=='pcg/module-design/v1'and d['reviewStage']=='design';b=d['bounds'];assert b['w']>0 and b['h']>0 and b['w']%128==0 and b['h']%128==0
-   for p in d['ports']:
-    x,y=p['position'];side=p['face'];edge=x if side in('LEFT','RIGHT')else y;origin=b['y']if side in('LEFT','RIGHT')else b['x'];along=y if side in('LEFT','RIGHT')else x
-    assert edge=={'LEFT':b['x'],'RIGHT':b['x']+b['w'],'TOP':b['y'],'BOTTOM':b['y']+b['h']}[side]and abs((along-origin)/128-.5-round((along-origin)/128-.5))<1e-6
-   ids={p['id']for p in d['ports']};assert len(ids)==len(d['ports']);assert all(v['from']in ids and v['to']in ids for v in d['intendedRoutes'])
+   seal_design(d);write(file,d)
   else:
    assert stage=='reference_display'and d['schema']=='gunman-rush-level-sketch/v1'and sha(file)==r['baseSourceSha256']
    assert d['generationContract']['contentVersion']==r['beforeVersion']
