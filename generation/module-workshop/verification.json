@@ -1,0 +1,30 @@
+{
+  "schema": "pcg/module-workshop-web-verification/v1",
+  "scope": "web_and_read_only_evidence_projection",
+  "checks": {
+    "sharedFoundationContract": true,
+    "exactDesignVersionBinding": true,
+    "directedRouteAndAbilitySameRoute": true,
+    "andOrAbilities": true,
+    "initialPermissionAbilityContext": true,
+    "browserWidths": [
+      320,
+      390,
+      1280
+    ],
+    "draftExportImport": true,
+    "unsubmittedOpinionsNotPromoted": true,
+    "existing225DesignsUnchanged": true,
+    "existing82ApprovalsUnchanged": true,
+    "existingModuleFilesUnchanged": true,
+    "staticBuildWithoutHistoricalAssets": true
+  },
+  "commands": [
+    "npm run check",
+    "python3 tools/browser_module_workshop.py",
+    "python3 tools/build_editor_site.py --out /tmp/module-workshop-site-final --no-history",
+    "WORKSHOP_BASE=http://127.0.0.1:8890/generation/module-workshop/ python3 tools/browser_module_workshop.py"
+  ],
+  "newPhysicsRun": false,
+  "productionApproval": false
+}
