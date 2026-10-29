@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 25,
+    "READY_FOR_IMPLEMENTATION": 26,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 50,
+    "handoffRevision": 51,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -28856,6 +28856,731 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-interface-s12-001",
+      "sourceIdeaId": "idea-interface-s12-001",
+      "reviewId": "idea-interface-s12-001",
+      "title": "S12 · 错时交叉换乘：一趟车，四个去向",
+      "summary": "错时交叉换乘：一趟车，四个去向。在交接区跳到另一台，还是继续随本台离开；下行回程也要选对接台方向。两条往复斜轨改变可用落脚位置；反冲可作横向制动和小幅换台，错过交接就跟车下一轮或回低岸。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-interface-s12-001/c0c0d7573e9d/images/S12.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 5,
+        "heightBlocks": 4
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 2,
+          "position": [
+            0,
+            320
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            64,
+            320
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "R",
+          "face": "RIGHT",
+          "index": 0,
+          "position": [
+            640,
+            64
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            1,
+            0
+          ],
+          "diagramLabel": "R",
+          "supportObjectId": "right",
+          "stagingPosition": [
+            592,
+            64
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "换边支撑/动作/接缝未验证，不可匹配。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                576,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "s12-R-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 1,
+          "position": [
+            192,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            192,
+            12
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 3,
+          "position": [
+            448,
+            512
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            448,
+            448
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不属于该角Block外侧边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-R",
+          "from": "L",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-L-R",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "L侧按本侧高度追/截对应载台；选择继续或在交接区换乘到R侧。",
+          "displacement": [
+            5,
+            -2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "L-to-T",
+          "from": "L",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-L-T",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "L侧按本侧高度追/截对应载台；选择继续或在交接区换乘到T侧。",
+          "displacement": [
+            1.5,
+            -2.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "L-to-B",
+          "from": "L",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-L-B",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "L侧按本侧高度追/截对应载台；选择继续或在交接区换乘到B侧。",
+          "displacement": [
+            3.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-L",
+          "from": "R",
+          "to": "L",
+          "role": "return",
+          "pathObjectId": "route-R-L",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "R侧按本侧高度追/截对应载台；选择继续或在交接区换乘到L侧。",
+          "displacement": [
+            -5,
+            2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-T",
+          "from": "R",
+          "to": "T",
+          "role": "return",
+          "pathObjectId": "route-R-T",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "R侧按本侧高度追/截对应载台；选择继续或在交接区换乘到T侧。",
+          "displacement": [
+            -3.5,
+            -0.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-B",
+          "from": "R",
+          "to": "B",
+          "role": "return",
+          "pathObjectId": "route-R-B",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "R侧按本侧高度追/截对应载台；选择继续或在交接区换乘到B侧。",
+          "displacement": [
+            -1.5,
+            3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-L",
+          "from": "T",
+          "to": "L",
+          "role": "return",
+          "pathObjectId": "route-T-L",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "T侧按本侧高度追/截对应载台；选择继续或在交接区换乘到L侧。",
+          "displacement": [
+            -1.5,
+            2.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-R",
+          "from": "T",
+          "to": "R",
+          "role": "return",
+          "pathObjectId": "route-T-R",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "T侧按本侧高度追/截对应载台；选择继续或在交接区换乘到R侧。",
+          "displacement": [
+            3.5,
+            0.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-B",
+          "from": "T",
+          "to": "B",
+          "role": "return",
+          "pathObjectId": "route-T-B",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "T侧按本侧高度追/截对应载台；选择继续或在交接区换乘到B侧。",
+          "displacement": [
+            2,
+            4
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-L",
+          "from": "B",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-B-L",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "B侧按本侧高度追/截对应载台；选择继续或在交接区换乘到L侧。",
+          "displacement": [
+            -3.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-R",
+          "from": "B",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-B-R",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "B侧按本侧高度追/截对应载台；选择继续或在交接区换乘到R侧。",
+          "displacement": [
+            1.5,
+            -3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-T",
+          "from": "B",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-B-T",
+          "evidenceStatus": "UNKNOWN",
+          "strategy": "B侧按本侧高度追/截对应载台；选择继续或在交接区换乘到T侧。",
+          "displacement": [
+            -2,
+            -4
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅设计预算；不同方向可省枪，真实最低能力/动作待验。"
+          },
+          "requiredAbilities": [
+            "jump",
+            "shot_recoil"
+          ],
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次与落台恢复；命中空怪可回1发，敌死后仍需完成声明路线。",
+          "initial_conditions": "使用图示机关初态；不继承上一玩家开门状态。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计能力预算；逐方向最低要求和资源未知。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:c0c0d7573e9ddf42681e19433325058c9c8e7f000f690e6207c913b491d19dd2",
+      "designFile": "generation/module-workshop/ideas/idea-interface-s12-001/c0c0d7573e9d/design.json",
+      "designFileSha256": "caf1aedbdc33060ffd9551aac0bb3e6d26586b331080b14e296d69be764c07dd",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-interface-s12-001/c0c0d7573e9d/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -30247,8 +30972,8 @@
           ]
         }
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -30271,8 +30996,8 @@
         "diagram": "ideas/idea-interface-s12-001/c0c0d7573e9d/images/S12.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-interface-s12-001-c1e8200dc192-1.json",
-        "sha256": "ae7545d4d260b3537434a6719dfac1cd892cac67614a41d225ec05798723860b"
+        "path": "feedback/manual-review/idea-decisions/idea-interface-s12-001-c0c0d7573e9d-2.json",
+        "sha256": "473ab68289b122dea262c1dd77a749a80914ef3bdb9f2bfb8c9df816d23c5f02"
       },
       "feedback": [
         {
@@ -30284,6 +31009,15 @@
           "decision": "CHANGE",
           "note": "s12加一个空中怪",
           "sourceReceipt": "feedback/module-workshop/review-receipts/interface-feedback-001.json"
+        },
+        {
+          "id": "idea-interface-s12-001",
+          "sourceType": "human_feedback",
+          "verbatim": "s12可以了",
+          "designVersion": "sha256:c0c0d7573e9ddf42681e19433325058c9c8e7f000f690e6207c913b491d19dd2",
+          "designFileSha256": "caf1aedbdc33060ffd9551aac0bb3e6d26586b331080b14e296d69be764c07dd",
+          "decision": "KEEP",
+          "note": "s12可以了"
         }
       ],
       "history": [
