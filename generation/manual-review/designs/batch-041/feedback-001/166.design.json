@@ -1,0 +1,223 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-recoil-shaft",
+  "reviewId": "166",
+  "title": "反冲竖井",
+  "summary": "5×4 Block；左裁3、右裁2；低左口与高右口双向目标，高岸上移16px接新口。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-recoil-shaft/module.mapnote.json",
+    "contentVersion": "sha256:900374b16d45bc9e54442b8dd1cdbe590899a2d23856e5deae72dc60763ebd7a",
+    "sha256": "1673c19a97d7b233d690fab6ba8c9bf8fd9b826e4f133607e2dce080eac66b55"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 384,
+    "y": 248,
+    "w": 640,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        384,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1024,
+        312
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return_or_hub",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左3右2，互通",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-5c7e4666be43ad2544ededc6e8114ef911552dc15e2682e13ee3477609b3e91a/platform-0",
+      "type": "terrain",
+      "x": 384,
+      "y": 600,
+      "w": 256,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5c7e4666be43ad2544ededc6e8114ef911552dc15e2682e13ee3477609b3e91a/platform-1",
+      "type": "terrain",
+      "x": 710,
+      "y": 344,
+      "w": 314,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-5c7e4666be43ad2544ededc6e8114ef911552dc15e2682e13ee3477609b3e91a/hazard-0",
+      "type": "hazard",
+      "x": 384,
+      "y": 680,
+      "w": 640,
+      "h": 40,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 384,
+      "y": 248,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 384,
+          "y": 568
+        },
+        {
+          "x": 620,
+          "y": 582
+        },
+        {
+          "x": 660,
+          "y": 480
+        },
+        {
+          "x": 680,
+          "y": 326
+        },
+        {
+          "x": 780,
+          "y": 326
+        },
+        {
+          "x": 1024,
+          "y": 312
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 384,
+      "y": 248,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 1024,
+          "y": 312
+        },
+        {
+          "x": 780,
+          "y": 326
+        },
+        {
+          "x": 680,
+          "y": 326
+        },
+        {
+          "x": 680,
+          "y": 500
+        },
+        {
+          "x": 620,
+          "y": 582
+        },
+        {
+          "x": 384,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designNotes": [
+    "10×4左裁3/右裁2成为5×4，边界x384–1024/y248–760；低口(384,568)、高口(1024,312)，底部原危险带保留。",
+    "裁掉原右出口y344接岸后，剩余高岸顶原为360，与新Port脚底344差16px；将原高岸整体上移16px至y344，保留宽度裁至新边、原40px厚度，不另加接缝平台。低岸仍y600。",
+    "去程由低左岸跳跃/反冲上高右岸，返程独立从高岸离台下落回低左；两个方向都只是设计目标。",
+    "高低岸差256px、横向净隙70px；真实身体净空、反冲高度/枪数/冷却、边界停稳、零枪或其他绕法与跌落重试均UNKNOWN，不以来源去程证明返程。"
+  ],
+  "designVersion": "sha256:236fe6ecd8e6977fa0bc576b1de948d9bd8d5b1952f91c546746c9401e262359"
+}
