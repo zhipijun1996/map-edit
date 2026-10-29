@@ -104,3 +104,5 @@ HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.js
 精确接口第二轮：`feedback/module-workshop/review-receipts/spec02-request-v1.json`逐字保存十份Block/Port需求与“h09 ok了”。HQ09最后dba700刺台版保留后106项交接/34项待实现。新`idea-spec02-*`十图仅为待审设计，尺寸/Port精确复用原话；S11六向、S12十二向、S13的L→L自返回，总33条目标全部UNKNOWN。来源、家族复用与缺Cell见`feedback/module-workshop/briefs/exact-ports-round02-v1.json`。与旧接口同形不继承旧审批，旧废弃S13不复活；本批十个规格不是十个新玩法家族。
 
 精确接口首评：回执`feedback/module-workshop/review-receipts/spec02-feedback-001.json`冻结三项修改与“其他通过”。S02/07/08/10/11/12/13按原快照保留，113项交接/41项待实现；已保留七图不重绘。S04只加两空怪；S06移除射手掩体，改离台绕射台下随动铃并追接；S09移除静态锯口，改互补井盖与错侧安全段。三份新版仅待审，尺寸/Port不改。随台接收体及井盖危险面同步绑定仍缺，所有反例/恢复/回程与物理均UNKNOWN。
+
+精确接口二评：`feedback/module-workshop/review-receipts/spec02-feedback-002.json`记录“S09没看懂，完全重新设计；其余ok”。S04/S06按最后图稿保留后115项交接/43项待实现。S09旧互补井盖退役，新稿只保留3×5及L/B精确端口，以一枚上下齿轮控制同一横穿窗口的上下净空；图中给出同一窗口两相位对照。不新增Cell、不调用物理，布局规则与实际可达/资源/恢复/绕行仍UNKNOWN；只有新S09待审。
