@@ -33,7 +33,8 @@
       "batch-024",
       "batch-025",
       "batch-026",
-      "batch-027"
+      "batch-027",
+      "batch-028"
     ],
     "priority": [
       "plains_without_grapple",
@@ -376,8 +377,8 @@
         "219",
         "220"
       ],
-      "priorityLabel": "平原 · 无钩索",
-      "orderingFrozen": false
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
+      "orderingFrozen": true
     },
     {
       "id": "batch-029",
@@ -5711,6 +5712,10 @@
       "receivedFeedback": "周围冗余block删除，拿完宝箱后会掉下去从下方出口出去",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
       "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:db852c43535585c6f055669a7e702580a8abdd3aebd8471597606445c3bca4af",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "206ok",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5927,6 +5932,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:ecb821ac06b9e24eebe7bb071cdac0e96ca4d85dd14e768c3b5e6acb81a1bcd5",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5945,6 +5954,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:9d85daabb49377efcaa86a899404ee677d302949c507d03789f5d1ae018cf8b5",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5963,6 +5976,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:898b47d9c47ed54c89facf4513382ccfa28e0c4a51fe9b30d65ac9e10d5631ec",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5981,6 +5998,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:26d2383f54df1f53589ec236b05a67f521343b9f47e99dadb1f4b9778aa9afc8",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5988,17 +6009,34 @@
     {
       "reviewId": "220",
       "moduleId": "junction-j06-0",
-      "title": "双岸会合风口 / 3口 / 横向宽",
-      "summary": "11×6 Block；3 个逻辑 Port；5 条归档动作路线。",
-      "source": "./modules/junction-j06-0/module.mapnote.json",
-      "sourceSha256": "3eaf4dcbe7f299709d4115860040c5d4c6c80cd869aa67111427f597965dfad0",
-      "contentVersion": "sha256:c14d7246b1827d38dd50628b1874b8770e1fe658df81750ef060804ac10d1f58",
-      "diagram": "diagrams/junction-j06-0--3eaf4dcbe7f29970.svg",
+      "title": "双岸会合，反冲回高口",
+      "summary": "7×5 Block；三口六向互通目标，新增一地一空怪；一处可穿小落点供高口上返。",
+      "source": "generation/manual-review/designs/batch-028/feedback-001/220.design.json",
+      "sourceSha256": "48dbe60b7b23214f6ef4d524111fdf8dd1a54746c6bdc685c36b26004b996a7c",
+      "contentVersion": "sha256:8dbc6ae613c7a3228e55d508947c2380a939d6db4e371c490e95ff41fb22b1c7",
+      "diagram": "designs/batch-028/feedback-001/images/220.png",
       "portCount": 3,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:8dbc6ae613c7a3228e55d508947c2380a939d6db4e371c490e95ff41fb22b1c7",
+      "reviewStage": "design",
+      "designNotes": [
+        "周边冗余暂释为左裁2、右裁2、下裁1：11×6变7×5，边界x0–896/y112–752。左上A(0,176)、左下B(0,688)、右侧C(896,432)都由原岸顶208/720/464支撑。下方仅裁薄冗余岩厚，不补安全台。",
+        "原三口只存在部分方向见证，不能由裁剪自动变成全互通；当前明确提出六个不同口间的有向目标，全部技术UNKNOWN。",
+        "为B/C返回高A增加唯一可穿小落点(350,368,96,16)：利用阶台或右岸起跳/反冲到小台，再上返左高岸；这是本轮待审地貌适配，不是旧规则已经实现的反向能力。",
+        "新增一只陆怪位于原y580阶台，身体28×32/底580；一只空怪在中庭与返程台下方空域，身体32×32。怪物没有放在端口，不靠免费回充或新能力弥补高口差。",
+        "A进入先下落到中庭，选择低B、阶台C或经过返程台回高口；B/C进入面对不同上升/下落路线。图只显示代表三条曲线，矩阵列出完整六向。",
+        "B→A经小台的上升约212px、再上升160px；C→A有横向反冲换落点。真实跳高/水平距离、枪数/冷却/精力、空怪威胁与命中回充、失败掉回中庭及六向稳定到岸均待实际实现验证；不能因添加一块台就宣布互通通过。",
+        "不新增宝箱或机关，不把现有台阶与怪物修改计成新玩法家族；保留普通跳与不同落点等合理替代解，不强制照抄示意曲线。"
+      ],
+      "previousDiagram": "diagrams/junction-j06-0--3eaf4dcbe7f29970.svg",
+      "previousVersion": "sha256:c14d7246b1827d38dd50628b1874b8770e1fe658df81750ef060804ac10d1f58",
+      "reviewRevision": "batch-028/design-feedback-001",
+      "receivedFeedback": "删除周边冗余，互通。增加1地1空怪",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
