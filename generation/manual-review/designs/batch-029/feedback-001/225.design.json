@@ -1,0 +1,551 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "workshop-one-shot-two-routes-1",
+  "reviewId": "225",
+  "title": "三口高低枢纽",
+  "summary": "7×5 Block；上C、左A、右B三口六向目标，增加一只空怪，保留原上层可选宝箱。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/workshop-one-shot-two-routes-1/module.mapnote.json",
+    "contentVersion": "sha256:44f0cc2fd65361419830de9d0d717edf672df0a0fe6c268085fc0f4653eadc06",
+    "sha256": "effe7ddaa184d3a4547af50175e5a1ab21b9a291fcde99f042fdb9a75c453be5"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 70,
+    "w": 896,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        0,
+        390
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "B",
+      "position": [
+        896,
+        518
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        320,
+        70
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "design-route-A-to-B",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "B-to-A",
+      "from": "B",
+      "to": "A",
+      "pathObjectId": "design-route-B-to-A",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "A-to-C",
+      "from": "A",
+      "to": "C",
+      "pathObjectId": "design-route-A-to-C",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-A",
+      "from": "C",
+      "to": "A",
+      "pathObjectId": "design-route-C-to-A",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "B-to-C",
+      "from": "B",
+      "to": "C",
+      "pathObjectId": "design-route-B-to-C",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-B",
+      "from": "C",
+      "to": "B",
+      "pathObjectId": "design-route-C-to-B",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "做成枢纽，上左右3port互通，增加1怪，删除周边冗余block",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 422,
+      "w": 240,
+      "h": 116,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-1",
+      "type": "terrain",
+      "x": 315,
+      "y": 230,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-2",
+      "type": "terrain",
+      "x": 520,
+      "y": 550,
+      "w": 376,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/cache-0",
+      "type": "reward",
+      "x": 362,
+      "y": 194,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 12",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 12,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            380,
+            212
+          ],
+          "region": [
+            350,
+            207,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      }
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-shore-B",
+      "type": "terrain",
+      "x": 886,
+      "y": 550,
+      "w": 10,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 5
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-0",
+      "type": "platform",
+      "x": 292,
+      "y": 166,
+      "w": 96,
+      "h": 12,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 6
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/migration-C-step-1",
+      "type": "platform",
+      "x": 272,
+      "y": 118,
+      "w": 96,
+      "h": 12,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 7
+    },
+    {
+      "id": "design-hub-air-enemy",
+      "type": "enemy",
+      "x": 420,
+      "y": 350,
+      "w": 32,
+      "h": 32,
+      "definition": "plains_diver",
+      "diagramLabel": "空中怪"
+    },
+    {
+      "id": "design-route-A-to-B",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 390
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 350,
+          "y": 340
+        },
+        {
+          "x": 480,
+          "y": 460
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 896,
+          "y": 518
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-B-to-A",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 896,
+          "y": 518
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 470,
+          "y": 440
+        },
+        {
+          "x": 350,
+          "y": 330
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 0,
+          "y": 390
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-A-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 390
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 290,
+          "y": 212
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 340,
+          "y": 148
+        },
+        {
+          "x": 320,
+          "y": 100
+        },
+        {
+          "x": 320,
+          "y": 70
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-A",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 70
+        },
+        {
+          "x": 320,
+          "y": 100
+        },
+        {
+          "x": 340,
+          "y": 148
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 290,
+          "y": 212
+        },
+        {
+          "x": 280,
+          "y": 330
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 0,
+          "y": 390
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-B-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 896,
+          "y": 518
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 480,
+          "y": 430
+        },
+        {
+          "x": 480,
+          "y": 212
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 340,
+          "y": 148
+        },
+        {
+          "x": 320,
+          "y": 100
+        },
+        {
+          "x": 320,
+          "y": 70
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-C-to-B",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 70
+        },
+        {
+          "x": 320,
+          "y": 100
+        },
+        {
+          "x": 340,
+          "y": 148
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 470,
+          "y": 212
+        },
+        {
+          "x": 470,
+          "y": 350
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 896,
+          "y": 518
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "A",
+      "B",
+      "C"
+    ],
+    "cells": [
+      {
+        "from": "A",
+        "to": "A",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "A",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "C",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designNotes": [
+    "周边裁紧暂释左2/右2/下1：11×6变7×5，边界x0–896/y70–710；A(0,390)、B(896,518)、C(320,70)，三口都保留原方向与INOUT。",
+    "原低位y750恢复长台随下裁移除；原A岸顶422、B岸顶550、高台230及顶口两段可穿支撑y166/118保留，不添加新的台阶或边框。",
+    "仅增加一只plains_diver空怪于(420,350,32,32)，位于高台下、两侧岸之间的空域。用户未要求删除225原宝箱，因此保留上层12金币箱，但枢纽通行不强制取宝。",
+    "六个不同口间方向分别提出目标，尤其B→C需要真实跳跃/反冲及可能的空中命中续枪；敌人存活/死亡与往返连续资源分别待验，不将一次命中当永续回充。",
+    "旧one-shot标题及来源单枪策略不作为新版所有方向的承诺；全身净空、真实枪数/冷却、怪物相位、落空后恢复及稳定出入口均UNKNOWN。"
+  ],
+  "designVersion": "sha256:e67a603c351a805c841a3a892a2020b5ce033e98c515de2cdd6328bb129dfd31"
+}
