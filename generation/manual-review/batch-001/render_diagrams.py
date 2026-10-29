@@ -157,6 +157,15 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
     label=('起点→终点'if row==0 and col==0 else port_labels[order[col-1]]if row==0 else port_labels[order[row-1]]if col==0 else{'DESIGN_TARGET':'目标','FORBIDDEN_EGRESS':'禁止','NOT_REQUESTED_SELF_LOOP':'—'}[status])
     fill='#e3eee1'if status=='DESIGN_TARGET'else'#f4dddd'if status=='FORBIDDEN_EGRESS'else'#f1f0e9'
     parts.append(f'<rect x="{left+col*cw}" y="{top+row*rh}" width="{cw}" height="{rh}" fill="{fill}" stroke="#c7d0c4"/>');text(left+(col+.5)*cw,top+row*rh+21,label,17,anchor='middle')
+  if design_only and design.get('diagramWindowStates'):
+   for i,state in enumerate(design['diagramWindowStates']):
+    px=800+i*295;py=y+18;scale=.8;wy=py+40
+    parts.append(f'<rect x="{px}" y="{py}" width="280" height="146" rx="8" fill="#f0f3ec" stroke="#a4b490"/>');text(px+140,py+24,state['title'],18,anchor='middle')
+    parts.append(f'<path d="M{px+28} {wy}H{px+252}M{px+28} {wy+96*scale}H{px+252}" stroke="#697e60" stroke-width="6"/>')
+    window_top=design.get('diagramWindowTop',272);cx=px+140;cy=wy+(state['gearCenterY']-window_top)*scale;radius=20*scale
+    pts=' '.join(f'{cx+math.cos(a*math.pi/12)*(radius if a%2==0 else radius*.67)},{cy+math.sin(a*math.pi/12)*(radius if a%2==0 else radius*.67)}'for a in range(24));parts.append(f'<polygon points="{pts}" fill="#d65345" stroke="#923e36"/>')
+    ay=wy+(state['bodyCenterY']-window_top)*scale;color='#157f84'if i==0 else'#d28b25';parts.append(f'<rect x="{px+35}" y="{ay-18*scale}" width="{24*scale}" height="{36*scale}" rx="4" fill="#81b7dc" stroke="#447a9f"/><path d="M{px+65} {ay}H{px+242}" stroke="{color}" stroke-width="3" marker-end="url(#arrow)"/>')
+    text(px+140,py+134,state.get('caption','同一窗口的另一相位'if i else'图中当前相位示例'),16,anchor='middle')
   y+=210
  legend='图例：绿＝地貌　紫＝门（虚线＝开）　金＝风铃/奖励　红＝齿轮/荆棘　曲线＝路线意图'if any(o['type']=='hazard'for o in doc['objects'])else'图例：绿＝岩体　紫＝门 / 可切换桥（虚线＝初始无碰撞）　金＝风铃 / 宝箱　橙＝怪物'
  if hooks:legend='图例：蓝环＝原钩点　虚蓝线＝来源动作顺序示意　绿＝岩体/平台　曲线不代表真实轨迹' if reference_action else '图例：蓝环＝弹起钩点　绿＝岩体/落地台　曲线＝设计动作顺序，非真实轨迹'
