@@ -1,0 +1,199 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-forest-directional-geometry-build-narrow",
+  "reviewId": "41",
+  "title": "侧钩刺口",
+  "summary": "5×4 Block；左2右3上2下1；保留H1侧钩及上下刺口，左岸上移42px接新入口。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-forest-directional-geometry-build-narrow/module.mapnote.json",
+    "contentVersion": "sha256:c5552f82a2028c819a6ec46b0701b071faeb0052a6f8a1d7170f00566e7236a3",
+    "sha256": "3cead1cd2b6fe98027b7796e9279eb5a4911045fcc1b73a16334522a7d6447f5"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": -128,
+    "y": -376,
+    "w": 640,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        -128,
+        -56
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        512,
+        -56
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删下1左2右3上2",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/platform-0",
+      "type": "terrain",
+      "x": -128,
+      "y": -24,
+      "w": 208,
+      "h": 60,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/platform-1",
+      "type": "terrain",
+      "x": -128,
+      "y": -376,
+      "w": 478,
+      "h": 266,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/platform-2",
+      "type": "terrain",
+      "x": 250,
+      "y": -24,
+      "w": 262,
+      "h": 60,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/hazard-0",
+      "type": "hazard",
+      "x": 210,
+      "y": -138,
+      "w": 60,
+      "h": 44,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/hazard-1",
+      "type": "hazard",
+      "x": 210,
+      "y": -24,
+      "w": 60,
+      "h": 52,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-ee14f9c2e73a7c2a6ca25b945de07a67b051b5e41fefd78ca452c63dabf4609f/hook-0",
+      "type": "hookBounce",
+      "x": 200,
+      "y": -40,
+      "w": 0,
+      "h": 0,
+      "rotation": 0,
+      "label": "",
+      "note": "位置已知；完整交互/碰撞尺寸 UNKNOWN",
+      "sourceId": "side_ring"
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": -128,
+      "y": -376,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": -128,
+          "y": -56
+        },
+        {
+          "x": 50,
+          "y": -42
+        },
+        {
+          "x": 130,
+          "y": -60
+        },
+        {
+          "x": 190,
+          "y": -60
+        },
+        {
+          "x": 290,
+          "y": -60
+        },
+        {
+          "x": 400,
+          "y": -42
+        },
+        {
+          "x": 512,
+          "y": -56
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "designNotes": [
+    "10×7按左2/右3/上2/下1裁为5×4，边界x-128–512/y-376–136；两侧口(-128,-56)/(512,-56)。",
+    "原入口短支撑被裁，左主岸原顶18与新Port脚底-24差42px：将原左岸上移42px至-24，与右岸同高；不另增接口台。",
+    "H1原hookBounce点(200,-40)、sourceId=side_ring完整保留并画蓝环；0×0是交互点，不是应该被裁掉的空矩形。钩索真实交互范围与身体扫掠仍UNKNOWN，不把点当已知碰撞半径。",
+    "原上岩罩下沿-110与上下刺口保留，侧钩在狭口附近；只声明原entry→exit设计目标，没有收到互通要求，不擅自补返回认证。",
+    "原y220底部长恢复地面与左侧小台在裁剪范围外，移除后旧恢复结论不沿用。仍保留jump/shot_recoil/grapple来源能力配置，不宣称变成纯反冲模块。",
+    "实际钩索触发/反弹、身体通过、时机、冷却/资源、失败恢复和出口稳定性均待真实实现验证。"
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil",
+      "grapple"
+    ],
+    "anyOfGroups": [],
+    "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+  },
+  "designVersion": "sha256:4e9f4ffef800c0332c458e847514c8ce2ae8ff1701c71f8282e611fd25b605aa"
+}
