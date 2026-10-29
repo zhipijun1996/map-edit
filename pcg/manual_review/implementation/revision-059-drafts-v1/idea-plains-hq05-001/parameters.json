@@ -1,0 +1,472 @@
+{
+  "designVersion": "sha256:61603ff895aba57db1c64c6875bc26ccdb39497629e5e725eb6453373aec7f38",
+  "content": {
+    "platforms": [
+      [
+        0,
+        224,
+        112,
+        160
+      ],
+      [
+        256,
+        288,
+        96,
+        12
+      ],
+      [
+        128,
+        352,
+        128,
+        12
+      ],
+      [
+        400,
+        208,
+        96,
+        12
+      ],
+      [
+        400,
+        32,
+        96,
+        12
+      ],
+      [
+        368,
+        0,
+        8,
+        56
+      ],
+      [
+        368,
+        88,
+        8,
+        40
+      ],
+      [
+        496,
+        0,
+        16,
+        128
+      ]
+    ],
+    "one_way_platform_indices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "turret-target-bell",
+        "bell": [
+          400.0,
+          16.0
+        ],
+        "gate": [
+          384,
+          112,
+          112,
+          16
+        ],
+        "open_seconds": 4,
+        "return_access": [
+          448.0,
+          64.0
+        ]
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [],
+    "approved_hq_cells": [
+      {
+        "kind": "hit_turret",
+        "id": "hit-turret",
+        "rect": [
+          258,
+          232,
+          44,
+          48
+        ],
+        "muzzle": [
+          290.733126291999,
+          234.53374741600203
+        ],
+        "direction": [
+          0.4472135954999579,
+          -0.8944271909999159
+        ],
+        "cooldown": 0.6,
+        "delay": 0.05,
+        "speed": 720.0,
+        "lifetime": 1.0,
+        "latch_id": "turret-target-bell"
+      }
+    ]
+  },
+  "staging": "real 24x36 body stand height derived from exact support; authored diagram staging retained in authorization snapshot",
+  "optionalReward": {
+    "kind": "original SimpleRoomReward",
+    "coins": 4,
+    "required": false
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "L-to-T",
+        "from_port": "L",
+        "to_port": "T",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "plan": [
+        {
+          "op": "settle",
+          "target_x": 90,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              86,
+              203,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 4
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              332,
+              267,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "shoot",
+          "native_aim_point": [
+            280,
+            256
+          ],
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 448,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 448,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              444,
+              187,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 448,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 4
+          },
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 448,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              444,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "T-to-L",
+        "from_port": "T",
+        "to_port": "L",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "plan": [
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 1
+          },
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              332,
+              267,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 270,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              266,
+              267,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              203,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ]
+}

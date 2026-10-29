@@ -1,0 +1,663 @@
+{
+  "cases": [
+    {
+      "id": "approved-r059-hq02-B-to-T",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision059_hq_author_v1.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          224,
+          480,
+          160,
+          12
+        ],
+        [
+          64,
+          356,
+          64,
+          12
+        ],
+        [
+          0,
+          32,
+          128,
+          12
+        ],
+        [
+          304,
+          324,
+          80,
+          16
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1,
+        2
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "P",
+          "start": [
+            224,
+            432
+          ],
+          "finish": [
+            144,
+            160
+          ],
+          "size": [
+            112,
+            20
+          ],
+          "travel_duration": 3.2,
+          "dwell_duration": 0.4,
+          "initial_phase": 0.23333333333333334,
+          "designState": "MOVING_EXAMPLE"
+        }
+      ],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "sentry",
+          "definition": "plains_sentry",
+          "position": [
+            320.0,
+            308.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "approved_hq_cells": [],
+      "control_plan": [
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "hq_board",
+            "timeout": 1800
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 200,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "wait",
+          "carrier": "P",
+          "trigger": {
+            "after": 1,
+            "state": "carrier_supported",
+            "timeout": 360
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 120,
+          "revision_follow": "P",
+          "carrier_offset": -24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "hq_upper",
+            "timeout": 1800
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 64,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 64,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              60,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        320,
+        462
+      ],
+      "entry_port": [
+        320,
+        462
+      ],
+      "exit_port": [
+        64,
+        14
+      ],
+      "goal": [
+        57,
+        10,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "B",
+          "position": [
+            320,
+            462
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "T",
+          "position": [
+            64,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 2
+        }
+      ],
+      "route_spec": {
+        "id": "B-to-T",
+        "from_port": "B",
+        "to_port": "T",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-plains-hq02-001",
+        "designVersion": "sha256:a7aa4349d4c46250003af40b21eebd06991ece5da0017e8a919454a3a01a5792",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 512
+        },
+        "originalAuthor": "pcg/manual_review/revision059_hq_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1280
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "B",
+          "position": [
+            320,
+            512
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "T",
+          "position": [
+            64,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "让移动台替你接下那一发",
+      "new_idea_scope": {
+        "id": "idea-plains-hq02-001",
+        "designVersion": "sha256:a7aa4349d4c46250003af40b21eebd06991ece5da0017e8a919454a3a01a5792",
+        "familyId": "idea-plains-hq02-001",
+        "formatTemplateOnly": true
+      }
+    },
+    {
+      "id": "approved-r059-hq02-T-to-B",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision059_hq_author_v1.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          224,
+          480,
+          160,
+          12
+        ],
+        [
+          64,
+          356,
+          64,
+          12
+        ],
+        [
+          0,
+          32,
+          128,
+          12
+        ],
+        [
+          304,
+          324,
+          80,
+          16
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1,
+        2
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "P",
+          "start": [
+            224,
+            432
+          ],
+          "finish": [
+            144,
+            160
+          ],
+          "size": [
+            112,
+            20
+          ],
+          "travel_duration": 3.2,
+          "dwell_duration": 0.4,
+          "initial_phase": 0.23333333333333334,
+          "designState": "MOVING_EXAMPLE"
+        }
+      ],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "sentry",
+          "definition": "plains_sentry",
+          "position": [
+            320.0,
+            308.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "approved_hq_cells": [],
+      "control_plan": [
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 160,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "height_threshold": 370,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 260,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 320,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              316,
+              459,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        64,
+        14
+      ],
+      "entry_port": [
+        64,
+        14
+      ],
+      "exit_port": [
+        320,
+        462
+      ],
+      "goal": [
+        313,
+        458,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "B",
+          "position": [
+            320,
+            462
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "T",
+          "position": [
+            64,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 2
+        }
+      ],
+      "route_spec": {
+        "id": "T-to-B",
+        "from_port": "T",
+        "to_port": "B",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-plains-hq02-001",
+        "designVersion": "sha256:a7aa4349d4c46250003af40b21eebd06991ece5da0017e8a919454a3a01a5792",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 512
+        },
+        "originalAuthor": "pcg/manual_review/revision059_hq_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1280
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "B",
+          "position": [
+            320,
+            512
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "T",
+          "position": [
+            64,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "让移动台替你接下那一发",
+      "new_idea_scope": {
+        "id": "idea-plains-hq02-001",
+        "designVersion": "sha256:a7aa4349d4c46250003af40b21eebd06991ece5da0017e8a919454a3a01a5792",
+        "familyId": "idea-plains-hq02-001",
+        "formatTemplateOnly": true
+      }
+    }
+  ]
+}
