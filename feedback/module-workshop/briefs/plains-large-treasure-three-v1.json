@@ -1,0 +1,257 @@
+{
+  "schema": "pcg/large-treasure-room-proposals/v1",
+  "request": {
+    "path": "feedback/module-workshop/review-receipts/large-treasure-request-v1.json",
+    "sha256": "57a79d8f5f9296f598c74a56577093b5400dc37119e84c0f7539814561e65e39"
+  },
+  "source": {
+    "producer": "current_codex_session",
+    "modelRevision": "UNKNOWN",
+    "externalModelCalled": false
+  },
+  "stage": "DIAGRAMS_FOR_HUMAN_REVIEW",
+  "sources": [
+    {
+      "path": "MAP_FOUNDATION.md",
+      "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+    },
+    {
+      "path": ".agents/skills/pcg-creative-producer/SKILL.md",
+      "sha256": "321da1ffd553738d896b48e932c49da2180794f657bbf6d2aef82188b057cfe6"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform.gd",
+      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+    },
+    {
+      "path": "library/source/scripts/generation/module_saw_definition.gd",
+      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b"
+    },
+    {
+      "path": "library/source/scripts/generation/platform_thorn_definition.gd",
+      "sha256": "10b62dfc8c66e4c804a08d50d69c5f9da96f54dd5600f400daa6e4751d1f3fc5"
+    },
+    {
+      "path": "feedback/module-workshop/review-receipts/hq-feedback-003.json",
+      "sha256": "752ad1b0be0fc608a0882060532f270e8d6912c50a4eb0676c5d25ea16e40bf1"
+    },
+    {
+      "path": "feedback/module-workshop/review-receipts/spec02-feedback-001.json",
+      "sha256": "c0eda60491a923f5c0565742771ff6eb3fa3d9b5e27bcc1cbbb0d34b166b7899"
+    }
+  ],
+  "workspaceRuntimeRead": {
+    "path": "pcg/prototype/godot/scripts/world/shot_latch.gd",
+    "sha256": "a982e1ceab32390bea30eab7843a382910b33a503338351bcd0bdc1fce825929",
+    "availability": "WORKSPACE_REFERENCE_NOT_FROZEN_CONSUMER"
+  },
+  "cards": [
+    {
+      "title": "三台留路：离台时冻结，取宝后重新启动",
+      "primary": {
+        "widthBlocks": 10,
+        "heightBlocks": 7,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 5,
+            "position": [
+              0,
+              704
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "L",
+            "role": "reward_return",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ]
+      },
+      "family": "independent-carrier-relay-macro",
+      "support": "EXISTING_CELLS_NEW_MACRO_LAYOUT",
+      "interpretation": {
+        "observation": "同时看当前脚下台的离岸速度、下一台是否迎向自己，以及身后被冻结的台是否留在回程可用高度。 Q→R还要看同一路径竖锯是否让出会合窗。",
+        "decision": "跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。",
+        "causality": "同枪产生方向反冲并让刚离开的真实载台保留当前相位，三个冻结位置逐段变成玩家自己留下的回程支点；不是三次等电梯，也不自动吸附理想停点。",
+        "cells": [
+          "原生线段实体载台×3",
+          "固定ShotLatch单目标启停与同目标访问铃",
+          "少量可穿接回台",
+          "岩岸/末端宝箱/依附岩面地刺",
+          "Q→R换乘窗原生竖锯×1"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
+        "terrain": "10×7。P斜升、Q横移、R竖升，三段接力没有贯通静态楼梯。只有入口、箱岸及两处低接回台；运动包络不与岩体重叠。",
+        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
+        "recovery": "两处低接回台只接对应中段失误，须重新追当前载台；漏出接回范围按原受伤/死亡流程，不承诺无损回滚。停台失误可访问原控制重启，错误停位和所有低台恢复可达仍待验。",
+        "directions": "L→L包含完整三台去程、领取宝箱、利用之前留下的R/Q/P位置回行；位置不好就重启相应一台再截乘，不能借用重置相位或箱后免费资源。",
+        "cheapSolutions": [
+          "从入口一次大跳直上箱岸",
+          "P/Q/R任意一台删掉仍等价",
+          "全程不射击只随台坐到终点",
+          "所有冻结位置都可通关使停位判断冗余",
+          "停错后控制不可达",
+          "回程用直落绕过全部关卡且无真实代价",
+          "换乘锯所有相位都不影响落点，仅作装饰"
+        ],
+        "difference": "复用S04/S12与S06的可控承载关系，扩展为自己保存三段回程落点的连续Macro；不把大尺寸/三台数量当新玩法家族。"
+      },
+      "gaps": [
+        "原生单铃单台启停、保持时钟和实体承载可复用；本案不要求一铃多台或移动铃。多个访问铃同一目标的绑定须按真实消费者核对。",
+        "新三段布局/停位可行区间、独立动态相位、离台惯性、身体碰撞、枪次/冷却、回程与失误恢复全部UNKNOWN。",
+        "若无射击跟车与精确停位同样安全且便宜，核心假设失败，应修布局，不算技术/体验通过。"
+      ],
+      "key": "LG01",
+      "verbatim": "三台留路：离台时冻结，取宝后重新启动。跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。同枪产生方向反冲并让刚离开的真实载台保留当前相位，三个冻结位置逐段变成玩家自己留下的回程支点；不是三次等电梯，也不自动吸附理想停点。"
+    },
+    {
+      "title": "双门连穿：先抢开门窗，再刹住箱前窄岸",
+      "primary": {
+        "widthBlocks": 9,
+        "heightBlocks": 8,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 6,
+            "position": [
+              0,
+              832
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "L",
+            "role": "reward_return",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ]
+      },
+      "family": "timed-bell-gate-relay-macro",
+      "support": "EXISTING_TIMED_GATE_NEEDS_CONSUMER_AND_BODY_GUARD_AUDIT",
+      "interpretation": {
+        "observation": "先看两层实岩门洞、每段近侧风铃、下一段小岸与最后箱岸，不把全房间共用一个倒计时。",
+        "decision": "第一段跳离准备岸向左下回射开门并反冲向右上；落中台后再选择第二段起跳与回射时刻；过第二门后面临竖锯和短箱岸，需把冲刺转为制动。",
+        "causality": "两次独立限时击铃各自与同枪位移会合，落中台是真实恢复；末段射向右侧刹住水平速度，不能把向右反冲一路按到底。",
+        "cells": [
+          "ShotLatch限时门×2及返程访问铃",
+          "实体岩隔墙",
+          "固定可穿准备/接回岸",
+          "原生竖向齿轮/宝箱/岩面刺"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
+        "terrain": "9×8，岩隔墙从边界/地面连至门洞，门洞是可见的身体通路，不用一根可越顶的短门。两级上升后才到箱前锯口。",
+        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
+        "recovery": "每扇门两侧都有真实接岸和各自访问铃；晚到/门已关可在本侧重新击铃。中台不自动重置另一扇门，箱前漏台有右侧接回台；防夹必须按身体形状复核。",
+        "directions": "L→L去程连升两层、读箱前锯并制动取宝；返回先反向读锯，再在每道门远侧重新开门后降回原口，不要求倒放同一空中操作。",
+        "cheapSolutions": [
+          "站准备岸提前开门后慢走照样过",
+          "隔墙/门洞可从顶部或底部低成本绕过",
+          "从本侧直接射到下道控制或宝箱",
+          "只用普通跳无须反冲也无时机判断",
+          "门超时夹人或关死返程",
+          "取宝后门状态默认继承为永久打开"
+        ],
+        "difference": "复用A3真实限时门家族，增加两次分段恢复和末段反向制动；不是发明一帧门，也不单凭两个门称新家族。"
+      },
+      "gaps": [
+        "ShotLatch源码有open_seconds和重复重开，门时长尚未求解；按真实弹丸到铃、人物到门、身体完全穿过和扰动容错计算，不能写固定一帧/沿用0秒。",
+        "源码当前防夹是扩大矩形后检查角色中心；它不是完整身体认证。实现必须复核真实碰撞形状，并使用原机制允许的延迟关闭。",
+        "侧访问铃可复用原接口，但实际绑定、弹丸遮挡、岸上预开门优势、窄岸制动/双向/恢复全UNKNOWN。"
+      ],
+      "key": "LG02",
+      "verbatim": "双门连穿：先抢开门窗，再刹住箱前窄岸。第一段跳离准备岸向左下回射开门并反冲向右上；落中台后再选择第二段起跳与回射时刻；过第二门后面临竖锯和短箱岸，需把冲刺转为制动。两次独立限时击铃各自与同枪位移会合，落中台是真实恢复；末段射向右侧刹住水平速度，不能把向右反冲一路按到底。"
+    },
+    {
+      "title": "三折刺檐：低弧加速，回身刹车，再抢移动落点",
+      "primary": {
+        "widthBlocks": 10,
+        "heightBlocks": 7,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 5,
+            "position": [
+              0,
+              704
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "L",
+            "role": "reward_return",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ]
+      },
+      "family": "recoil-eave-braking-slalom-macro",
+      "support": "EXISTING_CELLS_NEW_CONTINUOUS_GEOMETRY",
+      "interpretation": {
+        "observation": "看每个折角顶上的真实刺檐、对面短落点和下一枚齿轮的位置，最后一台会横移而不是在远处等你。",
+        "decision": "首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。",
+        "causality": "同一把枪在长跨时加速、短岸前制动、折角时改变方向；实体刺檐限制过高弧线，短岸使过早反冲和过晚刹车产生不同失误，末段把固定落点判断迁移到动态目标。",
+        "cells": [
+          "真实岩檐与其上下边地刺",
+          "功能性固定短台A/B/C",
+          "原生横移实体台D",
+          "原生竖锯/宝箱/低位恢复台"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
+        "terrain": "10×7，三折线路复用中央刺檐，A/B/C均有落地恢复用途；D是原生横向实体载台、末端一枚竖锯。不是额外堆成三组开关。",
+        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
+        "recovery": "入口和B是可观察点，A/C是短落点而非强制不停顿；低位接回台能退回前段重试但不能直接登箱。错过D可留C再等下一次会合，失败不自动传送。",
+        "directions": "L→L去程右→左→右折行，再追D取宝；回程先跳回D再回C/B/A。由高往低可选择更长下降，但刺檐/锯和底部尖刺限制无成本直落，真实捷径仍须保留并比较成本。",
+        "cheapSolutions": [
+          "入口或B直冲箱台跳过两折",
+          "站在刺檐顶面当安全步道",
+          "连按同方向射击就全程成功",
+          "从C普通跳直达箱台使D冗余",
+          "D停在端点只需无限等待且没有主动截乘价值",
+          "箱后直落回口完全跳过时机与落点判断",
+          "新增平台只为凑数量而无动作/恢复用途"
+        ],
+        "difference": "复用S08绕檐与已有反冲刹车，做连续折角与静转动态的组合挑战；独立于前两案，不用新开关、不依赖可消耗怪物续枪。"
+      },
+      "gaps": [
+        "所需岩体、PlatformThornDefinition边界刺、固定可穿台、原生横移实体台和竖锯均已有表达；连续几何规则尚未实现。",
+        "每段完整身体净空、真实反冲续航/射击冷却、每次落台恢复与可读的多帧操作窗口UNKNOWN。首段可能要分段重调，不能仅按线段长度宣称可达。",
+        "末段C→D→箱岸的必要性、回程敌死无关状态、穿伤/越顶/直接落回口和低台恢复须反例验证。"
+      ],
+      "key": "LG03",
+      "verbatim": "三折刺檐：低弧加速，回身刹车，再抢移动落点。首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。同一把枪在长跨时加速、短岸前制动、折角时改变方向；实体刺檐限制过高弧线，短岸使过早反冲和过晚刹车产生不同失误，末段把固定落点判断迁移到动态目标。"
+    }
+  ],
+  "newGameplayFamilyClaim": "NOT_ESTABLISHED: three continuous-room compositions of existing families",
+  "physicsRun": false
+}
