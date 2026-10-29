@@ -4,12 +4,12 @@
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
     "READY_FOR_IMPLEMENTATION": 44,
-    "NEEDS_REPAIR": 5,
-    "NEEDS_ALIGNMENT": 2
+    "NEEDS_REPAIR": 4,
+    "NEEDS_ALIGNMENT": 3
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 69,
+    "handoffRevision": "implementation-sync-r063",
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -19825,10 +19825,10 @@
       "sourceIdeaId": null,
       "reviewId": "196",
       "title": "贴墙择时出井，三口互联",
-      "summary": "3×9 Block；左裁2、上裁2、下裁2；增加底部空中口，三口六向互联目标。",
+      "summary": "同步已通过实现：底口为真实可穿平台，保留已实现支撑与jump/wall_climb要求。",
       "category": "平原",
-      "stage": "NEEDS_REPAIR",
-      "diagram": "../manual-review/designs/batch-024/feedback-002/images/196.png",
+      "stage": "NEEDS_ALIGNMENT",
+      "diagram": "../manual-review/designs/implementation-sync-r063/images/196.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 3,
@@ -19847,7 +19847,12 @@
           ],
           "face": "TOP",
           "surface": "ONE_WAY_PLATFORM",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            110,
+            -288
+          ],
+          "index": 1
         },
         {
           "id": "exit",
@@ -19861,7 +19866,12 @@
           ],
           "face": "LEFT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            -58,
+            384
+          ],
+          "index": 5
         },
         {
           "id": "bottom",
@@ -19874,8 +19884,13 @@
             1
           ],
           "face": "BOTTOM",
-          "surface": "AIR",
-          "permission": "INOUT"
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "stagingPosition": [
+            110,
+            768
+          ],
+          "index": 1
         }
       ],
       "routes": [
@@ -19888,10 +19903,14 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         },
         {
@@ -19903,10 +19922,14 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         },
         {
@@ -19918,10 +19941,14 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         },
         {
@@ -19933,10 +19960,14 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         },
         {
@@ -19948,10 +19979,14 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         },
         {
@@ -19963,26 +19998,34 @@
           "status": "DESIGN_TARGET",
           "technicalStatus": "UNKNOWN",
           "capabilityRequirements": {
+            "version": 1,
+            "status": "defined",
             "allOf": [
+              "jump",
               "wall_climb"
             ],
-            "status": "DESIGN_REQUIREMENT"
+            "anyOfGroups": [],
+            "note": "Explicit abilities for the revised approved interface."
           }
         }
       ],
       "relations": [],
       "capabilityRequirements": {
+        "version": 1,
+        "status": "defined",
         "allOf": [
+          "jump",
           "wall_climb"
         ],
-        "status": "DESIGN_REQUIREMENT"
+        "anyOfGroups": [],
+        "note": "Explicit abilities for the revised approved interface."
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:4856e51a2735655d0938ddceb6923fd0ddaebdf1935bd775216da41fd09940cc",
-      "designFile": "generation/manual-review/designs/batch-024/feedback-002/196.design.json",
-      "designFileSha256": "cffab618a4816ad166f4e5b42b64b36e20af97dcfddcc9a6b1caa4d02daa80ca",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/batch-024/feedback-002/196.design.json",
+      "designVersion": "sha256:83edd5e6eb620cadbc780695565be294444e80b8b9242cc87a6799415d2048ee",
+      "designFile": "generation/manual-review/designs/implementation-sync-r063/196.design.json",
+      "designFileSha256": "e59b92c0b8e6399fd17fd0ab297774280731889d68822a7b52ed87ff8786f3d6",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/implementation-sync-r063/196.design.json",
       "reviewUrl": "../manual-review/?batch=batch-024#r196",
       "implementation": {
         "reviewId": "196",
@@ -24521,10 +24564,10 @@
       "sourceIdeaId": null,
       "reviewId": "42",
       "title": "回望果实宝藏",
-      "summary": "4×2 Block；左2右6下2；新增顶部C可穿双向口，三口六向目标，原钩点与二选一奖励保留。",
+      "summary": "同步已通过实现：右岸x304、宽208，缺口48px。",
       "category": "森林",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "../manual-review/designs/batch-042/feedback-001/images/42.png",
+      "diagram": "../manual-review/designs/implementation-sync-r063/images/42.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 4,
@@ -24543,7 +24586,12 @@
           ],
           "face": "LEFT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            24,
+            -18
+          ],
+          "index": 1
         },
         {
           "id": "exit",
@@ -24557,7 +24605,12 @@
           ],
           "face": "RIGHT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            488,
+            -18
+          ],
+          "index": 1
         },
         {
           "id": "C",
@@ -24572,7 +24625,12 @@
           "face": "TOP",
           "surface": "ONE_WAY_PLATFORM",
           "permission": "INOUT",
-          "supportObjectId": "generated-98fd38b70a2a7398fe220478f1af08417976d6eefdcd58ec37c17e97c156d1da/platform-5"
+          "supportObjectId": "generated-98fd38b70a2a7398fe220478f1af08417976d6eefdcd58ec37c17e97c156d1da/platform-5",
+          "stagingPosition": [
+            192,
+            -178
+          ],
+          "index": 1
         }
       ],
       "routes": [
@@ -24711,10 +24769,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:f818ab1b4544d58c26a53f70f1e4ce16b7ff74b5fbe6e741bf6422465a8bef36",
-      "designFile": "generation/manual-review/designs/batch-042/feedback-001/42.design.json",
-      "designFileSha256": "202c0606d985f58363db69b2de9d3ff4f90f07651e4e76efdf29e4a26f8c16f3",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/batch-042/feedback-001/42.design.json",
+      "designVersion": "sha256:f11651cbcaf44feb22509d8a8ea2acb6b030a067f7a8142c13ea965216d004cf",
+      "designFile": "generation/manual-review/designs/implementation-sync-r063/42.design.json",
+      "designFileSha256": "92d55ff035e356d85154379d3c50eefb5690aa420a80671807f9bcf6f0a44e48",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/implementation-sync-r063/42.design.json",
       "reviewUrl": "../manual-review/?batch=batch-042#r42",
       "implementation": null,
       "archiveUrl": null,
@@ -24906,14 +24964,14 @@
       "sourceIdeaId": null,
       "reviewId": "51",
       "title": "树腹空腔",
-      "summary": "7×2 Block；下6左1右2；删除独立空中可穿台，保留裁内双钩，两口双向目标。",
+      "summary": "同步已通过实现：屋顶及附着危险上移128px，下层岩体/危险下移64px，净空与bounds同步。",
       "category": "森林",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "../manual-review/designs/batch-043/feedback-001/images/51.png",
+      "diagram": "../manual-review/designs/implementation-sync-r063/images/51.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 7,
-        "heightBlocks": 2
+        "heightBlocks": 4
       },
       "ports": [
         {
@@ -24928,7 +24986,12 @@
           ],
           "face": "LEFT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            -360,
+            -318
+          ],
+          "index": 2
         },
         {
           "id": "exit",
@@ -24942,7 +25005,12 @@
           ],
           "face": "RIGHT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            488,
+            -318
+          ],
+          "index": 2
         }
       ],
       "routes": [
@@ -25001,10 +25069,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:4e6675fa83434e2e71b943d9f69279ee18c2bf8b7cd396160694a0a706e881b9",
-      "designFile": "generation/manual-review/designs/batch-043/feedback-001/51.design.json",
-      "designFileSha256": "fd4dcea5aac272bdaec150724246c4fb2fa17990101a63f493fc8057940ab4e9",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/batch-043/feedback-001/51.design.json",
+      "designVersion": "sha256:ed255c82dfb417eb8cc0bb45e5bdc27f03ef912c83f3c060373bff00148c8155",
+      "designFile": "generation/manual-review/designs/implementation-sync-r063/51.design.json",
+      "designFileSha256": "59a5fed6113539deea00f21cb23dccaa3211a84ef06533dd79b4a9413a822f89",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/implementation-sync-r063/51.design.json",
       "reviewUrl": "../manual-review/?batch=batch-043#r51",
       "implementation": null,
       "archiveUrl": null,
@@ -25016,14 +25084,14 @@
       "sourceIdeaId": null,
       "reviewId": "52",
       "title": "树腹折角",
-      "summary": "7×3 Block；下5左1右2；删除独立空中可穿台，保留折角双钩，两口双向目标。",
+      "summary": "同步已通过实现：屋顶及附着危险上移128px，下层岩体/危险下移64px，净空与bounds同步。",
       "category": "森林",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "../manual-review/designs/batch-043/feedback-001/images/52.png",
+      "diagram": "../manual-review/designs/implementation-sync-r063/images/52.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 7,
-        "heightBlocks": 3
+        "heightBlocks": 5
       },
       "ports": [
         {
@@ -25038,7 +25106,12 @@
           ],
           "face": "LEFT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            -360,
+            -318
+          ],
+          "index": 2
         },
         {
           "id": "exit",
@@ -25052,7 +25125,12 @@
           ],
           "face": "RIGHT",
           "surface": "ROCK",
-          "permission": "INOUT"
+          "permission": "INOUT",
+          "stagingPosition": [
+            488,
+            -190
+          ],
+          "index": 3
         }
       ],
       "routes": [
@@ -25111,10 +25189,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:cfb2a2e4870815daf485431902bc3da51f5e06f5838b0c1ccb34947c5dce1357",
-      "designFile": "generation/manual-review/designs/batch-043/feedback-001/52.design.json",
-      "designFileSha256": "cac41d8ad9cd68bd5ca9124926cf9cc35117df402287ae02ff2f1ea5c826d8b3",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/batch-043/feedback-001/52.design.json",
+      "designVersion": "sha256:d57cd2d16b66f05ff99addf65c5ed8c956f62152157ee8083f9f34e76179cc1e",
+      "designFile": "generation/manual-review/designs/implementation-sync-r063/52.design.json",
+      "designFileSha256": "47f8f698f3747c9b1e3db8914a637b48267a6666adf93e46ccd49b50c82c13f9",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/manual-review/designs/implementation-sync-r063/52.design.json",
       "reviewUrl": "../manual-review/?batch=batch-043#r52",
       "implementation": null,
       "archiveUrl": null,
@@ -25869,7 +25947,7 @@
       "summary": "上下模块，跳起来射击左下怪，然后射击人物右下怪，最后向下射击反冲，到达上方可穿越平台。\n现在是2个怪，还可以出3个怪版本。",
       "category": "新创意",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/images/创意 002.png",
+      "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/8fcf6877a58c/images/创意 002.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 3,
@@ -25891,10 +25969,11 @@
           "permission": "INOUT",
           "stagingPosition": [
             192,
-            576
+            590
           ],
           "supportObjectId": "start-platform",
-          "diagramLabel": "A"
+          "diagramLabel": "A",
+          "index": 1
         },
         {
           "id": "B",
@@ -25908,9 +25987,14 @@
           ],
           "face": "TOP",
           "surface": "ONE_WAY_PLATFORM",
-          "permission": "INOUT",
+          "permission": "OUTPUT",
           "supportObjectId": "top-platform",
-          "diagramLabel": "B"
+          "diagramLabel": "B",
+          "stagingPosition": [
+            320,
+            46
+          ],
+          "index": 2
         }
       ],
       "routes": [
@@ -25920,24 +26004,6 @@
           "to": "B",
           "pathObjectId": "ascent-route",
           "role": "main",
-          "evidenceStatus": "UNKNOWN",
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "partial",
-            "allOf": [
-              "jump",
-              "shot_recoil"
-            ],
-            "anyOfGroups": [],
-            "note": "基础空中1发，必须真实空中命中才续发；无二段跳/钩索/多发空中能力假设。"
-          }
-        },
-        {
-          "id": "B-to-A",
-          "from": "B",
-          "to": "A",
-          "pathObjectId": "descent-route",
-          "role": "return",
           "evidenceStatus": "UNKNOWN",
           "capabilityRequirements": {
             "version": 1,
@@ -25982,10 +26048,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
-      "designFile": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
-      "designFileSha256": "e02e6c6a6e3868e8db3f2fc288de7a3a32d63b300739640ee3f5c371f304ca20",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
+      "designVersion": "sha256:8fcf6877a58c478737fd890cbbce8c7ded94aa28eca2b7f738904ab794c009ea",
+      "designFile": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/8fcf6877a58c/design.json",
+      "designFileSha256": "8067e484f5b943326bf810240e0b69e6dfd5ec8bc94ee08c76d3c193f53af85d",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/8fcf6877a58c/design.json",
       "reviewUrl": "#ideas",
       "implementation": null,
       "archiveUrl": null,
@@ -26000,7 +26066,7 @@
       "summary": "两列两行平台，平台往上，整个模块瘦高。平台的速度相位不一定一样，空中增加3段横向移动齿轮，速度相位不一致，1个空中怪物。",
       "category": "新创意",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/images/创意 003.png",
+      "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/b1c25284b6c9/images/创意 003.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 3,
@@ -26023,9 +26089,10 @@
           "supportObjectId": "start-dock",
           "stagingPosition": [
             192,
-            832
+            846
           ],
-          "diagramLabel": "A"
+          "diagramLabel": "A",
+          "index": 1
         },
         {
           "id": "B",
@@ -26039,9 +26106,14 @@
             0
           ],
           "surface": "ONE_WAY_PLATFORM",
-          "permission": "INOUT",
+          "permission": "OUTPUT",
           "supportObjectId": "goal-dock",
-          "diagramLabel": "B"
+          "diagramLabel": "B",
+          "stagingPosition": [
+            192,
+            46
+          ],
+          "index": 1
         }
       ],
       "routes": [
@@ -26051,24 +26123,6 @@
           "to": "B",
           "role": "main",
           "pathObjectId": "route-ascent",
-          "evidenceStatus": "UNKNOWN",
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "partial",
-            "allOf": [
-              "jump",
-              "shot_recoil"
-            ],
-            "anyOfGroups": [],
-            "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
-          }
-        },
-        {
-          "id": "B-to-A",
-          "from": "B",
-          "to": "A",
-          "role": "return",
-          "pathObjectId": "route-return",
           "evidenceStatus": "UNKNOWN",
           "capabilityRequirements": {
             "version": 1,
@@ -26113,10 +26167,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
-      "designFile": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
-      "designFileSha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
+      "designVersion": "sha256:b1c25284b6c9691744e2069c655ca4c4470e295f9849528d8992459e331944d6",
+      "designFile": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/b1c25284b6c9/design.json",
+      "designFileSha256": "1ef2d741b0a4076e9756b8cf13e5143b837ca707f56158b6f8e5a3f5cf0cce6f",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/b1c25284b6c9/design.json",
       "reviewUrl": "#ideas",
       "implementation": null,
       "archiveUrl": null,
@@ -31368,7 +31422,7 @@
       "summary": "一座可启停的升降台既是落脚点，也会挡住炮台到风铃的斜弹道。先选择台高，再跳起击炮：台停得顺手却挡弹会不开门，停得让弹又可能让你够不到。",
       "category": "新创意",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "ideas/idea-plains-hq09-001/dba700173996/images/HQ09.png",
+      "diagram": "ideas/idea-plains-hq09-001/313fc0c71181/images/HQ09.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 5,
@@ -31427,7 +31481,7 @@
             0
           ],
           "surface": "ONE_WAY_PLATFORM",
-          "permission": "INOUT",
+          "permission": "OUTPUT",
           "normal": [
             0,
             -1
@@ -31502,45 +31556,6 @@
             "status": "UNKNOWN",
             "physicsRun": false
           }
-        },
-        {
-          "id": "T-to-L",
-          "from": "T",
-          "to": "L",
-          "role": "return",
-          "pathObjectId": "route-T-L",
-          "strategy": "初态先从上侧安全访问收刺，再进入T落固定台回L；收刺前安全访问未验证。",
-          "evidenceStatus": "UNKNOWN",
-          "displacement": [
-            -1.5,
-            2.5
-          ],
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "partial",
-            "allOf": [
-              "jump",
-              "shot_recoil"
-            ],
-            "anyOfGroups": [],
-            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
-          },
-          "difficulty": "UNKNOWN",
-          "estimated_duration": "UNKNOWN",
-          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
-          "initial_conditions": "初态上下尖刺伸出；不沿用旧门状态或预借已收回。",
-          "entry_exit_contract": {
-            "entrySurface": "ONE_WAY_PLATFORM",
-            "exitSurface": "ROCK",
-            "entryVelocity": "UNKNOWN",
-            "exitStable": "UNKNOWN",
-            "bodyClearance": "UNKNOWN",
-            "entrySafety": "UNKNOWN: retract from adjacent top module before staging; native safe port not yet certified"
-          },
-          "validation": {
-            "status": "UNKNOWN",
-            "physicsRun": false
-          }
         }
       ],
       "relations": [],
@@ -31556,10 +31571,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
-      "designFile": "generation/module-workshop/ideas/idea-plains-hq09-001/dba700173996/design.json",
-      "designFileSha256": "3892e8afd1f6e7c6db0346aa9d113e36b443aee0bb438a749f01b388062c5ae1",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-plains-hq09-001/dba700173996/design.json",
+      "designVersion": "sha256:313fc0c711815b19e726360dbb0f6b4aabd4e4b21c90aba33a7bc5c939f2cff4",
+      "designFile": "generation/module-workshop/ideas/idea-plains-hq09-001/313fc0c71181/design.json",
+      "designFileSha256": "2d62ba50dccee1a8ec4b0d651c45d79b0871a8490455431204e1fe4df97f3867",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-plains-hq09-001/313fc0c71181/design.json",
       "reviewUrl": "#ideas",
       "implementation": null,
       "archiveUrl": null,
@@ -34157,7 +34172,7 @@
       "summary": "左上进入后下降到右下口。横向齿轮守着中下段换侧处，先留住空中枪，不在高处过早用掉；穿过锯线后再反冲刹住窄接岸。回程这些岸成为上行台阶。",
       "category": "新创意",
       "stage": "READY_FOR_IMPLEMENTATION",
-      "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png",
+      "diagram": "ideas/idea-spec02-s09-001/2f7b3bcc8099/images/R2-S09.png",
       "foundation": {
         "blockSize": 128,
         "widthBlocks": 3,
@@ -34254,7 +34269,7 @@
             "BOTTOM_RIGHT": {
               "applicable": true,
               "allowed": "UNKNOWN",
-              "reason": "本轮只请求精确原口，换边未认证。",
+              "reason": "基础规格已同步；角落换边仍需独立验证。",
               "targetFace": "RIGHT",
               "targetPosition": [
                 384,
@@ -34358,10 +34373,10 @@
       },
       "foundationCheck": "DESIGN_ONLY",
       "mapReady": false,
-      "designVersion": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
-      "designFile": "generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
-      "designFileSha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
-      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
+      "designVersion": "sha256:2f7b3bcc80995805910e5a90f055c4f3800df46b0d304192d9ea70ce67948198",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s09-001/2f7b3bcc8099/design.json",
+      "designFileSha256": "ed90bbaf430b2e80b362d5966d3feb179a1cae339f94ab3e5896b58ad8c011dd",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s09-001/2f7b3bcc8099/design.json",
       "reviewUrl": "#ideas",
       "implementation": null,
       "archiveUrl": null,
@@ -34498,10 +34513,10 @@
           "label": "2怪版 · 3×4 Block"
         },
         {
-          "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
-          "version": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
-          "sha256": "e02e6c6a6e3868e8db3f2fc288de7a3a32d63b300739640ee3f5c371f304ca20",
-          "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/images/创意 002.png",
+          "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/8fcf6877a58c/design.json",
+          "version": "sha256:8fcf6877a58c478737fd890cbbce8c7ded94aa28eca2b7f738904ab794c009ea",
+          "sha256": "8067e484f5b943326bf810240e0b69e6dfd5ec8bc94ee08c76d3c193f53af85d",
+          "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/8fcf6877a58c/images/创意 002.png",
           "key": "enemies-3",
           "label": "3怪版 · 3×5 Block"
         }
@@ -34521,19 +34536,20 @@
             "sha256": "c0c55581f56edff2e483e7e1c202da5fb17ab5cb2d049a3d4c7e8746e694297e"
           }
         },
-        "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6": {
+        "sha256:8fcf6877a58c478737fd890cbbce8c7ded94aa28eca2b7f738904ab794c009ea": {
           "moduleId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
           "reviewId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
           "decision": "KEEP",
           "receipt": {
-            "path": "feedback/manual-review/idea-decisions/idea-0363f85c-16c0-4b5f-b3b0-461335608db7-variants-38de33dc7119.json",
-            "sha256": "c0c55581f56edff2e483e7e1c202da5fb17ab5cb2d049a3d4c7e8746e694297e"
+            "path": "feedback/manual-review/spec-sync-r063-receipt.json",
+            "sha256": "b52e33b9ee914f4eda0907e6e5eb28ad9348e059a84f31b2e1a3b58ee93757ec"
           }
         }
       },
       "variantDecisions": {
         "sha256:f0829bf856a234834748750c4a4fec31042eaae8003d1f97bac7432b81f402b2": "KEEP",
-        "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6": "KEEP"
+        "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6": "KEEP",
+        "sha256:8fcf6877a58c478737fd890cbbce8c7ded94aa28eca2b7f738904ab794c009ea": "KEEP"
       },
       "feedback": [
         {
@@ -34551,7 +34567,31 @@
       "decisionReceipt": {
         "path": "feedback/manual-review/idea-decisions/idea-0363f85c-16c0-4b5f-b3b0-461335608db7-variants-38de33dc7119.json",
         "sha256": "c0c55581f56edff2e483e7e1c202da5fb17ab5cb2d049a3d4c7e8746e694297e"
-      }
+      },
+      "designHistory": [
+        {
+          "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
+          "version": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+          "sha256": "e02e6c6a6e3868e8db3f2fc288de7a3a32d63b300739640ee3f5c371f304ca20",
+          "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/images/创意 002.png",
+          "key": "enemies-3",
+          "label": "3怪版 · 3×5 Block"
+        }
+      ],
+      "approvalHistory": [
+        {
+          "version": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+          "receipt": {
+            "moduleId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+            "reviewId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+            "decision": "KEEP",
+            "receipt": {
+              "path": "feedback/manual-review/spec-sync-r063-receipt.json",
+              "sha256": "7aa17040ea2481b0450fe7f857674f8ec5ac84c734417b423cad577399e76347"
+            }
+          }
+        }
+      ]
     },
     {
       "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
@@ -34606,10 +34646,10 @@
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "design": {
-        "file": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
-        "version": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
-        "sha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b",
-        "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/images/创意 003.png"
+        "file": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/b1c25284b6c9/design.json",
+        "version": "sha256:b1c25284b6c9691744e2069c655ca4c4470e295f9849528d8992459e331944d6",
+        "sha256": "1ef2d741b0a4076e9756b8cf13e5143b837ca707f56158b6f8e5a3f5cf0cce6f",
+        "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/b1c25284b6c9/images/创意 003.png"
       },
       "gaps": [
         "现有载台到顶后原轨回落；若要求持续向上循环，缺少回收/重生Cell规则。",
@@ -34617,8 +34657,8 @@
         "实体承载/离台惯性、防挤压、失败接回、回程、敌已死状态与接缝均待原Harness验证。"
       ],
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3-16d930fb67a6-1.json",
-        "sha256": "5e012857658d5f639c53321aa6466f558ab6227446117d458fc6112f34bcf23d"
+        "path": "feedback/manual-review/spec-sync-r063-receipt.json",
+        "sha256": "b52e33b9ee914f4eda0907e6e5eb28ad9348e059a84f31b2e1a3b58ee93757ec"
       },
       "feedback": [
         {
@@ -34629,6 +34669,23 @@
           "decision": "KEEP",
           "note": "",
           "verbatim": "Module 工坊 · 设计审阅\n创意：idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3\n标题：错相升井：四台换乘，三道横锯\n设计版本：sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731\n设计文件 SHA256：d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b\n决定：保留\n意见：\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。"
+        }
+      ],
+      "designHistory": [
+        {
+          "file": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
+          "version": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+          "sha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b",
+          "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/images/创意 003.png"
+        }
+      ],
+      "approvalHistory": [
+        {
+          "version": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+          "receipt": {
+            "path": "feedback/manual-review/idea-decisions/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3-16d930fb67a6-1.json",
+            "sha256": "5e012857658d5f639c53321aa6466f558ab6227446117d458fc6112f34bcf23d"
+          }
         }
       ]
     },
@@ -37463,14 +37520,14 @@
       ],
       "feasibility": "MISSING_RETRACT_HAZARD_GROUP_BINDING_AND_PRIOR_CELLS",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-hq09-001/dba700173996/design.json",
-        "version": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
-        "sha256": "3892e8afd1f6e7c6db0346aa9d113e36b443aee0bb438a749f01b388062c5ae1",
-        "diagram": "ideas/idea-plains-hq09-001/dba700173996/images/HQ09.png"
+        "file": "generation/module-workshop/ideas/idea-plains-hq09-001/313fc0c71181/design.json",
+        "version": "sha256:313fc0c711815b19e726360dbb0f6b4aabd4e4b21c90aba33a7bc5c939f2cff4",
+        "sha256": "2d62ba50dccee1a8ec4b0d651c45d79b0871a8490455431204e1fe4df97f3867",
+        "diagram": "ideas/idea-plains-hq09-001/313fc0c71181/images/HQ09.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-dba700173996-3.json",
-        "sha256": "42fcc8e1d074dcab2160fd119b5897f26b017430fc961118d4635a690095f373"
+        "path": "feedback/manual-review/spec-sync-r063-receipt.json",
+        "sha256": "b52e33b9ee914f4eda0907e6e5eb28ad9348e059a84f31b2e1a3b58ee93757ec"
       },
       "feedback": [
         {
@@ -37522,6 +37579,23 @@
             "diagram": "ideas/idea-plains-hq09-001/699e58f2152b/images/HQ09.png"
           },
           "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "designHistory": [
+        {
+          "file": "generation/module-workshop/ideas/idea-plains-hq09-001/dba700173996/design.json",
+          "version": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
+          "sha256": "3892e8afd1f6e7c6db0346aa9d113e36b443aee0bb438a749f01b388062c5ae1",
+          "diagram": "ideas/idea-plains-hq09-001/dba700173996/images/HQ09.png"
+        }
+      ],
+      "approvalHistory": [
+        {
+          "version": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
+          "receipt": {
+            "path": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-dba700173996-3.json",
+            "sha256": "42fcc8e1d074dcab2160fd119b5897f26b017430fc961118d4635a690095f373"
+          }
         }
       ]
     },
@@ -38394,14 +38468,14 @@
       "feasibility": "EXISTING_CELLS_NEW_LAYOUT_RULE_PENDING",
       "family": "dynamic-window-height-choice",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
-        "version": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
-        "sha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
-        "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png"
+        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/2f7b3bcc8099/design.json",
+        "version": "sha256:2f7b3bcc80995805910e5a90f055c4f3800df46b0d304192d9ea70ce67948198",
+        "sha256": "ed90bbaf430b2e80b362d5966d3feb179a1cae339f94ab3e5896b58ad8c011dd",
+        "diagram": "ideas/idea-spec02-s09-001/2f7b3bcc8099/images/R2-S09.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-ba9155075c23-4.json",
-        "sha256": "22878589ba5e8e7cd7260a3a9e335a928716cece6d3ab706363c382230382533"
+        "path": "feedback/manual-review/spec-sync-r063-receipt.json",
+        "sha256": "b52e33b9ee914f4eda0907e6e5eb28ad9348e059a84f31b2e1a3b58ee93757ec"
       },
       "feedback": [
         {
@@ -38472,6 +38546,23 @@
             "diagram": "ideas/idea-spec02-s09-001/b19322aeec93/images/R2-S09.png"
           },
           "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "designHistory": [
+        {
+          "file": "generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
+          "version": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
+          "sha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
+          "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png"
+        }
+      ],
+      "approvalHistory": [
+        {
+          "version": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
+          "receipt": {
+            "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-ba9155075c23-4.json",
+            "sha256": "22878589ba5e8e7cd7260a3a9e335a928716cece6d3ab706363c382230382533"
+          }
         }
       ]
     },
