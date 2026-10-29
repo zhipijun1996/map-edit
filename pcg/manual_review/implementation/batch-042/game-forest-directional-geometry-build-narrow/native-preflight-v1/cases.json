@@ -1,0 +1,1222 @@
+{
+  "cases": [
+    {
+      "id": "approved-review045-v1-41-entry-to-exit-migration-clean-diagnostic-v1",
+      "family": "original-game-forest_directional_geometry__build_narrow",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil",
+        "grapple"
+      ],
+      "platforms": [
+        [
+          -128,
+          -24,
+          208,
+          60
+        ],
+        [
+          -128,
+          -376,
+          478,
+          266
+        ],
+        [
+          250,
+          -24,
+          262,
+          60
+        ]
+      ],
+      "spawn": [
+        -104,
+        -42
+      ],
+      "entry_port": [
+        -104,
+        -42
+      ],
+      "exit_port": [
+        488,
+        -42
+      ],
+      "goal": [
+        481,
+        -46,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -384,
+        -760,
+        1152,
+        1280
+      ],
+      "one_way_platform_indices": [],
+      "wall_platform_indices": [],
+      "hazards": [
+        [
+          210,
+          -138,
+          60,
+          44
+        ],
+        [
+          210,
+          -24,
+          60,
+          52
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [
+        {
+          "x": 200.0,
+          "y": -40.0,
+          "kind": "bounce",
+          "source_id": "side_ring"
+        }
+      ],
+      "latches": [],
+      "enemies": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              -4,
+              -45,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 1
+          },
+          "aim_target": [
+            200.0,
+            -40.0
+          ]
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 5
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 9,
+            "state": "free",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 355.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              350.0,
+              -46.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 488,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              484,
+              -45,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "settle_frames": 12,
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/review045_forest_author_v1.py",
+        "status": "decoded_original_no_physics_approval"
+      },
+      "challenge_requirements": {
+        "min_shots": 0,
+        "min_ground_jumps": 0
+      },
+      "route_spec": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "source_behavior": {
+        "allowed_seams": [
+          {
+            "platform_id": "entry",
+            "side": "left",
+            "top": 18.0
+          },
+          {
+            "platform_id": "crown",
+            "side": "right",
+            "top": -24.0
+          }
+        ],
+        "damage_mode": "production_environment_policy",
+        "goal": [
+          355.0,
+          -42.0
+        ],
+        "hook_anchors": [
+          {
+            "id": "side_ring",
+            "position": [
+              200.0,
+              -40.0
+            ]
+          }
+        ],
+        "id": "side_hook_thorn_mouth",
+        "observations": [
+          {
+            "platform_id": "entry",
+            "see": [
+              "side_ring",
+              "upper_thorns",
+              "lower_thorns",
+              "crown"
+            ]
+          },
+          {
+            "platform_id": "crown",
+            "see": [
+              "right_drop",
+              "recovery"
+            ]
+          }
+        ],
+        "protected_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ],
+        "recovery": {
+          "exit": "entry",
+          "support": "recovery",
+          "via": "recovery_step",
+          "walk_x": -275.0
+        },
+        "return": {
+          "drop_outside_x": 600.0,
+          "goal_support": "entry",
+          "via": "recovery"
+        },
+        "spawn": [
+          0.0,
+          0.0
+        ],
+        "steps": [
+          {
+            "anchor_id": "side_ring",
+            "direction": "horizontal",
+            "id": "side_catch",
+            "then": "away_kick"
+          },
+          {
+            "action": "shoot_left_recoil_right",
+            "id": "thorn_mouth",
+            "then": "stable_crown"
+          }
+        ],
+        "version": "forest-directional-narrow-thorns-v1",
+        "world_bounds": [
+          -320.0,
+          -550.0,
+          1220.0,
+          850.0
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -104,
+            -42
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            488,
+            -42
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        }
+      ],
+      "source_identity": {
+        "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+        "sourceArtifact": {
+          "kind": "generation",
+          "originalPath": "scripts/generation/forest_directional_geometry.gd",
+          "path": "library/source/scripts/generation/forest_directional_geometry.gd",
+          "sha256": "ea44b33daa27cfc8c46eba54648cf99cc7f4b7fa6391e57caa6ce48b15407bd7",
+          "gitBlobSha": "61164e6a7d8fe6a7d9774d071c55ac52d6cb1036",
+          "sourceCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
+          "action": "reused_exact_existing_copy"
+        },
+        "originalDictionarySha256": "8d62caefdf941cda11e0837758788d94e204aa41502a369e7874778c681bd88f",
+        "adapterVersion": 1
+      },
+      "original_pickups": [],
+      "required_original_pickups": [],
+      "original_feedback_routines": {
+        "source": "Pinned original H/R rhythm and explicit source approach/departure/routes",
+        "variant": 0,
+        "sourcePosesAssigned": false
+      },
+      "reward_sites": [],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          8
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            2,
+            -2
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            3,
+            -2
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "41",
+        "designVersion": "sha256:4e9f4ffef800c0332c458e847514c8ce2ae8ff1701c71f8282e611fd25b605aa",
+        "rectangle": {
+          "x": -128,
+          "y": -376,
+          "w": 640,
+          "h": 512
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_3b1fba63509b88cd.py"
+      },
+      "expected_hook_sequence": [
+        "side_ring"
+      ],
+      "module_sha256": "3d3e2a16890f1deb4f73bc7908bace07ca42ab7c66434a478ddd6ba59bf9d166",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.787877776406028,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.167125571857799,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.995778381824493,
+                0.0917898118495941
+              ],
+              "plan_index": 3,
+              "type": "grapple"
+            }
+          ]
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 4,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                -1.0,
+                0.0
+              ],
+              "plan_index": 6,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.61700439453125,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.130876020951705,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}

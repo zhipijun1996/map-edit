@@ -1,0 +1,128 @@
+{
+  "schema": "pcg/approved-design-implementation-result/v10",
+  "reviewId": "52",
+  "moduleId": "game-forest-hollow-trunk-geometry-cavity-elbow",
+  "design": {
+    "path": "generation/manual-review/designs/batch-043/feedback-001/52.design.json",
+    "sha256": "cac41d8ad9cd68bd5ca9124926cf9cc35117df402287ae02ff2f1ea5c826d8b3"
+  },
+  "designVersion": "sha256:cfb2a2e4870815daf485431902bc3da51f5e06f5838b0c1ccb34947c5dce1357",
+  "authorization": {
+    "path": "feedback/manual-review/implementation-results/review-045-v1/authorization/request.json",
+    "sha256": "0acd8775b5e3cdfa267122684947144d99c66aa41a6cd4c022086117dbf1a687"
+  },
+  "status": "UNQUALIFIED",
+  "implementationVersion": "sha256:31ab0649635d412d6f763267f230e19e26cbac7677feabf48e39da83c4496dfd",
+  "module": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/module.mapnote.json",
+    "sha256": "fa7602d45ab3c9342e5eb2d8856170bbb9739381c24dd10bce064d05c1d7ece5"
+  },
+  "parameters": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/parameters.json",
+    "sha256": "eca9d4ce91f532b85a66bd0a6c99bd11bdecf91d46979efda7c5f5f04d6f6b39"
+  },
+  "physicsCases": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/physics-input-cases.json",
+    "sha256": "064c17d994a4ecea1246be6e3a9c36f72820d6542eecfe83dcebd9d464f45bbe"
+  },
+  "humanPlaytest": "UNKNOWN",
+  "productionApproval": false,
+  "scope": {
+    "orientation": "identity",
+    "mirror": "UNKNOWN",
+    "closureConfigurations": "UNKNOWN",
+    "fullMap": "UNKNOWN"
+  },
+  "formalAttempts": 0,
+  "holdout": "NOT_RUN",
+  "blocker": {
+    "reason": "Neither final clean direction is damage-free. Same first-hook ceiling-hazard contact at frame34; reverse reaches central floor but clips the left bottom hazard on takeoff. Compiled manual candidate exists; real native replay fails with HP4.",
+    "nextAction": "Resolve jump-release/hook scheduling and safe central takeoff under real collision geometry. Keep one actual air shot; original anchor contact does not refill shots. Optional landing/anchor/clearance changes require separate design approval.",
+    "designDefectProven": false
+  },
+  "stoppingRecord": {
+    "path": "feedback/manual-review/implementation-results/review-045-v1/verification/revision-budget.json",
+    "sha256": "fc222954b965b9a756eff2a42498a4ae706cfe61f396f113dff20b81965cc15d"
+  },
+  "budgetExhausted": true,
+  "formalSelectedVersionExhausted": false,
+  "lastControlVersion": "v7",
+  "canonicalDelivery": {
+    "artifact": {
+      "path": "pcg/results/approved-r045-52-partial-delivery-v1/canonical.json",
+      "sha256": "7206e72d8a7d52fe49c3aef1209254821b16dd6781f01df59dfe8de2e745a774"
+    },
+    "successfulRoutes": [],
+    "failedRoutes": [
+      {
+        "route": "entry-to-exit",
+        "reasons": [
+          "actual_player_harm",
+          "real_damage",
+          "real_hook_sequence_missing",
+          "world_reset"
+        ]
+      },
+      {
+        "route": "exit-to-entry",
+        "reasons": [
+          "actual_player_harm",
+          "real_damage",
+          "real_hook_sequence_missing",
+          "world_reset"
+        ]
+      }
+    ]
+  },
+  "nativePlayable": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/playable",
+    "manifest": {
+      "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/playable/godot-package.json",
+      "sha256": "478fad6e8e7ccb34f65c0c6cedb13dc8b9563b22654431fb8a6216092f0ddc53"
+    },
+    "result": {
+      "path": "pcg/manual_review/implementation/review-045-final-v1/game-forest-hollow-trunk-geometry-cavity-elbow/package-result.json",
+      "sha256": "c8b3c345bf50da1af95a24e21f68ceb88b0f2fcd62499d12a928fc60a81fe48e"
+    },
+    "passed": false,
+    "compiled": true,
+    "replayCases": 2,
+    "wholeModuleQualification": "UNQUALIFIED",
+    "manualCandidateOnly": true
+  },
+  "videos": [
+    {
+      "routeId": "entry-to-exit",
+      "manifest": {
+        "path": "feedback/manual-review/implementation-results/review-045-v1/videos/52-failed-entry-to-exit-v1/manifest.json",
+        "sha256": "e05ec8951080e02a6f0cfd9e07718170201d79a6ed32191e74c336f3f77ae550"
+      },
+      "movie": {
+        "path": "feedback/manual-review/implementation-results/review-045-v1/videos/52-failed-entry-to-exit-v1/original-game-forest_hollow_trunk_geometry__cavity_elbow.mp4",
+        "sha256": "ac030555c41ec7aeeb031046ab9bb4e9b8bcc044d23354b8ff738dcbfca762f1"
+      },
+      "durationSeconds": 1.666667,
+      "comparison": "FAIL; review-only",
+      "differenceFields": {
+        "workshop": 35
+      },
+      "nativeOutcome": {
+        "frame": 35,
+        "hp": 4.0,
+        "id": "approved-review045-final-v1-52-entry-to-exit-migration-unqualified-partial-delivery",
+        "position": [
+          -360.0,
+          -318.0
+        ],
+        "safe": false,
+        "stable_frames": 0,
+        "workshop": {
+          "carriers": [],
+          "coins": 0,
+          "events": []
+        }
+      },
+      "failedRouteFootage": true
+    }
+  ]
+}
