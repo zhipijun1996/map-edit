@@ -3928,25 +3928,26 @@
       "sourceType": "ai_idea",
       "verbatim": "左上进入后下降到右下口。横向齿轮守着中下段换侧处，先留住空中枪，不在高处过早用掉；穿过锯线后再反冲刹住窄接岸。回程这些岸成为上行台阶。",
       "interpretation": {
-        "解释": "完全放弃此前互补井盖方案；旧AI原话与旧图只作历史，本轮从零按原接口重画。",
-        "observation": "中央岩壁只有一个窗口，观察唯一齿轮此刻在窗口上半还是下半。",
+        "解释": "按最新人工意见精简：左保留原ROCK入口岩台，窗口与齿轮上移；右中间平台换空怪。主图取中位，非当下可穿过的认证。",
+        "observation": "在唯一左入口岩台读锯的上下相位；右侧还有一只空中怪，要看它的进攻方向。",
         "decision": "锯在上走下缝，锯在下走上缝；中间都挤时留在接岸等合适窗口，而非盲目下落。",
         "causality": "齿轮的上下位置改变同一通道内可容纳身体的高度带。跳跃选择上缝，反冲调横移穿下缝或追上缝；不是射击切换隐藏状态。",
         "cells": [
-          "原静态岩体",
-          "原生正弦移动齿轮×1",
-          "依附岩沿的上下地刺",
-          "固定可穿准备台/接回台"
+          "原静态岩壁与唯一左入口岩台",
+          "原生竖移齿轮",
+          "原岩沿刺",
+          "右接回/底口可穿平台",
+          "plains_diver空怪×1"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "只用原跳跃、基础空中枪次、冷却和落地恢复，不靠敌人续枪或免费补资源。",
-        "terrain": "严格3×5；L(0,192)岩口、B(320,640)可穿口均INOUT。岩壁x176–208只在y256–384开窗；沿刺后有效高度y272–368，锯中心y292–348。",
+        "resources": "仍按真实枪次/冷却/落地与命中恢复；空怪替代的是固定落脚点，不自动等价于回枪平台。",
+        "terrain": "严格3×5与L(0,192)/B(320,640)INOUT不变；左只保留(0,224,112,32)岩台。窗口y160–288、有效净空y176–272，锯中线y224。右侧y512平台替换为空怪，余两右平台保留。",
         "reward": "穿窗到右侧再接下方模块；不额外加宝箱。",
-        "recovery": "左观察台和右接回台可停稳再试；穿窗失误的受伤/掉落、是否能救回原岸须真实验证，原生无敌帧不改。",
-        "directions": "L→B先下降到左准备台再横穿、右侧下行；B→L先上返右接岸，反向横穿后回左岸。两向独立UNKNOWN。",
+        "recovery": "左侧退回原入口岩台、右侧争取现有接回台；中间台删除后的192px上返高差、空怪命中机会、敌已死状态均UNKNOWN，不自动补台或刷怪。",
+        "directions": "L→B从入口直接选窗口高度后下行；B→L需要处理删台后的上升与空怪，再反向穿窗回L，仍为待验目标。",
         "cheapSolutions": [
           "直接从L不穿窗口跳到B侧",
           "身体挤过齿轮与岩沿而无需读相位",
@@ -3954,7 +3955,10 @@
           "穿伤/无敌帧硬闯成本远低于选缝",
           "站在下沿刺或齿轮上当安全中转",
           "邻接模块带速越顶/绕边",
-          "某固定台对回程和恢复均无用"
+          "某固定台对回程和恢复均无用",
+          "空怪被去程击杀后回程无路",
+          "把空怪命中错误当作落地恢复全部动作",
+          "新增怪仅替代图标却没有真实命中机会"
         ],
         "difference": "不再是开放竖井里一枚锯装饰下降，也没有互补井盖。单个动态障碍直接决定上/下两条高度带，画出两种相位就能理解；属于动态净空布局，不冒称新玩法家族已成立。"
       },
@@ -4014,22 +4018,21 @@
         "proposalKey": "S09"
       },
       "gaps": [
-        "不要求新Cell：现有ModuleSawDefinition正弦位移和PlatformThornDefinition边沿几何可表达；当前只存在设计图，布局规则/参数还未实现验证。",
-        "36px参考身体与40px齿轮只作静态草图预算，真实碰撞形状、角落净空、弹丸/人物扫掠与操作窗口须原Harness求解。",
-        "周期3.6秒、±28px行程为待校准假设；是否存在宽容的上下通路、能否换路/重试及B→L真实上返均UNKNOWN。",
-        "保留普通跳或其他合理替代路线；若能不读锯直接落到底口，必须作为失败反馈，不能指定必须开枪来掩盖。"
+        "现有岩体/齿轮/边沿刺/空怪可表达，当前仍只是新图，布局规则与物理未实施。",
+        "删除右中间平台后，底口台608到右接回台416有192px高差，能否用真实反冲与命中资源上返、敌死亡后是否仍可返回均UNKNOWN，不能继承删台前回程证据。",
+        "齿轮/窗口整体上移后，左入口到上下缝的完整身体/相位/瞄准扰动、受伤绕法和失败恢复均须重验。"
       ],
       "feasibility": "EXISTING_CELLS_NEW_LAYOUT_RULE_PENDING",
       "family": "dynamic-window-height-choice",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/b19322aeec93/design.json",
-        "version": "sha256:b19322aeec9308931348baeeadcfb06000815fdee67cd5d73453939316dfb122",
-        "sha256": "f738653f18ae56203f281ac01818797d529b05036a1ebbe905fdd1befee2fc12",
-        "diagram": "ideas/idea-spec02-s09-001/b19322aeec93/images/R2-S09.png"
+        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
+        "version": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
+        "sha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
+        "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-ecedc0733c06-2.json",
-        "sha256": "37fd199311c799439e4a427a569bcfc6bfdc68b130634826725efe26e7731f04"
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-b19322aeec93-3.json",
+        "sha256": "1be846c0d38890d99db5abe5e90153ea160fb637d632fdfc99d90b6e45a62067"
       },
       "feedback": [
         {
@@ -4051,6 +4054,16 @@
           "decision": "CHANGE",
           "note": "S09从零重做",
           "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-002.json"
+        },
+        {
+          "id": "idea-spec02-s09-001",
+          "sourceType": "human_feedback",
+          "verbatim": "左侧只留一个平台，齿轮对齐左侧平台位置。右侧中间少一个平台，变成一只空中怪。",
+          "designVersion": "sha256:b19322aeec9308931348baeeadcfb06000815fdee67cd5d73453939316dfb122",
+          "designFileSha256": "f738653f18ae56203f281ac01818797d529b05036a1ebbe905fdd1befee2fc12",
+          "decision": "CHANGE",
+          "note": "左侧只留一个平台，齿轮对齐左侧平台位置。右侧中间少一个平台，变成一只空中怪。",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-003.json"
         }
       ],
       "history": [
@@ -4069,6 +4082,15 @@
             "version": "sha256:ecedc0733c062b795167a2840f941b9d8560f94d24fc9e46895e6a3ae8d66067",
             "sha256": "c99f6de693f4869ba06468f1d978b0988a34c936fb5d269f4b6008d2b61d181c",
             "diagram": "ideas/idea-spec02-s09-001/ecedc0733c06/images/R2-S09.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        },
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-spec02-s09-001/b19322aeec93/design.json",
+            "version": "sha256:b19322aeec9308931348baeeadcfb06000815fdee67cd5d73453939316dfb122",
+            "sha256": "f738653f18ae56203f281ac01818797d529b05036a1ebbe905fdd1befee2fc12",
+            "diagram": "ideas/idea-spec02-s09-001/b19322aeec93/images/R2-S09.png"
           },
           "stage": "DESIGN_REVIEW"
         }
