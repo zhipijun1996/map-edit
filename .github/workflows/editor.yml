@@ -22,13 +22,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # These structural checks read library data, not archived experiment payloads.
+          # Structural checks build the workshop from approved design snapshots;
+          # archived experiment payloads remain excluded.
           sparse-checkout: |
             /*
             !/pcg/archives/
             !/pcg/results/
             !/generation/*
             /generation/contracts/
+            /generation/manual-review/queue.json
+            /generation/manual-review/designs/
+            /generation/module-workshop/
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
