@@ -42,3 +42,17 @@ const snapshot=read('generation/module-workshop/implementation-snapshot.json');a
 assert(!data.modules.some(m=>q.rows.find(q=>q.moduleId===m.id)?.receivedDecision==='DISCARD'));
 for(const i of data.ideas.filter(i=>i.design)){assert.equal(hash(i.design.file),i.design.sha256);assert(fs.existsSync('generation/module-workshop/'+i.design.diagram));}
 console.log('Module workshop: directed AND/OR filtering, permissions, exact approvals, candidate/archival gates and source bindings pass. No physics run.');
+
+const {creativeViews,filterCreativeViews}=await import('../generation/module-workshop/model.js');
+const text={id:'text-idea',stage:'IDEA',verbatim:'原话',implemented:true};
+const pending={id:'pending-idea',stage:'DESIGN_REVIEW',humanApproval:'UNKNOWN',design:{version:'v1'}};
+const approved={id:'approved-idea',stage:'READY_FOR_IMPLEMENTATION',humanApproval:'KEEP',design:{version:'v2'}};
+assert.equal(filterCreativeViews(creativeViews([text,pending,approved],[]),'TEXT').length,1);
+assert.equal(filterCreativeViews(creativeViews([text,pending,approved],[]),'REVIEW').length,1);
+assert.equal(filterCreativeViews(creativeViews([text,pending,approved],[]),'WAIT').length,1);
+assert.equal(creativeViews([approved],[{id:'approved-idea',designVersion:'v2',stage:'IMPLEMENTED_CANDIDATE'}]).length,0,'An exact completed implementation belongs only in the module library');
+assert.equal(creativeViews([approved],[{id:'approved-idea',designVersion:'old',stage:'IMPLEMENTED_CANDIDATE'}]).length,1,'A stale implementation cannot hide the current design');
+for(const stage of ['NEEDS_REPAIR','NEEDS_ALIGNMENT'])assert.equal(creativeViews([approved],[{id:'approved-idea',designVersion:'v2',stage}])[0].filterStage,'WAIT');
+const options={id:'dual',title:'一个创意',stage:'READY_FOR_IMPLEMENTATION',humanApproval:'KEEP',design:{version:'v2'},designVariants:[{version:'v2',label:'两怪'},{version:'v3',label:'三怪'}],variantDecisions:{v2:'KEEP',v3:'KEEP'},designApprovals:{v2:{moduleId:'dual-two'},v3:{moduleId:'dual-three'}}};
+const partiallyDone=creativeViews([options],[{id:'dual-two',sourceIdeaId:'dual',designVersion:'v2',stage:'IMPLEMENTED_CANDIDATE'}]);assert.equal(partiallyDone.length,1);assert.equal(partiallyDone[0].design.version,'v3');assert.equal(partiallyDone[0].filterStage,'WAIT');
+console.log('Creative lifecycle filters: text, review, waiting, independent variants and exact-version completed routing pass.');
