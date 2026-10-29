@@ -1,0 +1,93 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "sourceBrief": {
+    "path": "feedback/module-workshop/briefs/interface-complements-v1.json",
+    "sha256": "468eb23f0640cd9840be98a16f82fd6dca8ec727e414947b4dcbc7387c8d1af4"
+  },
+  "sourceRefs": [
+    {
+      "path": "MAP_FOUNDATION.md",
+      "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module_definition.gd",
+      "sha256": "7ae4bab73990c01f5cfc1d2e06a54e635dbaa71a2951b912b7d46d2eee1cbb96"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module.gd",
+      "sha256": "705af1d3d9354d8bf4ba86ea3b1d1b4eea33ae414019dc122c32e0aed1c08a30"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform.gd",
+      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/runtime_v3.gd",
+      "sha256": "da573889a39afe9d106dcda3327d548606b38d38109d46c8f23b02de08817e0b"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v1.gd",
+      "sha256": "7f1cc7f20ef1f675c5fce34ea5568c1c94780f467f97577c050a1080b0cf8781"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v2.gd",
+      "sha256": "7d40cf6351c718a884049a96b1dc504d7d3beae815c496ec52f9f8aedcad5e66"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+      "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+    },
+    {
+      "path": "library/source/scripts/generation/module_saw_definition.gd",
+      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b"
+    }
+  ],
+  "requestedSpecification": {
+    "key": "S13",
+    "widthBlocks": 3,
+    "heightBlocks": 2,
+    "ports": [
+      {
+        "id": "L",
+        "face": "LEFT",
+        "index": 1,
+        "position": [
+          0,
+          192
+        ],
+        "surface": "ROCK",
+        "permission": "INOUT"
+      }
+    ],
+    "intendedRelations": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      }
+    ]
+  },
+  "designChanges": [
+    "设计修订：文字提案的手动切门存在明显原路退出。为了保留奖励后的路线改变，本图显式增加入袋提交触发，非静默当作现有Cell。",
+    "已有互补门原型可承担状态/防夹，但缺少完整身体越门触发、一次提交与重试重置规则；未开发前这份设计不可进入实现通过状态。",
+    "下层返回口不是新Port。外侧换门铃用于下一次打开上门；重复入袋、空箱、触发被挡、低门先开反向入袋均需验证。",
+    "若不接受新触发Cell，应将本图退回修改；不能把普通平台替代该核心关系后沿用版本。"
+  ],
+  "gapStatus": "MISSING_ENTRY_TRIGGER_CELL",
+  "method": "Native Cell source inspection and static Block/Port/object/rail bounds only; no trajectory solver or physics.",
+  "missingRules": [
+    "完整身体越门触发、一次换门提交、重试重新使能"
+  ],
+  "technicalStatus": "UNKNOWN",
+  "physicsRun": false,
+  "diagramRenderer": {
+    "path": "generation/manual-review/batch-001/render_diagrams.py",
+    "sha256": "5f82d7de0164de63de39fabe8c7a912eb7f430103070d6f814fea887544a8dab",
+    "scope": "opt-in link center/subset drawing only; existing approved pictures unchanged"
+  }
+}

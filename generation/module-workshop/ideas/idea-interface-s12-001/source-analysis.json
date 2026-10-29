@@ -1,0 +1,190 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "sourceBrief": {
+    "path": "feedback/module-workshop/briefs/interface-complements-v1.json",
+    "sha256": "468eb23f0640cd9840be98a16f82fd6dca8ec727e414947b4dcbc7387c8d1af4"
+  },
+  "sourceRefs": [
+    {
+      "path": "MAP_FOUNDATION.md",
+      "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module_definition.gd",
+      "sha256": "7ae4bab73990c01f5cfc1d2e06a54e635dbaa71a2951b912b7d46d2eee1cbb96"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module.gd",
+      "sha256": "705af1d3d9354d8bf4ba86ea3b1d1b4eea33ae414019dc122c32e0aed1c08a30"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform.gd",
+      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/runtime_v3.gd",
+      "sha256": "da573889a39afe9d106dcda3327d548606b38d38109d46c8f23b02de08817e0b"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v1.gd",
+      "sha256": "7f1cc7f20ef1f675c5fce34ea5568c1c94780f467f97577c050a1080b0cf8781"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v2.gd",
+      "sha256": "7d40cf6351c718a884049a96b1dc504d7d3beae815c496ec52f9f8aedcad5e66"
+    },
+    {
+      "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+      "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+    },
+    {
+      "path": "library/source/scripts/generation/module_saw_definition.gd",
+      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b"
+    }
+  ],
+  "requestedSpecification": {
+    "key": "S12",
+    "widthBlocks": 5,
+    "heightBlocks": 4,
+    "ports": [
+      {
+        "id": "L",
+        "face": "LEFT",
+        "index": 2,
+        "position": [
+          0,
+          320
+        ],
+        "surface": "ROCK",
+        "permission": "INOUT"
+      },
+      {
+        "id": "R",
+        "face": "RIGHT",
+        "index": 0,
+        "position": [
+          640,
+          64
+        ],
+        "surface": "ROCK",
+        "permission": "INOUT"
+      },
+      {
+        "id": "T",
+        "face": "TOP",
+        "index": 1,
+        "position": [
+          192,
+          0
+        ],
+        "surface": "ONE_WAY_PLATFORM",
+        "permission": "INOUT"
+      },
+      {
+        "id": "B",
+        "face": "BOTTOM",
+        "index": 3,
+        "position": [
+          448,
+          512
+        ],
+        "surface": "ONE_WAY_PLATFORM",
+        "permission": "INOUT"
+      }
+    ],
+    "intendedRelations": [
+      {
+        "from": "L",
+        "to": "R",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "L",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "R",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "R",
+        "to": "T",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "R",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "T",
+        "to": "R",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "T",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "R",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "T",
+        "status": "DESIGN_TARGET",
+        "validation": "UNKNOWN"
+      }
+    ]
+  },
+  "designChanges": [
+    "两条直线轨由原生Cell表达，不引入圆轨；同周期错相只是设计初值，未证明任意入场相位都可安全换乘。",
+    "轨迹几何交点不是静态平台。不能把虚线交叉当落脚点；若两台同时到位造成夹挤须调整相位或退回设计。",
+    "observation：看两条斜轨的交接区、载台运动方向，以及上/右两个高位目的岸。",
+    "decision：在交接区跳到另一台，还是继续随本台离开；下行回程也要选对接台方向。"
+  ],
+  "gapStatus": "LAYOUT_AND_NATIVE_EXPORT_UNVERIFIED",
+  "method": "Native Cell source inspection and static Block/Port/object/rail bounds only; no trajectory solver or physics.",
+  "missingRules": [],
+  "technicalStatus": "UNKNOWN",
+  "physicsRun": false,
+  "diagramRenderer": {
+    "path": "generation/manual-review/batch-001/render_diagrams.py",
+    "sha256": "5f82d7de0164de63de39fabe8c7a912eb7f430103070d6f814fea887544a8dab",
+    "scope": "opt-in link center/subset drawing only; existing approved pictures unchanged"
+  }
+}
