@@ -1,0 +1,286 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "game-moving-transfer",
+  "reviewId": "115",
+  "title": "移动换乘",
+  "summary": "8×2 Block；左右各裁2，原摆渡平台上加1陆怪，两口双向目标。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/game-moving-transfer/module.mapnote.json",
+    "contentVersion": "sha256:6969b87bbfc23436af611761877bca0bde63ba939ac6c99582abada49d63d1ea",
+    "sha256": "339afa9d8a8104ad273c4f1451b9db7199e35c5ab2105f0d3c01ec2f1cb71636"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 128,
+    "y": 504,
+    "w": 1024,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        128,
+        568
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        1152,
+        568
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return_or_hub",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左右2，平台上加一个怪，互通",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/platform-0",
+      "type": "terrain",
+      "x": 128,
+      "y": 600,
+      "w": 232,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/platform-1",
+      "type": "terrain",
+      "x": 1000,
+      "y": 600,
+      "w": 152,
+      "h": 80,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/hazard-0",
+      "type": "hazard",
+      "x": 360,
+      "y": 690,
+      "w": 640,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": ""
+    },
+    {
+      "id": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/moving-0",
+      "type": "platform",
+      "x": 320,
+      "y": 560,
+      "w": 160,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceId": "ferry",
+      "trackId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/moving-track-0"
+    },
+    {
+      "id": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/moving-track-0",
+      "type": "trackLine",
+      "x": 400,
+      "y": 572,
+      "w": 560.000001,
+      "h": 9.999999974752427e-07,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 400,
+          "y": 572
+        },
+        {
+          "x": 960,
+          "y": 572
+        }
+      ],
+      "duration": 3,
+      "dwell": 1,
+      "initialPhase": 0,
+      "mode": "pingpong"
+    },
+    {
+      "id": "design-carrier-enemy",
+      "type": "enemy",
+      "x": 406,
+      "y": 528,
+      "w": 28,
+      "h": 32,
+      "definition": "plains_sentry",
+      "diagramLabel": "平台上陆怪",
+      "supportObjectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/moving-0",
+      "mechanics": {
+        "carrierId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/moving-0",
+        "supportMode": "physical_collision",
+        "bindingStatus": "DESIGN_INTENT_NOT_RUNTIME_CERTIFICATION"
+      }
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 128,
+      "y": 504,
+      "w": 1024,
+      "h": 256,
+      "points": [
+        {
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 300,
+          "y": 582
+        },
+        {
+          "x": 400,
+          "y": 542
+        },
+        {
+          "x": 960,
+          "y": 542
+        },
+        {
+          "x": 1080,
+          "y": 582
+        },
+        {
+          "x": 1152,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 128,
+      "y": 504,
+      "w": 1024,
+      "h": 256,
+      "points": [
+        {
+          "x": 1152,
+          "y": 568
+        },
+        {
+          "x": 1080,
+          "y": 582
+        },
+        {
+          "x": 960,
+          "y": 542
+        },
+        {
+          "x": 400,
+          "y": 542
+        },
+        {
+          "x": 300,
+          "y": 582
+        },
+        {
+          "x": 128,
+          "y": 568
+        }
+      ],
+      "reviewShowTrace": true
+    }
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designNotes": [
+    "删左右2解释为左右各裁2列：12×2变8×2，边界x128–1152/y504–760；两口(128,568)/(1152,568)由原岸顶600承托。",
+    "保留原640px缺口、下方危险带与真实移动平台。平台160×24，中心轨迹(400,572)→(960,572)，来源duration=3/dwell=1/initialPhase=0不改；图中浅色虚框是另一相位，不是第二个平台。",
+    "新增28×32陆怪初始站在平台上：位置(406,528)、脚底560与平台顶560一致。承载必须使用原真实碰撞和惯性，不用坐标跟随或瞬移替代；supportObjectId仅设计绑定，AI走动/离台、与玩家同台、平台运动相位待验。",
+    "两口互通为entry→exit与exit→entry两个独立目标，需测试双向追台/登台/离台、怪物存活/死亡与真实资源。错过平台、跌落危险带与重试UNKNOWN，不补恢复台。"
+  ],
+  "diagramGhosts": [
+    {
+      "x": 880,
+      "y": 560,
+      "w": 160,
+      "h": 24,
+      "label": "同一平台另一相位"
+    }
+  ],
+  "designVersion": "sha256:426f590e3a4132aaa0c5013eb451db3bb4e47d09394e082d73e3a46a33640108"
+}

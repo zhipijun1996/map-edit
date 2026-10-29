@@ -1,0 +1,479 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "workshop-one-shot-two-routes-1",
+  "reviewId": "225",
+  "title": "三口高低枢纽",
+  "summary": "7×5 Block；删除宝箱与旧接口接梯，顶部C右移1 Block至x448，以一块可穿平台接岸，三口六向目标。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/workshop-one-shot-two-routes-1/module.mapnote.json",
+    "contentVersion": "sha256:44f0cc2fd65361419830de9d0d717edf672df0a0fe6c268085fc0f4653eadc06",
+    "sha256": "effe7ddaa184d3a4547af50175e5a1ab21b9a291fcde99f042fdb9a75c453be5"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 70,
+    "w": 896,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        0,
+        390
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "B",
+      "position": [
+        896,
+        518
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "C",
+      "position": [
+        448,
+        70
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "design-route-A-to-B",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "B-to-A",
+      "from": "B",
+      "to": "A",
+      "pathObjectId": "design-route-B-to-A",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "A-to-C",
+      "from": "A",
+      "to": "C",
+      "pathObjectId": "design-route-A-to-C",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-A",
+      "from": "C",
+      "to": "A",
+      "pathObjectId": "design-route-C-to-A",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "B-to-C",
+      "from": "B",
+      "to": "C",
+      "pathObjectId": "design-route-B-to-C",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "C-to-B",
+      "from": "C",
+      "to": "B",
+      "pathObjectId": "design-route-C-to-B",
+      "role": "hub_connection",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删掉宝箱和接口支撑，上端port为可穿平台，往右移1",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 422,
+      "w": 240,
+      "h": 116,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-1",
+      "type": "terrain",
+      "x": 315,
+      "y": 230,
+      "w": 130,
+      "h": 24,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-4861bcf30bf2e8531c5c04fc3396ec9876783bdc575a7f27c22f1776195bd786/platform-2",
+      "type": "terrain",
+      "x": 520,
+      "y": 550,
+      "w": 376,
+      "h": 100,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "design-hub-air-enemy",
+      "type": "enemy",
+      "x": 420,
+      "y": 350,
+      "w": 32,
+      "h": 32,
+      "definition": "plains_diver",
+      "diagramLabel": "空中怪"
+    },
+    {
+      "id": "design-route-A-to-B",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 390
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 350,
+          "y": 340
+        },
+        {
+          "x": 480,
+          "y": 460
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 896,
+          "y": 518
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-B-to-A",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 896,
+          "y": 518
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 470,
+          "y": 440
+        },
+        {
+          "x": 350,
+          "y": 330
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 0,
+          "y": 390
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-A-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 390
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 290,
+          "y": 212
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 448,
+          "y": 116
+        },
+        {
+          "x": 448,
+          "y": 70
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-C-to-A",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 448,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": 116
+        },
+        {
+          "x": 380,
+          "y": 116
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 290,
+          "y": 212
+        },
+        {
+          "x": 280,
+          "y": 330
+        },
+        {
+          "x": 220,
+          "y": 404
+        },
+        {
+          "x": 0,
+          "y": 390
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-B-to-C",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 896,
+          "y": 518
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 480,
+          "y": 430
+        },
+        {
+          "x": 480,
+          "y": 212
+        },
+        {
+          "x": 380,
+          "y": 212
+        },
+        {
+          "x": 448,
+          "y": 116
+        },
+        {
+          "x": 448,
+          "y": 70
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-C-to-B",
+      "type": "route",
+      "x": 0,
+      "y": 70,
+      "w": 896,
+      "h": 640,
+      "points": [
+        {
+          "x": 448,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": 116
+        },
+        {
+          "x": 510,
+          "y": 116
+        },
+        {
+          "x": 510,
+          "y": 400
+        },
+        {
+          "x": 560,
+          "y": 532
+        },
+        {
+          "x": 896,
+          "y": 518
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-C-one-way-platform",
+      "type": "platform",
+      "x": 400,
+      "y": 134,
+      "w": 96,
+      "h": 12,
+      "label": "C口可穿平台",
+      "note": "单块直接接岸，替代已删除的两段接口接梯；上穿/落稳待验证"
+    }
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "A",
+      "B",
+      "C"
+    ],
+    "cells": [
+      {
+        "from": "A",
+        "to": "A",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "A",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "B",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "C",
+        "to": "C",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designNotes": [
+    "边界仍7×5，x0–896/y70–710；A(0,390)、B(896,518)不变。用户“往右移1”解释为一列128px Block：顶C由(320,70)改为(448,70)，仍在顶边Block中心。",
+    "删除原12金币宝箱、两段旧接口可穿接梯y118/y166以及与右岸重复的10px接口支撑。保留原高台(315,230,130,24)，它是内部地貌，不是接口接梯。",
+    "顶部Port保持ONE_WAY_PLATFORM/INOUT，以唯一C口可穿平台(400,134,96,12)直接接岸；不再保留原两级支撑。平台在Port下64px，给全身跨顶边留出空间；上穿与落稳仅为设计目标。",
+    "一只原中庭空怪保持(420,350,32,32)，三口六个有向目标保持UNKNOWN，所有涉及C的示意路线改绑新位置。",
+    "无宝箱后枢纽通行不带领取目标；空中命中续枪的真实提交、敌人存活/死亡状态、跳跃与反冲枪数、顶部双向全身净空、稳定出入口、失败恢复均需实现阶段验证。不在接岸补资源或额外台阶。"
+  ],
+  "designVersion": "sha256:90b832454ab37fcee8c68cbf536eb11d6e790dc03da17a353b18f29d49b7cc89"
+}
