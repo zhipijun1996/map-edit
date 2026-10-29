@@ -1,0 +1,311 @@
+{
+  "designVersion": "sha256:8351104645b1a749f58f5ed5011af6bc7612cf3a1c89b52fb70d08e76a5a32df",
+  "content": {
+    "platforms": [
+      [
+        -128,
+        502,
+        368,
+        32
+      ],
+      [
+        -60,
+        118,
+        180,
+        80
+      ],
+      [
+        -128,
+        118,
+        92,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [
+      {
+        "id": "ammo-sentry",
+        "definition": "plains_sentry",
+        "position": [
+          125.0,
+          486.0
+        ],
+        "initial_idle_cooldown": 0.6
+      }
+    ],
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          30,
+          100
+        ],
+        "region": [
+          0,
+          95,
+          60,
+          10
+        ],
+        "amount": 16
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 80,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              75,
+              480,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "cancel_settle": true
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 6
+          },
+          "value": 1,
+          "cancel_settle": true
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "ammo-sentry"
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 20
+          },
+          "direction": [
+            0.5,
+            0.8660254037844386
+          ]
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1,
+          "cancel_settle": true
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 30,
+          "deadband": 4
+        },
+        {
+          "op": "settle",
+          "target_x": 30,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              25,
+              96,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": -104,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              -109,
+              96,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 2700
+    },
+    {
+      "route": {
+        "id": "exit-to-entry",
+        "from_port": "exit",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 30,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              25,
+              96,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 160
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 50
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": -104,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              -109,
+              480,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 2700
+    }
+  ],
+  "notes": [
+    "Geometry, hazards, enemies, tracks and authored dwell unchanged; parameters and input policy only.",
+    "196 bottom AIR ingress is conditional on an incoming upward velocity, not a grounded recovery."
+  ]
+}

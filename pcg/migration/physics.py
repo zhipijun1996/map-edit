@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -517,6 +517,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=rejected_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v6 import classify as compact_bell_exterior
     judgment=compact_bell_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v7 import classify as low_return_exterior
+    judgment=low_return_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -776,6 +778,7 @@ def _verification_identity(folder, proof):
         reviewCounterScopeV4=core.sha(Path(__file__).with_name('review_counter_scope_v4.py')),
         reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
         reviewCounterScopeV6=core.sha(Path(__file__).with_name('review_counter_scope_v6.py')),
+        reviewCounterScopeV7=core.sha(Path(__file__).with_name('review_counter_scope_v7.py')),
         onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
         reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
         metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),

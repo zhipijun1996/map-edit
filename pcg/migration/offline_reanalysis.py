@@ -74,7 +74,7 @@ def reanalyse(folder,source_report,name='offline-causal-v2'):
     # seam, world goal and counter. The historical passed flag is not admission.
     physics.verify_report(folder,proof,deep=True)
     sources=[Path(physics.__file__),Path(causal_observer.__file__),Path(causal_observer_v2.__file__),Path(causal_observer_v3.__file__),
-             Path(pool_protocols.__file__),Path(holdout_guard.__file__),Path(__file__),Path(__file__).with_name('review_counter_scope_v1.py'),Path(__file__).with_name('review_counter_scope_v2.py'),Path(__file__).with_name('review_counter_scope_v3.py'),Path(__file__).with_name('review_counter_scope_v4.py'),Path(__file__).with_name('review_counter_scope_v5.py'),Path(__file__).with_name('review_counter_scope_v6.py')]
+             Path(pool_protocols.__file__),Path(holdout_guard.__file__),Path(__file__),Path(__file__).with_name('review_counter_scope_v1.py'),Path(__file__).with_name('review_counter_scope_v2.py'),Path(__file__).with_name('review_counter_scope_v3.py'),Path(__file__).with_name('review_counter_scope_v4.py'),Path(__file__).with_name('review_counter_scope_v5.py'),Path(__file__).with_name('review_counter_scope_v6.py'),Path(__file__).with_name('review_counter_scope_v7.py')]
     hashes={core.relative(p):core.sha(p)for p in sources};token=digest(dict(sourceReport=proof,analysisSources=hashes))[:24]
     snapshots=run/'offline-analysis'/token
     code=[]
