@@ -1,0 +1,483 @@
+{
+  "content": {
+    "platforms": [
+      [
+        384,
+        438,
+        256,
+        32
+      ],
+      [
+        384,
+        214,
+        256,
+        182
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [
+      {
+        "id": "design-ambush-left",
+        "definition": "plains_sentry",
+        "position": [
+          406.0,
+          422.0
+        ],
+        "initial_idle_cooldown": 2.0
+      },
+      {
+        "id": "design-ambush-right",
+        "definition": "plains_sentry",
+        "position": [
+          610.0,
+          422.0
+        ],
+        "initial_idle_cooldown": 2.0
+      }
+    ],
+    "reward_sites": [],
+    "review029_wave": {
+      "rect": [
+        482,
+        396,
+        60,
+        42
+      ],
+      "targetX": 512,
+      "speed": 18,
+      "oneShot": true
+    }
+  },
+  "controls": [
+    [
+      {
+        "op": "settle",
+        "target_x": 476,
+        "deadband": 0.6,
+        "source_native_gain": 5.5,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded",
+          "migration_goal": [
+            471,
+            416,
+            10,
+            8
+          ],
+          "timeout": 480
+        }
+      },
+      {
+        "op": "axis",
+        "value": 0,
+        "cancel_settle": true,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 3
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "settle",
+        "target_x": 616,
+        "deadband": 0.6,
+        "source_native_gain": 5.5,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded",
+          "migration_goal": [
+            611,
+            416,
+            10,
+            8
+          ],
+          "timeout": 480
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 24
+        }
+      }
+    ],
+    [
+      {
+        "op": "settle",
+        "target_x": 548,
+        "deadband": 0.6,
+        "source_native_gain": 5.5,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded",
+          "migration_goal": [
+            543,
+            416,
+            10,
+            8
+          ],
+          "timeout": 480
+        }
+      },
+      {
+        "op": "axis",
+        "value": 0,
+        "cancel_settle": true,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 3
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-right"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded_shot_ready",
+          "timeout": 120
+        }
+      },
+      {
+        "op": "shoot",
+        "trigger": {
+          "after": 0
+        },
+        "aim_cell": {
+          "kind": "enemy",
+          "id": "design-ambush-left"
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 17
+        }
+      },
+      {
+        "op": "settle",
+        "target_x": 408,
+        "deadband": 0.6,
+        "source_native_gain": 5.5,
+        "trigger": {
+          "after": 0
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "state": "grounded",
+          "migration_goal": [
+            403,
+            416,
+            10,
+            8
+          ],
+          "timeout": 480
+        }
+      },
+      {
+        "op": "wait",
+        "trigger": {
+          "after": 24
+        }
+      }
+    ]
+  ],
+  "original": {
+    "reviewId": "171",
+    "moduleId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
+    "designFile": "generation/manual-review/designs/batch-019/feedback-003/171.design.json",
+    "designVersion": "sha256:786f516dc9834fc2692f5a97f2965930869885feb0f8d1b7e72b49975701b061",
+    "designFileSha256": "b285a1db02aa042db5952f36a280cccc1644ec7c8292393790cf6d852e900b87",
+    "status": "READY_FOR_IMPLEMENTATION",
+    "sourceModule": {
+      "file": "./modules/generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/module.mapnote.json",
+      "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
+      "sha256": "ceb14e7dc6bbbdde95e0b2497962633b77a550ee95e7f1e8305202b2c120c289"
+    },
+    "outputDirectory": "pcg/manual_review/implementation/batch-019/generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
+    "designDecisionSource": "feedback/manual-review/batch-020/human-feedback-027.json"
+  }
+}

@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -254,6 +254,8 @@ def seam_cases(case, doc):
                     outside, inside = bx+nx*48, bx-nx*48
                     start, target = (outside, inside) if direction == 'ingress' else (inside, outside)
                     value['spawn'] = [start, y+offset]
+                    from .review_oneway_fixture_v1 import repair as repair_oneway_start
+                    repair_oneway_start(value,port,offset)
                     value['goal'] = [target-9, y-5, 18, 10]
                     value['control_plan'] = [dict(op='settle', trigger=dict(after=0), target_x=target, deadband=3)]
                 else:
@@ -607,7 +609,9 @@ def verify_report(folder, proof):
         from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
         lineage_report=validate_metadata(report,report_path)
     if lineage_report.get('boundaryRepair'):
-        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v5':
+        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v6':
+            from .review_boundary_repair_v6 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v5':
             from .review_boundary_repair_v5 import validate_lineage
         elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v4':
             from .review_boundary_repair_v4 import validate_lineage
@@ -772,9 +776,10 @@ def _verification_identity(folder, proof):
         reviewCounterScopeV4=core.sha(Path(__file__).with_name('review_counter_scope_v4.py')),
         reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
         reviewCounterScopeV6=core.sha(Path(__file__).with_name('review_counter_scope_v6.py')),
+        onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
         reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
         metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),
-        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3','v4','v5')},
+        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3','v4','v5','v6')},
         airInterfaces=core.sha(Path(__file__).with_name('air_interfaces_v1.py')),
         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
         report=proof, runFiles=files,
