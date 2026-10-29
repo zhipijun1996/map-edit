@@ -39,6 +39,8 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   if typ in ('terrain','platform'):
    parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{'#c8d5b8'if typ=='platform'else'#a4b490'}" stroke="#697e60" stroke-width="1.5"/>')
    if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,review_meta.get('objectLabels',{}).get(o['id'],('接口支撑' if o.get('label')=='Local boundary connector' else (o.get('label') or '可穿平台'))),18,anchor='middle')
+  elif typ=='projectileBarrier':
+   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#a4c9d7" fill-opacity=".65" stroke="#437c94" stroke-width="2" stroke-dasharray="4 3"/>');lp=o.get('diagramLabelPosition',[o['x']+o['w']/2,o['y']-12]);text(X(lp[0]),Y(lp[1]),o.get('diagramLabel','挡弹板 · 人物可穿 · 缺Cell'),19,anchor='middle')
   elif typ=='reflector':
    a,z=o['segment'];ax,ay=X(a[0]),Y(a[1]);zx,zy=X(z[0]),Y(z[1]);parts.append(f'<path d="M{ax} {ay}L{zx} {zy}" stroke="#668eaa" stroke-width="12"/><path d="M{ax} {ay}L{zx} {zy}" stroke="#deeff7" stroke-width="5"/>');lp=o.get('diagramLabelPosition',[o['x']+o['w']/2,o['y']-12]);text(X(lp[0]),Y(lp[1]),o.get('diagramLabel','反射镜 · 缺Cell'),19,anchor='middle')
   elif typ=='hitTurret':
@@ -123,7 +125,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  for o in doc['objects']:
   if o['type']=='bell':
    for target in o.get('diagramTargetIds',o.get('targetIds',[o.get('targetId')])):
-    gate=next((g for g in doc['objects'] if g['id']==target and g['type'] in ('gate','hazard','platform')),None)
+    gate=next((g for g in doc['objects'] if g['id']==target and g['type'] in ('gate','hazard','platform','projectileBarrier')),None)
     if gate:
      target_y=gate['y']+gate['h']/2 if o.get('diagramLinkToCenter') else o['y']+o['h']/2 if gate['type']=='gate' else gate['y']+gate['h']/2
      parts.append(f'<path d="M{X(o["x"]+o["w"]/2)} {Y(o["y"]+o["h"]/2)}L{X(gate["x"]+gate["w"]/2)} {Y(target_y)}" stroke="#ad8a35" stroke-width="1.5" stroke-dasharray="4 5"/>')

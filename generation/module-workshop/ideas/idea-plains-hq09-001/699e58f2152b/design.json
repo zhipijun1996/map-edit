@@ -1,0 +1,620 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq09-001",
+  "reviewId": "HQ09",
+  "title": "让竖向挡板让出炮弹路",
+  "summary": "5×4 Block · 两口双向目标 · 竖板只挡弹、不承载 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 640,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 2,
+      "position": [
+        0,
+        320
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        320
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 1,
+      "position": [
+        192,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        192,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 352,
+      "w": 112,
+      "h": 160
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 128,
+      "y": 32,
+      "w": 128,
+      "h": 12,
+      "label": "顶口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "upper-step",
+      "type": "platform",
+      "x": 128,
+      "y": 160,
+      "w": 96,
+      "h": 12,
+      "label": "上返转身点",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 320,
+      "y": 176,
+      "w": 0,
+      "h": 256,
+      "points": [
+        {
+          "x": 320,
+          "y": 432
+        },
+        {
+          "x": 320,
+          "y": 176
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform motion clock only; projectile-only body MISSING",
+        "start": [
+          320,
+          432
+        ],
+        "finish": [
+          320,
+          176
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.3888888888888889,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "projectileBarrier",
+      "x": 312,
+      "y": 184,
+      "w": 16,
+      "h": 112,
+      "trackId": "rail-P",
+      "designCollision": "PROJECTILES_ONLY_PLAYER_NON_SOLID",
+      "diagramLabel": "竖挡板：人物可穿，不能落脚",
+      "diagramLabelPosition": [
+        450,
+        214
+      ],
+      "mechanics": {
+        "kind": "PROPOSED_MOVING_PROJECTILE_ONLY_BARRIER",
+        "status": "MISSING_CELL_OR_COLLISION_BINDING",
+        "playerCollision": false,
+        "playerSupport": false,
+        "projectileCollision": true,
+        "clock": "Reuse native motion phase and pause; do not reuse native solid carrying collision"
+      }
+    },
+    {
+      "id": "fixed-turret",
+      "type": "hitTurret",
+      "x": 154,
+      "y": 328,
+      "w": 44,
+      "h": 48,
+      "diagramLabel": "受击定向炮台 · 缺Cell",
+      "mechanics": {
+        "kind": "PROPOSED_HIT_TRIGGERED_FIXED_DIRECTION_EMITTER",
+        "status": "MISSING_CELL",
+        "fixedDirection": [
+          0.838443616300637,
+          -0.5449883505954141
+        ],
+        "mountTo": null,
+        "input": "Absorb valid player shot",
+        "output": "New mechanism projectile, independent identity with parent event",
+        "extraRecoil": false,
+        "ammoRefund": false
+      }
+    },
+    {
+      "id": "top-gate",
+      "type": "gate",
+      "x": 0,
+      "y": 96,
+      "w": 640,
+      "h": 16,
+      "mechanics": {
+        "kind": "timed_gate",
+        "initialState": "CLOSED",
+        "openSeconds": "UNKNOWN",
+        "bodyAntiCrush": "REQUIRES_VALIDATION"
+      },
+      "diagramLabel": "上方长门：跨满模块宽度",
+      "diagramLabelPosition": [
+        400,
+        82
+      ]
+    },
+    {
+      "id": "target-bell",
+      "type": "bell",
+      "x": 486,
+      "y": 134,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "开上方长门",
+      "targetIds": [
+        "top-gate"
+      ],
+      "diagramLinkToCenter": true,
+      "diagramLabelPosition": [
+        536,
+        158
+      ]
+    },
+    {
+      "id": "return-bell",
+      "type": "bell",
+      "x": 182,
+      "y": 54,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "顶侧同门返回",
+      "targetIds": [
+        "top-gate"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "motion-bell",
+      "type": "bell",
+      "x": 62,
+      "y": 278,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "启停挡弹板（非载台）",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true,
+      "diagramLabelPosition": [
+        72,
+        252
+      ]
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 320
+        },
+        {
+          "x": 64,
+          "y": 320
+        },
+        {
+          "x": 208,
+          "y": 256
+        },
+        {
+          "x": 248,
+          "y": 248
+        },
+        {
+          "x": 192,
+          "y": 128
+        },
+        {
+          "x": 192,
+          "y": 64
+        },
+        {
+          "x": 192,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 192,
+          "y": 0
+        },
+        {
+          "x": 192,
+          "y": 64
+        },
+        {
+          "x": 192,
+          "y": 128
+        },
+        {
+          "x": 248,
+          "y": 248
+        },
+        {
+          "x": 208,
+          "y": 256
+        },
+        {
+          "x": 64,
+          "y": 320
+        },
+        {
+          "x": 0,
+          "y": 320
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "launch-step",
+      "type": "platform",
+      "x": 128,
+      "y": 288,
+      "w": 112,
+      "h": 12,
+      "label": "固定起跳台（不随竖板移动）",
+      "designCollision": "one_way",
+      "diagramLabelBelow": true
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "从固定起跳台和上返台通行，读竖板让弹窗口后击炮开长门；竖板无人物碰撞、无承载。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        1.5,
+        -2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-L",
+      "from": "T",
+      "to": "L",
+      "role": "return",
+      "pathObjectId": "route-T-L",
+      "strategy": "顶侧访问重开同一长门后，落固定台回左岸；竖板不当接岸。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -1.5,
+        2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "蓝竖板＝只挡弹／人物可穿（缺Cell）　绿台＝人物固定落点　紫＝长门／机关弹　蓝线＝玩家弹",
+  "reviewInstructions": [
+    "① 紫色上门延长到模块左右边界；闭门越过/绕端点仍须身体与边界验证。",
+    "② 蓝色细竖板只挡弹、人物可穿，不能站；这是缺碰撞规则的新Cell设计。",
+    "③ 人物改走固定起跳台与上返台；虚框是同一挡板下移后的状态。",
+    "④ 炮台可否被直接射铃替代仍是反例缺口；本稿不宣称已解决。"
+  ],
+  "designNotes": [
+    "人工原话“上当门”解释为“上方门”；门水平从x0延伸至640，y96–112，Module与Port不变。",
+    "目标铃下移32px到(496,144)，避免加长后的闭门与铃几何重叠；炮口固定向量同步改(320,-208)，是局部图稿适配。",
+    "竖板快照x312–328/y184–296截住斜炮线；下移例y296–408放行。真实弹丸半径/动态扫掠/停止窗口UNKNOWN。",
+    "固定起跳台(128,288,112,12)代替已取消的承载用途；炮线在x240处y310.4，静态离台底300超过10px，不是物理认证。",
+    "observation：看竖向挡弹板与炮线是否相交、上方长门是否打开；固定踏台才是人物落点。",
+    "decision：启停或等待竖板让出炮弹通路，再从固定台起跳击炮；人物不在挡板上等待或回枪。",
+    "causality：玩家弹触发炮台生成机关弹，只有挡板让开才可能击铃开门；人物只获得原射击反冲。竖板只挡弹、不与人物承载接触。",
+    "cells：HQ05受击固定方向炮台（缺Cell）；竖向移动只挡弹板（缺碰撞筛选/Cell）；原生计时风铃门；两块功能性固定可穿踏台",
+    "abilities：jump；shot_recoil",
+    "resources：真实跳跃、枪次、冷却及固定台落地恢复；穿过竖板不恢复资源。",
+    "terrain：5×4不变，上门由128px延长到640px，横贯两侧边界；原横载台改16×112竖板，增加固定起跳台供人物上行。",
+    "reward：开门进入上接模块，不加宝箱。",
+    "recovery：误击被挡可回固定起跳台恢复后重试；顶侧返回铃重开同门后沿固定台下降。新高度预算和等待成本待验。",
+    "directions：L→T先处理挡弹窗口，再从固定台上返；T→L重开长门下降，两个方向均UNKNOWN。",
+    "cheapSolutions：直接射铃绕过炮台；此项未因HQ06废弃而解决，不能宣称炮台必需；提前开门再慢走；从长门端点或非Port越界绕行；把竖板顶部当落点或碰触竖板回枪；固定踏台遮住机关弹；站地面反复射击等待而失去挑战",
+    "difference：按人工反馈取消落点与弹路的双重取舍，转为控制挡弹窗口；与194同属射窗方向，新增控制方式不自动算新玩法家族。",
+    "Cell缺口：HQ05受击定向炮台仍未实现；不能从设计保留推断已有Cell。；新增只与弹丸碰撞、人物可穿且不承载的竖向移动挡板；原实体载台不能直接冒充此能力。；运动/启停时钟可参考原生载台；碰撞筛选、位置跟随、炮弹拦截、阶段取消要真实绑定。；直接射铃替代炮台尚未排除；固定台到上返台的真实资源和身体预算、长门开窗/防夹、回程/恢复、越界反例均UNKNOWN。",
+    "当前新版未获人工保留，不开始实现。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq09-001/source-analysis-feedback-001.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 312,
+      "y": 296,
+      "w": 16,
+      "h": 112,
+      "label": "放行位置（同一竖板）"
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          196.1226467912153,
+          338.9202795857101
+        ],
+        [
+          312,
+          263.6
+        ]
+      ],
+      "color": "#995cbd",
+      "label": "竖板截弹",
+      "labelPosition": [
+        448,
+        316
+      ],
+      "dashed": true,
+      "endStop": true
+    },
+    {
+      "points": [
+        [
+          328,
+          253.2
+        ],
+        [
+          486,
+          150.5
+        ]
+      ],
+      "color": "#995cbd",
+      "label": "板让开后：炮弹 → 风铃",
+      "labelPosition": [
+        458,
+        194
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          248,
+          248
+        ],
+        [
+          176,
+          352
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "起跳向后下击炮",
+      "labelPosition": [
+        168,
+        244
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        248,
+        248
+      ],
+      "label": "从固定台起跳",
+      "labelPosition": [
+        204,
+        212
+      ]
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        348,
+        272
+      ],
+      "to": [
+        348,
+        352
+      ]
+    },
+    {
+      "from": [
+        248,
+        248
+      ],
+      "to": [
+        296,
+        180
+      ]
+    }
+  ],
+  "designVersion": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38"
+}
