@@ -1,0 +1,832 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-large-01-001",
+  "reviewId": "LG01",
+  "title": "三台留路：离台时冻结，取宝后重新启动",
+  "summary": "10×7 Block · 单L口取宝后返回 · 连续偏难目标 / 未实测",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 1280,
+    "h": 896
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 5,
+      "position": [
+        0,
+        704
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "entry",
+      "stagingPosition": [
+        64,
+        704
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "entry",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 160,
+      "h": 160
+    },
+    {
+      "id": "chest-bank",
+      "type": "terrain",
+      "x": 1136,
+      "y": 256,
+      "w": 144,
+      "h": 128
+    },
+    {
+      "id": "treasure",
+      "type": "reward",
+      "x": 1188,
+      "y": 232,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "三段后取宝"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 240,
+      "y": 480,
+      "w": 224,
+      "h": 224,
+      "points": [
+        {
+          "x": 240,
+          "y": 704
+        },
+        {
+          "x": 464,
+          "y": 480
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          240,
+          704
+        ],
+        "finish": [
+          464,
+          480
+        ],
+        "travel_duration": 3.6,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.4035714285714286,
+        "designState": "MOVING_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "platform",
+      "x": 360.0,
+      "y": 518.0,
+      "w": 112,
+      "h": 20,
+      "trackId": "rail-P",
+      "label": "P 实体台",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "rail-Q",
+      "type": "trackLine",
+      "x": 560,
+      "y": 448,
+      "w": 288,
+      "h": 0,
+      "points": [
+        {
+          "x": 560,
+          "y": 448
+        },
+        {
+          "x": 848,
+          "y": 448
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          560,
+          448
+        ],
+        "finish": [
+          848,
+          448
+        ],
+        "travel_duration": 3.9,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.3236434108527132,
+        "designState": "MOVING_EXAMPLE"
+      }
+    },
+    {
+      "id": "Q",
+      "type": "platform",
+      "x": 680.0,
+      "y": 438.0,
+      "w": 112,
+      "h": 20,
+      "trackId": "rail-Q",
+      "label": "Q 实体台",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "rail-R",
+      "type": "trackLine",
+      "x": 1000,
+      "y": 304,
+      "w": 0,
+      "h": 296,
+      "points": [
+        {
+          "x": 1000,
+          "y": 600
+        },
+        {
+          "x": 1000,
+          "y": 304
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          1000,
+          600
+        ],
+        "finish": [
+          1000,
+          304
+        ],
+        "travel_duration": 4.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.4136310223266745,
+        "designState": "MOVING_EXAMPLE"
+      }
+    },
+    {
+      "id": "R",
+      "type": "platform",
+      "x": 952.0,
+      "y": 350.0,
+      "w": 96,
+      "h": 20,
+      "trackId": "rail-R",
+      "label": "R 实体台",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "p-bell",
+      "type": "bell",
+      "x": 438,
+      "y": 614,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "启停P",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "q-bell",
+      "type": "bell",
+      "x": 742,
+      "y": 494,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "启停Q",
+      "targetIds": [
+        "Q"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "r-bell",
+      "type": "bell",
+      "x": 1046,
+      "y": 414,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "启停R",
+      "targetIds": [
+        "R"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "p-entry",
+      "type": "bell",
+      "x": 102,
+      "y": 670,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "入口P访问",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "r-return",
+      "type": "bell",
+      "x": 1158,
+      "y": 198,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "箱岸R访问",
+      "targetIds": [
+        "R"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "recover-1",
+      "type": "platform",
+      "x": 288,
+      "y": 800,
+      "w": 112,
+      "h": 12,
+      "label": "低位接回①",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "recover-2",
+      "type": "platform",
+      "x": 688,
+      "y": 704,
+      "w": 128,
+      "h": 12,
+      "label": "低位接回②",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "low-bed",
+      "type": "terrain",
+      "x": 160,
+      "y": 864,
+      "w": 1120,
+      "h": 32
+    },
+    {
+      "id": "low-thorns",
+      "type": "hazard",
+      "x": 160,
+      "y": 844,
+      "w": 1120,
+      "h": 20,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "low-bed",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 1120,
+        "depth": 20
+      }
+    },
+    {
+      "id": "route-L-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 896,
+      "points": [
+        {
+          "x": 0,
+          "y": 704
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 240,
+          "y": 672
+        },
+        {
+          "x": 416,
+          "y": 496
+        },
+        {
+          "x": 512,
+          "y": 480
+        },
+        {
+          "x": 560,
+          "y": 416
+        },
+        {
+          "x": 736,
+          "y": 416
+        },
+        {
+          "x": 856,
+          "y": 408
+        },
+        {
+          "x": 1000,
+          "y": 328
+        },
+        {
+          "x": 1104,
+          "y": 280
+        },
+        {
+          "x": 1200,
+          "y": 224
+        },
+        {
+          "x": 1104,
+          "y": 280
+        },
+        {
+          "x": 1000,
+          "y": 328
+        },
+        {
+          "x": 848,
+          "y": 416
+        },
+        {
+          "x": 560,
+          "y": 416
+        },
+        {
+          "x": 416,
+          "y": 496
+        },
+        {
+          "x": 240,
+          "y": 672
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 0,
+          "y": 704
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "transfer-saw-rail",
+      "type": "trackLine",
+      "x": 912,
+      "y": 336,
+      "w": 0,
+      "h": 128,
+      "points": [
+        {
+          "x": 912,
+          "y": 336
+        },
+        {
+          "x": 912,
+          "y": 464
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          912,
+          400
+        ],
+        "travel": [
+          0,
+          64
+        ],
+        "period": 3.1,
+        "initial_phase": 0,
+        "designOnly": true
+      }
+    },
+    {
+      "id": "transfer-saw",
+      "type": "hazard",
+      "x": 888,
+      "y": 376,
+      "w": 48,
+      "h": 48,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "transfer-saw-rail",
+      "label": "换乘窗口锯"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-L",
+      "from": "L",
+      "to": "L",
+      "role": "reward_return",
+      "pathObjectId": "route-L-L",
+      "strategy": "跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。；L→L包含完整三台去程、领取宝箱、利用之前留下的R/Q/P位置回行；位置不好就重启相应一台再截乘，不能借用重置相位或箱后免费资源。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        0.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "TARGET_HIGH_NOT_CALIBRATED",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      },
+      "rewardContract": {
+        "objectId": "treasure",
+        "requireActualClaim": true,
+        "returnTo": "L",
+        "status": "UNKNOWN"
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "event": "reach_reward_claim_and_return",
+        "validation": "UNKNOWN"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "青线＝去程　橙线＝取宝后回程　蓝虚线＝射击　绿箭头＝反冲　虚框＝轨道端点",
+  "reviewInstructions": [
+    "① P斜升→Q横移→R竖升，跃离时射身后铃；不是停好三台再走安全楼梯。",
+    "② 停位保留，去程留下的台决定取宝后的返回支点；回程必要时独立重启。",
+    "③ 地刺附着底部岩床；两低台只服务重试。真实相位、落台和回程尚未验证。"
+  ],
+  "designNotes": [
+    "移动平台均使用原生线段往复、独立时钟；图中只是一组不同进度的快照，不宣称同步可达。",
+    "返回访问必须覆盖错误停位，不能从箱岸默认可以射到全部控制或把平台重置为初态。",
+    "连续挑战允许在真实台上观察、再择时离台；不要求固定毫秒序列。",
+    "decision：跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。",
+    "causality：同枪产生方向反冲并让刚离开的真实载台保留当前相位，三个冻结位置逐段变成玩家自己留下的回程支点；不是三次等电梯，也不自动吸附理想停点。",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
+    "terrain：10×7。P斜升、Q横移、R竖升，三段接力没有贯通静态楼梯。只有入口、箱岸及两处低接回台；运动包络不与岩体重叠。",
+    "reward：唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
+    "recovery：两处低接回台只接对应中段失误，须重新追当前载台；漏出接回范围按原受伤/死亡流程，不承诺无损回滚。停台失误可访问原控制重启，错误停位和所有低台恢复可达仍待验。",
+    "directions：L→L包含完整三台去程、领取宝箱、利用之前留下的R/Q/P位置回行；位置不好就重启相应一台再截乘，不能借用重置相位或箱后免费资源。",
+    "cheapSolutions：从入口一次大跳直上箱岸；P/Q/R任意一台删掉仍等价；全程不射击只随台坐到终点；所有冻结位置都可通关使停位判断冗余；停错后控制不可达；回程用直落绕过全部关卡且无真实代价",
+    "difference：复用S04/S12与S06的可控承载关系，扩展为自己保存三段回程落点的连续Macro；不把大尺寸/三台数量当新玩法家族。",
+    "Cell与规则缺口：原生单铃单台启停、保持时钟和实体承载可复用；本案不要求一铃多台或移动铃。多个访问铃同一目标的绑定须按真实消费者核对。；新三段布局/停位可行区间、独立动态相位、离台惯性、身体碰撞、枪次/冷却、回程与失误恢复全部UNKNOWN。；若无射击跟车与精确停位同样安全且便宜，核心假设失败，应修布局，不算技术/体验通过。",
+    "未获此精确版本人工保留，不实施真实Module，不运行物理。",
+    "Q→R加入同一路径上下锯：必须同时读R未来位置与锯是否让出上侧路径，避免只管瞄铃不看落点。",
+    "图示三条回射线均从平台前缘外侧离台后发射，静态快照中不穿过自己刚离开的实体平台；动态相位仍须验证。",
+    "observation：同时看当前脚下台的离岸速度、下一台是否迎向自己，以及身后被冻结的台是否留在回程可用高度。 Q→R还要看同一路径竖锯是否让出会合窗。",
+    "cells：原生线段实体载台×3；固定ShotLatch单目标启停与同目标访问铃；少量可穿接回台；岩岸/末端宝箱/依附岩面地刺；Q→R换乘窗原生竖锯×1"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-large-01-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 408.0,
+      "y": 470.0,
+      "w": 112,
+      "h": 20,
+      "label": "P 轨道端点"
+    },
+    {
+      "x": 792.0,
+      "y": 438.0,
+      "w": 112,
+      "h": 20,
+      "label": "Q 轨道端点"
+    },
+    {
+      "x": 952.0,
+      "y": 294.0,
+      "w": 96,
+      "h": 20,
+      "label": "R 轨道端点"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        416.0,
+        510.0
+      ],
+      "to": [
+        449.94112549695427,
+        476.05887450304573
+      ]
+    },
+    {
+      "from": [
+        736.0,
+        430.0
+      ],
+      "to": [
+        784.0,
+        430.0
+      ]
+    },
+    {
+      "from": [
+        1000.0,
+        342.0
+      ],
+      "to": [
+        1000.0,
+        294.0
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        512,
+        480
+      ],
+      "to": [
+        448,
+        624
+      ],
+      "recoil": [
+        [
+          512,
+          480
+        ],
+        [
+          584,
+          396
+        ]
+      ],
+      "label": "① 离P回射：冻结身后落点",
+      "labelPosition": [
+        400,
+        376
+      ]
+    },
+    {
+      "from": [
+        856,
+        408
+      ],
+      "to": [
+        752,
+        504
+      ],
+      "recoil": [
+        [
+          856,
+          408
+        ],
+        [
+          952,
+          328
+        ]
+      ],
+      "label": "② 离Q回射：追上升R",
+      "labelPosition": [
+        728,
+        292
+      ]
+    },
+    {
+      "from": [
+        1104,
+        280
+      ],
+      "to": [
+        1056,
+        424
+      ],
+      "recoil": [
+        [
+          1104,
+          280
+        ],
+        [
+          1184,
+          192
+        ]
+      ],
+      "label": "③ 离R冻结：刹住箱岸",
+      "labelPosition": [
+        1040,
+        128
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        512,
+        480
+      ],
+      "label": "①",
+      "labelPosition": [
+        520,
+        456
+      ]
+    },
+    {
+      "position": [
+        856,
+        408
+      ],
+      "label": "②",
+      "labelPosition": [
+        864,
+        384
+      ]
+    },
+    {
+      "position": [
+        1104,
+        280
+      ],
+      "label": "③",
+      "labelPosition": [
+        1120,
+        260
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          0,
+          704
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          240,
+          672
+        ],
+        [
+          416,
+          496
+        ],
+        [
+          512,
+          480
+        ],
+        [
+          560,
+          416
+        ],
+        [
+          736,
+          416
+        ],
+        [
+          856,
+          408
+        ],
+        [
+          1000,
+          328
+        ],
+        [
+          1104,
+          280
+        ],
+        [
+          1200,
+          224
+        ]
+      ],
+      "color": "#157f84",
+      "label": "",
+      "labelPosition": [
+        0,
+        0
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          1200,
+          224
+        ],
+        [
+          1000,
+          328
+        ],
+        [
+          848,
+          416
+        ],
+        [
+          560,
+          416
+        ],
+        [
+          416,
+          496
+        ],
+        [
+          240,
+          672
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          0,
+          704
+        ]
+      ],
+      "color": "#d28b25",
+      "label": "",
+      "labelPosition": [
+        0,
+        0
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "designVersion": "sha256:fccb349427de01800e4644b4189300a62bfca57b7cf67febf741dc5d09dc4c1c"
+}
