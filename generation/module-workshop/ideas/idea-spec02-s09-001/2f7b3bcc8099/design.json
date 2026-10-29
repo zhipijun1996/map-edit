@@ -1,0 +1,634 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s09-001",
+  "reviewId": "R2-S09",
+  "title": "S09 · 齿轮在上走下缝，在下走上缝",
+  "summary": "用户授权小幅加宽刺窗：下沿墙顶与附着刺下移16px，净高96→112px；矩形/Port/锯轨道/怪不改。",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 1,
+      "position": [
+        0,
+        192.0
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left-bank",
+      "stagingPosition": [
+        64,
+        192
+      ],
+      "requestedBlockPosition": [
+        0.0,
+        1.5
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "B",
+      "face": "BOTTOM",
+      "index": 2,
+      "position": [
+        320.0,
+        640
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        1
+      ],
+      "diagramLabel": "B",
+      "supportObjectId": "bottom",
+      "stagingPosition": [
+        320,
+        576
+      ],
+      "requestedBlockPosition": [
+        2.5,
+        5.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "基础规格已同步；角落换边仍需独立验证。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            384,
+            576
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s09-B-bottom_right"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left-bank",
+      "type": "terrain",
+      "x": 0,
+      "y": 224,
+      "w": 112,
+      "h": 32
+    },
+    {
+      "id": "upper-wall",
+      "type": "terrain",
+      "x": 176,
+      "y": 0,
+      "w": 32,
+      "h": 160
+    },
+    {
+      "id": "lower-wall",
+      "type": "terrain",
+      "x": 176,
+      "y": 304,
+      "w": 32,
+      "h": 336
+    },
+    {
+      "id": "right-catch",
+      "type": "platform",
+      "x": 256,
+      "y": 416,
+      "w": 128,
+      "h": 12,
+      "label": "右侧接回",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "bottom",
+      "type": "platform",
+      "x": 272,
+      "y": 608,
+      "w": 112,
+      "h": 12,
+      "label": "底口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "upper-rim",
+      "type": "hazard",
+      "x": 176,
+      "y": 160,
+      "w": 32,
+      "h": 16,
+      "orientation": "DOWN",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "upper-wall",
+        "face": "BOTTOM",
+        "start_offset": 0,
+        "length": 32,
+        "depth": 16
+      }
+    },
+    {
+      "id": "lower-rim",
+      "type": "hazard",
+      "x": 176,
+      "y": 288,
+      "w": 32,
+      "h": 16,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "lower-wall",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 32,
+        "depth": 16
+      }
+    },
+    {
+      "id": "saw-rail",
+      "type": "trackLine",
+      "x": 192,
+      "y": 196,
+      "w": 0,
+      "h": 56,
+      "points": [
+        {
+          "x": 192,
+          "y": 196
+        },
+        {
+          "x": 192,
+          "y": 252
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          224
+        ],
+        "travel": [
+          0,
+          28
+        ],
+        "radius": 20,
+        "period": 3.6,
+        "initial_phase": 0.0
+      }
+    },
+    {
+      "id": "window-saw",
+      "type": "hazard",
+      "x": 172,
+      "y": 204,
+      "w": 40,
+      "h": 40,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "saw-rail",
+      "label": "中线与左台面齐平"
+    },
+    {
+      "id": "route-L-B",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 136,
+          "y": 208
+        },
+        {
+          "x": 168,
+          "y": 244
+        },
+        {
+          "x": 232,
+          "y": 244
+        },
+        {
+          "x": 312,
+          "y": 384
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 320,
+          "y": 640
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-B-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 640
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 280,
+          "y": 480
+        },
+        {
+          "x": 312,
+          "y": 384
+        },
+        {
+          "x": 232,
+          "y": 244
+        },
+        {
+          "x": 160,
+          "y": 244
+        },
+        {
+          "x": 136,
+          "y": 192
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "middle-air-enemy",
+      "type": "enemy",
+      "x": 298,
+      "y": 496,
+      "w": 28,
+      "h": 32,
+      "definition": "plains_diver",
+      "diagramLabel": "空中怪：替代原中间台",
+      "designPlacementMeaning": "Native behavior and resources only; no automatic respawn or guaranteed refill. Dead-enemy return remains UNKNOWN."
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-B",
+      "from": "L",
+      "to": "B",
+      "role": "main",
+      "pathObjectId": "route-L-B",
+      "strategy": "从唯一左入口岩台读锯选缝，穿过上移后的窗口，避让/攻击空怪后落底口。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        2.5,
+        3.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "B-to-L",
+      "from": "B",
+      "to": "L",
+      "role": "return",
+      "pathObjectId": "route-B-L",
+      "strategy": "处理删除中间台后的真实上升与空怪资源，再反向穿窗回L；敌死状态可达UNKNOWN。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -2.5,
+        -3.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "左一岩台　红锯上下往复／中线齐台面　橙＝空中怪　虚线路线须在合适相位执行",
+  "reviewInstructions": [
+    "① 左侧只留原入口岩台；齿轮往复中线与台面y224齐平，窗口同步上移。",
+    "② 主图是齿轮居中时刻，先等它让位；下方两小图展示可选通路。",
+    "③ 右侧中间台删除，原位增加一只空中怪；右接回台和底口平台保留。",
+    "④ 删除中间台后的上返、敌死状态与命中恢复仍待验证，不自动重生或补台。"
+  ],
+  "designNotes": [
+    "解释：按最新人工意见精简：左保留原ROCK入口岩台，窗口与齿轮上移；右中间平台换空怪。主图取中位，非当下可穿过的认证。",
+    "observation：在唯一左入口岩台读锯的上下相位；右侧还有一只空中怪，要看它的进攻方向。",
+    "decision：锯在上走下缝，锯在下走上缝；中间都挤时留在接岸等合适窗口，而非盲目下落。",
+    "causality：齿轮的上下位置改变同一通道内可容纳身体的高度带。跳跃选择上缝，反冲调横移穿下缝或追上缝；不是射击切换隐藏状态。",
+    "cells：原静态岩壁与唯一左入口岩台；原生竖移齿轮；原岩沿刺；右接回/底口可穿平台；plains_diver空怪×1",
+    "abilities：jump；shot_recoil",
+    "resources：仍按真实枪次/冷却/落地与命中恢复；空怪替代的是固定落脚点，不自动等价于回枪平台。",
+    "terrain：严格3×5与L(0,192)/B(320,640)INOUT不变；左只保留(0,224,112,32)岩台。窗口y160–288、有效净空y176–272，锯中线y224。右侧y512平台替换为空怪，余两右平台保留。",
+    "reward：穿窗到右侧再接下方模块；不额外加宝箱。",
+    "recovery：左侧退回原入口岩台、右侧争取现有接回台；中间台删除后的192px上返高差、空怪命中机会、敌已死状态均UNKNOWN，不自动补台或刷怪。",
+    "directions：L→B从入口直接选窗口高度后下行；B→L需要处理删台后的上升与空怪，再反向穿窗回L，仍为待验目标。",
+    "cheapSolutions：直接从L不穿窗口跳到B侧；身体挤过齿轮与岩沿而无需读相位；普通跳可解决部分窗口：允许，但仍应需要读锯；穿伤/无敌帧硬闯成本远低于选缝；站在下沿刺或齿轮上当安全中转；邻接模块带速越顶/绕边；某固定台对回程和恢复均无用；空怪被去程击杀后回程无路；把空怪命中错误当作落地恢复全部动作；新增怪仅替代图标却没有真实命中机会",
+    "difference：不再是开放竖井里一枚锯装饰下降，也没有互补井盖。单个动态障碍直接决定上/下两条高度带，画出两种相位就能理解；属于动态净空布局，不冒称新玩法家族已成立。",
+    "验证缺口：现有岩体/齿轮/边沿刺/空怪可表达，当前仍只是新图，布局规则与物理未实施。；删除右中间平台后，底口台608到右接回台416有192px高差，能否用真实反冲与命中资源上返、敌死亡后是否仍可返回均UNKNOWN，不能继承删台前回程证据。；齿轮/窗口整体上移后，左入口到上下缝的完整身体/相位/瞄准扰动、受伤绕法和失败恢复均须重验。",
+    "新版尚未获人工保留，不开始实施。",
+    "用户授权小幅加宽刺窗：下沿墙顶与附着刺下移16px，净高96→112px；矩形/Port/锯轨道/怪不改。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s09-001/source-analysis-feedback-003.json",
+  "technicalStatus": "UNKNOWN",
+  "actorPoses": [
+    {
+      "position": [
+        64,
+        192
+      ],
+      "label": "左侧唯一入口岩台",
+      "labelPosition": [
+        70,
+        280
+      ]
+    }
+  ],
+  "diagramGhosts": [],
+  "designTraces": [
+    {
+      "points": [
+        [
+          0,
+          192
+        ],
+        [
+          64,
+          192
+        ],
+        [
+          112,
+          192
+        ]
+      ],
+      "color": "#157f84",
+      "label": "先观察，再横穿",
+      "labelPosition": [
+        84,
+        124
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          128,
+          244
+        ],
+        [
+          160,
+          244
+        ]
+      ],
+      "color": "#6c8d8e",
+      "label": "等齿轮让位再横穿",
+      "labelPosition": [
+        108,
+        324
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          232,
+          244
+        ],
+        [
+          312,
+          384
+        ],
+        [
+          320,
+          576
+        ],
+        [
+          320,
+          640
+        ]
+      ],
+      "color": "#157f84",
+      "label": "过窗后落右台",
+      "labelPosition": [
+        300,
+        352
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          112,
+          224
+        ],
+        [
+          172,
+          224
+        ]
+      ],
+      "color": "#78918c",
+      "label": "",
+      "labelPosition": [
+        120,
+        224
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        232,
+        196
+      ],
+      "to": [
+        232,
+        252
+      ]
+    }
+  ],
+  "shotGuides": [],
+  "diagramWindowStates": [
+    {
+      "title": "锯在上 → 走下缝",
+      "gearCenterY": 196,
+      "bodyCenterY": 244,
+      "caption": "同一齿轮的上端相位"
+    },
+    {
+      "title": "锯在下 → 走上缝",
+      "gearCenterY": 252,
+      "bodyCenterY": 204,
+      "caption": "同一齿轮的下端相位"
+    }
+  ],
+  "diagramWindowTop": 176,
+  "userRevision": {
+    "receipt": "feedback/manual-review/spec-sync-r063-receipt.json",
+    "verbatim": "h09初始态上方只出不进\n第二轮s09可以地刺间加宽一点点。\n另外4个按照你的建议修复\n\n6个双平台继续完成\n\n规格不一致修改main的规格为最新实现",
+    "technicalValidation": "UNKNOWN_FOR_NEW_SPECIFICATION",
+    "implementationAuthorized": true
+  },
+  "designVersion": "sha256:2f7b3bcc80995805910e5a90f055c4f3800df46b0d304192d9ea70ce67948198"
+}
