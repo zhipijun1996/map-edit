@@ -13,7 +13,8 @@ def ingest_run(state,root,guard):
  required=['input-binding.json','protocol.json','batches.json']
  if not all((root/p).is_file()for p in required):return 0
  batches=[b for b in core.read(root/'batches.json')if b.get('stage')=='migration-holdout']
- if not batches:return 0
+ unsealed=[p for p in sorted((root/'physics').glob('*-migration-holdout.input.json'))if p.name.removesuffix('.input.json')not in {b['batch']for b in batches}]
+ if not batches and not unsealed:return 0
  binding=core.read(root/'input-binding.json');folder=core.resolve_artifact(binding['module']['path']).parent;identity=guard._identity(folder);canonical=core.resolve_artifact(binding['cases']['path']);core.verify_artifacts([binding['module'],binding['cases']]);values=core.read(canonical);cases=values['cases']if isinstance(values,dict)else values;route_indices={c['route_spec']['id']:i for i,c in enumerate(cases)};protocol=core.read(root/'protocol.json');pool=guard._pool(protocol);pool_key=guard.digest(pool);signature=guard._program_signature(cases);seen=state.setdefault('partialExposures',{});added=0
  for batch in batches:
   name=batch['batch'];input_path=root/'physics'/(name+'.input.json');execution=root/batch['execution'];packed=root/batch['gzip_path'];receipt=core.read(execution)
@@ -23,8 +24,24 @@ def ingest_run(state,root,guard):
   for route_id in route_ids:
    assert route_id in route_indices;key=core.relative(root)+'/'+name+'/'+route_id;proof=dict(execution=physics.artifact(execution),input=physics.artifact(input_path),raw=physics.artifact(packed),protocol=physics.artifact(root/'protocol.json'))
    if key in seen:
-    assert seen[key]==proof,'partial_holdout_evidence_changed:'+key;continue
+    if 'raw'in seen[key]:assert seen[key]==proof,'partial_holdout_evidence_changed:'+key
+    else:assert seen[key]['input']==proof['input']and seen[key]['protocol']==proof['protocol']
+    continue
    i=route_indices[route_id];state['observations'].append(dict(source=identity,pool=pool,poolKey=pool_key,routeId=route_id,routeIndex=i,actualHoldoutSeed=protocol['holdoutSeed']+i*1009,contentVersion=binding['contentVersion'],programSignature=signature,report=proof['execution'],holdout=proof['execution'],protocol=proof['protocol'],sourceInputBinding=physics.artifact(root/'input-binding.json'),failed=False,qualityStatus='UNKNOWN_AGGREGATE_NOT_REQUIRED_FOR_EXPOSURE',exposureKind='completed_holdout_batch_before_full_report',actualCases=sum(c['route_spec']['id']==route_id for c in inputs),rawEvidence=proof));seen[key]=proof;added+=1
+ # Instantiated inputs already expose conditions, even if the engine/parent
+ # fails before sealing a receipt. This locks a pool, never certifies outcomes.
+ for input_path in unsealed:
+  name=input_path.name.removesuffix('.input.json');inputs=core.read(input_path)['cases'];proof=dict(input=physics.artifact(input_path),protocol=physics.artifact(root/'protocol.json'))
+  for suffix in ['.log','.execution.json','.output.json','.output.json.gz']:
+   artifact=root/'physics'/(name+suffix)
+   if artifact.exists():proof[suffix]=physics.artifact(artifact)
+  for route_id in sorted({c['route_spec']['id']for c in inputs}):
+   assert route_id in route_indices;key=core.relative(root)+'/'+name+'/'+route_id
+   if key in seen:
+    # A later completion may append a log/output, but the exposed inputs and
+    # protocol are immutable. Keep the first proof and do not discard the lock.
+    assert seen[key]['input']==proof['input']and seen[key]['protocol']==proof['protocol'];continue
+   i=route_indices[route_id];state['observations'].append(dict(source=identity,pool=pool,poolKey=pool_key,routeId=route_id,routeIndex=i,actualHoldoutSeed=protocol['holdoutSeed']+i*1009,contentVersion=binding['contentVersion'],programSignature=signature,report=proof['input'],holdout=proof['input'],protocol=proof['protocol'],sourceInputBinding=physics.artifact(root/'input-binding.json'),failed=False,qualityStatus='UNKNOWN_INPUT_EXPOSURE_IS_NOT_VALIDATION',exposureKind='instantiated_holdout_inputs_before_sealed_completion',actualCases=sum(c['route_spec']['id']==route_id for c in inputs),rawEvidence=proof));seen[key]=proof;added+=1
  return added
 
 def ingest_all(state,guard):

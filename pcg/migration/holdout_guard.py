@@ -116,6 +116,9 @@ def refresh():
     with _lock():
         state=_state()
         for report in sorted((core.REPO/'pcg/results').glob('*/migration-physics.json')):_ingest(state,report)
+        from .partial_holdout_exposure_v1 import ingest_all
+        import sys
+        ingest_all(state,sys.modules[__name__])
         state['counts']=dict(observedRoutes=len(state['observations']),
             originalSources=len({o['source']['key']for o in state['observations']}),
             failedHoldoutRoutes=sum(o['failed']for o in state['observations']))
