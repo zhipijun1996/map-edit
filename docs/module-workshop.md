@@ -78,3 +78,7 @@ python3 tools/browser_module_workshop.py
 两怪/三怪方案已根据用户“新增加这两个保留”同时批准，分别绑定原f0829bf8…/61124f9e…版本，以`-enemies-2`和`-enemies-3`独立交接，保留相同sourceIdea ID。当前85项交接、13项待实现。批量精确批准入口：`python3 tools/module_workshop.py approve-variants /tmp/human-receipt.json`；回执包含真实原话、`sourceType=human_feedback`和已发布的`designVersions`数组，先全部核对再写入，任何旧版失败都不部分批准。设计认可仍不执行实现或升库。
 
 随后用户按设计16d930fb…及文件d06d31fe…保留《错相升井》，当前86项交接、14项待实现。新创意`idea-31639e2c-1a4a-487c-b1ea-c52522549fa8`以一个人工原话来源提供六个独立审核规格：宽×高1×2、2×1、2×2，各含左↔上、左↔下两口。每份仅两块可穿平台，普通跳可行时接受；这是同一家族的接口适配，未宣称新玩法或已实现。六份分别使用已发布designVersion/SHA接收反馈，尚未获保留；真实双向、完整身体通行、回程、边界封口和接缝均UNKNOWN。
+
+用户随后“均审核通过”保留这六个已发布规格；原批量精确批准入口核对全部版本与文件SHA后，为六个variantKey分别建立待实现交接，来源仍为同一个人工创意。当前92项交接、20项待实现；六份图稿不重绘、不改变版本，不授予技术验收或生产资格。
+
+接口需求图的八个代表已登记为`idea-interface-s01-001`等八份文字提案，可在“纯文字未出图”查看。源需求和图像逐字/逐口索引见`feedback/module-workshop/briefs/interface-complements-v1.json`，左右岩体口与上下可穿口严格区分，不把刚认可六份可穿左口直接算成岩体口适配。S01/S15优先复用旧家族，其余只是新的用途设计方向；未画图、未认可、未实施，不增加交接数量。
