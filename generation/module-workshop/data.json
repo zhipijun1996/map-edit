@@ -39115,39 +39115,33 @@
     },
     {
       "id": "idea-plains-large-01-001",
-      "title": "三台留路：离台时冻结，取宝后重新启动",
+      "title": "换桥穿锁：起跳后，把脚下桥换成前方通路",
       "sourceType": "ai_idea",
       "verbatim": "三台留路：离台时冻结，取宝后重新启动。跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。同枪产生方向反冲并让刚离开的真实载台保留当前相位，三个冻结位置逐段变成玩家自己留下的回程支点；不是三次等电梯，也不自动吸附理想停点。",
       "interpretation": {
-        "observation": "同时看当前脚下台的离岸速度、下一台是否迎向自己，以及身后被冻结的台是否留在回程可用高度。 Q→R还要看同一路径竖锯是否让出会合窗。",
-        "decision": "跃离P时回射冻结P、向右上反冲追Q；再离Q回射冻结Q去追竖台R；最后选择R的高度、离台冻结R并落到宝箱岸。停得好既影响这次起跳，也决定回程路线。",
-        "causality": "同枪产生方向反冲并让刚离开的真实载台保留当前相位，三个冻结位置逐段变成玩家自己留下的回程支点；不是三次等电梯，也不自动吸附理想停点。",
-        "cells": [
-          "原生线段实体载台×3",
-          "固定ShotLatch单目标启停与同目标访问铃",
-          "少量可穿接回台",
-          "岩岸/末端宝箱/依附岩面地刺",
-          "Q→R换乘窗原生竖锯×1"
+        "redesignReason": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+        "currentDesign": [
+          "观察：桥和前方整面实岩锁门，决定在离桥后哪个位置射击。因果：同枪反冲与桥/门互补切换，省略射击时门实体阻断路线。",
+          "奖励：第三道锁后独立内室；左右/上下外壳封闭。失败：漏跳落低台，重新切回起跳态；低台不能自动补资源。",
+          "回程：每一远侧有同组访问铃，先开通路再回前室；不能假设去程桥仍存在。",
+          "必须反驳：岸上先开门再一跳绕过撤掉的桥；若成功且代价低，该段桥与时机设计仍失败。不能仅因为不射击有墙就宣称有趣。",
+          "缺口：互补双门原型已有，水平桥/竖门、初态与返回访问绑定待实现。",
+          "缺口：桥前地貌与弹道遮挡须求解以排除廉价预开；当前画出候选关系，尚未证明必须空中切换。",
+          "缺口：逐段宽容的起跳/瞄准区间、真实枪次与防夹、错误状态恢复UNKNOWN。",
+          "所有闭合/开门/运动相位均须完整身体防夹；不以伤害当封墙。",
+          "箱体与右外缘间有实体岩墙；只有最后隔墙洞口能进入内室。此为静态拓扑目标，运行碰撞/邻接高速穿入尚未认证。"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
-        "terrain": "10×7。P斜升、Q横移、R竖升，三段接力没有贯通静态楼梯。只有入口、箱岸及两处低接回台；运动包络不与岩体重叠。",
-        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
-        "recovery": "两处低接回台只接对应中段失误，须重新追当前载台；漏出接回范围按原受伤/死亡流程，不承诺无损回滚。停台失误可访问原控制重启，错误停位和所有低台恢复可达仍待验。",
-        "directions": "L→L包含完整三台去程、领取宝箱、利用之前留下的R/Q/P位置回行；位置不好就重启相应一台再截乘，不能借用重置相位或箱后免费资源。",
+        "reward": "通过最后实体墙唯一洞口后进入宝库，取宝后同L口返回。",
+        "recovery": "各段真实接岸/本侧重试；无传送、赠枪或自动补血。",
         "cheapSolutions": [
-          "从入口一次大跳直上箱岸",
-          "P/Q/R任意一台删掉仍等价",
-          "全程不射击只随台坐到终点",
-          "所有冻结位置都可通关使停位判断冗余",
-          "停错后控制不可达",
-          "回程用直落绕过全部关卡且无真实代价",
-          "换乘锯所有相位都不影响落点，仅作装饰"
-        ],
-        "difference": "复用S04/S12与S06的可控承载关系，扩展为自己保存三段回程落点的连续Macro；不把大尺寸/三台数量当新玩法家族。"
+          "删掉全部射击/控制后，检查目标是否仍可廉价到达。",
+          "先封住宝箱外部进入和跨阶段捷径，再判断操作是否有意义。",
+          "实体隔墙只保证走指定洞口，不证明有趣；提前控制和普通跳仍需反例。"
+        ]
       },
       "constraints": {
         "challengeSpecification": {
@@ -39189,53 +39183,73 @@
         "proposalKey": "LG01"
       },
       "gaps": [
-        "原生单铃单台启停、保持时钟和实体承载可复用；本案不要求一铃多台或移动铃。多个访问铃同一目标的绑定须按真实消费者核对。",
-        "新三段布局/停位可行区间、独立动态相位、离台惯性、身体碰撞、枪次/冷却、回程与失误恢复全部UNKNOWN。",
-        "若无射击跟车与精确停位同样安全且便宜，核心假设失败，应修布局，不算技术/体验通过。"
+        "互补双门原型已有，水平桥/竖门、初态与返回访问绑定待实现。",
+        "桥前地貌与弹道遮挡须求解以排除廉价预开；当前画出候选关系，尚未证明必须空中切换。",
+        "逐段宽容的起跳/瞄准区间、真实枪次与防夹、错误状态恢复UNKNOWN。"
       ],
-      "feasibility": "EXISTING_CELLS_NEW_MACRO_LAYOUT",
+      "feasibility": "DESIGN_ONLY_WITH_EXPLICIT_RULE_GAPS",
       "family": "independent-carrier-relay-macro",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-large-01-001/fccb349427de/design.json",
-        "version": "sha256:fccb349427de01800e4644b4189300a62bfca57b7cf67febf741dc5d09dc4c1c",
-        "sha256": "01fccd63a11527780629ee169b2eed419f665d5bacf427d8af6b0f2564b0be2d",
-        "diagram": "ideas/idea-plains-large-01-001/fccb349427de/images/LG01.png"
+        "file": "generation/module-workshop/ideas/idea-plains-large-01-001/c7e20aa06a3c/design.json",
+        "version": "sha256:c7e20aa06a3c4ae43a57a037c075487446dfb3846eb511d0da631fcfc12d802d",
+        "sha256": "032f97e853b67f4b17de0ff1a9c0a71dd6ab8503a9526a625285ab1ccd72c02c",
+        "diagram": "ideas/idea-plains-large-01-001/c7e20aa06a3c/images/LG01.png"
       },
-      "history": []
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-plains-large-01-001/fccb349427de/design.json",
+            "version": "sha256:fccb349427de01800e4644b4189300a62bfca57b7cf67febf741dc5d09dc4c1c",
+            "sha256": "01fccd63a11527780629ee169b2eed419f665d5bacf427d8af6b0f2564b0be2d",
+            "diagram": "ideas/idea-plains-large-01-001/fccb349427de/images/LG01.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-plains-large-01-001-fccb349427de-1.json",
+        "sha256": "a4d0ff6841ab2fa6b237f6eaf05c57318582fbe64615ff0c14245d26fbd4af04"
+      },
+      "feedback": [
+        {
+          "id": "idea-plains-large-01-001",
+          "sourceType": "human_feedback",
+          "verbatim": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+          "designVersion": "sha256:fccb349427de01800e4644b4189300a62bfca57b7cf67febf741dc5d09dc4c1c",
+          "decision": "CHANGE",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/large-treasure-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-plains-large-02-001",
-      "title": "双门连穿：先抢开门窗，再刹住箱前窄岸",
+      "title": "弹丸跑长路：击炮起跳，在开锁时刻穿过内墙",
       "sourceType": "ai_idea",
       "verbatim": "双门连穿：先抢开门窗，再刹住箱前窄岸。第一段跳离准备岸向左下回射开门并反冲向右上；落中台后再选择第二段起跳与回射时刻；过第二门后面临竖锯和短箱岸，需把冲刺转为制动。两次独立限时击铃各自与同枪位移会合，落中台是真实恢复；末段射向右侧刹住水平速度，不能把向右反冲一路按到底。",
       "interpretation": {
-        "observation": "先看两层实岩门洞、每段近侧风铃、下一段小岸与最后箱岸，不把全房间共用一个倒计时。",
-        "decision": "第一段跳离准备岸向左下回射开门并反冲向右上；落中台后再选择第二段起跳与回射时刻；过第二门后面临竖锯和短箱岸，需把冲刺转为制动。",
-        "causality": "两次独立限时击铃各自与同枪位移会合，落中台是真实恢复；末段射向右侧刹住水平速度，不能把向右反冲一路按到底。",
-        "cells": [
-          "ShotLatch限时门×2及返程访问铃",
-          "实体岩隔墙",
-          "固定可穿准备/接回岸",
-          "原生竖向齿轮/宝箱/岩面刺"
+        "redesignReason": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+        "currentDesign": [
+          "观察：炮台命中反馈、封闭管道内可视化弹丸位置、内锁及门后岸。决定：何时起跳击炮，何时加速或刹车到开门窗。",
+          "炮台完整堵住弹道井底，井侧/顶是岩体；最终接收器只接受指定炮台生成的弹，玩家直接射击不解锁。这个资格限制必须显式实现/可视化，不能伪称现有机制。",
+          "奖励：第二实体锁后的封闭宝库；失败：没赶上停在本侧重试，不把玩家困在关闭门中。回程每道远侧有可见重开铃，近侧不能隔墙射到它。",
+          "反例：站起跳岸提前击炮再悠闲过门、直接打接收器、反向访问铃从近侧可射、弹丸反复触发、穿墙/箱互动隔墙领取。若时机无关则退回重设，不靠缩成一帧补救。",
+          "缺口：受击定向炮台、机关弹资格/速度/寿命、单次事务均缺Cell或接线；不用假炮台替换普通铃。",
+          "缺口：长路时间不是原生玩家弹丸速度；机关弹速度与锁开放时间要联合求解，禁止预设现有弹丸能飞完整管道。",
+          "缺口：弹道井口封堵/弹丸出生点净空、防夹、短时锁两侧可恢复与操控容错UNKNOWN。",
+          "所有闭合/开门/运动相位均须完整身体防夹；不以伤害当封墙。",
+          "箱体与右外缘间有实体岩墙；只有最后隔墙洞口能进入内室。此为静态拓扑目标，运行碰撞/邻接高速穿入尚未认证。"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
-        "terrain": "9×8，岩隔墙从边界/地面连至门洞，门洞是可见的身体通路，不用一根可越顶的短门。两级上升后才到箱前锯口。",
-        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
-        "recovery": "每扇门两侧都有真实接岸和各自访问铃；晚到/门已关可在本侧重新击铃。中台不自动重置另一扇门，箱前漏台有右侧接回台；防夹必须按身体形状复核。",
-        "directions": "L→L去程连升两层、读箱前锯并制动取宝；返回先反向读锯，再在每道门远侧重新开门后降回原口，不要求倒放同一空中操作。",
+        "reward": "通过最后实体墙唯一洞口后进入宝库，取宝后同L口返回。",
+        "recovery": "各段真实接岸/本侧重试；无传送、赠枪或自动补血。",
         "cheapSolutions": [
-          "站准备岸提前开门后慢走照样过",
-          "隔墙/门洞可从顶部或底部低成本绕过",
-          "从本侧直接射到下道控制或宝箱",
-          "只用普通跳无须反冲也无时机判断",
-          "门超时夹人或关死返程",
-          "取宝后门状态默认继承为永久打开"
-        ],
-        "difference": "复用A3真实限时门家族，增加两次分段恢复和末段反向制动；不是发明一帧门，也不单凭两个门称新家族。"
+          "删掉全部射击/控制后，检查目标是否仍可廉价到达。",
+          "先封住宝箱外部进入和跨阶段捷径，再判断操作是否有意义。",
+          "实体隔墙只保证走指定洞口，不证明有趣；提前控制和普通跳仍需反例。"
+        ]
       },
       "constraints": {
         "challengeSpecification": {
@@ -39277,54 +39291,74 @@
         "proposalKey": "LG02"
       },
       "gaps": [
-        "ShotLatch源码有open_seconds和重复重开，门时长尚未求解；按真实弹丸到铃、人物到门、身体完全穿过和扰动容错计算，不能写固定一帧/沿用0秒。",
-        "源码当前防夹是扩大矩形后检查角色中心；它不是完整身体认证。实现必须复核真实碰撞形状，并使用原机制允许的延迟关闭。",
-        "侧访问铃可复用原接口，但实际绑定、弹丸遮挡、岸上预开门优势、窄岸制动/双向/恢复全UNKNOWN。"
+        "受击定向炮台、机关弹资格/速度/寿命、单次事务均缺Cell或接线；不用假炮台替换普通铃。",
+        "长路时间不是原生玩家弹丸速度；机关弹速度与锁开放时间要联合求解，禁止预设现有弹丸能飞完整管道。",
+        "弹道井口封堵/弹丸出生点净空、防夹、短时锁两侧可恢复与操控容错UNKNOWN。"
       ],
-      "feasibility": "EXISTING_TIMED_GATE_NEEDS_CONSUMER_AND_BODY_GUARD_AUDIT",
+      "feasibility": "DESIGN_ONLY_WITH_EXPLICIT_RULE_GAPS",
       "family": "timed-bell-gate-relay-macro",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-large-02-001/eff7be5817fe/design.json",
-        "version": "sha256:eff7be5817fe7290cb53accdd79f888172cdb8eaf61984c9353d5076a187fa09",
-        "sha256": "f28ef58aafb6d5028d0855e5113251d2512d967c8aa1e75db4d59670ecbef4c7",
-        "diagram": "ideas/idea-plains-large-02-001/eff7be5817fe/images/LG02.png"
+        "file": "generation/module-workshop/ideas/idea-plains-large-02-001/b3aab5d264ea/design.json",
+        "version": "sha256:b3aab5d264ea6ce8187a51dd75e6cb649a1cc2011948d375c1b796d0b972ec0a",
+        "sha256": "d46f6d2398b47a63855dfeacd6c6bfbc2038677056334bb31bf6deb8787849bf",
+        "diagram": "ideas/idea-plains-large-02-001/b3aab5d264ea/images/LG02.png"
       },
-      "history": []
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-plains-large-02-001/eff7be5817fe/design.json",
+            "version": "sha256:eff7be5817fe7290cb53accdd79f888172cdb8eaf61984c9353d5076a187fa09",
+            "sha256": "f28ef58aafb6d5028d0855e5113251d2512d967c8aa1e75db4d59670ecbef4c7",
+            "diagram": "ideas/idea-plains-large-02-001/eff7be5817fe/images/LG02.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-plains-large-02-001-eff7be5817fe-1.json",
+        "sha256": "ff895eb255019c57c85d2d0015be8f25e6a163b89618ce38f0b2fcec2ba029bb"
+      },
+      "feedback": [
+        {
+          "id": "idea-plains-large-02-001",
+          "sourceType": "human_feedback",
+          "verbatim": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+          "designVersion": "sha256:eff7be5817fe7290cb53accdd79f888172cdb8eaf61984c9353d5076a187fa09",
+          "decision": "CHANGE",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/large-treasure-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-plains-large-03-001",
-      "title": "三折刺檐：低弧加速，回身刹车，再抢移动落点",
+      "title": "穿行中的洞口：先追窗口，再刹住对面的窄岸",
       "sourceType": "ai_idea",
       "verbatim": "三折刺檐：低弧加速，回身刹车，再抢移动落点。首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。同一把枪在长跨时加速、短岸前制动、折角时改变方向；实体刺檐限制过高弧线，短岸使过早反冲和过晚刹车产生不同失误，末段把固定落点判断迁移到动态目标。",
       "interpretation": {
-        "observation": "看每个折角顶上的真实刺檐、对面短落点和下一枚齿轮的位置，最后一台会横移而不是在远处等你。",
-        "decision": "首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。",
-        "causality": "同一把枪在长跨时加速、短岸前制动、折角时改变方向；实体刺檐限制过高弧线，短岸使过早反冲和过晚刹车产生不同失误，末段把固定落点判断迁移到动态目标。",
-        "cells": [
-          "真实岩檐与其上下边地刺",
-          "功能性固定短台A/B/C",
-          "原生横移实体台D",
-          "原生竖锯/宝箱/低位恢复台"
+        "redesignReason": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+        "currentDesign": [
+          "观察：洞口上下边共同平移、下一短岸以及前一窗口正在关闭的方向。决定：提前发射快速穿口还是等待迎面相位，到对面后必须制动。",
+          "洞口不是薄移动平台：两块联动实体填满隔墙空段，上下固定岩层接外壳，任一时刻都只留一个128px开口。图是中间相位，不能把轨道虚线当通路。",
+          "奖励：第三整墙后的宝库。失败：每墙近侧准备台重试，过墙落短岸后真实恢复；身体夹住时延迟运动/退让机制须设计，不用挤压瞬杀制造假难度。",
+          "回程：三个不同相位仍持续运动，反向穿口要预测身体尾部何时离开；取宝不会停下全房间。",
+          "反例：静止等在某一高度可一路普通跳、趁相位从上下板接缝穿出、用墙顶当平台、无反冲无风险通过、箱口最低相位被箱室地板遮掉有效净空。",
+          "缺口：原生单台线段往复不等于联动可变长洞口；需要两实体同步形状/运动覆盖规则和全身体防夹，明确缺Cell规则。",
+          "缺口：第三口与宝库地板交接必须求解全相位有效净空；图示不能保证最低相位能过，允许等待较高相位但不能困住回程。",
+          "缺口：不同周期仅设计起点，实际反冲必要性、瞄准/时机容错、接岸稳定、最坏相位回程UNKNOWN。",
+          "所有闭合/开门/运动相位均须完整身体防夹；不以伤害当封墙。",
+          "箱体与右外缘间有实体岩墙；只有最后隔墙洞口能进入内室。此为静态拓扑目标，运行碰撞/邻接高速穿入尚未认证。"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
-        "terrain": "10×7，三折线路复用中央刺檐，A/B/C均有落地恢复用途；D是原生横向实体载台、末端一枚竖锯。不是额外堆成三组开关。",
-        "reward": "唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
-        "recovery": "入口和B是可观察点，A/C是短落点而非强制不停顿；低位接回台能退回前段重试但不能直接登箱。错过D可留C再等下一次会合，失败不自动传送。",
-        "directions": "L→L去程右→左→右折行，再追D取宝；回程先跳回D再回C/B/A。由高往低可选择更长下降，但刺檐/锯和底部尖刺限制无成本直落，真实捷径仍须保留并比较成本。",
+        "reward": "通过最后实体墙唯一洞口后进入宝库，取宝后同L口返回。",
+        "recovery": "各段真实接岸/本侧重试；无传送、赠枪或自动补血。",
         "cheapSolutions": [
-          "入口或B直冲箱台跳过两折",
-          "站在刺檐顶面当安全步道",
-          "连按同方向射击就全程成功",
-          "从C普通跳直达箱台使D冗余",
-          "D停在端点只需无限等待且没有主动截乘价值",
-          "箱后直落回口完全跳过时机与落点判断",
-          "新增平台只为凑数量而无动作/恢复用途"
-        ],
-        "difference": "复用S08绕檐与已有反冲刹车，做连续折角与静转动态的组合挑战；独立于前两案，不用新开关、不依赖可消耗怪物续枪。"
+          "删掉全部射击/控制后，检查目标是否仍可廉价到达。",
+          "先封住宝箱外部进入和跨阶段捷径，再判断操作是否有意义。",
+          "实体隔墙只保证走指定洞口，不证明有趣；提前控制和普通跳仍需反例。"
+        ]
       },
       "constraints": {
         "challengeSpecification": {
@@ -39366,19 +39400,43 @@
         "proposalKey": "LG03"
       },
       "gaps": [
-        "所需岩体、PlatformThornDefinition边界刺、固定可穿台、原生横移实体台和竖锯均已有表达；连续几何规则尚未实现。",
-        "每段完整身体净空、真实反冲续航/射击冷却、每次落台恢复与可读的多帧操作窗口UNKNOWN。首段可能要分段重调，不能仅按线段长度宣称可达。",
-        "末段C→D→箱岸的必要性、回程敌死无关状态、穿伤/越顶/直接落回口和低台恢复须反例验证。"
+        "原生单台线段往复不等于联动可变长洞口；需要两实体同步形状/运动覆盖规则和全身体防夹，明确缺Cell规则。",
+        "第三口与宝库地板交接必须求解全相位有效净空；图示不能保证最低相位能过，允许等待较高相位但不能困住回程。",
+        "不同周期仅设计起点，实际反冲必要性、瞄准/时机容错、接岸稳定、最坏相位回程UNKNOWN。"
       ],
-      "feasibility": "EXISTING_CELLS_NEW_CONTINUOUS_GEOMETRY",
+      "feasibility": "DESIGN_ONLY_WITH_EXPLICIT_RULE_GAPS",
       "family": "recoil-eave-braking-slalom-macro",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-large-03-001/03f0cb428d34/design.json",
-        "version": "sha256:03f0cb428d34a61215c7eda2ec00792b88fb8c9da345b3f58c03324e54275172",
-        "sha256": "2a3bffe8f1a90a78b22a847a583e7ee537f20aa7fafc61c44e2b06fc535530b2",
-        "diagram": "ideas/idea-plains-large-03-001/03f0cb428d34/images/LG03.png"
+        "file": "generation/module-workshop/ideas/idea-plains-large-03-001/bae457472bd6/design.json",
+        "version": "sha256:bae457472bd67436d60c73e74009fe803de24a749073de21607f065807a8b099",
+        "sha256": "46cb271c8ef6c2aa8b748427f3a33dd580029f1db9f325ce1b337941d4813ee9",
+        "diagram": "ideas/idea-plains-large-03-001/bae457472bd6/images/LG03.png"
       },
-      "history": []
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-plains-large-03-001/03f0cb428d34/design.json",
+            "version": "sha256:03f0cb428d34a61215c7eda2ec00792b88fb8c9da345b3f58c03324e54275172",
+            "sha256": "2a3bffe8f1a90a78b22a847a583e7ee537f20aa7fafc61c44e2b06fc535530b2",
+            "diagram": "ideas/idea-plains-large-03-001/03f0cb428d34/images/LG03.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-plains-large-03-001-03f0cb428d34-1.json",
+        "sha256": "a5d92258915c1f46681608d2d9ddb6fcf82abd6d8e64530634e48fcbb651598f"
+      },
+      "feedback": [
+        {
+          "id": "idea-plains-large-03-001",
+          "sourceType": "human_feedback",
+          "verbatim": "作为大型奖励关卡，这三个设计的不够巧妙，第一个比较枯燥，且不暂停跳台也没问题，通过反冲的灵活性可以很容易下来。第二个类似。第三个尖刺位置玩家完全可以逃课用反冲直接上跳台。重新思考有趣且富有挑战性的大型单port奖励关卡，且宝箱需要保护不能被另一侧直接进入。",
+          "designVersion": "sha256:03f0cb428d34a61215c7eda2ec00792b88fb8c9da345b3f58c03324e54275172",
+          "decision": "CHANGE",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/large-treasure-feedback-001.json"
+        }
+      ]
     }
   ],
   "policy": {
