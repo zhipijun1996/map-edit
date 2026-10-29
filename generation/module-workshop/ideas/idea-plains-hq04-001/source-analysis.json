@@ -1,0 +1,129 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "sourceBrief": {
+    "path": "feedback/module-workshop/briefs/plains-hq-five-v1.json",
+    "sha256": "917f0f13d1a7884b3124b1bf8aeabcd098e79cf07d1c6b614baba7745186ee48"
+  },
+  "drawingAuthorization": {
+    "verbatim": "ai出创意直接出图。我看文字不太能审核",
+    "scope": "DESIGN_ONLY"
+  },
+  "sourceAnalysis": {
+    "tracked": [
+      {
+        "path": "MAP_FOUNDATION.md",
+        "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+      },
+      {
+        "path": ".agents/skills/pcg-creative-producer/SKILL.md",
+        "sha256": "0c600efe74b8bb09fd0fd5b42b6771fc012432a737a50605cf7422433eb400b8"
+      },
+      {
+        "path": "feedback/module-workshop/review-receipts/interface-feedback-001.json",
+        "sha256": "e7407913e41107498c1e4544971d57d24a9204edf3b888f80a2521c25bcbf8c5"
+      },
+      {
+        "path": "pcg/creative-production/plains-five-designs-v1.json",
+        "sha256": "a298f6dbc92d3e931166b3a8e68e0e71162b419798b6f464a183e7cea36b37e9"
+      },
+      {
+        "path": "library/source/scripts/generation/module_moving_platform.gd",
+        "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+      },
+      {
+        "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+        "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+      },
+      {
+        "path": "library/source/scripts/enemies/enemy_definition.gd",
+        "sha256": "781c39d4073a68a1074855ac95703a66b0976934cd5c17c8c213de824d32b01a"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/runtime_v3.gd",
+        "sha256": "da573889a39afe9d106dcda3327d548606b38d38109d46c8f23b02de08817e0b"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v2.gd",
+        "sha256": "7d40cf6351c718a884049a96b1dc504d7d3beae815c496ec52f9f8aedcad5e66"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+        "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+      }
+    ],
+    "workspaceRuntimeReads": [
+      {
+        "path": "pcg/prototype/godot/scripts/world/shot_latch.gd",
+        "sha256": "a982e1ceab32390bea30eab7843a382910b33a503338351bcd0bdc1fce825929",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
+        "sha256": "2631c540f3d62b4ea313b60cdf935bf2feacbc998bb6a023afcbf4c98c1afe9d",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_projectile.gd",
+        "sha256": "0218c8b6ffa26d4341aa7d5ae2fe8729ca04e329fa559e90e8cba8cba1c84076",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/resources/enemies/plains_sentry.tres",
+        "sha256": "97a8f3e5a6bddadfe5c52fc21851eea72decd96ec4053b3e4f2f918fea1e6226",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/resources/enemies/plains_charger.tres",
+        "sha256": "1afd5e34d497e3850d794b028fd5fe5407d3722fcd451d862f4c14a67ca98fc0",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      }
+    ],
+    "limit": "Local runtime reads establish design context only. Bind the actual consumer/exported source version before implementation or physics; do not infer certification from these copies.",
+    "trackedSourceCommit": "e5712ed50ea462518729047c6abd368a183754d1",
+    "bindingNote": "Tracked proposal-context hashes bind to this immutable commit; workflow preferences changed afterward. Untracked runtime copies remain context-only."
+  },
+  "requestedSpecification": {
+    "widthBlocks": 5,
+    "heightBlocks": 4,
+    "ports": [
+      {
+        "id": "L",
+        "face": "LEFT",
+        "index": 2,
+        "position": [
+          0,
+          320
+        ],
+        "surface": "ROCK",
+        "permission": "INOUT"
+      }
+    ],
+    "intendedRelations": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "PROPOSED_NOT_VALIDATED"
+      }
+    ],
+    "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+  },
+  "feasibility": "NEEDS_REWARD_TRANSACTION_PAIR_BINDING",
+  "gaps": [
+    "已有双门与奖励回执概念不等于已有该绑定；成功事务、幂等切换、保存/重入和防夹提交都需接线验证。",
+    "不因宝箱碰撞就提前切门，不在领取失败后改变世界。",
+    "5×4是否容纳足够但不狭窄的去程挑战和可恢复回路尚未求解；不满足则返回空间冲突。"
+  ],
+  "diagramAssumptions": [
+    "去程起跳台304→箱台144高差160px；落点较窄且穿越齿轮纵向扫掠区。是否真的具有足够但不过窄的挑战仍需原Harness求解。",
+    "齿轮中心x336/y160–384、半径24，完整包络在Module内。上下两路共享这枚锯，不追加无关敌阵或第二组危险。",
+    "领取奖励后上路阻断、低路打开；袋内重试台也用于箱后观察。箱前漏台仍需能回到上A门，不可困在初始关闭的下B门后。",
+    "重复领取、存档/重入、防夹提交与开口封闭全UNKNOWN。原S13继续废弃，本图是有明确去程成本的新提案。"
+  ],
+  "renderer": {
+    "path": "generation/manual-review/batch-001/render_diagrams.py",
+    "sha256": "af340c740fd10564248a12910371fb84e43fb124c0ceee1414bc87610b9369dd"
+  },
+  "method": "Native-source context, static coordinate/bounds and drawing geometry only. No Module compiler, trajectory solver or Godot physics.",
+  "technicalStatus": "UNKNOWN",
+  "physicsRun": false
+}

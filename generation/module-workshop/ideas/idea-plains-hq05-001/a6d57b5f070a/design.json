@@ -1,0 +1,550 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq05-001",
+  "reviewId": "HQ05",
+  "title": "子弹绕远路，人物走近路",
+  "summary": "4×3 Block · 2口有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 512,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 1,
+      "position": [
+        0,
+        192
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        192
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 3,
+      "position": [
+        448,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        448,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "图稿未验证换边支撑/完整路线/接缝。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            512,
+            64
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "hq05-T-top_right"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 224,
+      "w": 112,
+      "h": 160
+    },
+    {
+      "id": "launch",
+      "type": "platform",
+      "x": 256,
+      "y": 288,
+      "w": 96,
+      "h": 12,
+      "label": "击镜准备台",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "retry",
+      "type": "platform",
+      "x": 128,
+      "y": 352,
+      "w": 128,
+      "h": 12,
+      "label": "漏跳接回",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "catch",
+      "type": "platform",
+      "x": 400,
+      "y": 208,
+      "w": 96,
+      "h": 12,
+      "label": "短接岸 / 重试",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 400,
+      "y": 32,
+      "w": 96,
+      "h": 12,
+      "label": "顶口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "slit-top",
+      "type": "terrain",
+      "x": 368,
+      "y": 0,
+      "w": 8,
+      "h": 56
+    },
+    {
+      "id": "slit-bottom",
+      "type": "terrain",
+      "x": 368,
+      "y": 88,
+      "w": 8,
+      "h": 40
+    },
+    {
+      "id": "right-pier",
+      "type": "terrain",
+      "x": 496,
+      "y": 0,
+      "w": 16,
+      "h": 128
+    },
+    {
+      "id": "timed-gate",
+      "type": "gate",
+      "x": 384,
+      "y": 112,
+      "w": 112,
+      "h": 16,
+      "diagramLabel": "风铃门",
+      "mechanics": {
+        "kind": "timed_gate",
+        "initialState": "CLOSED",
+        "openSeconds": "UNKNOWN",
+        "bodyAntiCrush": "REQUIRES_VALIDATION"
+      }
+    },
+    {
+      "id": "mirror-bell",
+      "type": "bell",
+      "x": 390,
+      "y": 6,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "折射目标铃",
+      "targetIds": [
+        "timed-gate"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "return-bell",
+      "type": "bell",
+      "x": 438,
+      "y": 54,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "返回访问",
+      "targetIds": [
+        "timed-gate"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "mirror",
+      "type": "reflector",
+      "x": 256,
+      "y": 232,
+      "w": 48,
+      "h": 48,
+      "segment": [
+        [
+          262.56511067854785,
+          239.50683067604308
+        ],
+        [
+          297.43488932145215,
+          272.4931693239569
+        ]
+      ],
+      "diagramLabel": "斜镜 · 缺Cell",
+      "diagramLabelPosition": [
+        260,
+        310
+      ],
+      "mechanics": {
+        "kind": "PROPOSED_SINGLE_REFLECTION",
+        "status": "MISSING_CELL",
+        "position": [
+          280,
+          256
+        ],
+        "normal": [
+          -0.6872153884982047,
+          0.7264537217271734
+        ],
+        "collisionRole": "projectiles_only",
+        "preserveIdentity": true,
+        "extraRecoil": false,
+        "ammoRefund": false
+      }
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 80,
+          "y": 192
+        },
+        {
+          "x": 224,
+          "y": 250
+        },
+        {
+          "x": 320,
+          "y": 270
+        },
+        {
+          "x": 336,
+          "y": 224
+        },
+        {
+          "x": 448,
+          "y": 174
+        },
+        {
+          "x": 448,
+          "y": 80
+        },
+        {
+          "x": 448,
+          "y": 12
+        },
+        {
+          "x": 448,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 448,
+          "y": 0
+        },
+        {
+          "x": 448,
+          "y": 70
+        },
+        {
+          "x": 448,
+          "y": 174
+        },
+        {
+          "x": 320,
+          "y": 270
+        },
+        {
+          "x": 208,
+          "y": 320
+        },
+        {
+          "x": 80,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "一枪击镜并向右上反冲，允许先落短接岸再穿门；不要求一枪无落地飞完。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        3.5,
+        -1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-L",
+      "from": "T",
+      "to": "L",
+      "role": "return",
+      "pathObjectId": "route-T-L",
+      "strategy": "顶部同门访问点重开后分段下降，返回不要求反射倒放。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -3.5,
+        1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "蓝折线＝弹丸长路　橙箭头＝一次反冲　青线＝人物路线意图　斜镜缺Cell；紫＝门",
+  "reviewInstructions": [
+    "① 蓝折线是同一发子弹，橙箭头仅为最初反冲；镜面不补枪、不再推玩家。",
+    "② 左柱有32px高弹丸窗，身体不可据此通过；镜角/弹丸净空仍待真实验证。",
+    "③ 可先落短接岸再跳穿门，漏窗能重试；镜面Cell和实际开门窗口均未实现。"
+  ],
+  "designNotes": [
+    "图示射点(336,224)、镜心(280,256)、目标铃(400,16)；镜面法向按入射/出射向量求得。折线路长约333px，按1200px/s约0.277s，只是几何/弹速预算，不是人物到门证据。",
+    "折射线在左柱x368–376处y80–64，通过y56–88的32px窗；弹丸半径3时静态两端各有约5px余量。没有完整身体/动态碰撞认证。",
+    "同枪反冲先送向短接岸，允许真正落台恢复动作后再次跳跃。不会把画出的直线当无落地单枪成功，也不把平台视为额外赠送弹药。",
+    "必须检查直接射铃、岸上提前射镜、从小窗越界、二次反射/双次回充等反例；缺镜面Cell时返回缺口，不替换普通回射铃。",
+    "observation：看左下斜镜、被岩层遮住的风铃、出口门，以及反射弹道的可读路径。",
+    "decision：跳出后向左下斜镜开枪，让反冲送人物向右上；子弹先向后飞，折射后绕过岩层去击铃，玩家要让开门时刻与到门时刻会合。",
+    "causality：只有最初开枪产生一次反冲；同一发弹丸在镜面改变方向、继续以原身份飞行，随后击铃。人物短路与弹丸长路有不同时间，不把门设成一帧窗口。",
+    "cells：缺Cell：固定斜镜的一次弹丸反射；原生风铃门；岩体遮挡与弹丸可过的窗口；可穿顶岸和重试接岸",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实跳跃、空中枪次、冷却和落地恢复；仅jump/shot_recoil，无钩索、二段跳或免费补枪。",
+    "terrain：暂4×3左岩口转上可穿口；镜面和射线窗口与身体路线分开。4×4备选需重新安排中段接岸与时序，不直接把门抬高。",
+    "reward：穿门进入上方模块，不额外放宝箱。",
+    "recovery：折射未命中或漏窗落回重试岸，能再次瞄准；返回侧必须有真实重开/撤回方式，不依赖那一发子弹仍存在。",
+    "directions：L→T处理反射长路与上行短路；T→L用返回控制点下降，不强迫在空中倒放射击。两向独立待验。",
+    "cheapSolutions：从岸上直接射铃；不经镜面也可开门；提前发射再慢走等门；穿过给子弹的小窗绕门；镜面重复触发造成多次回枪或第二次反冲",
+    "difference：与A3/S07直接击铃不同，新增一次弹道折射让人物和弹丸分路后重新会合。没有镜面Cell就返回缺口，不退化成普通回射风铃。",
+    "Cell缺口：当前弹丸反射Cell未找到可用实现，不能宣称已支持。；必须保留原弹丸身份/生命周期/接收器幂等，单次反射不额外返枪、不额外给人物反冲。；反射角、弹丸净空、实际路程和身体通过时长均待求解；若只剩极窄时机，则修几何而不降容错标准。",
+    "未经此精确设计版本人工保留不开始实现；本次只画主规格，备选尺寸尚未作图/认证。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq05-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "actorPoses": [
+    {
+      "position": [
+        336,
+        224
+      ],
+      "label": "跳起击镜",
+      "labelPosition": [
+        318,
+        208
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          336,
+          224
+        ],
+        [
+          280,
+          256
+        ],
+        [
+          400,
+          16
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "同一发弹丸：后射 → 折返 → 击铃",
+      "labelPosition": [
+        206,
+        156
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        336,
+        224
+      ],
+      "to": [
+        470,
+        148
+      ],
+      "role": "initial_shot_recoil_only"
+    }
+  ],
+  "designVersion": "sha256:a6d57b5f070a45ecd08eba5fa91493f9f33396bbeb9ce9a1d25bd6b46b9f0941"
+}
