@@ -115,6 +115,12 @@ def build(destination, include_history=True):
         fetches.append(str(inventory_path))
     for standard in ('MAP_FOUNDATION.md', 'MAP_GENERATION_GUIDE.md'):
         if (ROOT/standard).is_file(): asset(standard, purpose='standard')
+    # The current workshop is a product page, including in --no-history builds.
+    workshop = ROOT/'generation/module-workshop'
+    if workshop.is_dir():
+        for path in sorted(workshop.rglob('*')):
+            if path.is_file() and path.suffix.lower() in WEB_SUFFIXES:
+                asset(path.relative_to(ROOT), purpose='current_module_workshop')
     history = 0
     history_selection = 'omitted'
     if include_history:
