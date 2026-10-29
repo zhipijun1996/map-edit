@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 10,
+    "READY_FOR_IMPLEMENTATION": 11,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 41,
+    "handoffRevision": 42,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -25456,6 +25456,196 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-orbit-choice-001",
+      "reviewId": "idea-orbit-choice-001",
+      "title": "环岛分流：追台，再选择离岛时机",
+      "summary": "环岛分流：从左岸追上绕空中中心点运行的载台，朝固定风铃开枪同时改变自身速度与载台启停。玩家根据运行相位，选择反冲离台到右岸，或继续向上到顶口可穿平台和宝箱。回程重新追台，不加一条独立安全通道。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/orbit-choice-001/images/新创意 001.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 5,
+        "heightBlocks": 4
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            320
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            640,
+            192
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            320,
+            0
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "routes": [
+        {
+          "id": "A-to-B",
+          "from": "A",
+          "to": "B",
+          "pathObjectId": "route-A-to-B",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        },
+        {
+          "id": "A-to-C",
+          "from": "A",
+          "to": "C",
+          "pathObjectId": "route-A-to-C",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        },
+        {
+          "id": "B-to-A",
+          "from": "B",
+          "to": "A",
+          "pathObjectId": "route-B-to-A",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        },
+        {
+          "id": "C-to-A",
+          "from": "C",
+          "to": "A",
+          "pathObjectId": "route-C-to-A",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        },
+        {
+          "id": "B-to-C",
+          "from": "B",
+          "to": "C",
+          "pathObjectId": "route-B-to-C",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        },
+        {
+          "id": "C-to-B",
+          "from": "C",
+          "to": "B",
+          "pathObjectId": "route-C-to-B",
+          "evidenceStatus": "UNKNOWN",
+          "role": "main",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "只提出跳跃与反冲目标，实际枪数及能力最低条件待验证。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:f665b6d2c9e342f2aac01a0cf27587a8261cb895664c94f47e4da0e84086b462",
+      "designFile": "generation/module-workshop/ideas/orbit-choice-001/design.json",
+      "designFileSha256": "c476258795b0b739a0f31b69a26902673c1f307bedba9f1b35baefc32603b072",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/orbit-choice-001/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -25498,7 +25688,7 @@
         ],
         "difference": "空间上是同一动态环岛承载分叉选择；与既有A2仍可能同族，AI去重尚未完成。"
       },
-      "stage": "DESIGN_REVIEW",
+      "stage": "READY_FOR_IMPLEMENTATION",
       "design": {
         "file": "generation/module-workshop/ideas/orbit-choice-001/design.json",
         "sha256": "c476258795b0b739a0f31b69a26902673c1f307bedba9f1b35baefc32603b072",
@@ -25510,10 +25700,25 @@
         "三个Port完整身体与进出状态待验",
         "所有Route/资源/失败恢复UNKNOWN"
       ],
-      "humanApproval": "UNKNOWN",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
-      "title": "环岛分流：追台，再选择离岛时机"
+      "title": "环岛分流：追台，再选择离岛时机",
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-orbit-choice-001-f665b6d2c9e3-1.json",
+        "sha256": "684e1a52dd3d2ae70d5818665407b16b9f34dd275c9fbc67a1f111d6090e4f8e"
+      },
+      "feedback": [
+        {
+          "id": "idea-orbit-choice-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-orbit-choice-001\n标题：环岛分流：追台，再选择离岛时机\n设计版本：sha256:f665b6d2c9e342f2aac01a0cf27587a8261cb895664c94f47e4da0e84086b462\n设计文件 SHA256：c476258795b0b739a0f31b69a26902673c1f307bedba9f1b35baefc32603b072\n决定：保留\n意见：挺好的。\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n已实现候选和已归档有什么区别？",
+          "note": "挺好的。",
+          "designVersion": "sha256:f665b6d2c9e342f2aac01a0cf27587a8261cb895664c94f47e4da0e84086b462",
+          "designFileSha256": "c476258795b0b739a0f31b69a26902673c1f307bedba9f1b35baefc32603b072",
+          "decision": "KEEP"
+        }
+      ]
     }
   ],
   "policy": {
