@@ -3,44 +3,33 @@
   "method": "Read actual Cell source and calculate one initial-phase snapshot plus static envelopes only. No trajectory simulation or physics certification.",
   "sourceRefs": [
     {
-      "path": "pcg/prototype/godot/scripts/generation/module_moving_platform_definition.gd",
-      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+      "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954",
+      "inspectedRuntimeCopy": "pcg/prototype/godot/scripts/generation/module_moving_platform_definition.gd"
     },
     {
-      "path": "pcg/prototype/godot/scripts/generation/module_moving_platform.gd",
-      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+      "path": "library/source/scripts/generation/module_moving_platform.gd",
+      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5",
+      "inspectedRuntimeCopy": "pcg/prototype/godot/scripts/generation/module_moving_platform.gd"
     },
     {
-      "path": "pcg/prototype/godot/scripts/generation/module_saw_definition.gd",
-      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b"
+      "path": "library/source/scripts/generation/module_saw_definition.gd",
+      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b",
+      "inspectedRuntimeCopy": "pcg/prototype/godot/scripts/generation/module_saw_definition.gd"
     },
     {
-      "path": "pcg/prototype/godot/scripts/generation/module_saw_hazard.gd",
-      "sha256": "5d31ef8f40ed756840417d1c7d727f8995688bd5616a7f4f5e2413fdd5e0ee91"
+      "path": "library/source/scripts/generation/module_saw_hazard.gd",
+      "sha256": "5d31ef8f40ed756840417d1c7d727f8995688bd5616a7f4f5e2413fdd5e0ee91",
+      "inspectedRuntimeCopy": "pcg/prototype/godot/scripts/generation/module_saw_hazard.gd"
     },
     {
-      "path": "pcg/prototype/godot/scripts/enemies/enemy_definition.gd",
-      "sha256": "781c39d4073a68a1074855ac95703a66b0976934cd5c17c8c213de824d32b01a"
-    },
-    {
-      "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
-      "sha256": "2631c540f3d62b4ea313b60cdf935bf2feacbc998bb6a023afcbf4c98c1afe9d"
+      "path": "library/source/scripts/enemies/enemy_definition.gd",
+      "sha256": "781c39d4073a68a1074855ac95703a66b0976934cd5c17c8c213de824d32b01a",
+      "inspectedRuntimeCopy": "pcg/prototype/godot/scripts/enemies/enemy_definition.gd"
     },
     {
       "path": "pcg/prototype/godot/resources/enemies/plains_diver.tres",
       "sha256": "35421393d53fcfba09e6702ef17180e5761065fa43f95e797b1a547038fddf54"
-    },
-    {
-      "path": "pcg/prototype/godot/scripts/combat/shot_energy_policy.gd",
-      "sha256": "d1abb19e0441cda5dc58ca6dd2d46ad2ca3dee6cab0b666dd69039ea681b9990"
-    },
-    {
-      "path": "pcg/prototype/godot/scripts/player/player_motor.gd",
-      "sha256": "9192a3b031cce875cfac47373e00f0a57a755ce2dfc481e6d4d0667df1410a56"
-    },
-    {
-      "path": "pcg/prototype/godot/config/player_tuning.json",
-      "sha256": "65abb4abffd122f79bc4718a94e6db1bbe19a8e2c5dcdac314aa10cd9698114c"
     }
   ],
   "carriers": [
@@ -175,5 +164,28 @@
     "Player body, dynamic collisions/crush, carrying inertia, retry/return, enemy-dead state and seams UNKNOWN."
   ],
   "physicsRun": false,
-  "technicalStatus": "UNKNOWN"
+  "technicalStatus": "UNKNOWN",
+  "workspaceRuntimeReads": [
+    {
+      "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
+      "sha256": "2631c540f3d62b4ea313b60cdf935bf2feacbc998bb6a023afcbf4c98c1afe9d",
+      "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/combat/shot_energy_policy.gd",
+      "sha256": "d1abb19e0441cda5dc58ca6dd2d46ad2ca3dee6cab0b666dd69039ea681b9990",
+      "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/player/player_motor.gd",
+      "sha256": "9192a3b031cce875cfac47373e00f0a57a755ce2dfc481e6d4d0667df1410a56",
+      "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+    },
+    {
+      "path": "pcg/prototype/godot/config/player_tuning.json",
+      "sha256": "65abb4abffd122f79bc4718a94e6db1bbe19a8e2c5dcdac314aa10cd9698114c",
+      "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+    }
+  ],
+  "sourceBindingLimit": "Moving-carrier and saw Cell definitions/implementations are bound to identical tracked library/source files. Player motion, enemy behavior and shot economy runtime copies were read as context only; their actual consumer version must be bound before implementation/physics. No certification is inferred from those unfrozen copies."
 }
