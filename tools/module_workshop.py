@@ -81,22 +81,56 @@ def decide(receipt):
   h['rows'].append(dict(reviewId=id,moduleId=id,designFile=r['design']['file'],designVersion=r['design']['version'],designFileSha256=r['design']['sha256'],status='READY_FOR_IMPLEMENTATION',sourceIdea=dict(file=IDEAS,id=id),outputDirectory='pcg/manual_review/implementation/ideas/'+id,designDecisionSource=path));h['revision']+=1;write(file,h)
  write(IDEAS,d)
 
+def approve_variants(receipt):
+ """One real human message can approve several already-published exact options."""
+ id=safe_id(receipt['id']);d=read(IDEAS);r=next(r for r in d['rows']if r['id']==id)
+ if receipt.get('sourceType')!='human_feedback'or not receipt.get('verbatim','').strip():raise ValueError('Actual human feedback required')
+ versions=receipt.get('designVersions',[])
+ if not versions or len(set(versions))!=len(versions):raise ValueError('Unique published versions required')
+ hfile='feedback/manual-review/implementation-handoff-v1.json';h=read(hfile);selected=[]
+ for version in versions:
+  v=next((v for v in r.get('designVariants',[])if v['version']==version),None)
+  if v is None or not v.get('key'):raise ValueError('Version is not a published option')
+  if digest(v['file'])!=v['sha256']or read(v['file']).get('designVersion')!=version:raise ValueError('Published option changed')
+  module_id=safe_id(id+'-'+v['key'])
+  if any(x['moduleId']==module_id or(x.get('sourceIdea',{}).get('id')==id and x['designVersion']==version)for x in h['rows']):raise ValueError('Option already handed off')
+  selected.append((v,module_id))
+ # All checks finish before any receipt or queue is mutated.
+ stamp=hashlib.sha256('|'.join(versions).encode()).hexdigest()[:12];path='feedback/manual-review/idea-decisions/'+id+'-variants-'+stamp+'.json'
+ canonical=[dict(reviewId=mid,moduleId=mid,version=v['version'],decision='KEEP',verbatim=receipt['verbatim'],versionType='design',sourceIdeaId=id,designVariant=v['key'])for v,mid in selected]
+ write(path,dict(schema='pcg/human-module-design-feedback/v1',scope='design_only',verbatimMessage=receipt['verbatim'],rows=canonical,decision='KEEP',**receipt))
+ aggregate='feedback/manual-review/received-design-decisions-v1.json';received=read(aggregate)
+ for v,mid in selected:
+  h['rows'].append(dict(reviewId=mid,moduleId=mid,designFile=v['file'],designVersion=v['version'],designFileSha256=v['sha256'],status='READY_FOR_IMPLEMENTATION',sourceIdea=dict(file=IDEAS,id=id,variantKey=v['key']),outputDirectory='pcg/manual_review/implementation/ideas/'+id+'/'+v['key'],designDecisionSource=path))
+  r.setdefault('designApprovals',{})[v['version']]=dict(moduleId=mid,reviewId=mid,decision='KEEP',receipt=dict(path=path,sha256=digest(path)))
+  r.setdefault('variantDecisions',{})[v['version']]='KEEP'
+ received['rows'].extend(canonical);received['latestReceipt']=path;h['revision']+=1
+ r.setdefault('feedback',[]).append(dict(receipt,decision='KEEP'));r.update(stage='READY_FOR_IMPLEMENTATION',humanApproval='KEEP',decisionReceipt=dict(path=path,sha256=digest(path)))
+ write(aggregate,received);write(hfile,h);write(IDEAS,d)
+
 def link_result(id,result_path):
  id=safe_id(id);path=Path(result_path)
  if path.is_absolute()or'..'in path.parts or not str(path).startswith('feedback/manual-review/implementation-results/'):raise ValueError('Use the existing implementation-results path')
- d=read(IDEAS);r=next(r for r in d['rows']if r['id']==id);result=read(result_path)
- if r['stage']!='READY_FOR_IMPLEMENTATION'or result.get('designVersion')!=r['design']['version']or result.get('moduleId')!=id:raise ValueError('Result must bind an approved design identity/version')
- r['implementationResult']=dict(path=str(path),sha256=digest(result_path));write(IDEAS,d)
+ h=read('feedback/manual-review/implementation-handoff-v1.json');entry=next(x for x in h['rows']if x['moduleId']==id);idea_id=entry.get('sourceIdea',{}).get('id',id)
+ d=read(IDEAS);r=next(r for r in d['rows']if r['id']==idea_id);result=read(result_path)
+ if r['humanApproval']!='KEEP'or result.get('designVersion')!=entry['designVersion']or result.get('moduleId')!=id:raise ValueError('Result must bind an approved design identity/version')
+ ref=dict(path=str(path),sha256=digest(result_path))
+ if idea_id==id:r['implementationResult']=ref
+ else:r.setdefault('implementationResults',{})[entry['designVersion']]=ref
+ write(IDEAS,d)
+
 
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);s=p.add_subparsers(dest='command',required=True)
  a=s.add_parser('intake');a.add_argument('packet',type=Path)
  a=s.add_parser('attach-design');a.add_argument('--id',required=True);a.add_argument('--design',type=Path,required=True)
  a=s.add_parser('record-decision');a.add_argument('receipt',type=Path)
+ a=s.add_parser('approve-variants');a.add_argument('receipt',type=Path)
  a=s.add_parser('link-result');a.add_argument('--id',required=True);a.add_argument('--result',required=True)
  a=p.parse_args()
  if a.command=='intake':intake(json.loads(a.packet.read_text()))
  elif a.command=='attach-design':attach(a.id,json.loads(a.design.read_text()))
  elif a.command=='record-decision':decide(json.loads(a.receipt.read_text()))
+ elif a.command=='approve-variants':approve_variants(json.loads(a.receipt.read_text()))
  else:link_result(a.id,a.result)
  subprocess.run(['node','tools/build_module_workshop.mjs'],cwd=ROOT,check=True)

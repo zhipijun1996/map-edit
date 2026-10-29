@@ -1,6 +1,6 @@
 import {evaluateRequirements} from '../../capabilities.js';
 export const FACES={LEFT:'左',RIGHT:'右',TOP:'上',BOTTOM:'下'};
-export const STAGES={ARCHIVED:'已归档',IMPLEMENTED_CANDIDATE:'已实现候选',READY_FOR_IMPLEMENTATION:'待实现',NEEDS_REPAIR:'待修复',NEEDS_ALIGNMENT:'设计版本待对齐',DESIGN_REVIEW:'待设计审核',IDEA:'创意草稿'};
+export const STAGES={ARCHIVED:'已归档',IMPLEMENTED_CANDIDATE:'已实现候选',READY_FOR_IMPLEMENTATION:'待实现',NEEDS_REPAIR:'待修复',NEEDS_ALIGNMENT:'设计版本待对齐',DESIGN_REVIEW:'待设计审核',IDEA:'创意草稿',DISCARDED:'已废弃'};
 export const COMPLETE_STAGES=['ARCHIVED','IMPLEMENTED_CANDIDATE'];
 export function matchingRoutes(module,filter={}){
  const ports=new Map(module.ports.map(p=>[p.id,p]));
@@ -41,3 +41,22 @@ export function designFeedback(idea,decision,note){
  if(!idea.design||!['KEEP','CHANGE','DISCARD'].includes(decision))throw Error('请选择当前设计版的意见');
  return `Module 工坊 · 设计审阅\n创意：${idea.id}\n标题：${idea.title??idea.id}\n设计版本：${idea.design.version}\n设计文件 SHA256：${idea.design.sha256}\n决定：${{KEEP:'保留',CHANGE:'修改',DISCARD:'废弃'}[decision]}\n意见：${note}\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。`;
 }
+
+// Creative work stays here until an exact-version implementation appears in the module library.
+export function creativeViews(ideas,modules){
+ const views=[];
+ for(const idea of ideas){
+  const designs=idea.designVariants?.length?idea.designVariants:idea.design?[idea.design]:[null];
+  for(const design of designs){
+   const approval=design?idea.designApprovals?.[design.version]:null;
+   const module=design?modules.find(m=>m.designVersion===design.version&&(approval?m.id===approval.moduleId:(m.sourceIdeaId??m.id)===idea.id)):null;
+   if(module&&COMPLETE_STAGES.includes(module.stage))continue;
+   const decision=design?(idea.variantDecisions?.[design.version]??(idea.design?.version===design.version?idea.humanApproval:'UNKNOWN')):'UNKNOWN';
+   const stage=module?.stage??(!design?(idea.stage==='DISCARDED'?'DISCARDED':'IDEA'):decision==='DISCARD'?'DISCARDED':decision==='KEEP'?'READY_FOR_IMPLEMENTATION':'DESIGN_REVIEW');
+   const filterStage=stage==='IDEA'?'TEXT':stage==='DISCARDED'?'DISCARDED':decision==='KEEP'||['READY_FOR_IMPLEMENTATION','NEEDS_REPAIR','NEEDS_ALIGNMENT'].includes(stage)?'WAIT':'REVIEW';
+   views.push({...idea,design,stage,filterStage,humanApproval:decision,moduleId:module?.id??approval?.moduleId??null,title:(idea.title||'未命名创意')+(design?.label?' · '+design.label:''),viewKey:idea.id+':'+(design?.version??'text')});
+  }
+ }
+ return views;
+}
+export function filterCreativeViews(views,stage='ALL'){return views.filter(v=>stage==='ALL'?v.filterStage!=='DISCARDED':v.filterStage===stage);}

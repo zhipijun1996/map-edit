@@ -8,6 +8,7 @@ class WorkflowTest(unittest.TestCase):
   self.tmp=tempfile.TemporaryDirectory();self.old=w.ROOT;w.ROOT=Path(self.tmp.name)
   w.write(w.IDEAS,dict(schema='pcg/module-workshop-ideas/v1',rows=[]))
   w.write('feedback/manual-review/implementation-handoff-v1.json',dict(rows=[],revision=1,policy=dict(productionApproval=False)))
+  w.write('feedback/manual-review/received-design-decisions-v1.json',dict(rows=[],history=[]))
  def tearDown(self):w.ROOT=self.old;self.tmp.cleanup()
  def intake(self):
   self.raw='  原话\n保留空白 <script> ';w.intake(dict(drafts=[dict(id='idea-abcdef',sourceType='human_idea',title='测试',verbatim=self.raw,stage='IDEA')]))
@@ -37,6 +38,14 @@ class WorkflowTest(unittest.TestCase):
  def test_discard_one_variant_preserves_other_unreviewed_option(self):
   d=self.prepare();data=w.read(w.IDEAS);variant=copy.deepcopy(d);variant['bounds']['h']=384;variant=seal_design(variant);file='generation/module-workshop/ideas/idea-abcdef/variant.json';w.write(file,variant);data['rows'][0]['designVariants']=[data['rows'][0]['design'],dict(file=file,sha256=w.digest(file),version=variant['designVersion'])];w.write(w.IDEAS,data)
   w.decide(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='两怪版废弃',designVersion=d['designVersion'],decision='DISCARD'));r=w.read(w.IDEAS)['rows'][0];self.assertEqual(r['stage'],'DESIGN_REVIEW');self.assertEqual(r['design']['version'],variant['designVersion']);self.assertEqual(w.read('feedback/manual-review/implementation-handoff-v1.json')['rows'],[])
+ def prepare_options(self):
+  d=self.prepare();data=w.read(w.IDEAS);one=dict(data['rows'][0]['design'],key='enemies-2');variant=copy.deepcopy(d);variant['bounds']['h']=384;variant=seal_design(variant);file='generation/module-workshop/ideas/idea-abcdef/third.json';w.write(file,variant);two=dict(file=file,version=variant['designVersion'],sha256=w.digest(file),key='enemies-3');data['rows'][0]['designVariants']=[one,two];w.write(w.IDEAS,data);return one,two
+ def test_two_human_keeps_create_independent_handoffs(self):
+  one,two=self.prepare_options();w.approve_variants(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='这两个保留',designVersions=[one['version'],two['version']]));h=w.read('feedback/manual-review/implementation-handoff-v1.json');self.assertEqual(len(h['rows']),2);self.assertEqual({r['moduleId']for r in h['rows']},{'idea-abcdef-enemies-2','idea-abcdef-enemies-3'});self.assertEqual({r['designVersion']for r in h['rows']},{one['version'],two['version']});self.assertTrue(all(r['sourceIdea']['id']=='idea-abcdef'for r in h['rows']));self.assertFalse((w.ROOT/'modules').exists())
+ def test_invalid_second_option_does_not_partially_approve_first(self):
+  one,two=self.prepare_options()
+  with self.assertRaises(ValueError):w.approve_variants(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='这两个保留',designVersions=[one['version'],'stale']))
+  self.assertEqual(w.read('feedback/manual-review/implementation-handoff-v1.json')['rows'],[]);self.assertEqual(w.read(w.IDEAS)['rows'][0]['stage'],'DESIGN_REVIEW')
  def test_boundary_must_be_block_face_center(self):
   d=self.design();d['ports'][0]['position']=[0,200]
   with self.assertRaises(AssertionError):seal_design(d)
