@@ -1,0 +1,902 @@
+{
+  "schema": "pcg/exact-interface-design-proposals/v1",
+  "requestSource": {
+    "path": "feedback/module-workshop/review-receipts/spec02-request-v1.json",
+    "sha256": "b16b6741fd4421b6b44e30b3fd88bdb1215d4e01c94717248ac931055cbb468b"
+  },
+  "source": {
+    "producer": "current_codex_session",
+    "modelRevision": "UNKNOWN",
+    "externalModelCalled": false
+  },
+  "stage": "DIAGRAMS_FOR_HUMAN_REVIEW",
+  "coordinateSystem": {
+    "blockSize": 128,
+    "origin": "TOP_LEFT",
+    "x": "RIGHT",
+    "y": "DOWN"
+  },
+  "cards": [
+    {
+      "key": "S02",
+      "title": "S02 · 一枚追锯，换边上井",
+      "verbatim": "在错位的上下接口之间，左右交替登台。同一枚竖向齿轮会追过不同的跨井高度；上行要选先过还是等它走，回程要下落刹住而不是照抄跳跃。",
+      "primary": {
+        "widthBlocks": 3,
+        "heightBlocks": 5,
+        "ports": [
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 0,
+            "position": [
+              64.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 2,
+            "position": [
+              320.0,
+              640
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "T",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "shared-saw-climb",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看共享竖锯将扫到哪次横跨、下一落脚台在哪侧。",
+        "decision": "选择本次立即横跨，还是留在有功能的接岸读下一窗口。",
+        "causality": "跳跃/反冲换侧时穿过同一竖锯的扫掠区，落台恢复用于下一段；回程反冲用于制动。",
+        "cells": [
+          "原生竖移齿轮",
+          "少量交替可穿落台",
+          "上下可穿接口"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "漏跳可落较低的既有台重新读锯；是否能无伤接回取决于相位，非免费底层安全路。",
+        "directions": "B→T逐段上升，T→B选择落到哪层并刹住；两向目标独立。",
+        "cheapSolutions": [
+          "上行完全不需要读锯",
+          "一路贴边连续跳避开共享区",
+          "下行直接跳到底口毫无风险",
+          "某块台对两向和恢复均无用"
+        ],
+        "difference": "同规格旧S02是斜台追乘；这版用共享竖锯约束交替跨井，属于反冲/动态危险家族布局，非旧斜台的尺寸变体。"
+      }
+    },
+    {
+      "key": "S04",
+      "title": "S04 · 停住接收台，再启另一台",
+      "verbatim": "高井中两台各有自己的启停铃和时钟。先把上一台留在接回位置，再启动另一台追上来换乘；回程在相反高度重排交接，不能两台一键复位。",
+      "primary": {
+        "widthBlocks": 3,
+        "heightBlocks": 7,
+        "ports": [
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 0,
+            "position": [
+              64.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 2,
+            "position": [
+              320.0,
+              896
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "T",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "independent-carrier-relay",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看两台高度、自己的跳跃预算以及哪台此刻应保持不动。",
+        "decision": "把一台当暂时稳定接岸，另台运行；准备离开时再改变控制。",
+        "causality": "独立启动/暂停保留真实相位，冻结的落点与正在移动的落点形成交接，射击同时改变人物运动。",
+        "cells": [
+          "两台原生独立竖向实体台",
+          "两组单台启停铃",
+          "上下接岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格3×7 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "错停可在原接岸或当前载台重启；离台失误能否接回原台、最大等待长度均待验。",
+        "directions": "B→T低台接高台，T→B先设低台接回再下行；不是相同轨迹反放。",
+        "cheapSolutions": [
+          "任意初相都只需站着等",
+          "一台就能走完整井",
+          "两铃顺序固定且无选择",
+          "失误之后控制铃不可触及"
+        ],
+        "difference": "对比HQ01同铃冻结两台构型：这里两套独立控制，决定哪台作为接回、哪台继续运行；仍归可控承载家族。"
+      }
+    },
+    {
+      "key": "S06",
+      "title": "S06 · 引出慢弹，追台到掩护侧",
+      "verbatim": "斜向上行台会切进射手的慢弹通路。先让射手真正发射，再追上台的背弹一侧；接近顶口时必须离开掩护，重新选择跳出的时刻。",
+      "primary": {
+        "widthBlocks": 4,
+        "heightBlocks": 6,
+        "ports": [
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 0,
+            "position": [
+              64.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 3,
+            "position": [
+              448.0,
+              768
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "T",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "moving-cover-adaptation",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看射手出手预兆、已经飞出的弹和台的未来位置。",
+        "decision": "先暴露引出真实弹，再追台；离台去上口要再次判断暴露。",
+        "causality": "同一实体载台既承载人物又用真实地形碰撞截敌弹；不为角色加无敌，不把弹超时当截弹。",
+        "cells": [
+          "原生斜向实体台",
+          "plains_sentry原慢弹射手",
+          "功能性中途重整台",
+          "上下可穿接岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格4×6 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "错过掩护可退已有接岸，受伤保留；敌死后仍需有可行几何路径。",
+        "directions": "B→T追上受保护一侧，T→B在下降相位读弹后接回；独立验证。",
+        "cheapSolutions": [
+          "提前遮挡使敌从未发弹",
+          "靠敌弹超时冒充截弹",
+          "直接安全远杀后无成本过关",
+          "敌死后无法上返"
+        ],
+        "difference": "明确复用已认可HQ02的移动掩体家族，适配本轮4×6和远右下口；不计新玩法家族。"
+      }
+    },
+    {
+      "key": "S07",
+      "title": "S07 · 起跳换脚，下一块台才出现",
+      "verbatim": "跃离低踏板后回射风铃：低踏板撤去，高踏板出现；同枪反冲把你送向新踏板。现在换太早会失去起跳支撑，换太晚可能错过高落点。",
+      "primary": {
+        "widthBlocks": 4,
+        "heightBlocks": 3,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 1,
+            "position": [
+              0,
+              192.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 3,
+            "position": [
+              448.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "T",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "swap-step-corner",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看两层互补踏板的初态，决定何时离开低台再换脚。",
+        "decision": "保留低台准备，还是已经离台并承诺向高台；不需要严格一帧。",
+        "causality": "原互补门以水平实体踏板表达：A撤碰撞、B成实体，与原射击反冲同枪发生。",
+        "cells": [
+          "原互补双门（水平桥面）",
+          "同组风铃与返回访问",
+          "左岩岸/顶可穿岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格4×3 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "漏高台可回原左岸重开低台；不偷偷补底部安全Port。实际掉落成本待验。",
+        "directions": "L→T先低后高；T→L从上侧访问重设低接回，不把来路默认为回路。",
+        "cheapSolutions": [
+          "不换脚直接跳到顶岸",
+          "低台永远没用",
+          "岸上预换高台就等价",
+          "初态门防夹让平台持续存在"
+        ],
+        "difference": "同接口旧S07为回射开顶门；这版用互补桥做真实承载取舍，沿用换脚桥家族，不造全宽门。"
+      }
+    },
+    {
+      "key": "S08",
+      "title": "S08 · 先退入檐下，再反冲绕出",
+      "verbatim": "右岸与右上口看似同侧直达，带刺岩檐却挡住直接升高。先向左退入内部小台，再向右上反冲绕过檐端；回程要从相反侧读檐口净空。",
+      "primary": {
+        "widthBlocks": 4,
+        "heightBlocks": 3,
+        "ports": [
+          {
+            "id": "R",
+            "face": "RIGHT",
+            "index": 1,
+            "position": [
+              512,
+              192.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 3,
+            "position": [
+              448.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "R",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "T",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "recoil-eave-turn",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看檐端、上下危险面和内部唯一有用的起跳台。",
+        "decision": "先向模块内部让位，再从檐端外侧绕上去，不能在右岸直冲顶口。",
+        "causality": "岩檐限制上升空间，反冲选择过檐时的水平位置；回程以制动调整下落点。",
+        "cells": [
+          "原岩体檐",
+          "依附岩面的上下尖刺",
+          "固定可穿起跳台",
+          "右岩口/顶可穿口"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格4×3 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "落回内台可重试；错过内台的伤害/落点待验，不要求无伤。",
+        "directions": "R→T向左退再右上绕，T→R向左下绕后向右落岸，不能从带刺岩檐直接落地。",
+        "cheapSolutions": [
+          "从右岸贴边直接飞上顶口",
+          "把檐顶当安全中转台",
+          "刺内无敌帧硬闯比绕檐便宜",
+          "从相邻模块带速跨过全部地貌"
+        ],
+        "difference": "S08并非S07镜像：顶口仍在右侧，而镜像S07顶口会在左；此案用入内再回身的几何判断，不额外塞风铃。"
+      }
+    },
+    {
+      "key": "S09",
+      "title": "S09 · 下落先留枪，过锯再刹回",
+      "verbatim": "左上进入后下降到右下口。横向齿轮守着中下段换侧处，先留住空中枪，不在高处过早用掉；穿过锯线后再反冲刹住窄接岸。回程这些岸成为上行台阶。",
+      "primary": {
+        "widthBlocks": 3,
+        "heightBlocks": 5,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 1,
+            "position": [
+              0,
+              192.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 2,
+            "position": [
+              320.0,
+              640
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "brake-descent-interface",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "读横锯下一次过线位置、自己落速和下层窄岸。",
+        "decision": "这段靠普通下落，还是花枪刹住；太早用枪会失去后段调整。",
+        "causality": "射击反冲改变落速和横移，落台才按真实机制恢复；同锯线在回程约束跳出时机。",
+        "cells": [
+          "原横移齿轮",
+          "三层功能性可穿接岸",
+          "左岩口/底可穿口"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "漏上一层可能接到下一层，但不保证所有相位安全；返回按原落地恢复重试。",
+        "directions": "L→B以刹车下降，B→L逐段上升并读锯，双向策略不同。",
+        "cheapSolutions": [
+          "长落到底口始终不需操作",
+          "普通跳已无风险覆盖全部回程",
+          "多一层台不改变恢复与路线",
+          "跳过齿轮扫掠区"
+        ],
+        "difference": "沿用此前认可S09的下降刹车方向，但严格恢复为本轮3×5/左第1行接口；不是沿用裁后3×4的旧认证。"
+      }
+    },
+    {
+      "key": "S10",
+      "title": "S10 · 同侧井口，先绕檐再接低岸",
+      "verbatim": "右口和右下口同侧，直落会碰到实岩檐。先向左绕出檐端，过横锯后再刹回右下接岸；上返要反向绕檐，不能沿边直升。",
+      "primary": {
+        "widthBlocks": 3,
+        "heightBlocks": 5,
+        "ports": [
+          {
+            "id": "R",
+            "face": "RIGHT",
+            "index": 1,
+            "position": [
+              384,
+              192.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 2,
+            "position": [
+              320.0,
+              640
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "R",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "brake-descent-interface",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看挡直落的实岩檐、横锯窗口和右下接岸。",
+        "decision": "在檐下回到右边太早会撞壁，太晚会错过底口接岸；保留反冲做回摆。",
+        "causality": "岩檐迫使先离开同侧直线，反冲再把落点拉回；上返落地恢复后反向处理。",
+        "cells": [
+          "原实岩檐",
+          "原横移齿轮",
+          "固定可穿重整台",
+          "右岩口/底可穿口"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "中间接岸服务回摆与上返，错过可否接下层仍待真实相位验证。",
+        "directions": "R→B先左绕再右接；B→R先左上绕檐再向右岸，独立声明。",
+        "cheapSolutions": [
+          "右边贴墙直接下穿岩檐",
+          "从底口直冲右口不用内部台",
+          "横锯只作装饰",
+          "切成S09镜像却错把底口移到左侧"
+        ],
+        "difference": "与S09同属反冲刹车家族的接口适配；底口保持右侧，所以不是水平镜像，不计独立玩法家族。"
+      }
+    },
+    {
+      "key": "S11",
+      "title": "S11 · 偏心环岛，选离台高度",
+      "verbatim": "同一座环行载台绕过中心岩岛。去右上岸要随台升到高侧，去下口可在低侧提前离台；从任一口回来，都要选追台还是等到它迎向自己。",
+      "primary": {
+        "widthBlocks": 5,
+        "heightBlocks": 4,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 2,
+            "position": [
+              0,
+              320.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "R",
+            "face": "RIGHT",
+            "index": 0,
+            "position": [
+              640,
+              64.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 3,
+            "position": [
+              448.0,
+              512
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "L",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "R",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "R",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "orbit-choice",
+      "gaps": [
+        "原生ModuleMovingPlatform仅线段往复，闭环轨迹/实际承载惯性需隔离扩展；不能画椭圆就当已有实现。",
+        "三口六向、离台窗口、相位/资源/漏台恢复、接缝与封口UNKNOWN。"
+      ],
+      "support": "MISSING_CLOSED_LOOP_MOTION_RULE",
+      "interpretation": {
+        "observation": "看环行方向、当前高度与三个真实目的岸的相对位置。",
+        "decision": "现在离台去下口，还是继续绕行去高右岸；回程选截台时机。",
+        "causality": "同一闭环承载改变人物的位置和离台惯性，反冲加速/刹车用于选岸，不是另加安全支路。",
+        "cells": [
+          "中心岩岛",
+          "闭环实体载台（缺运动规则）",
+          "左/右岩岸与底可穿岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格5×4 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "错过离台点可留台下一轮或返回原接岸；环行等待长度、漏台恢复和返回追台待验。",
+        "directions": "L/R/B六向逐条目标，选择来自不同高度离台；全部UNKNOWN。",
+        "cheapSolutions": [
+          "从任意静态岸单跳覆盖所有口",
+          "环行只是在等电梯",
+          "中心岩岛可攀成静态楼梯",
+          "底口只是安全恢复口而无独立目的"
+        ],
+        "difference": "复用已认可idea-orbit-choice-001家族，按本轮L/R/B接口适配；旧S11互补门稿保留不改，不算新环岛家族。"
+      }
+    },
+    {
+      "key": "S12",
+      "title": "S12 · 横台稳住，再择高台去向",
+      "verbatim": "一台横移、一台竖移，各自独立启停。下口或左口来的人先布置横台接回，再决定何时登高台、去上口还是右高岸；从高处返回则先把低台放到接回位置。",
+      "primary": {
+        "widthBlocks": 5,
+        "heightBlocks": 4,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 2,
+            "position": [
+              0,
+              320.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "R",
+            "face": "RIGHT",
+            "index": 0,
+            "position": [
+              640,
+              64.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "face": "TOP",
+            "index": 1,
+            "position": [
+              192.0,
+              0
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "face": "BOTTOM",
+            "index": 3,
+            "position": [
+              448.0,
+              512
+            ],
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "L",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "L",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "R",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "R",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "R",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "T",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "T",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "T",
+            "to": "B",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "R",
+            "status": "PROPOSED_NOT_VALIDATED"
+          },
+          {
+            "from": "B",
+            "to": "T",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "independent-carrier-relay",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看横台是否能接回、竖台是否适合换乘，以及上/右两个不同岸。",
+        "decision": "冻结横台留退路，还是让它追来接低口；再独立决定竖台的离台高度。",
+        "causality": "单台启停保留各自相位；同枪的反冲配合正在形成的落点，两个控制没有自动对齐。",
+        "cells": [
+          "两台原生正交实体载台",
+          "两组独立启停与各侧访问",
+          "四个真实接岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格5×4 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
+        "recovery": "错停先在既有接岸重新启停；误换台需比较留台下一周期与退原岸，不补资源。",
+        "directions": "L/R/T/B十二条有向目标，低入要先升高，高入要先安排接回；不是全部简单走路。",
+        "cheapSolutions": [
+          "一台删掉仍全向等价可达",
+          "任意停位都好用",
+          "四口实际上都接到同一安全步道",
+          "某来向无法触发控制"
+        ],
+        "difference": "旧S12是两条斜轨换乘；本案强调独立停台构型和高低来向的控制取舍，仍归可控承载家族。"
+      }
+    },
+    {
+      "key": "S13",
+      "title": "S13 · 贴檐取宝，回身刹在窄岸",
+      "verbatim": "宝箱在可见的右侧窄台，去路从带刺低檐下越过移动锯。取宝后从同一处回左口，回程要刹在短岸而不是继续向左冲；没有开箱送门的免费流程。",
+      "primary": {
+        "widthBlocks": 3,
+        "heightBlocks": 2,
+        "ports": [
+          {
+            "id": "L",
+            "face": "LEFT",
+            "index": 1,
+            "position": [
+              0,
+              192.0
+            ],
+            "surface": "ROCK",
+            "permission": "INOUT"
+          }
+        ],
+        "intendedRelations": [
+          {
+            "from": "L",
+            "to": "L",
+            "status": "PROPOSED_NOT_VALIDATED"
+          }
+        ],
+        "status": "EXACT_REQUEST_DESIGN_NOT_CERTIFIED"
+      },
+      "family": "low-eave-reward-return",
+      "gaps": [
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+      ],
+      "support": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
+      "interpretation": {
+        "observation": "看低檐净空、坑中横锯、宝箱台与左侧短岸。",
+        "decision": "控制低弧线越坑，到右台落地后再选择回程制动时刻。",
+        "causality": "反冲改变低檐下的横移；去程追远岸、回程刹短岸，落地恢复把两段真实动作串起来。",
+        "cells": [
+          "原岩檐下刺",
+          "原横移齿轮",
+          "固定宝箱台",
+          "左岩口与真实奖励"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+        "terrain": "严格3×2 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+        "reward": "右上方可见宝箱；取奖需跨低檐下的锯口，再回左侧窄岸，不靠自动换门。",
+        "recovery": "失足按原伤害/重试成本处理；箱前可退、箱后仍须有回路，不假设自动复活补枪。",
+        "directions": "唯一Route为L→L，明确包含过内部锯口、到右台取奖、回左岸离开。",
+        "cheapSolutions": [
+          "站左口伸手拿到箱",
+          "不用碰内部挑战就自返回",
+          "刺檐可直接从顶上安全翻过",
+          "受伤/越顶使奖励成本趋零"
+        ],
+        "difference": "不是复活已废弃旧S13换门宝袋；这里奖励前有低净空跨锯、奖励后有短岸制动，挑战成本仍需实测确认。"
+      }
+    }
+  ],
+  "familyCounting": "十份接口设计，非十个新玩法家族；S09/S10同族、S04/S12同族，S06/S11为明确家族复用。",
+  "sources": [
+    {
+      "path": "MAP_FOUNDATION.md",
+      "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+    },
+    {
+      "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+    },
+    {
+      "path": "library/source/scripts/generation/platform_thorn_definition.gd",
+      "sha256": "10b62dfc8c66e4c804a08d50d69c5f9da96f54dd5600f400daa6e4751d1f3fc5"
+    },
+    {
+      "path": "feedback/module-workshop/review-receipts/hq-feedback-003.json",
+      "sha256": "752ad1b0be0fc608a0882060532f270e8d6912c50a4eb0676c5d25ea16e40bf1"
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s13-001",
+  "reviewId": "R2-S13",
+  "title": "S13 · 贴檐取宝，回身刹在窄岸",
+  "summary": "精确规格 S13 · 3×2 Block · 1条有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 256
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 1,
+      "position": [
+        0,
+        192.0
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        48,
+        192
+      ],
+      "requestedBlockPosition": [
+        0.0,
+        1.5
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            64,
+            256
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s13-L-bottom_left"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 224,
+      "w": 80,
+      "h": 32
+    },
+    {
+      "id": "eave",
+      "type": "terrain",
+      "x": 96,
+      "y": 48,
+      "w": 160,
+      "h": 16
+    },
+    {
+      "id": "eave-under-thorns",
+      "type": "hazard",
+      "x": 96,
+      "y": 64,
+      "w": 160,
+      "h": 20,
+      "orientation": "DOWN",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave",
+        "face": "BOTTOM",
+        "start_offset": 0,
+        "length": 160,
+        "depth": 20
+      }
+    },
+    {
+      "id": "eave-top-thorns",
+      "type": "hazard",
+      "x": 96,
+      "y": 28,
+      "w": 160,
+      "h": 20,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 160,
+        "depth": 20
+      }
+    },
+    {
+      "id": "treasure",
+      "type": "platform",
+      "x": 288,
+      "y": 160,
+      "w": 96,
+      "h": 12,
+      "label": "取宝后真正落地恢复",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "reward",
+      "type": "reward",
+      "x": 324,
+      "y": 136,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "先过锯口再取宝"
+    },
+    {
+      "id": "pit-saw-rail",
+      "type": "trackLine",
+      "x": 120,
+      "y": 200,
+      "w": 144,
+      "h": 0,
+      "points": [
+        {
+          "x": 120,
+          "y": 200
+        },
+        {
+          "x": 264,
+          "y": 200
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          200
+        ],
+        "travel": [
+          72,
+          0
+        ],
+        "period": 3.2,
+        "initial_phase": 0.25
+      }
+    },
+    {
+      "id": "pit-saw",
+      "type": "hazard",
+      "x": 244,
+      "y": 180,
+      "w": 40,
+      "h": 40,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "pit-saw-rail",
+      "label": "移动齿轮"
+    },
+    {
+      "id": "route-L-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 256,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 48,
+          "y": 192
+        },
+        {
+          "x": 176,
+          "y": 148
+        },
+        {
+          "x": 336,
+          "y": 128
+        },
+        {
+          "x": 224,
+          "y": 160
+        },
+        {
+          "x": 112,
+          "y": 176
+        },
+        {
+          "x": 48,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-L",
+      "from": "L",
+      "to": "L",
+      "role": "reward_return",
+      "pathObjectId": "route-L-L",
+      "strategy": "从L跨过低刺檐下的锯口取奖，在右台落地恢复，再反向刹回短岸，从同一L离开。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        0.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "绿岩／浅绿可穿接岸　实体载台另标　红＝真实地刺/齿轮　曲线＝动作意图，非物理证据",
+  "reviewInstructions": [
+    "① L→L包含真实内部挑战、右台取奖和返回，不是入口附近转身。",
+    "② 刺檐限制高跳、移动锯惩罚过低，回程落岸更短；不自动换门、不送免费奖励。"
+  ],
+  "designNotes": [
+    "observation：看低檐净空、坑中横锯、宝箱台与左侧短岸。",
+    "decision：控制低弧线越坑，到右台落地后再选择回程制动时刻。",
+    "causality：反冲改变低檐下的横移；去程追远岸、回程刹短岸，落地恢复把两段真实动作串起来。",
+    "cells：原岩檐下刺；原横移齿轮；固定宝箱台；左岩口与真实奖励",
+    "abilities：jump；shot_recoil",
+    "resources：仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+    "terrain：严格3×2 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+    "reward：右上方可见宝箱；取奖需跨低檐下的锯口，再回左侧窄岸，不靠自动换门。",
+    "recovery：失足按原伤害/重试成本处理；箱前可退、箱后仍须有回路，不假设自动复活补枪。",
+    "directions：唯一Route为L→L，明确包含过内部锯口、到右台取奖、回左岸离开。",
+    "cheapSolutions：站左口伸手拿到箱；不用碰内部挑战就自返回；刺檐可直接从顶上安全翻过；受伤/越顶使奖励成本趋零",
+    "difference：不是复活已废弃旧S13换门宝袋；这里奖励前有低净空跨锯、奖励后有短岸制动，挑战成本仍需实测确认。",
+    "Cell缺口：现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。",
+    "本轮精确接口的新图稿不继承旧图或原家族技术认证；未经该版本人工保留不实施。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s13-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "designTraces": [
+    {
+      "points": [
+        [
+          0,
+          192
+        ],
+        [
+          48,
+          192
+        ],
+        [
+          176,
+          148
+        ],
+        [
+          336,
+          128
+        ]
+      ],
+      "color": "#157f84",
+      "label": "去程：低弧跨锯取宝",
+      "labelPosition": [
+        190,
+        114
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          336,
+          128
+        ],
+        [
+          224,
+          160
+        ],
+        [
+          112,
+          176
+        ],
+        [
+          48,
+          192
+        ],
+        [
+          0,
+          192
+        ]
+      ],
+      "color": "#d28b25",
+      "label": "回程：刹住左侧短岸",
+      "labelPosition": [
+        172,
+        204
+      ],
+      "dashed": false,
+      "endStop": false
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        176,
+        148
+      ],
+      "label": "低檐下控横移",
+      "labelPosition": [
+        176,
+        92
+      ]
+    }
+  ],
+  "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532"
+}

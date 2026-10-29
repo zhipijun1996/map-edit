@@ -96,3 +96,9 @@ python3 tools/browser_module_workshop.py
 HQ首轮反馈已收：HQ01/HQ02/HQ04精确版本保留，现101项交接、29项待实现。HQ03在左右横檐上方加带实体底层的危险区，并裁短顶接岸保留T口净空；HQ05按人工意见替换为受击固定方向发射炮台，蓝色玩家弹在炮台终止，紫色新机关弹再击铃。炮台不是反射镜，身份/资格/冷却规则需补；两份新图仍待审，旧图与来源反馈保留。此轮不实施真实Module或运行物理。
 
 HQ第二轮反馈见`feedback/module-workshop/review-receipts/hq-feedback-002.json`：HQ05当前炮台版精确保留，HQ03改岩面边界地刺后重新待审，历史图保留。HQ06–HQ10同轮直接出图，提案及Cell缺口在`feedback/module-workshop/briefs/plains-hq-second-five-v1.json`，不新增真实Module。当前102项交接、30项待实现；图稿待审共6项（HQ03与新五份）。五份不自动计五个新家族，技术、实际回程、镜像和接缝均UNKNOWN。
+
+HQ第三轮：原话回执`feedback/module-workshop/review-receipts/hq-feedback-003.json`。HQ03/HQ07/HQ08按当前已发布快照保留，105项交接/33项待实现；HQ06/HQ10设计废弃，来源和图稿保留。HQ09延长上门到模块全宽、改竖向只挡弹板，人物使用固定踏台；只挡弹且不承载是尚缺的碰撞规则，不是已有实体台能力。新图待审，不继承旧版认可；直接射铃绕过炮台仍明确列入反例。
+
+HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.json`绑定旧699e58图稿的修改意见。新版删除全宽门，采用出口可穿台上下表面尖刺初始伸出、目标铃命中后同组收回，平台本体始终保留；当前按一次收回/本场景不重伸画图，未获人工保留。竖板沿用只挡弹不承载。危险初态T尚未认证安全接岸，邻接模块带速/穿伤/绕刺和上侧访问待验；105项交接不变。
+
+精确接口第二轮：`feedback/module-workshop/review-receipts/spec02-request-v1.json`逐字保存十份Block/Port需求与“h09 ok了”。HQ09最后dba700刺台版保留后106项交接/34项待实现。新`idea-spec02-*`十图仅为待审设计，尺寸/Port精确复用原话；S11六向、S12十二向、S13的L→L自返回，总33条目标全部UNKNOWN。来源、家族复用与缺Cell见`feedback/module-workshop/briefs/exact-ports-round02-v1.json`。与旧接口同形不继承旧审批，旧废弃S13不复活；本批十个规格不是十个新玩法家族。
