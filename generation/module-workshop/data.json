@@ -25719,6 +25719,77 @@
           "decision": "KEEP"
         }
       ]
+    },
+    {
+      "id": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7",
+      "title": "左右交替命中，反冲接力上升",
+      "sourceType": "human_idea",
+      "verbatim": "上下模块，跳起来射击左下怪，然后射击人物右下怪，最后向下射击反冲，到达上方可穿越平台。\n现在是2个怪，还可以出3个怪版本。",
+      "interpretation": {
+        "observation": "观察当前可用空中枪次、两侧敌人的真实运动与上方可穿平台位置。",
+        "decision": "先命中左下目标获得右上位移，再命中右下目标反向配平，确认回枪后才打最后的向下空枪。",
+        "causality": "每次命中同时消耗敌人血量并返还一发；同一枪的反冲让人物继续上升，左右射击配平横向偏移。",
+        "cells": [
+          "已有空中怪plains_diver（运动相位待验）",
+          "原生可穿平台",
+          "可选宝箱"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "基础空中1发；2怪共3枪、3怪共4枪。每次必须等真实命中退款及0.25秒冷却；不加二段跳或凭空扩空中弹仓。",
+        "terrain": "2怪3×4、3怪3×5；单底台负责起跳与失误接回，不加中途踏板。底口/顶口均可穿平台，入口先落稳。",
+        "reward": "主要收益是上岸进入上方模块；顶台右侧可选宝箱，从下方能看到。",
+        "recovery": "失误回底台，落地恢复基础枪次；敌人的受伤/死亡保留，目标耗尽是明确缺口。可从底口撤退，重入是否重置由实际生命周期决定。",
+        "directions": "去程连续命中上升；回程按下穿过顶台、沿中轴下降到底台/底口。反向不是复制上升操作，全部尚未物理认证。",
+        "cheapSolutions": [
+          "一只怪连续受击取代两只",
+          "省去怪2/怪3",
+          "少最后一枪或纯跳+空枪",
+          "地面先伤怪/击杀后恢复",
+          "受伤位移或邻模块高度绕行"
+        ],
+        "difference": "与既有续枪上岸同族；这份强调竖向连续目标与左右反冲配平。三怪版多一次续航与横移，不算新家族。"
+      },
+      "constraints": {
+        "text": "下进上出，宽度高度根据反冲推算"
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/f0829bf856a2/design.json",
+        "version": "sha256:f0829bf856a234834748750c4a4fec31042eaae8003d1f97bac7432b81f402b2",
+        "sha256": "d8736919720ee03b3a82d6d078a37f016ab531c6cbb6a255e34c9e85ba92f26b",
+        "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/f0829bf856a2/images/创意 002.png",
+        "key": "enemies-2",
+        "label": "2怪版 · 3×4 Block"
+      },
+      "designVariants": [
+        {
+          "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/f0829bf856a2/design.json",
+          "version": "sha256:f0829bf856a234834748750c4a4fec31042eaae8003d1f97bac7432b81f402b2",
+          "sha256": "d8736919720ee03b3a82d6d078a37f016ab531c6cbb6a255e34c9e85ba92f26b",
+          "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/f0829bf856a2/images/创意 002.png",
+          "key": "enemies-2",
+          "label": "2怪版 · 3×4 Block"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
+          "version": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+          "sha256": "e02e6c6a6e3868e8db3f2fc288de7a3a32d63b300739640ee3f5c371f304ca20",
+          "diagram": "ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/images/创意 002.png",
+          "key": "enemies-3",
+          "label": "3怪版 · 3×5 Block"
+        }
+      ],
+      "gaps": [
+        "小范围可读的敌相位尚未验证；不把普通plains_diver冻成靶",
+        "怪物耗死后是否可恢复/退回重试未知",
+        "尺寸仅解析估算，身体/弹丸/冷却/实际净上升及全部Route待原Harness验证"
+      ]
     }
   ],
   "policy": {

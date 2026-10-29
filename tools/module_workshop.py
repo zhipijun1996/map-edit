@@ -39,13 +39,21 @@ def attach(id,design):
  manifest=dict(rows=[dict(reviewId=design['reviewId'],moduleId=id,title=design['title'],summary=design.get('summary',''),source=file,sourceSha256=digest(file),instructions=design.get('reviewInstructions',[]))]);write(folder+'/diagram-batch.json',manifest)
  subprocess.run(['python3','generation/manual-review/batch-001/render_diagrams.py','--manifest',folder+'/diagram-batch.json','--out',folder+'/images','--draft'],cwd=ROOT,check=True)
  if r.get('design'):r.setdefault('history',[]).append(dict(design=r['design'],stage=r['stage']))
- r.update(title=design['title'],stage='DESIGN_REVIEW',design=dict(file=file,version=version,sha256=digest(file),diagram=folder.removeprefix('generation/module-workshop/')+'/images/'+design['reviewId']+'.png'),humanApproval='UNKNOWN')
+ old=r.get('design',{});meta=dict(file=file,version=version,sha256=digest(file),diagram=folder.removeprefix('generation/module-workshop/')+'/images/'+design['reviewId']+'.png')
+ if old.get('key'):
+  meta.update(key=old['key'],label=old.get('label',design['title']));r['designVariants']=[meta if v.get('key')==old['key']else v for v in r.get('designVariants',[])]
+ r.update(title=design['title'],stage='DESIGN_REVIEW',design=meta,humanApproval='UNKNOWN')
  write(IDEAS,d)
 
 def decide(receipt):
  id=safe_id(receipt['id']);d=read(IDEAS);r=next(r for r in d['rows']if r['id']==id)
  if receipt.get('sourceType')!='human_feedback'or not isinstance(receipt.get('verbatim'),str)or not receipt['verbatim'].strip():raise ValueError('Use actual human feedback received in chat')
- if r.get('design',{}).get('version')!=receipt.get('designVersion'):raise ValueError('Decision targets a stale or missing design')
+ if r.get('design',{}).get('version')!=receipt.get('designVersion'):
+  variant=next((v for v in r.get('designVariants',[])if v['version']==receipt.get('designVersion')),None)
+  if variant is None or r['stage']!='DESIGN_REVIEW':raise ValueError('Decision targets a stale or missing design')
+  if digest(variant['file'])!=variant['sha256']or read(variant['file']).get('designVersion')!=variant['version']:raise ValueError('Variant bytes changed')
+  r.setdefault('history',[]).append(dict(design=copy.deepcopy(r['design']),stage=r['stage']))
+  r['design']=copy.deepcopy(variant)
  if digest(r['design']['file'])!=r['design']['sha256']:raise ValueError('Design bytes changed')
  choice=receipt.get('decision')
  if choice not in ['KEEP','CHANGE','DISCARD']:raise ValueError('Unknown decision')
@@ -62,6 +70,11 @@ def decide(receipt):
  received['latestReceipt']=path;write(aggregate,received)
  r['decisionReceipt']=dict(path=path,sha256=digest(path));r['humanApproval']=choice;r['stage']={'KEEP':'READY_FOR_IMPLEMENTATION','CHANGE':'DESIGN_REVIEW','DISCARD':'DISCARDED'}[choice]
  r.setdefault('feedback',[]).append(copy.deepcopy(receipt))
+ if r.get('designVariants'):
+  r.setdefault('variantDecisions',{})[receipt['designVersion']]=choice
+  if choice=='DISCARD':
+   pending=[v for v in r['designVariants']if r['variantDecisions'].get(v['version'])not in ['KEEP','DISCARD']]
+   if pending:r.update(design=copy.deepcopy(pending[0]),stage='DESIGN_REVIEW',humanApproval='UNKNOWN')
  if choice=='KEEP':
   file='feedback/manual-review/implementation-handoff-v1.json';h=read(file)
   if any(x['moduleId']==id for x in h['rows']):raise ValueError('An implementation handoff already exists')

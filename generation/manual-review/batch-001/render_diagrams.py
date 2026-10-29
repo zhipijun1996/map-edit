@@ -121,7 +121,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  port_labels={p['id']:p.get('diagramLabel',p['id'])for p in gc['ports']}
  for p in gc['ports']:
   plabel=port_labels[p['id']]
-  if design_only and p.get('face')=='TOP' and p.get('permission')=='INOUT' and p.get('surface')=='ONE_WAY_PLATFORM':
+  if design_only and p.get('face')in('TOP','BOTTOM') and p.get('permission')=='INOUT' and p.get('surface')=='ONE_WAY_PLATFORM':
    cx,cy=X(p['position'][0]),Y(p['position'][1]);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="white" stroke="#256776" stroke-width="3"/><path d="M{cx} {cy-29}V{cy+29}" stroke="#256776" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>');text(cx+18,cy-18,plabel+' 可穿·双向',22,weight=700)
    continue
   if design_only and p.get('permission')=='OUT' and p.get('surface')=='AIR':
@@ -154,6 +154,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  if instructions:
   for j,line in enumerate(instructions):text(40,y+35+j*32,line,20)
   y+=len(instructions)*32+20
+ if design_only and design.get('diagramLegend'):legend=design['diagramLegend']
  text(40,y+38,legend,20)
  text(40,y+72,('设计稿：每格 128 px；曲线仅表达玩法意图，不代表实际动作、可达性或技术认证。'if args.draft else'每格 128 px；虚线外框是占地，不是墙。路线为归档动作轨迹，不代表全条件通行认证。'),18)
  text(40,y+106,f'{gc["foundation"]["widthBlocks"]}×{gc["foundation"]["heightBlocks"]} Block · {entry["id"]} · 设计讨论',16)
