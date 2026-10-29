@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 13,
+    "READY_FOR_IMPLEMENTATION": 14,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 43,
+    "handoffRevision": 44,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -25991,6 +25991,137 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+      "sourceIdeaId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+      "reviewId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+      "title": "错相升井：四台换乘，三道横锯",
+      "summary": "两列两行平台，平台往上，整个模块瘦高。平台的速度相位不一定一样，空中增加3段横向移动齿轮，速度相位不一致，1个空中怪物。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/images/创意 003.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 3,
+        "heightBlocks": 7
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "BOTTOM",
+          "normal": [
+            0,
+            1
+          ],
+          "position": [
+            192,
+            896
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "start-dock",
+          "stagingPosition": [
+            192,
+            832
+          ],
+          "diagramLabel": "A"
+        },
+        {
+          "id": "B",
+          "face": "TOP",
+          "normal": [
+            0,
+            -1
+          ],
+          "position": [
+            192,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "goal-dock",
+          "diagramLabel": "B"
+        }
+      ],
+      "routes": [
+        {
+          "id": "A-to-B",
+          "from": "A",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-ascent",
+          "evidenceStatus": "UNKNOWN",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
+          }
+        },
+        {
+          "id": "B-to-A",
+          "from": "B",
+          "to": "A",
+          "role": "return",
+          "pathObjectId": "route-return",
+          "evidenceStatus": "UNKNOWN",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
+          }
+        },
+        {
+          "id": "A-to-A-retry",
+          "from": "A",
+          "to": "A",
+          "role": "recovery",
+          "pathObjectId": "route-retry",
+          "evidenceStatus": "UNKNOWN",
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+      "designFile": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
+      "designFileSha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -26225,8 +26356,8 @@
       "constraints": {
         "text": "下进上出"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "design": {
@@ -26239,6 +26370,125 @@
         "现有载台到顶后原轨回落；若要求持续向上循环，缺少回收/重生Cell规则。",
         "四台与三道齿轮的真实安全窗口、等待成本、操作容错尚未求解。",
         "实体承载/离台惯性、防挤压、失败接回、回程、敌已死状态与接缝均待原Harness验证。"
+      ],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3-16d930fb67a6-1.json",
+        "sha256": "5e012857658d5f639c53321aa6466f558ab6227446117d458fc6112f34bcf23d"
+      },
+      "feedback": [
+        {
+          "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+          "sourceType": "human_feedback",
+          "designVersion": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+          "designFileSha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b",
+          "decision": "KEEP",
+          "note": "",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3\n标题：错相升井：四台换乘，三道横锯\n设计版本：sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731\n设计文件 SHA256：d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b\n决定：保留\n意见：\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。"
+        }
+      ]
+    },
+    {
+      "id": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8",
+      "title": "双台转角：左↔上 / 左↔下",
+      "sourceType": "human_idea",
+      "verbatim": "1×2，2×1，2×2的转角模块，内部两个平台，左上port互联，左下port互联。共6个",
+      "interpretation": {
+        "observation": "先读尺寸、A左口与B上下口、两块可穿平台的高差和空隙；没有计时机关。",
+        "decision": "从左口接岸后，选择短跳、反冲补高或向下穿台；从另一口进入时重新判断落点。",
+        "causality": "跳跃提供初始高度，向下或斜下射击的反冲可补上升/横移；可穿平台允许从下方穿入和主动下穿。这里不规定必须开枪或踩遍两台。",
+        "cells": [
+          "原生静态可穿平台×2（同时承担端口接岸）",
+          "两个合法ONE_WAY_PLATFORM端口"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil（高差较大规格的设计预算；是否为最低必要条件待验）"
+        ],
+        "resources": "只用真实跳跃/基础空中枪次，落台后按原机制恢复；无怪物退款、二段跳、钩索或免费回弹。",
+        "terrain": "宽×高依次1×2、2×1、2×2。每个尺寸做左↔上与左↔下，共6个独立审核规格；每份仅两块可穿平台，无外墙、额外支撑或恢复地板。",
+        "reward": "主要收益是转角连接到另一模块。本套不额外放宝箱；也不为凑玩法增加机关和怪物。",
+        "recovery": "仍在下台覆盖范围时可落回并重试。偏出下台或非Port边界的失误不承诺安全接回；需验证接缝/封口/地图终止配置，不偷偷增加第三块安全台。",
+        "directions": "左上释左边Port↔顶边Port，左下释左边Port↔底边Port，并非一个角点Port。每份A→B/B→A分别声明为待验目标；上下行操作不互相倒推认证。",
+        "cheapSolutions": [
+          "普通跳就能通过时接受，不强迫开枪",
+          "直接从A到B而跳过一台可接受",
+          "从邻模块带速度或高度进入须按接缝条件认证",
+          "经未声明边界离开不是新增合法Route，必须检查边界处理"
+        ],
+        "difference": "基础转角连接件，同一用途家族的六个尺寸/接口适配，不称六种新玩法。对照既有135微型上升及双口高差件；与同接口同尺寸既有件应在实现前去重。",
+        "解释": "尺寸统一按宽×高；左口放在相对上下口较远的一行，两个平台本身就是两端接岸。六个都是方案图，不是自动换边的认证配置。",
+        "Cell支持缺口": "普通可穿平台已有真实Cell；目前未发现必须新增的Cell。仍缺这六个几何的完整身体净空、双向动作、最低能力、接缝与未接Port封口证据。",
+        "规格差异": "左↔上：1×2和2×2台面高差192px，2×1高差64px。左↔下：1×2和2×2高差128px，2×1同高错开；底口双向使用可穿平台，不能用AIR INPUT。"
+      },
+      "constraints": {
+        "text": ""
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/1d5fdf9e4b2a/design.json",
+        "version": "sha256:1d5fdf9e4b2aa8ce9ca7146d75f9caac79965dd83034131295ec244949809469",
+        "sha256": "21b025da9327adc10d1694c95da8de54ad0a0013157a48e046ca8c8ea1ca52c6",
+        "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/1d5fdf9e4b2a/images/转角 01.png",
+        "key": "left-top-1x2",
+        "label": "1×2 · 左↔上"
+      },
+      "designVariants": [
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/1d5fdf9e4b2a/design.json",
+          "version": "sha256:1d5fdf9e4b2aa8ce9ca7146d75f9caac79965dd83034131295ec244949809469",
+          "sha256": "21b025da9327adc10d1694c95da8de54ad0a0013157a48e046ca8c8ea1ca52c6",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/1d5fdf9e4b2a/images/转角 01.png",
+          "key": "left-top-1x2",
+          "label": "1×2 · 左↔上"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/8c5c85879397/design.json",
+          "version": "sha256:8c5c858793977891842269f89ad480b9ea5d05f441571b44433e65f969a79159",
+          "sha256": "90292d228203390badaec0fcca978b24d5f28bb66feffa6728d449b556d5c9ed",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/8c5c85879397/images/转角 02.png",
+          "key": "left-bottom-1x2",
+          "label": "1×2 · 左↔下"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/8315ca17760b/design.json",
+          "version": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+          "sha256": "de87de5cf6360d9725974d83990b66f25f95a74c5c8bca5d71670186b246a57f",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/8315ca17760b/images/转角 03.png",
+          "key": "left-top-2x1",
+          "label": "2×1 · 左↔上"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/235c8fa4afc3/design.json",
+          "version": "sha256:235c8fa4afc3067b4d23de44d630ded9017b548890d676da6ea74358f16b823d",
+          "sha256": "b68bc7c8f10a42ecff0375bb688e33e13380201d31e92545d8371b401cfa276d",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/235c8fa4afc3/images/转角 04.png",
+          "key": "left-bottom-2x1",
+          "label": "2×1 · 左↔下"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/fd98f5f56782/design.json",
+          "version": "sha256:fd98f5f5678200e9c7c1f1d04d359cf3bb06fb42c5d7945dc3450207079d96fe",
+          "sha256": "27985f47d16972031139483acdfc3aeebfadaa244ab99b478f77db3ff44096b8",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/fd98f5f56782/images/转角 05.png",
+          "key": "left-top-2x2",
+          "label": "2×2 · 左↔上"
+        },
+        {
+          "file": "generation/module-workshop/ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/33e8e715ec5f/design.json",
+          "version": "sha256:33e8e715ec5ff584ae239d525d18a18d30de8758dc12b2cd63ceacedd388e7bb",
+          "sha256": "665f3e654bfd6f985e1515c8c723fe962b58f3a07f1f1e7fd2e35c92ad4e19a5",
+          "diagram": "ideas/idea-31639e2c-1a4a-487c-b1ea-c52522549fa8/33e8e715ec5f/images/转角 06.png",
+          "key": "left-bottom-2x2",
+          "label": "2×2 · 左↔下"
+        }
+      ],
+      "gaps": [
+        "已有两块静态可穿平台可表达几何；尚无这6份图稿的运行参数或真实模块。",
+        "两向Route、完整角色/头部净空、下穿时机、最低资源与接缝均UNKNOWN。",
+        "未启用Port封口、非Port边界与镜像/四角换边未认证；不供在线匹配。"
       ]
     }
   ],
