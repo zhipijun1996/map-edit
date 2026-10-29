@@ -110,3 +110,6 @@ HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.js
 精确接口三评：`feedback/module-workshop/review-receipts/spec02-feedback-003.json`记录左侧只留一平台/齿轮对齐、右中台换空怪。为守住原ROCK口，保留左入口岩台删下方观察台，齿轮中线和窗口上移96px；右y512中间台换plains_diver，另外两右平台不动。尺寸/Port不变、115项交接不变，新图待审；删台后的上返及敌死亡后返回未验证，不补台或刷怪。
 
 精确接口四评：`spec02-feedback-004.json`记录“ok了，通过”，精确保留S09最后ba9155075c23版，图稿原字节不变。该十份规格设计全部保留，116项交接/44项待实现；无待审新图。本次只登记人工设计意见，不执行实施/物理，不升级技术或生产资格。
+
+
+大房间取宝提案：`feedback/module-workshop/briefs/plains-large-treasure-three-v1.json`与原话回执`large-treasure-request-v1.json`记录LG01三台留路（10×7）、LG02双门连穿（9×8）、LG03三折刺檐（10×7）。三份同轮出图，均是单L口INOUT ROCK、含领取宝箱事件的L→L自返回目标，只需jump/shot_recoil，当前待审核，不增加116项交接或44项待实现。LG01保存去程冻结构型供回程使用，LG02两次独立限时门后接箱前制动，LG03低檐换向后追动态落点；是已有家族的连续Macro组合，不算三个新玩法家族。静态射线/边界/手机检查见`large-treasure-three-conformance-v1.json`，不能据此宣称反冲可达、时序窗口、真实防夹、失败恢复或回程已验证；精确版本保留前不实施。

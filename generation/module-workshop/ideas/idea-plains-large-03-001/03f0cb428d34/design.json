@@ -1,0 +1,873 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-large-03-001",
+  "reviewId": "LG03",
+  "title": "三折刺檐：低弧加速，回身刹车，再抢移动落点",
+  "summary": "10×7 Block · 单L口取宝后返回 · 连续偏难目标 / 未实测",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 1280,
+    "h": 896
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 5,
+      "position": [
+        0,
+        704
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "entry",
+      "stagingPosition": [
+        64,
+        704
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "该L口位于非角落Block。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "entry",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 160,
+      "h": 160
+    },
+    {
+      "id": "A",
+      "type": "platform",
+      "x": 432,
+      "y": 672,
+      "w": 80,
+      "h": 12,
+      "label": "A 短岸：先刹住",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "B",
+      "type": "platform",
+      "x": 208,
+      "y": 512,
+      "w": 112,
+      "h": 12,
+      "label": "B 回身再起跳",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "C",
+      "type": "platform",
+      "x": 560,
+      "y": 352,
+      "w": 96,
+      "h": 12,
+      "label": "C 等待或主动截台",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "treasure-bank",
+      "type": "platform",
+      "x": 1136,
+      "y": 224,
+      "w": 144,
+      "h": 12,
+      "label": "箱岸：离D再制动",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "treasure",
+      "type": "reward",
+      "x": 1192,
+      "y": 200,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "第三折后取宝"
+    },
+    {
+      "id": "eave-1",
+      "type": "terrain",
+      "x": 336,
+      "y": 544,
+      "w": 192,
+      "h": 24
+    },
+    {
+      "id": "eave-1-top",
+      "type": "hazard",
+      "x": 336,
+      "y": 524,
+      "w": 192,
+      "h": 20,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave-1",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 192,
+        "depth": 20
+      }
+    },
+    {
+      "id": "eave-1-under",
+      "type": "hazard",
+      "x": 336,
+      "y": 568,
+      "w": 192,
+      "h": 20,
+      "orientation": "DOWN",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave-1",
+        "face": "BOTTOM",
+        "start_offset": 0,
+        "length": 192,
+        "depth": 20
+      }
+    },
+    {
+      "id": "eave-2",
+      "type": "terrain",
+      "x": 368,
+      "y": 368,
+      "w": 128,
+      "h": 24
+    },
+    {
+      "id": "eave-2-top",
+      "type": "hazard",
+      "x": 368,
+      "y": 348,
+      "w": 128,
+      "h": 20,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave-2",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 128,
+        "depth": 20
+      }
+    },
+    {
+      "id": "eave-2-under",
+      "type": "hazard",
+      "x": 368,
+      "y": 392,
+      "w": 128,
+      "h": 20,
+      "orientation": "DOWN",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "eave-2",
+        "face": "BOTTOM",
+        "start_offset": 0,
+        "length": 128,
+        "depth": 20
+      }
+    },
+    {
+      "id": "rail-D",
+      "type": "trackLine",
+      "x": 784,
+      "y": 352,
+      "w": 224,
+      "h": 0,
+      "points": [
+        {
+          "x": 784,
+          "y": 352
+        },
+        {
+          "x": 1008,
+          "y": 352
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          784,
+          352
+        ],
+        "finish": [
+          1008,
+          352
+        ],
+        "travel_duration": 3.6,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.275,
+        "designState": "MOVING_EXAMPLE"
+      }
+    },
+    {
+      "id": "D",
+      "type": "platform",
+      "x": 848.0,
+      "y": 342.0,
+      "w": 96,
+      "h": 20,
+      "trackId": "rail-D",
+      "label": "D 实体台",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "last-saw-rail",
+      "type": "trackLine",
+      "x": 1072,
+      "y": 216,
+      "w": 0,
+      "h": 112,
+      "points": [
+        {
+          "x": 1072,
+          "y": 216
+        },
+        {
+          "x": 1072,
+          "y": 328
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          1072,
+          272
+        ],
+        "travel": [
+          0,
+          56
+        ],
+        "period": 3.2,
+        "initial_phase": 0,
+        "designOnly": true
+      }
+    },
+    {
+      "id": "last-saw",
+      "type": "hazard",
+      "x": 1048,
+      "y": 248,
+      "w": 48,
+      "h": 48,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "last-saw-rail",
+      "label": "竖移锯"
+    },
+    {
+      "id": "low-recover",
+      "type": "platform",
+      "x": 624,
+      "y": 784,
+      "w": 112,
+      "h": 12,
+      "label": "低位接回，不直达箱岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "pit-bed",
+      "type": "terrain",
+      "x": 160,
+      "y": 864,
+      "w": 1120,
+      "h": 32
+    },
+    {
+      "id": "pit-thorns",
+      "type": "hazard",
+      "x": 160,
+      "y": 844,
+      "w": 1120,
+      "h": 20,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "pit-bed",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 1120,
+        "depth": 20
+      }
+    },
+    {
+      "id": "route-L-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 896,
+      "points": [
+        {
+          "x": 0,
+          "y": 704
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 240,
+          "y": 664
+        },
+        {
+          "x": 416,
+          "y": 624
+        },
+        {
+          "x": 472,
+          "y": 640
+        },
+        {
+          "x": 352,
+          "y": 624
+        },
+        {
+          "x": 296,
+          "y": 600
+        },
+        {
+          "x": 264,
+          "y": 480
+        },
+        {
+          "x": 336,
+          "y": 480
+        },
+        {
+          "x": 520,
+          "y": 464
+        },
+        {
+          "x": 600,
+          "y": 320
+        },
+        {
+          "x": 784,
+          "y": 320
+        },
+        {
+          "x": 1008,
+          "y": 320
+        },
+        {
+          "x": 1096,
+          "y": 200
+        },
+        {
+          "x": 1200,
+          "y": 192
+        },
+        {
+          "x": 1008,
+          "y": 320
+        },
+        {
+          "x": 784,
+          "y": 320
+        },
+        {
+          "x": 600,
+          "y": 320
+        },
+        {
+          "x": 520,
+          "y": 464
+        },
+        {
+          "x": 336,
+          "y": 480
+        },
+        {
+          "x": 264,
+          "y": 480
+        },
+        {
+          "x": 296,
+          "y": 600
+        },
+        {
+          "x": 352,
+          "y": 624
+        },
+        {
+          "x": 472,
+          "y": 640
+        },
+        {
+          "x": 240,
+          "y": 704
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 0,
+          "y": 704
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-L",
+      "from": "L",
+      "to": "L",
+      "role": "reward_return",
+      "pathObjectId": "route-L-L",
+      "strategy": "首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。；L→L去程右→左→右折行，再追D取宝；回程先跳回D再回C/B/A。由高往低可选择更长下降，但刺檐/锯和底部尖刺限制无成本直落，真实捷径仍须保留并比较成本。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        0.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "TARGET_HIGH_NOT_CALIBRATED",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      },
+      "rewardContract": {
+        "objectId": "treasure",
+        "requireActualClaim": true,
+        "returnTo": "L",
+        "status": "UNKNOWN"
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "event": "reach_reward_claim_and_return",
+        "validation": "UNKNOWN"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "青线＝去程　橙线＝取宝后回程　蓝虚线＝射击　绿箭头＝反冲　虚框＝轨道端点",
+  "reviewInstructions": [
+    "① 去程：右跨落A→向左绕檐落B→再右上到C，射击方向必须随下一落点改变。",
+    "② 红刺依附岩檐上下表面，不是整块不存在的伤害区域；可以在A/B/C落地后观察。",
+    "③ C之后还有移动D与竖锯：择时截台，离台后刹在箱岸，最后不是安全步道。",
+    "④ 回程复用原折角/载台；任何直落/越顶成功捷径仍须记录并比较成本，当前未验证。"
+  ],
+  "designNotes": [
+    "每个短台都有真实落地恢复和换向职责；若删除后实际行为不变，作为冗余修订而不是追加填充平台。",
+    "刺檐1下净空为672-(544+24+20)=84px；该数值只是静态示意，身体与低弧扰动尚未求解。",
+    "连续段末端可落地重整，不把偏高难度解释成一串毫秒固定按键；整体高难度待真实校准。",
+    "decision：首段在低檐下反冲向右，到A前向右射击刹住；落A后向左折返绕檐到B，再右转到C；最后根据移动台D与竖锯的相位选择追台还是等它迎来，离台制动落箱岸。",
+    "causality：同一把枪在长跨时加速、短岸前制动、折角时改变方向；实体刺檐限制过高弧线，短岸使过早反冲和过晚刹车产生不同失误，末段把固定落点判断迁移到动态目标。",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实枪次、冷却、精力、落地恢复和载台惯性；没有空中额外补枪、二跳、自动补血/复活。每次必要射击之间安排真实落台，具体资源预算UNKNOWN。",
+    "terrain：10×7，三折线路复用中央刺檐，A/B/C均有落地恢复用途；D是原生横向实体载台、末端一枚竖锯。不是额外堆成三组开关。",
+    "reward：唯一宝箱放在挑战末端，可从接近房间的视野辨认；需真实到达箱台并领取，原口自返回包含取宝事件。箱台也是返回前观察点，不让取箱瞬间强迫起跳。",
+    "recovery：入口和B是可观察点，A/C是短落点而非强制不停顿；低位接回台能退回前段重试但不能直接登箱。错过D可留C再等下一次会合，失败不自动传送。",
+    "directions：L→L去程右→左→右折行，再追D取宝；回程先跳回D再回C/B/A。由高往低可选择更长下降，但刺檐/锯和底部尖刺限制无成本直落，真实捷径仍须保留并比较成本。",
+    "cheapSolutions：入口或B直冲箱台跳过两折；站在刺檐顶面当安全步道；连按同方向射击就全程成功；从C普通跳直达箱台使D冗余；D停在端点只需无限等待且没有主动截乘价值；箱后直落回口完全跳过时机与落点判断；新增平台只为凑数量而无动作/恢复用途",
+    "difference：复用S08绕檐与已有反冲刹车，做连续折角与静转动态的组合挑战；独立于前两案，不用新开关、不依赖可消耗怪物续枪。",
+    "Cell与规则缺口：所需岩体、PlatformThornDefinition边界刺、固定可穿台、原生横移实体台和竖锯均已有表达；连续几何规则尚未实现。；每段完整身体净空、真实反冲续航/射击冷却、每次落台恢复与可读的多帧操作窗口UNKNOWN。首段可能要分段重调，不能仅按线段长度宣称可达。；末段C→D→箱岸的必要性、回程敌死无关状态、穿伤/越顶/直接落回口和低台恢复须反例验证。",
+    "未获此精确版本人工保留，不实施真实Module，不运行物理。",
+    "绕第一刺檐的意图线先在下方低位退出左端，再上升到B；第二檐先从下方到右端外再上升，避免图线直接穿岩。",
+    "observation：看每个折角顶上的真实刺檐、对面短落点和下一枚齿轮的位置，最后一台会横移而不是在远处等你。",
+    "cells：真实岩檐与其上下边地刺；功能性固定短台A/B/C；原生横移实体台D；原生竖锯/宝箱/低位恢复台"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-large-03-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 960.0,
+      "y": 342.0,
+      "w": 96,
+      "h": 20,
+      "label": "D 轨道端点"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        896.0,
+        334.0
+      ],
+      "to": [
+        944.0,
+        334.0
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        240,
+        664
+      ],
+      "to": [
+        160,
+        696
+      ],
+      "recoil": [
+        [
+          240,
+          664
+        ],
+        [
+          336,
+          624
+        ]
+      ],
+      "label": "① 低弧加速",
+      "labelPosition": [
+        192,
+        600
+      ]
+    },
+    {
+      "from": [
+        416,
+        624
+      ],
+      "to": [
+        488,
+        624
+      ],
+      "recoil": [
+        [
+          416,
+          624
+        ],
+        [
+          360,
+          624
+        ]
+      ],
+      "label": "② 到短岸前先刹车",
+      "labelPosition": [
+        448,
+        744
+      ]
+    },
+    {
+      "from": [
+        296,
+        544
+      ],
+      "to": [
+        384,
+        616
+      ],
+      "recoil": [
+        [
+          296,
+          544
+        ],
+        [
+          232,
+          480
+        ]
+      ],
+      "label": "③ 反向绕过刺檐端",
+      "labelPosition": [
+        592,
+        552
+      ]
+    },
+    {
+      "from": [
+        520,
+        448
+      ],
+      "to": [
+        432,
+        520
+      ],
+      "recoil": [
+        [
+          520,
+          448
+        ],
+        [
+          584,
+          384
+        ]
+      ],
+      "label": "④ 再换右上方向",
+      "labelPosition": [
+        704,
+        456
+      ]
+    },
+    {
+      "from": [
+        1096,
+        200
+      ],
+      "to": [
+        1160,
+        200
+      ],
+      "recoil": [
+        [
+          1096,
+          200
+        ],
+        [
+          1048,
+          200
+        ]
+      ],
+      "label": "⑤ 看锯、离D、刹箱岸",
+      "labelPosition": [
+        1016,
+        128
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        416,
+        624
+      ],
+      "label": "A前制动",
+      "labelPosition": [
+        408,
+        608
+      ]
+    },
+    {
+      "position": [
+        280,
+        480
+      ],
+      "label": "B反向起跳",
+      "labelPosition": [
+        224,
+        444
+      ]
+    },
+    {
+      "position": [
+        600,
+        320
+      ],
+      "label": "C截台判断",
+      "labelPosition": [
+        600,
+        268
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          0,
+          704
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          240,
+          664
+        ],
+        [
+          416,
+          624
+        ],
+        [
+          472,
+          640
+        ],
+        [
+          352,
+          624
+        ],
+        [
+          296,
+          600
+        ],
+        [
+          264,
+          480
+        ],
+        [
+          336,
+          480
+        ],
+        [
+          520,
+          464
+        ],
+        [
+          600,
+          320
+        ],
+        [
+          784,
+          320
+        ],
+        [
+          1008,
+          320
+        ],
+        [
+          1096,
+          200
+        ],
+        [
+          1200,
+          192
+        ]
+      ],
+      "color": "#157f84",
+      "label": "",
+      "labelPosition": [
+        0,
+        0
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          1200,
+          192
+        ],
+        [
+          1008,
+          320
+        ],
+        [
+          784,
+          320
+        ],
+        [
+          600,
+          320
+        ],
+        [
+          520,
+          464
+        ],
+        [
+          336,
+          480
+        ],
+        [
+          264,
+          480
+        ],
+        [
+          296,
+          600
+        ],
+        [
+          352,
+          624
+        ],
+        [
+          472,
+          640
+        ],
+        [
+          240,
+          704
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          0,
+          704
+        ]
+      ],
+      "color": "#d28b25",
+      "label": "",
+      "labelPosition": [
+        0,
+        0
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "designVersion": "sha256:03f0cb428d34a61215c7eda2ec00792b88fb8c9da345b3f58c03324e54275172"
+}
