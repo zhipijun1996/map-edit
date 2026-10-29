@@ -34359,37 +34359,38 @@
     },
     {
       "id": "idea-plains-hq09-001",
-      "title": "让竖向挡板让出炮弹路",
+      "title": "让开弹路，击铃收起出口台尖刺",
       "sourceType": "ai_idea",
       "verbatim": "一座可启停的升降台既是落脚点，也会挡住炮台到风铃的斜弹道。先选择台高，再跳起击炮：台停得顺手却挡弹会不开门，停得让弹又可能让你够不到。",
       "interpretation": {
-        "observation": "看竖向挡弹板与炮线是否相交、上方长门是否打开；固定踏台才是人物落点。",
-        "decision": "启停或等待竖板让出炮弹通路，再从固定台起跳击炮；人物不在挡板上等待或回枪。",
-        "causality": "玩家弹触发炮台生成机关弹，只有挡板让开才可能击铃开门；人物只获得原射击反冲。竖板只挡弹、不与人物承载接触。",
+        "observation": "看竖板是否让出炮弹通路，以及顶部出口台的上下尖刺是否收回；平台本体不会消失。",
+        "decision": "读挡弹窗口后击炮，让机关弹命中目标铃收刺，再从固定踏台上返。不是寻找横向长门的薄弱处。",
+        "causality": "同一枪给玩家反冲并触发炮台；机关弹通过竖板窗口命中风铃，收起出口台上下危险面，保留可穿平台。",
         "cells": [
-          "HQ05受击固定方向炮台（缺Cell）",
-          "竖向移动只挡弹板（缺碰撞筛选/Cell）",
-          "原生计时风铃门",
-          "两块功能性固定可穿踏台"
+          "HQ05受击定向炮台（缺Cell）",
+          "竖向只挡弹板（缺碰撞筛选Cell）",
+          "已有PlatformThornDefinition上下表面尖刺",
+          "一铃收回同平台两危险面的控制绑定（缺）",
+          "可穿出口台与固定踏台"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "真实跳跃、枪次、冷却及固定台落地恢复；穿过竖板不恢复资源。",
-        "terrain": "5×4不变，上门由128px延长到640px，横贯两侧边界；原横载台改16×112竖板，增加固定起跳台供人物上行。",
-        "reward": "开门进入上接模块，不加宝箱。",
-        "recovery": "误击被挡可回固定起跳台恢复后重试；顶侧返回铃重开同门后沿固定台下降。新高度预算和等待成本待验。",
-        "directions": "L→T先处理挡弹窗口，再从固定台上返；T→L重开长门下降，两个方向均UNKNOWN。",
+        "resources": "真实枪次、冷却和固定台落地恢复；击铃/炮台/穿竖板不补枪。",
+        "terrain": "5×4、L(0,320)/T(192,0)不变。全宽门删除；顶部台(128,32,128,12)保留，上下刺初始伸出，触发后收回。",
+        "reward": "获得安全顶口落脚与上接通路，不额外放宝箱。",
+        "recovery": "炮弹被挡可退固定台重试；有效击铃后本场景保持收回，不新增限时重伸。T初态危险，需从上侧同组访问先收刺再进入；邻接站位/弹路未验证。",
+        "directions": "L→T目标为击铃收刺后登台；T→L若初始伸刺需先安全命中上侧访问铃，不能假设进入时已触发。两向均UNKNOWN。",
         "cheapSolutions": [
-          "直接射铃绕过炮台；此项未因HQ06废弃而解决，不能宣称炮台必需",
-          "提前开门再慢走",
-          "从长门端点或非Port越界绕行",
-          "把竖板顶部当落点或碰触竖板回枪",
-          "固定踏台遮住机关弹",
-          "站地面反复射击等待而失去挑战"
+          "左侧邻接模块带速高跳/反冲绕到顶部",
+          "从下方穿台或从侧边绕刺直跨T",
+          "带伤/无敌帧硬闯上下刺",
+          "直接射目标铃省略炮台",
+          "提前收刺后从固定台普通上行",
+          "T初始危险且上侧访问无法安全命中"
         ],
-        "difference": "按人工反馈取消落点与弹路的双重取舍，转为控制挡弹窗口；与194同属射窗方向，新增控制方式不自动算新玩法家族。"
+        "difference": "按人工意见把门替换成出口台的危险状态，通行目标是让既有落脚面变安全；不是新增家族，也不能把扣血说成不可通行。"
       },
       "constraints": {
         "challengeSpecification": {
@@ -34446,21 +34447,22 @@
         "proposalKey": "HQ09"
       },
       "gaps": [
-        "HQ05受击定向炮台仍未实现；不能从设计保留推断已有Cell。",
-        "新增只与弹丸碰撞、人物可穿且不承载的竖向移动挡板；原实体载台不能直接冒充此能力。",
-        "运动/启停时钟可参考原生载台；碰撞筛选、位置跟随、炮弹拦截、阶段取消要真实绑定。",
-        "直接射铃替代炮台尚未排除；固定台到上返台的真实资源和身体预算、长门开窗/防夹、回程/恢复、越界反例均UNKNOWN。"
+        "现有PlatformThornDefinition提供上下表面危险几何；同铃原子收回两面并保留平台本体的控制/视觉绑定仍缺，不能凭图宣称已实现。",
+        "受击炮台与只挡弹竖板仍缺原记录中的Cell/碰撞规则。",
+        "T初态危险，不满足已验证安全接岸；保留端口意图，安全上侧访问与状态条件必须重新验证，未认证不可供Map直接使用。",
+        "邻接左侧带速/高跳、上下刺完整身体和穿伤无敌帧、直接射铃、回程/失败恢复/接缝均UNKNOWN。",
+        "默认本场景单次收回且不自动重伸；重入/存档/阶段取消待实现明确。"
       ],
-      "feasibility": "MISSING_PROJECTILE_ONLY_MOVING_BARRIER_AND_TURRET_CELL",
+      "feasibility": "MISSING_RETRACT_HAZARD_GROUP_BINDING_AND_PRIOR_CELLS",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-hq09-001/699e58f2152b/design.json",
-        "version": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38",
-        "sha256": "3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520",
-        "diagram": "ideas/idea-plains-hq09-001/699e58f2152b/images/HQ09.png"
+        "file": "generation/module-workshop/ideas/idea-plains-hq09-001/dba700173996/design.json",
+        "version": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
+        "sha256": "3892e8afd1f6e7c6db0346aa9d113e36b443aee0bb438a749f01b388062c5ae1",
+        "diagram": "ideas/idea-plains-hq09-001/dba700173996/images/HQ09.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-5c93c5150834-1.json",
-        "sha256": "32107df593d7ec3d3900bdc87a2d615b102cc474cd765b24412b53c993cd629b"
+        "path": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-699e58f2152b-2.json",
+        "sha256": "4b30cb9c529c50d0f672ff7deb739c6128c81bb515af320901bfbd3525416198"
       },
       "feedback": [
         {
@@ -34472,6 +34474,16 @@
           "decision": "CHANGE",
           "note": "上当门长一点，别让人可以越过。升降台改成竖的，专门挡炮弹且不提供人落脚点",
           "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-003.json"
+        },
+        {
+          "id": "idea-plains-hq09-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-plains-hq09-001\n标题：让竖向挡板让出炮弹路\n设计版本：sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38\n设计文件 SHA256：3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520\n决定：修改\n意见：这个门有点丑，而且解决不了左侧人物从别的模块反冲跳上去。改成这个风铃控制最上方出口平台，风铃机关触发前是尖刺平台或者齿轮平台，触发后机关收回，变回普通平台\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。",
+          "designVersion": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38",
+          "designFileSha256": "3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520",
+          "decision": "CHANGE",
+          "note": "去掉长门，风铃改控制顶部出口平台尖刺伸出/收回。",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-004.json"
         }
       ],
       "history": [
@@ -34481,6 +34493,15 @@
             "version": "sha256:5c93c5150834b0bcbd3a3c88e10ae41099f48a9d485f5061213215340233c3b9",
             "sha256": "fefe3dbcbc9a27599b7bd653c5d4e77381d99713d5f7a3a48a5237e71a8418fd",
             "diagram": "ideas/idea-plains-hq09-001/5c93c5150834/images/HQ09.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        },
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-plains-hq09-001/699e58f2152b/design.json",
+            "version": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38",
+            "sha256": "3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520",
+            "diagram": "ideas/idea-plains-hq09-001/699e58f2152b/images/HQ09.png"
           },
           "stage": "DESIGN_REVIEW"
         }

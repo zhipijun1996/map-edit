@@ -98,3 +98,5 @@ HQ首轮反馈已收：HQ01/HQ02/HQ04精确版本保留，现101项交接、29�
 HQ第二轮反馈见`feedback/module-workshop/review-receipts/hq-feedback-002.json`：HQ05当前炮台版精确保留，HQ03改岩面边界地刺后重新待审，历史图保留。HQ06–HQ10同轮直接出图，提案及Cell缺口在`feedback/module-workshop/briefs/plains-hq-second-five-v1.json`，不新增真实Module。当前102项交接、30项待实现；图稿待审共6项（HQ03与新五份）。五份不自动计五个新家族，技术、实际回程、镜像和接缝均UNKNOWN。
 
 HQ第三轮：原话回执`feedback/module-workshop/review-receipts/hq-feedback-003.json`。HQ03/HQ07/HQ08按当前已发布快照保留，105项交接/33项待实现；HQ06/HQ10设计废弃，来源和图稿保留。HQ09延长上门到模块全宽、改竖向只挡弹板，人物使用固定踏台；只挡弹且不承载是尚缺的碰撞规则，不是已有实体台能力。新图待审，不继承旧版认可；直接射铃绕过炮台仍明确列入反例。
+
+HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.json`绑定旧699e58图稿的修改意见。新版删除全宽门，采用出口可穿台上下表面尖刺初始伸出、目标铃命中后同组收回，平台本体始终保留；当前按一次收回/本场景不重伸画图，未获人工保留。竖板沿用只挡弹不承载。危险初态T尚未认证安全接岸，邻接模块带速/穿伤/绕刺和上侧访问待验；105项交接不变。
