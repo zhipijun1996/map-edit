@@ -1,0 +1,472 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s09-001",
+  "reviewId": "R2-S09",
+  "title": "S09 · 下落先留枪，过锯再刹回",
+  "summary": "精确规格 S09 · 3×5 Block · 2条有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 1,
+      "position": [
+        0,
+        192.0
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "side",
+      "stagingPosition": [
+        64,
+        192
+      ],
+      "requestedBlockPosition": [
+        0.0,
+        1.5
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "B",
+      "face": "BOTTOM",
+      "index": 2,
+      "position": [
+        320.0,
+        640
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        1
+      ],
+      "diagramLabel": "B",
+      "supportObjectId": "bottom",
+      "stagingPosition": [
+        320,
+        576
+      ],
+      "requestedBlockPosition": [
+        2.5,
+        5.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            384,
+            576
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s09-B-bottom_right"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "side",
+      "type": "terrain",
+      "x": 0,
+      "y": 224,
+      "w": 96,
+      "h": 32
+    },
+    {
+      "id": "bottom",
+      "type": "platform",
+      "x": 272,
+      "y": 608,
+      "w": 112,
+      "h": 12,
+      "label": "下口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "low",
+      "type": "platform",
+      "x": 240,
+      "y": 496,
+      "w": 112,
+      "h": 12,
+      "label": "刹回 / 上返",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "middle",
+      "type": "platform",
+      "x": 64,
+      "y": 368,
+      "w": 96,
+      "h": 12,
+      "label": "重整 / 上返",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "high",
+      "type": "platform",
+      "x": 256,
+      "y": 240,
+      "w": 96,
+      "h": 12,
+      "label": "转向高台",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "cross-saw-rail",
+      "type": "trackLine",
+      "x": 96,
+      "y": 432,
+      "w": 192,
+      "h": 0,
+      "points": [
+        {
+          "x": 96,
+          "y": 432
+        },
+        {
+          "x": 288,
+          "y": 432
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          432
+        ],
+        "travel": [
+          96,
+          0
+        ],
+        "period": 3.6,
+        "initial_phase": 0
+      }
+    },
+    {
+      "id": "cross-saw",
+      "type": "hazard",
+      "x": 168,
+      "y": 408,
+      "w": 48,
+      "h": 48,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "cross-saw-rail",
+      "label": "移动齿轮"
+    },
+    {
+      "id": "route-L-B",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 304,
+          "y": 208
+        },
+        {
+          "x": 112,
+          "y": 336
+        },
+        {
+          "x": 296,
+          "y": 464
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 320,
+          "y": 640
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-B-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 640
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 296,
+          "y": 464
+        },
+        {
+          "x": 112,
+          "y": 336
+        },
+        {
+          "x": 304,
+          "y": 208
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-B",
+      "from": "L",
+      "to": "B",
+      "role": "main",
+      "pathObjectId": "route-L-B",
+      "strategy": "先读横锯，保留枪次在后段刹回右下窄岸；同侧来向先绕实岩檐。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        2.5,
+        3.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "B-to-L",
+      "from": "B",
+      "to": "L",
+      "role": "return",
+      "pathObjectId": "route-B-L",
+      "strategy": "按接岸逐段恢复，反向读锯与岩檐；不把下降证据当上行。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -2.5,
+        -3.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "绿岩／浅绿可穿接岸　实体载台另标　红＝真实地刺/齿轮　曲线＝动作意图，非物理证据",
+  "reviewInstructions": [
+    "① 青线下降，回程逐段上返；横锯威胁中段换侧，不加独立钥匙。",
+    "② S09/S10同家族接口适配；S10底口仍在右侧，必须先绕同侧实岩檐。"
+  ],
+  "designNotes": [
+    "observation：读横锯下一次过线位置、自己落速和下层窄岸。",
+    "decision：这段靠普通下落，还是花枪刹住；太早用枪会失去后段调整。",
+    "causality：射击反冲改变落速和横移，落台才按真实机制恢复；同锯线在回程约束跳出时机。",
+    "cells：原横移齿轮；三层功能性可穿接岸；左岩口/底可穿口",
+    "abilities：jump；shot_recoil",
+    "resources：仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+    "terrain：严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+    "reward：目的岸与下一模块为主要收益，不放免费宝箱。",
+    "recovery：漏上一层可能接到下一层，但不保证所有相位安全；返回按原落地恢复重试。",
+    "directions：L→B以刹车下降，B→L逐段上升并读锯，双向策略不同。",
+    "cheapSolutions：长落到底口始终不需操作；普通跳已无风险覆盖全部回程；多一层台不改变恢复与路线；跳过齿轮扫掠区",
+    "difference：沿用此前认可S09的下降刹车方向，但严格恢复为本轮3×5/左第1行接口；不是沿用裁后3×4的旧认证。",
+    "Cell缺口：现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。",
+    "本轮精确接口的新图稿不继承旧图或原家族技术认证；未经该版本人工保留不实施。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s09-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "actorPoses": [
+    {
+      "position": [
+        176,
+        384
+      ],
+      "label": "过线后再刹回",
+      "labelPosition": [
+        142,
+        350
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        176,
+        384
+      ],
+      "to": [
+        144,
+        448
+      ],
+      "recoil": [
+        [
+          176,
+          384
+        ],
+        [
+          208,
+          320
+        ]
+      ],
+      "label": "反冲制动 / 调横移",
+      "labelPosition": [
+        192,
+        542
+      ]
+    }
+  ],
+  "designVersion": "sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081"
+}

@@ -2147,9 +2147,9 @@
     {
       "reviewId": "idea-plains-hq09-001",
       "moduleId": "idea-plains-hq09-001",
-      "version": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38",
-      "decision": "CHANGE",
-      "verbatim": "Module 工坊 · 设计审阅\n创意：idea-plains-hq09-001\n标题：让竖向挡板让出炮弹路\n设计版本：sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38\n设计文件 SHA256：3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520\n决定：修改\n意见：这个门有点丑，而且解决不了左侧人物从别的模块反冲跳上去。改成这个风铃控制最上方出口平台，风铃机关触发前是尖刺平台或者齿轮平台，触发后机关收回，变回普通平台\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。",
+      "version": "sha256:dba700173996ba166e0eaa873b6e577dc4935c26b86eb8232f5de8945df04b4b",
+      "decision": "KEEP",
+      "verbatim": "h09 ok了，接下来按照尺寸和port生成创意。\n模块规格如下，尺寸和坐标均以 Block 为单位，1 Block = 128×128 像素。\n\n坐标原点是模块左上角，X 向右、Y 向下。Port 位于边界 Block 的外侧边中点，不是整个模块边的中点。\n\n所有 Port 均为 INOUT。左右朝向的 Port 使用 ROCK，上下朝向的 Port 使用 ONE_WAY_PLATFORM。多口模块需要各 Port 之间双向可达，并明确声明有向 Routes。\n\nS02：宽3、高5。两个 Port：\n上口 (0.5, 0)，朝上；\n下口 (2.5, 5)，朝下。\n\nS04：宽3、高7。两个 Port：\n上口 (0.5, 0)，朝上；\n下口 (2.5, 7)，朝下。\n\nS06：宽4、高6。两个 Port：\n上口 (0.5, 0)，朝上；\n下口 (3.5, 6)，朝下。\n\nS07：宽4、高3。两个 Port：\n左口 (0, 1.5)，朝左；\n上口 (3.5, 0)，朝上。\n\nS08：宽4、高3。两个 Port：\n右口 (4, 1.5)，朝右；\n上口 (3.5, 0)，朝上。\n\nS09：宽3、高5。两个 Port：\n左口 (0, 1.5)，朝左；\n下口 (2.5, 5)，朝下。\n\nS10：宽3、高5。两个 Port：\n右口 (3, 1.5)，朝右；\n下口 (2.5, 5)，朝下。\n\nS11：宽5、高4。三个 Port：\n左口 (0, 2.5)，朝左；\n右口 (5, 0.5)，朝右；\n下口 (3.5, 4)，朝下。\n\nS12：宽5、高4。四个 Port：\n左口 (0, 2.5)，朝左；\n右口 (5, 0.5)，朝右；\n上口 (1.5, 0)，朝上；\n下口 (3.5, 4)，朝下。\n\nS13：宽3、高2。一个 Port：\n左口 (0, 1.5)，朝左。\n必须支持从该口进入、经过内部内容后从同一口返回，并声明自返回 Route。",
       "versionType": "design"
     },
     {
@@ -2982,7 +2982,15 @@
       "decision": "CHANGE",
       "verbatim": "hq3通过\nModule 工坊 · 设计审阅\n创意：idea-plains-hq06-001\n标题：把炮口送到正确的高度\n设计版本：sha256:986b44881e550b97aa339a9d5db27587c96f3471476435fbdc3c6647c7ca0bd0\n设计文件 SHA256：8d86422f1881774ebe660f0e133b16f63caa100b23bb92affb0f9126062a4895\n决定：废弃\n意见：炮台没有意义，人也可以攻击风铃，除非只能通过炮台攻击\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n hq7，8通过\n\nModule 工坊 · 设计审阅\n创意：idea-plains-hq09-001\n标题：别把落点停在炮弹路上\n设计版本：sha256:5c93c5150834b0bcbd3a3c88e10ae41099f48a9d485f5061213215340233c3b9\n设计文件 SHA256：fefe3dbcbc9a27599b7bd653c5d4e77381d99713d5f7a3a48a5237e71a8418fd\n决定：修改\n意见：上当门长一点，别让人可以越过。升降台改成竖的，专门挡炮弹且不提供人落脚点\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-plains-hq10-001\n标题：这块台，是踏板也是井口塞子\n设计版本：sha256:88ec69e77b0dacd726a4208a20db45cca578fc628f11eece2a43bc4d3868fbc1\n设计文件 SHA256：1077ea64b31b7ad7813c9c6eaf107fdfd8f68cac5933bb2363ce5e009bdbfcf4\n决定：废弃\n意见：和单纯三出口无差别，就多一个射击风铃\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。",
       "versionType": "design"
+    },
+    {
+      "reviewId": "idea-plains-hq09-001",
+      "moduleId": "idea-plains-hq09-001",
+      "version": "sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38",
+      "decision": "CHANGE",
+      "verbatim": "Module 工坊 · 设计审阅\n创意：idea-plains-hq09-001\n标题：让竖向挡板让出炮弹路\n设计版本：sha256:699e58f2152ba91ec11c676a6d22bf5ad13911f1e65b18375056ecf94b6c7e38\n设计文件 SHA256：3ed193d64f72538582008fe7c6ec4bd1657fc2acce69f75eaa8970f69927c520\n决定：修改\n意见：这个门有点丑，而且解决不了左侧人物从别的模块反冲跳上去。改成这个风铃控制最上方出口平台，风铃机关触发前是尖刺平台或者齿轮平台，触发后机关收回，变回普通平台\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。",
+      "versionType": "design"
     }
   ],
-  "latestReceipt": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-699e58f2152b-2.json"
+  "latestReceipt": "feedback/manual-review/idea-decisions/idea-plains-hq09-001-dba700173996-3.json"
 }
