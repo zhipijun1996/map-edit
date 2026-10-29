@@ -1,0 +1,461 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7",
+  "reviewId": "创意 002",
+  "title": "左右交替命中，反冲接力上升 · 3怪",
+  "summary": "3×5 Block · 3次命中续枪 + 1次向下反冲；下进上出，图文待审。",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "A",
+      "position": [
+        192,
+        640
+      ],
+      "normal": [
+        0,
+        1
+      ],
+      "face": "BOTTOM",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "stagingPosition": [
+        192,
+        576
+      ],
+      "supportObjectId": "start-platform",
+      "diagramLabel": "A"
+    },
+    {
+      "id": "B",
+      "position": [
+        320,
+        0
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "OUTPUT",
+      "supportObjectId": "top-platform",
+      "diagramLabel": "B",
+      "stagingPosition": [
+        320,
+        46
+      ]
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "start-platform",
+      "type": "platform",
+      "x": 0,
+      "y": 608,
+      "w": 384,
+      "h": 16,
+      "label": "底台：起跳与失误接回"
+    },
+    {
+      "id": "top-platform",
+      "type": "platform",
+      "x": 272,
+      "y": 64,
+      "w": 96,
+      "h": 12,
+      "label": "目标可穿平台"
+    },
+    {
+      "id": "reward",
+      "type": "reward",
+      "x": 344,
+      "y": 40,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "可选宝箱",
+      "diagramLabelPosition": [
+        378,
+        55
+      ]
+    },
+    {
+      "id": "enemy-1",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 118,
+      "y": 460,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "怪1 · 左下",
+      "diagramLabelPosition": [
+        132,
+        514
+      ],
+      "designPlacementMeaning": "对应射击时刻的目标位置示意；不能据此冻结原巡航/俯冲行为或推断真实相位命中。"
+    },
+    {
+      "id": "enemy-2",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 346,
+      "y": 356,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "怪2 · 右下",
+      "diagramLabelPosition": [
+        360,
+        410
+      ],
+      "designPlacementMeaning": "对应射击时刻的目标位置示意；不能据此冻结原巡航/俯冲行为或推断真实相位命中。"
+    },
+    {
+      "id": "enemy-3",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 118,
+      "y": 252,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "怪3 · 左下",
+      "diagramLabelPosition": [
+        132,
+        306
+      ],
+      "designPlacementMeaning": "对应射击时刻的目标位置示意；不能据此冻结原巡航/俯冲行为或推断真实相位命中。"
+    },
+    {
+      "id": "ascent-route",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 192,
+          "y": 640
+        },
+        {
+          "x": 192,
+          "y": 576
+        },
+        {
+          "x": 192,
+          "y": 416
+        },
+        {
+          "x": 300,
+          "y": 312
+        },
+        {
+          "x": 192,
+          "y": 208
+        },
+        {
+          "x": 300,
+          "y": 104
+        },
+        {
+          "x": 300,
+          "y": -20
+        },
+        {
+          "x": 320,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "id": "descent-route",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 0
+        },
+        {
+          "x": 192,
+          "y": 80
+        },
+        {
+          "x": 192,
+          "y": 576
+        },
+        {
+          "x": 192,
+          "y": 640
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "retry-route",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 192,
+          "y": 640
+        },
+        {
+          "x": 192,
+          "y": 416
+        },
+        {
+          "x": 300,
+          "y": 312
+        },
+        {
+          "x": 300,
+          "y": 576
+        },
+        {
+          "x": 192,
+          "y": 576
+        },
+        {
+          "x": 192,
+          "y": 640
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "revision053-top-gate",
+      "type": "gate",
+      "x": 288,
+      "y": 0,
+      "w": 64,
+      "h": 12,
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 4
+      }
+    },
+    {
+      "id": "revision053-top-bell",
+      "type": "bell",
+      "x": 306,
+      "y": 7,
+      "w": 28,
+      "h": 34,
+      "sourceId": "top-exit-bell",
+      "targetId": "revision053-top-gate",
+      "mechanics": {
+        "service": "ShotLatch"
+      }
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "pathObjectId": "ascent-route",
+      "role": "main",
+      "evidenceStatus": "UNKNOWN"
+    },
+    {
+      "id": "A-to-A-retry",
+      "from": "A",
+      "to": "A",
+      "pathObjectId": "retry-route",
+      "role": "recovery",
+      "evidenceStatus": "UNKNOWN"
+    }
+  ],
+  "routeMatrix": {
+    "portOrder": [
+      "A",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "A",
+        "to": "A",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "diagramLegend": "图例：蓝虚线＝子弹方向　绿箭头＝人物反冲　青线＝上升意图　橙色＝怪物",
+  "routeCaption": "A→B 上升；B→A 下穿回程；A→A 失误接回均仅为设计目标。",
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "基础空中1发，必须真实空中命中才续发；无二段跳/钩索/多发空中能力假设。"
+  },
+  "shotGuides": [
+    {
+      "from": [
+        192,
+        416
+      ],
+      "to": [
+        132,
+        476
+      ],
+      "label": "1 左下命中 / 回1发",
+      "labelPosition": [
+        183,
+        388
+      ],
+      "labelAnchor": "middle",
+      "recoil": [
+        [
+          192,
+          416
+        ],
+        [
+          242.9,
+          365.1
+        ]
+      ]
+    },
+    {
+      "from": [
+        300,
+        312
+      ],
+      "to": [
+        360,
+        372
+      ],
+      "label": "2 右下命中 / 回1发",
+      "labelPosition": [
+        291,
+        284
+      ],
+      "labelAnchor": "end",
+      "recoil": [
+        [
+          300,
+          312
+        ],
+        [
+          249.1,
+          261.1
+        ]
+      ]
+    },
+    {
+      "from": [
+        192,
+        208
+      ],
+      "to": [
+        132,
+        268
+      ],
+      "label": "3 左下命中 / 回1发",
+      "labelPosition": [
+        183,
+        180
+      ],
+      "labelAnchor": "middle",
+      "recoil": [
+        [
+          192,
+          208
+        ],
+        [
+          242.9,
+          157.1
+        ]
+      ]
+    },
+    {
+      "from": [
+        300,
+        104
+      ],
+      "to": [
+        300,
+        194
+      ],
+      "label": "4 向下空枪 / 收尾",
+      "labelPosition": [
+        291,
+        76
+      ],
+      "labelAnchor": "end",
+      "recoil": [
+        [
+          300,
+          104
+        ],
+        [
+          300.0,
+          32.0
+        ]
+      ]
+    }
+  ],
+  "reviewInstructions": [
+    "① 底台起跳；按编号命中3只空中怪，每次命中返还1发。",
+    "② 左下射击向右上反冲，右下射击向左上反冲；最后向下空枪上岸。",
+    "③ 失误回底台；怪物血量保留，可能耗尽目标；无限重试尚无恢复保证。"
+  ],
+  "designNotes": [
+    "宽3格暂容纳约109px左右摆幅与怪物身体；高5格使底台staging到出口高差576px。解析预算约593.5px，只是尺寸初稿。",
+    "本图蓝线是弹丸方向、绿箭头是人物反冲；怪1/2/3的左下/右下都是相对对应蓝色射击点，不是相对固定Module中心。",
+    "底A为可穿平台INOUT，不能用底边AIR INPUT；顶部B也用ONE_WAY_PLATFORM。先从下方穿入底台落稳，再起跳完成内部链；落地回枪使用原机制，不在接缝凭空恢复。",
+    "2怪版上下Port同列；3怪版因最后一次斜射向右，顶口放到右上角Block中心，落台后走到出口锚点，不要求空中额外反向射击。",
+    "已有plains_diver及真实命中回枪，但普通怪有巡航/俯冲且3点血；本图只画设计射击相位，不能把怪冻结成靶，不宣称所需小范围悬停行为已有实现。",
+    "重试后敌人受伤/死亡不自动复活；需验证仍可命中、撤退重新进入的真实生命周期、或提出有依据的可重试修订。重开重置未知，不能把死亡耗尽风险隐藏。",
+    "同一只怪连打、省一只怪、跳跃+空枪、地面预伤/预杀、蹭敌受伤位移、借外部高度、少最后一枪等都进入反例清单；找到真路线就保存，不用指定动作拒绝。",
+    "奖励为上岸与可选顶台宝箱；回程按下穿可穿平台，走中央下落，不要求再杀怪；全身净空、回程及必要接缝均UNKNOWN。",
+    "与已有173/200续枪上岸同族；新增强调竖向连续命中与左右摆幅配平。2/3怪只是动作链适配，不计两个新玩法家族。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "sourceModule": null,
+  "implementationRevision": {
+    "authorization": {
+      "path": "feedback/manual-review/implementation-results/revision-053-v1/authorization/request.json",
+      "sha256": "d76c762c59afb590c57138e1c93e63a32c885e56b2f4d04752a6191c3316c499"
+    },
+    "base": {
+      "designFile": "generation/module-workshop/ideas/idea-0363f85c-16c0-4b5f-b3b0-461335608db7/61124f9e700c/design.json",
+      "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+      "designFileSha256": "e02e6c6a6e3868e8db3f2fc288de7a3a32d63b300739640ee3f5c371f304ca20"
+    },
+    "userAuthorized": true
+  },
+  "designVersion": "sha256:520f11823b852ac8501ea9b6ab55d7506c4172ce5aaac252a6a6119342676003"
+}

@@ -1,0 +1,2966 @@
+{
+  "cases": [
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "wall_window": [
+            330,
+            430
+          ],
+          "trigger": {
+            "after": 1,
+            "state": "wall_launch",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "value": -1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": -58,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              -62,
+              381,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-entry-to-exit",
+      "spawn": [
+        110,
+        -288
+      ],
+      "entry_port": [
+        110,
+        -288
+      ],
+      "exit_port": [
+        -58,
+        384
+      ],
+      "goal": [
+        -65,
+        380,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    },
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 320,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 183,
+          "deadband": 0.6,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 80,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": -240,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -291,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-exit-to-entry",
+      "spawn": [
+        -58,
+        384
+      ],
+      "entry_port": [
+        -58,
+        384
+      ],
+      "exit_port": [
+        110,
+        -288
+      ],
+      "goal": [
+        103,
+        -292,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "exit-to-entry",
+        "from_port": "exit",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    },
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "height_threshold": 710,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 1000
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              765,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-entry-to-bottom",
+      "spawn": [
+        110,
+        -288
+      ],
+      "entry_port": [
+        110,
+        -288
+      ],
+      "exit_port": [
+        110,
+        768
+      ],
+      "goal": [
+        103,
+        764,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "entry-to-bottom",
+        "from_port": "entry",
+        "to_port": "bottom",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    },
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 80,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": -240,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -291,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-bottom-to-entry",
+      "spawn": [
+        110,
+        768
+      ],
+      "entry_port": [
+        110,
+        768
+      ],
+      "exit_port": [
+        110,
+        -288
+      ],
+      "goal": [
+        103,
+        -292,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "bottom-to-entry",
+        "from_port": "bottom",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    },
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 320,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 183,
+          "deadband": 0.6,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 80,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "height_threshold": 710,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 1000
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              765,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-exit-to-bottom",
+      "spawn": [
+        -58,
+        384
+      ],
+      "entry_port": [
+        -58,
+        384
+      ],
+      "exit_port": [
+        110,
+        768
+      ],
+      "goal": [
+        103,
+        764,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "exit-to-bottom",
+        "from_port": "exit",
+        "to_port": "bottom",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    },
+    {
+      "family": "wall-slide-launch-window",
+      "capabilities": [
+        "move",
+        "jump",
+        "wall_climb"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_author_v3.py"
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "climb_target": 80,
+          "trigger": {
+            "after": 1,
+            "state": "climb_y",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "wall_window": [
+            330,
+            430
+          ],
+          "trigger": {
+            "after": 1,
+            "state": "wall_launch",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "value": -1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": -58,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              -62,
+              381,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "platforms": [
+        [
+          90,
+          18,
+          50,
+          60
+        ],
+        [
+          195,
+          -80,
+          32,
+          898
+        ],
+        [
+          40,
+          -334,
+          20,
+          434
+        ],
+        [
+          40,
+          300,
+          20,
+          518
+        ],
+        [
+          -82,
+          402,
+          102,
+          30
+        ],
+        [
+          74,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          134,
+          -334,
+          12,
+          291.9252418577671
+        ],
+        [
+          78,
+          -270,
+          64,
+          12
+        ],
+        [
+          78,
+          786,
+          64,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        7,
+        8
+      ],
+      "wall_platform_indices": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "upper-mouth",
+          "platform_index": 2,
+          "face": "right",
+          "start_offset": 0,
+          "length": 434,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth",
+          "platform_index": 3,
+          "face": "right",
+          "start_offset": 0,
+          "length": 518,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-upper-no-reset",
+          "platform_index": 1,
+          "face": "left",
+          "start_offset": 0,
+          "length": 40,
+          "depth": 8
+        },
+        {
+          "surface_id": "right-top-no-perch",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 32,
+          "depth": 8
+        },
+        {
+          "surface_id": "lower-mouth-no-perch",
+          "platform_index": 3,
+          "face": "top",
+          "start_offset": 0,
+          "length": 20,
+          "depth": 8
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "mouth-saw",
+          "origin": [
+            60.0,
+            170.0
+          ],
+          "travel": [
+            0.0,
+            100.0
+          ],
+          "radius": 18.0,
+          "period": 0.9,
+          "initial_phase": 0.85,
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -46.0,
+            384.0
+          ],
+          "region": [
+            -76.0,
+            379.0,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      ],
+      "id": "approved-r053-v3-196-bottom-to-exit",
+      "spawn": [
+        110,
+        768
+      ],
+      "entry_port": [
+        110,
+        768
+      ],
+      "exit_port": [
+        -58,
+        384
+      ],
+      "goal": [
+        -65,
+        380,
+        14,
+        8
+      ],
+      "max_frames": 3000,
+      "trace_all": false,
+      "route_spec": {
+        "id": "bottom-to-exit",
+        "from_port": "bottom",
+        "to_port": "exit",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "world_bounds": [
+        -338,
+        -718,
+        896,
+        1920
+      ],
+      "approved_implementation": {
+        "reviewId": "196",
+        "designVersion": "sha256:bec6503ea1cbcf5dcc7d8f6b4ff5d8330443faa65bab42add31b9e7192b894ca",
+        "rectangle": {
+          "x": -82,
+          "y": -334,
+          "w": 384,
+          "h": 1152
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_970747f611b3665d.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -334
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "exit",
+          "position": [
+            -82,
+            370
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            818
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          46,
+          50
+        ],
+        "cells": [
+          [
+            -1,
+            -3
+          ],
+          [
+            -1,
+            -2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ]
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            110,
+            -288
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 7
+        },
+        {
+          "id": "exit",
+          "position": [
+            -58,
+            384
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 4
+        },
+        {
+          "id": "bottom",
+          "position": [
+            110,
+            768
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 8
+        }
+      ]
+    }
+  ]
+}

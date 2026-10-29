@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -208,6 +208,9 @@ def fresh(case, label):
 
 
 def exterior_floor(case, port):
+    from .revision053_boundary_v1 import neighbor as revision_neighbor
+    existing=revision_neighbor(case,port)
+    if existing is not None:return existing
     support_index = next(p['support_index'] for p in case['ports'] if p['id'] == port['id'])
     source = case['platforms'][support_index]
     x, y = port['position']; nx, ny = port['normal']
@@ -261,6 +264,8 @@ def seam_cases(case, doc):
                     repair_oneway_start(value,port,offset)
                     from .review_oneway_fixture_v2 import repair as repair_final_oneway_start
                     repair_final_oneway_start(value,port,offset)
+                    from .review_oneway_fixture_v3 import repair as revision_oneway_start
+                    revision_oneway_start(value,port,offset)
                     value['goal'] = [target-9, y-5, 18, 10]
                     value['control_plan'] = [dict(op='settle', trigger=dict(after=0), target_x=target, deadband=3)]
                 else:
@@ -278,6 +283,8 @@ def seam_cases(case, doc):
                     neighbor=neighbor, body=[24,36])
                 from .ideas_boundary_v1 import applies as idea_top,local as idea_local
                 if idea_top(value,port):idea_local(value,port,direction,doc,offset)
+                from .revision053_boundary_v1 import local as revision_local
+                revision_local(value,port,direction,doc,offset)
                 value['module_sha256'] = module_hash(value)
                 fixtures.append(value)
     return fixtures
@@ -350,6 +357,9 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .revision053_boundary_v1 import exit as revision_exit
+    special=revision_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     from .ideas_boundary_v1 import exit as idea_exit
     special=idea_exit(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -541,6 +551,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=approved040_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v9 import classify as new_ideas_exterior
     judgment=new_ideas_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v11 import classify as revised196_exterior
+    judgment=revised196_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -633,7 +645,9 @@ def verify_report(folder, proof):
         from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
         lineage_report=validate_metadata(report,report_path)
     if lineage_report.get('boundaryRepair'):
-        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v7':
+        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v8':
+            from .review_boundary_repair_v8 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v7':
             from .review_boundary_repair_v7 import validate_lineage
         elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v6':
             from .review_boundary_repair_v6 import validate_lineage

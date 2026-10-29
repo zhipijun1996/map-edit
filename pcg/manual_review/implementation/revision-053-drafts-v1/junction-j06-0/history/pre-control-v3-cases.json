@@ -1,0 +1,6625 @@
+{
+  "cases": [
+    {
+      "id": "approved-r053-v2-220-A-to-B",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        24,
+        190
+      ],
+      "entry_port": [
+        24,
+        190
+      ],
+      "exit_port": [
+        24,
+        702
+      ],
+      "goal": [
+        17,
+        698,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 250,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              245,
+              186,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 285,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              280,
+              698,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              19,
+              698,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-220-A-to-C",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        24,
+        190
+      ],
+      "entry_port": [
+        24,
+        190
+      ],
+      "exit_port": [
+        872,
+        446
+      ],
+      "goal": [
+        865,
+        442,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 250,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              245,
+              186,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 285,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              280,
+              698,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              330,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              396,
+              629,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 575,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              571,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              676,
+              489,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 810,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 810,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              806,
+              443,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              868,
+              443,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "A-to-C",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-220-B-to-C",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        24,
+        702
+      ],
+      "entry_port": [
+        24,
+        702
+      ],
+      "exit_port": [
+        872,
+        446
+      ],
+      "goal": [
+        865,
+        442,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 270,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              265,
+              698,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              330,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              396,
+              629,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy",
+            "body_offset": [
+              0,
+              8
+            ]
+          },
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "timeout": 180,
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 480,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              476,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 575,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              571,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              676,
+              489,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 810,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 810,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              806,
+              443,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              868,
+              443,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "B-to-C",
+        "from_port": "B",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-220-C-to-B",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        872,
+        446
+      ],
+      "entry_port": [
+        872,
+        446
+      ],
+      "exit_port": [
+        24,
+        702
+      ],
+      "goal": [
+        17,
+        698,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 650,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              645,
+              488,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              330,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-air-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              395,
+              628,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              19,
+              698,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "C-to-B",
+        "from_port": "C",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-220-C-to-A",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        872,
+        446
+      ],
+      "entry_port": [
+        872,
+        446
+      ],
+      "exit_port": [
+        24,
+        190
+      ],
+      "goal": [
+        17,
+        186,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 650,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              646,
+              489,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              576,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 240,
+            "after": 1
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ground-enemy"
+        },
+        {
+          "op": "settle",
+          "target_x": 580,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              575,
+              558,
+              10,
+              8
+            ],
+            "timeout": 480,
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "enemy_position": {
+            "id": "design-air-enemy",
+            "minimum_x": 450,
+            "moving_side": 1
+          },
+          "trigger": {
+            "state": "enemy_x_ready",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 441,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              437,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "enemy_id": "design-air-enemy",
+          "trigger": {
+            "state": "enemy_attack_ready",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 14
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy",
+            "body_offset": [
+              0,
+              16
+            ]
+          },
+          "enemy_window": {
+            "id": "design-air-enemy",
+            "minimum_drop": 40,
+            "maximum_actor_y": 416
+          },
+          "trigger": {
+            "state": "enemy_below",
+            "timeout": 180,
+            "after": 4
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 240,
+          "follow_enemy": {
+            "id": "design-air-enemy",
+            "side": 1,
+            "distance": 60
+          },
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 240,
+          "follow_enemy": {
+            "id": "design-air-enemy",
+            "side": 1,
+            "distance": 60
+          },
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 284,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "direction": [
+            0.55,
+            0.8351646544
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              187,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "C-to-A",
+        "from_port": "C",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-220-B-to-A",
+      "family": "windgap-junction",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          208,
+          270,
+          62
+        ],
+        [
+          0,
+          720,
+          300,
+          32
+        ],
+        [
+          300,
+          650,
+          162,
+          100
+        ],
+        [
+          450,
+          580,
+          162,
+          170
+        ],
+        [
+          600,
+          510,
+          162,
+          240
+        ],
+        [
+          750,
+          464,
+          146,
+          286
+        ]
+      ],
+      "spawn": [
+        24,
+        702
+      ],
+      "entry_port": [
+        24,
+        702
+      ],
+      "exit_port": [
+        24,
+        190
+      ],
+      "goal": [
+        17,
+        186,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -272,
+        1408,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-ground-enemy",
+          "definition": "plains_sentry",
+          "position": [
+            526.0,
+            564.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "design-air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            381.0,
+            446.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [],
+      "max_frames": 3000,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            190
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            24,
+            702
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 1
+        },
+        {
+          "id": "C",
+          "position": [
+            872,
+            446
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "layout_uid": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+      "layout_title": "双岸会合风口 / 3口 / 横向宽",
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 270,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              266,
+              699,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 335,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              331,
+              629,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              396,
+              629,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "enemy_position": {
+            "id": "design-air-enemy",
+            "minimum_x": 450,
+            "moving_side": 1
+          },
+          "trigger": {
+            "state": "enemy_x_ready",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 470,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 10
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 470,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              466,
+              559,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "enemy_id": "design-air-enemy",
+          "trigger": {
+            "state": "enemy_attack_ready",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 14
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy",
+            "body_offset": [
+              0,
+              16
+            ]
+          },
+          "enemy_window": {
+            "id": "design-air-enemy",
+            "minimum_drop": 40,
+            "maximum_actor_y": 416
+          },
+          "trigger": {
+            "state": "enemy_below",
+            "timeout": 180,
+            "after": 4
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 240,
+          "follow_enemy": {
+            "id": "design-air-enemy",
+            "side": 1,
+            "distance": 60
+          },
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 240,
+          "follow_enemy": {
+            "id": "design-air-enemy",
+            "side": 1,
+            "distance": 60
+          },
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-air-enemy"
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 240,
+          "follow_enemy": {
+            "id": "design-ground-enemy",
+            "side": 1,
+            "distance": 60
+          },
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy"
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 284,
+          "trigger": {
+            "state": "descending_shot_height",
+            "timeout": 240,
+            "after": 4
+          },
+          "direction": [
+            0.55,
+            0.8351646544
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              187,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "windgap-junction",
+      "challenge_route": false,
+      "expected_reward": 0,
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "recipe": "windgap-junction",
+        "interface": 0,
+        "step_run": 150,
+        "step_rise": 70,
+        "upper_surface": 180,
+        "lower_surface": 720,
+        "shared_decision": {
+          "x": 335,
+          "y": 632
+        },
+        "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+        "no_path_claim": false
+      },
+      "generation_rule": {
+        "id": "junction/windgap-junction",
+        "version": 3,
+        "source_path": "pcg/prototype/creative_batches/junction_windgap/rules_v3.py",
+        "parameters": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "step_run": 150,
+          "step_rise": 70,
+          "upper_surface": 180,
+          "lower_surface": 720,
+          "shared_decision": {
+            "x": 335,
+            "y": 632
+          },
+          "purpose": "high-west entry drops into common court, then lower-west/east continuations",
+          "no_path_claim": false
+        },
+        "source_type": "executable_rule",
+        "registration_source": "pcg/manual_review/revision053_author_v2.py"
+      },
+      "idea_ids": [
+        "J06"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "junction/J06/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "windgap-junction",
+        "objective": {
+          "recipe": "windgap-junction",
+          "interface": 0,
+          "junction_role": "fork_with_directional_merge",
+          "physical_layout_sha256": "bab038aee574439a807ceaf1d257c5ab738ddcb2c4bcef1e478bb9185da0e965",
+          "branch_ports": [
+            {
+              "id": "A",
+              "position": [
+                40,
+                162
+              ],
+              "support_index": 0,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_upper_external"
+            },
+            {
+              "id": "B",
+              "position": [
+                40,
+                702
+              ],
+              "support_index": 1,
+              "normal": [
+                -1,
+                0
+              ],
+              "map_role": "west_lower_external"
+            },
+            {
+              "id": "C",
+              "position": [
+                990,
+                422
+              ],
+              "support_index": 5,
+              "normal": [
+                1,
+                0
+              ],
+              "map_role": "east_external"
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "a-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-c"
+          },
+          {
+            "from_port": "B",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "b-c"
+          },
+          {
+            "from_port": "C",
+            "to_port": "B",
+            "role": "return",
+            "route_id": "c-b"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "a-b-c"
+          }
+        ],
+        "space": {
+          "max_width": 1800,
+          "max_height": 1400,
+          "max_port_span_x": 1500
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported scene capture before input",
+          "exit": "stable observation only"
+        },
+        "return_conditions": "C→B and continuous A→B→C explicitly tested; A reverse UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          112
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "220",
+        "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 896,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/review045_author_v3.py"
+      },
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            176
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            0,
+            688
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        },
+        {
+          "id": "C",
+          "position": [
+            896,
+            432
+          ],
+          "face": "RIGHT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ]
+    }
+  ]
+}

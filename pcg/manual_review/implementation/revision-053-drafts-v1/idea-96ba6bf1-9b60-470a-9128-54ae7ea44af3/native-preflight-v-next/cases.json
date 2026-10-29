@@ -1,0 +1,5252 @@
+{
+  "cases": [
+    {
+      "id": "approved-r053-v2-lift-A-to-B-r9-migration-clean-v-next",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_lift_author_v2.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          864,
+          384,
+          16
+        ],
+        [
+          128,
+          64,
+          128,
+          12
+        ],
+        [
+          144,
+          -32,
+          96,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1,
+        2
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [
+        {
+          "source_id": "G1",
+          "origin": [
+            192,
+            688
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 2.8,
+          "initial_phase": 0.15
+        },
+        {
+          "source_id": "G2",
+          "origin": [
+            192,
+            464
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 3.7,
+          "initial_phase": 0.85
+        },
+        {
+          "source_id": "G3",
+          "origin": [
+            192,
+            240
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 4.6,
+          "initial_phase": 0.5
+        }
+      ],
+      "moving_platforms": [
+        {
+          "platform_id": "L1",
+          "start": [
+            104,
+            784
+          ],
+          "finish": [
+            104,
+            512
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 3.0,
+          "dwell_duration": 0.35,
+          "initial_phase": 0.09701492537313433
+        },
+        {
+          "platform_id": "R1",
+          "start": [
+            280,
+            784
+          ],
+          "finish": [
+            280,
+            512
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 3.6,
+          "dwell_duration": 0.5,
+          "initial_phase": 0.21463414634146344
+        },
+        {
+          "platform_id": "L2",
+          "start": [
+            104,
+            448
+          ],
+          "finish": [
+            104,
+            128
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 2.8,
+          "dwell_duration": 0.4,
+          "initial_phase": 0.28125
+        },
+        {
+          "platform_id": "R2",
+          "start": [
+            280,
+            448
+          ],
+          "finish": [
+            280,
+            128
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 4.0,
+          "dwell_duration": 0.45,
+          "initial_phase": 0.11797752808988764
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "top-exit-bell",
+          "bell": [
+            192.0,
+            24.0
+          ],
+          "gate": [
+            160,
+            0,
+            64,
+            12
+          ],
+          "open_seconds": 4
+        }
+      ],
+      "enemies": [
+        {
+          "id": "air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            192.0,
+            360.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            236.0,
+            52.0
+          ],
+          "region": [
+            196.0,
+            24.0,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              843,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_clear",
+            "timeout": 1200
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_choose_lower",
+            "timeout": 2200
+          }
+        },
+        {
+          "op": "settle",
+          "revision_target": "edge",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_edge",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 4
+          },
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_above_g1",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "revision_target": "lower",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_lower_support",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_transfer",
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "revision_target": "lower_launch",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_lower_launch",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            1
+          ],
+          "revision_transfer_shot": true,
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "revision_target": "upper",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_upper_support",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_finish",
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "revision_target": "finish",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_lift_finish_edge",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            1
+          ],
+          "revision_final_shot": true,
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              43,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            -1
+          ],
+          "trigger": {
+            "after": 4,
+            "state": "grounded_shot_ready",
+            "timeout": 300
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              -53,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        846
+      ],
+      "entry_port": [
+        192,
+        846
+      ],
+      "exit_port": [
+        192,
+        46
+      ],
+      "goal": [
+        185,
+        -54,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            846
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            46
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "designVersion": "sha256:4d043ebce4d4b092a29242e0f31f28e49ddd3c5b7fab45d184ff5ce472c784d6",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 896
+        },
+        "originalAuthor": "pcg/manual_review/lift_author_v10.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1664
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            896
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "OUTPUT"
+        }
+      ],
+      "layout_title": "错相升井：四台换乘，三道横锯",
+      "new_idea_scope": {
+        "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "designVersion": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+        "familyId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "formatTemplateOnly": true
+      },
+      "explicit_exit_neighbor": {
+        "portId": "B",
+        "floor": [
+          144,
+          -32,
+          96,
+          12
+        ],
+        "index": 2,
+        "source": "explicit compatible adjacent Module fixture; not owned content",
+        "copiedIntoModule": false
+      },
+      "module_sha256": "06dcce9967a9e5d5c2a3ad1b026eaa6367e51e21d07d5e624a53db959998a2e0",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0906009525060654,
+                -0.995887279510498
+              ],
+              "noise_key": 10000,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "axis": 0.166098854758523,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 0.33220048384233,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 0.498302112926136,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 0.664403742009943,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 0.83050537109375,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 0.996607000177557,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 0.607371937144886,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 0.128836891867898,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.121330380439758,
+                -0.992612183094025
+              ],
+              "noise_key": 10001,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 20,
+          "axis": 0.249766956676136,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 0.472206809303977,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.694646661931818,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.917086514559659,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.320062810724432,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.121212191879749,
+                -0.992626667022705
+              ],
+              "noise_key": 10002,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 37,
+          "axis": 0.29011396928267,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.512337424538352,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.734560879794034,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.956784335049716,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.358809037642045,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.159369245171547,
+                -0.987219035625458
+              ],
+              "noise_key": 10003,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 54,
+          "axis": 0.368288907137784,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.660466974431818,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.952645041725852,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 0.954648104580966,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 0.202498002485795,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.188301280140877,
+                -0.982111275196075
+              ],
+              "noise_key": 10004,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 71,
+          "axis": 0.388175270774148,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.733395663174716,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.579168146306818,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.122852672230114,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0551199615001678,
+                -0.998479783535004
+              ],
+              "noise_key": 10005,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 88,
+          "axis": 0.127114035866477,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.228166060014205,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.329218084161932,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.430270108309659,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 0.531322132457386,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.632374156605114,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 0.733426180752841,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 0.834478204900568,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 0.874900124289773,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 0.185585715553977,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.00552750658243895,
+                -0.999984741210938
+              ],
+              "noise_key": 10006,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.110309947620739,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.114363236860795,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                -0.0201150979846716,
+                -0.999797701835632
+              ],
+              "noise_key": 10007,
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": -0.123246626420455,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": -0.160122958096591,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": -0.196999289772727,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": -0.233875621448864,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": -0.270751953125,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": -0.285503040660511,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 205,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 209,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 217,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 218,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 219,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 220,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 221,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 222,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 223,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 224,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 225,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 226,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 227,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 228,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 229,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 230,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 231,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 232,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 233,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 234,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 235,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 236,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 237,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 238,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 239,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 240,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 241,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 242,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 243,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 244,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 245,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 246,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 247,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 248,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 249,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 250,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 251,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 252,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 253,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 254,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 255,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 256,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 257,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 258,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 259,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 260,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 261,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 262,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 263,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 264,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 265,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 266,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 267,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 268,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 269,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 270,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 271,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 272,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 273,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 274,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 275,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 276,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 277,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 278,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 279,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 280,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 281,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 282,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 283,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 284,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 285,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 286,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 287,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 288,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 289,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 290,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 291,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 292,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 293,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 294,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 295,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 296,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 297,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 298,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 299,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 300,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 301,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 302,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 303,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 304,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 305,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 306,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 307,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 308,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 309,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 310,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 311,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 312,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 313,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 314,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 315,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 316,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 317,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 318,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 319,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 320,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 321,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 322,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 323,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 324,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 325,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 326,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 327,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 328,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 329,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 330,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 331,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 332,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 333,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 334,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 335,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 336,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 337,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 338,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 339,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 340,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 341,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 342,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 343,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 344,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 345,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 346,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 347,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 348,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 349,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 350,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 351,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 352,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 353,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 354,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 355,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 356,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 357,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 358,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 359,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 360,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 361,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 362,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 363,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 364,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 365,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 366,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 367,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 368,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 369,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 370,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 371,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 372,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 373,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 374,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 375,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 376,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 377,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 378,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 379,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 380,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 381,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 382,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 383,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 384,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 385,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 386,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 387,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 388,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 389,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 390,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 391,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 392,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 393,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 394,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 395,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 396,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 397,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 398,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 399,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 400,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 401,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 402,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 403,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 404,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 405,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 406,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 407,
+          "axis": -0.60604511607777,
+          "requested": []
+        },
+        {
+          "frame": 408,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 7,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 409,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 410,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 411,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 412,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 413,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 414,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 415,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 416,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 417,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 418,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 419,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 420,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 421,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 422,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 423,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 424,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 425,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 426,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 427,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 428,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 429,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 430,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 431,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 432,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 8,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 433,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 434,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 435,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 436,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                1.0
+              ],
+              "plan_index": 9,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 437,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 438,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 439,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 440,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 441,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 442,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 443,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 444,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 445,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 446,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 447,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 448,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 449,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 450,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 451,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 452,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 453,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 454,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 455,
+          "axis": 0.356292724609375,
+          "requested": []
+        },
+        {
+          "frame": 456,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 457,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 458,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 459,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 460,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 461,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 462,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 463,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 464,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 465,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 466,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 467,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 468,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 469,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 470,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 471,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 472,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 473,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 474,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 475,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 476,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 477,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 478,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 479,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 480,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 481,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 482,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 483,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 484,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 485,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 486,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 487,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 488,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 489,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 490,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 491,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 492,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 493,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 494,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 495,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 496,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 497,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 498,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 499,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 500,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 501,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 502,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 503,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 504,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 505,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 506,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 507,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 17,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 508,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 509,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 510,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 511,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 512,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 513,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 514,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 515,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 516,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 517,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 518,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 519,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 520,
+          "axis": 0.924005681818182,
+          "requested": []
+        },
+        {
+          "frame": 521,
+          "axis": 0.196000532670455,
+          "requested": []
+        },
+        {
+          "frame": 522,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 523,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 524,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 525,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 526,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 527,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 528,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 529,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 530,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 531,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 18,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 532,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 533,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 534,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 535,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                -0.414677619934082,
+                0.909968376159668
+              ],
+              "plan_index": 19,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 536,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 537,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 538,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 539,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 540,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 541,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 542,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 543,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 544,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 545,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 546,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 547,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 548,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 549,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 550,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 551,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 552,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 553,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 554,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 555,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 556,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 557,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 558,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 559,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 560,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 561,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 562,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 563,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 564,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 565,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 566,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 567,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 568,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 569,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 570,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 571,
+          "axis": -0.410622336647727,
+          "requested": []
+        },
+        {
+          "frame": 572,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 27,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 573,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 574,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 575,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 576,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 577,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 578,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 579,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 580,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 581,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 582,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 583,
+          "axis": -0.874908447265625,
+          "requested": []
+        },
+        {
+          "frame": 584,
+          "axis": -0.185585715553977,
+          "requested": []
+        },
+        {
+          "frame": 585,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 586,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 587,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 588,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 589,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 590,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 591,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 592,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.00140598847065121,
+                0.999998986721039
+              ],
+              "plan_index": 28,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 593,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 594,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 595,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 596,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 597,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 598,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 599,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 600,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 29,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 601,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 602,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 603,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 604,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 605,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 606,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 607,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 608,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 609,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 610,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 611,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 612,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 613,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 614,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 615,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 616,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 617,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 618,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 619,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 620,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 621,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 622,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 623,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 624,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 625,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 626,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 627,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 628,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 629,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 630,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 631,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 632,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 633,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 634,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 635,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 636,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                -1.0
+              ],
+              "plan_index": 33,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 637,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 638,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 639,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 640,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 641,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 642,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 643,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 644,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 645,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 646,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 647,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 648,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 35,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 649,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 650,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 651,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 652,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 653,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 654,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 655,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 656,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 657,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 658,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 659,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 660,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 661,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 662,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 663,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 664,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 665,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 666,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 667,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 668,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 669,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 670,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 671,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 672,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 36,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 673,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 674,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 675,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 676,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 677,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 678,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 679,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 680,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 681,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 682,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 683,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 684,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 685,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 686,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 687,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 688,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 689,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 690,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 691,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 692,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 693,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 694,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 695,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 696,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 697,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 698,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 699,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 700,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 701,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 702,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 703,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 704,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 705,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 706,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-r053-v2-lift-A-to-A-retry-r9-migration-clean-v-next",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision053_lift_author_v2.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          864,
+          384,
+          16
+        ],
+        [
+          128,
+          64,
+          128,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [
+        {
+          "source_id": "G1",
+          "origin": [
+            192,
+            688
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 2.8,
+          "initial_phase": 0.15
+        },
+        {
+          "source_id": "G2",
+          "origin": [
+            192,
+            464
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 3.7,
+          "initial_phase": 0.85
+        },
+        {
+          "source_id": "G3",
+          "origin": [
+            192,
+            240
+          ],
+          "travel": [
+            128,
+            0
+          ],
+          "radius": 24.0,
+          "period": 4.6,
+          "initial_phase": 0.5
+        }
+      ],
+      "moving_platforms": [
+        {
+          "platform_id": "L1",
+          "start": [
+            104,
+            784
+          ],
+          "finish": [
+            104,
+            512
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 3.0,
+          "dwell_duration": 0.35,
+          "initial_phase": 0.09701492537313433
+        },
+        {
+          "platform_id": "R1",
+          "start": [
+            280,
+            784
+          ],
+          "finish": [
+            280,
+            512
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 3.6,
+          "dwell_duration": 0.5,
+          "initial_phase": 0.21463414634146344
+        },
+        {
+          "platform_id": "L2",
+          "start": [
+            104,
+            448
+          ],
+          "finish": [
+            104,
+            128
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 2.8,
+          "dwell_duration": 0.4,
+          "initial_phase": 0.28125
+        },
+        {
+          "platform_id": "R2",
+          "start": [
+            280,
+            448
+          ],
+          "finish": [
+            280,
+            128
+          ],
+          "size": [
+            104,
+            16
+          ],
+          "travel_duration": 4.0,
+          "dwell_duration": 0.45,
+          "initial_phase": 0.11797752808988764
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "top-exit-bell",
+          "bell": [
+            192.0,
+            24.0
+          ],
+          "gate": [
+            160,
+            0,
+            64,
+            12
+          ],
+          "open_seconds": 4
+        }
+      ],
+      "enemies": [
+        {
+          "id": "air-enemy",
+          "definition": "plains_diver",
+          "position": [
+            192.0,
+            360.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            236.0,
+            52.0
+          ],
+          "region": [
+            196.0,
+            24.0,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              843,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        846
+      ],
+      "entry_port": [
+        192,
+        846
+      ],
+      "exit_port": [
+        192,
+        846
+      ],
+      "goal": [
+        185,
+        842,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            846
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            46
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-A-retry",
+        "from_port": "A",
+        "to_port": "A",
+        "role": "recovery",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "designVersion": "sha256:4d043ebce4d4b092a29242e0f31f28e49ddd3c5b7fab45d184ff5ce472c784d6",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 896
+        },
+        "originalAuthor": "pcg/manual_review/lift_author_v10.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1664
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            896
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "OUTPUT"
+        }
+      ],
+      "layout_title": "错相升井：四台换乘，三道横锯",
+      "new_idea_scope": {
+        "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "designVersion": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+        "familyId": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "881dca1f002db4dae4978650b587000402a4fff1bc14b5574c4021f35420ae11",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 5,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}
