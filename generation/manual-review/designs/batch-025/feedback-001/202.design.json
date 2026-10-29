@@ -1,0 +1,354 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a",
+  "reviewId": "202",
+  "title": "射铃刹车，折入低檐宝箱",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/module.mapnote.json",
+    "contentVersion": "sha256:eb2f253bbe1a1001722695522f434cc49d057d2876ac48fbeb36e201e1605c19",
+    "sha256": "83912d0c0a6ce6e72925053a1d44b901545d648400f7e5efc73be74f6c4b6c09"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 86,
+    "w": 512,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        150
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        512,
+        406
+      ],
+      "normal": [
+        1,
+        0
+      ],
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "删左2下2右4，互联",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 182,
+      "w": 240,
+      "h": 98,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/platform-1",
+      "type": "terrain",
+      "x": 45,
+      "y": 438,
+      "w": 100,
+      "h": 65,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/gate-0",
+      "type": "gate",
+      "x": 180,
+      "y": 290,
+      "w": 20,
+      "h": 170,
+      "rotation": 0,
+      "label": "pocket-bell gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 0.9,
+        "carrierId": null,
+        "returnAccess": [
+          70,
+          360
+        ]
+      }
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/bell-0",
+      "type": "bell",
+      "x": 456,
+      "y": 322,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "pocket-bell",
+      "note": "",
+      "targetId": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/gate-0",
+      "sourceId": "pocket-bell"
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/cache-0",
+      "type": "reward",
+      "x": 87,
+      "y": 402,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 10",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 10,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            105,
+            420
+          ],
+          "region": [
+            75,
+            415,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      }
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/return-bell-0",
+      "type": "bell",
+      "x": 56,
+      "y": 343,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "返回侧接收器",
+      "note": "原 add_access_bell，与主铃共享事务",
+      "targetId": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/gate-0",
+      "sourceId": "pocket-bell/return",
+      "mechanics": {
+        "service": "ShotLatch.add_access_bell",
+        "returnSideOnly": true
+      }
+    },
+    {
+      "id": "generated-a8f918f1ee9e8e682a919cdbb67ba2015fcfe075d54e5f25147fbe04dd156d2a/migration-shore-exit",
+      "type": "terrain",
+      "x": 121,
+      "y": 438,
+      "w": 391,
+      "h": 24,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 86,
+      "w": 512,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 150
+        },
+        {
+          "x": 210,
+          "y": 164
+        },
+        {
+          "x": 270,
+          "y": 164
+        },
+        {
+          "x": 345,
+          "y": 370
+        },
+        {
+          "x": 220,
+          "y": 400
+        },
+        {
+          "x": 160,
+          "y": 420
+        },
+        {
+          "x": 105,
+          "y": 420
+        },
+        {
+          "x": 150,
+          "y": 420
+        },
+        {
+          "x": 240,
+          "y": 420
+        },
+        {
+          "x": 400,
+          "y": 420
+        },
+        {
+          "x": 512,
+          "y": 406
+        }
+      ]
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 0,
+      "y": 86,
+      "w": 512,
+      "h": 512,
+      "points": [
+        {
+          "x": 512,
+          "y": 406
+        },
+        {
+          "x": 380,
+          "y": 420
+        },
+        {
+          "x": 280,
+          "y": 380
+        },
+        {
+          "x": 275,
+          "y": 290
+        },
+        {
+          "x": 275,
+          "y": 150
+        },
+        {
+          "x": 210,
+          "y": 150
+        },
+        {
+          "x": 0,
+          "y": 150
+        }
+      ]
+    }
+  ],
+  "summary": "4×4 Block；左裁2、右裁4、下裁2；两口双向目标，射铃反冲折入低檐取宝。",
+  "designNotes": [
+    "10×6裁为4×4，边界x0–512/y86–598。左口(0,150)岸顶182、右口(512,406)岸顶438，原门、两侧铃与完整宝箱保留。",
+    "下裁移除原y680恢复长台，不在下方补安全平台；从主铃右侧出手，射铃同时开门并借反冲向左刹入低檐宝箱；返回侧铃保留。",
+    "互联解释为entry→exit与exit→entry两个有向目标；图画取宝路线。直达右口与省略取宝属于应检查的替代解，不宣称每次过模块都必须击铃。",
+    "右侧回上方左口的目标另画：需绕高岸右端、跳跃/反冲向上回岸，不将反向行走等同于已经通过。真实高度、能力资源、计时、门再关闭与失败恢复均UNKNOWN。",
+    "来源0.9秒只作为待校准初值；无本轮物理证据。不改变门/铃行为以掩盖裁剪或返程缺口。"
+  ],
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "shotGuides": [
+    {
+      "from": [
+        345,
+        370
+      ],
+      "to": [
+        470,
+        339
+      ],
+      "label": "射主铃 / 反冲向左刹入",
+      "labelPosition": [
+        255,
+        315
+      ],
+      "recoil": [
+        [
+          330,
+          375
+        ],
+        [
+          275,
+          405
+        ]
+      ]
+    }
+  ],
+  "designVersion": "sha256:5a10ddb17798b09d3675e103b30bca0c4a38a0f8f829ce3448ccea2a5f70672d"
+}

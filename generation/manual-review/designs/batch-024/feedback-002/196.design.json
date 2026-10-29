@@ -1,0 +1,675 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198",
+  "reviewId": "196",
+  "title": "贴墙择时出井，三口互联",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/module.mapnote.json",
+    "contentVersion": "sha256:efcb8e38d814183ceec5882617f88880102394891123002696ee5ab7d0c3e3cb",
+    "sha256": "d6652806853b54419996bb2afa75c623233eb8183f60845cc71114c34580e440"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": -82,
+    "y": -334,
+    "w": 384,
+    "h": 1152
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        110,
+        -334
+      ],
+      "normal": [
+        0,
+        -1
+      ],
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        -82,
+        370
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "bottom",
+      "position": [
+        110,
+        818
+      ],
+      "normal": [
+        0,
+        1
+      ],
+      "face": "BOTTOM",
+      "surface": "AIR",
+      "permission": "INOUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-entry",
+      "from": "exit",
+      "to": "entry",
+      "pathObjectId": "design-route-exit-to-entry",
+      "role": "branch_or_return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "entry-to-bottom",
+      "from": "entry",
+      "to": "bottom",
+      "pathObjectId": "design-route-entry-to-bottom",
+      "role": "branch_or_return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "bottom-to-entry",
+      "from": "bottom",
+      "to": "entry",
+      "pathObjectId": "design-route-bottom-to-entry",
+      "role": "branch_or_return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-to-bottom",
+      "from": "exit",
+      "to": "bottom",
+      "pathObjectId": "design-route-exit-to-bottom",
+      "role": "branch_or_return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "bottom-to-exit",
+      "from": "bottom",
+      "to": "exit",
+      "pathObjectId": "design-route-bottom-to-exit",
+      "role": "branch_or_return",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "下面增加port，删左2下2上2block。互联",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated intent only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-0",
+      "type": "terrain",
+      "x": 90,
+      "y": 18,
+      "w": 50,
+      "h": 60,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-1",
+      "type": "terrain",
+      "x": 195,
+      "y": -80,
+      "w": 32,
+      "h": 898,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-2",
+      "type": "terrain",
+      "x": 40,
+      "y": -334,
+      "w": 20,
+      "h": 434,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-3",
+      "type": "terrain",
+      "x": 40,
+      "y": 300,
+      "w": 20,
+      "h": 518,
+      "rotation": 0,
+      "label": "",
+      "note": "设计适配：下侧岩壁外侧可蹬墙，供左口回到窗口；内侧墙刺保留",
+      "sourceIndex": 3,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-4",
+      "type": "terrain",
+      "x": -82,
+      "y": 402,
+      "w": 102,
+      "h": 30,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 4,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/thorn-0",
+      "type": "wallSpike",
+      "x": 60,
+      "y": -334,
+      "w": 8,
+      "h": 434,
+      "rotation": 0,
+      "label": "",
+      "note": "原碰撞危险面",
+      "hostId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-2",
+      "sourceId": "upper-mouth"
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/thorn-1",
+      "type": "wallSpike",
+      "x": 60,
+      "y": 300,
+      "w": 8,
+      "h": 518,
+      "rotation": 0,
+      "label": "",
+      "note": "原碰撞危险面",
+      "hostId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-3",
+      "sourceId": "lower-mouth"
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/thorn-2",
+      "type": "wallSpike",
+      "x": 187,
+      "y": -80,
+      "w": 8,
+      "h": 40,
+      "rotation": 180,
+      "label": "",
+      "note": "原碰撞危险面",
+      "hostId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-1",
+      "sourceId": "right-upper-no-reset"
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/thorn-3",
+      "type": "spike",
+      "x": 195,
+      "y": -88,
+      "w": 32,
+      "h": 8,
+      "rotation": 0,
+      "label": "",
+      "note": "原碰撞危险面",
+      "hostId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-1",
+      "sourceId": "right-top-no-perch"
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/thorn-4",
+      "type": "spike",
+      "x": 40,
+      "y": 292,
+      "w": 20,
+      "h": 8,
+      "rotation": 0,
+      "label": "",
+      "note": "原碰撞危险面",
+      "hostId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/platform-3",
+      "sourceId": "lower-mouth-no-perch"
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/saw-0",
+      "type": "gear",
+      "x": 42,
+      "y": 71.09830056250524,
+      "w": 36,
+      "h": 36.0,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceId": "mouth-saw",
+      "trackId": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/saw-track-0",
+      "mechanics": {
+        "runtimeParameters": {
+          "damage": 1,
+          "contact_interval": 0.7
+        }
+      }
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/saw-track-0",
+      "type": "trackLine",
+      "x": 60,
+      "y": 70,
+      "w": 9.999999974752427e-07,
+      "h": 200.000001,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "points": [
+        {
+          "x": 60,
+          "y": 70
+        },
+        {
+          "x": 60,
+          "y": 270
+        }
+      ],
+      "duration": 0.9,
+      "mode": "sine",
+      "initialPhase": 0.85
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/cache-0",
+      "type": "reward",
+      "x": -64,
+      "y": 366,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 8",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 8,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            -46,
+            384
+          ],
+          "region": [
+            -76,
+            379,
+            60,
+            10
+          ],
+          "amount": 8
+        }
+      }
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/guided-shaft-left",
+      "type": "terrain",
+      "x": 74,
+      "y": -334,
+      "w": 12,
+      "h": 291.9252418577671,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "设计适配：导向井面允许蹬墙，供返回顶部；资源与真实上攀待验",
+      "sourceIndex": 5,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/guided-shaft-right",
+      "type": "terrain",
+      "x": 134,
+      "y": -334,
+      "w": 12,
+      "h": 291.9252418577671,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "设计适配：导向井面允许蹬墙，供返回顶部；资源与真实上攀待验",
+      "sourceIndex": 6,
+      "wallClimbable": true
+    },
+    {
+      "id": "generated-75b420621682d36fc3b7262784c347f0acea7e55422f7e0abaebbc285fa89198/guided-top-dock",
+      "type": "platform",
+      "x": 78,
+      "y": -270,
+      "w": 64,
+      "h": 12,
+      "rotation": 0,
+      "label": "顶部可穿支撑",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 7
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": 110,
+          "y": -334
+        },
+        {
+          "x": 110,
+          "y": -50
+        },
+        {
+          "x": 170,
+          "y": -10
+        },
+        {
+          "x": 175,
+          "y": 180
+        },
+        {
+          "x": 15,
+          "y": 245
+        },
+        {
+          "x": -46,
+          "y": 384
+        },
+        {
+          "x": -82,
+          "y": 370
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": -82,
+          "y": 370
+        },
+        {
+          "x": 27,
+          "y": 370
+        },
+        {
+          "x": 27,
+          "y": 220
+        },
+        {
+          "x": 100,
+          "y": 185
+        },
+        {
+          "x": 175,
+          "y": 180
+        },
+        {
+          "x": 170,
+          "y": -15
+        },
+        {
+          "x": 110,
+          "y": -20
+        },
+        {
+          "x": 110,
+          "y": -334
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-entry-to-bottom",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": 110,
+          "y": -334
+        },
+        {
+          "x": 110,
+          "y": -50
+        },
+        {
+          "x": 170,
+          "y": -10
+        },
+        {
+          "x": 175,
+          "y": 600
+        },
+        {
+          "x": 110,
+          "y": 780
+        },
+        {
+          "x": 110,
+          "y": 818
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-bottom-to-entry",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": 110,
+          "y": 818
+        },
+        {
+          "x": 175,
+          "y": 760
+        },
+        {
+          "x": 175,
+          "y": 180
+        },
+        {
+          "x": 170,
+          "y": -15
+        },
+        {
+          "x": 110,
+          "y": -20
+        },
+        {
+          "x": 110,
+          "y": -334
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "design-route-exit-to-bottom",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": -82,
+          "y": 370
+        },
+        {
+          "x": 27,
+          "y": 370
+        },
+        {
+          "x": 27,
+          "y": 220
+        },
+        {
+          "x": 100,
+          "y": 185
+        },
+        {
+          "x": 175,
+          "y": 180
+        },
+        {
+          "x": 175,
+          "y": 600
+        },
+        {
+          "x": 110,
+          "y": 818
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "design-route-bottom-to-exit",
+      "type": "route",
+      "x": -82,
+      "y": -334,
+      "w": 384,
+      "h": 1152,
+      "points": [
+        {
+          "x": 110,
+          "y": 818
+        },
+        {
+          "x": 175,
+          "y": 760
+        },
+        {
+          "x": 175,
+          "y": 180
+        },
+        {
+          "x": 100,
+          "y": 185
+        },
+        {
+          "x": 15,
+          "y": 245
+        },
+        {
+          "x": -46,
+          "y": 384
+        },
+        {
+          "x": -82,
+          "y": 370
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "summary": "3×9 Block；左裁2、上裁2、下裁2；增加底部空中口，三口六向互联目标。",
+  "designNotes": [
+    "5×13裁为3×9，边界x-82–302/y-334–818。上口(110,-334)、左口(-82,370)、下口(110,818)都在Block外边中心；底口AIR双向、不补底台。",
+    "裁到的宝箱完整内移至x-64；左侧原落岸与宝箱下移84px，岸顶y402对齐左口，箱底也为402；合并原左口短支撑、不叠加冗余平台。顶部可穿支撑下移至y-270，原窗口/齿轮行程不改。",
+    "用户互联解释为三个不同端口六个有向目标，顶口由INPUT改INOUT；为左口/底口上返，导向井两内壁及下侧岩壁外侧标为可蹬墙，内侧原墙刺保留。不新增台阶或恢复点，精力持续性待验。",
+    "下行可选择左口择时蹬出或继续从底部离开；从左口跳回窗口、从底口上攀与顶部返回分别提出目标，不由原下滑成功自动推断。",
+    "全部动作仍需wall_climb。上攀持续时间/精力消耗、是否需要新恢复条件或能力、相位容错、身体净空和六向稳定通过均UNKNOWN；不能免费补恢复或直接宣布六向已实现。"
+  ],
+  "capabilityRequirements": {
+    "allOf": [
+      "wall_climb"
+    ],
+    "status": "DESIGN_REQUIREMENT"
+  },
+  "connectivityIntent": "all_distinct_ordered_pairs",
+  "routeMatrix": {
+    "portOrder": [
+      "entry",
+      "exit",
+      "bottom"
+    ],
+    "cells": [
+      {
+        "from": "entry",
+        "to": "entry",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "entry",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "entry",
+        "to": "bottom",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "exit",
+        "to": "exit",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      },
+      {
+        "from": "exit",
+        "to": "bottom",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "bottom",
+        "to": "entry",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "bottom",
+        "to": "exit",
+        "status": "DESIGN_TARGET",
+        "technicalStatus": "UNKNOWN"
+      },
+      {
+        "from": "bottom",
+        "to": "bottom",
+        "status": "NOT_REQUESTED_SELF_LOOP",
+        "technicalStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "designVersion": "sha256:4856e51a2735655d0938ddceb6923fd0ddaebdf1935bd775216da41fd09940cc"
+}
