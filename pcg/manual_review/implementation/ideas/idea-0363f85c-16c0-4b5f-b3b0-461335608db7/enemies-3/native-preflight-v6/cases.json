@@ -1,0 +1,3493 @@
+{
+  "cases": [
+    {
+      "id": "approved-newideas-v6-enemies-3-A-to-B-migration-clean-v6",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/ideas_author_v4.py"
+      },
+      "max_frames": 3000,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          608,
+          384,
+          16
+        ],
+        [
+          272,
+          32,
+          96,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "enemy-1",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            476.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-2",
+          "definition": "plains_diver",
+          "position": [
+            360.0,
+            372.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-3",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            268.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            356.0,
+            20.0
+          ],
+          "region": [
+            316.0,
+            -8.0,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 300,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              296,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 300,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              296,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "enemy-1",
+            "body_offset": [
+              0,
+              12
+            ]
+          },
+          "chain_window": {
+            "id": "enemy-1",
+            "side": -1,
+            "maximum_actor_y": 465,
+            "minimum_drop": 25
+          },
+          "trigger": {
+            "after": 4,
+            "state": "chain_shot",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 300,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "enemy-2",
+            "body_offset": [
+              0,
+              12
+            ]
+          },
+          "chain_window": {
+            "id": "enemy-2",
+            "side": 1,
+            "maximum_actor_y": 380,
+            "minimum_drop": 40
+          },
+          "trigger": {
+            "after": 4,
+            "state": "chain_shot",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "enemy-3",
+            "body_offset": [
+              0,
+              12
+            ]
+          },
+          "chain_window": {
+            "id": "enemy-3",
+            "side": -1,
+            "maximum_actor_y": 295,
+            "minimum_drop": 40
+          },
+          "trigger": {
+            "after": 4,
+            "state": "chain_shot",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 320,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            1
+          ],
+          "height_threshold": 160,
+          "trigger": {
+            "after": 4,
+            "state": "chain_final",
+            "timeout": 240
+          },
+          "final_x": 320
+        },
+        {
+          "op": "settle",
+          "target_x": 320,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              316,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        590
+      ],
+      "entry_port": [
+        192,
+        590
+      ],
+      "exit_port": [
+        320,
+        14
+      ],
+      "goal": [
+        313,
+        10,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            590
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/ideas_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1408
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            640
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "左右交替命中，反冲接力上升 · 3怪",
+      "new_idea_scope": {
+        "id": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "familyId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "6bd5ee2caced04afccbcc8bf6a26979b77c32aa626549eb105379b59fa90b47b",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.727267178622159,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 25,
+          "axis": 0.154208096590909,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 3,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 9,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 92,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 10,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.557250916957855,
+                0.830344140529633
+              ],
+              "plan_index": 11,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 120,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.975136496803977,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.20684814453125,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.712154626846313,
+                0.702022552490234
+              ],
+              "plan_index": 13,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 136,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": -0.601703990589489,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": 0.347836581143466,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.828161418437958,
+                0.560489654541016
+              ],
+              "plan_index": 15,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 152,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 0.157997824928977,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                1.0
+              ],
+              "plan_index": 17,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 168,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 205,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 209,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 217,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 218,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-newideas-v6-enemies-3-B-to-A-migration-clean-v6",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/ideas_author_v4.py"
+      },
+      "max_frames": 3000,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          608,
+          384,
+          16
+        ],
+        [
+          272,
+          32,
+          96,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "enemy-1",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            476.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-2",
+          "definition": "plains_diver",
+          "position": [
+            360.0,
+            372.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-3",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            268.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            356.0,
+            20.0
+          ],
+          "region": [
+            316.0,
+            -8.0,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "height_threshold": 20,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 60
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        320,
+        14
+      ],
+      "entry_port": [
+        320,
+        14
+      ],
+      "exit_port": [
+        192,
+        590
+      ],
+      "goal": [
+        185,
+        586,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            590
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/ideas_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1408
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            640
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "左右交替命中，反冲接力上升 · 3怪",
+      "new_idea_scope": {
+        "id": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "familyId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "857d8a76c3babe327c6afd0abf3fafa850e22e40fab7b581eaa426be51ea7a92",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "drop_through"
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": 0.939408735795455,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": 0.199268687855114,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-newideas-v6-enemies-3-A-to-A-retry-migration-clean-v6",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/ideas_author_v4.py"
+      },
+      "max_frames": 3000,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          608,
+          384,
+          16
+        ],
+        [
+          272,
+          32,
+          96,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "enemy-1",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            476.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-2",
+          "definition": "plains_diver",
+          "position": [
+            360.0,
+            372.0
+          ],
+          "initial_idle_cooldown": 0
+        },
+        {
+          "id": "enemy-3",
+          "definition": "plains_diver",
+          "position": [
+            132.0,
+            268.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            356.0,
+            20.0
+          ],
+          "region": [
+            316.0,
+            -8.0,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 285,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              587,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        590
+      ],
+      "entry_port": [
+        192,
+        590
+      ],
+      "exit_port": [
+        192,
+        590
+      ],
+      "goal": [
+        185,
+        586,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            590
+          ],
+          "normal": [
+            0,
+            1
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-A-retry",
+        "from_port": "A",
+        "to_port": "A",
+        "role": "recovery",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 640
+        },
+        "originalAuthor": "pcg/manual_review/ideas_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1408
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            192,
+            640
+          ],
+          "face": "BOTTOM",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            320,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "左右交替命中，反冲接力上升 · 3怪",
+      "new_idea_scope": {
+        "id": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3",
+        "designVersion": "sha256:61124f9e700cb0b1400cdd5efda98cbdb4dc2c410cec33c632858178e199ffe6",
+        "familyId": "idea-0363f85c-16c0-4b5f-b3b0-461335608db7",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "169583b70cdfae936f596c9b481e97d301bd5ef748e97f66efae8e806b922e33",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 0.358803488991477,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -0.287519975142045,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+orbit A-to-B True []
+orbit A-to-C True []
+orbit B-to-A True []
+orbit C-to-A True []
+orbit B-to-C True []
+orbit C-to-B True []
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/probe_ideas_v1.py", line 15, in <module>
+    if not sys.argv[2:]or label(r)in sys.argv[2:]:run(r,sys.argv[1])
+                                                  ^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/probe_ideas_v1.py", line 9, in run
+    for i,(c,r,e)in enumerate(eng.run([physics.fresh(c,'clean-'+version)for c in cs],'clean-diagnostic')):
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/prototype/factory/core/engine.py", line 44, in run
+    results=self.sim.run(chunk,name)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/prototype/plains/engine.py", line 19, in run
+    if p.returncode or 'PCG_BATCH_V3_COMPLETE '+str(len(cases))not in text or 'ERROR:'in text or 'SCRIPT ERROR'in text or 'were leaked'in text:raise RuntimeError('Plains engine failure: '+str(log))
+                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Plains engine failure: /workspace/map-edit-approved-implementation/pcg/results/approved-ideas-enemies-2-canonical-v2/physics/0000-clean-diagnostic.log

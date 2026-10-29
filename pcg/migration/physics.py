@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -218,7 +218,8 @@ def exterior_floor(case, port):
             raise ValueError('vertical_fixture_requires_real_one_way_surface:'+port['id'])
         # An explicit adjacent Module owns this witness deck. There is no new
         # support inside the tested Module and no runtime seam auto-repair.
-        rect = [x-48, y-32 if ny < 0 else y+40, 96, 12]
+        from .ideas_boundary_v1 import applies as idea_top
+        rect = [x-48, y-(96 if idea_top(case,port)else 32) if ny < 0 else y+40, 96, 12]
     new_index = len(case['platforms']); case['platforms'].append(rect)
     if not nx or support_index in case.get('one_way_platform_indices', []):
         case.setdefault('one_way_platform_indices', []).append(new_index)
@@ -227,6 +228,8 @@ def exterior_floor(case, port):
 
 
 def _vertical_inner_dock(case, port):
+    from .ideas_boundary_v1 import applies as idea_top
+    if idea_top(case,port):return list(port['stagingPosition'])
     x, y = port['position']; ny = port['normal'][1]
     eligible = [r for r in case['platforms'] if r[0]+12 <= x <= r[0]+r[2]-12
                 and ((r[1]-18 >= y+20) if ny < 0 else (r[1]-18 <= y-20))]
@@ -273,6 +276,8 @@ def seam_cases(case, doc):
                 value['migration_probe'] = dict(kind='local_boundary', portId=port['id'],
                     direction=direction, boundary=port['position'], normal=port['normal'],
                     neighbor=neighbor, body=[24,36])
+                from .ideas_boundary_v1 import applies as idea_top,local as idea_local
+                if idea_top(value,port):idea_local(value,port,direction,doc,offset)
                 value['module_sha256'] = module_hash(value)
                 fixtures.append(value)
     return fixtures
@@ -345,6 +350,9 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .ideas_boundary_v1 import exit as idea_exit
+    special=idea_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     value = fresh(case, 'continuous-exit')
     route = case['route_spec']
     port = next(p for p in doc['generationContract']['ports'] if p['id'] == route['to_port'])
@@ -410,6 +418,9 @@ def continuous_entry(case, doc):
     This measures entry docking only. It never resets an actor mid-fixture or
     claims the separately replayed interior starts with identical world phase.
     """
+    from .ideas_boundary_v1 import entry as idea_entry
+    special=idea_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     value=fresh(case,'continuous-entry')
     port=next(p for p in doc['generationContract']['ports']if p['id']==case['route_spec']['from_port'])
     if port.get('surface')=='AIR':
@@ -528,6 +539,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=low_return_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v8 import classify as approved040_exterior
     judgment=approved040_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v9 import classify as new_ideas_exterior
+    judgment=new_ideas_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -790,9 +803,11 @@ def _verification_identity(folder, proof):
         reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
         reviewCounterScopeV6=core.sha(Path(__file__).with_name('review_counter_scope_v6.py')),
         reviewCounterScopeV7=core.sha(Path(__file__).with_name('review_counter_scope_v7.py')),
+        reviewCounterScopeV9=core.sha(Path(__file__).with_name('review_counter_scope_v9.py')),
         reviewCounterScopeV8=core.sha(Path(__file__).with_name('review_counter_scope_v8.py')),
         reviewBoundaryObserverV1=core.sha(Path(__file__).with_name('review_boundary_observer_v1.py')),
         onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
+        ideasBoundaryV1=core.sha(Path(__file__).with_name('ideas_boundary_v1.py')),
         onewayFixtureV2=core.sha(Path(__file__).with_name('review_oneway_fixture_v2.py')),
         reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
         metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),
