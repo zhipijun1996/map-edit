@@ -18,9 +18,14 @@ with sync_playwright() as p:
  with page.expect_download() as info:page.locator('#export-drafts').click()
  download=info.value;backup=Path('/tmp/module-workshop-browser-backup.json');download.save_as(backup);d=json.loads(backup.read_text());assert d['drafts'][0]['verbatim']==raw
  page.locator('#import-drafts').set_input_files(str(backup));assert page.locator('.draft').count()==1
- page.locator('.feedback-form input[value=CHANGE]').check();page.locator('.feedback-form textarea').fill('右岸再抬高一格');page.locator('.feedback-form button').click();assert 'sha256:'in page.locator('#copy-text').input_value();assert '右岸再抬高一格'in page.locator('#copy-text').input_value();page.locator('#close-copy').click();page.reload();page.wait_for_selector('.feedback-form');assert page.locator('.feedback-form input[value=CHANGE]').is_checked();assert page.locator('.feedback-form textarea').input_value()=='右岸再抬高一格'
- # A local opinion cannot change the repository workflow state.
- assert '待设计审核' in page.locator('#published-ideas').inner_text();page.locator('[data-idea-zoom]').click();page.wait_for_function('document.querySelector("#detail-body img").complete && document.querySelector("#detail-body img").naturalWidth>0');page.screenshot(path='/tmp/module-workshop-design-mobile.png');page.locator('#close-detail').click();page.locator('#pipeline-stage').select_option('NEEDS_ALIGNMENT');assert page.locator('.pipeline-row').count()==data['counts']['NEEDS_ALIGNMENT']
+ pending=page.locator('.feedback-form')
+ if pending.count():
+  form=pending.first;form.locator('input[value=CHANGE]').check();form.locator('textarea').fill('右岸再抬高一格');form.locator('button').click();assert 'sha256:'in page.locator('#copy-text').input_value();assert '右岸再抬高一格'in page.locator('#copy-text').input_value();page.locator('#close-copy').click();page.reload();page.wait_for_selector('.feedback-form');assert page.locator('.feedback-form').first.locator('input[value=CHANGE]').is_checked();assert page.locator('.feedback-form').first.locator('textarea').input_value()=='右岸再抬高一格'
+  assert '待设计审核' in page.locator('#published-ideas').inner_text()
+ else:
+  assert page.locator('.received-idea-decision').count()==len([i for i in data['ideas']if i.get('design')]);assert '设计保留' in page.locator('#published-ideas').inner_text()
+ # Browser-local opinions never change the repository workflow state.
+ page.locator('[data-idea-zoom]').first.click();page.wait_for_function('document.querySelector("#detail-body img").complete && document.querySelector("#detail-body img").naturalWidth>0');page.screenshot(path='/tmp/module-workshop-design-mobile.png');page.locator('#close-detail').click();page.locator('#pipeline-stage').select_option('NEEDS_ALIGNMENT');assert page.locator('.pipeline-row').count()==data['counts']['NEEDS_ALIGNMENT']
  page.locator('#library').scroll_into_view_if_needed();page.screenshot(path='/tmp/module-workshop-library-mobile.png');assert not errors,errors
  browser.close()
 print(json.dumps(dict(mobileWidths=[390,320],desktopWidth=1280,combinedFilters=True,exactVersionFeedback=True,localDraftBackup=True,approvalNotSelfPromoted=True,jsErrors=errors,physicsRun=False)))
