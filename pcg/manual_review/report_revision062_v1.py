@@ -7,12 +7,12 @@ GAPS={'hq07':dict(classification='验证流程／留出曝光登记缺口',reaso
 def main():
  results=[];table=[];downloads=core.read(OUT/'downloads/index.json')['rows'];qualified=0
  for row in rows():
-  n=label(row);f=folder_for(row);q=core.read(f/'qualification.json');p=f/'playable';sel=core.read(f/'selection.json');movie=next((OUT/'videos').glob('native-'+n+'-*/native.mp4'));manifest=movie.parent/'manifest.json';m=core.read(manifest);d=next(x for x in downloads if x['name']==n);count=len(core.read(p/'cases.json')['cases']);qualified+=q['passed'];screen=q.get('screen')or sel.get('screen');r=dict(schema='pcg/approved-design-implementation-result/v1',round='062',name=n,reviewId=row['reviewId'],moduleId=row['moduleId'],designVersion=row['designVersion'],designSource=physics.artifact(core.REPO/row['designFile']),status='FULL_V2_VALIDATED_CANDIDATE'if q['passed']else'FIXED_NATIVE_PLAYABLE_SCREEN_UNQUALIFIED',qualified=q['passed'],qualification=physics.artifact(f/'qualification.json'),formalAttempts=q.get('actualAttempts',0),formalDirections=formal(q)if q['passed']or q.get('report')else[],sourceModule=physics.artifact(f/'module.mapnote.json'),parameters=physics.artifact(f/'parameters.json'),implementationProvenance=physics.artifact(f/'implementation-provenance.json'),selection=physics.artifact(f/'selection.json'),nativePlayable=dict(scene=physics.artifact(p/'demo.tscn'),manifest=physics.artifact(p/'godot-package.json'),result=physics.artifact(f/'package-result.json'),actualNativeCases=count,zip=d['file']),videos=[dict(movie=physics.artifact(movie),manifest=physics.artifact(manifest),receipt=m['nativeReceipt'],strict=m['strict'],reviewOnly=m['reviewOnly'])],originalGamePhysicsSourceChanged=False,designWebChanged=False,humanPlaytest='UNKNOWN',productionApproval=False,unknown=['mirror','closure combinations','arbitrary entry states','full Map'])
+  n=label(row);f=folder_for(row);q=core.read(f/'qualification.json');p=f/'playable';sel=core.read(f/'selection.json');movie=next((OUT/'videos').glob('native-'+n+'-*/native.mp4'));manifest=movie.parent/'manifest.json';m=core.read(manifest);d=next(x for x in downloads if x['name']==n);count=len(core.read(p/'cases.json')['cases']);qualified+=q['passed'];screen=q.get('screen')or sel.get('screen');r=dict(schema='pcg/approved-design-implementation-result/v1',round='062',name=n,reviewId=row['reviewId'],moduleId=row['moduleId'],designVersion=row['designVersion'],designSource=physics.artifact(core.REPO/row['designFile']),status='FULL_V2_VALIDATED_CANDIDATE'if q['passed']else'TECHNICAL_GATES_PASSED_KNOWN_HOLDOUT_REPLAY'if n=='hq07'else'FIXED_NATIVE_PLAYABLE_SCREEN_UNQUALIFIED',qualified=q['passed'],qualification=physics.artifact(f/'qualification.json'),formalAttempts=q.get('actualAttempts',0),formalDirections=formal(q)if q['passed']or q.get('report')else[],sourceModule=physics.artifact(f/'module.mapnote.json'),parameters=physics.artifact(f/'parameters.json'),implementationProvenance=physics.artifact(f/'implementation-provenance.json'),selection=physics.artifact(f/'selection.json'),nativePlayable=dict(scene=physics.artifact(p/'demo.tscn'),manifest=physics.artifact(p/'godot-package.json'),result=physics.artifact(f/'package-result.json'),actualNativeCases=count,zip=d['file']),videos=[dict(movie=physics.artifact(movie),manifest=physics.artifact(manifest),receipt=m['nativeReceipt'],strict=m['strict'],reviewOnly=m['reviewOnly'])],originalGamePhysicsSourceChanged=False,designWebChanged=False,humanPlaytest='UNKNOWN',productionApproval=False,unknown=['mirror','closure combinations','arbitrary entry states','full Map'])
   if isinstance(screen,dict):r['screenEvidence']=screen;r['screen']=core.read(core.resolve_artifact(screen['path']))['counts']
   if n in GAPS:r['uncompleted']={**GAPS[n],'designImpossibleProven':False,'geometryChanged':False}
   elif not q['passed']:r['uncompleted']=dict(classification='完整验证未达标',reason='固定和筛选通过，正式校准/留出/边界/反例中仍有失败，逐方向保留于formalDirections。',designImpossibleProven=False)
   if n=='hq07':r['counterDriverContinuation']=core.read(core.resolve_artifact(q['report']['path'])).get('counterDriverContinuation');r['originalInvalidCounterAttemptsRetained']=12
-  core.write(OUT/(n+'.json'),r);results.append(dict(name=n,reviewId=row['reviewId'],qualified=q['passed'],result=physics.artifact(OUT/(n+'.json'))));table.append(f"| {n} | {'完整v2通过'if q['passed']else'双向可玩，扰动未达标'} | {count} | {r['formalAttempts']} | [证据]({n}.json) · [试玩ZIP](downloads/{n}-native.zip) · [短片]({core.relative(movie).split(core.relative(OUT)+'/')[1]}) |")
+  core.write(OUT/(n+'.json'),r);results.append(dict(name=n,reviewId=row['reviewId'],qualified=q['passed'],result=physics.artifact(OUT/(n+'.json'))));table.append(f"| {n} | {'完整v2通过'if q['passed']else'技术复测通过，独立资格未完成'if n=='hq07'else'双向可玩，扰动未达标'} | {count} | {r['formalAttempts']} | [证据]({n}.json) · [试玩ZIP](downloads/{d['file']['path'].rsplit('/',1)[1]}) · [短片]({core.relative(movie).split(core.relative(OUT)+'/')[1]}) |")
  audit=core.read(OUT/'verification/geometry-source-budget.json');core.write(OUT/'index.json',dict(schema='pcg/approved-design-implementation-index/v1',round='062',main=core.read(AUTH/'request.json')['main'],scope=len(results),repairs=5,newApproved=3,playable=len(results),nativeDirections=audit['nativeDirections'],qualified=qualified,results=results,productionAdmitted=False))
  text='''# 最新审批模块实现与旧失败修复（revision062）
 
@@ -32,7 +32,7 @@ S04采用两组原生风铃分别控制P/Q；真实事件仅影响各自载台�
 
 先用上轮失败的实际校准输入、相位与噪声原样重放，8个失败均复现，再修输入策略。HQ01修Q→P落点、左岸地面反冲及顶口起跳；HQ03修右侧安全战斗站位；HQ07把实际高度并入射击触发；第二轮S10修起跳与反冲边界余量；第二轮S12修右侧登Q和从Q左侧上行。需要替换已知池的正式运行使用真实修订程序与预登记池；HQ07默认池曝光漏记单列，不宣称独立通过。全部旧失败保留，不调已观察的留出。
 
-HQ07当前只标技术复测通过，独立资格仍未完成：发现旧守卫仅扫描完整报告，漏记上一轮中断前已完成的R→L留出。当前同一程序换独立池被守卫拒绝，未分配seed；没有强行重跑。已补充按完整批次登记曝光，并用真实旧raw做隔离回归检查。
+HQ07当前只标技术复测通过，独立资格仍未完成：发现旧守卫仅扫描完整报告，漏记上一轮中断前已完成的R→L留出。当前同一程序换独立池被守卫拒绝，未分配seed；没有强行重跑。对应规则见[物理skill](../../../../.agents/skills/pcg-physics-contract/SKILL.md)：“改名、换Route标签或只换seed不产生新独立留出”。已补充按完整批次登记曝光，并用真实旧raw做隔离回归检查。
 
 HQ07正式反例遇到缺省direction驱动错误：已完成批次逐字节复用，仅12个完全相同的反例输入用新的观察驱动续测。原错误、实际命令、驱动源码、批次SHA和额外原始重算均独立绑定；没有新校准或留出。反例是删除指定计划动作的固定策略搜索，不能当作穷尽所有玩家操作的无解证明；实际请求均保留在raw中。
 
@@ -50,7 +50,9 @@ python3 pcg/tools/restore_archive.py approved-revision062-implementation-v1 --ex
 python3 -m pcg.manual_review.audit_revision062_v1
 ```
 
-完整通过仅限精确版本及已测配置的技术候选资格，人工试玩、生产批准、镜像、封口组合、任意进入态和完整Map仍UNKNOWN。S12环境恢复时已完成29个封装批次及1个未封装完整批次：后者由原输出、完成标记和真实内核子进程退出码0恢复执行回执，计时UNKNOWN，未伪造计时或重跑该批。其余同输入继续，候选/协议/池/种子均未改变。
+完整通过仅限精确版本及已测配置的技术候选资格，人工试玩、生产批准、镜像、封口组合、任意进入态和完整Map仍UNKNOWN。S12最后六个顶口检查仅因旧观察器0.05px高度容差失败。官方原PlayerMotor实测safe_margin=0.08；实际支撑ID、全身位于指定相邻平台、连续静止均成立，脚底偏差0.0678px在原边距内。按真实支撑只读复核后通过，原失败与六类否决测试保留，未放宽越界/健康/奖励/世界状态门槛。复核报告留在原预登记执行目录；缺失路径只读链接到同输入续跑的归档原件，另有逐项SHA清单，没有修改池预留或新增物理运行。
+
+S12环境恢复时已完成29个封装批次及1个未封装完整批次：后者由原输出、完成标记和真实内核子进程退出码0恢复执行回执，计时UNKNOWN，未伪造计时或重跑该批。其余同输入继续，候选/协议/池/种子均未改变。
 
 没有修改设计网页、部署或合并main。
 '''
