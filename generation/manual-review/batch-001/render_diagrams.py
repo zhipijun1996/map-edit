@@ -154,7 +154,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   for row in range(len(order)+1):
    for col in range(len(order)+1):
     status=cells.get((order[row-1],order[col-1]))if row and col else None
-    label=('起点→终点'if row==0 and col==0 else port_labels[order[col-1]]if row==0 else port_labels[order[row-1]]if col==0 else{'DESIGN_TARGET':'目标','FORBIDDEN_EGRESS':'禁止','NOT_REQUESTED_SELF_LOOP':'—'}[status])
+    label=('起点→终点'if row==0 and col==0 else port_labels[order[col-1]]if row==0 else port_labels[order[row-1]]if col==0 else{'DESIGN_TARGET':'目标','FORBIDDEN_EGRESS':'禁止','FORBIDDEN_INGRESS':'初态禁入','NOT_REQUESTED_SELF_LOOP':'—'}[status])
     fill='#e3eee1'if status=='DESIGN_TARGET'else'#f4dddd'if status=='FORBIDDEN_EGRESS'else'#f1f0e9'
     parts.append(f'<rect x="{left+col*cw}" y="{top+row*rh}" width="{cw}" height="{rh}" fill="{fill}" stroke="#c7d0c4"/>');text(left+(col+.5)*cw,top+row*rh+21,label,17,anchor='middle')
   if design_only and design.get('diagramWindowStates'):

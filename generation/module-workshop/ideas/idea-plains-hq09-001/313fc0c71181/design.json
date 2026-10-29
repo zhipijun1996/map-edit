@@ -1,0 +1,630 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq09-001",
+  "reviewId": "HQ09",
+  "title": "让开弹路，击铃收起出口台尖刺",
+  "summary": "用户确认：T顶口初态只出不进；上下刺收回后同世界返回另行验证，不冒充初始双向口。",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 640,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 2,
+      "position": [
+        0,
+        320
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        320
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 1,
+      "position": [
+        192,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "OUTPUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        192,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      },
+      "entryConditions": "初始伸刺不保证安全接岸；先经上侧同组访问收刺，邻接可操作性UNKNOWN。",
+      "safetyStatus": "UNKNOWN_REQUIRES_RETRACTED_THORNS"
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 352,
+      "w": 112,
+      "h": 160
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 128,
+      "y": 32,
+      "w": 128,
+      "h": 12,
+      "label": " ",
+      "designCollision": "one_way",
+      "mechanics": {
+        "kind": "PLATFORM_WITH_RETRACTABLE_SURFACE_THORNS",
+        "initialState": "EXTENDED",
+        "afterValidBellHit": "RETRACTED",
+        "platformRemoved": false,
+        "autoReextend": false,
+        "status": "MISSING_CONTROL_BINDING"
+      }
+    },
+    {
+      "id": "upper-step",
+      "type": "platform",
+      "x": 128,
+      "y": 160,
+      "w": 96,
+      "h": 12,
+      "label": "上返转身点",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 320,
+      "y": 176,
+      "w": 0,
+      "h": 256,
+      "points": [
+        {
+          "x": 320,
+          "y": 432
+        },
+        {
+          "x": 320,
+          "y": 176
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform motion clock only; projectile-only body MISSING",
+        "start": [
+          320,
+          432
+        ],
+        "finish": [
+          320,
+          176
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.3888888888888889,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "projectileBarrier",
+      "x": 312,
+      "y": 184,
+      "w": 16,
+      "h": 112,
+      "trackId": "rail-P",
+      "designCollision": "PROJECTILES_ONLY_PLAYER_NON_SOLID",
+      "diagramLabel": "竖挡板：人物可穿，不能落脚",
+      "diagramLabelPosition": [
+        450,
+        214
+      ],
+      "mechanics": {
+        "kind": "PROPOSED_MOVING_PROJECTILE_ONLY_BARRIER",
+        "status": "MISSING_CELL_OR_COLLISION_BINDING",
+        "playerCollision": false,
+        "playerSupport": false,
+        "projectileCollision": true,
+        "clock": "Reuse native motion phase and pause; do not reuse native solid carrying collision"
+      }
+    },
+    {
+      "id": "fixed-turret",
+      "type": "hitTurret",
+      "x": 154,
+      "y": 328,
+      "w": 44,
+      "h": 48,
+      "diagramLabel": "受击定向炮台 · 缺Cell",
+      "mechanics": {
+        "kind": "PROPOSED_HIT_TRIGGERED_FIXED_DIRECTION_EMITTER",
+        "status": "MISSING_CELL",
+        "fixedDirection": [
+          0.838443616300637,
+          -0.5449883505954141
+        ],
+        "mountTo": null,
+        "input": "Absorb valid player shot",
+        "output": "New mechanism projectile, independent identity with parent event",
+        "extraRecoil": false,
+        "ammoRefund": false
+      }
+    },
+    {
+      "id": "target-bell",
+      "type": "bell",
+      "x": 486,
+      "y": 134,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "目标铃：收起出口台上下刺",
+      "targetIds": [
+        "exit-thorns-top",
+        "exit-thorns-bottom"
+      ],
+      "diagramLinkToCenter": true,
+      "diagramLabelPosition": [
+        536,
+        158
+      ],
+      "diagramTargetIds": [
+        "exit-thorns-bottom"
+      ],
+      "mechanics": {
+        "kind": "PROPOSED_RETRACT_HAZARD_GROUP_ON_HIT",
+        "controlGroup": "exit-platform-thorns",
+        "status": "MISSING_BINDING",
+        "effect": "Idempotently retract both thorn faces; keep one-way platform body",
+        "autoReextend": false
+      }
+    },
+    {
+      "id": "return-bell",
+      "type": "bell",
+      "x": 262,
+      "y": 6,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "上侧访问",
+      "targetIds": [
+        "exit-thorns-top",
+        "exit-thorns-bottom"
+      ],
+      "diagramLinkToCenter": true,
+      "diagramTargetIds": [
+        "exit-thorns-top"
+      ],
+      "controlGroup": "exit-platform-thorns"
+    },
+    {
+      "id": "motion-bell",
+      "type": "bell",
+      "x": 62,
+      "y": 278,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "启停挡弹板（非载台）",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true,
+      "diagramLabelPosition": [
+        72,
+        252
+      ]
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 320
+        },
+        {
+          "x": 64,
+          "y": 320
+        },
+        {
+          "x": 208,
+          "y": 256
+        },
+        {
+          "x": 248,
+          "y": 248
+        },
+        {
+          "x": 192,
+          "y": 128
+        },
+        {
+          "x": 192,
+          "y": 64
+        },
+        {
+          "x": 192,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "launch-step",
+      "type": "platform",
+      "x": 128,
+      "y": 288,
+      "w": 112,
+      "h": 12,
+      "label": "固定起跳台（不随竖板移动）",
+      "designCollision": "one_way",
+      "diagramLabelBelow": true
+    },
+    {
+      "id": "exit-thorns-top",
+      "type": "hazard",
+      "x": 128,
+      "y": 8,
+      "w": 128,
+      "h": 24,
+      "orientation": "UP",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "top",
+        "face": "TOP",
+        "start_offset": 0,
+        "length": 128,
+        "depth": 24
+      },
+      "mechanics": {
+        "controlGroup": "exit-platform-thorns",
+        "initialState": "EXTENDED",
+        "afterValidBellHit": "RETRACTED",
+        "bodyCollision": "native damage region",
+        "status": "MISSING_CONTROL_BINDING"
+      },
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "id": "exit-thorns-bottom",
+      "type": "hazard",
+      "x": 128,
+      "y": 44,
+      "w": 128,
+      "h": 20,
+      "orientation": "DOWN",
+      "label": "",
+      "surfaceBinding": {
+        "nativeCell": "PlatformThornDefinition",
+        "ownerObjectId": "top",
+        "face": "BOTTOM",
+        "start_offset": 0,
+        "length": 128,
+        "depth": 20
+      },
+      "mechanics": {
+        "controlGroup": "exit-platform-thorns",
+        "initialState": "EXTENDED",
+        "afterValidBellHit": "RETRACTED",
+        "bodyCollision": "native damage region",
+        "status": "MISSING_CONTROL_BINDING"
+      },
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "炮弹过竖板击目标铃，收回出口台上下刺，再沿固定台到T。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        1.5,
+        -2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "初态上下尖刺伸出；不沿用旧门状态或预借已收回。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "FORBIDDEN_INGRESS"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "初始顶口只出不进；矩阵按初态权限，开门/收刺后的同世界返回另验。",
+  "diagramLegend": "红刺＝触发前伸出　击铃后上下刺收回／绿台保留　蓝竖板＝只挡弹　紫线＝机关弹",
+  "reviewInstructions": [
+    "① 长门已删除。图中红刺为初态：出口可穿平台上下两面都伸刺。",
+    "② 目标铃触发后：上下尖刺收回，同一块平台恢复普通可穿落脚面。",
+    "③ 蓝竖板仍只挡弹、不承载；炮台与收刺控制绑定均尚未实现。",
+    "④ 邻接左侧带速跳入、侧绕/穿伤及T初始安全接岸仍待验证，不当物理封口。"
+  ],
+  "designNotes": [
+    "按最新人工意见删除全宽门，采用已有表面尖刺表达危险出口台；没有添加大危险框。",
+    "初态TOP刺(128,8,128,24)、BOTTOM刺(128,44,128,20)依附真实top平台；一次有效击铃同组收回、平台本体保留。",
+    "上侧访问铃移至(272,16)，避开初态尖刺；其邻接操作站位/射程未知，不冒称T是已认证双向安全接口。",
+    "其余固定踏台、炮口方向、竖板轨迹与L/T位置保持；绘图不运行Godot。",
+    "observation：看竖板是否让出炮弹通路，以及顶部出口台的上下尖刺是否收回；平台本体不会消失。",
+    "decision：读挡弹窗口后击炮，让机关弹命中目标铃收刺，再从固定踏台上返。不是寻找横向长门的薄弱处。",
+    "causality：同一枪给玩家反冲并触发炮台；机关弹通过竖板窗口命中风铃，收起出口台上下危险面，保留可穿平台。",
+    "cells：HQ05受击定向炮台（缺Cell）；竖向只挡弹板（缺碰撞筛选Cell）；已有PlatformThornDefinition上下表面尖刺；一铃收回同平台两危险面的控制绑定（缺）；可穿出口台与固定踏台",
+    "abilities：jump；shot_recoil",
+    "resources：真实枪次、冷却和固定台落地恢复；击铃/炮台/穿竖板不补枪。",
+    "terrain：5×4、L(0,320)/T(192,0)不变。全宽门删除；顶部台(128,32,128,12)保留，上下刺初始伸出，触发后收回。",
+    "reward：获得安全顶口落脚与上接通路，不额外放宝箱。",
+    "recovery：炮弹被挡可退固定台重试；有效击铃后本场景保持收回，不新增限时重伸。T初态危险，需从上侧同组访问先收刺再进入；邻接站位/弹路未验证。",
+    "directions：L→T目标为击铃收刺后登台；T→L若初始伸刺需先安全命中上侧访问铃，不能假设进入时已触发。两向均UNKNOWN。",
+    "cheapSolutions：左侧邻接模块带速高跳/反冲绕到顶部；从下方穿台或从侧边绕刺直跨T；带伤/无敌帧硬闯上下刺；直接射目标铃省略炮台；提前收刺后从固定台普通上行；T初始危险且上侧访问无法安全命中",
+    "difference：按人工意见把门替换成出口台的危险状态，通行目标是让既有落脚面变安全；不是新增家族，也不能把扣血说成不可通行。",
+    "Cell缺口：现有PlatformThornDefinition提供上下表面危险几何；同铃原子收回两面并保留平台本体的控制/视觉绑定仍缺，不能凭图宣称已实现。；受击炮台与只挡弹竖板仍缺原记录中的Cell/碰撞规则。；T初态危险，不满足已验证安全接岸；保留端口意图，安全上侧访问与状态条件必须重新验证，未认证不可供Map直接使用。；邻接左侧带速/高跳、上下刺完整身体和穿伤无敌帧、直接射铃、回程/失败恢复/接缝均UNKNOWN。；默认本场景单次收回且不自动重伸；重入/存档/阶段取消待实现明确。",
+    "本次新版本尚未获人工保留，不开始实施。",
+    "用户确认：T顶口初态只出不进；上下刺收回后同世界返回另行验证，不冒充初始双向口。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq09-001/source-analysis-feedback-002.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 312,
+      "y": 296,
+      "w": 16,
+      "h": 112,
+      "label": "放行位置（同一竖板）"
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          196.1226467912153,
+          338.9202795857101
+        ],
+        [
+          312,
+          263.6
+        ]
+      ],
+      "color": "#995cbd",
+      "label": "竖板截弹",
+      "labelPosition": [
+        448,
+        316
+      ],
+      "dashed": true,
+      "endStop": true
+    },
+    {
+      "points": [
+        [
+          328,
+          253.2
+        ],
+        [
+          486,
+          150.5
+        ]
+      ],
+      "color": "#995cbd",
+      "label": "板让开后：炮弹 → 风铃",
+      "labelPosition": [
+        458,
+        194
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          248,
+          248
+        ],
+        [
+          176,
+          352
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "起跳向后下击炮",
+      "labelPosition": [
+        168,
+        244
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          496,
+          144
+        ],
+        [
+          256,
+          40
+        ]
+      ],
+      "color": "#23896e",
+      "label": "击铃 → 上下收刺，绿台保留",
+      "labelPosition": [
+        420,
+        80
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        248,
+        248
+      ],
+      "label": "从固定台起跳",
+      "labelPosition": [
+        204,
+        212
+      ]
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        348,
+        272
+      ],
+      "to": [
+        348,
+        352
+      ]
+    },
+    {
+      "from": [
+        248,
+        248
+      ],
+      "to": [
+        296,
+        180
+      ]
+    }
+  ],
+  "userRevision": {
+    "receipt": "feedback/manual-review/spec-sync-r063-receipt.json",
+    "verbatim": "h09初始态上方只出不进\n第二轮s09可以地刺间加宽一点点。\n另外4个按照你的建议修复\n\n6个双平台继续完成\n\n规格不一致修改main的规格为最新实现",
+    "technicalValidation": "UNKNOWN_FOR_NEW_SPECIFICATION",
+    "implementationAuthorized": true
+  },
+  "connectivityIntent": "initial_permission_compatible_routes",
+  "designVersion": "sha256:313fc0c711815b19e726360dbb0f6b4aabd4e4b21c90aba33a7bc5c939f2cff4"
+}
