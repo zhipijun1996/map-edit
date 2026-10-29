@@ -49,19 +49,21 @@ const snapshot=fs.existsSync(path.join(root,snapshotFile))?read(snapshotFile):{r
 const implementations=new Map(snapshot.rows.map(r=>[r.reviewId,r]));
 const ideas=read('feedback/module-workshop/ideas-v1.json');
 const rows=handoff.rows.map(h=>{
- const idea=ideas.rows.find(r=>r.id===h.moduleId);
- if(idea?.implementationResult){
-  const reference=idea.implementationResult,raw=fs.readFileSync(path.join(root,reference.path));if(hash(raw)!==reference.sha256)throw Error('implementation result changed');
+ const idea=ideas.rows.find(r=>r.id===(h.sourceIdea?.id??h.moduleId));
+ const option=idea?.designVariants?.find(v=>v.version===h.designVersion)??idea?.design;
+ const linked=idea?.implementationResults?.[h.designVersion]??idea?.implementationResult;
+ if(linked){
+  const reference=linked,raw=fs.readFileSync(path.join(root,reference.path));if(hash(raw)!==reference.sha256)throw Error('implementation result changed');
   const result=JSON.parse(raw),moduleRaw=result.module?fs.readFileSync(path.join(root,result.module.path)):null;
   if(moduleRaw&&hash(moduleRaw)!==result.module.sha256)throw Error('implementation Module SHA changed');
   implementations.set(h.reviewId,projectResult({reviewId:h.reviewId,result,resultReference:reference,document:moduleRaw?JSON.parse(moduleRaw):null},'main'));
  }
- const q=queue.rows.find(r=>r.reviewId===h.reviewId)??(idea?.humanApproval==='KEEP'?{receivedDecision:'KEEP',contentVersion:idea.design.version,title:idea.title,summary:idea.verbatim,category:'新创意'}:null);if(!q||q.receivedDecision!=='KEEP'||q.contentVersion!==h.designVersion)throw Error('approval does not bind '+h.reviewId);
+ const q=queue.rows.find(r=>r.reviewId===h.reviewId)??(idea?.humanApproval==='KEEP'?{receivedDecision:'KEEP',contentVersion:option.version,title:idea.title+(h.sourceIdea?.variantKey?' · '+(option.label??h.sourceIdea.variantKey):''),summary:idea.verbatim,category:'新创意'}:null);if(!q||q.receivedDecision!=='KEEP'||q.contentVersion!==h.designVersion)throw Error('approval does not bind '+h.reviewId);
  const bytes=fs.readFileSync(path.join(root,h.designFile));if(hash(bytes)!==h.designFileSha256)throw Error('approved snapshot changed '+h.reviewId);
  const doc=JSON.parse(bytes),base=original.get(h.moduleId),impl=implementations.get(h.reviewId);
  const currentDesign=h.designFileKind==='source_module_reference'?doc.generationContract.contentVersion:doc.designVersion;
  if(currentDesign!==h.designVersion)throw Error('handoff design version mismatch');
- let stage='READY_FOR_IMPLEMENTATION',interfaceData=null,diagram=idea?.design?.diagram??'../manual-review/'+q.diagram;
+ let stage='READY_FOR_IMPLEMENTATION',interfaceData=null,diagram=option?.diagram??'../manual-review/'+q.diagram;
  if(impl){
   if(impl.designVersion!==h.designVersion)stage='NEEDS_ALIGNMENT';
   else if(impl.declaredStatus!=='PASS'||!impl.interface||!impl.nativePlayable)stage='NEEDS_REPAIR';
@@ -77,16 +79,24 @@ const rows=handoff.rows.map(h=>{
   if(doc.schema==='pcg/module-design/v1')interfaceData={foundation:{blockSize:doc.blockSize,widthBlocks:doc.bounds.w/doc.blockSize,heightBlocks:doc.bounds.h/doc.blockSize},ports:doc.ports,routes:doc.intendedRoutes.map(r=>({...r,capabilityRequirements:r.capabilityRequirements??doc.capabilityRequirements??{version:1,status:'unspecified',allOf:[],anyOfGroups:[],note:''}})),relations:[],capabilityRequirements:doc.capabilityRequirements,foundationCheck:'DESIGN_ONLY',mapReady:false};
   else interfaceData=project(doc);
  }
- return {id:h.moduleId,reviewId:h.reviewId,title:q.title,summary:q.summary,category:base?.category??q.category,stage,diagram,...interfaceData,
+ return {id:h.moduleId,sourceIdeaId:idea?.id??null,reviewId:h.reviewId,title:q.title,summary:q.summary,category:base?.category??q.category,stage,diagram,...interfaceData,
   designVersion:h.designVersion,designFile:h.designFile,designFileSha256:h.designFileSha256,designUrl:href('main',h.designFile),
   reviewUrl:idea?'#ideas':`../manual-review/?batch=${queue.batches.find(b=>b.reviewIds.includes(h.reviewId)).id}#r${h.reviewId}`,
   implementation:impl??null,archiveUrl:stage==='ARCHIVED'?'../../'+base.file.replace(/^\.\//,''):null,
   productionApproval:false,humanPlaytest:impl?.humanPlaytest??'UNKNOWN'};
 });
 for(const idea of ideas.rows){
- if(idea.design){const raw=fs.readFileSync(path.join(root,idea.design.file));if(hash(raw)!==idea.design.sha256)throw Error('idea design SHA changed');if(JSON.parse(raw).designVersion!==idea.design.version)throw Error('idea version mismatch');}
+ for(const design of [...(idea.design?[idea.design]:[]),...(idea.designVariants??[])]){const raw=fs.readFileSync(path.join(root,design.file));if(hash(raw)!==design.sha256)throw Error('idea design SHA changed');const d=JSON.parse(raw);if(d.designVersion!==design.version||d.id!==idea.id)throw Error('idea version/identity mismatch');}
  if(!['IDEA','DESIGN_REVIEW','READY_FOR_IMPLEMENTATION','DISCARDED'].includes(idea.stage))throw Error('Unsupported idea stage');
- if(idea.stage==='READY_FOR_IMPLEMENTATION'){const r=handoff.rows.find(r=>r.moduleId===idea.id);if(!r||r.designVersion!==idea.design.version||idea.humanApproval!=='KEEP')throw Error('Approved idea lacks exact handoff');const raw=fs.readFileSync(path.join(root,idea.decisionReceipt.path));if(hash(raw)!==idea.decisionReceipt.sha256)throw Error('human receipt changed');const receipt=JSON.parse(raw);if(receipt.decision!=='KEEP'||receipt.designVersion!==idea.design.version||receipt.sourceType!=='human_feedback')throw Error('human approval mismatch');}
+ if(idea.humanApproval==='KEEP'){
+  const approvals=Object.entries(idea.designApprovals??{});
+  const bindings=approvals.length?approvals.map(([version,a])=>({version,id:a.moduleId,receipt:a.receipt})): [{version:idea.design.version,id:idea.id,receipt:idea.decisionReceipt}];
+  for(const binding of bindings){
+   const r=handoff.rows.find(r=>r.moduleId===binding.id&&r.designVersion===binding.version);if(!r)throw Error('Approved idea lacks exact handoff');
+   const raw=fs.readFileSync(path.join(root,binding.receipt.path));if(hash(raw)!==binding.receipt.sha256)throw Error('human receipt changed');const receipt=JSON.parse(raw);
+   if(receipt.decision!=='KEEP'||receipt.sourceType!=='human_feedback'||!(receipt.designVersion===binding.version||receipt.rows?.some(row=>row.moduleId===binding.id&&row.version===binding.version&&row.decision==='KEEP')))throw Error('human approval mismatch');
+  }
+ }
 }
 const counts=Object.fromEntries(['ARCHIVED','IMPLEMENTED_CANDIDATE','READY_FOR_IMPLEMENTATION','NEEDS_REPAIR','NEEDS_ALIGNMENT'].map(s=>[s,rows.filter(r=>r.stage===s).length]));
 const sources={catalogSha256:hash(fs.readFileSync(path.join(root,'modules/catalog.json'))),handoffRevision:handoff.revision,

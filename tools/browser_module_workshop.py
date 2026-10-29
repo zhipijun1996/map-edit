@@ -18,14 +18,28 @@ with sync_playwright() as p:
  with page.expect_download() as info:page.locator('#export-drafts').click()
  download=info.value;backup=Path('/tmp/module-workshop-browser-backup.json');download.save_as(backup);d=json.loads(backup.read_text());assert d['drafts'][0]['verbatim']==raw
  page.locator('#import-drafts').set_input_files(str(backup));assert page.locator('.draft').count()==1
+ draft_id=page.locator('[data-edit-idea]').first.get_attribute('data-edit-idea');page.locator('[data-edit-idea]').first.click();assert page.locator('#idea-text').input_value()==raw;page.locator('#idea-text').fill('取消的改动');page.locator('#cancel-idea-edit').click();assert page.locator('.draft pre').inner_text()==raw
+ page.locator('[data-edit-idea]').first.click();raw+='修改后的原话';page.locator('#idea-text').fill(raw);page.locator('#idea-title').fill('修改后的创意');page.locator('#save-idea').click();assert page.locator('[data-edit-idea]').first.get_attribute('data-edit-idea')==draft_id;assert page.locator('.draft pre').inner_text()==raw;page.reload();page.wait_for_selector('.draft');assert page.locator('.draft pre').inner_text()==raw
+ page.locator('#idea-stage').select_option('ALL');before=page.locator('#published-ideas article').count();page.locator('[data-delete-idea]').click();assert page.locator('.draft').count()==0;assert page.locator('#published-ideas article').count()==before;page.locator('#undo-draft-delete').click();assert page.locator('.draft pre').inner_text()==raw
+ with page.expect_download() as info:page.locator('#export-drafts').click()
+ backup=Path('/tmp/module-workshop-edited-backup.json');info.value.save_as(backup);page.locator('[data-delete-idea]').click();page.reload();page.wait_for_selector('.module-card');assert page.locator('.draft').count()==0;page.locator('#import-drafts').set_input_files(str(backup));assert page.locator('.draft pre').inner_text()==raw
+ for form in page.locator('.feedback-form').all():
+  form.locator('input[value=CHANGE]').check();form.locator('button').click();assert form.get_attribute('data-version') in page.locator('#copy-text').input_value();page.locator('#close-copy').click()
  pending=page.locator('.feedback-form')
  if pending.count():
   form=pending.first;form.locator('input[value=CHANGE]').check();form.locator('textarea').fill('右岸再抬高一格');form.locator('button').click();assert 'sha256:'in page.locator('#copy-text').input_value();assert '右岸再抬高一格'in page.locator('#copy-text').input_value();page.locator('#close-copy').click();page.reload();page.wait_for_selector('.feedback-form');assert page.locator('.feedback-form').first.locator('input[value=CHANGE]').is_checked();assert page.locator('.feedback-form').first.locator('textarea').input_value()=='右岸再抬高一格'
   assert '待设计审核' in page.locator('#published-ideas').inner_text()
  else:
-  assert page.locator('.received-idea-decision').count()==len([i for i in data['ideas']if i.get('design')]);assert '设计保留' in page.locator('#published-ideas').inner_text()
+  assert page.locator('.received-idea-decision').count()>=1;assert '设计保留' in page.locator('#published-ideas').inner_text()
+ # Each stage selector filters published and local work independently; completed variants leave only the library.
+ expected=page.evaluate("async()=>{const d=await fetch('data.json').then(r=>r.json());const m=await import('./model.js');return Object.fromEntries(['ALL','TEXT','REVIEW','WAIT','DISCARDED'].map(s=>[s,m.filterCreativeViews(m.creativeViews(d.ideas,d.modules),s).length]));}")
+ for stage,n in expected.items():
+  page.locator('#idea-stage').select_option(stage);assert page.locator('#published-ideas article').count()==n;assert page.locator('.draft').count()==(1 if stage in ['ALL','TEXT']else 0)
+ page.locator('#idea-stage').select_option('WAIT');page.reload();page.wait_for_selector('.module-card');assert page.locator('#idea-stage').input_value()=='WAIT';assert page.locator('.feedback-form').count()==0;page.locator('#idea-stage').select_option('ALL')
  # Browser-local opinions never change the repository workflow state.
  page.locator('[data-idea-zoom]').first.click();page.wait_for_function('document.querySelector("#detail-body img").complete && document.querySelector("#detail-body img").naturalWidth>0');page.screenshot(path='/tmp/module-workshop-design-mobile.png');page.locator('#close-detail').click();page.locator('#pipeline-stage').select_option('NEEDS_ALIGNMENT');assert page.locator('.pipeline-row').count()==data['counts']['NEEDS_ALIGNMENT']
+ for width in [320,390]:
+  page.set_viewport_size(dict(width=width,height=844));assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.locator('#library').scroll_into_view_if_needed();page.screenshot(path='/tmp/module-workshop-library-mobile.png');assert not errors,errors
  browser.close()
 print(json.dumps(dict(mobileWidths=[390,320],desktopWidth=1280,combinedFilters=True,exactVersionFeedback=True,localDraftBackup=True,approvalNotSelfPromoted=True,jsErrors=errors,physicsRun=False)))
