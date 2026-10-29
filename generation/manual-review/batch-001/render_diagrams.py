@@ -41,6 +41,8 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    if typ=='platform':text(x+w/2,y+h+22 if o.get('diagramLabelBelow') else y-10,review_meta.get('objectLabels',{}).get(o['id'],('接口支撑' if o.get('label')=='Local boundary connector' else (o.get('label') or '可穿平台'))),18,anchor='middle')
   elif typ=='reflector':
    a,z=o['segment'];ax,ay=X(a[0]),Y(a[1]);zx,zy=X(z[0]),Y(z[1]);parts.append(f'<path d="M{ax} {ay}L{zx} {zy}" stroke="#668eaa" stroke-width="12"/><path d="M{ax} {ay}L{zx} {zy}" stroke="#deeff7" stroke-width="5"/>');lp=o.get('diagramLabelPosition',[o['x']+o['w']/2,o['y']-12]);text(X(lp[0]),Y(lp[1]),o.get('diagramLabel','反射镜 · 缺Cell'),19,anchor='middle')
+  elif typ=='hitTurret':
+   cx,cy=x+w/2,y+h/2;dx,dy=o['mechanics']['fixedDirection'];norm=math.hypot(dx,dy);dx,dy=dx/norm,dy/norm;parts.append(f'<circle cx="{cx}" cy="{cy}" r="{18*s}" fill="#b2c1cc" stroke="#506b80" stroke-width="3"/><path d="M{cx} {cy}L{cx+dx*24*s} {cy+dy*24*s}" stroke="#506b80" stroke-width="{9*s}" stroke-linecap="round"/><circle cx="{cx}" cy="{cy}" r="{5*s}" fill="#d6ae4a"/>');lp=o.get('diagramLabelPosition',[o['x']+o['w']/2,o['y']+o['h']+24]);text(X(lp[0]),Y(lp[1]),o.get('diagramLabel','受击炮台 · 缺Cell'),19,anchor='middle')
   elif typ=='gate':
    if (o.get('mechanics')or{}).get('collision')=='disabled_by_original_bind_motion':continue
    label='G'+str(len(gates)+1);gates[o['id']]=label;m=o.get('mechanics')or{};opened=m.get('kind')=='complementary_gates' and m.get('member')==m.get('initialOpen')
@@ -58,7 +60,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
    cx,cy=x+w/2,y+h/2;radius=max(9,12*s);label='H'+str(len(hooks)+1);hooks[o['id']]=label
    parts.append(f'<circle data-hook-id="{esc(o["id"])}" cx="{cx}" cy="{cy}" r="{radius}" fill="#e2effb" stroke="#3b79c9" stroke-width="3"/><circle cx="{cx}" cy="{cy}" r="{radius*.55}" fill="none" stroke="#bf9436" stroke-width="2"/>');text(cx,cy-radius-8,label+' · '+o.get('sourceId','')+(' 弹起'if typ=='hookBounce'else' 悬挂'),18,anchor='middle')
   elif typ=='hazard' and o.get('shape')=='zone':
-   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#c75049" fill-opacity=".3" stroke="#903931" stroke-width="2"/>');text(x+w/2,y-9,o.get('label','危险区'),18,anchor='middle')
+   parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="#c75049" fill-opacity=".3" stroke="#903931" stroke-width="2"/>');lp=o.get('diagramLabelPosition');text(X(lp[0])if lp else x+w/2,Y(lp[1])if lp else y-9,o.get('label','危险区'),18,anchor='middle')
   elif typ=='hazard':
    vertical=o.get('orientation') in ('LEFT','RIGHT');count=max(2,round(h/(w*1.3)))if vertical else max(2,round(w/(h*1.3)));count=max(1,int(o.get('count',count)));step=(h if vertical else w)/count
    for j in range(count):

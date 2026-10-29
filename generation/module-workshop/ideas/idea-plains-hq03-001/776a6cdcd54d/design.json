@@ -1,0 +1,962 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq03-001",
+  "reviewId": "HQ03",
+  "title": "把冲锋引向你准备离开的那一边",
+  "summary": "4×3 Block · 3口有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 512,
+    "h": 384
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 1,
+      "position": [
+        0,
+        192
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        192
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "R",
+      "face": "RIGHT",
+      "index": 1,
+      "position": [
+        512,
+        192
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        1,
+        0
+      ],
+      "diagramLabel": "R",
+      "supportObjectId": "right",
+      "stagingPosition": [
+        480,
+        192
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 2,
+      "position": [
+        320,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        320,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 224,
+      "w": 96,
+      "h": 160
+    },
+    {
+      "id": "right",
+      "type": "terrain",
+      "x": 448,
+      "y": 224,
+      "w": 64,
+      "h": 160
+    },
+    {
+      "id": "center-ridge",
+      "type": "terrain",
+      "x": 96,
+      "y": 288,
+      "w": 352,
+      "h": 96
+    },
+    {
+      "id": "left-eave",
+      "type": "terrain",
+      "x": 0,
+      "y": 112,
+      "w": 176,
+      "h": 16
+    },
+    {
+      "id": "right-eave",
+      "type": "terrain",
+      "x": 336,
+      "y": 112,
+      "w": 176,
+      "h": 16
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 256,
+      "y": 32,
+      "w": 88,
+      "h": 12,
+      "label": "上口接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "charger",
+      "type": "enemy",
+      "x": 258,
+      "y": 224,
+      "w": 28,
+      "h": 32,
+      "definition": "plains_charger",
+      "diagramLabel": "冲锋怪 · 先诱左冲",
+      "designPlacementMeaning": "Original telegraph/direction/attack/recovery only. No wall stun, invincibility or automatic respawn assumed.",
+      "designParameters": {
+        "patrol_half_width": 64,
+        "status": "PROPOSED_LAYOUT_OVERRIDE_NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "id": "route-L-R",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 120,
+          "y": 270
+        },
+        {
+          "x": 176,
+          "y": 270
+        },
+        {
+          "x": 224,
+          "y": 238
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 320,
+          "y": 238
+        },
+        {
+          "x": 368,
+          "y": 270
+        },
+        {
+          "x": 424,
+          "y": 270
+        },
+        {
+          "x": 480,
+          "y": 192
+        },
+        {
+          "x": 512,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 0,
+          "y": 192
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 120,
+          "y": 270
+        },
+        {
+          "x": 176,
+          "y": 270
+        },
+        {
+          "x": 224,
+          "y": 238
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 320,
+          "y": 80
+        },
+        {
+          "x": 320,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-R-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 512,
+          "y": 192
+        },
+        {
+          "x": 480,
+          "y": 192
+        },
+        {
+          "x": 424,
+          "y": 270
+        },
+        {
+          "x": 368,
+          "y": 270
+        },
+        {
+          "x": 320,
+          "y": 238
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 224,
+          "y": 238
+        },
+        {
+          "x": 176,
+          "y": 270
+        },
+        {
+          "x": 120,
+          "y": 270
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-R-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 512,
+          "y": 192
+        },
+        {
+          "x": 480,
+          "y": 192
+        },
+        {
+          "x": 424,
+          "y": 270
+        },
+        {
+          "x": 368,
+          "y": 270
+        },
+        {
+          "x": 320,
+          "y": 238
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 320,
+          "y": 80
+        },
+        {
+          "x": 320,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-T-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 320,
+          "y": 0
+        },
+        {
+          "x": 320,
+          "y": 80
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 224,
+          "y": 238
+        },
+        {
+          "x": 176,
+          "y": 270
+        },
+        {
+          "x": 120,
+          "y": 270
+        },
+        {
+          "x": 64,
+          "y": 192
+        },
+        {
+          "x": 0,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-T-R",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 384,
+      "points": [
+        {
+          "x": 320,
+          "y": 0
+        },
+        {
+          "x": 320,
+          "y": 80
+        },
+        {
+          "x": 256,
+          "y": 168
+        },
+        {
+          "x": 320,
+          "y": 238
+        },
+        {
+          "x": 368,
+          "y": 270
+        },
+        {
+          "x": 424,
+          "y": 270
+        },
+        {
+          "x": 480,
+          "y": 192
+        },
+        {
+          "x": 512,
+          "y": 192
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "left-screen",
+      "type": "terrain",
+      "x": 144,
+      "y": 96,
+      "w": 16,
+      "h": 128
+    },
+    {
+      "id": "right-screen",
+      "type": "terrain",
+      "x": 384,
+      "y": 96,
+      "w": 16,
+      "h": 128
+    },
+    {
+      "id": "fight-perch",
+      "type": "terrain",
+      "x": 192,
+      "y": 256,
+      "w": 160,
+      "h": 32
+    },
+    {
+      "id": "left-upper-danger-solid",
+      "type": "terrain",
+      "x": 0,
+      "y": 0,
+      "w": 176,
+      "h": 112
+    },
+    {
+      "id": "left-upper-danger",
+      "type": "hazard",
+      "shape": "zone",
+      "x": 0,
+      "y": 0,
+      "w": 176,
+      "h": 112,
+      "label": "上方危险区 · 禁安全绕行",
+      "mechanics": {
+        "solidBlockingObjectId": "left-upper-danger-solid",
+        "purpose": "Local solid hazard barrier above the side eaves; damage alone must not be treated as route closure.",
+        "actualCollision": "UNKNOWN_NOT_IMPLEMENTED"
+      },
+      "diagramLabelPosition": [
+        88,
+        44
+      ]
+    },
+    {
+      "id": "right-upper-danger-solid",
+      "type": "terrain",
+      "x": 344,
+      "y": 0,
+      "w": 168,
+      "h": 112
+    },
+    {
+      "id": "right-upper-danger",
+      "type": "hazard",
+      "shape": "zone",
+      "x": 344,
+      "y": 0,
+      "w": 168,
+      "h": 112,
+      "label": "上方危险区 · 禁安全绕行",
+      "mechanics": {
+        "solidBlockingObjectId": "right-upper-danger-solid",
+        "purpose": "Local solid hazard barrier above the side eaves; damage alone must not be treated as route closure.",
+        "actualCollision": "UNKNOWN_NOT_IMPLEMENTED"
+      },
+      "diagramLabelPosition": [
+        428,
+        44
+      ]
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-R",
+      "from": "L",
+      "to": "R",
+      "role": "main",
+      "pathObjectId": "route-L-R",
+      "strategy": "L侧先诱导真实冲锋方向，再选择跳越/反冲向R；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        4.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "L侧先诱导真实冲锋方向，再选择跳越/反冲向T；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        2.5,
+        -1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "R-to-L",
+      "from": "R",
+      "to": "L",
+      "role": "main",
+      "pathObjectId": "route-R-L",
+      "strategy": "R侧先诱导真实冲锋方向，再选择跳越/反冲向L；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -4.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "R-to-T",
+      "from": "R",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-R-T",
+      "strategy": "R侧先诱导真实冲锋方向，再选择跳越/反冲向T；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -1.5,
+        -1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-L",
+      "from": "T",
+      "to": "L",
+      "role": "main",
+      "pathObjectId": "route-T-L",
+      "strategy": "T侧先诱导真实冲锋方向，再选择跳越/反冲向L；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -2.5,
+        1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-R",
+      "from": "T",
+      "to": "R",
+      "role": "main",
+      "pathObjectId": "route-T-R",
+      "strategy": "T侧先诱导真实冲锋方向，再选择跳越/反冲向R；击杀是可接受的战斗解。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        1.5,
+        1.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "R",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "R",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "R",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "R",
+        "to": "R",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "R",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "R",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "红区＝横台上方危险　橙怪/橙线＝冲锋与方向　蓝人＝诱导站位　中央顶口可穿",
+  "reviewInstructions": [
+    "左右横台上方为有实体底层的危险封堵，中央顶口保留；实际碰撞/越顶仍待验证。",
+    "① 蓝人先在一侧诱导，等怪承诺冲锋后跃过；橙线是该轮冲向，不是撞墙眩晕。",
+    "② 局部岩檐阻挡岸上直接高跳/远射；是否仍能安全清怪或直接绕过，需验证。",
+    "③ 左右与上口分别声明六向目标；敌死后仍须有路，不用活敌充当唯一钥匙。"
+  ],
+  "designNotes": [
+    "人工修订：左右空中横台上方加危险区。左区x0–176/y0–112，右区x344–512/y0–112；右内缘让出8px以给T口(320,0)保留完整身体净空，单该窄条不构成跨右横台通路。",
+    "顶接岸由x256–384裁为x256–344，避免原右段落入危险区；T口不移动，中心到右危险区24px（按24px宽身体有12px静态侧裕量），真实扰动仍待验。",
+    "危险区有独立实体岩体底层，目标为实际挡住上方绕行，不仅增加扣血；接触危险表现与实体碰撞仍未实现或认证，须测越顶/贴边/邻模块带入。",
+    "入口下沉后从遮挡柱底部进入中央抬高战场；柱底224/base地面288提供64px通行高度，避免只靠岸上安全远杀。侧岸与柱之间留48px，柱与抬高战场间留32px过渡；身体仍需实测。",
+    "冲锋怪图示中心(272,240)，原生行为不变，建议巡逻半宽64使左右承诺点208/336留在192–352实体台上。该参数是待实现的局部适配，不声称原资源已改；没有撞墙眩晕。",
+    "observation：观察中庭单只冲锋怪的朝向和蓄力，提前看清自己想去的出口。",
+    "decision：先在一侧诱导它定向，随后起跳越过，向它所在方向开枪把自己反冲到另一侧/上方。选择哪侧诱敌会改变下一次落点。",
+    "causality：玩家位置改变真实敌人本轮冲锋方向；射击既造成伤害，也把自己送离冲锋带。使用原有攻击/恢复窗口，不让敌人替玩家按开关。",
+    "cells：已有plains_charger×1；岩体左右岸；顶部可穿接岸；遮住岸上远射的局部岩檐",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实跳跃、空中枪次、冷却和落地恢复；仅jump/shot_recoil，无钩索、二段跳或免费补枪。",
+    "terrain：暂4×3三口，中部窄脊让冲锋线与穿越线相交，上方口需要主动离开冲锋带。不添加第二群怪或独立齿轮；备选4×4增加竖向躲让空间。",
+    "reward：选择继续横穿还是上接区域；不为一次诱敌另塞宝箱。",
+    "recovery：失误可退回原岸再诱导，掉血保留；杀敌后地貌仍要有路，不强制无伤。不得依赖敌自动复活。",
+    "directions：左右进入可诱导相反方向；顶口下来先判断敌人本轮承诺方向，再选择低岸。六向为待验目标。",
+    "cheapSolutions：岸上站稳远射三枪无代价清场；直接从上面跳过且无需读冲锋；假设冲墙会眩晕；敌已死后某个必需出口不可达",
+    "difference：区别于171进入即刷两侧怪和双靶续枪：玩家主动安排敌人的攻击方向，空间选择来自这次诱导。击杀是合法战斗解，需比较真实暴露和成本。",
+    "Cell缺口：原生charger已有0.45s预兆、0.38s攻击、0.7s恢复；数值只是读到的当前定义，不是操作窗口认证。；现有冲锋按锁定左右方向运动，不保证精确追到旧站位，也没有已确认的撞墙眩晕。；几何须让安全远杀和完全绕过成为需要暴露/成本的选择；不能靠给怪加无敌来强行成立。",
+    "未经此精确设计版本人工保留不开始实现；本次只画主规格，备选尺寸尚未作图/认证。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq03-001/source-analysis-feedback-001.json",
+  "technicalStatus": "UNKNOWN",
+  "actorPoses": [
+    {
+      "position": [
+        224,
+        238
+      ],
+      "label": "诱导站位",
+      "labelPosition": [
+        206,
+        211
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          272,
+          240
+        ],
+        [
+          208,
+          240
+        ]
+      ],
+      "color": "#c77332",
+      "label": "本轮向左冲",
+      "labelPosition": [
+        280,
+        288
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        256,
+        168
+      ],
+      "to": [
+        208,
+        240
+      ],
+      "label": "朝怪射击，反冲离开冲锋带",
+      "labelPosition": [
+        252,
+        142
+      ],
+      "recoil": [
+        [
+          256,
+          168
+        ],
+        [
+          304,
+          96
+        ]
+      ]
+    }
+  ],
+  "designVersion": "sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74"
+}
