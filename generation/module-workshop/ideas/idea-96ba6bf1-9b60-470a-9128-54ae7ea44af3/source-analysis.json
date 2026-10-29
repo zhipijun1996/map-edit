@@ -1,0 +1,179 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "method": "Read actual Cell source and calculate one initial-phase snapshot plus static envelopes only. No trajectory simulation or physics certification.",
+  "sourceRefs": [
+    {
+      "path": "pcg/prototype/godot/scripts/generation/module_moving_platform_definition.gd",
+      "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/generation/module_moving_platform.gd",
+      "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/generation/module_saw_definition.gd",
+      "sha256": "ca864cb2c00e78b6088b61dc1f042b64372e6fe97115619d72390c005981087b"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/generation/module_saw_hazard.gd",
+      "sha256": "5d31ef8f40ed756840417d1c7d727f8995688bd5616a7f4f5e2413fdd5e0ee91"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/enemies/enemy_definition.gd",
+      "sha256": "781c39d4073a68a1074855ac95703a66b0976934cd5c17c8c213de824d32b01a"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
+      "sha256": "2631c540f3d62b4ea313b60cdf935bf2feacbc998bb6a023afcbf4c98c1afe9d"
+    },
+    {
+      "path": "pcg/prototype/godot/resources/enemies/plains_diver.tres",
+      "sha256": "35421393d53fcfba09e6702ef17180e5761065fa43f95e797b1a547038fddf54"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/combat/shot_energy_policy.gd",
+      "sha256": "d1abb19e0441cda5dc58ca6dd2d46ad2ca3dee6cab0b666dd69039ea681b9990"
+    },
+    {
+      "path": "pcg/prototype/godot/scripts/player/player_motor.gd",
+      "sha256": "9192a3b031cce875cfac47373e00f0a57a755ce2dfc481e6d4d0667df1410a56"
+    },
+    {
+      "path": "pcg/prototype/godot/config/player_tuning.json",
+      "sha256": "65abb4abffd122f79bc4718a94e6db1bbe19a8e2c5dcdac314aa10cd9698114c"
+    }
+  ],
+  "carriers": [
+    {
+      "id": "L1",
+      "column": 104,
+      "startY": 784,
+      "finishY": 512,
+      "travel": 3.0,
+      "dwell": 0.35,
+      "progress": 0.1,
+      "initialPhase": 0.09701492537313433,
+      "initialCenter": [
+        104,
+        756.8
+      ],
+      "ascentSpeed": 90.66666666666667
+    },
+    {
+      "id": "R1",
+      "column": 280,
+      "startY": 784,
+      "finishY": 512,
+      "travel": 3.6,
+      "dwell": 0.5,
+      "progress": 0.35,
+      "initialPhase": 0.21463414634146344,
+      "initialCenter": [
+        280,
+        688.8
+      ],
+      "ascentSpeed": 75.55555555555556
+    },
+    {
+      "id": "L2",
+      "column": 104,
+      "startY": 448,
+      "finishY": 128,
+      "travel": 2.8,
+      "dwell": 0.4,
+      "progress": 0.5,
+      "initialPhase": 0.28125,
+      "initialCenter": [
+        104,
+        288.0
+      ],
+      "ascentSpeed": 114.28571428571429
+    },
+    {
+      "id": "R2",
+      "column": 280,
+      "startY": 448,
+      "finishY": 128,
+      "travel": 4.0,
+      "dwell": 0.45,
+      "progress": 0.15,
+      "initialPhase": 0.11797752808988764,
+      "initialCenter": [
+        280,
+        400.0
+      ],
+      "ascentSpeed": 80.0
+    }
+  ],
+  "gears": [
+    {
+      "id": "G1",
+      "y": 688,
+      "period": 2.8,
+      "phase": 0.15,
+      "initialCenter": [
+        295.5541752799933,
+        688
+      ],
+      "initialDirection": "RIGHT",
+      "radius": 24
+    },
+    {
+      "id": "G2",
+      "y": 464,
+      "period": 3.7,
+      "phase": 0.85,
+      "initialCenter": [
+        88.44582472000671,
+        464
+      ],
+      "initialDirection": "RIGHT",
+      "radius": 24
+    },
+    {
+      "id": "G3",
+      "y": 240,
+      "period": 4.6,
+      "phase": 0.5,
+      "initialCenter": [
+        192.00000000000003,
+        240
+      ],
+      "initialDirection": "LEFT",
+      "radius": 24
+    }
+  ],
+  "dimensions": {
+    "widthBlocks": 3,
+    "heightBlocks": 7,
+    "widthPixels": 384,
+    "heightPixels": 896,
+    "columnCenters": [
+      104,
+      280
+    ],
+    "platformSize": [
+      104,
+      16
+    ],
+    "middleGap": 72,
+    "closestMovingSurfaceGap": 48,
+    "actorReferenceSize": [
+      24,
+      36
+    ]
+  },
+  "supportedRules": [
+    "ModuleMovingPlatform is a real AnimatableBody2D with solid RectangleShape2D; the engine supplies carrying velocity.",
+    "Each definition provides independent travel_duration/dwell_duration/initial_phase; native at_time returns down the same rail.",
+    "ModuleSawDefinition uses origin+travel*sin(TAU*(clock/period+phase)); independent horizontal three-track motion is expressible.",
+    "plains_diver exists with original patrol/dive state and health; exact chosen consumer/export path still needs binding."
+  ],
+  "gaps": [
+    "No continuous up-only recycle/respawn rule is provided by the existing moving platform Cell.",
+    "No claim that all seven clocks have safe reachable phase windows or low waiting time.",
+    "Player body, dynamic collisions/crush, carrying inertia, retry/return, enemy-dead state and seams UNKNOWN."
+  ],
+  "physicsRun": false,
+  "technicalStatus": "UNKNOWN"
+}
