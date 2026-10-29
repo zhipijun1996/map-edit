@@ -31,7 +31,9 @@
       "batch-022",
       "batch-023",
       "batch-024",
-      "batch-025"
+      "batch-025",
+      "batch-026",
+      "batch-027"
     ],
     "priority": [
       "plains_without_grapple",
@@ -350,8 +352,8 @@
         "209",
         "210"
       ],
-      "priorityLabel": "平原 · 无钩索",
-      "orderingFrozen": false
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
+      "orderingFrozen": true
     },
     {
       "id": "batch-027",
@@ -362,8 +364,8 @@
         "214",
         "215"
       ],
-      "priorityLabel": "平原 · 无钩索",
-      "orderingFrozen": false
+      "priorityLabel": "平原 · 无钩索 · 批次保留",
+      "orderingFrozen": true
     },
     {
       "id": "batch-028",
@@ -5590,6 +5592,10 @@
       "receivedFeedback": "删左2下2右4，互联",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
       "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:5a10ddb17798b09d3675e103b30bca0c4a38a0f8f829ce3448ccea2a5f70672d",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "25批ok",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5645,6 +5651,10 @@
       "receivedFeedback": "删左2右3",
       "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
       "formalLibraryChanged": false,
+      "receivedDecision": "KEEP",
+      "receivedDecisionVersion": "sha256:a0903da04176561e76ff3ef2f67b53c68fa7f2ed43ad9fde2e389e822a3d861c",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "25批ok",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5674,17 +5684,33 @@
     {
       "reviewId": "206",
       "moduleId": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2",
-      "title": "p50-resource-trapdoor-commit-i1-c0",
-      "summary": "10×11 Block；2 个逻辑 Port；1 条归档动作路线。",
-      "source": "./modules/generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/module.mapnote.json",
-      "sourceSha256": "cf000ff3e6e964296b1752aa063ca172861cdcdce548ebb0bf1822079aa8796f",
-      "contentVersion": "sha256:99ce2d15cc3e984616bd94c63bd62041972df98ee83c637b709d0955f7ccdbea",
-      "diagram": "diagrams/generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2--cf000ff3e6e96429.svg",
+      "title": "击铃开脚下，取宝落出下口",
+      "summary": "4×5 Block；四周裁紧，击铃下落取宝；奖励领取成功后落板打开，从底部空中口离开。",
+      "source": "generation/manual-review/designs/batch-026/feedback-001/206.design.json",
+      "sourceSha256": "30fbe04c0cc53843601c0a3d457677f029eb629a7a14dad710630cbcffe341dc",
+      "contentVersion": "sha256:db852c43535585c6f055669a7e702580a8abdd3aebd8471597606445c3bca4af",
+      "diagram": "designs/batch-026/feedback-001/images/206.png",
       "portCount": 2,
       "category": "平原",
-      "technicalStatus": "passed_scoped",
+      "technicalStatus": "design_only",
       "decision": "PENDING",
       "humanFeedback": [],
+      "designVersion": "sha256:db852c43535585c6f055669a7e702580a8abdd3aebd8471597606445c3bca4af",
+      "reviewStage": "design",
+      "designNotes": [
+        "周围冗余裁紧的解释：原10×11裁为4×5，左裁2/右裁4/上裁6，底边不动；边界x0–512/y214–854。保留遮挡岩壁、上桥铃、下层宝箱及漏斗侧壁。",
+        "左口(0,406)仍ROCK，岸顶438。底口(320,854)改AIR仅出，删除原y836出口可穿短台，避免取得宝箱后又被平台接住。只提出entry→exit，不自动补回程。",
+        "上层保留原风铃与脚下桥门：先越过上桥，击中上方铃打开脚下桥门，落到下层宝箱落板；openSeconds=0只是来源未定值，不能认定已校准。",
+        "下层原230px平台的左右各51px岩边保留，中间128px改为初始承载的取宝落板。宝箱完整保留在(355,640)，底658与初始落板顶658一致。",
+        "自动下落的设计条件：先由奖励服务确认领取14金币成功，再撤销中间落板碰撞，保持开放到模块重置；不能只凭进入宝箱范围或见到箱子就掉落，不能先撤支撑导致领取失败。",
+        "取宝自动撤板不是原Module已实现行为；所需奖励提交→碰撞撤销绑定明确列为待实现。中间通道x291–419净宽128px，取宝后微调到x320，从底口下落离开。身体净空、完整领取/落下次序、动态门防夹、失误恢复、重试与重置全部UNKNOWN。"
+      ],
+      "previousDiagram": "diagrams/generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2--cf000ff3e6e96429.svg",
+      "previousVersion": "sha256:99ce2d15cc3e984616bd94c63bd62041972df98ee83c637b709d0955f7ccdbea",
+      "reviewRevision": "batch-026/design-feedback-001",
+      "receivedFeedback": "周围冗余block删除，拿完宝箱后会掉下去从下方出口出去",
+      "physicsSummary": "设计讨论阶段；定稿后统一实现与验证。",
+      "formalLibraryChanged": false,
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5703,6 +5729,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:976ebcfca84f4cce6fe902bda2548da400f9e4d8d6437ef52ae7ebc3c47136c9",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5721,6 +5751,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:aaa2a32eb2a1cefdd100cc96cfed9347da2c72525c1a7ede1c311ccda87c1545",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5739,6 +5773,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:8c7cf583c1d0cea62d4d64617e270c1dc9930baf66920137424ce493343d5398",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5757,6 +5795,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:348b42760bdc85343fea1ac2e3a6917749628765ee6c4bed8343f7d88d3cf912",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5775,6 +5817,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:eadc4815c516ffb6fc7a1c174d0ca3bda19e0715591821e6f611feedd4fa672a",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5793,6 +5839,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:e2c8d53b80b507e4628aa0ba2c8a1f4306dfd1d3421630cb318b773eb4160391",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5811,6 +5861,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:502987f208042f69bebc8b85b35ce9ffcc659a80363a8d3c6290009ae2d5fc11",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5829,6 +5883,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:2d5535f7b21f034f936bfd0f85031fd0a56806811f368121213e1192a1385ffb",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
@@ -5847,6 +5905,10 @@
       "technicalStatus": "passed_scoped",
       "decision": "PENDING",
       "humanFeedback": [],
+      "receivedDecision": "DISCARD",
+      "receivedDecisionVersion": "sha256:09a29749473284de7ba13bb157559a66ed9c1e5d3cb9c14eef08a6de8e150fcc",
+      "receivedDecisionScope": "design_only",
+      "receivedDecisionNote": "",
       "usesGrapple": false,
       "hookPointCount": 0,
       "reviewPriorityGroup": "plains_without_grapple"
