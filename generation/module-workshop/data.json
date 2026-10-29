@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 29,
+    "READY_FOR_IMPLEMENTATION": 30,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 54,
+    "handoffRevision": 55,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -30328,6 +30328,217 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-plains-hq05-001",
+      "sourceIdeaId": "idea-plains-hq05-001",
+      "reviewId": "idea-plains-hq05-001",
+      "title": "击中炮台，让它替你开门",
+      "summary": "子弹绕远路，人物走近路。跳出后向左下斜镜开枪，让反冲送人物向右上；子弹先向后飞，折射后绕过岩层去击铃，玩家要让开门时刻与到门时刻会合。只有最初开枪产生一次反冲；同一发弹丸在镜面改变方向、继续以原身份飞行，随后击铃。人物短路与弹丸长路有不同时间，不把门设成一帧窗口。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-plains-hq05-001/61603ff895ab/images/HQ05.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 4,
+        "heightBlocks": 3
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 1,
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            64,
+            192
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 3,
+          "position": [
+            448,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            448,
+            12
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "图稿未验证换边支撑/完整路线/接缝。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                512,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "hq05-T-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-T",
+          "from": "L",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-L-T",
+          "strategy": "向左下击中炮台后向右上反冲；炮台另发固定方向机关弹击铃。允许先落短接岸，再穿门。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            3.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-L",
+          "from": "T",
+          "to": "L",
+          "role": "return",
+          "pathObjectId": "route-T-L",
+          "strategy": "顶部同门访问点重开后分段下降，返回不要求反射倒放。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -3.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:61603ff895aba57db1c64c6875bc26ccdb39497629e5e725eb6453373aec7f38",
+      "designFile": "generation/module-workshop/ideas/idea-plains-hq05-001/61603ff895ab/design.json",
+      "designFileSha256": "582533d10d95e864f724ba935aef1db6f234c79ccb61f91e01e0cb45a9e07e32",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-plains-hq05-001/61603ff895ab/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -32402,7 +32613,7 @@
           "shot_recoil"
         ],
         "resources": "沿用真实跳跃、空中枪次、冷却和落地恢复；仅jump/shot_recoil，无钩索、二段跳或免费补枪。",
-        "terrain": "暂4×3三口，中部窄脊让冲锋线与穿越线相交，上方口需要主动离开冲锋带。不添加第二群怪或独立齿轮；备选4×4增加竖向躲让空间。 按人工意见，左右上方横台增加危险区，顶岸收至右危险区之前；保持原4×3与三Port。 两块上方危险区含实体岩体底层，目标为碰撞封堵；实际阻止效果仍UNKNOWN。",
+        "terrain": "4×3三口不变；左右上部用边界向下地刺、横檐向上地刺和柱顶地刺；保留中央顶口，不使用大危险框或填充方块。",
         "reward": "选择继续横穿还是上接区域；不为一次诱敌另塞宝箱。",
         "recovery": "失误可退回原岸再诱导，掉血保留；杀敌后地貌仍要有路，不强制无伤。不得依赖敌自动复活。",
         "directions": "左右进入可诱导相反方向；顶口下来先判断敌人本轮承诺方向，再选择低岸。六向为待验目标。",
@@ -32415,7 +32626,7 @@
           "从Module顶部非Port越界绕过"
         ],
         "difference": "区别于171进入即刷两侧怪和双靶续枪：玩家主动安排敌人的攻击方向，空间选择来自这次诱导。击杀是合法战斗解，需比较真实暴露和成本。",
-        "图稿适配": "入口下沉后从遮挡柱底部进入中央抬高战场；柱底224/base地面288提供64px通行高度，避免只靠岸上安全远杀。侧岸与柱之间留48px，柱与抬高战场间留32px过渡；身体仍需实测。；冲锋怪图示中心(272,240)，原生行为不变，建议巡逻半宽64使左右承诺点208/336留在192–352实体台上。该参数是待实现的局部适配，不声称原资源已改；没有撞墙眩晕。"
+        "图稿适配": "人工再次修订：不用整块危险区Cell。移除两块大危险框和填充岩体，边界薄岩条下沿、横檐上表面、立柱顶端改用已有PlatformThornDefinition地刺。；上边界支撑厚16px、向下刺深40px；横檐上刺24px，在非立柱处留下32px净高，仅静态小于参考身体高36px。中央T口与两侧进出不被地刺覆盖，不能由此宣称伤害硬闯或越界已禁止。；右侧地刺从x344起，T口(320,0)与顶岸保留；不默认沿整个Module加外边框。"
       },
       "constraints": {
         "text": "主规格暂4×3；备选仅待协商；玩家能力jump/shot_recoil。",
@@ -32579,18 +32790,18 @@
         "原生charger已有0.45s预兆、0.38s攻击、0.7s恢复；数值只是读到的当前定义，不是操作窗口认证。",
         "现有冲锋按锁定左右方向运动，不保证精确追到旧站位，也没有已确认的撞墙眩晕。",
         "几何须让安全远杀和完全绕过成为需要暴露/成本的选择；不能靠给怪加无敌来强行成立。",
-        "新危险区对绕行的实际阻止效果、伤害/无敌帧利用、顶口身体与瞄准扰动未验证。"
+        "边界地刺的完整身体/穿伤/无敌帧/越界绕行和六向路线均UNKNOWN。"
       ],
       "feasibility": "EXISTING_CELLS_NEW_ENCOUNTER_LAYOUT",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-plains-hq03-001/776a6cdcd54d/design.json",
-        "version": "sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74",
-        "sha256": "ffeda39f76fdb08406f02d2c27debc584619fcb9135b55bf5adcb3e87528b354",
-        "diagram": "ideas/idea-plains-hq03-001/776a6cdcd54d/images/HQ03.png"
+        "file": "generation/module-workshop/ideas/idea-plains-hq03-001/94c9959eaa7e/design.json",
+        "version": "sha256:94c9959eaa7e976cc0d3fd39210a3789fe928f937b500900d8dd592a51169d1d",
+        "sha256": "9bb048ac4b768eb748476526e7dc56481155847ff90f4e7bb51c9d38112a97dd",
+        "diagram": "ideas/idea-plains-hq03-001/94c9959eaa7e/images/HQ03.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-plains-hq03-001-dc702a2b1ee3-1.json",
-        "sha256": "819d67c1f8fd804bbad25831795259ce50ae6227f092a248f68cf570d7283bcc"
+        "path": "feedback/manual-review/idea-decisions/idea-plains-hq03-001-776a6cdcd54d-2.json",
+        "sha256": "1d29f385e70ae12f1eeac323346ba476a1c8edf7987a888db08d91bfa90139a7"
       },
       "feedback": [
         {
@@ -32602,6 +32813,16 @@
           "decision": "CHANGE",
           "note": "左右空中平台上方增加危险地带，不让玩家可以上方经过",
           "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-001.json"
+        },
+        {
+          "id": "idea-plains-hq03-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-plains-hq03-001\n标题：把冲锋引向你准备离开的那一边\n设计版本：sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74\n设计文件 SHA256：ffeda39f76fdb08406f02d2c27debc584619fcb9135b55bf5adcb3e87528b354\n决定：修改\n意见：禁止通行区应该是用边界地刺去实现，现在没有一整块危险区的cell，而且不美观\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nhq05好的\n\n\n再来五个创意",
+          "designVersion": "sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74",
+          "designFileSha256": "ffeda39f76fdb08406f02d2c27debc584619fcb9135b55bf5adcb3e87528b354",
+          "decision": "CHANGE",
+          "note": "禁止通行区应该是用边界地刺去实现，现在没有一整块危险区的cell，而且不美观",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-002.json"
         }
       ],
       "history": [
@@ -32611,6 +32832,15 @@
             "version": "sha256:dc702a2b1ee35b60fd9d048b2d09ff69c638bcb0e4a86915f7a376a07a33429e",
             "sha256": "62f1fb6522c4b6e3482d7b5d8a768d9f4901ec16fd0b4c546afab99500be546b",
             "diagram": "ideas/idea-plains-hq03-001/dc702a2b1ee3/images/HQ03.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        },
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-plains-hq03-001/776a6cdcd54d/design.json",
+            "version": "sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74",
+            "sha256": "ffeda39f76fdb08406f02d2c27debc584619fcb9135b55bf5adcb3e87528b354",
+            "diagram": "ideas/idea-plains-hq03-001/776a6cdcd54d/images/HQ03.png"
           },
           "stage": "DESIGN_REVIEW"
         }
@@ -32863,8 +33093,8 @@
           "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
         }
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -32888,8 +33118,8 @@
         "diagram": "ideas/idea-plains-hq05-001/61603ff895ab/images/HQ05.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-plains-hq05-001-a6d57b5f070a-1.json",
-        "sha256": "e32daa3ccc8bf0f31e5342ab57a8b9abc3b595eb0835f4b7319ddbfdc9e20e85"
+        "path": "feedback/manual-review/idea-decisions/idea-plains-hq05-001-61603ff895ab-2.json",
+        "sha256": "c93fa9eacc610c6997ea2a47a96f4dbaa920732db9f7d8a30db66510b163deb4"
       },
       "feedback": [
         {
@@ -32901,6 +33131,16 @@
           "decision": "CHANGE",
           "note": "不要用镜子，而是用一个“被击中会向固定方向发射子弹的炮台”去呈现",
           "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-001.json"
+        },
+        {
+          "id": "idea-plains-hq05-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-plains-hq03-001\n标题：把冲锋引向你准备离开的那一边\n设计版本：sha256:776a6cdcd54d98207c5e0e58e07433be9f458d963c5834e4bda6f090edf65c74\n设计文件 SHA256：ffeda39f76fdb08406f02d2c27debc584619fcb9135b55bf5adcb3e87528b354\n决定：修改\n意见：禁止通行区应该是用边界地刺去实现，现在没有一整块危险区的cell，而且不美观\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nhq05好的\n\n\n再来五个创意",
+          "designVersion": "sha256:61603ff895aba57db1c64c6875bc26ccdb39497629e5e725eb6453373aec7f38",
+          "designFileSha256": "582533d10d95e864f724ba935aef1db6f234c79ccb61f91e01e0cb45a9e07e32",
+          "decision": "KEEP",
+          "note": "hq05好的",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/hq-feedback-002.json"
         }
       ],
       "history": [
@@ -32914,6 +33154,557 @@
           "stage": "DESIGN_REVIEW"
         }
       ]
+    },
+    {
+      "id": "idea-plains-hq06-001",
+      "title": "把炮口送到正确的高度",
+      "sourceType": "ai_idea",
+      "verbatim": "一座竖向载台带着固定向右的受击炮台。低位击中时炮弹命中右路的铃，高位击中时命中上路的铃；同一次射击的反冲还要把你送向选择的岸。",
+      "interpretation": {
+        "observation": "看载台高度、炮口与两只目标铃的对齐，以及自己下一落点。",
+        "decision": "选择在哪个高度击炮，并从相应一侧借反冲离台。",
+        "causality": "平台位移改变炮弹出生高度，同一枪的反冲选择人物离台方向；炮口不自动瞄准。",
+        "cells": [
+          "原生竖向实体载台",
+          "HQ05受击定向炮台（缺Cell）",
+          "两只独立计时风铃门"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+        "terrain": "5×4，低左入口、高右岸、上方可穿口。两门各控一路，不伪称永久二选一。",
+        "reward": "接通目标区域，不放无成本宝箱。",
+        "recovery": "错过高度可随下一真实周期再试；落回左岸重试。上/右岸各有同门返回访问，六向身体和资源待验。",
+        "directions": "L→R/T选高度；R/T返回读取当前相位和门状态，不继承去程通过。",
+        "cheapSolutions": [
+          "停在岸上提前开两门",
+          "任意高度都能同时击中两铃",
+          "不需要载台直接射目标铃",
+          "炮台触发给玩家续枪"
+        ],
+        "difference": "对比HQ05静态炮台：移动的是弹丸的出生高度，决定哪个世界目标被命中；不是把同一门挪高。"
+      },
+      "constraints": {
+        "challengeSpecification": {
+          "widthBlocks": 5,
+          "heightBlocks": 4,
+          "ports": [
+            {
+              "id": "L",
+              "face": "LEFT",
+              "index": 2,
+              "position": [
+                0,
+                320
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            },
+            {
+              "id": "R",
+              "face": "RIGHT",
+              "index": 0,
+              "position": [
+                640,
+                64
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            },
+            {
+              "id": "T",
+              "face": "TOP",
+              "index": 1,
+              "position": [
+                192,
+                0
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            }
+          ],
+          "intendedRelations": [
+            {
+              "from": "L",
+              "to": "R",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "L",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "R",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "R",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "R",
+              "status": "PROPOSED_NOT_VALIDATED"
+            }
+          ],
+          "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+        }
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "source": {
+        "producer": "current_codex_session",
+        "modelRevision": "UNKNOWN",
+        "externalModelCalled": false,
+        "requirementsFile": "feedback/module-workshop/briefs/plains-hq-second-five-v1.json",
+        "proposalKey": "HQ06"
+      },
+      "gaps": [
+        "缺HQ05受击固定方向炮台及载台刚性挂载；固定世界向右、不继承台速度的规则需明确实现。",
+        "独立计时/返回访问可沿用；射击资格、发射延迟、宽容高度区间和六向全部UNKNOWN。"
+      ],
+      "feasibility": "NEEDS_CELL_OR_BINDING",
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-plains-hq06-001/986b44881e55/design.json",
+        "version": "sha256:986b44881e550b97aa339a9d5db27587c96f3471476435fbdc3c6647c7ca0bd0",
+        "sha256": "8d86422f1881774ebe660f0e133b16f63caa100b23bb92affb0f9126062a4895",
+        "diagram": "ideas/idea-plains-hq06-001/986b44881e55/images/HQ06.png"
+      }
+    },
+    {
+      "id": "idea-plains-hq07-001",
+      "title": "造出一块桥，也放出追兵",
+      "sourceType": "ai_idea",
+      "verbatim": "跳离左岸向后下方击铃：右侧缺口出现桥，而困住冲锋怪的门同时打开。你获得落脚点，也释放了正向落点靠近的追兵。",
+      "interpretation": {
+        "observation": "先看桥缺口、牢门与怪物的位置，再选择射击和落地时刻。",
+        "decision": "在空中开桥后，决定抢先过岸、跃过冲锋还是迎战；不强制杀怪。",
+        "causality": "原互补门一次切换：竖门打开释放怪、横门关闭成为实体桥；同枪反冲把人推向新桥。",
+        "cells": [
+          "原互补双门",
+          "原生plains_charger",
+          "局部弹道岩罩",
+          "左右岩岸"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+        "terrain": "7×3，桥跨到右岸。怪物的整个巡逻与冲锋范围都在原有右岸，不依赖地面怪掉落到桥上。",
+        "reward": "接通目标区域，不放无成本宝箱。",
+        "recovery": "漏桥按原关卡失败成本重试；站稳右岸能读下一冲锋。返回铃控制同一对门，回程开/关桥需重算。",
+        "directions": "L→R开桥即放敌；R→L先决定是否在敌仍活着时收放同桥，两个方向独立。",
+        "cheapSolutions": [
+          "完全无桥跳过512px缺口",
+          "岸上提前开桥无暴露",
+          "右岸轻松远杀且无后果",
+          "假设冲锋怪会掉到桥或撞墙眩晕"
+        ],
+        "difference": "沿用换脚桥家族，但收益同时改变威胁：造桥放敌。如果怪物不能影响落岸决策，应合并为旧桥的冗余变体。"
+      },
+      "constraints": {
+        "challengeSpecification": {
+          "widthBlocks": 7,
+          "heightBlocks": 3,
+          "ports": [
+            {
+              "id": "L",
+              "face": "LEFT",
+              "index": 2,
+              "position": [
+                0,
+                320
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            },
+            {
+              "id": "R",
+              "face": "RIGHT",
+              "index": 2,
+              "position": [
+                896,
+                320
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            }
+          ],
+          "intendedRelations": [
+            {
+              "from": "L",
+              "to": "R",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "R",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            }
+          ],
+          "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+        }
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "source": {
+        "producer": "current_codex_session",
+        "modelRevision": "UNKNOWN",
+        "externalModelCalled": false,
+        "requirementsFile": "feedback/module-workshop/briefs/plains-hq-second-five-v1.json",
+        "proposalKey": "HQ07"
+      },
+      "gaps": [
+        "Cell均已有；空中击铃布局、真实横门承载、怪物释放后的路线和回程需要新布局规则及验证。",
+        "原生怪物不新增重力/眩晕；放敌到落岸的时间关系与廉价提前开桥UNKNOWN。"
+      ],
+      "feasibility": "NEEDS_CELL_OR_BINDING",
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-plains-hq07-001/654ed79c6a2d/design.json",
+        "version": "sha256:654ed79c6a2d35e5c2456f92e0e0ee45d0038583a2c830a981da34e7128b37a7",
+        "sha256": "666317c66f94a469dbc526b2c5621c173564e26e3d9f916263d75cbfb0cf1d3c",
+        "diagram": "ideas/idea-plains-hq07-001/654ed79c6a2d/images/HQ07.png"
+      }
+    },
+    {
+      "id": "idea-plains-hq08-001",
+      "title": "落地补枪，脚下却开始下沉",
+      "sourceType": "ai_idea",
+      "verbatim": "第一枪把你送上暂停的高台。真正落地恢复枪次的同时，平台开始下降；你要在刚补回的枪与不断损失的高度之间，挑一个能避开上方横锯的离台窗口。",
+      "interpretation": {
+        "observation": "在落台前看横锯的未来位置；落台后读台高下降速度。",
+        "decision": "立刻离台保高度，或多等一点让锯让路，再用真正恢复的一枪上顶岸。",
+        "causality": "同一次真实承载接触恢复原动作资源，同时触发原台启动下降；没有额外回充。",
+        "cells": [
+          "暂停的原生实体载台",
+          "原生横移齿轮",
+          "真实承载接触→启动绑定（缺）",
+          "可穿重试台"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+        "terrain": "4×4，左低进、顶上出；暂停台起点(320,288)，先下行到432再按原往复返回，非瞬移复位。",
+        "reward": "接通目标区域，不放无成本宝箱。",
+        "recovery": "漏跳可到下方功能台重整；迟离台可用真实后续上升周期再试，若安全久等使挑战无聊须返修。",
+        "directions": "L→T在首次下沉与锯窗之间决定；T→L下降到原岸，不反推上行认证。",
+        "cheapSolutions": [
+          "不落台直接上顶",
+          "落台后无限安全等待没有代价",
+          "平台接触边缘就无条件回枪",
+          "无需读齿轮的固定连跳"
+        ],
+        "difference": "对比D02手动射铃启动下沉：触发来自获得资源的落地本身。若只换触发文字、实际选择相同，作为同家族适配不加新家族。"
+      },
+      "constraints": {
+        "challengeSpecification": {
+          "widthBlocks": 4,
+          "heightBlocks": 4,
+          "ports": [
+            {
+              "id": "L",
+              "face": "LEFT",
+              "index": 2,
+              "position": [
+                0,
+                320
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            },
+            {
+              "id": "T",
+              "face": "TOP",
+              "index": 2,
+              "position": [
+                320,
+                0
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            }
+          ],
+          "intendedRelations": [
+            {
+              "from": "L",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            }
+          ],
+          "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+        }
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "source": {
+        "producer": "current_codex_session",
+        "modelRevision": "UNKNOWN",
+        "externalModelCalled": false,
+        "requirementsFile": "feedback/module-workshop/briefs/plains-hq-second-five-v1.json",
+        "proposalKey": "HQ08"
+      },
+      "gaps": [
+        "缺真实平台承载接触一次性启动绑定；不能用矩形触发器伪造落地/回枪。",
+        "下降速度/锯相位/身体离台窗口与失误重试须原Harness求解；图示时间只是初始假设。"
+      ],
+      "feasibility": "NEEDS_CELL_OR_BINDING",
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-plains-hq08-001/08bf08e62e79/design.json",
+        "version": "sha256:08bf08e62e79a3e7af481a3c0ce466457a7a3342ab089aa42a395b1112eb5623",
+        "sha256": "4d1ed56ed9861f93a3d5c0d07abd8889a425e0096fc22c870818d4230f792d26",
+        "diagram": "ideas/idea-plains-hq08-001/08bf08e62e79/images/HQ08.png"
+      }
+    },
+    {
+      "id": "idea-plains-hq09-001",
+      "title": "别把落点停在炮弹路上",
+      "sourceType": "ai_idea",
+      "verbatim": "一座可启停的升降台既是落脚点，也会挡住炮台到风铃的斜弹道。先选择台高，再跳起击炮：台停得顺手却挡弹会不开门，停得让弹又可能让你够不到。",
+      "interpretation": {
+        "observation": "比较整块台体与斜弹道的交叠，不能只看平台中心。",
+        "decision": "选一段能落脚且放行炮弹的高度区间，再击炮借反冲追台。",
+        "causality": "同一实体台的碰撞既承载身体又截住机关弹，两个要求由同一停位耦合；不凭图把弹穿台。",
+        "cells": [
+          "原生启停实体升降台",
+          "HQ05受击定向炮台（缺Cell）",
+          "原计时风铃门",
+          "原岩/可穿台"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+        "terrain": "5×4低左→上口；坏例台中心(320,240)截斜弹，较低中心320的台可放行。不是新添一面无关挡板。",
+        "reward": "接通目标区域，不放无成本宝箱。",
+        "recovery": "打炮失败可回原岸重停；误落低台后可重新启台，真实承载/循环重试待验。顶侧同门访问用于返回。",
+        "directions": "L→T需兼顾落点与弹路；T→L先重开顶门再分段落回，同台状态保留。",
+        "cheapSolutions": [
+          "先开门再慢慢摆台",
+          "从岸上绕过炮台直打目标铃",
+          "不用这块台也能上去",
+          "暂停高度对人物和弹道没有实际共同限制"
+        ],
+        "difference": "对比194移动挡板射窗和HQ02敌弹掩体：这次玩家自己的落脚面会挡自己的开门弹。若可完全忽略台，只算旧射窗布局。"
+      },
+      "constraints": {
+        "challengeSpecification": {
+          "widthBlocks": 5,
+          "heightBlocks": 4,
+          "ports": [
+            {
+              "id": "L",
+              "face": "LEFT",
+              "index": 2,
+              "position": [
+                0,
+                320
+              ],
+              "surface": "ROCK",
+              "permission": "INOUT"
+            },
+            {
+              "id": "T",
+              "face": "TOP",
+              "index": 1,
+              "position": [
+                192,
+                0
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            }
+          ],
+          "intendedRelations": [
+            {
+              "from": "L",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            }
+          ],
+          "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+        }
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "source": {
+        "producer": "current_codex_session",
+        "modelRevision": "UNKNOWN",
+        "externalModelCalled": false,
+        "requirementsFile": "feedback/module-workshop/briefs/plains-hq-second-five-v1.json",
+        "proposalKey": "HQ09"
+      },
+      "gaps": [
+        "缺HQ05炮台Cell；既有载台/启停/门可复用。需绑定机关弹与真实平台碰撞，不能把出生点穿透当放行。",
+        "计时门与提前开门反例待算，必须保留有宽度的停位区间，不靠一帧截图。"
+      ],
+      "feasibility": "NEEDS_CELL_OR_BINDING",
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-plains-hq09-001/5c93c5150834/design.json",
+        "version": "sha256:5c93c5150834b0bcbd3a3c88e10ae41099f48a9d485f5061213215340233c3b9",
+        "sha256": "fefe3dbcbc9a27599b7bd653c5d4e77381d99713d5f7a3a48a5237e71a8418fd",
+        "diagram": "ideas/idea-plains-hq09-001/5c93c5150834/images/HQ09.png"
+      }
+    },
+    {
+      "id": "idea-plains-hq10-001",
+      "title": "这块台，是踏板也是井口塞子",
+      "sourceType": "ai_idea",
+      "verbatim": "窄竖井里，一块实体台可横向收进侧袋。伸入时可落脚，却堵住上下通路；收回时放开井口，却失去这个落点。三个来向要按当前目的调整同一块台。",
+      "interpretation": {
+        "observation": "先看台插入多少、自己在其上还是下，以及想去侧口还是上下口。",
+        "decision": "需要中间承载时保留插台；要直落或从下上穿时，先启动并择时停台收回。",
+        "causality": "同一载台自己的碰撞直接改写局部通路，不借另一扇门。实体台不可下穿。",
+        "cells": [
+          "原生水平实体台及启停铃",
+          "原岩井壁",
+          "上下/侧面可穿接岸",
+          "上下访问同台控制"
+        ],
+        "abilities": [
+          "jump",
+          "shot_recoil"
+        ],
+        "resources": "沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+        "terrain": "3×4，井宽128，台宽112，仅余8px侧缝；收回时完全离开井道。侧袋槽高32小于参考身体36，仍须全身体验证。",
+        "reward": "接通目标区域，不放无成本宝箱。",
+        "recovery": "错停可在已有接岸重启；上下控制访问需可达。重启后仍走原往复时钟，没有自动收至端点。",
+        "directions": "L/T/B六向目标：部分路线可以简单跳过，B↔T必须处理井中实体阻挡；不强行每向都用同动作。",
+        "cheapSolutions": [
+          "身体从8px缝挤过",
+          "把实体台当可下穿台",
+          "射铃一次自动精确收台",
+          "三口控制访问有一侧不可用"
+        ],
+        "difference": "对比175载台压Dock开独立门：这里台本身就是通道阻挡，取舍是落点与通路，不是另开一道门。"
+      },
+      "constraints": {
+        "challengeSpecification": {
+          "widthBlocks": 3,
+          "heightBlocks": 4,
+          "ports": [
+            {
+              "id": "L",
+              "face": "LEFT",
+              "index": 1,
+              "position": [
+                0,
+                192
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            },
+            {
+              "id": "T",
+              "face": "TOP",
+              "index": 1,
+              "position": [
+                192,
+                0
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            },
+            {
+              "id": "B",
+              "face": "BOTTOM",
+              "index": 1,
+              "position": [
+                192,
+                512
+              ],
+              "surface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT"
+            }
+          ],
+          "intendedRelations": [
+            {
+              "from": "L",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "L",
+              "to": "B",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "T",
+              "to": "B",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "B",
+              "to": "L",
+              "status": "PROPOSED_NOT_VALIDATED"
+            },
+            {
+              "from": "B",
+              "to": "T",
+              "status": "PROPOSED_NOT_VALIDATED"
+            }
+          ],
+          "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+        }
+      },
+      "stage": "DESIGN_REVIEW",
+      "humanApproval": "UNKNOWN",
+      "technicalStatus": "UNKNOWN",
+      "productionApproval": false,
+      "source": {
+        "producer": "current_codex_session",
+        "modelRevision": "UNKNOWN",
+        "externalModelCalled": false,
+        "requirementsFile": "feedback/module-workshop/briefs/plains-hq-second-five-v1.json",
+        "proposalKey": "HQ10"
+      },
+      "gaps": [
+        "原生台/单台启停已有；三处访问绑定同台与状态持久需核对，不能造三台或三个独立时钟。",
+        "侧袋/身体/承载/防夹/三口六向、封口和接缝全部UNKNOWN。"
+      ],
+      "feasibility": "NEEDS_CELL_OR_BINDING",
+      "design": {
+        "file": "generation/module-workshop/ideas/idea-plains-hq10-001/88ec69e77b0d/design.json",
+        "version": "sha256:88ec69e77b0dacd726a4208a20db45cca578fc628f11eece2a43bc4d3868fbc1",
+        "sha256": "1077ea64b31b7ad7813c9c6eaf107fdfd8f68cac5933bb2363ce5e009bdbfcf4",
+        "diagram": "ideas/idea-plains-hq10-001/88ec69e77b0d/images/HQ10.png"
+      }
     }
   ],
   "policy": {

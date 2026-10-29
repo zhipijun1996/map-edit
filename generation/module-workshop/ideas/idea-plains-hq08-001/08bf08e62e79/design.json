@@ -1,0 +1,523 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq08-001",
+  "reviewId": "HQ08",
+  "title": "落地补枪，脚下却开始下沉",
+  "summary": "4×4 Block · 2口有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 512,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 2,
+      "position": [
+        0,
+        320
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        320
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 2,
+      "position": [
+        320,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        320,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 352,
+      "w": 112,
+      "h": 160
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 256,
+      "y": 32,
+      "w": 128,
+      "h": 12,
+      "label": "顶口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "retry",
+      "type": "platform",
+      "x": 128,
+      "y": 416,
+      "w": 128,
+      "h": 12,
+      "label": "漏跳重整台",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 320,
+      "y": 288,
+      "w": 0,
+      "h": 144,
+      "points": [
+        {
+          "x": 320,
+          "y": 288
+        },
+        {
+          "x": 320,
+          "y": 432
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          320,
+          288
+        ],
+        "finish": [
+          320,
+          432
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.05555555555555556,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "platform",
+      "x": 264.0,
+      "y": 278.0,
+      "w": 112,
+      "h": 20,
+      "trackId": "rail-P",
+      "label": "P 停台示例",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "contact-note",
+      "type": "triggerZone",
+      "x": 264,
+      "y": 263,
+      "w": 112,
+      "h": 15,
+      "diagramLabel": "真实落台：原回枪＋启动下降（缺绑定）",
+      "diagramLabelPosition": [
+        270,
+        240
+      ],
+      "mechanics": {
+        "kind": "PROPOSED_REAL_SUPPORT_CONTACT_START",
+        "status": "MISSING_BINDING",
+        "restoration": "Native only",
+        "oneShot": true
+      }
+    },
+    {
+      "id": "saw-rail",
+      "type": "trackLine",
+      "x": 160,
+      "y": 144,
+      "w": 192,
+      "h": 0,
+      "points": [
+        {
+          "x": 160,
+          "y": 144
+        },
+        {
+          "x": 352,
+          "y": 144
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          256,
+          144
+        ],
+        "travel": [
+          96,
+          0
+        ],
+        "period": 3.6,
+        "initial_phase": 0
+      }
+    },
+    {
+      "id": "saw",
+      "type": "hazard",
+      "x": 232,
+      "y": 120,
+      "w": 48,
+      "h": 48,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "saw-rail",
+      "label": "横锯：看下一窗口"
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 320
+        },
+        {
+          "x": 64,
+          "y": 320
+        },
+        {
+          "x": 224,
+          "y": 238
+        },
+        {
+          "x": 320,
+          "y": 260
+        },
+        {
+          "x": 320,
+          "y": 192
+        },
+        {
+          "x": 368,
+          "y": 80
+        },
+        {
+          "x": 320,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 512,
+      "points": [
+        {
+          "x": 320,
+          "y": 0
+        },
+        {
+          "x": 368,
+          "y": 80
+        },
+        {
+          "x": 384,
+          "y": 212
+        },
+        {
+          "x": 320,
+          "y": 260
+        },
+        {
+          "x": 208,
+          "y": 384
+        },
+        {
+          "x": 64,
+          "y": 320
+        },
+        {
+          "x": 0,
+          "y": 320
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "第一枪到台；真实落地回枪同时启动下降，选择避锯离台窗口。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        2.5,
+        -2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-L",
+      "from": "T",
+      "to": "L",
+      "role": "return",
+      "pathObjectId": "route-T-L",
+      "strategy": "读下降台和锯相位，按真实接回/落岸下降。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -2.5,
+        2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "深绿岩体／浅绿可穿台　主载台实体　蓝线玩家弹／紫线机关弹　虚框同台另一状态",
+  "reviewInstructions": [
+    "① 黄色细条是接触绑定说明，不是危险区；必须真正承载落地。",
+    "② 恢复原枪次的同次落地启动下降：等锯让路，会付出高度。",
+    "③ 台按原往复返回，不能假设一次性坠毁或瞬间复位；安全久等是否无聊须审查。"
+  ],
+  "designNotes": [
+    "暂停初位中心320,288，下降至432，行程144；3.2s只是图稿假设，不是已标定操作窗口。",
+    "下方重整台服务失败恢复，不新增Port；失误重试与返回均待真实验证。",
+    "observation：在落台前看横锯的未来位置；落台后读台高下降速度。",
+    "decision：立刻离台保高度，或多等一点让锯让路，再用真正恢复的一枪上顶岸。",
+    "causality：同一次真实承载接触恢复原动作资源，同时触发原台启动下降；没有额外回充。",
+    "cells：暂停的原生实体载台；原生横移齿轮；真实承载接触→启动绑定（缺）；可穿重试台",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实跳跃、空中枪次、冷却、承载和落地恢复，不额外赠枪或二段跳。",
+    "terrain：4×4，左低进、顶上出；暂停台起点(320,288)，先下行到432再按原往复返回，非瞬移复位。",
+    "reward：接通目标区域，不放无成本宝箱。",
+    "recovery：漏跳可到下方功能台重整；迟离台可用真实后续上升周期再试，若安全久等使挑战无聊须返修。",
+    "directions：L→T在首次下沉与锯窗之间决定；T→L下降到原岸，不反推上行认证。",
+    "cheapSolutions：不落台直接上顶；落台后无限安全等待没有代价；平台接触边缘就无条件回枪；无需读齿轮的固定连跳",
+    "difference：对比D02手动射铃启动下沉：触发来自获得资源的落地本身。若只换触发文字、实际选择相同，作为同家族适配不加新家族。",
+    "Cell缺口：缺真实平台承载接触一次性启动绑定；不能用矩形触发器伪造落地/回枪。；下降速度/锯相位/身体离台窗口与失误重试须原Harness求解；图示时间只是初始假设。",
+    "未经当前精确设计版本人工保留不实施。所有技术/封口/镜像/接缝为UNKNOWN。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq08-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 264.0,
+      "y": 422.0,
+      "w": 112,
+      "h": 20,
+      "label": "P 轨道端点"
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        320,
+        260
+      ],
+      "label": "刚落台",
+      "labelPosition": [
+        338,
+        300
+      ]
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        384,
+        292
+      ],
+      "to": [
+        384,
+        364
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        320,
+        210
+      ],
+      "to": [
+        320,
+        286
+      ],
+      "recoil": [
+        [
+          320,
+          210
+        ],
+        [
+          320,
+          132
+        ]
+      ],
+      "label": "落台恢复的一枪，用于离台",
+      "labelPosition": [
+        400,
+        190
+      ]
+    }
+  ],
+  "designVersion": "sha256:08bf08e62e79a3e7af481a3c0ce466457a7a3342ab089aa42a395b1112eb5623"
+}
