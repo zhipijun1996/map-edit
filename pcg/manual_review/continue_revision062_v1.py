@@ -1,0 +1,13 @@
+import copy,subprocess
+from pcg.migration import core,physics
+OUT=core.REPO/'feedback/manual-review/implementation-results/revision-062-v1';AUTH=OUT/'authorization';ROOT=core.REPO/'pcg/manual_review/implementation/revision-062-drafts-v1';FINAL=core.REPO/'pcg/manual_review/implementation/revision-062-final-v1'
+REPAIRS={'idea-plains-hq01-001':'hq01','idea-plains-hq03-001':'hq03','idea-plains-hq07-001':'hq07','idea-spec02-s10-001':'rs10','idea-spec02-s12-001':'rs12'}
+def label(r):return REPAIRS.get(r['reviewId'],r['reviewId'].replace('idea-spec02-','').replace('-001',''))
+def rows():return core.read(AUTH/'handoff.json')['rows']
+def main():
+ assert not AUTH.exists();h=core.read('feedback/manual-review/implementation-handoff-v1.json');ids=[*REPAIRS,*['idea-spec02-'+n+'-001'for n in ['s04','s06','s09']]];rs=copy.deepcopy([r for r in h['rows']if r['reviewId']in ids]);assert len(rs)==8
+ core.write(AUTH/'request.json',dict(verbatim='更新仓库，继续实现新的已经通过审核的module。之前没成功的，先看是不是模块问题，不是的话重跑，是的话先根据建议修改。',main=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip(),scope=ids,newApproved=['s04','s06','s09'],repairs=list(REPAIRS.values()),priorRounds=['revision-060-v1','revision-061-v1'],geometryPolicy='Exact approved geometry/ports; repair input/measurement first. HQ09 initial TOP permission conflict separately pending user design clarification.',priorFailureReplay='First failed calibration row per failed route, identical instantiated input/noise. No new independent holdout and no lucky reseed.',selection='First unchanged clean+screen+native passing candidate; one formal selected/spec in this newly authorized repair round. Preserve previous full failures; genuinely revised program required before any fresh pool.',noHoldoutTuning=True,rs12Basis='Already failed R-to-L calibration in the running061 campaign; finish old campaign independently; proposed fix derived from its calibration only.',budget=dict(maximumSemanticVersionsPerSpec=12,diagnosticsPerRouteVersion=18,screen=dict(clean=1,mild=6,moderate=6,minimumModeratePasses=5,seed=271028029),nativePreflightPerRouteVersion=1,selectedFormalVersionsPerSpec=1,additionalFixturesPerSpec=32,maximumNewGodotCases=30000,protocol=physics.artifact(physics.FULL_PROTOCOL)),noDesignWebEdits=True,noOriginalPhysicsSourceEdits=True))
+ for r in rs:
+  assert core.sha(r['designFile'])==r['designFileSha256'];r['outputDirectory']=core.relative(ROOT/r['moduleId']);r['implementationMode']='repair_input_policy'if r['reviewId']in REPAIRS else'new_exact_approved_design';core.write(AUTH/'designs'/(label(r)+'.json'),core.read(r['designFile']))
+ core.write(AUTH/'handoff.json',dict(rows=rs));print('ROUND062_FROZEN',[(label(r),r['designVersion'][:19])for r in rs])
+if __name__=='__main__':main()
