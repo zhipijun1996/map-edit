@@ -1,5 +1,5 @@
 import {ABILITIES,requirementSummary} from '../../capabilities.js';
-import {FACES,STAGES,COMPLETE_STAGES,filterModules,matchingRoutes,validateDraft,designFeedback,creativeViews,filterCreativeViews} from './model.js';
+import {FACES,STAGES,COMPLETE_STAGES,filterModules,matchingRoutes,validateDraft,designFeedback,creativeViews,filterCreativeViews} from './model.js?v=idea-stage-filter-v1';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let data,shown=18,filtered=[],drafts=[],editingDraftId=null,deletedDraft=null;const IDEA_FILTER_KEY='module-workshop:idea-filter:v1';
 const DRAFT_KEY='module-workshop:ideas:v1',FORM_KEY='module-workshop:unsaved-idea:v1';
