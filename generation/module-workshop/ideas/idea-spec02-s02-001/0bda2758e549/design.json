@@ -1,0 +1,492 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s02-001",
+  "reviewId": "R2-S02",
+  "title": "S02 · 一枚追锯，换边上井",
+  "summary": "精确规格 S02 · 3×5 Block · 2条有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 0,
+      "position": [
+        64.0,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        64,
+        12
+      ],
+      "requestedBlockPosition": [
+        0.5,
+        0.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "LEFT",
+          "targetPosition": [
+            0,
+            64
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s02-T-top_left"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "B",
+      "face": "BOTTOM",
+      "index": 2,
+      "position": [
+        320.0,
+        640
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        1
+      ],
+      "diagramLabel": "B",
+      "supportObjectId": "bottom",
+      "stagingPosition": [
+        320,
+        576
+      ],
+      "requestedBlockPosition": [
+        2.5,
+        5.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            384,
+            576
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s02-B-bottom_right"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 16,
+      "y": 32,
+      "w": 96,
+      "h": 12,
+      "label": "上口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "bottom",
+      "type": "platform",
+      "x": 272,
+      "y": 608,
+      "w": 112,
+      "h": 12,
+      "label": "下口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "a",
+      "type": "platform",
+      "x": 240,
+      "y": 464,
+      "w": 96,
+      "h": 12,
+      "label": "跨井落脚",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "b",
+      "type": "platform",
+      "x": 32,
+      "y": 336,
+      "w": 96,
+      "h": 12,
+      "label": "跨井落脚",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "c",
+      "type": "platform",
+      "x": 240,
+      "y": 208,
+      "w": 112,
+      "h": 12,
+      "label": "跨井落脚",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "d",
+      "type": "platform",
+      "x": 16,
+      "y": 80,
+      "w": 96,
+      "h": 12,
+      "label": "跨井落脚",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "shared-saw-rail",
+      "type": "trackLine",
+      "x": 192,
+      "y": 160,
+      "w": 0,
+      "h": 320,
+      "points": [
+        {
+          "x": 192,
+          "y": 160
+        },
+        {
+          "x": 192,
+          "y": 480
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          320
+        ],
+        "travel": [
+          0,
+          160
+        ],
+        "period": 4.4,
+        "initial_phase": 0
+      }
+    },
+    {
+      "id": "shared-saw",
+      "type": "hazard",
+      "x": 168,
+      "y": 296,
+      "w": 48,
+      "h": 48,
+      "shape": "gears",
+      "count": 1,
+      "trackId": "shared-saw-rail",
+      "label": "移动齿轮"
+    },
+    {
+      "id": "route-B-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 320,
+          "y": 640
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 288,
+          "y": 432
+        },
+        {
+          "x": 80,
+          "y": 304
+        },
+        {
+          "x": 288,
+          "y": 176
+        },
+        {
+          "x": 64,
+          "y": 48
+        },
+        {
+          "x": 64,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-B",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 640,
+      "points": [
+        {
+          "x": 64,
+          "y": 0
+        },
+        {
+          "x": 64,
+          "y": 48
+        },
+        {
+          "x": 288,
+          "y": 176
+        },
+        {
+          "x": 80,
+          "y": 304
+        },
+        {
+          "x": 288,
+          "y": 432
+        },
+        {
+          "x": 320,
+          "y": 576
+        },
+        {
+          "x": 320,
+          "y": 640
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "B-to-T",
+      "from": "B",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-B-T",
+      "strategy": "逐段交替读同一竖锯窗口上井。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -2.0,
+        -5.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-B",
+      "from": "T",
+      "to": "B",
+      "role": "return",
+      "pathObjectId": "route-T-B",
+      "strategy": "按下降速度选择跳过或落回接岸，保留枪次制动。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        2.0,
+        5.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "T",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "T",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "绿岩／浅绿可穿接岸　实体载台另标　红＝真实地刺/齿轮　曲线＝动作意图，非物理证据",
+  "reviewInstructions": [
+    "① 同一枚竖锯扫过不同高度，横跨时读它的未来位置。",
+    "② 下行可跨层，但不是默认直落到底；每台的上返与恢复用途都要检验。"
+  ],
+  "designNotes": [
+    "observation：看共享竖锯将扫到哪次横跨、下一落脚台在哪侧。",
+    "decision：选择本次立即横跨，还是留在有功能的接岸读下一窗口。",
+    "causality：跳跃/反冲换侧时穿过同一竖锯的扫掠区，落台恢复用于下一段；回程反冲用于制动。",
+    "cells：原生竖移齿轮；少量交替可穿落台；上下可穿接口",
+    "abilities：jump；shot_recoil",
+    "resources：仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+    "terrain：严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+    "reward：目的岸与下一模块为主要收益，不放免费宝箱。",
+    "recovery：漏跳可落较低的既有台重新读锯；是否能无伤接回取决于相位，非免费底层安全路。",
+    "directions：B→T逐段上升，T→B选择落到哪层并刹住；两向目标独立。",
+    "cheapSolutions：上行完全不需要读锯；一路贴边连续跳避开共享区；下行直接跳到底口毫无风险；某块台对两向和恢复均无用",
+    "difference：同规格旧S02是斜台追乘；这版用共享竖锯约束交替跨井，属于反冲/动态危险家族布局，非旧斜台的尺寸变体。",
+    "Cell缺口：现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。",
+    "本轮精确接口的新图稿不继承旧图或原家族技术认证；未经该版本人工保留不实施。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s02-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "actorPoses": [
+    {
+      "position": [
+        104,
+        288
+      ],
+      "label": "等锯离开这一层",
+      "labelPosition": [
+        94,
+        260
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        104,
+        288
+      ],
+      "to": [
+        48,
+        352
+      ],
+      "recoil": [
+        [
+          104,
+          288
+        ],
+        [
+          168,
+          224
+        ]
+      ],
+      "label": "反冲换侧",
+      "labelPosition": [
+        250,
+        274
+      ]
+    }
+  ],
+  "designVersion": "sha256:0bda2758e549614457cf07f0010e524b27abe6d5807bdd1f4d55a408ac927121"
+}

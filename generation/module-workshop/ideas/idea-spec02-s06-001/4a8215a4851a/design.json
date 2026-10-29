@@ -1,0 +1,511 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s06-001",
+  "reviewId": "R2-S06",
+  "title": "S06 · 引出慢弹，追台到掩护侧",
+  "summary": "精确规格 S06 · 4×6 Block · 2条有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 512,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 0,
+      "position": [
+        64.0,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        64,
+        12
+      ],
+      "requestedBlockPosition": [
+        0.5,
+        0.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "LEFT",
+          "targetPosition": [
+            0,
+            64
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s06-T-top_left"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "B",
+      "face": "BOTTOM",
+      "index": 3,
+      "position": [
+        448.0,
+        768
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        1
+      ],
+      "diagramLabel": "B",
+      "supportObjectId": "bottom",
+      "stagingPosition": [
+        448,
+        704
+      ],
+      "requestedBlockPosition": [
+        3.5,
+        6.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            512,
+            704
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s06-B-bottom_right"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 16,
+      "y": 32,
+      "w": 96,
+      "h": 12,
+      "label": "上口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "bottom",
+      "type": "platform",
+      "x": 400,
+      "y": 736,
+      "w": 112,
+      "h": 12,
+      "label": "下口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "retry",
+      "type": "platform",
+      "x": 32,
+      "y": 464,
+      "w": 96,
+      "h": 12,
+      "label": "暴露观察 / 重试",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "upper-retry",
+      "type": "platform",
+      "x": 320,
+      "y": 240,
+      "w": 96,
+      "h": 12,
+      "label": "离台后接回",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "sentry-perch",
+      "type": "terrain",
+      "x": 336,
+      "y": 344,
+      "w": 80,
+      "h": 16
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 112,
+      "y": 128,
+      "w": 304,
+      "h": 544,
+      "points": [
+        {
+          "x": 416,
+          "y": 672
+        },
+        {
+          "x": 112,
+          "y": 128
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          416,
+          672
+        ],
+        "finish": [
+          112,
+          128
+        ],
+        "travel_duration": 5.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.3142857142857143,
+        "designState": "MOVING_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "platform",
+      "x": 177.6,
+      "y": 335.6,
+      "w": 112,
+      "h": 20,
+      "trackId": "rail-P",
+      "label": "P 实体台",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "sentry",
+      "type": "enemy",
+      "x": 350,
+      "y": 312,
+      "w": 28,
+      "h": 32,
+      "definition": "plains_sentry",
+      "diagramLabel": "原生慢弹射手"
+    },
+    {
+      "id": "route-B-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 768,
+      "points": [
+        {
+          "x": 448,
+          "y": 768
+        },
+        {
+          "x": 448,
+          "y": 704
+        },
+        {
+          "x": 320,
+          "y": 520
+        },
+        {
+          "x": 152,
+          "y": 368
+        },
+        {
+          "x": 208,
+          "y": 300
+        },
+        {
+          "x": 112,
+          "y": 96
+        },
+        {
+          "x": 64,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-B",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 768,
+      "points": [
+        {
+          "x": 64,
+          "y": 0
+        },
+        {
+          "x": 112,
+          "y": 96
+        },
+        {
+          "x": 368,
+          "y": 208
+        },
+        {
+          "x": 208,
+          "y": 300
+        },
+        {
+          "x": 152,
+          "y": 368
+        },
+        {
+          "x": 320,
+          "y": 520
+        },
+        {
+          "x": 448,
+          "y": 704
+        },
+        {
+          "x": 448,
+          "y": 768
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "B-to-T",
+      "from": "B",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-B-T",
+      "strategy": "先暴露引弹、追台到保护侧，再择机离开掩护上顶口。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -3.0,
+        -6.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-B",
+      "from": "T",
+      "to": "B",
+      "role": "return",
+      "pathObjectId": "route-T-B",
+      "strategy": "从上侧接台或既有观察台，读射手与下降台状态回下口。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        3.0,
+        6.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "T",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "T",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "绿岩／浅绿可穿接岸　实体载台另标　红＝真实地刺/齿轮　曲线＝动作意图，非物理证据",
+  "reviewInstructions": [
+    "① 红线是已发射弹，红叉是与实体台碰撞的意图点，不用弹丸超时冒充。",
+    "② 复用HQ02移动掩体家族，适配4×6与右下口；不是增加新家族。"
+  ],
+  "designNotes": [
+    "observation：看射手出手预兆、已经飞出的弹和台的未来位置。",
+    "decision：先暴露引出真实弹，再追台；离台去上口要再次判断暴露。",
+    "causality：同一实体载台既承载人物又用真实地形碰撞截敌弹；不为角色加无敌，不把弹超时当截弹。",
+    "cells：原生斜向实体台；plains_sentry原慢弹射手；功能性中途重整台；上下可穿接岸",
+    "abilities：jump；shot_recoil",
+    "resources：仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
+    "terrain：严格4×6 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
+    "reward：目的岸与下一模块为主要收益，不放免费宝箱。",
+    "recovery：错过掩护可退已有接岸，受伤保留；敌死后仍需有可行几何路径。",
+    "directions：B→T追上受保护一侧，T→B在下降相位读弹后接回；独立验证。",
+    "cheapSolutions：提前遮挡使敌从未发弹；靠敌弹超时冒充截弹；直接安全远杀后无成本过关；敌死后无法上返",
+    "difference：明确复用已认可HQ02的移动掩体家族，适配本轮4×6和远右下口；不计新玩法家族。",
+    "Cell缺口：现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。",
+    "本轮精确接口的新图稿不继承旧图或原家族技术认证；未经该版本人工保留不实施。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s06-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 56.0,
+      "y": 118.0,
+      "w": 112,
+      "h": 20,
+      "label": "P 轨道端点"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        233.6,
+        327.6
+      ],
+      "to": [
+        210.18457483208277,
+        285.69871285741135
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        152,
+        368
+      ],
+      "label": "已引出真实弹",
+      "labelPosition": [
+        125,
+        340
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          364,
+          328
+        ],
+        [
+          289.6,
+          342.04
+        ]
+      ],
+      "color": "#c75049",
+      "label": "预期被实体台截住",
+      "labelPosition": [
+        374,
+        390
+      ],
+      "dashed": true,
+      "endStop": true
+    }
+  ],
+  "designVersion": "sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064"
+}
