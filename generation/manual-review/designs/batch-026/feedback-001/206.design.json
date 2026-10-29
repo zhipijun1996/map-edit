@@ -1,0 +1,323 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2",
+  "reviewId": "206",
+  "title": "击铃开脚下，取宝落出下口",
+  "summary": "4×5 Block；四周裁紧，击铃下落取宝；奖励领取成功后落板打开，从底部空中口离开。",
+  "reviewStage": "design",
+  "implementationStatus": "PAUSED_PENDING_DESIGN_FINALIZATION",
+  "sourceModule": {
+    "file": "./modules/generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/module.mapnote.json",
+    "contentVersion": "sha256:99ce2d15cc3e984616bd94c63bd62041972df98ee83c637b709d0955f7ccdbea",
+    "sha256": "cf000ff3e6e964296b1752aa063ca172861cdcdce548ebb0bf1822079aa8796f"
+  },
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 214,
+    "w": 512,
+    "h": 640
+  },
+  "ports": [
+    {
+      "id": "entry",
+      "position": [
+        0,
+        406
+      ],
+      "normal": [
+        -1,
+        0
+      ],
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT"
+    },
+    {
+      "id": "exit",
+      "position": [
+        320,
+        854
+      ],
+      "normal": [
+        0,
+        1
+      ],
+      "face": "BOTTOM",
+      "surface": "AIR",
+      "permission": "OUT"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "entry-to-exit",
+      "from": "entry",
+      "to": "exit",
+      "pathObjectId": "design-route-entry-to-exit",
+      "role": "main",
+      "status": "DESIGN_TARGET",
+      "technicalStatus": "UNKNOWN"
+    }
+  ],
+  "humanFeedback": "周围冗余block删除，拿完宝箱后会掉下去从下方出口出去",
+  "approvalMeaning": "Design preference only; no technical or production approval",
+  "routeMeaning": "Illustrated sequence only, not physical evidence",
+  "visualObjects": [
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-0",
+      "type": "terrain",
+      "x": 0,
+      "y": 438,
+      "w": 240,
+      "h": 310,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 0,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-1",
+      "type": "terrain",
+      "x": 470,
+      "y": 438,
+      "w": 42,
+      "h": 310,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-2",
+      "type": "terrain",
+      "x": 180,
+      "y": 214,
+      "w": 120,
+      "h": 176,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 2,
+      "wallClimbable": false
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-3",
+      "type": "gate",
+      "x": 291,
+      "y": 658,
+      "w": 128,
+      "h": 70,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 3,
+      "wallClimbable": false,
+      "diagramLabel": "取宝落板 · 初始承载",
+      "diagramLabelPosition": [
+        355,
+        752
+      ],
+      "mechanics": {
+        "kind": "reward_committed_release",
+        "initialState": "solid",
+        "afterClaim": "open_until_module_reset",
+        "triggerRewardId": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/cache-0",
+        "status": "DESIGN_REQUIREMENT_NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/gate-0",
+      "type": "gate",
+      "x": 240,
+      "y": 438,
+      "w": 230,
+      "h": 20,
+      "rotation": 0,
+      "label": "bridge-key gate",
+      "note": "",
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 0,
+        "carrierId": null,
+        "returnAccess": null
+      }
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/bell-0",
+      "type": "bell",
+      "x": 396,
+      "y": 228,
+      "w": 28,
+      "h": 34,
+      "rotation": 0,
+      "label": "bridge-key",
+      "note": "",
+      "targetId": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/gate-0",
+      "sourceId": "bridge-key"
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/cache-0",
+      "type": "reward",
+      "x": 337,
+      "y": 622,
+      "w": 36,
+      "h": 36,
+      "rotation": 0,
+      "label": "宝箱 14",
+      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
+      "mechanics": {
+        "kind": "chest",
+        "service": "SimpleRoomReward",
+        "amount": 14,
+        "source": {
+          "id": "visible-cache",
+          "position": [
+            355,
+            640
+          ],
+          "region": [
+            325,
+            635,
+            60,
+            10
+          ],
+          "amount": 14
+        },
+        "onClaimDesign": [
+          {
+            "event": "reward_transaction_committed",
+            "effect": "disable_support_collision",
+            "targetId": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-3",
+            "status": "DESIGN_TARGET",
+            "technicalStatus": "UNKNOWN"
+          }
+        ]
+      }
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-3-window-left",
+      "type": "terrain",
+      "x": 240,
+      "y": 658,
+      "w": 51,
+      "h": 70,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 4
+    },
+    {
+      "id": "generated-c234da4022051a1194ce251aa0da25d06ee572aa2a1c58873f8843f6d934feb2/platform-3-window-right",
+      "type": "terrain",
+      "x": 419,
+      "y": 658,
+      "w": 51,
+      "h": 70,
+      "rotation": 0,
+      "label": "Local boundary connector",
+      "note": "Offline adaptation; physics pending",
+      "sourceIndex": 5
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 0,
+      "y": 214,
+      "w": 512,
+      "h": 640,
+      "points": [
+        {
+          "x": 0,
+          "y": 406
+        },
+        {
+          "x": 150,
+          "y": 420
+        },
+        {
+          "x": 275,
+          "y": 420
+        },
+        {
+          "x": 355,
+          "y": 420
+        },
+        {
+          "x": 355,
+          "y": 640
+        },
+        {
+          "x": 355,
+          "y": 770
+        },
+        {
+          "x": 320,
+          "y": 820
+        },
+        {
+          "x": 320,
+          "y": 854
+        }
+      ]
+    }
+  ],
+  "designNotes": [
+    "周围冗余裁紧的解释：原10×11裁为4×5，左裁2/右裁4/上裁6，底边不动；边界x0–512/y214–854。保留遮挡岩壁、上桥铃、下层宝箱及漏斗侧壁。",
+    "左口(0,406)仍ROCK，岸顶438。底口(320,854)改AIR仅出，删除原y836出口可穿短台，避免取得宝箱后又被平台接住。只提出entry→exit，不自动补回程。",
+    "上层保留原风铃与脚下桥门：先越过上桥，击中上方铃打开脚下桥门，落到下层宝箱落板；openSeconds=0只是来源未定值，不能认定已校准。",
+    "下层原230px平台的左右各51px岩边保留，中间128px改为初始承载的取宝落板。宝箱完整保留在(355,640)，底658与初始落板顶658一致。",
+    "自动下落的设计条件：先由奖励服务确认领取14金币成功，再撤销中间落板碰撞，保持开放到模块重置；不能只凭进入宝箱范围或见到箱子就掉落，不能先撤支撑导致领取失败。",
+    "取宝自动撤板不是原Module已实现行为；所需奖励提交→碰撞撤销绑定明确列为待实现。中间通道x291–419净宽128px，取宝后微调到x320，从底口下落离开。身体净空、完整领取/落下次序、动态门防夹、失误恢复、重试与重置全部UNKNOWN。"
+  ],
+  "requiredImplementationChanges": [
+    {
+      "id": "reward-commit-to-support-release",
+      "requirement": "Bind successful SimpleRoomReward transaction completion to disabling the central support collider; keep it open for that attempt and reset explicitly with the Module",
+      "status": "MISSING_RULE_OR_BINDING",
+      "technicalStatus": "UNKNOWN",
+      "existingSupport": "Existing reward service and door/platform collision Cells can be reused; source Module contains no verified automatic reward-triggered release"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        355,
+        740
+      ],
+      "to": [
+        320,
+        838
+      ]
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        355,
+        415
+      ],
+      "to": [
+        410,
+        245
+      ],
+      "label": "击铃，打开脚下上桥",
+      "labelPosition": [
+        380,
+        330
+      ],
+      "recoil": [
+        [
+          350,
+          430
+        ],
+        [
+          330,
+          475
+        ]
+      ]
+    }
+  ],
+  "designVersion": "sha256:db852c43535585c6f055669a7e702580a8abdd3aebd8471597606445c3bca4af"
+}
