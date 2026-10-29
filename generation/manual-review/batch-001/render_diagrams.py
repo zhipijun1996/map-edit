@@ -110,10 +110,10 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
   parts.append(f'<polyline data-source-action-order="true" points="{points}" stroke="#3b79c9" stroke-width="2.5" stroke-dasharray="7 6" fill="none" marker-end="url(#arrow)"/>')
  for o in doc['objects']:
   if o['type']=='bell':
-   for target in o.get('targetIds',[o.get('targetId')]):
+   for target in o.get('diagramTargetIds',o.get('targetIds',[o.get('targetId')])):
     gate=next((g for g in doc['objects'] if g['id']==target and g['type'] in ('gate','hazard','platform')),None)
     if gate:
-     target_y=o['y']+o['h']/2 if gate['type']=='gate' else gate['y']+gate['h']/2
+     target_y=gate['y']+gate['h']/2 if o.get('diagramLinkToCenter') else o['y']+o['h']/2 if gate['type']=='gate' else gate['y']+gate['h']/2
      parts.append(f'<path d="M{X(o["x"]+o["w"]/2)} {Y(o["y"]+o["h"]/2)}L{X(gate["x"]+gate["w"]/2)} {Y(target_y)}" stroke="#ad8a35" stroke-width="1.5" stroke-dasharray="4 5"/>')
    cx,cy=X(o['x']+o['w']/2),Y(o['y']+o['h']/2);parts.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="#dfbc51" stroke="#9d7a29" stroke-width="2"/>');text(cx,cy-18,o.get('diagramLabel',bells[o['id']]),19,anchor='middle')
  for o in reward:
