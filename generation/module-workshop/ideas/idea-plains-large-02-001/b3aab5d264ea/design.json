@@ -1,0 +1,844 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-large-02-001",
+  "reviewId": "LG02",
+  "title": "弹丸跑长路：击炮起跳，在开锁时刻穿过内墙",
+  "summary": "重设计 · 10×7 Block · 单口奖励内室 · 实体封闭外缘 / 技术待验",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 1280,
+    "h": 896
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 5,
+      "position": [
+        0,
+        704
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "entry",
+      "stagingPosition": [
+        64,
+        704
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "roof",
+      "type": "terrain",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 32
+    },
+    {
+      "id": "floor",
+      "type": "terrain",
+      "x": 0,
+      "y": 864,
+      "w": 1280,
+      "h": 32
+    },
+    {
+      "id": "right-shell",
+      "type": "terrain",
+      "x": 1248,
+      "y": 32,
+      "w": 32,
+      "h": 832
+    },
+    {
+      "id": "left-upper",
+      "type": "terrain",
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 640
+    },
+    {
+      "id": "left-lower",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 32,
+      "h": 128
+    },
+    {
+      "id": "entry",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 160,
+      "h": 32
+    },
+    {
+      "id": "vault-floor",
+      "type": "terrain",
+      "x": 1056,
+      "y": 352,
+      "w": 192,
+      "h": 512
+    },
+    {
+      "id": "treasure",
+      "type": "reward",
+      "x": 1160,
+      "y": 328,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "实体内室中的宝箱"
+    },
+    {
+      "id": "relay-wall1-upper",
+      "type": "terrain",
+      "x": 512,
+      "y": 32,
+      "w": 32,
+      "h": 448
+    },
+    {
+      "id": "relay-wall1-lower",
+      "type": "terrain",
+      "x": 512,
+      "y": 672,
+      "w": 32,
+      "h": 192
+    },
+    {
+      "id": "限时锁1",
+      "type": "gate",
+      "x": 512,
+      "y": 480,
+      "w": 32,
+      "h": 192,
+      "mechanics": {
+        "kind": "timed_gate",
+        "initialState": "CLOSED",
+        "openSeconds": "SOLVE_FULL_BODY_AND_PROJECTILE_TIMING"
+      },
+      "diagramLabel": "限时锁1"
+    },
+    {
+      "id": "relay-wall2-upper",
+      "type": "terrain",
+      "x": 1024,
+      "y": 32,
+      "w": 32,
+      "h": 128
+    },
+    {
+      "id": "relay-wall2-lower",
+      "type": "terrain",
+      "x": 1024,
+      "y": 352,
+      "w": 32,
+      "h": 512
+    },
+    {
+      "id": "限时锁2",
+      "type": "gate",
+      "x": 1024,
+      "y": 160,
+      "w": 32,
+      "h": 192,
+      "mechanics": {
+        "kind": "timed_gate",
+        "initialState": "CLOSED",
+        "openSeconds": "SOLVE_FULL_BODY_AND_PROJECTILE_TIMING"
+      },
+      "diagramLabel": "限时锁2"
+    },
+    {
+      "id": "duct-left1",
+      "type": "terrain",
+      "x": 224,
+      "y": 64,
+      "w": 20,
+      "h": 624
+    },
+    {
+      "id": "duct-right1",
+      "type": "terrain",
+      "x": 268,
+      "y": 64,
+      "w": 20,
+      "h": 624
+    },
+    {
+      "id": "duct-cap1",
+      "type": "terrain",
+      "x": 224,
+      "y": 48,
+      "w": 64,
+      "h": 16
+    },
+    {
+      "id": "turret1",
+      "type": "hitTurret",
+      "x": 240,
+      "y": 672,
+      "w": 32,
+      "h": 32,
+      "diagramLabel": "受击向上发射 · 缺Cell",
+      "diagramLabelPosition": [
+        196,
+        736
+      ],
+      "mechanics": {
+        "fixedDirection": [
+          0,
+          -1
+        ],
+        "kind": "PROPOSED_HIT_RELAY",
+        "projectileConsumedOnHit": true,
+        "status": "MISSING_CELL"
+      }
+    },
+    {
+      "id": "sealed-receiver1",
+      "type": "bell",
+      "x": 246,
+      "y": 86,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "封闭弹道接收器",
+      "targetIds": [
+        "限时锁1"
+      ],
+      "diagramLinkToCenter": true,
+      "mechanics": {
+        "requiredProjectileSource": "turret1",
+        "status": "MISSING_SOURCE_FILTER_BINDING"
+      }
+    },
+    {
+      "id": "launch1",
+      "type": "platform",
+      "x": 288,
+      "y": 736,
+      "w": 112,
+      "h": 12,
+      "label": "击炮起跳岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "return-access1",
+      "type": "bell",
+      "x": 566,
+      "y": 614,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "远侧重开",
+      "targetIds": [
+        "限时锁1"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "duct-left2",
+      "type": "terrain",
+      "x": 800,
+      "y": 64,
+      "w": 20,
+      "h": 368
+    },
+    {
+      "id": "duct-right2",
+      "type": "terrain",
+      "x": 844,
+      "y": 64,
+      "w": 20,
+      "h": 368
+    },
+    {
+      "id": "duct-cap2",
+      "type": "terrain",
+      "x": 800,
+      "y": 48,
+      "w": 64,
+      "h": 16
+    },
+    {
+      "id": "turret2",
+      "type": "hitTurret",
+      "x": 816,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "diagramLabel": "受击向上发射 · 缺Cell",
+      "diagramLabelPosition": [
+        772,
+        480
+      ],
+      "mechanics": {
+        "fixedDirection": [
+          0,
+          -1
+        ],
+        "kind": "PROPOSED_HIT_RELAY",
+        "projectileConsumedOnHit": true,
+        "status": "MISSING_CELL"
+      }
+    },
+    {
+      "id": "sealed-receiver2",
+      "type": "bell",
+      "x": 822,
+      "y": 86,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "封闭弹道接收器",
+      "targetIds": [
+        "限时锁2"
+      ],
+      "diagramLinkToCenter": true,
+      "mechanics": {
+        "requiredProjectileSource": "turret2",
+        "status": "MISSING_SOURCE_FILTER_BINDING"
+      }
+    },
+    {
+      "id": "launch2",
+      "type": "platform",
+      "x": 864,
+      "y": 480,
+      "w": 112,
+      "h": 12,
+      "label": "击炮起跳岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "return-access2",
+      "type": "bell",
+      "x": 1142,
+      "y": 294,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "远侧重开",
+      "targetIds": [
+        "限时锁2"
+      ],
+      "diagramLinkToCenter": true
+    },
+    {
+      "id": "catch1",
+      "type": "platform",
+      "x": 576,
+      "y": 608,
+      "w": 112,
+      "h": 12,
+      "label": "第一锁后落地",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rise",
+      "type": "platform",
+      "x": 704,
+      "y": 512,
+      "w": 96,
+      "h": 12,
+      "label": "第二段准备",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "catch2",
+      "type": "platform",
+      "x": 1088,
+      "y": 320,
+      "w": 128,
+      "h": 12,
+      "label": "入库接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "route-L-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 896,
+      "points": [
+        {
+          "x": 0,
+          "y": 704
+        },
+        {
+          "x": 112,
+          "y": 704
+        },
+        {
+          "x": 320,
+          "y": 704
+        },
+        {
+          "x": 360,
+          "y": 616
+        },
+        {
+          "x": 480,
+          "y": 568
+        },
+        {
+          "x": 592,
+          "y": 576
+        },
+        {
+          "x": 752,
+          "y": 480
+        },
+        {
+          "x": 896,
+          "y": 448
+        },
+        {
+          "x": 936,
+          "y": 360
+        },
+        {
+          "x": 1000,
+          "y": 280
+        },
+        {
+          "x": 1120,
+          "y": 288
+        },
+        {
+          "x": 1176,
+          "y": 320
+        },
+        {
+          "x": 1120,
+          "y": 288
+        },
+        {
+          "x": 1000,
+          "y": 280
+        },
+        {
+          "x": 936,
+          "y": 360
+        },
+        {
+          "x": 896,
+          "y": 448
+        },
+        {
+          "x": 752,
+          "y": 480
+        },
+        {
+          "x": 592,
+          "y": 576
+        },
+        {
+          "x": 480,
+          "y": 568
+        },
+        {
+          "x": 360,
+          "y": 616
+        },
+        {
+          "x": 320,
+          "y": 704
+        },
+        {
+          "x": 112,
+          "y": 704
+        },
+        {
+          "x": 0,
+          "y": 704
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-L",
+      "from": "L",
+      "to": "L",
+      "role": "reward_return",
+      "pathObjectId": "route-L-L",
+      "strategy": "击中炮台产生固定方向机关弹，玩家反冲沿人体通道去内锁；两者到达时间会合。通过第一锁落地恢复，再执行第二段。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        0.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      },
+      "rewardContract": {
+        "objectId": "treasure",
+        "requireActualClaim": true,
+        "returnTo": "L",
+        "status": "UNKNOWN"
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "rewardClaimRequired": true
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "深绿实体岩层阻挡身体/弹丸　青线去程　橙线回程　图示不是物理认证",
+  "reviewInstructions": [
+    "① 紫线：炮台发射的机关弹走封闭井；青线：人物走另一路去实体锁。",
+    "② 目标铃封在井内，仅接受对应炮台弹，不能由玩家直接射铃省略炮台。",
+    "③ 第一段落稳后第二段更高；回程各门远侧可重开。",
+    "④ 炮台与弹丸资格明确缺Cell；时长须保留可读的多帧窗口。"
+  ],
+  "designNotes": [
+    "观察：炮台命中反馈、封闭管道内可视化弹丸位置、内锁及门后岸。决定：何时起跳击炮，何时加速或刹车到开门窗。",
+    "炮台完整堵住弹道井底，井侧/顶是岩体；最终接收器只接受指定炮台生成的弹，玩家直接射击不解锁。这个资格限制必须显式实现/可视化，不能伪称现有机制。",
+    "奖励：第二实体锁后的封闭宝库；失败：没赶上停在本侧重试，不把玩家困在关闭门中。回程每道远侧有可见重开铃，近侧不能隔墙射到它。",
+    "反例：站起跳岸提前击炮再悠闲过门、直接打接收器、反向访问铃从近侧可射、弹丸反复触发、穿墙/箱互动隔墙领取。若时机无关则退回重设，不靠缩成一帧补救。",
+    "缺口：受击定向炮台、机关弹资格/速度/寿命、单次事务均缺Cell或接线；不用假炮台替换普通铃。",
+    "缺口：长路时间不是原生玩家弹丸速度；机关弹速度与锁开放时间要联合求解，禁止预设现有弹丸能飞完整管道。",
+    "缺口：弹道井口封堵/弹丸出生点净空、防夹、短时锁两侧可恢复与操控容错UNKNOWN。",
+    "所有闭合/开门/运动相位均须完整身体防夹；不以伤害当封墙。",
+    "箱体与右外缘间有实体岩墙；只有最后隔墙洞口能进入内室。此为静态拓扑目标，运行碰撞/邻接高速穿入尚未认证。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-large-02-001/source-analysis-r2.json",
+  "technicalStatus": "UNKNOWN",
+  "boundaryIntent": {
+    "singleOpening": [
+      0,
+      672,
+      32,
+      64
+    ],
+    "solidBoundaryObjectIds": [
+      "roof",
+      "floor",
+      "right-shell",
+      "left-upper",
+      "left-lower"
+    ],
+    "purpose": "Requested reward-room enclosure; blocks entry from neighboring modules on other sides.",
+    "certification": "UNKNOWN"
+  },
+  "designTraces": [
+    {
+      "points": [
+        [
+          256,
+          672
+        ],
+        [
+          256,
+          96
+        ]
+      ],
+      "color": "#9359b5",
+      "label": "机关弹丸上行",
+      "labelPosition": [
+        328,
+        176
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          832,
+          416
+        ],
+        [
+          832,
+          96
+        ]
+      ],
+      "color": "#9359b5",
+      "label": "机关弹丸上行",
+      "labelPosition": [
+        904,
+        176
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          0,
+          704
+        ],
+        [
+          112,
+          704
+        ],
+        [
+          320,
+          704
+        ],
+        [
+          360,
+          616
+        ],
+        [
+          480,
+          568
+        ],
+        [
+          592,
+          576
+        ],
+        [
+          752,
+          480
+        ],
+        [
+          896,
+          448
+        ],
+        [
+          936,
+          360
+        ],
+        [
+          1000,
+          280
+        ],
+        [
+          1120,
+          288
+        ],
+        [
+          1176,
+          320
+        ]
+      ],
+      "color": "#157f84",
+      "label": "去程",
+      "labelPosition": [
+        120,
+        800
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          1176,
+          320
+        ],
+        [
+          1120,
+          288
+        ],
+        [
+          1000,
+          280
+        ],
+        [
+          936,
+          360
+        ],
+        [
+          896,
+          448
+        ],
+        [
+          752,
+          480
+        ],
+        [
+          592,
+          576
+        ],
+        [
+          480,
+          568
+        ],
+        [
+          360,
+          616
+        ],
+        [
+          320,
+          704
+        ],
+        [
+          112,
+          704
+        ],
+        [
+          0,
+          704
+        ]
+      ],
+      "color": "#d28b25",
+      "label": "取宝后原口返回",
+      "labelPosition": [
+        680,
+        824
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        360,
+        616
+      ],
+      "to": [
+        256,
+        688
+      ],
+      "recoil": [
+        [
+          360,
+          616
+        ],
+        [
+          472,
+          536
+        ]
+      ],
+      "label": "击炮＋反冲 1",
+      "labelPosition": [
+        392,
+        536
+      ]
+    },
+    {
+      "from": [
+        936,
+        360
+      ],
+      "to": [
+        832,
+        432
+      ],
+      "recoil": [
+        [
+          936,
+          360
+        ],
+        [
+          1048,
+          280
+        ]
+      ],
+      "label": "击炮＋反冲 2",
+      "labelPosition": [
+        968,
+        280
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        360,
+        616
+      ],
+      "label": "1",
+      "labelPosition": [
+        360,
+        588
+      ]
+    },
+    {
+      "position": [
+        936,
+        360
+      ],
+      "label": "2",
+      "labelPosition": [
+        936,
+        332
+      ]
+    }
+  ],
+  "gaps": [
+    "受击定向炮台、机关弹资格/速度/寿命、单次事务均缺Cell或接线；不用假炮台替换普通铃。",
+    "长路时间不是原生玩家弹丸速度；机关弹速度与锁开放时间要联合求解，禁止预设现有弹丸能飞完整管道。",
+    "弹道井口封堵/弹丸出生点净空、防夹、短时锁两侧可恢复与操控容错UNKNOWN。"
+  ],
+  "designVersion": "sha256:b3aab5d264ea6ce8187a51dd75e6cb649a1cc2011948d375c1b796d0b972ec0a"
+}
