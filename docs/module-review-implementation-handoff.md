@@ -27,4 +27,4 @@ git worktree add -b content/approved-designs-batch001 ../map-edit-approved-imple
 
 可给新Codex会话的提示词：
 
-> 你负责已确认Module设计的实现。先读取最新main的AGENTS.md、docs/module-review-implementation-handoff.md和feedback/manual-review/implementation-handoff-v1.json。在独立分支/worktree仅实现清单中01–07、10、12、17、23、25、27、28、30、32、34、35、36、37、39、41、42、50、51、52、55、57、61、62、115、116–120、122、123、125、127、130、132、133、134、135、138、140、146、147、148、150、154、156、157、159、160、161、162、163、165、166、167、169、171、173、174、175、176、179、191、193、194、196、197、198、200、202、204、206、220、223、225及idea-orbit-choice-001的精确确认版本，补全真实参数，复用现有Godot Harness验证并提交可复现证据。不改图文设计网页，不处理清单外的Module，不恢复旧批量任务；发现设计冲突先记录反馈，不悄悄改玩法。
+> 你负责已确认Module设计的实现。先读取最新main的AGENTS.md、docs/module-review-implementation-handoff.md和feedback/manual-review/implementation-handoff-v1.json。在独立分支/worktree仅实现交接JSON列出的全部精确确认版本（当前85项，包括环岛及同一人工创意的两怪/三怪两个规格），以JSON中的moduleId、designFile、designVersion和SHA为准，不用本段历史编号推断范围。补全真实参数，复用现有Godot Harness验证并提交可复现证据。不改图文设计网页，不处理清单外的Module，不恢复旧批量任务；发现设计冲突先记录反馈，不悄悄改玩法。
