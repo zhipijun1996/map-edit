@@ -102,3 +102,5 @@ HQ第三轮：原话回执`feedback/module-workshop/review-receipts/hq-feedback-
 HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.json`绑定旧699e58图稿的修改意见。新版删除全宽门，采用出口可穿台上下表面尖刺初始伸出、目标铃命中后同组收回，平台本体始终保留；当前按一次收回/本场景不重伸画图，未获人工保留。竖板沿用只挡弹不承载。危险初态T尚未认证安全接岸，邻接模块带速/穿伤/绕刺和上侧访问待验；105项交接不变。
 
 精确接口第二轮：`feedback/module-workshop/review-receipts/spec02-request-v1.json`逐字保存十份Block/Port需求与“h09 ok了”。HQ09最后dba700刺台版保留后106项交接/34项待实现。新`idea-spec02-*`十图仅为待审设计，尺寸/Port精确复用原话；S11六向、S12十二向、S13的L→L自返回，总33条目标全部UNKNOWN。来源、家族复用与缺Cell见`feedback/module-workshop/briefs/exact-ports-round02-v1.json`。与旧接口同形不继承旧审批，旧废弃S13不复活；本批十个规格不是十个新玩法家族。
+
+精确接口首评：回执`feedback/module-workshop/review-receipts/spec02-feedback-001.json`冻结三项修改与“其他通过”。S02/07/08/10/11/12/13按原快照保留，113项交接/41项待实现；已保留七图不重绘。S04只加两空怪；S06移除射手掩体，改离台绕射台下随动铃并追接；S09移除静态锯口，改互补井盖与错侧安全段。三份新版仅待审，尺寸/Port不改。随台接收体及井盖危险面同步绑定仍缺，所有反例/恢复/回程与物理均UNKNOWN。

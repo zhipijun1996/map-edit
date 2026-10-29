@@ -1,0 +1,546 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-spec02-s06-001",
+  "reviewId": "R2-S06",
+  "title": "S06 · 离台绕射，让上升台追上你",
+  "summary": "精确规格 S06 · 4×6 Block · 台下挂铃／离台启动／反冲追台 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 512,
+    "h": 768
+  },
+  "ports": [
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 0,
+      "position": [
+        64.0,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        64,
+        12
+      ],
+      "requestedBlockPosition": [
+        0.5,
+        0.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "LEFT",
+          "targetPosition": [
+            0,
+            64
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s06-T-top_left"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "B",
+      "face": "BOTTOM",
+      "index": 3,
+      "position": [
+        448.0,
+        768
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        1
+      ],
+      "diagramLabel": "B",
+      "supportObjectId": "bottom",
+      "stagingPosition": [
+        448,
+        704
+      ],
+      "requestedBlockPosition": [
+        3.5,
+        6.0
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "本轮只请求精确原口，换边未认证。",
+          "targetFace": "RIGHT",
+          "targetPosition": [
+            512,
+            704
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "spec02-s06-B-bottom_right"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 16,
+      "y": 32,
+      "w": 96,
+      "h": 12,
+      "label": "上口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "bottom",
+      "type": "platform",
+      "x": 400,
+      "y": 736,
+      "w": 112,
+      "h": 12,
+      "label": "下口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "retry",
+      "type": "platform",
+      "x": 32,
+      "y": 416,
+      "w": 96,
+      "h": 12,
+      "label": "中途失误接回 / 重追",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 112,
+      "y": 160,
+      "w": 304,
+      "h": 480,
+      "points": [
+        {
+          "x": 416,
+          "y": 640
+        },
+        {
+          "x": 112,
+          "y": 160
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          416,
+          640
+        ],
+        "finish": [
+          112,
+          160
+        ],
+        "travel_duration": 3.6,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.05,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "platform",
+      "x": 360.0,
+      "y": 630.0,
+      "w": 112,
+      "h": 20,
+      "trackId": "rail-P",
+      "label": "P 停台示例",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "under-bell",
+      "type": "bell",
+      "x": 406,
+      "y": 694,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "台下挂铃 · 随P移动",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true,
+      "mechanics": {
+        "kind": "PROPOSED_RIGID_MOUNTED_MOTION_BELL",
+        "mountTo": "P",
+        "offset": [
+          0,
+          64
+        ],
+        "control": "Native single-platform start/pause, preserve clock",
+        "status": "MISSING_BINDING",
+        "airborneOnly": false
+      },
+      "mountTo": "P",
+      "mountOffset": [
+        0,
+        64
+      ]
+    },
+    {
+      "id": "route-B-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 768,
+      "points": [
+        {
+          "x": 448,
+          "y": 768
+        },
+        {
+          "x": 448,
+          "y": 704
+        },
+        {
+          "x": 416,
+          "y": 608
+        },
+        {
+          "x": 288,
+          "y": 600
+        },
+        {
+          "x": 320,
+          "y": 472
+        },
+        {
+          "x": 224,
+          "y": 304
+        },
+        {
+          "x": 112,
+          "y": 128
+        },
+        {
+          "x": 64,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-T-B",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 768,
+      "points": [
+        {
+          "x": 64,
+          "y": 0
+        },
+        {
+          "x": 112,
+          "y": 128
+        },
+        {
+          "x": 224,
+          "y": 304
+        },
+        {
+          "x": 80,
+          "y": 384
+        },
+        {
+          "x": 320,
+          "y": 472
+        },
+        {
+          "x": 416,
+          "y": 608
+        },
+        {
+          "x": 448,
+          "y": 704
+        },
+        {
+          "x": 448,
+          "y": 768
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "B-to-T",
+      "from": "B",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-B-T",
+      "strategy": "先登暂停台，离开台侧绕射下挂铃，借同枪反冲追上启动中的台，再主动离台登顶。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -3.0,
+        -6.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-B",
+      "from": "T",
+      "to": "B",
+      "role": "return",
+      "pathObjectId": "route-T-B",
+      "strategy": "上侧接台后从侧面访问同一随台铃启停下行，必要时用中途接回点重追；不是静候复位。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        3.0,
+        6.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "T",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "T",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "绿＝固定地貌／可穿岸　紫＝井盖或互补支撑　红＝已伸出地刺／原生怪　虚框＝另一相位/状态",
+  "reviewInstructions": [
+    "① 台下的铃随同一实体台移动；站在台上直射会先碰台，红叉为示意。",
+    "② 先向侧面跃离，绕台下击铃；同枪反冲与被启动的左上升台形成追接。",
+    "③ 不加“仅空中可射”限制；站边提前射铃如果仍能轻松坐完，是必须保留的反例。",
+    "④ 虚框是同台轨道端点；随台接收绑定、真实追接/回程均待实现验证。"
+  ],
+  "designNotes": [
+    "observation：看实体台下的随台铃、左上轨迹以及自己离台后的追赶空间。",
+    "decision：先离开遮住弹道的实体台，从侧下方打到随台铃，再决定追上台还是落中途岸重整。",
+    "causality：载台本体遮挡站台直射；离台绕射同一次行动启动载台并把人物反冲向左上，目标落点随之离开原位。只用真实启停与碰撞，不加仅空中可触发条件。",
+    "cells：原生实体斜台与启停；刚性挂在台下64px的风铃（缺绑定）；中途功能接回台；上下可穿岸",
+    "abilities：jump；shot_recoil",
+    "resources：真实枪次、冷却、载台惯性和落地恢复；打铃不回枪，不再依赖射手遮弹。",
+    "terrain：严格4×6、T(64,0)/B(448,768)不变；台中心(416,640)到(112,160)，下挂铃跟随，移除旧射手与掩体布局。",
+    "reward：主动追台抵达上接模块，不加宝箱。",
+    "recovery：漏追先争取中途台，重新观察随台铃的实际位置再启停/追接；若只能死等长周期应返修。底口提前启动后能否追回必须测试。",
+    "directions：B→T需先上台再离台绕射追接；T→B从相反高度接台并控制下行，逐方向UNKNOWN。",
+    "cheapSolutions：站台枪口探出边沿不离台就能安全射铃然后等全程；底岸提前开台仍能毫无难度坐上去；随台铃扫到身体成为额外落脚点；枪从平台边缘穿模；一路跟车无需主动追接；中途台变成静态直达捷径",
+    "difference：取消原移动掩体/射手关系，改为承载面自身遮住启动铃：必须先处理如何失去支撑再让它回来接人。若站边一枪便能等全程，设计仍被反例推翻，不能宣布已消除。",
+    "Cell缺口：需要风铃真实接收体/美术刚性跟随载台，挂点在台下64px且不可当身体支撑；原native ShotLatch固定世界位置不能直接冒充。；现有玩家弹全碰撞掩码/原生台layer1支持遮挡假设；枪口出边沿、完整弹丸扫掠与站台先射的廉价解仍UNKNOWN。；启停原时钟/真实承载惯性继续复用；上升速度、离台容错/瞄准扰动、漏追恢复和回程未物理求解，不要求固定极窄按键序列。",
+    "本次只改图文：新版本尚未获人工保留，旧反馈不代表新图已通过。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-spec02-s06-001/source-analysis-feedback-001.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 56.0,
+      "y": 150.0,
+      "w": 112,
+      "h": 20,
+      "label": "P 轨道端点"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        380,
+        610
+      ],
+      "to": [
+        332,
+        536
+      ],
+      "role": "platform_starts_up_left"
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        288,
+        600
+      ],
+      "label": "先跃到台侧外",
+      "labelPosition": [
+        210,
+        564
+      ]
+    }
+  ],
+  "designTraces": [
+    {
+      "points": [
+        [
+          416,
+          608
+        ],
+        [
+          416,
+          630
+        ]
+      ],
+      "color": "#c75049",
+      "label": "站台直射被实体挡住",
+      "labelPosition": [
+        350,
+        592
+      ],
+      "dashed": true,
+      "endStop": true
+    }
+  ],
+  "designVersion": "sha256:5831f430e8986857d524f8a89d86dfc93410befd38c8b26bd22fe4abaea789d4",
+  "shotGuides": [
+    {
+      "from": [
+        288,
+        600
+      ],
+      "to": [
+        416,
+        704
+      ],
+      "recoil": [
+        [
+          288,
+          600
+        ],
+        [
+          224,
+          548
+        ]
+      ],
+      "label": "绕台下射铃 → 反冲左上／载台左上启动",
+      "labelPosition": [
+        176,
+        688
+      ]
+    }
+  ]
+}
