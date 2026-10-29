@@ -1,0 +1,932 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "sourceType": "human_idea",
+  "verbatim": "1×2，2×1，2×2的转角模块，内部两个平台，左上port互联，左下port互联。共6个",
+  "interpretation": {
+    "observation": "先读尺寸、A左口与B上下口、两块可穿平台的高差和空隙；没有计时机关。",
+    "decision": "从左口接岸后，选择短跳、反冲补高或向下穿台；从另一口进入时重新判断落点。",
+    "causality": "跳跃提供初始高度，向下或斜下射击的反冲可补上升/横移；可穿平台允许从下方穿入和主动下穿。这里不规定必须开枪或踩遍两台。",
+    "cells": [
+      "原生静态可穿平台×2（同时承担端口接岸）",
+      "两个合法ONE_WAY_PLATFORM端口"
+    ],
+    "abilities": [
+      "jump",
+      "shot_recoil（高差较大规格的设计预算；是否为最低必要条件待验）"
+    ],
+    "resources": "只用真实跳跃/基础空中枪次，落台后按原机制恢复；无怪物退款、二段跳、钩索或免费回弹。",
+    "terrain": "宽×高依次1×2、2×1、2×2。每个尺寸做左↔上与左↔下，共6个独立审核规格；每份仅两块可穿平台，无外墙、额外支撑或恢复地板。",
+    "reward": "主要收益是转角连接到另一模块。本套不额外放宝箱；也不为凑玩法增加机关和怪物。",
+    "recovery": "仍在下台覆盖范围时可落回并重试。偏出下台或非Port边界的失误不承诺安全接回；需验证接缝/封口/地图终止配置，不偷偷增加第三块安全台。",
+    "directions": "左上释左边Port↔顶边Port，左下释左边Port↔底边Port，并非一个角点Port。每份A→B/B→A分别声明为待验目标；上下行操作不互相倒推认证。",
+    "cheapSolutions": [
+      "普通跳就能通过时接受，不强迫开枪",
+      "直接从A到B而跳过一台可接受",
+      "从邻模块带速度或高度进入须按接缝条件认证",
+      "经未声明边界离开不是新增合法Route，必须检查边界处理"
+    ],
+    "difference": "基础转角连接件，同一用途家族的六个尺寸/接口适配，不称六种新玩法。对照既有135微型上升及双口高差件；与同接口同尺寸既有件应在实现前去重。",
+    "解释": "尺寸统一按宽×高；左口放在相对上下口较远的一行，两个平台本身就是两端接岸。六个都是方案图，不是自动换边的认证配置。",
+    "Cell支持缺口": "普通可穿平台已有真实Cell；目前未发现必须新增的Cell。仍缺这六个几何的完整身体净空、双向动作、最低能力、接缝与未接Port封口证据。",
+    "规格差异": "左↔上：1×2和2×2台面高差192px，2×1高差64px。左↔下：1×2和2×2高差128px，2×1同高错开；底口双向使用可穿平台，不能用AIR INPUT。"
+  },
+  "sourceRefs": [
+    {
+      "path": "MAP_FOUNDATION.md",
+      "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module_definition.gd",
+      "sha256": "7ae4bab73990c01f5cfc1d2e06a54e635dbaa71a2951b912b7d46d2eee1cbb96"
+    },
+    {
+      "path": "library/source/scripts/generation/platforming_module.gd",
+      "sha256": "705af1d3d9354d8bf4ba86ea3b1d1b4eea33ae414019dc122c32e0aed1c08a30"
+    },
+    {
+      "path": "library/source/game-import/config/player_tuning.json",
+      "sha256": "65abb4abffd122f79bc4718a94e6db1bbe19a8e2c5dcdac314aa10cd9698114c"
+    }
+  ],
+  "method": "Read tracked native platform definition and collision builder. Only pixel/Block/Port/static bounds checks; no Motor, trajectory solver, factory or Godot run.",
+  "supportedRules": [
+    "platforms are Rect2[]; one_way_platform_indices selects their one-way collision.",
+    "Native CollisionShape2D.one_way_collision is set per selected platform.",
+    "Two authored platforms can also be the two port supports; no separate support Cell is required."
+  ],
+  "sourceBindingLimit": "Tracked source proves Cell expressibility only. Legacy PlatformingModuleDefinition port/anchor validation is not the Foundation boundary contract; implementation must use the current existing compiler/adaptor and real Harness, never shift canonical boundary Ports inward to satisfy a legacy check.",
+  "deduplication": {
+    "family": "basic_two_platform_corner_connector",
+    "specifications": 6,
+    "newGameplayFamilies": 0,
+    "compared": [
+      "135 game-plains-micro-rise",
+      "138 game-plains-perch-double",
+      "130 game-plains-high-perches"
+    ],
+    "finding": "Purpose and geometry adaptations overlap existing simple rise/drop connectors. Retain exact human-requested six interface specs for review; compare actual shape/ports before implementing, reuse canonical native archive if equivalent; no full-library uniqueness claim."
+  },
+  "gaps": [
+    "已有两块静态可穿平台可表达几何；尚无这6份图稿的运行参数或真实模块。",
+    "两向Route、完整角色/头部净空、下穿时机、最低资源与接缝均UNKNOWN。",
+    "未启用Port封口、非Port边界与镜像/四角换边未认证；不供在线匹配。"
+  ],
+  "physicsRun": false,
+  "technicalStatus": "UNKNOWN",
+  "specifications": [
+    {
+      "key": "left-top-1x2",
+      "label": "1×2 · 左↔上",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 256
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            204
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "BOTTOM",
+              "targetPosition": [
+                64,
+                256
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-1x2-relocate-A-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "TOP",
+          "normal": [
+            0,
+            -1
+          ],
+          "position": [
+            64,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            64,
+            12
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "LEFT",
+              "targetPosition": [
+                0,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-1x2-relocate-B-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                128,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-1x2-relocate-B-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 224,
+          "w": 128,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 40,
+          "y": 32,
+          "w": 88,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 192,
+      "designVersion": "sha256:1d5fdf9e4b2aa8ce9ca7146d75f9caac79965dd83034131295ec244949809469",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "key": "left-bottom-1x2",
+      "label": "1×2 · 左↔下",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 256
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            64
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            76
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                64,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-1x2-relocate-A-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "normal": [
+            0,
+            1
+          ],
+          "position": [
+            64,
+            256
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            64,
+            204
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "LEFT",
+              "targetPosition": [
+                0,
+                192
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-1x2-relocate-B-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                128,
+                192
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-1x2-relocate-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 96,
+          "w": 88,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 0,
+          "y": 224,
+          "w": 128,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 128,
+      "designVersion": "sha256:8c5c858793977891842269f89ad480b9ea5d05f441571b44433e65f969a79159",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "key": "left-top-2x1",
+      "label": "2×1 · 左↔上",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 128
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            64
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            76
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                64,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-2x1-relocate-A-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "BOTTOM",
+              "targetPosition": [
+                64,
+                128
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-2x1-relocate-A-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "TOP",
+          "normal": [
+            0,
+            -1
+          ],
+          "position": [
+            192,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            192,
+            12
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                256,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-2x1-relocate-B-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 96,
+          "w": 104,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 144,
+          "y": 32,
+          "w": 112,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 64,
+      "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "key": "left-bottom-2x1",
+      "label": "2×1 · 左↔下",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 128
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            64
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            76
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                64,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-2x1-relocate-A-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "BOTTOM",
+              "targetPosition": [
+                64,
+                128
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-2x1-relocate-A-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "normal": [
+            0,
+            1
+          ],
+          "position": [
+            192,
+            128
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            192,
+            76
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                256,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-2x1-relocate-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 96,
+          "w": 104,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 144,
+          "y": 96,
+          "w": 112,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 0,
+      "designVersion": "sha256:235c8fa4afc3067b4d23de44d630ded9017b548890d676da6ea74358f16b823d",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "key": "left-top-2x2",
+      "label": "2×2 · 左↔上",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            204
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "BOTTOM",
+              "targetPosition": [
+                64,
+                256
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-2x2-relocate-A-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "TOP",
+          "normal": [
+            0,
+            -1
+          ],
+          "position": [
+            192,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            192,
+            12
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                256,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-top-2x2-relocate-B-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 224,
+          "w": 128,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 144,
+          "y": 32,
+          "w": 112,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 192,
+      "designVersion": "sha256:fd98f5f5678200e9c7c1f1d04d359cf3bb06fb42c5d7945dc3450207079d96fe",
+      "technicalStatus": "UNKNOWN"
+    },
+    {
+      "key": "left-bottom-2x2",
+      "label": "2×2 · 左↔下",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "ports": [
+        {
+          "id": "A",
+          "face": "LEFT",
+          "normal": [
+            -1,
+            0
+          ],
+          "position": [
+            0,
+            64
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-A",
+          "stagingPosition": [
+            48,
+            76
+          ],
+          "diagramLabel": "A",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                64,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-2x2-relocate-A-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "normal": [
+            0,
+            1
+          ],
+          "position": [
+            192,
+            256
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "supportObjectId": "platform-B",
+          "stagingPosition": [
+            192,
+            204
+          ],
+          "diagramLabel": "B",
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "不位于该角Block的外侧边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "同角相邻边可作后续适配提案，真实支撑/两向/接缝未验证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                256,
+                192
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "left-bottom-2x2-relocate-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "platforms": [
+        {
+          "id": "platform-A",
+          "type": "platform",
+          "x": 0,
+          "y": 96,
+          "w": 104,
+          "h": 12,
+          "label": "P1 · 可穿接岸",
+          "designCollision": "one_way"
+        },
+        {
+          "id": "platform-B",
+          "type": "platform",
+          "x": 144,
+          "y": 224,
+          "w": 112,
+          "h": 12,
+          "label": "P2 · 可穿接岸",
+          "designCollision": "one_way"
+        }
+      ],
+      "surfaceHeightDifference": 128,
+      "designVersion": "sha256:33e8e715ec5ff584ae239d525d18a18d30de8758dc12b2cd63ceacedd388e7bb",
+      "technicalStatus": "UNKNOWN"
+    }
+  ]
+}
