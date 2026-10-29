@@ -15,6 +15,8 @@ def run(commit):
   paths +=[native_folder/n for n in ['module.tscn','compiled-content.json','cases.json','load-evidence/index.json']]
   paths +=sorted((native_folder/'load-evidence').glob('case-*/receipt.json'))
  archive=core.REPO/'pcg/archives/approved-revision059-implementation-v1';paths+=[archive/'manifest.json'];paths +=[archive/p['file']for p in core.read(archive/'manifest.json')['parts']]
+ paths +=sorted((core.REPO/'pcg/migration/foundation-v1/holdout-pools').glob('approved-revision059-v1-*/*.json'))
+ paths +=[OUT/'verification/counter-scope-regressions.json',OUT/'verification/rejected-native-film.json',OUT/'videos/native-hq02-B-to-T-v2/native.avi']
  paths=list(dict.fromkeys(paths))
  def check(p):
   rel=core.relative(p);url='https://raw.githubusercontent.com/zhipijun1996/map-edit/'+commit+'/'+rel;expected=core.sha(p)
