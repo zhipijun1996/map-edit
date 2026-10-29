@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -231,6 +231,8 @@ def exterior_floor(case, port):
 
 
 def _vertical_inner_dock(case, port):
+    from .revision058_boundary_v1 import applies as revision_top
+    if revision_top(case,port):return list(port['stagingPosition'])
     from .ideas_boundary_v1 import applies as idea_top
     if idea_top(case,port):return list(port['stagingPosition'])
     x, y = port['position']; ny = port['normal'][1]
@@ -264,6 +266,8 @@ def seam_cases(case, doc):
                     repair_oneway_start(value,port,offset)
                     from .review_oneway_fixture_v2 import repair as repair_final_oneway_start
                     repair_final_oneway_start(value,port,offset)
+                    from .revision058_boundary_v1 import side_start
+                    side_start(value,port,offset)
                     from .review_oneway_fixture_v3 import repair as revision_oneway_start
                     revision_oneway_start(value,port,offset)
                     value['goal'] = [target-9, y-5, 18, 10]
@@ -285,6 +289,8 @@ def seam_cases(case, doc):
                 if idea_top(value,port):idea_local(value,port,direction,doc,offset)
                 from .revision053_boundary_v1 import local as revision_local
                 revision_local(value,port,direction,doc,offset)
+                from .revision058_boundary_v1 import local as new_local
+                new_local(value,port,direction,doc,offset)
                 value['module_sha256'] = module_hash(value)
                 fixtures.append(value)
     return fixtures
@@ -342,6 +348,9 @@ def crossing(case, raw):
                  if event.get('type')=='chest_claim'and event.get('accepted')}
         outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw)
     observation=observe(case,raw)
+    if observation is None:
+        from .revision058_top_observer_v2 import observe as observe_top
+        observation=observe_top(case,raw)
     stable=bool(raw.get('ok')) or bool(observation and observation['stableExit'])
     result=dict(passed=bool(stable and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
                 stableExit=stable, bodyPassedBothSides=inward and outward,
@@ -357,6 +366,9 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .revision058_boundary_v1 import exit as new_exit
+    special=new_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     from .revision053_boundary_v1 import exit as revision_exit
     special=revision_exit(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -423,6 +435,9 @@ def continuous_exit(case, doc):
 
 
 def continuous_entry(case, doc):
+    from .revision058_boundary_v1 import entry as new_entry
+    special=new_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     """Approach the actual canonical start from an explicit adjacent Module.
 
     This measures entry docking only. It never resets an actor mid-fixture or
@@ -553,6 +568,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=new_ideas_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v11 import classify as revised196_exterior
     judgment=revised196_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v12 import classify as new_exterior
+    judgment=new_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -640,6 +657,9 @@ def verify_report(folder, proof):
     core.verify_artifacts([proof])
     report_path = core.resolve_artifact(proof['path']); run_path = report_path.parent
     report = core.read(report_path)
+    if report.get('protocolCompletion'):
+        from .revision058_protocol_completion_v2 import validate_lineage as validate_completion
+        validate_completion(report,report_path)
     lineage_report=report
     if report.get('metadataCorrection'):
         from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
@@ -758,7 +778,7 @@ def verify_report(folder, proof):
     probes = core.read(core.resolve_artifact(report['probes']['path']))
     cases = canonical_cases
     expected_probes = seam_cases(cases[0], doc)+[continuous_exit(case, doc) for case in cases]
-    if protocol.get('schema')=='pcg/module-migration-protocol/v2':
+    if protocol.get('schema')=='pcg/module-migration-protocol/v2'or report.get('protocolCompletion'):
         expected_probes += [continuous_entry(case,doc)for case in cases]
     if {p['id'] for p in probes} != {case['id'] for case in expected_probes} or len(probes) != len(expected_probes):
         raise ValueError('boundary_or_continuous_exit_coverage_missing')
@@ -766,7 +786,7 @@ def verify_report(folder, proof):
         case, raw = by_id[expected['id']]
         if module_hash(case) != module_hash(expected) or not crossing(case, raw)['passed']:
             raise ValueError('actual_boundary_probe_failed:' + expected['id'])
-    if protocol.get('schema')=='pcg/module-migration-protocol/v2':
+    if protocol.get('schema')=='pcg/module-migration-protocol/v2'or report.get('protocolCompletion'):
         if 'counterexamples'not in report:raise ValueError('adaptation_counter_search_missing')
         core.verify_artifacts([report['counterexamples']])
         counters=core.read(core.resolve_artifact(report['counterexamples']['path']))
@@ -819,6 +839,8 @@ def _verification_identity(folder, proof):
         reviewCounterScopeV7=core.sha(Path(__file__).with_name('review_counter_scope_v7.py')),
         reviewCounterScopeV9=core.sha(Path(__file__).with_name('review_counter_scope_v9.py')),
         reviewCounterScopeV8=core.sha(Path(__file__).with_name('review_counter_scope_v8.py')),
+        revision058TopObserver=core.sha(Path(__file__).with_name('revision058_top_observer_v2.py')),
+        revision058Completion=core.sha(Path(__file__).with_name('revision058_protocol_completion_v2.py')),
         reviewBoundaryObserverV1=core.sha(Path(__file__).with_name('review_boundary_observer_v1.py')),
         onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
         ideasBoundaryV1=core.sha(Path(__file__).with_name('ideas_boundary_v1.py')),

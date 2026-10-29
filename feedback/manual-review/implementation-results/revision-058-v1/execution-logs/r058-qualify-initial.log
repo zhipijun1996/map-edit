@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_revision058_v1.py", line 3, in qualify
+    from pcg.migration import core,physics,godot_package,revision058_runtime_v1
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/holdout_guard.py", line 150, in check
+    raise HoldoutConflict(dict(status='holdout_pool_locked',phase='holdout_guard',source=identity,
+pcg.migration.holdout_guard.HoldoutConflict: {"automaticRetry": false, "candidateContentVersion": "sha256:e0aa912a4d7b8bbaf8fa4ff54d2dc1a5d7f472e44ee340ebaf967bfbd731a335", "conflicts": ["holdout_conditions_already_observed_for_original_source"], "negotiable": ["reuse unchanged full-report evidence without new physics", "for observer-only changes, re-analyse original raw with explicit source binding", "freeze a genuine revised candidate and independently preregister a fresh executable pool"], "phase": "holdout_guard", "previousEvidence": [{"failed": false, "holdout": {"path": "pcg/results/approved-r045-42-qualified-final-v1/holdout-1.json", "sha256": "4cbc34e0c20642de2c4f0a3e661bf016f2991cddb587189af70ac23f1259de0f"}, "report": {"path": "pcg/results/approved-r045-42-qualified-final-v1/migration-physics.json", "sha256": "e0ae052745e0272ea06537ddba8e2ce184a67a51d8f661fb5f59697b5815fb38"}, "routeId": "exit-to-entry"}, {"failed": false, "holdout": {"path": "pcg/results/approved-r045-42-qualified-final-v1/holdout-2.json", "sha256": "7ebeefdc435ae52e34af013a59a1e44f1e0442215b16f8ede1032bfd86cfe290"}, "report": {"path": "pcg/results/approved-r045-42-qualified-final-v1/migration-physics.json", "sha256": "e0ae052745e0272ea06537ddba8e2ce184a67a51d8f661fb5f59697b5815fb38"}, "routeId": "entry-to-C"}, {"failed": false, "holdout": {"path": "pcg/results/approved-r045-42-qualified-final-v1/holdout-3.json", "sha256": "74e9520ae3028db65da03cd883f4b0218b106e0af788abea8fda1e8946689eb5"}, "report": {"path": "pcg/results/approved-r045-42-qualified-final-v1/migration-physics.json", "sha256": "e0ae052745e0272ea06537ddba8e2ce184a67a51d8f661fb5f59697b5815fb38"}, "routeId": "C-to-entry"}, {"failed": false, "holdout": {"path": "pcg/results/approved-r045-42-qualified-final-v1/holdout-4.json", "sha256": "7f34f85450e538f4b7478c9fa85444f7e05e048f5294faeb66704699205614b6"}, "report": {"path": "pcg/results/approved-r045-42-qualified-final-v1/migration-physics.json", "sha256": "e0ae052745e0272ea06537ddba8e2ce184a67a51d8f661fb5f59697b5815fb38"}, "routeId": "exit-to-C"}], "requestedPool": {"baseSeed": 2710271901, "mild": {"aimDegrees": 2, "timingFrames": 1}, "moderate": {"aimDegrees": 6, "timingFrames": 3}, "routeSeedStride": 1009, "trialsPerNoiseLevel": 12}, "searched": ["original sourceVersion across all template names and route labels", "actual held-out seed/perturbation conditions"], "source": {"key": "32f937d57de667a4ced15f55124b11059e642603e3e1bd3ac43c92bb842db481", "sourcePath": "modules/game-forest-exploration-modules-backlook-fruit-cache/module.mapnote.json", "sourceVersion": "sha256:32f937d57de667a4ced15f55124b11059e642603e3e1bd3ac43c92bb842db481"}, "status": "holdout_pool_locked"}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_revision058_v1.py", line 24, in <module>
+    if label(r)in wanted:(freeze(r,sys.argv[2])if sys.argv[1]=='freeze'else globals()[sys.argv[1]](r))
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_revision058_v1.py", line 16, in qualify
+    source=inspect.getsource(previous.qualify).replace('approved-revision053-v1-','approved-revision058-v1-').replace('approved-r053-','approved-r058-');namespace={**previous.__dict__,'folder_for':folder_for,'label':label};exec(compile(source,__file__,'exec'),namespace);namespace['qualify'](row)
+                                                                                                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_revision058_v1.py", line 5, in qualify
+    from .continue_revision058_v1 import rows,label,AUTH
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/holdout_guard.py", line 253, in register_pool
+    bind_registered_pool(folder,pool_id)
+  File "/workspace/map-edit-approved-implementation/pcg/migration/pool_protocols.py", line 75, in bind_registered_pool
+    if existing is not None and existing!=binding:raise ValueError('frozen_candidate_already_bound_to_a_different_pool')
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: frozen_candidate_already_bound_to_a_different_pool

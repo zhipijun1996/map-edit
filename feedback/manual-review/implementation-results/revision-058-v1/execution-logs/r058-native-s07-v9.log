@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/native_preflight_revision058_v1.py", line 11, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/native_preflight_revision058_v1.py", line 10, in main
+    namespace={**previous.__dict__,'label':label,'backend':godot_package if label(row)=='42'else access_backend if label(row)=='s07'else backend};exec(compile(source,__file__,'exec'),namespace);namespace['run'](row,sys.argv[1])
+                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/native_preflight_revision058_v1.py", line 2, in run
+    from pcg.migration import revision058_runtime_v1 as backend,revision058_runtime_v2 as access_backend,godot_package
+                                                                                                                       
+  File "/workspace/map-edit-approved-implementation/pcg/migration/revision058_runtime_v2.py", line 23, in compile_package
+    def compile_package(*a,**kw):return base.compile_package(*a,**kw,_extension=sys.modules[__name__])
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 372, in compile_package
+    content,audit=(_extension.audit_cases if _extension else audit_cases)(doc,cases)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/revision058_runtime_v2.py", line 8, in audit_cases
+    d=consumer_document(doc);extra=[o for o in d['objects']if o.get('mechanics',{}).get('extraPairAccess')];d['objects']=[o for o in d['objects']if o not in extra];cs=copy.deepcopy(cases);content=decode(doc)
+                                                                                                                                                                                                    ^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/revision058_content_v2.py", line 5, in decode
+    c=previous(doc)
+      ^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/revision058_content_v1.py", line 22, in decode
+    c=native.content_from_objects(d)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 247, in content_from_objects
+    if not other.get('mechanics',{}).get('returnSideOnly'):_fail('return_receiver_semantics',object_id=other['id'])
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 41, in _fail
+    def _fail(code, **details): raise PackageError(code, details)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pcg.migration.godot_package.PackageError: return_receiver_semantics: {'object_id': 'return-bell'}

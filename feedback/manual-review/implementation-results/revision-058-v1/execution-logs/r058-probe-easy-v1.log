@@ -1,0 +1,36 @@
+42 entry-to-exit True []
+42 exit-to-entry True []
+42 entry-to-C True []
+42 C-to-entry True []
+42 exit-to-C True []
+42 C-to-exit True []
+lt-1x2 A-to-B True []
+lt-1x2 B-to-A True []
+lb-1x2 A-to-B True []
+lb-1x2 B-to-A True []
+lt-2x1 A-to-B False ['actual_body_outside_approved_rectangle']
+lt-2x1 B-to-A True []
+lb-2x1 A-to-B False ['actual_body_outside_approved_rectangle']
+lb-2x1 B-to-A False ['actual_body_outside_approved_rectangle']
+lt-2x2 A-to-B False ['actual_body_outside_approved_rectangle']
+lt-2x2 B-to-A True []
+lb-2x2 A-to-B False ['actual_body_outside_approved_rectangle', 'trigger_timeout/3/grounded']
+lb-2x2 B-to-A True []
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/probe_revision058_v1.py", line 9, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/probe_revision058_v1.py", line 8, in main
+    if label(row)in sys.argv[2:]:namespace['run'](row,sys.argv[1])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/probe_revision058_v1.py", line 2, in run
+    from . import probe_ideas_v1 as previous
+                                             
+  File "/workspace/map-edit-approved-implementation/pcg/migration/physics.py", line 153, in _engine
+    folder = Path(folder).resolve(); core.safe_id(name)
+                                     ^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/core.py", line 70, in safe_id
+    raise ValueError('unsafe_module_id')
+ValueError: unsafe_module_id

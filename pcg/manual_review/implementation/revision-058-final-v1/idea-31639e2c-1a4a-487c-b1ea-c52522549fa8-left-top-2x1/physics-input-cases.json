@@ -1,0 +1,627 @@
+{
+  "cases": [
+    {
+      "id": "approved-r058-final-v1-idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1-A-to-B",
+      "family": "approved-interface",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision058_author_v3.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          96,
+          104,
+          12
+        ],
+        [
+          144,
+          32,
+          112,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 80,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              76,
+              75,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.9925461516,
+            -0.1218693434
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            1
+          ],
+          "trigger": {
+            "after": 1,
+            "state": "revision_shot_ready",
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 180
+            },
+            "timeout": 90
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        24,
+        78
+      ],
+      "entry_port": [
+        24,
+        78
+      ],
+      "exit_port": [
+        192,
+        14
+      ],
+      "goal": [
+        185,
+        10,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            78
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 128
+        },
+        "originalAuthor": "pcg/manual_review/revision058_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        768,
+        896
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "face": "LEFT",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "双台转角 · 2×1 · 左↔上",
+      "new_idea_scope": {
+        "id": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "familyId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8",
+        "formatTemplateOnly": true
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            78
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              78
+            ]
+          },
+          "crossing_offset": [
+            0,
+            0
+          ],
+          "aperture": [
+            -32,
+            32,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "stagingPosition": [
+            192,
+            14
+          ],
+          "grid": {
+            "cell": [
+              1,
+              0
+            ],
+            "edge": "N",
+            "stagingPosition": [
+              192,
+              14
+            ]
+          },
+          "crossing_offset": [
+            0,
+            0
+          ],
+          "aperture": [
+            160,
+            -32,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-r058-final-v1-idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1-B-to-A",
+      "family": "approved-interface",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision058_author_v3.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          96,
+          104,
+          12
+        ],
+        [
+          144,
+          32,
+          112,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [],
+      "control_plan": [
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            1,
+            0
+          ],
+          "height_threshold": 42,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              75,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        14
+      ],
+      "entry_port": [
+        192,
+        14
+      ],
+      "exit_port": [
+        24,
+        78
+      ],
+      "goal": [
+        17,
+        74,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            78
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 128
+        },
+        "originalAuthor": "pcg/manual_review/revision058_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        768,
+        896
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "face": "LEFT",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "双台转角 · 2×1 · 左↔上",
+      "new_idea_scope": {
+        "id": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "familyId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8",
+        "formatTemplateOnly": true
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            78
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              78
+            ]
+          },
+          "crossing_offset": [
+            0,
+            0
+          ],
+          "aperture": [
+            -32,
+            32,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "stagingPosition": [
+            192,
+            14
+          ],
+          "grid": {
+            "cell": [
+              1,
+              0
+            ],
+            "edge": "N",
+            "stagingPosition": [
+              192,
+              14
+            ]
+          },
+          "crossing_offset": [
+            0,
+            0
+          ],
+          "aperture": [
+            160,
+            -32,
+            64,
+            64
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1201 @@
+{
+  "cases": [
+    {
+      "id": "approved-r058-lt-2x1-A-to-B-v2-v3-migration-clean-v3",
+      "family": "approved-interface",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision058_author_v3.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          96,
+          104,
+          12
+        ],
+        [
+          144,
+          32,
+          112,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 80,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              76,
+              75,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -0.9925461516,
+            -0.1218693434
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            0,
+            1
+          ],
+          "trigger": {
+            "after": 1,
+            "state": "revision_shot_ready",
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 180
+            },
+            "timeout": 90
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        24,
+        78
+      ],
+      "entry_port": [
+        24,
+        78
+      ],
+      "exit_port": [
+        192,
+        14
+      ],
+      "goal": [
+        185,
+        10,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            78
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 128
+        },
+        "originalAuthor": "pcg/manual_review/revision058_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        768,
+        896
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "face": "LEFT",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "双台转角 · 2×1 · 左↔上",
+      "new_idea_scope": {
+        "id": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "familyId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "ca0f9ab1bcdb18dc1a1a33795707a7f7921aadf402481cf858b59b47c695a047",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.992546141147614,
+                -0.121869340538979
+              ],
+              "plan_index": 3,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 13,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.290555087002841,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                1.0
+              ],
+              "plan_index": 5,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 29,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.290555087002841,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-r058-lt-2x1-B-to-A-v2-v3-migration-clean-v3",
+      "family": "approved-interface",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision058_author_v3.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          96,
+          104,
+          12
+        ],
+        [
+          144,
+          32,
+          112,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        0,
+        1
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [],
+      "control_plan": [
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            1,
+            0
+          ],
+          "height_threshold": 42,
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              75,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        192,
+        14
+      ],
+      "entry_port": [
+        192,
+        14
+      ],
+      "exit_port": [
+        24,
+        78
+      ],
+      "goal": [
+        17,
+        74,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            78
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            14
+          ],
+          "normal": [
+            0,
+            -1
+          ],
+          "support_index": 1
+        }
+      ],
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [],
+      "expected_reward": 0,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 128
+        },
+        "originalAuthor": "pcg/manual_review/revision058_author_v1.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        768,
+        896
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "A",
+          "position": [
+            0,
+            64
+          ],
+          "face": "LEFT",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        {
+          "id": "B",
+          "position": [
+            192,
+            0
+          ],
+          "face": "TOP",
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "双台转角 · 2×1 · 左↔上",
+      "new_idea_scope": {
+        "id": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8-left-top-2x1",
+        "designVersion": "sha256:8315ca17760b09df75cb1ea052a585078d01cbea69f8373340e90838fc49710c",
+        "familyId": "idea-31639e2c-1a4a-487c-b1ea-c52522549fa8",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "b46e8b456c719fd34ae24960bc492ac132774d41a70b93b6ab45c14e552c757b",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 0,
+              "type": "drop_through"
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -0.969698125665838,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -0.205693331631747,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}
