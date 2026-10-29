@@ -1,0 +1,145 @@
+{
+  "schema": "pcg/design-source-analysis/v1",
+  "sourceBrief": {
+    "path": "feedback/module-workshop/briefs/plains-hq-five-v1.json",
+    "sha256": "917f0f13d1a7884b3124b1bf8aeabcd098e79cf07d1c6b614baba7745186ee48"
+  },
+  "drawingAuthorization": {
+    "verbatim": "ai出创意直接出图。我看文字不太能审核",
+    "scope": "DESIGN_ONLY"
+  },
+  "sourceAnalysis": {
+    "tracked": [
+      {
+        "path": "MAP_FOUNDATION.md",
+        "sha256": "5dfbde09234f5da03db645b131e97c5b3de0ab76e85594920886daa4a2de0e7d"
+      },
+      {
+        "path": ".agents/skills/pcg-creative-producer/SKILL.md",
+        "sha256": "0c600efe74b8bb09fd0fd5b42b6771fc012432a737a50605cf7422433eb400b8"
+      },
+      {
+        "path": "feedback/module-workshop/review-receipts/interface-feedback-001.json",
+        "sha256": "e7407913e41107498c1e4544971d57d24a9204edf3b888f80a2521c25bcbf8c5"
+      },
+      {
+        "path": "pcg/creative-production/plains-five-designs-v1.json",
+        "sha256": "a298f6dbc92d3e931166b3a8e68e0e71162b419798b6f464a183e7cea36b37e9"
+      },
+      {
+        "path": "library/source/scripts/generation/module_moving_platform.gd",
+        "sha256": "c3c3c7d068f5bcef692eabe4a2110aaa6308d4379623b09e652062f29c0f0fd5"
+      },
+      {
+        "path": "library/source/scripts/generation/module_moving_platform_definition.gd",
+        "sha256": "46575fc0350d2961006d4ddc78884e20d1eb5fcbf133aa23d0690603b7664954"
+      },
+      {
+        "path": "library/source/scripts/enemies/enemy_definition.gd",
+        "sha256": "781c39d4073a68a1074855ac95703a66b0976934cd5c17c8c213de824d32b01a"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/runtime_v3.gd",
+        "sha256": "da573889a39afe9d106dcda3327d548606b38d38109d46c8f23b02de08817e0b"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v2.gd",
+        "sha256": "7d40cf6351c718a884049a96b1dc504d7d3beae815c496ec52f9f8aedcad5e66"
+      },
+      {
+        "path": "pcg/prototype/creative_batches/batch30_cell/pair_latch_v3.gd",
+        "sha256": "04a0ad8879bca4d2a5be6c11d373df025ba57ea9e4cf9c8ceebd927481562f07"
+      }
+    ],
+    "workspaceRuntimeReads": [
+      {
+        "path": "pcg/prototype/godot/scripts/world/shot_latch.gd",
+        "sha256": "a982e1ceab32390bea30eab7843a382910b33a503338351bcd0bdc1fce825929",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_behavior.gd",
+        "sha256": "2631c540f3d62b4ea313b60cdf935bf2feacbc998bb6a023afcbf4c98c1afe9d",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/scripts/enemies/enemy_attack_projectile.gd",
+        "sha256": "0218c8b6ffa26d4341aa7d5ae2fe8729ca04e329fa559e90e8cba8cba1c84076",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/resources/enemies/plains_sentry.tres",
+        "sha256": "97a8f3e5a6bddadfe5c52fc21851eea72decd96ec4053b3e4f2f918fea1e6226",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      },
+      {
+        "path": "pcg/prototype/godot/resources/enemies/plains_charger.tres",
+        "sha256": "1afd5e34d497e3850d794b028fd5fe5407d3722fcd451d862f4c14a67ca98fc0",
+        "availability": "WORKSPACE_RUNTIME_COPY_NOT_FROZEN_HERE"
+      }
+    ],
+    "limit": "Local runtime reads establish design context only. Bind the actual consumer/exported source version before implementation or physics; do not infer certification from these copies.",
+    "trackedSourceCommit": "e5712ed50ea462518729047c6abd368a183754d1",
+    "bindingNote": "Tracked proposal-context hashes bind to this immutable commit; workflow preferences changed afterward. Untracked runtime copies remain context-only."
+  },
+  "requestedSpecification": {
+    "widthBlocks": 4,
+    "heightBlocks": 3,
+    "ports": [
+      {
+        "id": "L",
+        "face": "LEFT",
+        "index": 1,
+        "position": [
+          0,
+          192
+        ],
+        "surface": "ROCK",
+        "permission": "INOUT"
+      },
+      {
+        "id": "T",
+        "face": "TOP",
+        "index": 3,
+        "position": [
+          448,
+          0
+        ],
+        "surface": "ONE_WAY_PLATFORM",
+        "permission": "INOUT"
+      }
+    ],
+    "intendedRelations": [
+      {
+        "from": "L",
+        "to": "T",
+        "status": "PROPOSED_NOT_VALIDATED"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "PROPOSED_NOT_VALIDATED"
+      }
+    ],
+    "status": "PROPOSED_SPACE_BUDGET_NOT_CERTIFIED"
+  },
+  "feasibility": "MISSING_PROJECTILE_REFLECTOR_CELL",
+  "gaps": [
+    "当前弹丸反射Cell未找到可用实现，不能宣称已支持。",
+    "必须保留原弹丸身份/生命周期/接收器幂等，单次反射不额外返枪、不额外给人物反冲。",
+    "反射角、弹丸净空、实际路程和身体通过时长均待求解；若只剩极窄时机，则修几何而不降容错标准。"
+  ],
+  "diagramAssumptions": [
+    "图示射点(336,224)、镜心(280,256)、目标铃(400,16)；镜面法向按入射/出射向量求得。折线路长约333px，按1200px/s约0.277s，只是几何/弹速预算，不是人物到门证据。",
+    "折射线在左柱x368–376处y80–64，通过y56–88的32px窗；弹丸半径3时静态两端各有约5px余量。没有完整身体/动态碰撞认证。",
+    "同枪反冲先送向短接岸，允许真正落台恢复动作后再次跳跃。不会把画出的直线当无落地单枪成功，也不把平台视为额外赠送弹药。",
+    "必须检查直接射铃、岸上提前射镜、从小窗越界、二次反射/双次回充等反例；缺镜面Cell时返回缺口，不替换普通回射铃。"
+  ],
+  "renderer": {
+    "path": "generation/manual-review/batch-001/render_diagrams.py",
+    "sha256": "af340c740fd10564248a12910371fb84e43fb124c0ceee1414bc87610b9369dd"
+  },
+  "method": "Native-source context, static coordinate/bounds and drawing geometry only. No Module compiler, trajectory solver or Godot physics.",
+  "technicalStatus": "UNKNOWN",
+  "physicsRun": false
+}

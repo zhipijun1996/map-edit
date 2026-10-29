@@ -1,0 +1,959 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-hq01-001",
+  "reviewId": "HQ01",
+  "title": "把两台停成一段楼梯",
+  "summary": "5×4 Block · 3口有向目标 · 图文待审",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 640,
+    "h": 512
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 2,
+      "position": [
+        0,
+        320
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "left",
+      "stagingPosition": [
+        64,
+        320
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "R",
+      "face": "RIGHT",
+      "index": 0,
+      "position": [
+        640,
+        64
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        1,
+        0
+      ],
+      "diagramLabel": "R",
+      "supportObjectId": "right",
+      "stagingPosition": [
+        592,
+        64
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "图稿未验证换边支撑/完整路线/接缝。",
+          "targetFace": "TOP",
+          "targetPosition": [
+            576,
+            0
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "profileId": "hq01-R-top_right"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    },
+    {
+      "id": "T",
+      "face": "TOP",
+      "index": 1,
+      "position": [
+        192,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "normal": [
+        0,
+        -1
+      ],
+      "diagramLabel": "T",
+      "supportObjectId": "top",
+      "stagingPosition": [
+        192,
+        12
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非该角外边中心。"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "left",
+      "type": "terrain",
+      "x": 0,
+      "y": 352,
+      "w": 112,
+      "h": 160
+    },
+    {
+      "id": "right",
+      "type": "terrain",
+      "x": 544,
+      "y": 96,
+      "w": 96,
+      "h": 416
+    },
+    {
+      "id": "entry-eave",
+      "type": "terrain",
+      "x": 0,
+      "y": 240,
+      "w": 176,
+      "h": 12
+    },
+    {
+      "id": "top",
+      "type": "platform",
+      "x": 128,
+      "y": 32,
+      "w": 128,
+      "h": 12,
+      "label": "顶口可穿接岸",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "rail-P",
+      "type": "trackLine",
+      "x": 176,
+      "y": 312,
+      "w": 288,
+      "h": 0,
+      "points": [
+        {
+          "x": 176,
+          "y": 312
+        },
+        {
+          "x": 464,
+          "y": 312
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          176,
+          312
+        ],
+        "finish": [
+          464,
+          312
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.17901234567901236,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "P",
+      "type": "platform",
+      "x": 208.0,
+      "y": 304.0,
+      "w": 96,
+      "h": 16,
+      "trackId": "rail-P",
+      "label": "P 停台示例",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "rail-Q",
+      "type": "trackLine",
+      "x": 368,
+      "y": 128,
+      "w": 0,
+      "h": 136,
+      "points": [
+        {
+          "x": 368,
+          "y": 264
+        },
+        {
+          "x": 368,
+          "y": 128
+        }
+      ],
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          368,
+          264
+        ],
+        "finish": [
+          368,
+          128
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.2647058823529412,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    },
+    {
+      "id": "Q",
+      "type": "platform",
+      "x": 320.0,
+      "y": 192.0,
+      "w": 96,
+      "h": 16,
+      "trackId": "rail-Q",
+      "label": "Q 停台示例",
+      "designCollision": "solid_not_one_way"
+    },
+    {
+      "id": "group-bell",
+      "type": "bell",
+      "x": 126,
+      "y": 358,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "同组启停 · 缺绑定",
+      "targetIds": [
+        "P",
+        "Q"
+      ],
+      "diagramLinkToCenter": true,
+      "mechanics": {
+        "kind": "PROPOSED_GROUP_MOTION",
+        "targets": [
+          "P",
+          "Q"
+        ],
+        "preserveIndependentClocks": true,
+        "status": "MISSING_RULE"
+      }
+    },
+    {
+      "id": "right-access",
+      "type": "bell",
+      "x": 574,
+      "y": 38,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "右侧同组访问",
+      "targetIds": [
+        "Q"
+      ],
+      "diagramLinkToCenter": true,
+      "controlGroup": "group-bell"
+    },
+    {
+      "id": "top-access",
+      "type": "bell",
+      "x": 182,
+      "y": 62,
+      "w": 20,
+      "h": 20,
+      "diagramLabel": "顶部同组访问",
+      "targetIds": [
+        "P"
+      ],
+      "diagramLinkToCenter": true,
+      "controlGroup": "group-bell"
+    },
+    {
+      "id": "route-L-R",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 320
+        },
+        {
+          "x": 80,
+          "y": 320
+        },
+        {
+          "x": 192,
+          "y": 278
+        },
+        {
+          "x": 256,
+          "y": 278
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 460,
+          "y": 124
+        },
+        {
+          "x": 592,
+          "y": 64
+        },
+        {
+          "x": 640,
+          "y": 64
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-L-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 0,
+          "y": 320
+        },
+        {
+          "x": 80,
+          "y": 320
+        },
+        {
+          "x": 192,
+          "y": 278
+        },
+        {
+          "x": 256,
+          "y": 278
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 288,
+          "y": 116
+        },
+        {
+          "x": 192,
+          "y": 80
+        },
+        {
+          "x": 192,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-R-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 640,
+          "y": 64
+        },
+        {
+          "x": 592,
+          "y": 64
+        },
+        {
+          "x": 460,
+          "y": 124
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 256,
+          "y": 278
+        },
+        {
+          "x": 192,
+          "y": 278
+        },
+        {
+          "x": 80,
+          "y": 320
+        },
+        {
+          "x": 0,
+          "y": 320
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-R-T",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 640,
+          "y": 64
+        },
+        {
+          "x": 592,
+          "y": 64
+        },
+        {
+          "x": 460,
+          "y": 124
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 288,
+          "y": 116
+        },
+        {
+          "x": 192,
+          "y": 80
+        },
+        {
+          "x": 192,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-T-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 192,
+          "y": 0
+        },
+        {
+          "x": 192,
+          "y": 80
+        },
+        {
+          "x": 288,
+          "y": 116
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 256,
+          "y": 278
+        },
+        {
+          "x": 192,
+          "y": 278
+        },
+        {
+          "x": 80,
+          "y": 320
+        },
+        {
+          "x": 0,
+          "y": 320
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "route-T-R",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 640,
+      "h": 512,
+      "points": [
+        {
+          "x": 192,
+          "y": 0
+        },
+        {
+          "x": 192,
+          "y": 80
+        },
+        {
+          "x": 288,
+          "y": 116
+        },
+        {
+          "x": 368,
+          "y": 166
+        },
+        {
+          "x": 460,
+          "y": 124
+        },
+        {
+          "x": 592,
+          "y": 64
+        },
+        {
+          "x": 640,
+          "y": 64
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-R",
+      "from": "L",
+      "to": "R",
+      "role": "main",
+      "pathObjectId": "route-L-R",
+      "strategy": "L侧读两台已有停位，必要时同组启动后选择新冻结构型，再去R。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        5.0,
+        -2.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "L-to-T",
+      "from": "L",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-L-T",
+      "strategy": "L侧读两台已有停位，必要时同组启动后选择新冻结构型，再去T。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        1.5,
+        -2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "R-to-L",
+      "from": "R",
+      "to": "L",
+      "role": "main",
+      "pathObjectId": "route-R-L",
+      "strategy": "R侧读两台已有停位，必要时同组启动后选择新冻结构型，再去L。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -5.0,
+        2.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "R-to-T",
+      "from": "R",
+      "to": "T",
+      "role": "main",
+      "pathObjectId": "route-R-T",
+      "strategy": "R侧读两台已有停位，必要时同组启动后选择新冻结构型，再去T。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -3.5,
+        -0.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ONE_WAY_PLATFORM",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-L",
+      "from": "T",
+      "to": "L",
+      "role": "main",
+      "pathObjectId": "route-T-L",
+      "strategy": "T侧读两台已有停位，必要时同组启动后选择新冻结构型，再去L。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        -1.5,
+        2.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    },
+    {
+      "id": "T-to-R",
+      "from": "T",
+      "to": "R",
+      "role": "main",
+      "pathObjectId": "route-T-R",
+      "strategy": "T侧读两台已有停位，必要时同组启动后选择新冻结构型，再去R。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        3.5,
+        0.5
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ONE_WAY_PLATFORM",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L",
+      "R",
+      "T"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "L",
+        "to": "R",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "L",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "R",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "R",
+        "to": "R",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      },
+      {
+        "from": "R",
+        "to": "T",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "L",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "R",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "T",
+        "to": "T",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "实台＝冻结示例　虚框＝端点　金铃＝同组共控（缺绑定）　浅绿顶岸可穿、P/Q实体",
+  "reviewInstructions": [
+    "① 图中实台是一个冻结示例，虚框只是轨道端点；横台P、竖台Q同组启停。",
+    "② 去右岸/顶口比较不同构型；一铃多台共控尚需扩展，不自动吸附到理想位置。",
+    "③ 错停可重启；是否只用一台就能绕过、两台是否冗余，仍须反例检查。"
+  ],
+  "designNotes": [
+    "图示P中心(256,312)、Q中心(368,200)。P台面304/Q台面192形成112px高差，仅静态示例，不证明两台都必要。",
+    "入口局部岩檐限制岸上直接起跳，载台不与岩檐重叠；不能用岩檐把操作逼成极窄窗口。",
+    "三口六向均为目标；每个访问铃只是同组控制入口，仍需实际共控、相位保存和防夹/离台惯性验证。",
+    "observation：一台横移、一台升降；看两台之间的距离，以及它们到右岸/顶口的高差。",
+    "decision：先让两台运行；跃离左岸时回射同组铃，把两台同时停在能连续落脚的位置。停得早可走右岸，想去顶口则等另一种台阶关系。",
+    "causality：同一枪既反冲改变人物落点，也冻结两台的相对构型；之后的路线由玩家选定的停台状态形成。两台保留各自时钟/初相，不重置到完美位置。",
+    "cells：原生往复实体载台×2；风铃接收；三端接岸；缺规则：同一接收事件原子启停两台，分别保留相位",
+    "abilities：jump；shot_recoil",
+    "resources：沿用真实跳跃、空中枪次、冷却和落地恢复；仅jump/shot_recoil，无钩索、二段跳或免费补枪。",
+    "terrain：暂5×4三口：低左岩岸、高右岩岸、顶部可穿口。两台占据共同中庭，不另铺静态阶梯；备选4×4需缩轨重新设计，不直接缩放。",
+    "reward：奖励是选择通往右岸或上方区域，不加顺路宝箱。",
+    "recovery：错误停位可从当前接岸重新启台/再停；各已声明来向须能访问同组控制。失足接回与等待时长未验证。",
+    "directions：L→R/T先布置再跳；R/T返回读取已有冻结状态，必要时重启再选择。六个有向关系仅为目标。",
+    "cheapSolutions：只停一台就能走完；完全不碰载台直接跳过；任何停位都一样容易；新增上口只是安全恢复口；某侧进来没有控制权",
+    "difference：与D04布置回程支撑同属可控承载；这里同时约束两台相对几何、选择两个真实目的岸。若第二台删掉也不改变判断，就退回去重，不称新家族。",
+    "Cell缺口：原生ShotLatch只有一个motion_target；一铃两台的共控绑定/一次提交需扩展。；原生启动/暂停可复用，不支持自动停到目标位置，不发明平台改向。；必须找到有宽容区间的相位组合；“停得准”不能变成一帧截图题。",
+    "未经此精确设计版本人工保留不开始实现；本次只画主规格，备选尺寸尚未作图/认证。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-hq01-001/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "diagramGhosts": [
+    {
+      "x": 416.0,
+      "y": 304.0,
+      "w": 96,
+      "h": 16,
+      "label": "P 轨道端点"
+    },
+    {
+      "x": 320.0,
+      "y": 120.0,
+      "w": 96,
+      "h": 16,
+      "label": "Q 轨道端点"
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        224,
+        272
+      ],
+      "to": [
+        136,
+        368
+      ],
+      "label": "同枪反冲＋冻住两台",
+      "labelPosition": [
+        200,
+        236
+      ],
+      "recoil": [
+        [
+          224,
+          272
+        ],
+        [
+          284,
+          210
+        ]
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        224,
+        272
+      ],
+      "label": "跃离时击铃",
+      "labelPosition": [
+        216,
+        300
+      ]
+    }
+  ],
+  "designVersion": "sha256:f6789c34bba2d7c7075840f2a0dbfc36cfa57915e28c0a84433ca0d4eb75560d"
+}
