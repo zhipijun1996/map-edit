@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 34,
+    "READY_FOR_IMPLEMENTATION": 41,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 59,
+    "handoffRevision": 66,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -31565,6 +31565,2135 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s02-001",
+      "sourceIdeaId": "idea-spec02-s02-001",
+      "reviewId": "idea-spec02-s02-001",
+      "title": "S02 · 一枚追锯，换边上井",
+      "summary": "在错位的上下接口之间，左右交替登台。同一枚竖向齿轮会追过不同的跨井高度；上行要选先过还是等它走，回程要下落刹住而不是照抄跳跃。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s02-001/0bda2758e549/images/R2-S02.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 3,
+        "heightBlocks": 5
+      },
+      "ports": [
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 0,
+          "position": [
+            64,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            64,
+            12
+          ],
+          "requestedBlockPosition": [
+            0.5,
+            0
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "LEFT",
+              "targetPosition": [
+                0,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s02-T-top_left"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 2,
+          "position": [
+            320,
+            640
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            320,
+            576
+          ],
+          "requestedBlockPosition": [
+            2.5,
+            5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                384,
+                576
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s02-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "B-to-T",
+          "from": "B",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-B-T",
+          "strategy": "逐段交替读同一竖锯窗口上井。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -2,
+            -5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-B",
+          "from": "T",
+          "to": "B",
+          "role": "return",
+          "pathObjectId": "route-T-B",
+          "strategy": "按下降速度选择跳过或落回接岸，保留枪次制动。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            2,
+            5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:0bda2758e549614457cf07f0010e524b27abe6d5807bdd1f4d55a408ac927121",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s02-001/0bda2758e549/design.json",
+      "designFileSha256": "65811fbc75203a785f526d0dcc0b266a287b6b4a86fba845a15c9e88cd4635a0",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s02-001/0bda2758e549/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s07-001",
+      "sourceIdeaId": "idea-spec02-s07-001",
+      "reviewId": "idea-spec02-s07-001",
+      "title": "S07 · 起跳换脚，下一块台才出现",
+      "summary": "跃离低踏板后回射风铃：低踏板撤去，高踏板出现；同枪反冲把你送向新踏板。现在换太早会失去起跳支撑，换太晚可能错过高落点。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s07-001/2e7b95062f7b/images/R2-S07.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 4,
+        "heightBlocks": 3
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 1,
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            64,
+            192
+          ],
+          "requestedBlockPosition": [
+            0,
+            1.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 3,
+          "position": [
+            448,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            448,
+            12
+          ],
+          "requestedBlockPosition": [
+            3.5,
+            0
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                512,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s07-T-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-T",
+          "from": "L",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-L-T",
+          "strategy": "先有低台起跳，离台回射换成高台并反冲追上。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            3.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-L",
+          "from": "T",
+          "to": "L",
+          "role": "return",
+          "pathObjectId": "route-T-L",
+          "strategy": "上侧访问同一对桥，按实际换态留下低台接回。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -3.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:2e7b95062f7b71e0c43f1aaa3a417a391e517384fa8aaf6be8f195a53ce45e4b",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s07-001/2e7b95062f7b/design.json",
+      "designFileSha256": "f7768abcfc8b00a66a4e874f851713b5948787058e0309641a25ba1f2c33a8f3",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s07-001/2e7b95062f7b/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s08-001",
+      "sourceIdeaId": "idea-spec02-s08-001",
+      "reviewId": "idea-spec02-s08-001",
+      "title": "S08 · 先退入檐下，再反冲绕出",
+      "summary": "右岸与右上口看似同侧直达，带刺岩檐却挡住直接升高。先向左退入内部小台，再向右上反冲绕过檐端；回程要从相反侧读檐口净空。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s08-001/bf6273dbd6f8/images/R2-S08.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 4,
+        "heightBlocks": 3
+      },
+      "ports": [
+        {
+          "id": "R",
+          "face": "RIGHT",
+          "index": 1,
+          "position": [
+            512,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            1,
+            0
+          ],
+          "diagramLabel": "R",
+          "supportObjectId": "right",
+          "stagingPosition": [
+            464,
+            192
+          ],
+          "requestedBlockPosition": [
+            4,
+            1.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 3,
+          "position": [
+            448,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            448,
+            12
+          ],
+          "requestedBlockPosition": [
+            3.5,
+            0
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                512,
+                64
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s08-T-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "R-to-T",
+          "from": "R",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-R-T",
+          "strategy": "先退左侧内部起跳，再反冲绕檐端上顶口。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -0.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-R",
+          "from": "T",
+          "to": "R",
+          "role": "return",
+          "pathObjectId": "route-T-R",
+          "strategy": "从顶口绕到檐端外，再调整落点回右岸。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            0.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:bf6273dbd6f8c910e5e440fc5bb81217601f18ea789010a7a51f52832d0270a0",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s08-001/bf6273dbd6f8/design.json",
+      "designFileSha256": "764d3205e517b35d78bd7a455fa0696616ecc81a2c30faada0c828aecc57013f",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s08-001/bf6273dbd6f8/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s10-001",
+      "sourceIdeaId": "idea-spec02-s10-001",
+      "reviewId": "idea-spec02-s10-001",
+      "title": "S10 · 同侧井口，先绕檐再接低岸",
+      "summary": "右口和右下口同侧，直落会碰到实岩檐。先向左绕出檐端，过横锯后再刹回右下接岸；上返要反向绕檐，不能沿边直升。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s10-001/0f6dc21ed04b/images/R2-S10.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 3,
+        "heightBlocks": 5
+      },
+      "ports": [
+        {
+          "id": "R",
+          "face": "RIGHT",
+          "index": 1,
+          "position": [
+            384,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            1,
+            0
+          ],
+          "diagramLabel": "R",
+          "supportObjectId": "side",
+          "stagingPosition": [
+            336,
+            192
+          ],
+          "requestedBlockPosition": [
+            3,
+            1.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 2,
+          "position": [
+            320,
+            640
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            320,
+            576
+          ],
+          "requestedBlockPosition": [
+            2.5,
+            5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                384,
+                576
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s10-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "R-to-B",
+          "from": "R",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-R-B",
+          "strategy": "先读横锯，保留枪次在后段刹回右下窄岸；同侧来向先绕实岩檐。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -0.5,
+            3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-R",
+          "from": "B",
+          "to": "R",
+          "role": "return",
+          "pathObjectId": "route-B-R",
+          "strategy": "按接岸逐段恢复，反向读锯与岩檐；不把下降证据当上行。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            0.5,
+            -3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:0f6dc21ed04b996082548b16856841672a93b9fea3514548792cb7b41c0ad4a7",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s10-001/0f6dc21ed04b/design.json",
+      "designFileSha256": "2ba280b81194d8ad8d66dc47af7dd07ebeb070399927fb738dcfa112cb1e1c58",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s10-001/0f6dc21ed04b/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s11-001",
+      "sourceIdeaId": "idea-spec02-s11-001",
+      "reviewId": "idea-spec02-s11-001",
+      "title": "S11 · 偏心环岛，选离台高度",
+      "summary": "同一座环行载台绕过中心岩岛。去右上岸要随台升到高侧，去下口可在低侧提前离台；从任一口回来，都要选追台还是等到它迎向自己。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s11-001/ca5de5b99d80/images/R2-S11.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 5,
+        "heightBlocks": 4
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 2,
+          "position": [
+            0,
+            320
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            64,
+            320
+          ],
+          "requestedBlockPosition": [
+            0,
+            2.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "R",
+          "face": "RIGHT",
+          "index": 0,
+          "position": [
+            640,
+            64
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            1,
+            0
+          ],
+          "diagramLabel": "R",
+          "supportObjectId": "right",
+          "stagingPosition": [
+            592,
+            64
+          ],
+          "requestedBlockPosition": [
+            5,
+            0.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                576,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s11-R-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 3,
+          "position": [
+            448,
+            512
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            448,
+            448
+          ],
+          "requestedBlockPosition": [
+            3.5,
+            4
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-R",
+          "from": "L",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-L-R",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            5,
+            -2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "L-to-B",
+          "from": "L",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-L-B",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            3.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-L",
+          "from": "R",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-R-L",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -5,
+            2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-B",
+          "from": "R",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-R-B",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -1.5,
+            3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-L",
+          "from": "B",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-B-L",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -3.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-R",
+          "from": "B",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-B-R",
+          "strategy": "追上同一环台，在目的岸对应高度主动离台；相反来向独立策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            1.5,
+            -3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:ca5de5b99d80a1104ceec354e144cbde7654ad9266a82790ac92586a5f424056",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s11-001/ca5de5b99d80/design.json",
+      "designFileSha256": "328dffbf7cc43d1f696f60c8444b6c4b5504d0401d3452913d62829219bb70d6",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s11-001/ca5de5b99d80/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s12-001",
+      "sourceIdeaId": "idea-spec02-s12-001",
+      "reviewId": "idea-spec02-s12-001",
+      "title": "S12 · 横台稳住，再择高台去向",
+      "summary": "一台横移、一台竖移，各自独立启停。下口或左口来的人先布置横台接回，再决定何时登高台、去上口还是右高岸；从高处返回则先把低台放到接回位置。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s12-001/d5a7213383ec/images/R2-S12.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 5,
+        "heightBlocks": 4
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 2,
+          "position": [
+            0,
+            320
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            64,
+            320
+          ],
+          "requestedBlockPosition": [
+            0,
+            2.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "R",
+          "face": "RIGHT",
+          "index": 0,
+          "position": [
+            640,
+            64
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            1,
+            0
+          ],
+          "diagramLabel": "R",
+          "supportObjectId": "right",
+          "stagingPosition": [
+            592,
+            64
+          ],
+          "requestedBlockPosition": [
+            5,
+            0.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "TOP",
+              "targetPosition": [
+                576,
+                0
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s12-R-top_right"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "T",
+          "face": "TOP",
+          "index": 1,
+          "position": [
+            192,
+            0
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            -1
+          ],
+          "diagramLabel": "T",
+          "supportObjectId": "top",
+          "stagingPosition": [
+            192,
+            12
+          ],
+          "requestedBlockPosition": [
+            1.5,
+            0
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 3,
+          "position": [
+            448,
+            512
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            448,
+            448
+          ],
+          "requestedBlockPosition": [
+            3.5,
+            4
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-R",
+          "from": "L",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-L-R",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            5,
+            -2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "L-to-T",
+          "from": "L",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-L-T",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            1.5,
+            -2.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "L-to-B",
+          "from": "L",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-L-B",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            3.5,
+            1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-L",
+          "from": "R",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-R-L",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -5,
+            2
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-T",
+          "from": "R",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-R-T",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -3.5,
+            -0.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "R-to-B",
+          "from": "R",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-R-B",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -1.5,
+            3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-L",
+          "from": "T",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-T-L",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -1.5,
+            2.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-R",
+          "from": "T",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-T-R",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            3.5,
+            0.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "T-to-B",
+          "from": "T",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-T-B",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            2,
+            4
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-L",
+          "from": "B",
+          "to": "L",
+          "role": "main",
+          "pathObjectId": "route-B-L",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -3.5,
+            -1.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-R",
+          "from": "B",
+          "to": "R",
+          "role": "main",
+          "pathObjectId": "route-B-R",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            1.5,
+            -3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-T",
+          "from": "B",
+          "to": "T",
+          "role": "main",
+          "pathObjectId": "route-B-T",
+          "strategy": "独立布置P接回与Q高度，选择上口/右高岸或下返，十二方向各需真实策略。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -2,
+            -4
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s12-001/d5a7213383ec/design.json",
+      "designFileSha256": "f8a7b6ea1f5bccd935a76a348da42c0600688ca04401e97e24396d8ebe890a64",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s12-001/d5a7213383ec/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s13-001",
+      "sourceIdeaId": "idea-spec02-s13-001",
+      "reviewId": "idea-spec02-s13-001",
+      "title": "S13 · 贴檐取宝，回身刹在窄岸",
+      "summary": "宝箱在可见的右侧窄台，去路从带刺低檐下越过移动锯。取宝后从同一处回左口，回程要刹在短岸而不是继续向左冲；没有开箱送门的免费流程。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s13-001/bea219b40406/images/R2-S13.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 3,
+        "heightBlocks": 2
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 1,
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left",
+          "stagingPosition": [
+            48,
+            192
+          ],
+          "requestedBlockPosition": [
+            0,
+            1.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "BOTTOM",
+              "targetPosition": [
+                64,
+                256
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s13-L-bottom_left"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-L",
+          "from": "L",
+          "to": "L",
+          "role": "reward_return",
+          "pathObjectId": "route-L-L",
+          "strategy": "从L跨过低刺檐下的锯口取奖，在右台落地恢复，再反向刹回短岸，从同一L离开。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            0,
+            0
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s13-001/bea219b40406/design.json",
+      "designFileSha256": "87c72c31ff00f1a8d9a9bb5e6fcd78b3c03842a77a7a38eeb53147fa04b55932",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s13-001/bea219b40406/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -34943,8 +37072,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -34964,7 +37093,23 @@
         "version": "sha256:0bda2758e549614457cf07f0010e524b27abe6d5807bdd1f4d55a408ac927121",
         "sha256": "65811fbc75203a785f526d0dcc0b266a287b6b4a86fba845a15c9e88cd4635a0",
         "diagram": "ideas/idea-spec02-s02-001/0bda2758e549/images/R2-S02.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s02-001-0bda2758e549-1.json",
+        "sha256": "e0252de6e9fb50f69c86940e29f1a61a98ab2419d22270713309812b517de874"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s02-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:0bda2758e549614457cf07f0010e524b27abe6d5807bdd1f4d55a408ac927121",
+          "designFileSha256": "65811fbc75203a785f526d0dcc0b266a287b6b4a86fba845a15c9e88cd4635a0",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s04-001",
@@ -34972,13 +37117,14 @@
       "sourceType": "ai_idea",
       "verbatim": "高井中两台各有自己的启停铃和时钟。先把上一台留在接回位置，再启动另一台追上来换乘；回程在相反高度重排交接，不能两台一键复位。",
       "interpretation": {
-        "observation": "看两台高度、自己的跳跃预算以及哪台此刻应保持不动。",
+        "observation": "看两台高度、自己的跳跃预算以及哪台此刻应保持不动。 还要读下段与高段空怪的真实进攻方向。",
         "decision": "把一台当暂时稳定接岸，另台运行；准备离开时再改变控制。",
-        "causality": "独立启动/暂停保留真实相位，冻结的落点与正在移动的落点形成交接，射击同时改变人物运动。",
+        "causality": "独立启动/暂停保留真实相位，冻结的落点与正在移动的落点形成交接，射击同时改变人物运动。 空怪干扰离台与换乘，可选择躲避或击杀；不把命中回枪作为必需钥匙。",
         "cells": [
           "两台原生独立竖向实体台",
           "两组单台启停铃",
-          "上下接岸"
+          "上下接岸",
+          "plains_diver×2"
         ],
         "abilities": [
           "jump",
@@ -34987,7 +37133,7 @@
         "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
         "terrain": "严格3×7 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
         "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
-        "recovery": "错停可在原接岸或当前载台重启；离台失误能否接回原台、最大等待长度均待验。",
+        "recovery": "错停可在原接岸或当前载台重启；离台失误能否接回原台、最大等待长度均待验。 敌死后仍可往返，不自动重生补枪。",
         "directions": "B→T低台接高台，T→B先设低台接回再下行；不是相同轨迹反放。",
         "cheapSolutions": [
           "任意初相都只需站着等",
@@ -35053,49 +37199,79 @@
         "proposalKey": "S04"
       },
       "gaps": [
-        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。",
+        "两空怪实际追击/碰撞与换乘、死亡后可达及恢复须验证，未调整原生敌参数。"
       ],
       "feasibility": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
       "family": "independent-carrier-relay",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-spec02-s04-001/84fb3339b245/design.json",
-        "version": "sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7",
-        "sha256": "912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392",
-        "diagram": "ideas/idea-spec02-s04-001/84fb3339b245/images/R2-S04.png"
+        "file": "generation/module-workshop/ideas/idea-spec02-s04-001/3d5d4b164083/design.json",
+        "version": "sha256:3d5d4b164083bf52a544dd4299c58e6dd74f474fafc32f78fc6b760acbdebc4f",
+        "sha256": "4508835bb5b5f6ffd6daceead7fb8ed45762369ee764f802f80663077a044022",
+        "diagram": "ideas/idea-spec02-s04-001/3d5d4b164083/images/R2-S04.png"
       },
-      "history": []
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-spec02-s04-001/84fb3339b245/design.json",
+            "version": "sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7",
+            "sha256": "912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392",
+            "diagram": "ideas/idea-spec02-s04-001/84fb3339b245/images/R2-S04.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s04-001-84fb3339b245-1.json",
+        "sha256": "f23fafe5af9a4089876c6adff1d286d01dfb188d45f68fb51db75379b8c27edc"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s04-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7",
+          "designFileSha256": "912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392",
+          "decision": "CHANGE",
+          "note": "增加2个空中怪物",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s06-001",
-      "title": "S06 · 引出慢弹，追台到掩护侧",
+      "title": "S06 · 离台绕射，让上升台追上你",
       "sourceType": "ai_idea",
       "verbatim": "斜向上行台会切进射手的慢弹通路。先让射手真正发射，再追上台的背弹一侧；接近顶口时必须离开掩护，重新选择跳出的时刻。",
       "interpretation": {
-        "observation": "看射手出手预兆、已经飞出的弹和台的未来位置。",
-        "decision": "先暴露引出真实弹，再追台；离台去上口要再次判断暴露。",
-        "causality": "同一实体载台既承载人物又用真实地形碰撞截敌弹；不为角色加无敌，不把弹超时当截弹。",
+        "解释": "原AI提案原文只保留作来源；当前按人工重新思考后的新标题、新图与以下动作关系审核。",
+        "observation": "看实体台下的随台铃、左上轨迹以及自己离台后的追赶空间。",
+        "decision": "先离开遮住弹道的实体台，从侧下方打到随台铃，再决定追上台还是落中途岸重整。",
+        "causality": "载台本体遮挡站台直射；离台绕射同一次行动启动载台并把人物反冲向左上，目标落点随之离开原位。只用真实启停与碰撞，不加仅空中可触发条件。",
         "cells": [
-          "原生斜向实体台",
-          "plains_sentry原慢弹射手",
-          "功能性中途重整台",
-          "上下可穿接岸"
+          "原生实体斜台与启停",
+          "刚性挂在台下64px的风铃（缺绑定）",
+          "中途功能接回台",
+          "上下可穿岸"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
-        "terrain": "严格4×6 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
-        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
-        "recovery": "错过掩护可退已有接岸，受伤保留；敌死后仍需有可行几何路径。",
-        "directions": "B→T追上受保护一侧，T→B在下降相位读弹后接回；独立验证。",
+        "resources": "真实枪次、冷却、载台惯性和落地恢复；打铃不回枪，不再依赖射手遮弹。",
+        "terrain": "严格4×6、T(64,0)/B(448,768)不变；台中心(416,640)到(112,160)，下挂铃跟随，移除旧射手与掩体布局。",
+        "reward": "主动追台抵达上接模块，不加宝箱。",
+        "recovery": "漏追先争取中途台，重新观察随台铃的实际位置再启停/追接；若只能死等长周期应返修。底口提前启动后能否追回必须测试。",
+        "directions": "B→T需先上台再离台绕射追接；T→B从相反高度接台并控制下行，逐方向UNKNOWN。",
         "cheapSolutions": [
-          "提前遮挡使敌从未发弹",
-          "靠敌弹超时冒充截弹",
-          "直接安全远杀后无成本过关",
-          "敌死后无法上返"
+          "站台枪口探出边沿不离台就能安全射铃然后等全程",
+          "底岸提前开台仍能毫无难度坐上去",
+          "随台铃扫到身体成为额外落脚点",
+          "枪从平台边缘穿模",
+          "一路跟车无需主动追接",
+          "中途台变成静态直达捷径"
         ],
-        "difference": "明确复用已认可HQ02的移动掩体家族，适配本轮4×6和远右下口；不计新玩法家族。"
+        "difference": "取消原移动掩体/射手关系，改为承载面自身遮住启动铃：必须先处理如何失去支撑再让它回来接人。若站边一枪便能等全程，设计仍被反例推翻，不能宣布已消除。"
       },
       "constraints": {
         "challengeSpecification": {
@@ -35153,16 +37329,45 @@
         "proposalKey": "S06"
       },
       "gaps": [
-        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+        "需要风铃真实接收体/美术刚性跟随载台，挂点在台下64px且不可当身体支撑；原native ShotLatch固定世界位置不能直接冒充。",
+        "现有玩家弹全碰撞掩码/原生台layer1支持遮挡假设；枪口出边沿、完整弹丸扫掠与站台先射的廉价解仍UNKNOWN。",
+        "启停原时钟/真实承载惯性继续复用；上升速度、离台容错/瞄准扰动、漏追恢复和回程未物理求解，不要求固定极窄按键序列。"
       ],
-      "feasibility": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
-      "family": "moving-cover-adaptation",
+      "feasibility": "MISSING_MOVING_BELL_MOUNT_BINDING",
+      "family": "leave-support-to-control-carrier",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-spec02-s06-001/4a8215a4851a/design.json",
-        "version": "sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064",
-        "sha256": "c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75",
-        "diagram": "ideas/idea-spec02-s06-001/4a8215a4851a/images/R2-S06.png"
-      }
+        "file": "generation/module-workshop/ideas/idea-spec02-s06-001/5831f430e898/design.json",
+        "version": "sha256:5831f430e8986857d524f8a89d86dfc93410befd38c8b26bd22fe4abaea789d4",
+        "sha256": "4dd87f99a19c1af955a382abb533ecfa888b8e639f144c4712e0e1d22274d21a",
+        "diagram": "ideas/idea-spec02-s06-001/5831f430e898/images/R2-S06.png"
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s06-001-4a8215a4851a-1.json",
+        "sha256": "ca0dc96e3c8f3d84159fb511238cca8f0cb1bd6510fe991d8f2e36a87f00bec9"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s06-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064",
+          "designFileSha256": "c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75",
+          "decision": "CHANGE",
+          "note": "趣味性不足，重新思考",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ],
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-spec02-s06-001/4a8215a4851a/design.json",
+            "version": "sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064",
+            "sha256": "c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75",
+            "diagram": "ideas/idea-spec02-s06-001/4a8215a4851a/images/R2-S06.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s07-001",
@@ -35239,8 +37444,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35260,7 +37465,23 @@
         "version": "sha256:2e7b95062f7b71e0c43f1aaa3a417a391e517384fa8aaf6be8f195a53ce45e4b",
         "sha256": "f7768abcfc8b00a66a4e874f851713b5948787058e0309641a25ba1f2c33a8f3",
         "diagram": "ideas/idea-spec02-s07-001/2e7b95062f7b/images/R2-S07.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s07-001-2e7b95062f7b-1.json",
+        "sha256": "cc5178b54d31ec07c8439dbaf9a8b99c9af12da00ab9e88075e350945becf6f4"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s07-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:2e7b95062f7b71e0c43f1aaa3a417a391e517384fa8aaf6be8f195a53ce45e4b",
+          "designFileSha256": "f7768abcfc8b00a66a4e874f851713b5948787058e0309641a25ba1f2c33a8f3",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s08-001",
@@ -35338,8 +37559,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35359,38 +37580,60 @@
         "version": "sha256:bf6273dbd6f8c910e5e440fc5bb81217601f18ea789010a7a51f52832d0270a0",
         "sha256": "764d3205e517b35d78bd7a455fa0696616ecc81a2c30faada0c828aecc57013f",
         "diagram": "ideas/idea-spec02-s08-001/bf6273dbd6f8/images/R2-S08.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s08-001-bf6273dbd6f8-1.json",
+        "sha256": "71aee8584f04645d6712c3cc06ed39dd90269f31e6a813a0c02535b15b109ccd"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s08-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:bf6273dbd6f8c910e5e440fc5bb81217601f18ea789010a7a51f52832d0270a0",
+          "designFileSha256": "764d3205e517b35d78bd7a455fa0696616ecc81a2c30faada0c828aecc57013f",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s09-001",
-      "title": "S09 · 下落先留枪，过锯再刹回",
+      "title": "S09 · 开脚下井盖，换出下一层接脚",
       "sourceType": "ai_idea",
       "verbatim": "左上进入后下降到右下口。横向齿轮守着中下段换侧处，先留住空中枪，不在高处过早用掉；穿过锯线后再反冲刹住窄接岸。回程这些岸成为上行台阶。",
       "interpretation": {
-        "observation": "读横锯下一次过线位置、自己落速和下层窄岸。",
-        "decision": "这段靠普通下落，还是花枪刹住；太早用枪会失去后段调整。",
-        "causality": "射击反冲改变落速和横移，落台才按真实机制恢复；同锯线在回程约束跳出时机。",
+        "解释": "原AI提案原文只保留作来源；当前按人工重新思考后的新标题、新图与以下动作关系审核。",
+        "observation": "看A/B哪层有实体、两层各自安全落脚段在哪侧；不能把透明井盖当支撑。",
+        "decision": "开掉A之前先计划怎么到B右段；落B后决定继续开下路，还是保留B并经开放A上返。",
+        "causality": "同一有效击铃以原互补规则打开一个井盖、生成另一个实体接脚面，反冲同时改变横移。与井盖绑定的危险面只在该井盖实体时伸出。",
         "cells": [
-          "原横移齿轮",
-          "三层功能性可穿接岸",
-          "左岩口/底可穿口"
+          "原互补双门作为两层水平井盖",
+          "同组多个访问铃",
+          "原生表面地刺",
+          "井盖实体/危险面一致换态绑定（缺）",
+          "功能性固定上返点"
         ],
         "abilities": [
           "jump",
           "shot_recoil"
         ],
-        "resources": "仅真实跳跃、基础枪次/冷却、原生命和落地恢复，不赠枪、不用钩索或二跳。",
-        "terrain": "严格3×5 Block；Port位置/地貌/INOUT及逐向目标按本轮原话冻结。",
-        "reward": "目的岸与下一模块为主要收益，不放免费宝箱。",
-        "recovery": "漏上一层可能接到下一层，但不保证所有相位安全；返回按原落地恢复重试。",
-        "directions": "L→B以刹车下降，B→L逐段上升并读锯，双向策略不同。",
+        "resources": "枪次/冷却/落地恢复照真实机制；不能由切换本身送第二枪，必须检查省略落B是否真实可行。",
+        "terrain": "严格3×5，L(0,192)/B(320,640)不变；A320/B384两层铺满左岩柱至右边界，安全段A偏左/B偏右，不再是可直落的锯口。",
+        "reward": "打通下接模块或从底部回左岸，无宝箱。",
+        "recovery": "失误可争取当前仍实体的安全段或下方原上返点；切门防夹及危险面先后关系必须真实验证，不能夹死或让无实体刺悬空。",
+        "directions": "L→B先A换B并换侧，之后二次下行；B→L先让B成为接岸、A开放，再从B上返左岸，不在未穿过A时把它关成天花板。",
         "cheapSolutions": [
-          "长落到底口始终不需操作",
-          "普通跳已无风险覆盖全部回程",
-          "多一层台不改变恢复与路线",
-          "跳过齿轮扫掠区"
+          "不操作直接穿两层井盖下到底口",
+          "始终落在任意一侧都安全而没有选落点意义",
+          "射击同组多访问铃造成一枪多次切换",
+          "危险面在井盖打开后仍悬空",
+          "底部回程枪次/高度不足或关闭A封死自己",
+          "从未声明边界绕到两层井盖外",
+          "从固定上返点直接绕过整个状态挑战"
         ],
-        "difference": "沿用此前认可S09的下降刹车方向，但严格恢复为本轮3×5/左第1行接口；不是沿用裁后3×4的旧认证。"
+        "difference": "推翻旧版静态留枪刹车假设，改成支撑互补与错侧落脚；不是把锯加速或多放刺。仍归已有互补门家族的新局部路线，趣味/可靠性待评。"
       },
       "constraints": {
         "challengeSpecification": {
@@ -35448,16 +37691,45 @@
         "proposalKey": "S09"
       },
       "gaps": [
-        "现有Cell表达可复用，当前布局、真实承载/身体、能力资源/回程和动态相位仍需原Harness验证。"
+        "互补门的帧原子切换与真实角色防夹可复用，但水平井盖/表面危险面的同状态启用与收回绑定尚缺；不能把未画出的B刺当已实现。",
+        "必须检验A/B安全段与完整身体、开B时收回其危险面、状态重入/取消和多个访问点的同枪去重。",
+        "B→L经开放A上返的真实高度/枪次/惯性、底侧先成B的可操作性、失败恢复与所有绕行UNKNOWN。"
       ],
-      "feasibility": "EXISTING_CELLS_LAYOUT_RULE_PENDING",
-      "family": "brake-descent-interface",
+      "feasibility": "MISSING_GATE_SURFACE_HAZARD_STATE_BINDING",
+      "family": "complementary-shaft-landings",
       "design": {
-        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/f7d980c7eddd/design.json",
-        "version": "sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081",
-        "sha256": "e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e",
-        "diagram": "ideas/idea-spec02-s09-001/f7d980c7eddd/images/R2-S09.png"
-      }
+        "file": "generation/module-workshop/ideas/idea-spec02-s09-001/ecedc0733c06/design.json",
+        "version": "sha256:ecedc0733c062b795167a2840f941b9d8560f94d24fc9e46895e6a3ae8d66067",
+        "sha256": "c99f6de693f4869ba06468f1d978b0988a34c936fb5d269f4b6008d2b61d181c",
+        "diagram": "ideas/idea-spec02-s09-001/ecedc0733c06/images/R2-S09.png"
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-f7d980c7eddd-1.json",
+        "sha256": "1788d9f5638cd7d94d1c79b856279e4702a6ff5e0938e7b3853cd7ce4d4ff71f"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s09-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081",
+          "designFileSha256": "e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e",
+          "decision": "CHANGE",
+          "note": "很容易过，重新思考",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ],
+      "history": [
+        {
+          "design": {
+            "file": "generation/module-workshop/ideas/idea-spec02-s09-001/f7d980c7eddd/design.json",
+            "version": "sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081",
+            "sha256": "e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e",
+            "diagram": "ideas/idea-spec02-s09-001/f7d980c7eddd/images/R2-S09.png"
+          },
+          "stage": "DESIGN_REVIEW"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s10-001",
@@ -35535,8 +37807,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35556,7 +37828,23 @@
         "version": "sha256:0f6dc21ed04b996082548b16856841672a93b9fea3514548792cb7b41c0ad4a7",
         "sha256": "2ba280b81194d8ad8d66dc47af7dd07ebeb070399927fb738dcfa112cb1e1c58",
         "diagram": "ideas/idea-spec02-s10-001/0f6dc21ed04b/images/R2-S10.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s10-001-0f6dc21ed04b-1.json",
+        "sha256": "8df354775a88f141fb3413f5a01960cdd5db0b64625f8e71739ee86a09523a29"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s10-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:0f6dc21ed04b996082548b16856841672a93b9fea3514548792cb7b41c0ad4a7",
+          "designFileSha256": "2ba280b81194d8ad8d66dc47af7dd07ebeb070399927fb738dcfa112cb1e1c58",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s11-001",
@@ -35664,8 +37952,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35686,7 +37974,23 @@
         "version": "sha256:ca5de5b99d80a1104ceec354e144cbde7654ad9266a82790ac92586a5f424056",
         "sha256": "328dffbf7cc43d1f696f60c8444b6c4b5504d0401d3452913d62829219bb70d6",
         "diagram": "ideas/idea-spec02-s11-001/ca5de5b99d80/images/R2-S11.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s11-001-ca5de5b99d80-1.json",
+        "sha256": "35205e72fb4fb78482db5c0992058a5c5332a1f51ce2ee592cfb117385ba9c8f"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s11-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:ca5de5b99d80a1104ceec354e144cbde7654ad9266a82790ac92586a5f424056",
+          "designFileSha256": "328dffbf7cc43d1f696f60c8444b6c4b5504d0401d3452913d62829219bb70d6",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s12-001",
@@ -35835,8 +38139,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35856,7 +38160,23 @@
         "version": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
         "sha256": "f8a7b6ea1f5bccd935a76a348da42c0600688ca04401e97e24396d8ebe890a64",
         "diagram": "ideas/idea-spec02-s12-001/d5a7213383ec/images/R2-S12.png"
-      }
+      },
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s12-001-d5a7213383ec-1.json",
+        "sha256": "808bc0e070ddbf772f4c955245ef7e425bf4395b495782ecd81558a9c877516d"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s12-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "designFileSha256": "f8a7b6ea1f5bccd935a76a348da42c0600688ca04401e97e24396d8ebe890a64",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     },
     {
       "id": "idea-spec02-s13-001",
@@ -35918,8 +38238,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -35940,7 +38260,23 @@
         "sha256": "87c72c31ff00f1a8d9a9bb5e6fcd78b3c03842a77a7a38eeb53147fa04b55932",
         "diagram": "ideas/idea-spec02-s13-001/bea219b40406/images/R2-S13.png"
       },
-      "history": []
+      "history": [],
+      "decisionReceipt": {
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s13-001-bea219b40406-1.json",
+        "sha256": "ca4cd4b3df6a68a344921021c53fc3cda0be08283464a9178f0bbaace901a0a7"
+      },
+      "feedback": [
+        {
+          "id": "idea-spec02-s13-001",
+          "sourceType": "human_feedback",
+          "verbatim": "Module 工坊 · 设计审阅\n创意：idea-spec02-s04-001\n标题：S04 · 停住接收台，再启另一台\n设计版本：sha256:84fb3339b2450b5e4740d407575229c7572977b44ca3f8f58e6d41b0772f5ef7\n设计文件 SHA256：912d54fcd6d245a0a16c795d555a466165e845901f615f2d56554cec148ae392\n决定：修改\n意见：增加2个空中怪物\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s06-001\n标题：S06 · 引出慢弹，追台到掩护侧\n设计版本：sha256:4a8215a4851a598a039c2ec595fe5eb8a1dd026af770ae1ce9d33c71868ed064\n设计文件 SHA256：c1bd6a583254353c6265a52a1d67e57ffa06a24cb2d303f3272da38989798f75\n决定：修改\n意见：趣味性不足，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\nModule 工坊 · 设计审阅\n创意：idea-spec02-s09-001\n标题：S09 · 下落先留枪，过锯再刹回\n设计版本：sha256:f7d980c7eddd13ba583f59cbe4fef6067aa07a50d3ff4f96b8bdb1ab3378d081\n设计文件 SHA256：e01858de6031057ef70f7efefb43a18a54f87194df11f06c64ca43f124e24e9e\n决定：修改\n意见：很容易过，重新思考\n仅为此设计版本的人工意见，尚不代表已实现或技术验收。\n\n其他通过",
+          "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532",
+          "designFileSha256": "87c72c31ff00f1a8d9a9bb5e6fcd78b3c03842a77a7a38eeb53147fa04b55932",
+          "decision": "KEEP",
+          "note": "其他通过：绑定本轮当前已发布精确版本",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-001.json"
+        }
+      ]
     }
   ],
   "policy": {

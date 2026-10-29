@@ -32,6 +32,7 @@ for n,(entry,(title,note)) in enumerate(zip(catalog,notes),1):
  gates={};bells={};reward=[];hooks={};reference_action=review_meta.get('actionDiagram') or review_meta.get('hookActionDiagram')
  for o in doc['objects']:
   typ=o['type']
+  if design_only and o.get('diagramInactive'):continue
   if typ in ('route','entry','exit','anchor','note'):continue
   if typ in ('wallSpike','spike','gear'):
    o=dict(o,type='hazard',sourceType=typ,**(dict(shape='gears',count=1) if typ=='gear' else dict(orientation=('LEFT' if o.get('rotation',0)%360==180 else 'RIGHT') if typ=='wallSpike' else 'UP')));typ='hazard'
