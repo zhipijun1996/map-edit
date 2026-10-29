@@ -3,13 +3,13 @@
   "counts": {
     "ARCHIVED": 1,
     "IMPLEMENTED_CANDIDATE": 64,
-    "READY_FOR_IMPLEMENTATION": 43,
+    "READY_FOR_IMPLEMENTATION": 44,
     "NEEDS_REPAIR": 5,
     "NEEDS_ALIGNMENT": 2
   },
   "sources": {
     "catalogSha256": "f12ed3b4cd876fcd52eea3ab54ad75225826c8b9f63b5db597808c6710ca0fb2",
-    "handoffRevision": 68,
+    "handoffRevision": 69,
     "implementationCommit": "08012fbaed5c5eba2eca1b94de4823a97967b0b7",
     "implementationPullRequest": 25,
     "implementationMerged": false,
@@ -34148,6 +34148,225 @@
       "archiveUrl": null,
       "productionApproval": false,
       "humanPlaytest": "UNKNOWN"
+    },
+    {
+      "id": "idea-spec02-s09-001",
+      "sourceIdeaId": "idea-spec02-s09-001",
+      "reviewId": "idea-spec02-s09-001",
+      "title": "S09 · 齿轮在上走下缝，在下走上缝",
+      "summary": "左上进入后下降到右下口。横向齿轮守着中下段换侧处，先留住空中枪，不在高处过早用掉；穿过锯线后再反冲刹住窄接岸。回程这些岸成为上行台阶。",
+      "category": "新创意",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png",
+      "foundation": {
+        "blockSize": 128,
+        "widthBlocks": 3,
+        "heightBlocks": 5
+      },
+      "ports": [
+        {
+          "id": "L",
+          "face": "LEFT",
+          "index": 1,
+          "position": [
+            0,
+            192
+          ],
+          "surface": "ROCK",
+          "permission": "INOUT",
+          "normal": [
+            -1,
+            0
+          ],
+          "diagramLabel": "L",
+          "supportObjectId": "left-bank",
+          "stagingPosition": [
+            64,
+            192
+          ],
+          "requestedBlockPosition": [
+            0,
+            1.5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "face": "BOTTOM",
+          "index": 2,
+          "position": [
+            320,
+            640
+          ],
+          "surface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT",
+          "normal": [
+            0,
+            1
+          ],
+          "diagramLabel": "B",
+          "supportObjectId": "bottom",
+          "stagingPosition": [
+            320,
+            576
+          ],
+          "requestedBlockPosition": [
+            2.5,
+            5
+          ],
+          "cornerRelocations": {
+            "TOP_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "TOP_RIGHT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_LEFT": {
+              "applicable": false,
+              "allowed": false,
+              "reason": "非该角外边中心。"
+            },
+            "BOTTOM_RIGHT": {
+              "applicable": true,
+              "allowed": "UNKNOWN",
+              "reason": "本轮只请求精确原口，换边未认证。",
+              "targetFace": "RIGHT",
+              "targetPosition": [
+                384,
+                576
+              ],
+              "proposedSurface": "ONE_WAY_PLATFORM",
+              "permission": "INOUT",
+              "profileId": "spec02-s09-B-bottom_right"
+            }
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "L-to-B",
+          "from": "L",
+          "to": "B",
+          "role": "main",
+          "pathObjectId": "route-L-B",
+          "strategy": "从唯一左入口岩台读锯选缝，穿过上移后的窗口，避让/攻击空怪后落底口。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            2.5,
+            3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ROCK",
+            "exitSurface": "ONE_WAY_PLATFORM",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        },
+        {
+          "id": "B-to-L",
+          "from": "B",
+          "to": "L",
+          "role": "return",
+          "pathObjectId": "route-B-L",
+          "strategy": "处理删除中间台后的真实上升与空怪资源，再反向穿窗回L；敌死状态可达UNKNOWN。",
+          "evidenceStatus": "UNKNOWN",
+          "displacement": [
+            -2.5,
+            -3.5
+          ],
+          "capabilityRequirements": {
+            "version": 1,
+            "status": "partial",
+            "allOf": [
+              "jump",
+              "shot_recoil"
+            ],
+            "anyOfGroups": [],
+            "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+          },
+          "difficulty": "UNKNOWN",
+          "estimated_duration": "UNKNOWN",
+          "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+          "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+          "entry_exit_contract": {
+            "entrySurface": "ONE_WAY_PLATFORM",
+            "exitSurface": "ROCK",
+            "entryVelocity": "UNKNOWN",
+            "exitStable": "UNKNOWN",
+            "bodyClearance": "UNKNOWN"
+          },
+          "validation": {
+            "status": "UNKNOWN",
+            "physicsRun": false
+          }
+        }
+      ],
+      "relations": [],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "foundationCheck": "DESIGN_ONLY",
+      "mapReady": false,
+      "designVersion": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
+      "designFile": "generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
+      "designFileSha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
+      "designUrl": "https://github.com/zhipijun1996/map-edit/blob/main/generation/module-workshop/ideas/idea-spec02-s09-001/ba9155075c23/design.json",
+      "reviewUrl": "#ideas",
+      "implementation": null,
+      "archiveUrl": null,
+      "productionApproval": false,
+      "humanPlaytest": "UNKNOWN"
     }
   ],
   "ideas": [
@@ -38156,8 +38375,8 @@
         },
         "humanRequest": "feedback/module-workshop/review-receipts/spec02-request-v1.json"
       },
-      "stage": "DESIGN_REVIEW",
-      "humanApproval": "UNKNOWN",
+      "stage": "READY_FOR_IMPLEMENTATION",
+      "humanApproval": "KEEP",
       "technicalStatus": "UNKNOWN",
       "productionApproval": false,
       "source": {
@@ -38181,8 +38400,8 @@
         "diagram": "ideas/idea-spec02-s09-001/ba9155075c23/images/R2-S09.png"
       },
       "decisionReceipt": {
-        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-b19322aeec93-3.json",
-        "sha256": "1be846c0d38890d99db5abe5e90153ea160fb637d632fdfc99d90b6e45a62067"
+        "path": "feedback/manual-review/idea-decisions/idea-spec02-s09-001-ba9155075c23-4.json",
+        "sha256": "22878589ba5e8e7cd7260a3a9e335a928716cece6d3ab706363c382230382533"
       },
       "feedback": [
         {
@@ -38214,6 +38433,16 @@
           "decision": "CHANGE",
           "note": "左侧只留一个平台，齿轮对齐左侧平台位置。右侧中间少一个平台，变成一只空中怪。",
           "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-003.json"
+        },
+        {
+          "id": "idea-spec02-s09-001",
+          "sourceType": "human_feedback",
+          "verbatim": "ok了，通过",
+          "designVersion": "sha256:ba9155075c23aa053b31102e16aec69cd170fe5e74310c44d7f36d1a01855783",
+          "designFileSha256": "65726ad21653652aed747a93e5d397df1fea8f16ee9ae797a677c483a1cf9413",
+          "decision": "KEEP",
+          "note": "ok了，通过",
+          "sourceReceipt": "feedback/module-workshop/review-receipts/spec02-feedback-004.json"
         }
       ],
       "history": [

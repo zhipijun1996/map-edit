@@ -108,3 +108,5 @@ HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.js
 精确接口二评：`feedback/module-workshop/review-receipts/spec02-feedback-002.json`记录“S09没看懂，完全重新设计；其余ok”。S04/S06按最后图稿保留后115项交接/43项待实现。S09旧互补井盖退役，新稿只保留3×5及L/B精确端口，以一枚上下齿轮控制同一横穿窗口的上下净空；图中给出同一窗口两相位对照。不新增Cell、不调用物理，布局规则与实际可达/资源/恢复/绕行仍UNKNOWN；只有新S09待审。
 
 精确接口三评：`feedback/module-workshop/review-receipts/spec02-feedback-003.json`记录左侧只留一平台/齿轮对齐、右中台换空怪。为守住原ROCK口，保留左入口岩台删下方观察台，齿轮中线和窗口上移96px；右y512中间台换plains_diver，另外两右平台不动。尺寸/Port不变、115项交接不变，新图待审；删台后的上返及敌死亡后返回未验证，不补台或刷怪。
+
+精确接口四评：`spec02-feedback-004.json`记录“ok了，通过”，精确保留S09最后ba9155075c23版，图稿原字节不变。该十份规格设计全部保留，116项交接/44项待实现；无待审新图。本次只登记人工设计意见，不执行实施/物理，不升级技术或生产资格。
