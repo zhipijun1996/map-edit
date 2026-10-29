@@ -31,6 +31,12 @@ class WorkflowTest(unittest.TestCase):
   with self.assertRaises(ValueError):w.decide(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='保留',designVersion=d['designVersion'],decision='KEEP'))
  def test_discard_keeps_design_and_does_not_enter_handoff(self):
   d=self.prepare();w.decide(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='废弃',designVersion=d['designVersion'],decision='DISCARD'));self.assertEqual(w.read(w.IDEAS)['rows'][0]['stage'],'DISCARDED');self.assertEqual(w.read('feedback/manual-review/implementation-handoff-v1.json')['rows'],[])
+ def test_published_variant_requires_exact_binding(self):
+  d=self.prepare();data=w.read(w.IDEAS);variant=copy.deepcopy(d);variant['bounds']['h']=384;variant=seal_design(variant);file='generation/module-workshop/ideas/idea-abcdef/variant.json';w.write(file,variant);data['rows'][0]['designVariants']=[data['rows'][0]['design'],dict(file=file,sha256=w.digest(file),version=variant['designVersion'])];w.write(w.IDEAS,data)
+  w.decide(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='三怪版保留',designVersion=variant['designVersion'],decision='KEEP'));h=w.read('feedback/manual-review/implementation-handoff-v1.json');self.assertEqual(h['rows'][0]['designVersion'],variant['designVersion']);self.assertEqual(h['rows'][0]['designFile'],file)
+ def test_discard_one_variant_preserves_other_unreviewed_option(self):
+  d=self.prepare();data=w.read(w.IDEAS);variant=copy.deepcopy(d);variant['bounds']['h']=384;variant=seal_design(variant);file='generation/module-workshop/ideas/idea-abcdef/variant.json';w.write(file,variant);data['rows'][0]['designVariants']=[data['rows'][0]['design'],dict(file=file,sha256=w.digest(file),version=variant['designVersion'])];w.write(w.IDEAS,data)
+  w.decide(dict(id='idea-abcdef',sourceType='human_feedback',verbatim='两怪版废弃',designVersion=d['designVersion'],decision='DISCARD'));r=w.read(w.IDEAS)['rows'][0];self.assertEqual(r['stage'],'DESIGN_REVIEW');self.assertEqual(r['design']['version'],variant['designVersion']);self.assertEqual(w.read('feedback/manual-review/implementation-handoff-v1.json')['rows'],[])
  def test_boundary_must_be_block_face_center(self):
   d=self.design();d['ports'][0]['position']=[0,200]
   with self.assertRaises(AssertionError):seal_design(d)

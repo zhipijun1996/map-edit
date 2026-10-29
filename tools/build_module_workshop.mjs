@@ -84,7 +84,7 @@ const rows=handoff.rows.map(h=>{
   productionApproval:false,humanPlaytest:impl?.humanPlaytest??'UNKNOWN'};
 });
 for(const idea of ideas.rows){
- if(idea.design){const raw=fs.readFileSync(path.join(root,idea.design.file));if(hash(raw)!==idea.design.sha256)throw Error('idea design SHA changed');if(JSON.parse(raw).designVersion!==idea.design.version)throw Error('idea version mismatch');}
+ for(const design of [...(idea.design?[idea.design]:[]),...(idea.designVariants??[])]){const raw=fs.readFileSync(path.join(root,design.file));if(hash(raw)!==design.sha256)throw Error('idea design SHA changed');const d=JSON.parse(raw);if(d.designVersion!==design.version||d.id!==idea.id)throw Error('idea version/identity mismatch');}
  if(!['IDEA','DESIGN_REVIEW','READY_FOR_IMPLEMENTATION','DISCARDED'].includes(idea.stage))throw Error('Unsupported idea stage');
  if(idea.stage==='READY_FOR_IMPLEMENTATION'){const r=handoff.rows.find(r=>r.moduleId===idea.id);if(!r||r.designVersion!==idea.design.version||idea.humanApproval!=='KEEP')throw Error('Approved idea lacks exact handoff');const raw=fs.readFileSync(path.join(root,idea.decisionReceipt.path));if(hash(raw)!==idea.decisionReceipt.sha256)throw Error('human receipt changed');const receipt=JSON.parse(raw);if(receipt.decision!=='KEEP'||receipt.designVersion!==idea.design.version||receipt.sourceType!=='human_feedback')throw Error('human approval mismatch');}
 }
