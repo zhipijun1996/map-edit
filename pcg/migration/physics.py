@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -231,6 +231,10 @@ def exterior_floor(case, port):
 
 
 def _vertical_inner_dock(case, port):
+    from .revision061_top_boundary_v1 import applies as latest_top
+    if latest_top(case,port):return list(port['stagingPosition'])
+    from .revision060_top_boundary_v1 import applies as newer_top
+    if newer_top(case,port):return list(port['stagingPosition'])
     from .revision059_top_boundary_v1 import applies as hq_top
     if hq_top(case,port):return list(port['stagingPosition'])
     from .revision058_boundary_v1 import applies as revision_top
@@ -291,6 +295,10 @@ def seam_cases(case, doc):
                 if idea_top(value,port):idea_local(value,port,direction,doc,offset)
                 from .revision053_boundary_v1 import local as revision_local
                 revision_local(value,port,direction,doc,offset)
+                from .revision061_top_boundary_v1 import local as latest_local
+                latest_local(value,port,direction,doc,offset)
+                from .revision060_top_boundary_v1 import local as newer_local
+                newer_local(value,port,direction,doc,offset)
                 from .revision059_top_boundary_v1 import local as hq_local
                 hq_local(value,port,direction,doc,offset)
                 from .revision058_boundary_v1 import local as new_local
@@ -353,6 +361,11 @@ def crossing(case, raw):
         outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw)
     observation=observe(case,raw)
     if observation is None:
+        from .revision060_top_observer_v1 import observe as observe_newer_top
+        observation=observe_newer_top(case,raw)
+        if observation is None:
+            from .revision061_top_observer_v1 import observe as observe_latest_top
+            observation=observe_latest_top(case,raw)
         from .revision059_top_observer_v1 import observe as observe_hq_top
         hq_observation=observe_hq_top(case,raw)
         if hq_observation:observation=hq_observation
@@ -373,6 +386,12 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .revision061_top_boundary_v1 import exit as latest_exit
+    special=latest_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision060_top_boundary_v1 import exit as newer_exit
+    special=newer_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     from .revision059_top_boundary_v1 import exit as hq_exit
     special=hq_exit(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -445,6 +464,12 @@ def continuous_exit(case, doc):
 
 
 def continuous_entry(case, doc):
+    from .revision061_top_boundary_v1 import entry as latest_entry
+    special=latest_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision060_top_boundary_v1 import entry as newer_entry
+    special=newer_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     from .revision059_top_boundary_v1 import entry as hq_entry
     special=hq_entry(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -588,6 +613,10 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=new_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v13 import classify as approved_hq_exterior
     judgment=approved_hq_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v14 import classify as approved060_exterior
+    judgment=approved060_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v15 import classify as approved061_exterior
+    judgment=approved061_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 

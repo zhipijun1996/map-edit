@@ -1,0 +1,434 @@
+{
+  "designVersion": "sha256:654ed79c6a2d35e5c2456f92e0e0ee45d0038583a2c830a981da34e7128b37a7",
+  "content": {
+    "platforms": [
+      [
+        0,
+        352,
+        128,
+        32
+      ],
+      [
+        640,
+        352,
+        256,
+        32
+      ],
+      [
+        216,
+        312,
+        12,
+        60
+      ],
+      [
+        216,
+        300,
+        48,
+        12
+      ],
+      [
+        216,
+        372,
+        48,
+        12
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "pair-bell",
+        "bell": [
+          240.0,
+          344.0
+        ],
+        "gate": [
+          736,
+          256,
+          16,
+          96
+        ],
+        "open_seconds": 0,
+        "paired_gate": [
+          448,
+          352,
+          192,
+          16
+        ],
+        "initial_open": "B",
+        "return_access": [
+          832.0,
+          304.0
+        ]
+      }
+    ],
+    "enemies": [
+      {
+        "id": "charger",
+        "definition": "plains_charger",
+        "position": [
+          768.0,
+          336.0
+        ],
+        "initial_idle_cooldown": 0
+      }
+    ],
+    "reward_sites": [],
+    "approved_hq_cells": []
+  },
+  "staging": "real 24x36 body stand height derived from exact support; authored diagram staging retained in authorization snapshot",
+  "optionalReward": {
+    "kind": "original SimpleRoomReward",
+    "coins": 4,
+    "required": false
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "L-to-R",
+        "from_port": "L",
+        "to_port": "R",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "plan": [
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              106,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 330,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "descending_height",
+            "timeout": 120
+          },
+          "height_threshold": 310
+        },
+        {
+          "op": "shoot",
+          "native_aim_point": [
+            240,
+            344
+          ],
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 500,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 500,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              496,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 672,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 672,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              668,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_clear",
+            "timeout": 1200
+          },
+          "enemy": "charger",
+          "guard_x": 672,
+          "high_shore": false
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              868,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "R-to-L",
+        "from_port": "R",
+        "to_port": "L",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "plan": [
+        {
+          "op": "settle",
+          "target_x": 800,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              796,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "revision_clear",
+            "timeout": 1200
+          },
+          "enemy": "charger",
+          "guard_x": 800,
+          "high_shore": false
+        },
+        {
+          "op": "shoot",
+          "aim_cell": {
+            "kind": "bell",
+            "id": "pair-bell",
+            "receiver": "access"
+          },
+          "trigger": {
+            "after": 1,
+            "state": "grounded_shot_ready",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 500,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 500,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              496,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 110,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 4
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ]
+}
