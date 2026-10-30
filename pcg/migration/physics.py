@@ -149,7 +149,7 @@ def deduplicate_snapshot(out):
             os.link(target, temporary); temporary.replace(path)
 
 
-def _engine(folder, name, protocol_path):
+def _engine(folder, name, protocol_path, *, extra_sources=()):
     folder = Path(folder).resolve(); core.safe_id(name)
     cases_file = folder/'physics-input-cases.json'
     if not cases_file.exists():cases_file=folder/'cases.json'
@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision062_top_observer_v1.py'), Path(__file__).with_name('revision062_top_reanalysis_v1.py'), Path(__file__).with_name('partial_holdout_exposure_v2.py'), Path(__file__).with_name('partial_holdout_exposure_v1.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [*map(Path,extra_sources), Path(__file__).with_name('revision063_group_sampling_v1.py'), Path(__file__).with_name('revision063_fixture_v2.py'), Path(__file__).with_name('revision063_fixture_lineage_v1.py'), Path(__file__).with_name('revision063_boundary_v1.py'), Path(__file__).with_name('revision063_observer_v1.py'), Path(__file__).with_name('legacy_full_v2_upgrade_v1.py'), Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision062_top_observer_v1.py'), Path(__file__).with_name('revision062_top_reanalysis_v1.py'), Path(__file__).with_name('partial_holdout_exposure_v2.py'), Path(__file__).with_name('partial_holdout_exposure_v1.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -208,6 +208,9 @@ def fresh(case, label):
 
 
 def exterior_floor(case, port):
+    from .revision063_boundary_v1 import neighbor as r063_neighbor
+    existing=r063_neighbor(case,port)
+    if existing is not None:return existing
     from .revision053_boundary_v1 import neighbor as revision_neighbor
     existing=revision_neighbor(case,port)
     if existing is not None:return existing
@@ -231,6 +234,8 @@ def exterior_floor(case, port):
 
 
 def _vertical_inner_dock(case, port):
+    from .revision063_boundary_v1 import applies as r063_top
+    if r063_top(case,port):return list(port['stagingPosition'])
     from .revision061_top_boundary_v1 import applies as latest_top
     if latest_top(case,port):return list(port['stagingPosition'])
     from .revision060_top_boundary_v1 import applies as newer_top
@@ -303,6 +308,10 @@ def seam_cases(case, doc):
                 hq_local(value,port,direction,doc,offset)
                 from .revision058_boundary_v1 import local as new_local
                 new_local(value,port,direction,doc,offset)
+                from .revision063_boundary_v1 import local as r063_local
+                r063_local(value,port,direction,doc,offset)
+                from .revision063_fixture_v2 import adjust as adjust_r063_fixture
+                adjust_r063_fixture(value)
                 value['module_sha256'] = module_hash(value)
                 fixtures.append(value)
     return fixtures
@@ -374,6 +383,9 @@ def crossing(case, raw):
     if observation is None:
         from .revision062_top_observer_v1 import observe as observed_native_contact
         observation=observed_native_contact(case,raw)
+    if observation is None:
+        from .revision063_observer_v1 import observe as r063_observe
+        observation=r063_observe(case,raw)
     stable=bool(raw.get('ok')) or bool(observation and observation['stableExit'])
     result=dict(passed=bool(stable and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
                 stableExit=stable, bodyPassedBothSides=inward and outward,
@@ -389,6 +401,9 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .revision063_boundary_v1 import exit as r063_exit
+    special=r063_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     from .revision061_top_boundary_v1 import exit as latest_exit
     special=latest_exit(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -467,6 +482,12 @@ def continuous_exit(case, doc):
 
 
 def continuous_entry(case, doc):
+    from .revision063_boundary_v1 import entry as r063_entry
+    special=r063_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:
+        from .revision063_fixture_v2 import adjust
+        adjust(special);special['module_sha256']=module_hash(special)
+        return special
     from .revision061_top_boundary_v1 import entry as latest_entry
     special=latest_entry(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -514,6 +535,8 @@ def continuous_entry(case, doc):
     # Entrance docking must not inherit the original route's AIR exit goal.
     if case.get('approved_first30') and any(p['id']==case['route_spec']['to_port'] and p.get('surface')=='AIR' for p in doc['generationContract']['ports']):
         value['route_spec']=dict(case['route_spec'],to_port=case['route_spec']['from_port'])
+    from .revision063_fixture_v2 import adjust
+    adjust(value)
     value['module_sha256']=module_hash(value)
     return value
 
@@ -620,6 +643,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=approved060_exterior(case,raw,check,outcome,judgment,baseline)
     from .review_counter_scope_v15 import classify as approved061_exterior
     judgment=approved061_exterior(case,raw,check,outcome,judgment,baseline)
+    from .revision063_observer_v1 import classify as approved063_exterior
+    judgment=approved063_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -637,7 +662,7 @@ def artifact(path):
     return dict(path=core.relative(path), sha256=core.sha(path))
 
 
-def run(folder, name, protocol_path=None):
+def run(folder, name, protocol_path=None, *, sampling_correction=None):
     folder = Path(folder).resolve(); doc = core.read(folder/'module.mapnote.json')
     protocol_path = pool_protocols.runtime_protocol(folder, protocol_path, new_run=True)
     holdout_guard.check(folder,protocol_path=protocol_path)
@@ -645,7 +670,11 @@ def run(folder, name, protocol_path=None):
     protocol = core.read(protocol_path)
     if doc['generationContract']['version'] != 2:
         raise ValueError('migration_requires_v2')
-    engine, cases, authors = _engine(folder, name, protocol_path)
+    sampling_proof=None;evaluate_fn=evaluate
+    if sampling_correction is not None:
+        from . import revision063_group_sampling_v1 as group_sampling
+        sampling_proof=group_sampling.validate(folder,sampling_correction);evaluate_fn=group_sampling.evaluate
+    engine, cases, authors = _engine(folder, name, protocol_path, extra_sources=[core.resolve_artifact(sampling_correction['path'])] if sampling_correction else [])
     run_path = engine.out
     core.write(run_path/'protocol.json', protocol)
     core.write(run_path/'input-binding.json', dict(module=artifact(folder/'module.mapnote.json'),
@@ -655,7 +684,7 @@ def run(folder, name, protocol_path=None):
     for index, (case, author) in enumerate(zip(cases, authors)):
         base = fresh(case, 'interior')
         check = lambda c, r: checked_purpose(author, c, r)
-        calibration = evaluate(engine, [base], protocol['calibrationSeed']+index*1009,
+        calibration = evaluate_fn(engine, [base], protocol['calibrationSeed']+index*1009,
                                12, 'migration-calibration', purpose_fn=check)[0]
         core.write(run_path/f'calibration-{index}.json', calibration)
         if calibration.get('witness'):baselines[case['route_spec']['id']]=calibration['witness']['result']
@@ -668,7 +697,7 @@ def run(folder, name, protocol_path=None):
             calibrationSha256=core.sha(run_path/f'calibration-{index}.json'),
             holdoutSeed=protocol['holdoutSeed']+index*1009, revisions=0))
         pool_protocols.reserve_holdout(folder,protocol_path,name)
-        holdout = evaluate(engine, [base], protocol['holdoutSeed']+index*1009,
+        holdout = evaluate_fn(engine, [base], protocol['holdoutSeed']+index*1009,
                            12, 'migration-holdout', purpose_fn=check)[0]
         core.write(run_path/f'holdout-{index}.json', holdout)
         route_reports.append(dict(routeId=case['route_spec']['id'],
@@ -693,6 +722,7 @@ def run(folder, name, protocol_path=None):
         batches=artifact(run_path/'batches.json'), protocol=artifact(run_path/'protocol.json'),
         unknown=['unsearched port pairs', 'closure combinations', 'mirror', 'arbitrary entry states', 'full Map'],
         humanReview='UNKNOWN', productionAdmitted=False)
+    if sampling_proof is not None:report['samplingCorrection']=sampling_proof
     if extended:report['counterexamples']=artifact(run_path/'counterexamples.json')
     pool_binding=pool_protocols.report_binding(folder,protocol_path,name)
     if pool_binding is not None:report['holdoutPool']=pool_binding
@@ -707,6 +737,12 @@ def verify_report(folder, proof):
     core.verify_artifacts([proof])
     report_path = core.resolve_artifact(proof['path']); run_path = report_path.parent
     report = core.read(report_path)
+    if report.get('samplingCorrection'):
+        from .revision063_group_sampling_v1 import validate_report
+        validate_report(Path(folder),report)
+    if report.get('fixtureCorrection'):
+        from .revision063_fixture_lineage_v1 import validate_lineage
+        validate_lineage(report,report_path)
     if report.get('protocolCompletion'):
         from .revision058_protocol_completion_v2 import validate_lineage as validate_completion
         validate_completion(report,report_path)
@@ -790,6 +826,8 @@ def verify_report(folder, proof):
         raise ValueError('physics_attempt_count_mismatch')
     from pcg.prototype.factory.core.quality import gate
     from pcg.prototype.workshop.evaluate import instantiate
+    if report.get('samplingCorrection'):
+        from .revision063_group_sampling_v1 import instantiate
     counter_baselines={}
     for route_index, route in enumerate(report['routes']):
         if not isinstance(route['holdout'], dict):
@@ -882,7 +920,7 @@ def _verification_identity(folder, proof):
     return digest(dict(schema='pcg/deep-physics-verification-cache/v1',
         verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
         causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), causalObserverV3=core.sha(Path(causal_observer_v3.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
-        holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
+        groupSamplingSource=core.sha(Path(__file__).with_name('revision063_group_sampling_v1.py')), holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
         reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
         reviewCounterScopeV2=core.sha(Path(__file__).with_name('review_counter_scope_v2.py')),
         reviewCounterScopeV3=core.sha(Path(__file__).with_name('review_counter_scope_v3.py')),

@@ -196,7 +196,7 @@ def _continuation_allowance(folder,reference,registered):
     return 1,reference
 
 
-def register_pool(folder,pool_id,*,continuation_budget=None):
+def register_pool(folder,pool_id,*,continuation_budget=None,protocol_upgrade=None):
     """Allocate once after freezing a genuinely revised candidate, never reroll.
 
     Allocate conditions once after freezing the genuinely revised candidate,
@@ -210,7 +210,9 @@ def register_pool(folder,pool_id,*,continuation_budget=None):
         version=doc['generationContract']['contentVersion'];signature=_program_signature(cases)
         observed=[o for o in state['observations']if o['source']['key']==identity['key']]
         if not observed:raise ValueError('initial_unobserved_candidate_does_not_need_a_replacement_pool')
-        if any(o['programSignature']==signature for o in observed):
+        from .legacy_full_v2_upgrade_v1 import validate as validate_upgrade
+        upgrade=validate_upgrade(folder,protocol_upgrade,state,__import__(__name__,fromlist=['unused']))
+        if any(o['programSignature']==signature for o in observed) and upgrade is None:
             raise ValueError('unchanged_physics_program_or_observer_only_change_requires_raw_reanalysis_not_new_seed')
         registered=[p for p in state['independentPools']if p['source']['key']==identity['key']]
         previous=next((p for p in registered if p['frozenCandidate']['programSignature']==signature),None)
@@ -247,6 +249,7 @@ def register_pool(folder,pool_id,*,continuation_budget=None):
             baseProtocol=dict(path=core.relative(physics.FULL_PROTOCOL),sha256=core.sha(physics.FULL_PROTOCOL)),
             runtimeProtocolIntegration='REGISTERED_POOL_RUNTIME_V1',humanApproval='UNKNOWN')
         if continuation is not None:declaration['prospectiveContinuationBudget']=continuation
+        if upgrade is not None:declaration['prospectiveLegacyFullV2Upgrade']=upgrade
         target.mkdir(parents=True);core.write(target/'protocol.json',protocol);core.write(target/'registration.json',declaration)
         row=dict(id=pool_id,source=identity,frozenCandidate=frozen,pool=declaration['pool'],poolKey=digest(declaration['pool']),
             protocol=dict(path=core.relative(target/'protocol.json'),sha256=core.sha(target/'protocol.json')),

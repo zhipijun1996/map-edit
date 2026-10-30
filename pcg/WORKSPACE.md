@@ -178,3 +178,7 @@ Godot素材与真实脚本由 `godot-runtime-v1` 完整保存870原件；恢复�
 ## 三端口最新入口
 
 [PLAINS-THREE-PORT-REPORT.md](PLAINS-THREE-PORT-REPORT.md)：`prototype/plains/three_port.py`生成同几何A/B/C分支；`three_port_produce.py`完成校准/独立留出。2候选，每个6有向对/7路线，正式552次物理；742帧原生视频精确匹配。新T视频待评，奖励服务/通用回程保证/接缝/拼装仍未完成。恢复plains-three-port-v1可取得完整失败与源；不是14个Module，不将参数变体算新玩法。
+
+## 审批修复 revision063–064
+
+本轮12项原生可玩、23条固定方向，11项FULL v2通过；四载台三锯升降井仍未通过扰动，未授予独立资格。main规格同步提交`c04fca59`，完整交付见[README](../feedback/manual-review/implementation-results/revision-063-v1/README.md)。原始成功、失败和快照归档`approved-revision063-064-implementation-v1`含115817文件、19份分片；可用`python3 pcg/tools/restore_archive.py approved-revision063-064-implementation-v1 --verify-parts-only`核验，用`--extract`恢复。原游戏870保护文件未变。
