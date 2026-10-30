@@ -1,4 +1,6 @@
 """Freeze selected controls and run the original full protocol exactly once."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from pcg.migration import core
 from . import finalize_first40_v1 as shared,finalize_review040_v1 as previous

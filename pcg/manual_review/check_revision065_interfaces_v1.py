@@ -1,4 +1,6 @@
 """Narrow interface dispatch and the relay's real static body clearances."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics,revision065_boundary_v1 as boundary
 from .continue_revision065_lift_v1 import OUT,ID

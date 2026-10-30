@@ -1,4 +1,6 @@
 """Freeze one screened implementation, qualify once, deliver real native data."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,inspect
 from pcg.migration import core,physics,holdout_guard,pool_protocols,godot_package
 from pcg.prototype.creative_batches.batch30_runtime.produce_v1 import checked_purpose

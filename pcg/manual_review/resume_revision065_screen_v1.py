@@ -1,4 +1,6 @@
 """Reuse24 completed screen cases; run only the two not yet executed."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import gzip,json
 from pcg.migration import core,physics
 from pcg.prototype.workshop.evaluate import instantiate

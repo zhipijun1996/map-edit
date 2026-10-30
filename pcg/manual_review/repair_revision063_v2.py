@@ -1,4 +1,6 @@
 """Repairs from v1 clean diagnostics only; keep failed v1 inputs immutable."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,godot_package
 from .continue_revision063_v1 import rows,label

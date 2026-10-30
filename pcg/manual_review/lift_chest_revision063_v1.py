@@ -1,4 +1,6 @@
 """Real optional chest detour after the complete four-carrier ascent."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,inspect
 from pcg.migration import core,physics,godot_package,revision053_runtime_v1 as backend
 from pcg.prototype.creative_batches.batch30_runtime.produce_v1 import checked_purpose

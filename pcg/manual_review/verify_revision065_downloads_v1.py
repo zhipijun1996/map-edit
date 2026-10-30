@@ -1,4 +1,6 @@
 """Anonymous exact-byte downloads for relay scenes, samples, films and raw parts."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,concurrent.futures,datetime,hashlib,time,urllib.request
 from pcg.migration import core,physics
 from .continue_revision065_lift_v1 import OUT

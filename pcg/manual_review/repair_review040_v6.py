@@ -1,4 +1,6 @@
 """Late bounded policy revision; native observations and original resources only."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from pcg.prototype.workshop.rules import cmd
 from .prepare_review040_v3 import rows,axis,at,end,jump,height,phase

@@ -1,4 +1,6 @@
 """Append a new ZIP for read-only-qualified S12; preserve its earlier failed ZIP."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import zipfile,shutil
 from pcg.migration import core,physics
 from .continue_revision062_v1 import OUT

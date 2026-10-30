@@ -1,4 +1,6 @@
 """Regression using real archived prior raw; no new physics or seed allocation."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,json,subprocess,tempfile,shutil
 from unittest.mock import patch
 from pcg.migration import core,physics,holdout_guard as guard

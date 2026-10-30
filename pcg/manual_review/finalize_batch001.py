@@ -1,4 +1,6 @@
 """Bind diagnostic controls/trajectories to the five edited review drafts; never admit them."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pathlib import Path
 import copy,gzip,json,shutil
 from pcg.migration import core,physics

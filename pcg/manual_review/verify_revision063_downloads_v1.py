@@ -1,4 +1,6 @@
 """Anonymous SHA readback of the actual published delivery and raw archive."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,concurrent.futures,datetime,hashlib,time,urllib.request
 from pcg.migration import core,physics
 from .continue_revision063_v1 import OUT

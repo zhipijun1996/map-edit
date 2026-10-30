@@ -1,4 +1,6 @@
 """Append one actual exit-dock repair in the reserved run, preserving its trials."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,os
 from pcg.migration import core,physics,review_boundary_repair_v3,pool_protocols
 from .finalize_first40_repair17_v2 import AUTH,folder_for

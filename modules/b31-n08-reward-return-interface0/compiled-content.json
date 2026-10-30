@@ -1,10 +1,10 @@
 {
   "platforms": [
     [
-      0,
+      128,
       736,
-      320,
-      96
+      192,
+      32
     ],
     [
       800,
@@ -28,42 +28,12 @@
       1184,
       736,
       352,
-      64
+      32
     ],
     [
       256,
       736,
       352,
-      64
-    ],
-    [
-      96,
-      1248,
-      1344,
-      40
-    ],
-    [
-      96,
-      1056,
-      160,
-      32
-    ],
-    [
-      256,
-      864,
-      160,
-      32
-    ],
-    [
-      1248,
-      1056,
-      192,
-      32
-    ],
-    [
-      1120,
-      864,
-      192,
       32
     ]
   ],
@@ -101,13 +71,23 @@
       ]
     }
   ],
-  "enemies": [],
+  "enemies": [
+    {
+      "id": "review-crest-sentry",
+      "definition": "plains_sentry",
+      "position": [
+        1136.0,
+        144.0
+      ],
+      "initial_idle_cooldown": 0
+    }
+  ],
   "reward_sites": [
     {
       "id": "upper-cache",
       "position": [
-        896,
-        334
+        896.0,
+        334.0
       ],
       "region": [
         866,
@@ -119,20 +99,20 @@
     }
   ],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "3add7d11c0e4b2f068689279e68ff381c5a7f7fbb8a1f3989c3a0838a3091165",
+  "source_sha256": "97678f183dd7590c3cadcfcf39e3aeb9c3e231ffc1900ddb62bc3efafd173337",
   "stable_id": "b31-n08-reward-return-interface0",
   "ports": [
     {
       "id": "A",
       "objectId": "generated-75db39168ab146c6a9780044f6ed04f89c9c950af0e164c93b67e68b0f5c20a1/port-A",
       "position": [
-        0,
+        128,
         704
       ],
       "connection": {
         "status": "declared",
         "region": {
-          "x": -32,
+          "x": 96,
           "y": 672,
           "w": 64,
           "h": 64
@@ -214,13 +194,46 @@
         14
       ],
       "stagingPosition": [
-        24,
+        152,
         718
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe"
+      "permissionStatus": "declared_pending_approved_design_validation",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            192,
+            768
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      }
     },
     {
       "id": "B",
@@ -320,21 +333,47 @@
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe"
+      "permissionStatus": "declared_pending_approved_design_validation",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      }
     }
   ],
   "world_bounds": [
-    -256,
-    -256,
-    2048,
-    1920
+    128,
+    0,
+    1408,
+    768
   ],
   "entry_port": [
-    24,
-    718
+    152.0,
+    718.0
   ],
   "exit_port": [
-    1512,
-    334
+    1512.0,
+    334.0
   ]
 }

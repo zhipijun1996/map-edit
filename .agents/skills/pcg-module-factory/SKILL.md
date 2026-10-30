@@ -1,40 +1,14 @@
 ---
 name: pcg-module-factory
-description: 按当前授权修改已有 Module、实现确认设计或生成新 Module，复用真实工坊、格式和 Godot Harness，预检协议预算并交付可追溯样品。
+description: Create or revise playable Modules using the current Foundation format, existing native Cells and the single-source production pipeline.
 ---
 
-# 入口：先选模式，再实现
+Read [pcg-module-production](../pcg-module-production/SKILL.md) first and use its exact commands and lifecycle. This is the active factory workflow; older references are research history, not production entrypoints.
 
-先读 [Module 共用工作流程](references/module-workflow.md)，执行其中的授权、格式、预检、变更重验与失败归因规则。模型以根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md) 为准，[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md) 是推荐；输出按 [OUTPUT-CONTRACT.md](../../../pcg/OUTPUT-CONTRACT.md) 和实际导出/加载/验证实现核对。不能只补 schema 或 generationContract 就宣称支持。
+Start from the current ID's record and exact approved design. For a new design allocate a stable ID immediately in `modules/`; do not start another candidate/source library. Existing designs retain their ID through implementation. Keep design approval and implementation approval explicit. Capture layout, observable decision/action causality, native Cell support, real rewards, resource/recovery rules, initial permissions and each directed route (including requested self-return). Do not invent missing Cell behavior to make a report pass.
 
-| 当前工作 | 采用流程 |
-| --- | --- |
-| 既有 Module 修复/修改/迁移 | 核原件、反馈和依赖，最小修改；完整迁移/分流/归档另按 [迁移 skill](../pcg-module-migration/SKILL.md)。不启动旧批量任务。 |
-| 已确认设计实现 | 冻结用户指定清单子集、设计/来源 SHA、designVersion 与人工记录；复用 [交接文档](../../../docs/module-review-implementation-handoff.md)，只补获准的参数和策略。后续清单扩容不自动扩任务，不改设计页。 |
-| 新生成 | 当前用户授权允许后，采用下方创作流程；新增仍暂停时保持暂停，不因 skill 或旧命令恢复生产。 |
+Implement actual objects and native bindings using the original PlayerController, collision bodies, enemies, mechanisms, reward consumers and damage/lifetime services. Keep Block ownership and public boundary Ports distinct from the old host's internal standing anchors. The host owns the existing player and resources; module loading never spawns/refills a replacement actor. A source update must atomically replace all derived content and retire old evidence. Unknown configurations remain uncertified. Do not export a per-module mirror gate, mirrored copies or an all-Port connection whitelist: map-gen mirrors the complete content, selects Port subsets, installs unused-Port gear closures and checks remaining routes. Preserve original evidence and UNKNOWN separately from generation choices.
 
-提交、推送、发布、合并与新 Map 工作分别按当前授权判断，不沿用历史永久禁令或自行扩大权限。复用原规则、WorkshopEngine/factory Engine、库与 Godot Harness，不复制物理或候选系统。
+Use the existing physics/causal quality tools with frozen current inputs and exact versions. Calibration, independent holdout, accepted input events, full body boundaries, rewards/returns and counterexamples are separate claims. Run clean-package Godot acceptance after compilation. Store current fixtures under that ID's `validation/`, immutable proof references in its record, and distributable content only through the generated package. If design conflicts block one module, write its gap and continue other authorized modules.
 
-# 修改已有 Module 或实现确认设计
-
-1. 核实际来源、核心玩法、地貌、敌人/机关/奖励、Port/Route、真实资源、旧成功失败和精确设计差距。内部奖励台/waypoint 与外边 Port 分开，不为旧标签强迫无意义往返。
-2. 固定允许修改项、目标、预算和选项。普通迁移可按授权最小适配尺寸、平移与接岸；已确认设计不因通用迁移建议而自动改几何、移动敌人或加安全台。需要改方案时记录具体冲突。
-3. 补真实参数与可靠控制。核原 DSL 持续状态、动态触发、输入接受、瞄准、资源恢复及到岸，不把请求动作当已经发生。先做有界小样与针对性反例，保留全部失败；按预登记规则选一份方案。
-4. 冻结实际输入与源后，完成共用流程的协议解析、调用量上界和留出守卫预检，再按 [物理 skill](../pcg-physics-contract/SKILL.md) 验证受影响 Route、完整身体、真实因果/资源、扰动、恢复、接口与声明的同世界返回。控制策略未达标不能直接升级为设计缺陷。
-5. 编译可玩候选、原生加载回读、依赖与 SHA 核验，按 [视频 skill](../pcg-video-review/SKILL.md) 交付短片。分别声明候选、认证范围、人评和生产认可；失败保留，不冒称正式入库。
-
-# 获准的新 Module 生成
-
-设计卡说明玩家观察/选择、人物与世界因果、真实机制/能力、空间用途、奖励、失败恢复/回程、廉价替代与已有内容差别。对照真实 Cell 和消费者，缺口在授权范围内实现或如实报告，不用标题/动作词/implemented 字段冒充能力。
-
-在程序中生成一个最小可玩核心，先静态合同与实际 clean，再做有界扰动小样及廉价反例；固定候选域、选择和停止规则。选定后冻结并完整校准，通过后才运行未见留出。使用实际原质量门槛，不将示范配方或一次成功当通用生成能力。完整步骤见 [生产循环参考](references/production-loop.md)，历史数值和 CLI 先核当前能力后才可用。
-
-按真实需求扩展方向、接口、封口及镜像，不强迫所有口互通；N×N 含自环、正反独立，未测 UNKNOWN。合理替代解先作为 Route 发现保存，不因省略预设动作就认定非法；技术合格与体验冗余分开。
-
-# 公共边界与交付
-
-完整矩形、真实边中心 Port、surface/初始权限、封口、Route、镜像与角落换边均遵守 Foundation 及 [共用流程](references/module-workflow.md)。角落换边另见 [扩展合同](../../../docs/l4-mapgen/corner-port-relocation-v1.md)，仅开放认证的完整配置；不要求封旧几何开口或额外加墙。
-
-原件、旧结果和失败不覆盖；纯元数据/测量修订优先原 raw 只读重分析，真实参数、策略、几何或接口变化按影响范围重验。预算/协议错误与物理质量失败分别报告；不能事后提预算、换 seed 或放宽门槛救过。
-
-交付来源/设计/实现 SHA、参数与策略、实际格式与加载结果、协议/成本/留出记录、逐方向与配置状态、可复现命令、可玩样品和视频。正式库资格只来自实际目标验证、回读与现有准入；迁移原件在目标、引用及可恢复归档就绪后再处理。未来在线仅静态能力/初始权限、纯程序读取认证库，不在线追逐步资源或调用 LLM 补内容。
+Export every native `reward_sites` ID, position, region and amount. Route reward requirements use existing `resourceProfile.requiredRewards` / native case `required_rewards`; unknown associations remain in the generated gap report without deleting content. Set explicit ordinary `purpose` metadata for future Boss content; effective `entryPortIds` are derived from actual directed-route starts and initial ingress permissions, not a separate Boss routing schema.

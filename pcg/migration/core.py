@@ -600,6 +600,7 @@ def _relocate_transaction(path, transaction, journal, entry, *, prepared=None):
 
 
 def promote(folder):
+    raise RuntimeError("retired_legacy_production_entrypoint_use_module_pipeline")
     with _migration_lock():
         return _promote_locked(folder)
 
@@ -661,6 +662,7 @@ def _promote_locked(folder):
 
 
 def archive(folder, reason, replacement=None):
+    raise RuntimeError("retired_legacy_production_entrypoint_use_module_pipeline")
     """Only explicit disposal/deduplication; a failed migration is not disposal."""
     with _migration_lock():
         return _archive_locked(folder, reason, replacement)
@@ -835,6 +837,7 @@ def _refresh_package_locked(folder, *, evidence_update=False):
 
 
 def build_catalog():
+    raise RuntimeError("retired_legacy_production_entrypoint_use_module_pipeline")
     if _CATALOG_DEFERRED:
         return dict(status='deferred_until_batch_end')
     rows = []

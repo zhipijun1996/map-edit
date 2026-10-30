@@ -20,33 +20,9 @@
     ],
     [
       820,
-      500,
-      260,
-      40
-    ],
-    [
-      -64,
-      1160,
-      64,
-      24
-    ],
-    [
-      -128,
-      1160,
-      64,
-      24
-    ],
-    [
-      1080,
-      500,
-      136,
-      24
-    ],
-    [
-      1216,
       520,
-      64,
-      24
+      204,
+      40
     ]
   ],
   "one_way_platform_indices": [],
@@ -55,7 +31,7 @@
     [
       44,
       1200,
-      992,
+      980,
       20
     ],
     [
@@ -79,22 +55,27 @@
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "3d0015bf0ccfa958398a0d4b44e7138fc125e1b922306eb11e529f7e43e62292",
+  "source_sha256": "b44a3931f20f67b28856d36d24d47dc0100abe436f3feea609617eeb791a7070",
   "stable_id": "game-challenge-recoil-climb",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/port-entry",
       "position": [
-        -128,
+        0,
         1128
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 1096,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/replay-independent-dock-entry",
+        "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -161,7 +142,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -185,13 +166,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         1142
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -217,21 +198,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          5
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          1142
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/port-exit",
       "position": [
-        1280,
+        1024,
         488
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 992,
+          "y": 456,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/replay-independent-dock-exit",
+        "objectId": "generated-786a2111efd3f0d7fed601b46e7b96ca2acf22bfd3be265556494bd8599a029b/platform-3",
         "face": "top",
         "status": "source_derived"
       },
@@ -298,7 +296,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -322,13 +320,13 @@
         ]
       },
       "stagingPosition": [
-        1256,
+        1000,
         502
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -339,11 +337,11 @@
         "TOP_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            1216,
+            960,
             424
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -361,21 +359,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          7,
+          0
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          1000,
+          502
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    0.0,
-    1664,
-    1448.0
+    0,
+    424,
+    1024,
+    896
   ],
   "entry_port": [
-    20.0,
+    24.0,
     1142.0
   ],
   "exit_port": [
-    1256,
-    502
+    1000.0,
+    502.0
   ]
 }

@@ -1,4 +1,6 @@
 """Three preregistered actual mechanism probes, separate from route qualification."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics
 from pcg.prototype.workshop.engine import WorkshopEngine

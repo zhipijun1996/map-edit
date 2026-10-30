@@ -1,4 +1,6 @@
 """Freeze the first unchanged fully screened/native candidate per specification."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from pcg.migration import core,physics,pool_protocols,holdout_guard,ideas_runtime_v2 as backend
 from pcg.prototype.creative_batches.batch30_runtime.produce_v1 import checked_purpose

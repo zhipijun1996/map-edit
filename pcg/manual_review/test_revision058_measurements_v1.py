@@ -1,4 +1,6 @@
 """Actual raw positives and fail-closed negatives for scoped measurement/completion changes."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json
 from pcg.migration import core,physics,revision058_top_observer_v2 as top,revision058_protocol_completion_v2 as lineage,review_counter_scope_v12 as counter,revision058_boundary_v1 as boundary
 from .continue_revision058_v1 import OUT,rows,label

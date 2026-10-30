@@ -1,4 +1,6 @@
 """Short native bell window and shield-side walk-off; preserve immutable older trials."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import sys
 from pcg.migration import core,godot_package
 from pcg.prototype.workshop.rules import cmd

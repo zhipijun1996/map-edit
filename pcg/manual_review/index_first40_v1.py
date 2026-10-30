@@ -1,4 +1,6 @@
 """Build a current delivery index without rewriting any historical result."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pathlib import Path
 from pcg.migration import core,physics,godot_package

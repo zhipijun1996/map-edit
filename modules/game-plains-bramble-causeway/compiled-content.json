@@ -25,27 +25,9 @@
       30
     ],
     [
-      -64,
-      300,
-      64,
-      24
-    ],
-    [
-      -128,
-      300,
-      64,
-      24
-    ],
-    [
       860,
       300,
-      100,
-      24
-    ],
-    [
-      960,
-      300,
-      64,
+      36,
       24
     ]
   ],
@@ -79,24 +61,29 @@
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "e780810c7dca3e9795cd97c7687f922fd7ab160c6f54d5d84062869801d4d99b",
+  "source_sha256": "43cb3f3e1f517a021fe0b10d5a0f18cb9ee67c0ad36e126202b7e1ad51d36254",
   "stable_id": "game-plains-bramble-causeway",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/port-entry",
       "position": [
-        -128,
+        0,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/replay-independent-dock-entry",
+        "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/platform-0",
         "face": "top",
-        "status": "source_derived"
+        "status": "actual_complete_body_native_standing_support"
       },
       "normal": [
         -1,
@@ -161,7 +148,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -185,22 +172,22 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         282
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            -64,
+            64,
             204
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -224,23 +211,40 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          0
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/port-exit",
       "position": [
-        1024,
+        896,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 864,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/replay-independent-dock-exit",
+        "objectId": "generated-18b882f9bff186202b93ffa717997466a86278eea18b138d362637ac750226f9/replay-shore-approach-exit",
         "face": "top",
-        "status": "source_derived"
+        "status": "actual_complete_body_native_standing_support"
       },
       "normal": [
         1,
@@ -305,7 +309,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -329,13 +333,13 @@
         ]
       },
       "stagingPosition": [
-        1000,
+        872,
         282
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -346,11 +350,11 @@
         "TOP_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            960,
+            832,
             204
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -368,21 +372,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          6,
+          0
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          872,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    0.0,
-    1408,
-    588.0
+    0,
+    204,
+    896,
+    256
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    1000,
-    282
+    872.0,
+    282.0
   ]
 }

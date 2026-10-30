@@ -1,4 +1,6 @@
 """Real height feedback, original upper receiver API and same-world carrier timing."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,shutil
 from pcg.migration import core
 from pcg.prototype.factory.core.quality import digest

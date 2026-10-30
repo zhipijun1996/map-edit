@@ -1,4 +1,6 @@
 """Apply frozen explicit discards; retire aliases whose primary was discarded."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import shutil
 from pcg.migration import core,physics
 from .refresh_review040_v1 import OUT,AUTH

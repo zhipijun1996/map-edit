@@ -7,27 +7,9 @@
       40
     ],
     [
-      -64,
-      300,
-      64,
-      24
-    ],
-    [
-      -128,
-      300,
-      64,
-      24
-    ],
-    [
       480,
       300,
-      96,
-      24
-    ],
-    [
-      576,
-      300,
-      64,
+      32,
       24
     ]
   ],
@@ -60,22 +42,27 @@
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "0afea2ecd3e59f29a4588c4a2ceacb93cac51abafee84fdf3b0c1a7f49d09d42",
+  "source_sha256": "0846f23881d9106d68032323b6278e4f79550e33f1cb73cf4e920323039da942",
   "stable_id": "game-plains-windchime-lesson",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/port-entry",
       "position": [
-        -128,
+        0,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/replay-independent-dock-entry",
+        "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -142,7 +129,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -166,13 +153,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         282
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -198,21 +185,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/port-exit",
       "position": [
-        640,
+        512,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 480,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/replay-independent-dock-exit",
+        "objectId": "generated-67ea5b3f1b207c99a05a60dd09c64c926b6e69c6f95e3ecda608d1481ff56dee/replay-shore-approach-exit",
         "face": "top",
         "status": "source_derived"
       },
@@ -279,7 +283,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -303,13 +307,13 @@
         ]
       },
       "stagingPosition": [
-        616,
+        496,
         282
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -335,21 +339,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          3,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          496,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    -52.0,
-    1024,
-    640.0
+    0,
+    76,
+    512,
+    384
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    616,
-    282
+    496.0,
+    282.0
   ]
 }

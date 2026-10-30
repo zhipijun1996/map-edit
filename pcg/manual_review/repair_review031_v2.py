@@ -1,4 +1,6 @@
 """Remove an unnecessary exposed wait on 200's independently authored descent."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from .prepare_review031_v1 import rows,axis
 from .prepare_review_refresh_v1 import end

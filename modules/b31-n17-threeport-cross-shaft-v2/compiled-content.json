@@ -4,7 +4,7 @@
       0,
       736,
       256,
-      64
+      32
     ],
     [
       320,
@@ -35,18 +35,6 @@
       224,
       256,
       64
-    ],
-    [
-      128,
-      928,
-      768,
-      32
-    ],
-    [
-      288,
-      800,
-      192,
-      40
     ]
   ],
   "one_way_platform_indices": [],
@@ -58,31 +46,55 @@
   "hooks": [],
   "latches": [
     {
-      "id": "cross-pair",
+      "id": "upper-route-gears",
       "bell": [
         560.0,
         488.0
       ],
       "gate": [
-        0,
-        352,
-        768,
-        20
+        560,
+        488,
+        1,
+        1
       ],
       "open_seconds": 0,
-      "paired_gate": [
-        768,
-        320,
-        24,
-        256
-      ],
-      "initial_open": "B"
+      "kind": "retractable_gears/v1"
     }
   ],
   "enemies": [],
   "reward_sites": [],
+  "retractable_groups": [
+    {
+      "id": "upper-route-gears",
+      "bell": [
+        560.0,
+        488.0
+      ],
+      "initial_extended": true,
+      "bands": [
+        {
+          "id": "design-P1-retractable-gears",
+          "rect": [
+            352,
+            264,
+            160,
+            24
+          ]
+        },
+        {
+          "id": "design-P2-retractable-gears",
+          "rect": [
+            576,
+            328,
+            192,
+            24
+          ]
+        }
+      ]
+    }
+  ],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "7880608db3287bc361e86660dd6d66d95777f2658a958fe68af8f152b9f3a70a",
+  "source_sha256": "3ebbca6d1215e97c5c322af5f1ce33ed71c982476a7cd8ee96566cc72ca3769c",
   "stable_id": "b31-n17-threeport-cross-shaft-v2",
   "ports": [
     {
@@ -170,7 +182,9 @@
       ],
       "routeRoles": [
         "A-to-B:entry",
-        "A-to-C:entry"
+        "A-to-C:entry",
+        "B-to-A:exit",
+        "C-to-A:exit"
       ],
       "crossing_offset": [
         0,
@@ -183,7 +197,52 @@
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe"
+      "permissionStatus": "declared_pending_approved_validation",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            64,
+            768
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      },
+      "grid": {
+        "cell": [
+          0,
+          4
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          718
+        ],
+        "profile": "ground64/v1"
+      }
     },
     {
       "id": "B",
@@ -269,7 +328,10 @@
         "B-seam"
       ],
       "routeRoles": [
-        "A-to-B:exit"
+        "A-to-B:exit",
+        "B-to-C:entry",
+        "B-to-A:entry",
+        "C-to-B:exit"
       ],
       "crossing_offset": [
         0,
@@ -282,7 +344,45 @@
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe"
+      "permissionStatus": "declared_pending_approved_validation",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      },
+      "grid": {
+        "cell": [
+          7,
+          2
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          1000,
+          462
+        ],
+        "profile": "ground64/v1"
+      }
     },
     {
       "id": "C",
@@ -368,7 +468,10 @@
         "C-seam"
       ],
       "routeRoles": [
-        "A-to-C:exit"
+        "A-to-C:exit",
+        "B-to-C:exit",
+        "C-to-A:entry",
+        "C-to-B:entry"
       ],
       "crossing_offset": [
         0,
@@ -381,21 +484,66 @@
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe"
+      "permissionStatus": "declared_pending_approved_validation",
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "TOP",
+          "targetPosition": [
+            64,
+            128
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "port_not_on_this_corner_block_outer_face",
+          "profileId": null
+        }
+      },
+      "grid": {
+        "cell": [
+          0,
+          0
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          206
+        ],
+        "profile": "ground64/v1"
+      }
     }
   ],
   "world_bounds": [
-    -1200,
-    -1000,
-    4000,
-    2400
+    0,
+    128,
+    1024,
+    640
   ],
   "entry_port": [
-    24,
-    718
+    24.0,
+    718.0
   ],
   "exit_port": [
-    1000,
-    462
+    1000.0,
+    462.0
   ]
 }

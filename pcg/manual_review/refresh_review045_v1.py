@@ -1,4 +1,6 @@
 """Freeze final approvals and a new explicitly continued repair round."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,inspect,subprocess
 from pcg.migration import core,physics
 from . import delete_review040_v1 as deletion

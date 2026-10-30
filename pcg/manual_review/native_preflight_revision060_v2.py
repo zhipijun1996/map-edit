@@ -1,3 +1,5 @@
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import sys
 from .continue_revision060_v1 import rows,label
 from .execution_revision060_v1 import frozen_row

@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/inspect-refresh-videos-final.py", line 5, in <module>
-    n=row['reviewId'];folder=root/'videos'/(n+('-recovery-v1'if n in('122','154','157','159')else'-v1'));m=json.load(open(folder/'manifest.json'));c=m['clips'][0];movie=folder/c['file'];probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(movie)]));v=probe['streams'][0];duration=float(probe['format']['duration']);frames=c.get('frames',c.get('frames_exact'));assert v['avg_frame_rate']=='60/1';assert abs(duration-frames/60-1)<.08,(n,duration,frames)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ('116', 11.483333, 624)

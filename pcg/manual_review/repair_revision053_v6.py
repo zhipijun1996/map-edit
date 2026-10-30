@@ -1,4 +1,6 @@
 """Keep the native12px hook sweep clear of the pillar, then recontact the real ring."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from .continue_revision053_v1 import rows,label
 from .prepare_review045_v1 import end

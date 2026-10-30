@@ -1,4 +1,6 @@
 """Real enemy depletion, retreat/reentry and unchanged post-death ascent policy."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics
 from .lift_idea_v1 import rows,AUTH
