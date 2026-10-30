@@ -1,4 +1,6 @@
 """Bounded diagnostics of frozen inputs; not qualification or holdout."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,inspect
 from . import probe_review040_v1 as previous
 from .refresh_review045_v1 import AUTH,rows

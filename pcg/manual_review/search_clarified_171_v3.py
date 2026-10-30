@@ -1,4 +1,6 @@
 """Aim within actual enemy body, keep the player grounded and alternate shots."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,copy
 from pcg.migration import core,godot_package,physics
 from pcg.manual_review.repair_clarified_three_v1 import OUT,rows

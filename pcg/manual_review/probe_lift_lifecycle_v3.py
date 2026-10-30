@@ -3,6 +3,8 @@
 This adjusts the depletion fixture only. Nominal controller v12 and all
 screen/holdout inputs remain frozen. No health or resource writes occur.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from . import probe_lift_lifecycle_v1 as previous
 

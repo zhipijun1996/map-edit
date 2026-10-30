@@ -1,4 +1,6 @@
 """Read-only geometry, actual input, causal and fixture lineage audit."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json,subprocess
 from pcg.migration import core,physics,review_oneway_fixture_v1 as fixture
 from pcg.manual_review.repair_clarified_three_v1 import OUT,AUTH,rows

@@ -1,38 +1,17 @@
-name: Editor and repository module library
+name: Current Module production and editor
 on:
   pull_request:
-    paths:
-      - '*.js'
-      - '*.html'
-      - '*.css'
-      - 'package.json'
-      - 'library/**'
-      - 'modules/**'
-      - 'modules-recycle/**'
-      - 'MAP_FOUNDATION.md'
-      - 'MAP_GENERATION_GUIDE.md'
-      - 'tools/**'
-      - '.github/workflows/editor.yml'
-      - '.github/workflows/pages.yml'
 permissions:
   contents: read
 jobs:
-  editor-checks:
+  current-library:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          # Structural checks build the workshop from approved design snapshots;
-          # archived experiment payloads remain excluded.
           sparse-checkout: |
             /*
             !/pcg/archives/
-            !/pcg/results/
-            !/generation/*
-            /generation/contracts/
-            /generation/manual-review/queue.json
-            /generation/manual-review/designs/
-            /generation/module-workshop/
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
@@ -41,3 +20,5 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm run check
+      - run: npm run test:production
+      - run: python3 tools/build_editor_site.py --out dist

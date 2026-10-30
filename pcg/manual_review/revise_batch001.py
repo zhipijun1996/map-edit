@@ -2,6 +2,8 @@
 
 No admission, generator, map, or physics replacement. Reuses the existing contract compiler.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pathlib import Path
 import copy,json,hashlib,subprocess
 from pcg.migration import core,corners,godot_package,physics

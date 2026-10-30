@@ -1,4 +1,6 @@
 """Publish current statuses without rewriting historical failures."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,shutil
 from pathlib import Path
 from collections import Counter

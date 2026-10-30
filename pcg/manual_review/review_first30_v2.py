@@ -1,4 +1,6 @@
 """Apply the user's explicit first-30 scope to exact recorded design decisions."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import copy
 import shutil

@@ -1,4 +1,6 @@
 """Freeze the first unchanged all-gates candidate; allocate at most one formal run."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,sys
 from pcg.migration import core,physics,holdout_guard,pool_protocols
 from . import finalize_first40_v1 as shared

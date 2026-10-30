@@ -1,4 +1,6 @@
 """Real closed-gate negative fixtures and unchanged full-body upward crossing."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,sys
 from pcg.migration import core,physics,revision053_runtime_v1 as backend
 from pcg.prototype.factory.core.quality import module_hash

@@ -1,4 +1,6 @@
 """Cross the small slalom gear during the initial safe part of a downward burst."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,shutil,inspect,math
 from pcg.migration import core,physics,godot_package
 from .probe_review_refresh_v1 import AUTH

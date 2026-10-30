@@ -1,4 +1,6 @@
 """Stay fully outside Q's solid side before real upward recoil; direct TOP approach at172."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from .continue_revision058_v1 import rows,label
 

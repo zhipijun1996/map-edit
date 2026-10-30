@@ -1,4 +1,6 @@
 """Real rendered replay of compiled native scenes; failed workshop films remain preserved."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,os,subprocess,sys
 from pcg.migration import core,physics
 from .continue_revision058_v1 import rows,label,OUT

@@ -1,4 +1,6 @@
 """Decode representative native movies at normal speed; preserve strict-comparison failures."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,subprocess,sys
 from PIL import Image,ImageDraw
 from .continue_revision058_v1 import OUT

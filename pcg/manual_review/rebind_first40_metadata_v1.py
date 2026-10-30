@@ -1,4 +1,6 @@
 """Correct provenance labels without changing or rerunning any held-out trial."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,copy,inspect,shutil
 from pcg.migration import core,physics
 from .finalize_first40_v1 import AUTH,folder_for as original_folder

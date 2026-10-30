@@ -1,4 +1,6 @@
 """Freeze real control repairs separately from immutable batch-001 evidence."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import copy
 from pcg.migration import core, physics, holdout_guard, pool_protocols

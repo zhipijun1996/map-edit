@@ -1,4 +1,6 @@
 """Fresh presentation directories after the display server startup failure."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from . import record_review040_v1 as previous
 def run(row):

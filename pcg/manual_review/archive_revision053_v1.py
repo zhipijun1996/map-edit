@@ -1,4 +1,6 @@
 """Every successful/failed raw, setup rejection and immutable snapshot retained."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from pcg.tools.build_archive import build
 from pcg.tools.restore_archive import restore

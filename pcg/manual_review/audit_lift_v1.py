@@ -1,4 +1,6 @@
 """Reproducible exact approved Cell/geometry and immutable-source audit."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import hashlib,json,subprocess
 from pcg.migration import core,physics,lift_runtime_v1 as backend
 from .lift_idea_v1 import OUT,rows

@@ -1,4 +1,6 @@
 """Publish native samples while keeping full-v2, legacy and failed candidates distinct."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from .continue_revision058_v1 import rows,label,OUT,AUTH
 from .finalize_revision058_v1 import folder_for

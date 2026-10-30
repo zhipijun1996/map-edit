@@ -1,4 +1,6 @@
 """Separate exact-version round for the lift approval discovered after v1 froze."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,copy,subprocess
 from pcg.migration import core,physics
 from . import prepare_ideas_v1 as previous

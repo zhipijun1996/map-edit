@@ -1,4 +1,6 @@
 """One genuine control adaptation under the existing FULL protocol cap of2."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from .continue_revision065_lift_v1 import OUT as PRIOR,AUTH as PRIOR_AUTH,ID
 from .run_revision065_lift_v1 import folder_for,rows

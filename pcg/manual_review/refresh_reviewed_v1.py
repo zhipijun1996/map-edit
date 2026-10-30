@@ -1,4 +1,6 @@
 """Freeze the newly approved exact versions and apply explicit discard decisions."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,subprocess,shutil
 from pcg.migration import core,physics
 OUT=core.REPO/'feedback/manual-review/implementation-results/review-refresh-v1'

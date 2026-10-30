@@ -1,4 +1,6 @@
 """Publishable result records; qualification, demonstrations and approval stay separate."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json
 import subprocess
 from pcg.migration import core, physics

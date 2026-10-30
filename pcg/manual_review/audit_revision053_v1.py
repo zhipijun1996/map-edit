@@ -1,4 +1,6 @@
 """Reproducible approved geometry, original physics, ownership and budget audit."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json,subprocess,collections
 from pcg.migration import core,physics,godot_package,revision053_runtime_v1
 from .continue_revision053_v1 import OUT,AUTH,rows,label

@@ -1,4 +1,6 @@
 """Materialize twelve exact designs; explicit authorized42 adjustment kept separate."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,inspect,sys
 from pcg.migration import core,physics,godot_package,corners
 from pcg.prototype.workshop.rules import cmd

@@ -1,4 +1,6 @@
 """Aggregate the bounded repair continuation without changing round063 limits."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from . import audit_revision063_v1 as original
 from .continue_revision063_v1 import OUT,rows,label

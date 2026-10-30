@@ -1,4 +1,6 @@
 """Unchanged 1 clean + 6 mild + 6 moderate bounded screen and original gates."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,inspect
 from . import screen_review040_v1 as previous
 from .refresh_review045_v1 import AUTH,rows

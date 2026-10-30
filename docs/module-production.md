@@ -6,7 +6,7 @@ The current state is generated into `modules/catalog.json.counts`; do not mainta
 
 ## Commands
 
-Run from the repository root using Linux, Python 3.11+, Node 18+ and `strace`. The exact Godot 4.7.2 binary is hash-checked or installed in the user cache. A verified host cache avoids repeated downloads.
+Run from the repository root using Linux, Python 3.12+, Node 18+ and `strace`. The exact Godot 4.7.2 binary is hash-checked or installed in the user cache. A verified host cache avoids repeated downloads.
 
 ```sh
 python3 -m module_pipeline add /path/to/design-or-module.json
@@ -21,7 +21,7 @@ npm run test:production
 python3 -m module_pipeline validate-portable --host-source /path/to/locked-host
 ```
 
-`add` allocates a UUID-based stable ID unless `--id` names an already reserved design identity; an existing ID (including withdrawn) is rejected. Designs are sealed and rendered by the existing renderer. Implemented input must declare Foundation v2 objects, native runtime bindings and internal host anchors. Missing bindings/Cells fail rather than creating a placeholder. Replacing a design with implementation uses `update` under the same ID. Source updates invalidate implementation/route/portable evidence; re-approval never recreates physics evidence.
+`add` allocates a UUID-based stable ID unless `--id` names an already reserved design identity; an existing ID (including withdrawn) is rejected. Designs are sealed and rendered by the existing renderer. Implemented input must declare Foundation v2 objects, native runtime bindings and internal host anchors. Missing bindings/Cells fail rather than creating a placeholder. Replacing a design with implementation uses `update` under the same ID. Updates invalidate implementation and portable approval. Gameplay or runtime-contract changes also invalidate route evidence; metadata-only changes may retain it through explicit content equivalence. Re-approval never recreates physics evidence.
 
 All changes stage a complete next library, recompile affected content, regenerate its thumbnail and index, and validate before a single Linux `renameat2(RENAME_EXCHANGE)` directory exchange. A failed transaction leaves the prior library intact. Readers see a complete tree; browser catalog/hash mismatches during a refresh retain the prior snapshot and retry. Every ID has one version at rest. Manual changes to generated files are detected by checksums.
 
@@ -58,3 +58,11 @@ Use a new SemVer when contents change. This creates `releases/map-edit-modules-1
 The manifest has a source commit and checksums for every included file. ZIP member order, timestamps and permissions are fixed. A repeated build of the same committed inputs/version yields identical bytes; an existing version cannot be replaced with different bytes. A release built from a source commit remains reproducible by checking out that commit. Generated evidence/status updates can be committed afterward without retroactively changing the release's source identity.
 
 Only qualified retained modules enter delivery. Pending designs and explicit exclusion reasons appear in the delivery catalog; withdrawn items do not enter its module set. Runtime files, current Module JSON/data/scenes/thumbnails, integration examples and pinned dependency locks are included. Raw traces, historical rounds, videos, old Harness workspaces and unrelated reports are excluded. The package is generated content, not a second authoring library.
+
+To extend a pinned shared host dependency closure, use `python3 tools/production/refresh_host_lock.py --lock runtime/host-lock.json --cache /path/to/host-cache --source /path/to/locked-game-checkout`. It resolves literal/formatted resource prefixes against the fixed upstream Git tree, checks Git blob identities and writes explicit SHA256 entries. Changing a host lock or runtime adapter invalidates portable acceptance; old physical route evidence remains tied to its original host profile.
+
+Editor copies now declare `modify_existing`; `update` resolves their local draft ID back to the explicit stable `source.moduleId` and removes inline baseline copies. Changes silently ignored by an unchanged native binding (for example a rock/platform type switch or unbound motion timing) fail with an object/field-specific error. Update the native binding/adapter explicitly, then qualify the changed behavior. Pure document metadata changes with byte-equivalent objects and an identical runtime/interface contract keep their old physics evidence through an explicit version-equivalence attestation; they still require implementation review and a fresh portable binding check.
+
+The native verifier also checks canonical case Cells against the current compiled source before accepting evidence. Additional test-neighbor platforms must be outside the owned rectangle and explicitly declared in the admission's `testNeighborFixtures`, keyed by route ID. They are carried as route validation requirements and never inserted into a module scene. The three-enemy and relay-lift upper-exit cases retain their respective original external upper-platform conditions; arbitrary upper seams are not certified by those fixtures.
+
+Current input policy templates stay under `validation/cases.json` after an update and are explicitly marked as needing a current-source check. Old frozen qualification working copies are removed from the current source. Editing never silently discards the retained input policy, and a stale template cannot qualify different compiled Cells.

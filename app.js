@@ -338,7 +338,7 @@ async function showLibrary(){
       document.querySelectorAll('[data-copy-module]').forEach(button=>button.onclick=async()=>{try{
         const m=libraryData.modules.find(m=>m.id===button.dataset.copyModule);
         const [raw,assessment,receipts]=await Promise.all([client.module(m),client.cornerAssessment(m),client.cornerConfigurations(m)]);
-        const reference=validateDocument(raw),corners=cornerRelocationRows(reference,assessment,receipts),d=makeRevision(reference,'new_variant');
+        const reference=validateDocument(raw),corners=cornerRelocationRows(reference,assessment,receipts),d=makeRevision(reference,'modify_existing');
         d.title=m.title.slice(0,180)+' · 编辑副本';d.intent.archiveOrigin={id:m.id,moduleId:m.moduleId,contentVersion:m.contentVersion,technicalStatus:m.technicalStatus,mapReady:m.mapReady,humanReview:m.humanReview};
         $('#dialog').close();loadDocument(d,corners,{entry:m,receipts});toast('已打开新版编辑副本，库内原版本保留');
       }catch(error){toast('模块打开失败：'+error.message);}});

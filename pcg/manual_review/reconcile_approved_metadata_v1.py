@@ -4,6 +4,8 @@ The original deep verifier requires playback and validated cases to agree even
 on observation-only fields. Only the missing existing ground64 Port metadata
 is copied here; geometry, controls, initial conditions and all raw stay fixed.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 import shutil
 from pcg.migration import core, physics

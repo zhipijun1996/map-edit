@@ -1,4 +1,6 @@
 """Exact final drawings, original native hooks/region choice, bounded controls."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,inspect,shutil
 from pcg.migration import core,physics,godot_package,godot_package_v5
 from pcg.prototype.workshop.rules import cmd

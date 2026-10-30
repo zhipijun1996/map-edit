@@ -37,7 +37,7 @@ usable_routes = routes_for_abilities(template, {'jump', 'recoil'})
 # prototype.model.placed_ports(template, origin_x, origin_y, mirror=False)
 ```
 
-Insert these templates after importing the model; do not call the prototype's `generate.prepare_library()`, which overwrites `LIB` with placeholders. The adapter maps `shot_recoil` to its `recoil` spelling; it preserves `wall_climb` rather than pretending the prototype supports it. Only exact witnessed ability sets are returned. The existing prototype generator assumes closure/mirror behavior; it must call `validate_placement` for each accepted placement and reject unsupported configurations before exporting. Uncertified partial connections cannot be enabled merely because that prototype has a solid-cap helper. The package does not change the downstream algorithm repository.
+Insert these templates after importing the model; do not call the prototype's `generate.prepare_library()`, which overwrites `LIB` with placeholders. The adapter maps `shot_recoil` to its `recoil` spelling; it preserves `wall_climb` rather than pretending the prototype supports it. Only exact witnessed ability sets are returned. For a module that declares a native tuning/fixture, also pass its exact ID as `native_profile_id=…`; omitting or mismatching that profile returns no routes. The template retains the complete `initial_configuration` and `host_profile`. The existing prototype generator assumes closure/mirror behavior; it must call `validate_placement` for each accepted placement and reject unsupported configurations before exporting. Uncertified partial connections cannot be enabled merely because that prototype has a solid-cap helper. The package does not change the downstream algorithm repository.
 
 Port `local2` coordinates are doubled Block coordinates relative to the owned rectangle's top-left. At integer Block origin `(x,y)`, `world2 = 2*(x,y) + local2`. Matching still requires opposite faces, equal surfaces, initial permissions and a separately verified seam.
 
@@ -73,3 +73,29 @@ Enemy/damage identities and reward transactions are namespaced by stable instanc
 ## Verification
 
 `evidence/module-production/portable-runtime.json` binds the current source hashes, runtime fingerprint, pinned host and engine. Acceptance imports real scenes in a clean extracted project, checks every module's collision shapes/one-way flags and translated Ports, binds the external actor without resource resets, exercises actual body collision, native projectile-to-bell delivery and idempotent native reward grants, and checks independent shared instances. `strace` verifies no runtime reads from the authoring repository or former experiment/fixture paths. Latest-game API compatibility is reported separately. Historical physical qualification is addressed by immutable Git/archive references, never by missing local experiment folders.
+
+## Run the included playable sample
+
+For a fresh sample project, unzip the archive under `sample/module_pack/`, install its locked dependencies, and create this minimal `sample/project.godot` (an existing game keeps its own project configuration):
+
+```ini
+config_version=5
+[application]
+config/name="Module package playable sample"
+run/main_scene="res://module_pack/integration/playable_sample.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+[physics]
+common/physics_ticks_per_second=60
+[rendering]
+renderer/rendering_method="gl_compatibility"
+```
+
+```sh
+python3 sample/module_pack/integration/install_host.py --target sample
+Godot_v4.7.2-stable_linux.x86_64 --headless --path sample --editor --import
+Godot_v4.7.2-stable_linux.x86_64 --path sample
+```
+
+A/D moves, Space jumps, mouse release shoots, E requests native pickup interaction, and R restarts this sample host. `-- --module STABLE_ID` selects another included module; the sample configures a new actor at birth from that module's declared native profile. It never changes an existing game's player at a seam. The automated sample test uses actual keyboard/mouse events and observes accepted jump and shot signals, not a replacement movement model. Godot-generated `.uid`/`.import` files beside declared resources are disposable caches; package verification ignores only those known generated companions and still verifies every original file.
+
+Some scoped route witnesses require explicit neighbor geometry. Inspect `route.validation.testNeighborFixtures` before selecting/connecting that route. The three-enemy module uses `[272,-32,96,12]` and the relay-lift module `[144,-32,96,12]` for A→B's external upper platform, in original local pixel coordinates. These are evidence conditions outside the owned rectangle, not extra geometry installed by the runtime. A generic neighbor with merely the same surface label is not automatically certified.

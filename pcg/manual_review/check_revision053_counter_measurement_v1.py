@@ -1,4 +1,6 @@
 """Positive and fail-closed negatives against unchanged original196 raw."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json
 from pcg.migration import core,physics,review_counter_scope_v10 as scope
 from .continue_revision053_v1 import OUT

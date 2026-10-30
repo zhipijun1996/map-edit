@@ -1,4 +1,6 @@
 """User-authorized latest approved designs plus explicit42 geometry adjustment."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,hashlib,json,subprocess
 from pcg.migration import core,physics
 OUT=core.REPO/'feedback/manual-review/implementation-results/revision-058-v1'

@@ -1,4 +1,6 @@
 """Actual failed-route footage. Remove only recorder's success prerequisite."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,gzip,json,subprocess
 from pcg.migration import core,physics
 from pcg.prototype.workshop import record as recorder
