@@ -17,3 +17,5 @@ python3 -m module_pipeline build --version 1.0.0
 历史可从合并提交 `9b712fe814ef228b368c0eb9adf660e39de29e37` 或不可变 `pcg/archives/` 恢复，当前生产不扫描这些内容。清理与验证事实见 [`evidence/module-production/`](evidence/module-production/)。
 
 本地编辑器：`npm run serve` 后打开 `http://localhost:8080/`；工坊位于 `/generation/module-workshop/`。
+
+交付验收见 [`evidence/module-production/final-package.json`](evidence/module-production/final-package.json)。`releases/` 中的 ZIP、校验和与元数据均为固定版本生成物，不在其中编辑 Module；精确复建请先检出包内 `manifest.json.source.commit`，再执行上述构建命令。
