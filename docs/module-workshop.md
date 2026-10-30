@@ -113,3 +113,9 @@ HQ第四轮：回执`feedback/module-workshop/review-receipts/hq-feedback-004.js
 
 
 大房间取宝提案：`feedback/module-workshop/briefs/plains-large-treasure-three-v1.json`与原话回执`large-treasure-request-v1.json`记录LG01三台留路（10×7）、LG02双门连穿（9×8）、LG03三折刺檐（10×7）。三份同轮出图，均是单L口INOUT ROCK、含领取宝箱事件的L→L自返回目标，只需jump/shot_recoil，当前待审核，不增加116项交接或44项待实现。LG01保存去程冻结构型供回程使用，LG02两次独立限时门后接箱前制动，LG03低檐换向后追动态落点；是已有家族的连续Macro组合，不算三个新玩法家族。静态射线/边界/手机检查见`large-treasure-three-conformance-v1.json`，不能据此宣称反冲可达、时序窗口、真实防夹、失败恢复或回程已验证；精确版本保留前不实施。
+
+
+大房间第二版已按实际人工反例完全重画。见`large-treasure-feedback-001.json`和`plains-large-treasure-rethink-v2.json`：LG01桥门互补、LG02封闭弹道炮台开锁、LG03联动移动洞口。宝箱由实岩外壳与最终隔墙保护，唯一外部开口为L。初步审计只检查图稿外缘覆盖，不代表真实碰撞或无绕行；炮台/资格绑定与联动洞口规则明确缺失。旧图保留，新精确版本重新待审，不自动进入实施。
+
+
+大型奖励房第三版：按`large-treasure-feedback-002.json`撤销全房矩形围墙和重复门串联。`plains-large-treasure-route-compositions-v3.json`记录三种跨空间规划：先留接回台再撤长桥绕库、保留空怪走续枪短线或清场换乘长线、搬动同一实体改变通道/承重/跳台/掩体。LG01为12×8，LG02/LG03为12×7；均单L口，仅局部保护宝箱，尖刺不冒充绝对封口。LG03新增反冲身体撞岩作为杀怪后的替代施力设计，须独立实现和验证；不假装原生已支持。三份新精确版本待人审，旧反馈和图稿保留，不增加实施交接。

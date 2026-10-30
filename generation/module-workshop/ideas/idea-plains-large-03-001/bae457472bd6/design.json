@@ -1,0 +1,976 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-plains-large-03-001",
+  "reviewId": "LG03",
+  "title": "穿行中的洞口：先追窗口，再刹住对面的窄岸",
+  "summary": "重设计 · 10×7 Block · 单口奖励内室 · 实体封闭外缘 / 技术待验",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 1280,
+    "h": 896
+  },
+  "ports": [
+    {
+      "id": "L",
+      "face": "LEFT",
+      "index": 5,
+      "position": [
+        0,
+        704
+      ],
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "normal": [
+        -1,
+        0
+      ],
+      "diagramLabel": "L",
+      "supportObjectId": "entry",
+      "stagingPosition": [
+        64,
+        704
+      ],
+      "cornerRelocations": {
+        "TOP_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "TOP_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "BOTTOM_LEFT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        },
+        "BOTTOM_RIGHT": {
+          "applicable": false,
+          "allowed": false,
+          "reason": "非角落口"
+        }
+      }
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "roof",
+      "type": "terrain",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 32
+    },
+    {
+      "id": "floor",
+      "type": "terrain",
+      "x": 0,
+      "y": 864,
+      "w": 1280,
+      "h": 32
+    },
+    {
+      "id": "right-shell",
+      "type": "terrain",
+      "x": 1248,
+      "y": 32,
+      "w": 32,
+      "h": 832
+    },
+    {
+      "id": "left-upper",
+      "type": "terrain",
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 640
+    },
+    {
+      "id": "left-lower",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 32,
+      "h": 128
+    },
+    {
+      "id": "entry",
+      "type": "terrain",
+      "x": 0,
+      "y": 736,
+      "w": 160,
+      "h": 32
+    },
+    {
+      "id": "vault-floor",
+      "type": "terrain",
+      "x": 1056,
+      "y": 352,
+      "w": 192,
+      "h": 512
+    },
+    {
+      "id": "treasure",
+      "type": "reward",
+      "x": 1160,
+      "y": 328,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "实体内室中的宝箱"
+    },
+    {
+      "id": "window-wall1-upper",
+      "type": "terrain",
+      "x": 352,
+      "y": 32,
+      "w": 32,
+      "h": 448
+    },
+    {
+      "id": "window-wall1-lower",
+      "type": "terrain",
+      "x": 352,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "moving-upper1",
+      "type": "terrain",
+      "x": 352,
+      "y": 480,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window1",
+        "centerOrigin": [
+          368,
+          656
+        ],
+        "verticalTravel": 48,
+        "period": 3.4,
+        "phase": 0,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "moving-lower1",
+      "type": "terrain",
+      "x": 352,
+      "y": 720,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window1",
+        "centerOrigin": [
+          368,
+          656
+        ],
+        "verticalTravel": 48,
+        "period": 3.4,
+        "phase": 0,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "window-track1",
+      "type": "trackLine",
+      "x": 368,
+      "y": 608,
+      "w": 0,
+      "h": 96,
+      "points": [
+        {
+          "x": 368,
+          "y": 608
+        },
+        {
+          "x": 368,
+          "y": 704
+        }
+      ]
+    },
+    {
+      "id": "near1",
+      "type": "platform",
+      "x": 144,
+      "y": 736,
+      "w": 96,
+      "h": 12,
+      "label": "观察 / 起跳1",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "far1",
+      "type": "platform",
+      "x": 416,
+      "y": 672,
+      "w": 80,
+      "h": 12,
+      "label": "短接岸1",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "window-wall2-upper",
+      "type": "terrain",
+      "x": 704,
+      "y": 32,
+      "w": 32,
+      "h": 256
+    },
+    {
+      "id": "window-wall2-lower",
+      "type": "terrain",
+      "x": 704,
+      "y": 640,
+      "w": 32,
+      "h": 224
+    },
+    {
+      "id": "moving-upper2",
+      "type": "terrain",
+      "x": 704,
+      "y": 288,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window2",
+        "centerOrigin": [
+          720,
+          464
+        ],
+        "verticalTravel": 48,
+        "period": 4.1,
+        "phase": 0.35,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "moving-lower2",
+      "type": "terrain",
+      "x": 704,
+      "y": 528,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window2",
+        "centerOrigin": [
+          720,
+          464
+        ],
+        "verticalTravel": 48,
+        "period": 4.1,
+        "phase": 0.35,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "window-track2",
+      "type": "trackLine",
+      "x": 720,
+      "y": 416,
+      "w": 0,
+      "h": 96,
+      "points": [
+        {
+          "x": 720,
+          "y": 416
+        },
+        {
+          "x": 720,
+          "y": 512
+        }
+      ]
+    },
+    {
+      "id": "near2",
+      "type": "platform",
+      "x": 496,
+      "y": 544,
+      "w": 96,
+      "h": 12,
+      "label": "观察 / 起跳2",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "far2",
+      "type": "platform",
+      "x": 768,
+      "y": 480,
+      "w": 80,
+      "h": 12,
+      "label": "短接岸2",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "window-wall3-upper",
+      "type": "terrain",
+      "x": 1024,
+      "y": 32,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "id": "window-wall3-lower",
+      "type": "terrain",
+      "x": 1024,
+      "y": 448,
+      "w": 32,
+      "h": 416
+    },
+    {
+      "id": "moving-upper3",
+      "type": "terrain",
+      "x": 1024,
+      "y": 96,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window3",
+        "centerOrigin": [
+          1040,
+          272
+        ],
+        "verticalTravel": 16,
+        "period": 3.7,
+        "phase": 0.7,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "moving-lower3",
+      "type": "terrain",
+      "x": 1024,
+      "y": 336,
+      "w": 32,
+      "h": 112,
+      "mechanics": {
+        "kind": "PROPOSED_COUPLED_APERTURE",
+        "group": "window3",
+        "centerOrigin": [
+          1040,
+          272
+        ],
+        "verticalTravel": 16,
+        "period": 3.7,
+        "phase": 0.7,
+        "openingHeight": 128,
+        "coverageRequired": true,
+        "status": "MISSING_COUPLED_SHAPE_RULE",
+        "antiCrush": "NEVER_INSTANT_CLOSE_ON_BODY"
+      }
+    },
+    {
+      "id": "window-track3",
+      "type": "trackLine",
+      "x": 1040,
+      "y": 256,
+      "w": 0,
+      "h": 32,
+      "points": [
+        {
+          "x": 1040,
+          "y": 256
+        },
+        {
+          "x": 1040,
+          "y": 288
+        }
+      ]
+    },
+    {
+      "id": "near3",
+      "type": "platform",
+      "x": 816,
+      "y": 352,
+      "w": 96,
+      "h": 12,
+      "label": "观察 / 起跳3",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "far3",
+      "type": "platform",
+      "x": 1088,
+      "y": 288,
+      "w": 80,
+      "h": 12,
+      "label": "短接岸3",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "relay-step",
+      "type": "platform",
+      "x": 528,
+      "y": 592,
+      "w": 96,
+      "h": 12,
+      "label": "中段换向重整",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "relay-step2",
+      "type": "platform",
+      "x": 864,
+      "y": 400,
+      "w": 96,
+      "h": 12,
+      "label": "高段重整",
+      "designCollision": "one_way"
+    },
+    {
+      "id": "route-L-L",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 896,
+      "points": [
+        {
+          "x": 0,
+          "y": 704
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 192,
+          "y": 704
+        },
+        {
+          "x": 288,
+          "y": 672
+        },
+        {
+          "x": 416,
+          "y": 640
+        },
+        {
+          "x": 560,
+          "y": 560
+        },
+        {
+          "x": 608,
+          "y": 512
+        },
+        {
+          "x": 640,
+          "y": 480
+        },
+        {
+          "x": 768,
+          "y": 448
+        },
+        {
+          "x": 912,
+          "y": 368
+        },
+        {
+          "x": 960,
+          "y": 288
+        },
+        {
+          "x": 1104,
+          "y": 240
+        },
+        {
+          "x": 1176,
+          "y": 320
+        },
+        {
+          "x": 1104,
+          "y": 240
+        },
+        {
+          "x": 960,
+          "y": 288
+        },
+        {
+          "x": 912,
+          "y": 368
+        },
+        {
+          "x": 768,
+          "y": 448
+        },
+        {
+          "x": 640,
+          "y": 480
+        },
+        {
+          "x": 608,
+          "y": 512
+        },
+        {
+          "x": 560,
+          "y": 560
+        },
+        {
+          "x": 416,
+          "y": 640
+        },
+        {
+          "x": 288,
+          "y": 672
+        },
+        {
+          "x": 192,
+          "y": 704
+        },
+        {
+          "x": 96,
+          "y": 704
+        },
+        {
+          "x": 0,
+          "y": 704
+        }
+      ],
+      "reviewShowTrace": false
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "L-to-L",
+      "from": "L",
+      "to": "L",
+      "role": "reward_return",
+      "pathObjectId": "route-L-L",
+      "strategy": "逐个读取未来洞口高度，用反冲穿过整面墙并刹到对岸；三口不同周期相位，不能凭第一口的节奏连按。",
+      "evidenceStatus": "UNKNOWN",
+      "displacement": [
+        0.0,
+        0.0
+      ],
+      "capabilityRequirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+      },
+      "difficulty": "UNKNOWN",
+      "estimated_duration": "UNKNOWN",
+      "resource_profile": "真实基础枪次、冷却与落地恢复；不赠送弹药或空中跳跃。",
+      "initial_conditions": "图示初态/相位仅为设计条件，不借用旧玩家已打开的门。",
+      "entry_exit_contract": {
+        "entrySurface": "ROCK",
+        "exitSurface": "ROCK",
+        "entryVelocity": "UNKNOWN",
+        "exitStable": "UNKNOWN",
+        "bodyClearance": "UNKNOWN"
+      },
+      "validation": {
+        "status": "UNKNOWN",
+        "physicsRun": false
+      },
+      "rewardContract": {
+        "objectId": "treasure",
+        "requireActualClaim": true,
+        "returnTo": "L",
+        "status": "UNKNOWN"
+      }
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "设计预算；逐方向最低能力、资源及动作容错待验。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "L"
+    ],
+    "cells": [
+      {
+        "from": "L",
+        "to": "L",
+        "status": "DESIGN_TARGET",
+        "rewardClaimRequired": true
+      }
+    ]
+  },
+  "routeCaption": "曲线是动作意图，矩阵是逐方向目标；身体、时机、资源和接缝均UNKNOWN。",
+  "diagramLegend": "深绿实体岩层阻挡身体/弹丸　青线去程　橙线回程　图示不是物理认证",
+  "reviewInstructions": [
+    "① 三面墙贯通外壳，只有洞口能穿；上跳无法绕到墙背后的宝箱。",
+    "② 洞口上下移动，必须瞄准“身体到达时”的位置；过口后刹进短岸。",
+    "③ 三口不同周期；每段能落地观察，避免一串固定按键。",
+    "④ 联动洞口与防夹缺规则；运动区始终补满岩墙，不能出现上下缝隙。"
+  ],
+  "designNotes": [
+    "观察：洞口上下边共同平移、下一短岸以及前一窗口正在关闭的方向。决定：提前发射快速穿口还是等待迎面相位，到对面后必须制动。",
+    "洞口不是薄移动平台：两块联动实体填满隔墙空段，上下固定岩层接外壳，任一时刻都只留一个128px开口。图是中间相位，不能把轨道虚线当通路。",
+    "奖励：第三整墙后的宝库。失败：每墙近侧准备台重试，过墙落短岸后真实恢复；身体夹住时延迟运动/退让机制须设计，不用挤压瞬杀制造假难度。",
+    "回程：三个不同相位仍持续运动，反向穿口要预测身体尾部何时离开；取宝不会停下全房间。",
+    "反例：静止等在某一高度可一路普通跳、趁相位从上下板接缝穿出、用墙顶当平台、无反冲无风险通过、箱口最低相位被箱室地板遮掉有效净空。",
+    "缺口：原生单台线段往复不等于联动可变长洞口；需要两实体同步形状/运动覆盖规则和全身体防夹，明确缺Cell规则。",
+    "缺口：第三口与宝库地板交接必须求解全相位有效净空；图示不能保证最低相位能过，允许等待较高相位但不能困住回程。",
+    "缺口：不同周期仅设计起点，实际反冲必要性、瞄准/时机容错、接岸稳定、最坏相位回程UNKNOWN。",
+    "所有闭合/开门/运动相位均须完整身体防夹；不以伤害当封墙。",
+    "箱体与右外缘间有实体岩墙；只有最后隔墙洞口能进入内室。此为静态拓扑目标，运行碰撞/邻接高速穿入尚未认证。",
+    "第三洞口下行幅度暂限16px，最低下沿352与宝库台面相接；不沿用前两口±48px。整身通过与回程仍待验证。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-plains-large-03-001/source-analysis-r2.json",
+  "technicalStatus": "UNKNOWN",
+  "boundaryIntent": {
+    "singleOpening": [
+      0,
+      672,
+      32,
+      64
+    ],
+    "solidBoundaryObjectIds": [
+      "roof",
+      "floor",
+      "right-shell",
+      "left-upper",
+      "left-lower"
+    ],
+    "purpose": "Requested reward-room enclosure; blocks entry from neighboring modules on other sides.",
+    "certification": "UNKNOWN"
+  },
+  "designTraces": [
+    {
+      "points": [
+        [
+          316,
+          592
+        ],
+        [
+          420,
+          592
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "洞口1 上下移动",
+      "labelPosition": [
+        296,
+        560
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          668,
+          400
+        ],
+        [
+          772,
+          400
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "洞口2 上下移动",
+      "labelPosition": [
+        648,
+        368
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          988,
+          208
+        ],
+        [
+          1092,
+          208
+        ]
+      ],
+      "color": "#3b79c9",
+      "label": "洞口3 上下移动",
+      "labelPosition": [
+        968,
+        176
+      ],
+      "dashed": true,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          0,
+          704
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          192,
+          704
+        ],
+        [
+          288,
+          672
+        ],
+        [
+          416,
+          640
+        ],
+        [
+          560,
+          560
+        ],
+        [
+          608,
+          512
+        ],
+        [
+          640,
+          480
+        ],
+        [
+          768,
+          448
+        ],
+        [
+          912,
+          368
+        ],
+        [
+          960,
+          288
+        ],
+        [
+          1104,
+          240
+        ],
+        [
+          1176,
+          320
+        ]
+      ],
+      "color": "#157f84",
+      "label": "去程",
+      "labelPosition": [
+        120,
+        800
+      ],
+      "dashed": false,
+      "endStop": false
+    },
+    {
+      "points": [
+        [
+          1176,
+          320
+        ],
+        [
+          1104,
+          240
+        ],
+        [
+          960,
+          288
+        ],
+        [
+          912,
+          368
+        ],
+        [
+          768,
+          448
+        ],
+        [
+          640,
+          480
+        ],
+        [
+          608,
+          512
+        ],
+        [
+          560,
+          560
+        ],
+        [
+          416,
+          640
+        ],
+        [
+          288,
+          672
+        ],
+        [
+          192,
+          704
+        ],
+        [
+          96,
+          704
+        ],
+        [
+          0,
+          704
+        ]
+      ],
+      "color": "#d28b25",
+      "label": "取宝后原口返回",
+      "labelPosition": [
+        680,
+        824
+      ],
+      "dashed": true,
+      "endStop": false
+    }
+  ],
+  "shotGuides": [
+    {
+      "from": [
+        288,
+        672
+      ],
+      "to": [
+        224,
+        720
+      ],
+      "recoil": [
+        [
+          288,
+          672
+        ],
+        [
+          400,
+          624
+        ]
+      ],
+      "label": "预判窗口再反冲 1",
+      "labelPosition": [
+        220,
+        824
+      ]
+    },
+    {
+      "from": [
+        640,
+        480
+      ],
+      "to": [
+        576,
+        528
+      ],
+      "recoil": [
+        [
+          640,
+          480
+        ],
+        [
+          752,
+          432
+        ]
+      ],
+      "label": "预判窗口再反冲 2",
+      "labelPosition": [
+        572,
+        632
+      ]
+    },
+    {
+      "from": [
+        960,
+        288
+      ],
+      "to": [
+        896,
+        336
+      ],
+      "recoil": [
+        [
+          960,
+          288
+        ],
+        [
+          1072,
+          240
+        ]
+      ],
+      "label": "预判窗口再反冲 3",
+      "labelPosition": [
+        892,
+        440
+      ]
+    }
+  ],
+  "actorPoses": [
+    {
+      "position": [
+        288,
+        672
+      ],
+      "label": "1",
+      "labelPosition": [
+        288,
+        644
+      ]
+    },
+    {
+      "position": [
+        640,
+        480
+      ],
+      "label": "2",
+      "labelPosition": [
+        640,
+        452
+      ]
+    },
+    {
+      "position": [
+        960,
+        288
+      ],
+      "label": "3",
+      "labelPosition": [
+        960,
+        260
+      ]
+    }
+  ],
+  "gaps": [
+    "原生单台线段往复不等于联动可变长洞口；需要两实体同步形状/运动覆盖规则和全身体防夹，明确缺Cell规则。",
+    "第三口与宝库地板交接必须求解全相位有效净空；图示不能保证最低相位能过，允许等待较高相位但不能困住回程。",
+    "不同周期仅设计起点，实际反冲必要性、瞄准/时机容错、接岸稳定、最坏相位回程UNKNOWN。"
+  ],
+  "designVersion": "sha256:bae457472bd67436d60c73e74009fe803de24a749073de21607f065807a8b099"
+}
