@@ -1,9 +1,9 @@
 {
   "platforms": [
     [
-      0,
+      128,
       352,
-      272,
+      144,
       100
     ],
     [
@@ -14,9 +14,9 @@
     ],
     [
       282,
-      -6,
-      510,
-      160
+      128,
+      486,
+      26
     ],
     [
       738,
@@ -25,27 +25,22 @@
       134
     ],
     [
-      -168,
-      594,
-      1200,
-      60
-    ],
-    [
-      -256,
-      352,
-      280,
-      24
-    ],
-    [
       744,
       352,
-      408,
+      24,
       24
     ]
   ],
   "one_way_platform_indices": [],
   "wall_platform_indices": [],
-  "hazards": [],
+  "hazards": [
+    [
+      272,
+      480,
+      220,
+      32
+    ]
+  ],
   "thorns": [],
   "saws": [],
   "moving_platforms": [],
@@ -73,27 +68,27 @@
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "b241d65914fa548ff4c110146c745431344842a02dbff57c44fda09a6645a698",
+  "source_sha256": "f905e75453c439bcc032d04c99610efaf1da8c759bcb5564fa1c2eeaa12bfc1c",
   "stable_id": "block-demand-a3-bidirectional-map-traversal-0",
   "ports": [
     {
       "id": "A",
       "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/port-A",
       "position": [
-        -256,
+        128,
         320
       ],
       "connection": {
         "status": "declared",
         "region": {
-          "x": -32,
+          "x": 96,
           "y": 288,
           "w": 64,
           "h": 64
         }
       },
       "support": {
-        "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/migration-shore-A",
+        "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -160,21 +155,21 @@
         "A-seam"
       ],
       "routeRoles": [
-        "outbound:entry",
-        "return:exit"
+        "A-to-B:entry",
+        "B-to-A:exit"
       ],
       "crossing_offset": [
         0,
         14
       ],
       "stagingPosition": [
-        -232,
+        152,
         334
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -200,13 +195,25 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          152,
+          334
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "B",
       "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/port-B",
       "position": [
-        1152,
+        768,
         320
       ],
       "connection": {
@@ -219,7 +226,7 @@
         }
       },
       "support": {
-        "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/migration-shore-B",
+        "objectId": "generated-36c91398526382e731cc45b62284ead155bcc0c62716530abe073a494efa6cab/platform-1",
         "face": "top",
         "status": "source_derived"
       },
@@ -286,21 +293,21 @@
         "B-seam"
       ],
       "routeRoles": [
-        "outbound:exit",
-        "return:entry"
+        "A-to-B:exit",
+        "B-to-A:entry"
       ],
       "crossing_offset": [
         0,
         14
       ],
       "stagingPosition": [
-        1128,
+        744,
         334
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -326,21 +333,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          4,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          744,
+          334
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -1200,
-    -1000,
-    4000,
-    2400
+    128,
+    128,
+    640,
+    384
   ],
   "entry_port": [
-    24,
-    334
+    152.0,
+    334.0
   ],
   "exit_port": [
-    744,
-    334
+    744.0,
+    334.0
   ]
 }

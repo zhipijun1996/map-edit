@@ -7,27 +7,9 @@
       40
     ],
     [
-      -64,
-      300,
-      64,
-      24
-    ],
-    [
-      -128,
-      300,
-      64,
-      24
-    ],
-    [
       480,
       300,
-      96,
-      24
-    ],
-    [
-      576,
-      300,
-      64,
+      32,
       24
     ]
   ],
@@ -56,30 +38,35 @@
       "kind": "sequence",
       "link_color": "e8bd65",
       "sequence_offset": [
-        80.0,
-        0.0
+        0,
+        -96
       ]
     }
   ],
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "246c164e005543005f90471b246aba65bd2354af9a3b6f70243348d05ee00295",
+  "source_sha256": "26365c726d76ed497a23848af1d16c17f8a6ba8d899a00332b2c798438c53f5a",
   "stable_id": "game-plains-windchime-sequence",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/port-entry",
       "position": [
-        -128,
+        0,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/replay-independent-dock-entry",
+        "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -146,7 +133,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -170,13 +157,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         282
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -202,21 +189,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/port-exit",
       "position": [
-        640,
+        512,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 480,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/replay-independent-dock-exit",
+        "objectId": "generated-faa2ee5f7f2618ddf5bf6c172e4beb42e8870b268e2650352041b20db2d339db/replay-shore-approach-exit",
         "face": "top",
         "status": "source_derived"
       },
@@ -283,7 +287,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -307,13 +311,13 @@
         ]
       },
       "stagingPosition": [
-        616,
+        496,
         282
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -339,21 +343,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          3,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          496,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    -52.0,
-    1024,
-    640.0
+    0,
+    76,
+    512,
+    384
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    616,
-    282
+    496.0,
+    282.0
   ]
 }

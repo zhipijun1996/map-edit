@@ -1,6 +1,6 @@
 {
   "schema": "gunman-rush-level-sketch/v1",
-  "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342",
+  "id": "game-plains-bellstrider-arena",
   "title": "鸣铃巡游机战场",
   "description": "原游戏精确来源迁移候选；原接口、机关和调参保留，尚未取得新地基物理认证。",
   "constraints": "UNKNOWN不得作为有效地图接口。",
@@ -16,17 +16,34 @@
   },
   "objects": [
     {
-      "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
+      "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
       "type": "terrain",
-      "x": 0,
+      "x": 128,
       "y": 600,
-      "w": 1120,
-      "h": 80,
+      "w": 384,
+      "h": 32,
       "rotation": 0,
       "label": "",
       "note": "",
       "sourceIndex": 0,
-      "wallClimbable": false
+      "wallClimbable": false,
+      "sourceObjectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
+      "mechanics": {}
+    },
+    {
+      "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east",
+      "type": "terrain",
+      "x": 768,
+      "y": 600,
+      "w": 256,
+      "h": 32,
+      "rotation": 0,
+      "label": "",
+      "note": "",
+      "sourceIndex": 1,
+      "wallClimbable": false,
+      "sourceObjectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
+      "mechanics": {}
     },
     {
       "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-1",
@@ -38,8 +55,9 @@
       "rotation": 0,
       "label": "",
       "note": "",
-      "sourceIndex": 1,
-      "wallClimbable": false
+      "sourceIndex": 2,
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
       "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-2",
@@ -51,8 +69,9 @@
       "rotation": 0,
       "label": "",
       "note": "",
-      "sourceIndex": 2,
-      "wallClimbable": false
+      "sourceIndex": 3,
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
       "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-3",
@@ -64,72 +83,120 @@
       "rotation": 0,
       "label": "",
       "note": "",
-      "sourceIndex": 3,
-      "wallClimbable": false
+      "sourceIndex": 4,
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
-      "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/main-route",
+      "id": "design-arena-air-enemy-1",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 456,
+      "y": 434,
+      "w": 28,
+      "h": 32,
+      "label": "空中怪1",
+      "mechanics": {
+        "status": "implemented_native",
+        "initialIdleCooldown": 0,
+        "runtimeParameters": {
+          "initial_idle_cooldown": 0
+        }
+      },
+      "sourceId": "design-arena-air-enemy-1"
+    },
+    {
+      "id": "design-arena-air-enemy-2",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 806,
+      "y": 514,
+      "w": 28,
+      "h": 32,
+      "label": "空中怪2",
+      "mechanics": {
+        "status": "implemented_native",
+        "initialIdleCooldown": 0,
+        "runtimeParameters": {
+          "initial_idle_cooldown": 0
+        }
+      },
+      "sourceId": "design-arena-air-enemy-2"
+    },
+    {
+      "id": "design-route-entry-to-exit",
       "type": "route",
-      "x": 20,
-      "y": 582,
-      "w": 1080.000001,
-      "h": 9.999999974752427e-7,
-      "rotation": 0,
-      "label": "设计路线 UNKNOWN",
-      "note": "",
+      "x": 128,
+      "y": 376,
+      "w": 896,
+      "h": 256,
       "points": [
         {
-          "x": 20,
+          "x": 128,
+          "y": 568
+        },
+        {
+          "x": 300,
           "y": 582
         },
         {
-          "x": 1100,
+          "x": 440,
+          "y": 540
+        },
+        {
+          "x": 520,
+          "y": 470
+        },
+        {
+          "x": 610,
+          "y": 440
+        },
+        {
+          "x": 720,
+          "y": 470
+        },
+        {
+          "x": 805,
+          "y": 560
+        },
+        {
+          "x": 900,
           "y": 582
+        },
+        {
+          "x": 1024,
+          "y": 568
         }
       ],
-      "duration": 0.016666666666666666,
+      "duration": 1,
       "mode": "once",
-      "sourceRoute": "main",
-      "trajectory": "unverified_design"
+      "mechanics": {}
     },
     {
       "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/port-entry",
-      "type": "entry",
-      "x": -12,
+      "type": "exit",
+      "x": 116,
       "y": 550,
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "entry",
-      "note": "原角色身体站位；外边接口等待实际适配"
+      "mechanics": {}
     },
     {
       "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/port-exit",
       "type": "exit",
-      "x": 1140,
+      "x": 1012,
       "y": 550,
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "exit",
-      "note": "原角色身体站位；外边接口等待实际适配"
-    },
-    {
-      "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/migration-shore-exit",
-      "type": "terrain",
-      "x": 1096,
-      "y": 600,
-      "w": 56,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 4
+      "mechanics": {}
     }
   ],
   "updatedAt": "2026-10-27T13:28:16.375Z",
   "intent": {
-    "operation": "new_module"
+    "operation": "modify_existing",
+    "notes": "Authoritative current Module. Edit objects and declared native bindings here; generated files are not another source library."
   },
   "capabilityRequirements": {
     "version": 1,
@@ -148,196 +215,151 @@
     "note": ""
   },
   "source": {
+    "repository": "zhipijun1996/map-edit",
+    "commit": "9b712fe814ef228b368c0eb9adf660e39de29e37",
+    "path": "modules/game-plains-bellstrider-arena/module.mapnote.json",
+    "moduleId": "game-plains-bellstrider-arena",
+    "kind": "resource",
+    "category": "平原",
     "integration": {
       "isIntegrated": false,
-      "usage": "not_integrated",
-      "label": "未接入 · 研究候选",
-      "reason": "生成与回放证据未写回正式游戏地图消费者。",
-      "checkedCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-      "evidence": [],
-      "verification": "research_output_only"
-    },
-    "repository": "zhipijun1996/gunman-rush",
-    "commit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-    "path": "resources/generation/modules/plains_bellstrider_arena.tres",
-    "moduleId": "plains_bellstrider_arena",
-    "kind": "resource",
-    "original": {
-      "anchors": [
-        [
-          20,
-          582
-        ],
-        [
-          200,
-          582
-        ],
-        [
-          420,
-          582
-        ],
-        [
-          700,
-          582
-        ],
-        [
-          900,
-          582
-        ],
-        [
-          1100,
-          582
-        ]
-      ],
-      "branch_routes": [],
-      "danger_bounds": [],
-      "definition_version": 1,
-      "entry_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "entry",
-        "position": [
-          20,
-          582
-        ]
-      },
-      "entry_ports": [],
-      "exit_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "exit",
-        "position": [
-          1100,
-          582
-        ]
-      },
-      "exit_ports": [],
-      "ferries": [],
-      "main_route": [],
-      "maximum_shot_cooldown": 0,
-      "min_air_shots": 0,
-      "min_jumps": 0,
-      "minimum_burst_distance": 0,
-      "minimum_ground_speed": 0,
-      "minimum_held_jump_height": 0,
-      "minimum_held_jump_range": 0,
-      "mirrored_horizontal": false,
-      "module_id": "plains_bellstrider_arena",
-      "one_way_platform_indices": [
-        1,
-        2,
-        3
-      ],
-      "platform_pressure": 0,
-      "platforms": [
-        [
-          0,
-          600,
-          1120,
-          80
-        ],
-        [
-          290,
-          470,
-          120,
-          20
-        ],
-        [
-          750,
-          410,
-          100,
-          20
-        ],
-        [
-          890,
-          470,
-          120,
-          20
-        ]
-      ],
-      "requires_burst": false,
-      "saws": [],
-      "surface_thorns": [],
-      "timing_pressure": 0,
-      "world_bounds": [
-        0,
-        0,
-        1120,
-        700
-      ]
-    },
-    "method": null,
-    "arguments": []
+      "reason": "Current reviewed source; runtime delivery is separate from production game approval."
+    }
   },
   "generationContract": {
     "version": 2,
     "kind": "module",
-    "contentVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
+    "contentVersion": "sha256:fe9006d3bfa33877dbcfaeb663b9d0de56bfad48b6b6ef1d5759cf2a42ffaef7",
     "seed": {
       "status": "UNKNOWN",
       "value": "UNKNOWN",
       "reason": "旧输出未声明生成种子，不用验证种子冒充"
     },
     "generation": {
-      "source": {
-        "cases": {
-          "path": ".cache/migration/game-inputs-v5/game-plains-bellstrider-arena/cases.json",
-          "sha256": "791f944c4fdf93a4386007647bb083554f1db1d200b295ad1e2c17769486d4ee"
-        },
-        "run": "UNKNOWN",
-        "sourceCaseId": "game-plains_bellstrider_arena-policy-walk",
-        "moduleSha256": "6d3497052d148c5035f7d34c2465efd8edaeba41fbdb0d89a305fa6a6ba86210",
-        "physicsSourceCommit": "UNKNOWN",
-        "sourceManifestSha256": "UNKNOWN"
-      },
       "parameters": {
-        "producerArguments": "UNKNOWN",
-        "family": "original-game-plains_bellstrider_arena",
-        "controlPlan": [
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
+        "runtimeBindings": {
+          "platforms": [
+            {
+              "$bind": "rect",
+              "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west"
             },
-            "target_x": 1100,
-            "deadband": 3
-          }
-        ],
-        "challengeRequirements": {
-          "min_shots": 0,
-          "min_ground_jumps": 0
+            {
+              "$bind": "rect",
+              "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east"
+            },
+            {
+              "$bind": "rect",
+              "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-1"
+            },
+            {
+              "$bind": "rect",
+              "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-2"
+            },
+            {
+              "$bind": "rect",
+              "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-3"
+            }
+          ],
+          "one_way_platform_indices": [
+            2,
+            3,
+            4
+          ],
+          "wall_platform_indices": [],
+          "hazards": [],
+          "thorns": [],
+          "saws": [],
+          "moving_platforms": [],
+          "hooks": [],
+          "latches": [],
+          "enemies": [
+            {
+              "id": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-1",
+                "path": [
+                  "id"
+                ]
+              },
+              "definition": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-1",
+                "path": [
+                  "definition"
+                ]
+              },
+              "position": {
+                "$bind": "center",
+                "object": "design-arena-air-enemy-1"
+              },
+              "initial_idle_cooldown": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-1",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_idle_cooldown"
+                ]
+              }
+            },
+            {
+              "id": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-2",
+                "path": [
+                  "id"
+                ]
+              },
+              "definition": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-2",
+                "path": [
+                  "definition"
+                ]
+              },
+              "position": {
+                "$bind": "center",
+                "object": "design-arena-air-enemy-2"
+              },
+              "initial_idle_cooldown": {
+                "$bind": "field",
+                "object": "design-arena-air-enemy-2",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_idle_cooldown"
+                ]
+              }
+            }
+          ],
+          "reward_sites": []
         },
-        "synthesis": "UNKNOWN",
-        "originalGameProgramSelection": {
-          "source": "pcg/results/foundation-migration-original-policy-discovery-v3/discovery.json",
-          "sha256": "eba9df3e1a752fa436146bd983b22f133885b766aeaa8a9dd84714d7aa6c1b56",
-          "rule": "first clean success among four preregistered source-guided programs; no holdout used"
+        "nativeAnchors": {
+          "entry": {
+            "$bind": "relative_point",
+            "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
+            "offset": [
+              -168,
+              -34
+            ]
+          },
+          "exit": {
+            "$bind": "relative_point",
+            "object": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
+            "offset": [
+              680,
+              -34
+            ]
+          }
         }
       },
+      "source": {
+        "kind": "current_module_source",
+        "record": "modules/game-plains-bellstrider-arena/record.json"
+      },
       "migration": {
-        "sourcePath": "pcg/migration/game-sources/game-plains-bellstrider-arena",
-        "sourceVersion": "sha256:a48051a6e5667367a078bb0c6c2685e3aefa16c8240a5b7ce450e8380550bfbb",
         "moduleId": "game-plains-bellstrider-arena",
-        "policy": "minimal_actual_shore_adaptation",
-        "sourceDocumentSha256": "ddbf83c315aef39435055fdba80d3cbb6a73c516bb3ffb4665529097a7728104"
+        "status": "current_source"
       }
     },
     "designStatus": "declared",
@@ -363,20 +385,22 @@
         }
       },
       "bounds": {
-        "x": 0,
+        "x": 128,
         "y": 376,
-        "w": 1152,
-        "h": 384
+        "w": 896,
+        "h": 256
       },
       "boundsCoverage": "Complete rectangle computed from real Cells and original body action reservations; shore adaptation pending real physics.",
       "occupancy": {
         "status": "partial",
         "objectIds": [
-          "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
+          "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
+          "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east",
           "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-1",
           "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-2",
           "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-3",
-          "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/migration-shore-exit"
+          "design-arena-air-enemy-1",
+          "design-arena-air-enemy-2"
         ],
         "regions": [],
         "coverage": "known cells; full action and projectile reservations UNKNOWN"
@@ -391,31 +415,42 @@
           "unobserved projectile paths"
         ]
       },
-      "dynamicEnvelopes": [],
+      "dynamicEnvelopes": [
+        {
+          "objectId": "design-arena-air-enemy-1",
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
+        },
+        {
+          "objectId": "design-arena-air-enemy-2",
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
+        }
+      ],
       "seams": [
         {
           "id": "entry-seam",
           "portId": "entry",
+          "allowedOverlap": [],
           "region": {
-            "x": -32,
+            "x": 96,
             "y": 536,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         },
         {
           "id": "exit-seam",
           "portId": "exit",
+          "allowedOverlap": [],
           "region": {
-            "x": 1120,
+            "x": 992,
             "y": 536,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         }
       ],
       "transforms": [
@@ -502,15 +537,20 @@
         "id": "entry",
         "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/port-entry",
         "position": [
-          0,
+          128,
           568
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 96,
+            "y": 536,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
+          "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
           "face": "top",
           "status": "source_derived"
         },
@@ -577,7 +617,7 @@
           "entry-seam"
         ],
         "routeRoles": [
-          "main:entry"
+          "entry-to-exit:entry"
         ],
         "sourceRoles": [
           "entry"
@@ -601,13 +641,13 @@
           ]
         },
         "stagingPosition": [
-          24,
+          152,
           582
         ],
         "face": "LEFT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -622,10 +662,17 @@
             "profileId": null
           },
           "BOTTOM_LEFT": {
-            "applicable": false,
-            "allowed": false,
-            "reason": "port_not_on_this_corner_block_outer_face",
-            "profileId": null
+            "applicable": true,
+            "allowed": "UNKNOWN",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+            "profileId": null,
+            "targetFace": "BOTTOM",
+            "targetPosition": [
+              192,
+              632
+            ],
+            "proposedSurface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
           },
           "BOTTOM_RIGHT": {
             "applicable": false,
@@ -633,21 +680,38 @@
             "reason": "port_not_on_this_corner_block_outer_face",
             "profileId": null
           }
+        },
+        "grid": {
+          "cell": [
+            0,
+            1
+          ],
+          "edge": "W",
+          "stagingPosition": [
+            152,
+            582
+          ],
+          "profile": "ground64/v1"
         }
       },
       {
         "id": "exit",
         "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/port-exit",
         "position": [
-          1152,
+          1024,
           568
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 992,
+            "y": 536,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/migration-shore-exit",
+          "objectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east",
           "face": "top",
           "status": "source_derived"
         },
@@ -714,7 +778,7 @@
           "exit-seam"
         ],
         "routeRoles": [
-          "main:exit"
+          "entry-to-exit:exit"
         ],
         "sourceRoles": [
           "exit"
@@ -738,13 +802,13 @@
           ]
         },
         "stagingPosition": [
-          1128,
+          1000,
           582
         ],
         "face": "RIGHT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -765,11 +829,30 @@
             "profileId": null
           },
           "BOTTOM_RIGHT": {
-            "applicable": false,
-            "allowed": false,
-            "reason": "port_not_on_this_corner_block_outer_face",
-            "profileId": null
+            "applicable": true,
+            "allowed": "UNKNOWN",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+            "profileId": null,
+            "targetFace": "BOTTOM",
+            "targetPosition": [
+              960,
+              632
+            ],
+            "proposedSurface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
           }
+        },
+        "grid": {
+          "cell": [
+            6,
+            1
+          ],
+          "edge": "E",
+          "stagingPosition": [
+            1000,
+            582
+          ],
+          "profile": "ground64/v1"
         }
       }
     ],
@@ -778,40 +861,40 @@
         "from": "entry",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "entry",
         "to": "exit",
-        "status": "path",
+        "status": "UNKNOWN",
+        "conditions": "UNKNOWN",
         "routeIds": [
-          "main"
-        ],
-        "conditions": "UNKNOWN"
+          "entry-to-exit"
+        ]
       },
       {
         "from": "exit",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "exit",
         "to": "exit",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       }
     ],
     "routes": [
       {
-        "id": "main",
+        "id": "entry-to-exit",
         "from": "entry",
         "to": "exit",
         "role": "main",
-        "pathObjectId": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/main-route",
+        "pathObjectId": "design-route-entry-to-exit",
         "capabilityRequirements": {
           "version": 1,
           "status": "partial",
@@ -911,9 +994,7 @@
           "observedJumps": "UNKNOWN",
           "phaseWaits": []
         },
-        "validationIds": [
-          "migration-main"
-        ],
+        "validationIds": [],
         "requiredAbilities": [
           "move",
           "jump",
@@ -930,9 +1011,10 @@
           "status": "UNKNOWN"
         },
         "localDisplacementBlocks": [
-          9,
+          7,
           0
-        ]
+        ],
+        "evidenceStatus": "UNKNOWN"
       }
     ],
     "unlocks": [],
@@ -942,145 +1024,72 @@
       "exports": [],
       "cells": [
         {
-          "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0",
-          "contentVersion": "sha256:803b23f079f4cd5e1e7e9b24f005ed2f76003d2da48024bdb1c2087213622b27",
+          "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west",
           "objectIds": [
-            "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0"
-          ]
+            "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-west"
+          ],
+          "contentVersion": "sha256:acde95470c191dd3860e6ab91451e2aad1110b6f324fd31566f19b2b0139c509"
+        },
+        {
+          "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east",
+          "objectIds": [
+            "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-0-east"
+          ],
+          "contentVersion": "sha256:5dc4f2d51314726d34686df990ceb47a3cc2b93850f99d5a1d04ea513594da9a"
         },
         {
           "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-1",
-          "contentVersion": "sha256:3eb459f33938757f7e290a9e7defb144be8d10f0f11dc665300b78dc29d88271",
           "objectIds": [
             "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-1"
-          ]
+          ],
+          "contentVersion": "sha256:4cb84fedbad4f5095ae6d3e7091e1e9c0ead7effa989b8e79d84a2285b2b4bbe"
         },
         {
           "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-2",
-          "contentVersion": "sha256:e0745472456fa438a9165499fecb78bde8cb3f035fbe761c497bfca1663ed38e",
           "objectIds": [
             "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-2"
-          ]
+          ],
+          "contentVersion": "sha256:90d9e211ebb6aa9f35c913b1893bb1d2d2edf5d6c9933fc611a8556bdbe16f87"
         },
         {
           "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-3",
-          "contentVersion": "sha256:b08325d0ad8d66576ffa3b006d8852648e4b8bfe4bb4dd00a93399467fdbea24",
           "objectIds": [
             "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/platform-3"
-          ]
+          ],
+          "contentVersion": "sha256:7ee5c8697ddf14d5a20f913dd412b7c1c83f9f27d5cfaae1f8b647af82321a0d"
         },
         {
-          "id": "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/migration-shore-exit",
-          "contentVersion": "sha256:305b8b86abaff3a2a63efccd316eb47f0fc118f548764d3dbd77a2e98ddc2374",
+          "id": "design-arena-air-enemy-1",
           "objectIds": [
-            "generated-1d654f28590707b03bf60aaa75275097aab84698decefafbf68e5101fec95342/migration-shore-exit"
-          ]
+            "design-arena-air-enemy-1"
+          ],
+          "contentVersion": "sha256:824c30253ed40937d4a2d15a2e2af90fb51bead80cdbb519c2b9963ed12637b9"
+        },
+        {
+          "id": "design-arena-air-enemy-2",
+          "objectIds": [
+            "design-arena-air-enemy-2"
+          ],
+          "contentVersion": "sha256:2eb49e5ef2124be1aa2aefc1fac1a116ca3fab2e5a938d47409bdf1ad95d5dd0"
         }
       ]
     },
-    "validations": [
-      {
-        "id": "migration-main",
-        "kind": "physics",
-        "contentVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
-        "routeId": "main",
-        "from": "entry",
-        "to": "exit",
-        "result": "pass",
-        "capabilityConfiguration": {
-          "available": [
-            "move",
-            "jump",
-            "shot_recoil"
-          ],
-          "equipment": "UNKNOWN"
-        },
-        "entryState": {
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "unspecified",
-            "allOf": [],
-            "anyOfGroups": [],
-            "note": ""
-          },
-          "equipment": "UNKNOWN",
-          "grounded": "UNKNOWN",
-          "velocity": "UNKNOWN",
-          "remainingJumps": "UNKNOWN",
-          "airShots": "UNKNOWN",
-          "stamina": "UNKNOWN",
-          "health": "UNKNOWN",
-          "shotCooldown": "UNKNOWN",
-          "traversalState": "UNKNOWN",
-          "mechanisms": "UNKNOWN",
-          "phase": "UNKNOWN",
-          "recoveryConditions": "UNKNOWN"
-        },
-        "method": "actual_godot_fixed_migration_protocol",
-        "coverage": {
-          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
-          "route": {
-            "routeId": "main",
-            "passed": true,
-            "calibration": {
-              "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/calibration-0.json",
-              "sha256": "e9e99f2df9e8e98a36a96568ff258dd0ef9919f51cf5bbbb1e92c37985117d8c"
-            },
-            "holdout": {
-              "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/holdout-0.json",
-              "sha256": "391cbcf7c22b5a7a052cc7cd3a44ce402b668c153c2034f97eebd3dfda42de9a"
-            }
-          },
-          "arbitraryEntryStates": "UNKNOWN",
-          "fullMap": "UNKNOWN"
-        },
-        "failures": [],
-        "unverified": [
-          "unsearched port pairs",
-          "closure combinations",
-          "mirror",
-          "arbitrary entry states",
-          "full Map"
-        ],
-        "artifacts": [
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/migration-physics.json",
-            "sha256": "5b689e6207f56409aee21b729dabf0782bb46c698c182b7076c67e5a4cdd94de"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/source_binding.json",
-            "sha256": "d6ce3d8b701b0b54f581bfeb3f3719791f259038353f1dc535d8ebde338ce11b"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/batches.json",
-            "sha256": "b03467078c56ac2a19a889a5315eb9be06592d3fe758377e84095b3acca105d6"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/protocol.json",
-            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bellstrider-arena-quality-v1/boundary-probes.json",
-            "sha256": "17e0c188f5ab8207bcf56f54b8a3ee0587aa7cf9df4f0247fb286b1ceaf603d9"
-          }
-        ]
-      }
-    ],
+    "validations": [],
     "visualization": {
-      "contentVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
+      "contentVersion": "sha256:fe9006d3bfa33877dbcfaeb663b9d0de56bfad48b6b6ef1d5759cf2a42ffaef7",
       "path": "thumbnail.svg"
     },
     "staticChecks": {
-      "result": "pass",
-      "contentVersion": "sha256:7a4acb3388f5f8360633d39938376592d20dc51886bd3e03d901fb287d3a1272",
+      "result": "UNKNOWN",
+      "contentVersion": "sha256:fe9006d3bfa33877dbcfaeb663b9d0de56bfad48b6b6ef1d5759cf2a42ffaef7",
       "method": "existing Map Notes validator + output contract structural/geometry checks",
       "scope": "schema, references, actual extents, separate motion envelopes, exhaustive ordered port pairs; not physics"
     },
     "foundation": {
       "version": "1.0",
       "blockSize": 128,
-      "widthBlocks": 9,
-      "heightBlocks": 3
+      "widthBlocks": 7,
+      "heightBlocks": 2
     },
     "closures": [],
     "mirror": {

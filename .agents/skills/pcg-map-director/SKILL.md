@@ -3,6 +3,10 @@ name: pcg-map-director
 description: 保留 MAP_FOUNDATION 对在线 Map 的模型边界，区分 Module 工作与 Map 授权，防止恢复退役入口或把局部认证冒称整图通过。
 ---
 
+# Current single-source workflow
+
+For current work read [pcg-module-production](../pcg-module-production/SKILL.md) first. Only `modules/<stable-ID>/record.json` and its current source are authoritative. Use `python3 -m module_pipeline`; source/design previews are generated into that ID, and workshop data is derived from `modules/catalog.json` on `main`. Historical round paths, `tools/module_workshop.py`, candidate libraries, migration catalog/promote and batch production commands below are retired examples, not current write targets. Preserve the native physics, causal/holdout and design-quality principles below. A downstream Map consumer reads the explicit versioned package, never old experiments.
+
 # 当前状态：旧生成器退役，新Map不在本轮范围
 
 读根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）和[Module迁移skill](../pcg-module-migration/SKILL.md)。Module 修改、确认设计实现和新生成按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)及当前授权分别执行，不能从历史迁移排序或旧任务限制推定权限。本 skill 不自行实现新Map、不恢复旧Map入口/固定骨架/物化链。历史Map代码、旧逻辑图、试件与报告只作参考和证据，不是新系统当前可用入口。

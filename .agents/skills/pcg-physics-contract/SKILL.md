@@ -3,6 +3,10 @@ name: pcg-physics-contract
 description: 按 MAP_FOUNDATION 验证已有修改、确认设计实现及获准新生成 Module 的真实 Godot 动作、接口、资源、扰动和可追溯证据。
 ---
 
+# Current single-source workflow
+
+For current work read [pcg-module-production](../pcg-module-production/SKILL.md) first. Only `modules/<stable-ID>/record.json` and its current source are authoritative. Use `python3 -m module_pipeline`; source/design previews are generated into that ID, and workshop data is derived from `modules/catalog.json` on `main`. Historical round paths, `tools/module_workshop.py`, candidate libraries, migration catalog/promote and batch production commands below are retired examples, not current write targets. Preserve the native physics, causal/holdout and design-quality principles below. A downstream Map consumer reads the explicit versioned package, never old experiments.
+
 # 真实物理认证与地基迁移
 
 适用：既有 Module 修改/迁移、已确认设计实现、获准新生成内容的动作与机关验证、认证失效分析、接缝及连续路线验证。它不负责在线 Map 求解，也不维护另一套物理。

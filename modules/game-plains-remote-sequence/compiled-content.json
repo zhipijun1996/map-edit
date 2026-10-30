@@ -3,58 +3,44 @@
     [
       0,
       300,
-      900,
+      768,
       32
     ],
     [
-      440,
-      210,
-      160,
-      18
-    ],
-    [
-      805,
-      210,
-      85,
-      18
-    ],
-    [
-      360,
-      140,
+      472,
+      112,
       24,
       110
     ],
     [
-      -64,
-      300,
-      64,
+      472,
+      88,
+      96,
       24
     ],
     [
-      -128,
-      300,
-      64,
-      24
+      544,
+      112,
+      24,
+      110
     ],
     [
-      900,
-      300,
-      60,
-      24
-    ],
-    [
-      960,
-      300,
-      64,
-      24
+      656,
+      -52,
+      72,
+      116
     ]
   ],
-  "one_way_platform_indices": [
-    1,
-    2
-  ],
+  "one_way_platform_indices": [],
   "wall_platform_indices": [],
-  "hazards": [],
+  "hazards": [
+    [
+      656,
+      64,
+      72,
+      16
+    ]
+  ],
   "thorns": [],
   "saws": [],
   "moving_platforms": [],
@@ -67,46 +53,70 @@
         220.0
       ],
       "gate": [
-        780,
+        496,
+        222,
+        48,
+        16
+      ],
+      "open_seconds": 4,
+      "prompt": "RING 1 / REOPEN FINITE G1",
+      "kind": "timed"
+    },
+    {
+      "id": "windchime_plains_remote_sequence-second-independent",
+      "bell": [
+        520.0,
+        170.0
+      ],
+      "gate": [
+        680,
         80,
         24,
         220
       ],
-      "open_seconds": 0,
-      "prompt": "RING 1 / CLIMB FOR REMOTE RING 2",
-      "kind": "remote_sequence",
-      "link_color": "a4dce8",
-      "sequence_gate": [
-        300,
-        60,
-        24,
-        240
-      ],
-      "sequence_offset": [
-        420.0,
-        -50.0
-      ]
+      "open_seconds": 3,
+      "prompt": "RING 2 / OPEN G2",
+      "kind": "timed"
     }
   ],
-  "enemies": [],
+  "enemies": [
+    {
+      "id": "design-ground-enemy-1",
+      "definition": "plains_sentry",
+      "position": [
+        346.0,
+        284.0
+      ],
+      "initial_idle_cooldown": 0
+    }
+  ],
   "reward_sites": [],
+  "refresh_reopenable_latches": [
+    "windchime_plains_remote_sequence"
+  ],
+  "refresh_carried_enemies": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "b03a5dbc208557d6169cbc568b9f407876265d8a89258a581c5a95d54a571ba1",
+  "source_sha256": "2164bbcb8920d97123f0e1fe25fe87212f01a66a40e4e447c48d60bc501f2a0b",
   "stable_id": "game-plains-remote-sequence",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/port-entry",
       "position": [
-        -128,
+        0,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/replay-independent-dock-entry",
+        "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -173,7 +183,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -197,13 +207,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         282
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -220,11 +230,11 @@
         "BOTTOM_LEFT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "BOTTOM",
           "targetPosition": [
-            -64,
+            64,
             332
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -236,21 +246,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          2
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/port-exit",
       "position": [
-        1024,
+        768,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 736,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/replay-independent-dock-exit",
+        "objectId": "generated-81606bd41b694557d03e66eeac56a0331c30443f2551aade66ffd408e2cafc6a/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -317,7 +344,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -341,13 +368,13 @@
         ]
       },
       "stagingPosition": [
-        1000,
+        744,
         282
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -370,31 +397,43 @@
         "BOTTOM_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "BOTTOM",
           "targetPosition": [
-            960,
+            704,
             332
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
           "permission": "INOUT"
         }
+      },
+      "grid": {
+        "cell": [
+          5,
+          2
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          744,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    -180.0,
-    1408,
-    640.0
+    0,
+    -52,
+    768,
+    384
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    1000,
-    282
+    744.0,
+    282.0
   ]
 }
