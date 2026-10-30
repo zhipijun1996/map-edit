@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_review040_v2.py", line 22, in <module>
+    if r['reviewId']in sys.argv[2:]:globals()[sys.argv[1]](r)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/finalize_review040_v2.py", line 18, in partial
+    godot_package.compile_package(f/'module.mapnote.json',f/'playback-cases.json',f/'playable',stable_id=row['moduleId']);r=godot_package.run_package_validation(f/'playable');core.write(f/'package-result.json',r);print(n,'UNQUALIFIED_NATIVE_SAMPLE',r['passed'],len(items),flush=True)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 372, in compile_package
+    content,audit=(_extension.audit_cases if _extension else audit_cases)(doc,cases)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/review_air_runtime.py", line 12, in audit_cases
+    return base.audit_cases(doc,cases,require_replay=require_replay,_extension=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 278, in audit_cases
+    content=content_from_objects(doc)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 195, in content_from_objects
+    _equal([o['w'],o['h']],list(map(float,size.groups())),o['id']+'/body_size')
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 48, in _equal
+    if not same(actual,expected):_fail('geometry_mismatch',field=field,case_id=case_id,objects=actual,canonical=expected)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 41, in _fail
+    def _fail(code, **details): raise PackageError(code, details)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pcg.migration.godot_package.PackageError: geometry_mismatch: {'field': 'design-air-enemy/body_size', 'case_id': None, 'objects': [32, 32], 'canonical': [28.0, 32.0]}

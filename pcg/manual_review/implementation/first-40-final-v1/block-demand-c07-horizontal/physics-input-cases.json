@@ -1,0 +1,1015 @@
+{
+  "cases": [
+    {
+      "id": "approved-first40-final-v1-32-A-to-B",
+      "family": "block128-new-wall-collision-brake",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          128,
+          96,
+          112,
+          59
+        ],
+        [
+          214,
+          563,
+          100,
+          30
+        ],
+        [
+          550,
+          480,
+          218,
+          53
+        ],
+        [
+          744,
+          480,
+          24,
+          24
+        ]
+      ],
+      "spawn": [
+        152,
+        78
+      ],
+      "entry_port": [
+        152,
+        78
+      ],
+      "exit_port": [
+        744,
+        462
+      ],
+      "goal": [
+        737,
+        458,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        -768,
+        1152,
+        1792
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "brake-pair",
+          "bell": [
+            450.0,
+            183.0
+          ],
+          "gate": [
+            490,
+            -257,
+            24,
+            820
+          ],
+          "open_seconds": 0,
+          "paired_gate": [
+            190,
+            155,
+            24,
+            408
+          ],
+          "initial_open": "B"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            744.0,
+            462.0
+          ],
+          "region": [
+            719.0,
+            457.0,
+            50,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            152,
+            78
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            744,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        }
+      ],
+      "interface": 0,
+      "production_recipe": "block128-new-wall-collision-brake",
+      "idea_ids": [
+        "B30-C07"
+      ],
+      "native_scene": "res://prototype/creative_batches/batch30_blockc07/main_v1.tscn",
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 210
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 340
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "brake-pair"
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 6
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 45
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 295
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.8,
+            0.6
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 744,
+          "deadband": 4
+        }
+      ],
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "expected_reward": 12,
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_pair_states": [
+        {
+          "id": "brake-pair",
+          "open_a": true,
+          "open_b": false
+        }
+      ],
+      "rule_parameters": {
+        "interface": 0,
+        "control": 2,
+        "shot_at_actor_x": 340,
+        "core": "same-shot opens forward gate and builds solid left brake, original wall contact then pocket support before onward jump",
+        "body": [
+          24,
+          36
+        ],
+        "side_normal": 1,
+        "spatial_role": "horizontal behind old lip"
+      },
+      "layout_title": "Block128 关墙接住反冲 / 横向刹车袋",
+      "layout_uid": "040a1946a78a807130cdc09f564df46e4693726c87ca5ff929e9c7ff1577c3dd",
+      "generation_rule": {
+        "id": "batch30/blockC07",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockc07/rules_v2.py",
+        "parameters": {
+          "translation": [
+            0,
+            -57
+          ],
+          "terminal_edits": [
+            {
+              "port": "A",
+              "before": [
+                -160,
+                123,
+                400,
+                32
+              ],
+              "after": [
+                0,
+                96,
+                240,
+                59
+              ],
+              "shore_top_delta": -27
+            },
+            {
+              "port": "B",
+              "before": [
+                550,
+                453,
+                230,
+                80
+              ],
+              "after": [
+                550,
+                480,
+                218,
+                53
+              ],
+              "shore_top_delta": 27
+            }
+          ],
+          "retained_recovery_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "deleted_physical_indices": [],
+          "new_physical_platforms": 0,
+          "source_physics_inherited": false,
+          "reservation_air_cells": [],
+          "paid_jump_upper_reservation": [
+            128,
+            -320,
+            384,
+            400
+          ]
+        },
+        "registration_source": "pcg/manual_review/first40_r32_v1.py"
+      },
+      "challenge_route": true,
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockc07/main_v1.tscn",
+      "block_reservations": [
+        [
+          12,
+          60,
+          228,
+          100
+        ],
+        [
+          180,
+          -80,
+          570,
+          850
+        ],
+        [
+          190,
+          155,
+          24,
+          408
+        ],
+        [
+          726,
+          444,
+          36,
+          36
+        ],
+        [
+          128,
+          -320,
+          384,
+          400
+        ]
+      ],
+      "block_adaptation": {
+        "translation": [
+          0,
+          -57
+        ],
+        "terminal_edits": [
+          {
+            "port": "A",
+            "before": [
+              -160,
+              123,
+              400,
+              32
+            ],
+            "after": [
+              0,
+              96,
+              240,
+              59
+            ],
+            "shore_top_delta": -27
+          },
+          {
+            "port": "B",
+            "before": [
+              550,
+              453,
+              230,
+              80
+            ],
+            "after": [
+              550,
+              480,
+              218,
+              53
+            ],
+            "shore_top_delta": 27
+          }
+        ],
+        "retained_recovery_indices": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "deleted_physical_indices": [],
+        "new_physical_platforms": 0,
+        "source_physics_inherited": false,
+        "reservation_air_cells": [],
+        "paid_jump_upper_reservation": [
+          128,
+          -320,
+          384,
+          400
+        ]
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/C07/horizontal",
+        "source_type": "task_a_derived_current_Map_contract_demand",
+        "region": "plains",
+        "required_family": "block128-new-wall-collision-brake",
+        "objective": {
+          "recipe": "block128-new-wall-collision-brake",
+          "interface": 0,
+          "physical_layout_sha256": "040a1946a78a807130cdc09f564df46e4693726c87ca5ff929e9c7ff1577c3dd",
+          "core": "Samefallingshot builds actual collisionbrake, then efficient pocket/onwardreward route; actual paid extra-groundjump alternatives allowed",
+          "independent_new_family_claim": false,
+          "canonical_pair": {
+            "open_a": true,
+            "open_b": false
+          },
+          "alternative_pair_states": [
+            {
+              "open_a": true,
+              "open_b": false
+            },
+            {
+              "open_a": false,
+              "open_b": true
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "block_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "brake"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1280,
+          "max_height": 1408,
+          "boundary_policy": "open",
+          "ownership_shape": "connected_polyomino"
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                744,
+                462
+              ],
+              "region": [
+                719,
+                457,
+                50,
+                10
+              ],
+              "amount": 12
+            }
+          ],
+          "pocket": "internalcollisiontransfer",
+          "recovery_steps": "retained; newbodyownership recovery proof required"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Original fresh supported A dock, frontgate closed/backbrake open",
+          "exit": "Observed stableB and real12coin; nominalfrontopen/backbrakeclosed, costedalternatives report actualstates; generictransferUNKNOWN"
+        },
+        "return_conditions": "B->A, boundarycrossing, rightstairs recovery and all seamsUNKNOWN until newexactevidence",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "block-demand/C07/horizontal",
+        "source_type": "task_a_derived_current_Map_contract_demand",
+        "region": "plains",
+        "required_family": "block128-new-wall-collision-brake",
+        "objective": {
+          "recipe": "block128-new-wall-collision-brake",
+          "interface": 0,
+          "physical_layout_sha256": "040a1946a78a807130cdc09f564df46e4693726c87ca5ff929e9c7ff1577c3dd",
+          "core": "Samefallingshot builds actual collisionbrake, then efficient pocket/onwardreward route; actual paid extra-groundjump alternatives allowed",
+          "independent_new_family_claim": false,
+          "canonical_pair": {
+            "open_a": true,
+            "open_b": false
+          },
+          "alternative_pair_states": [
+            {
+              "open_a": true,
+              "open_b": false
+            },
+            {
+              "open_a": false,
+              "open_b": true
+            }
+          ]
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "block_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "brake"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1280,
+          "max_height": 1408,
+          "boundary_policy": "open",
+          "ownership_shape": "connected_polyomino"
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                744,
+                462
+              ],
+              "region": [
+                719,
+                457,
+                50,
+                10
+              ],
+              "amount": 12
+            }
+          ],
+          "pocket": "internalcollisiontransfer",
+          "recovery_steps": "retained; newbodyownership recovery proof required"
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Original fresh supported A dock, frontgate closed/backbrake open",
+          "exit": "Observed stableB and real12coin; nominalfrontopen/backbrakeclosed, costedalternatives report actualstates; generictransferUNKNOWN"
+        },
+        "return_conditions": "B->A, boundarycrossing, rightstairs recovery and all seamsUNKNOWN until newexactevidence",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "map_request_response": {
+        "status": "candidate_for_joint_mapping",
+        "request_id": "block-demand/C07/horizontal",
+        "source_request_sha256": "c4a24284cf679d0f973119d41873390fe03051d78f49c4a8d96e9bb40db0d5d1",
+        "request_origin": "TaskA_derived_current_Map_contract; not_actual_Bgraph_request",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unresolved": [
+          "Bgraph_joint_assignment",
+          "arbitrary_entry",
+          "reverse",
+          "boundary_crossing",
+          "rightstairs_recovery_inside_ownership",
+          "state_transfer",
+          "full_Map"
+        ],
+        "map_added_terrain": 0,
+        "reward_budget": "Actual12coin_chest_only; no_major_item_service",
+        "production_admitted": false
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 12,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b30-blockc07-v2-i0-c2",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            1,
+            -3
+          ],
+          [
+            1,
+            -2
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            2,
+            -2
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            3,
+            -2
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            4,
+            -2
+          ],
+          [
+            4,
+            -1
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            5,
+            -2
+          ],
+          [
+            5,
+            -1
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "32",
+        "designVersion": "sha256:e2566c2946634d89e99766d27cf495d74695dbf48b0db0bb4b3aeb069df6b56c",
+        "rectangle": {
+          "x": 128,
+          "y": -384,
+          "w": 640,
+          "h": 1024
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_70f05b97b923.py"
+      },
+      "approved_first30": {
+        "reviewId": "32",
+        "designVersion": "sha256:e2566c2946634d89e99766d27cf495d74695dbf48b0db0bb4b3aeb069df6b56c",
+        "rectangle": {
+          "x": 128,
+          "y": -384,
+          "w": 640,
+          "h": 1024
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_70f05b97b923.py"
+      },
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            128,
+            64
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            152,
+            78
+          ],
+          "grid": {
+            "cell": [
+              0,
+              3
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              152,
+              78
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            96,
+            32,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            768,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            744,
+            462
+          ],
+          "grid": {
+            "cell": [
+              4,
+              6
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              744,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            736,
+            416,
+            64,
+            64
+          ]
+        }
+      }
+    }
+  ]
+}

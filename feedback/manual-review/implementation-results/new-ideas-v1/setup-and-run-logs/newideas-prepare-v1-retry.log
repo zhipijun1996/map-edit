@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_ideas_v1.py", line 63, in <module>
+    for r in rows():prepare(r)
+                    ^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_ideas_v1.py", line 56, in prepare
+    scope={**shared.__dict__,'TEMPLATE_DOC':template,'BASE_CASE':base,'AUTH':AUTH,'enrich':enrich,'dock':dock,'decode':decode,'plan_for':plan_for};exec(compile(source,__file__,'exec'),scope);scope['prepare'](row)
+                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/prepare_ideas_v1.py", line 42, in prepare
+    count=2 if n.endswith('enemies-2')else 3;floor=design['bounds']['h']-50
+               ^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/manual_review/ideas_content_v1.py", line 16, in decode
+    d['objects']=[o for o in d['objects']if o['id']not in removed];content=native.content_from_objects(d)
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 259, in content_from_objects
+    _equal([o['w'],o['h']],[36,36],o['id']+'/size');_equal(_center(o),source.get('position'),o['id']+'/position');_equal(m.get('amount'),source.get('amount'),o['id']+'/amount')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 48, in _equal
+    if not same(actual,expected):_fail('geometry_mismatch',field=field,case_id=case_id,objects=actual,canonical=expected)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-approved-implementation/pcg/migration/godot_package.py", line 41, in _fail
+    def _fail(code, **details): raise PackageError(code, details)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pcg.migration.godot_package.PackageError: geometry_mismatch: {'field': 'reward/size', 'case_id': None, 'objects': [24, 28], 'canonical': [36, 36]}

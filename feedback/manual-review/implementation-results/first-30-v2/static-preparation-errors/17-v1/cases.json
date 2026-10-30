@@ -1,0 +1,1998 @@
+{
+  "cases": [
+    {
+      "id": "approved-first30-17-A-to-C",
+      "family": "park-for-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          128,
+          438,
+          112,
+          100
+        ],
+        [
+          570,
+          438,
+          180,
+          12
+        ],
+        [
+          780,
+          214,
+          55,
+          326
+        ],
+        [
+          1030,
+          694,
+          122,
+          32
+        ],
+        [
+          220,
+          650,
+          180,
+          40
+        ],
+        [
+          465,
+          325,
+          30,
+          115
+        ],
+        [
+          570,
+          438,
+          40,
+          100
+        ],
+        [
+          738,
+          438,
+          12,
+          100
+        ]
+      ],
+      "spawn": [
+        152,
+        420
+      ],
+      "entry_port": [
+        152,
+        420
+      ],
+      "exit_port": [
+        1128,
+        676
+      ],
+      "goal": [
+        1121,
+        672,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        -170,
+        1536,
+        1280
+      ],
+      "one_way_platform_indices": [
+        1
+      ],
+      "hazards": [
+        [
+          240,
+          694,
+          790,
+          32
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "return-deck",
+          "start": [
+            300,
+            620
+          ],
+          "finish": [
+            900,
+            620
+          ],
+          "size": [
+            176,
+            20
+          ],
+          "travel_duration": 3,
+          "dwell_duration": 0.15,
+          "initial_phase": 0
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "return-control",
+          "bell": [
+            155.0,
+            395.0
+          ],
+          "gate": [
+            -100,
+            100,
+            10,
+            10
+          ],
+          "open_seconds": 0,
+          "ferry_id": "return-deck"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            1110.0,
+            676.0
+          ],
+          "region": [
+            1080.0,
+            671.0,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            152,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            1128,
+            676
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-control"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 90
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 225
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-control"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 646
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 870
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "return-deck"
+            },
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.9886859967,
+            0.15
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 1128,
+          "deadband": 4
+        }
+      ],
+      "layout_uid": "098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0",
+      "layout_title": "去程留下的桥 / 宽回廊",
+      "interface": 0,
+      "production_recipe": "park-for-return",
+      "challenge_route": true,
+      "expected_reward": 12,
+      "route_spec": {
+        "id": "A-to-C",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "interface": 0,
+        "park": "reward",
+        "route": "reward-out",
+        "control": 0,
+        "purpose": "outgoing recoil shot parks a return/reward support",
+        "return_control": {
+          "index": 0,
+          "takeoff_x": 490,
+          "shot_dy": 0.5
+        },
+        "core": "outbound air shot freezes the same carrier later used for direct return or reward detour; choice persists",
+        "external_goal": "destination plus declared persistent carrier park; continuous return is separate fixture"
+      },
+      "generation_rule": {
+        "id": "batch30/D04",
+        "version": 7,
+        "source_path": "pcg/prototype/creative_batches/batch30_d04/rules_v7.py",
+        "registration_source": "pcg/manual_review/first30_author_v2.py",
+        "parameters": {
+          "interface": 0,
+          "park": "reward",
+          "route": "reward-out",
+          "control": 0,
+          "purpose": "outgoing recoil shot parks a return/reward support",
+          "return_control": {
+            "index": 0,
+            "takeoff_x": 490,
+            "shot_dy": 0.5
+          },
+          "core": "outbound air shot freezes the same carrier later used for direct return or reward detour; choice persists",
+          "external_goal": "destination plus declared persistent carrier park; continuous return is separate fixture"
+        },
+        "migrationOriginalRegistrationSource": "pcg/prototype/creative_batches/batch30_d04/api_v3.py"
+      },
+      "idea_ids": [
+        "PR-D04"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/D04/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "park-for-return",
+        "objective": {
+          "recipe": "park-for-return",
+          "interface": 0,
+          "physical_layout_sha256": "098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0",
+          "core": "same outgoing shot leaves carrier at meaningful future parking state",
+          "route_world_outcomes": {
+            "park-middle-and-cross": {
+              "required_carrier_park": {
+                "id": "return-deck",
+                "running": false,
+                "x_range": [
+                  515,
+                  635
+                ]
+              }
+            },
+            "park-reward-and-descend": {
+              "required_carrier_park": {
+                "id": "return-deck",
+                "running": false,
+                "x_range": [
+                  785,
+                  930
+                ]
+              }
+            }
+          },
+          "continuity_fixture_control_domain": [
+            [
+              490,
+              45,
+              0.5
+            ],
+            [
+              500,
+              35,
+              0.65
+            ],
+            [
+              510,
+              25,
+              0.75
+            ],
+            [
+              500,
+              35,
+              0.85
+            ]
+          ],
+          "continuity_fixture_scope": "One selected same-world return control, frozen before held; fixtures are not Module self-loop routes"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "park-middle-and-cross"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "park-reward-and-descend"
+          }
+        ],
+        "space": {
+          "max_width": 2200,
+          "max_height": 1800,
+          "max_port_span_x": 1300
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                1110,
+                632
+              ],
+              "region": [
+                1080,
+                627,
+                60,
+                10
+              ],
+              "amount": 12
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported fresh scene at A; every route has identical Cells and parked initial carrier",
+          "exit": "observed stable exit and route-specific carrier park; arbitrary states UNKNOWN"
+        },
+        "return_conditions": "Two exact same-world A-return fixtures; generic return transfer remains UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 8,
+          "safe_stable": 8,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.3906175873976139,
+            0.8618821601026385
+          ]
+        }
+      },
+      "review_alias": "b30-d04-api3-i0-reward-reward-out-c0-r0",
+      "migration_boundary_plans": {
+        "A": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -488,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -493,
+                  415,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 80,
+              "deadband": 2
+            }
+          ]
+        },
+        "C": {
+          "egress": [
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 0
+              },
+              "aim_cell": {
+                "kind": "bell",
+                "id": "return-control"
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 90
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 225
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 12
+              }
+            },
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 6
+              },
+              "aim_cell": {
+                "kind": "bell",
+                "id": "return-control"
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 646
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 0
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "timeout": 240
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 8
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 870
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 0
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "on_platform",
+                  "id": "return-deck"
+                },
+                "timeout": 240
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 8
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 12
+              }
+            },
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 6
+              },
+              "direction": [
+                -0.9886859967,
+                0.15
+              ]
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 6
+              },
+              "target_x": 1110,
+              "deadband": 4
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1085,
+                  628,
+                  50,
+                  8
+                ],
+                "timeout": 1400
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1692,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1688,
+                  627,
+                  8,
+                  10
+                ],
+                "timeout": 360
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1768,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  1763,
+                  671,
+                  10,
+                  10
+                ],
+                "timeout": 300
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 1840,
+              "deadband": 2
+            }
+          ]
+        }
+      },
+      "migration_purpose": {
+        "schema": "pcg/internal-waypoint-purpose-binding/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_d04/api_v3.py",
+        "waypoints": [
+          {
+            "id": "core-waypoint-B",
+            "objectId": "generated-098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0/migration-core-waypoint-B",
+            "sourcePortId": "B",
+            "position": [
+              650,
+              420
+            ],
+            "originalPosition": [
+              650,
+              420
+            ],
+            "requiredGrounded": true,
+            "interpretation": "original_grounded_internal_dock",
+            "validation": "UNKNOWN"
+          }
+        ],
+        "policy": "Keep original real grounded dock checks; outer entry and exit remain independent actual Port tests."
+      },
+      "migration_boundary_control_binding": {
+        "caseId": "b30-d04-api3-i0-reward-reward-out-c0-r0",
+        "schema": "pcg/boundary-controller-binding/v1",
+        "originalAuthorSource": "pcg/migration/migration_purpose.py",
+        "originalRunner": "pcg/prototype/workshop/runner.gd",
+        "runnerSource": "pcg/migration/boundary_runners/runner_d05abd8a7b18173c.gd",
+        "wrapperSource": "pcg/migration/boundary_runners/binding_a0fb5c9a350c8873.py",
+        "fullPlansSha256": "016654fb3e788e93c322aefc87e8aaede0591bfa290420d1efa40adf8b2e969a",
+        "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          86
+        ],
+        "cells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            8,
+            4
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "17",
+        "designVersion": "sha256:64b5d57974080a1c26d39f2f6b3408e27fded8e48329ad6c79b36b9bf6c000bf",
+        "rectangle": {
+          "x": 128,
+          "y": 214,
+          "w": 1024,
+          "h": 512
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_a0fb5c9a350c8873.py"
+      }
+    },
+    {
+      "id": "approved-first30-17-C-to-A",
+      "family": "park-for-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          128,
+          438,
+          112,
+          100
+        ],
+        [
+          570,
+          438,
+          180,
+          12
+        ],
+        [
+          780,
+          214,
+          55,
+          326
+        ],
+        [
+          1030,
+          694,
+          122,
+          32
+        ],
+        [
+          220,
+          650,
+          180,
+          40
+        ],
+        [
+          465,
+          325,
+          30,
+          115
+        ],
+        [
+          570,
+          438,
+          40,
+          100
+        ],
+        [
+          738,
+          438,
+          12,
+          100
+        ]
+      ],
+      "spawn": [
+        1128,
+        676
+      ],
+      "entry_port": [
+        1128,
+        676
+      ],
+      "exit_port": [
+        152,
+        420
+      ],
+      "goal": [
+        145,
+        416,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -128,
+        -170,
+        1536,
+        1280
+      ],
+      "one_way_platform_indices": [
+        1
+      ],
+      "hazards": [
+        [
+          240,
+          694,
+          790,
+          32
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [
+        {
+          "platform_id": "return-deck",
+          "start": [
+            300,
+            620
+          ],
+          "finish": [
+            900,
+            620
+          ],
+          "size": [
+            176,
+            20
+          ],
+          "travel_duration": 3,
+          "dwell_duration": 0.15,
+          "initial_phase": 0
+        }
+      ],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "return-control",
+          "bell": [
+            155.0,
+            395.0
+          ],
+          "gate": [
+            -100,
+            100,
+            10,
+            10
+          ],
+          "open_seconds": 0,
+          "ferry_id": "return-deck"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            1110.0,
+            676.0
+          ],
+          "region": [
+            1080.0,
+            671.0,
+            60,
+            10
+          ],
+          "amount": 12
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            152,
+            420
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "C",
+          "position": [
+            1128,
+            676
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        }
+      ],
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1050,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 1056
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "return-control"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 100
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 900,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 70
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 200,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            0.9,
+            0.435889894
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "layout_uid": "098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0",
+      "layout_title": "去程留下的桥 / 宽回廊",
+      "interface": 0,
+      "production_recipe": "park-for-return",
+      "challenge_route": false,
+      "expected_reward": 12,
+      "route_spec": {
+        "id": "C-to-A",
+        "from_port": "C",
+        "to_port": "A",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "interface": 0,
+        "park": "middle",
+        "route": "outbound",
+        "control": 0,
+        "purpose": "outgoing recoil shot parks a return/reward support",
+        "return_control": {
+          "index": 0,
+          "takeoff_x": 490,
+          "shot_dy": 0.5
+        },
+        "core": "outbound air shot freezes the same carrier later used for direct return or reward detour; choice persists",
+        "external_goal": "destination plus declared persistent carrier park; continuous return is separate fixture"
+      },
+      "generation_rule": {
+        "id": "batch30/D04",
+        "version": 7,
+        "source_path": "pcg/prototype/creative_batches/batch30_d04/rules_v7.py",
+        "registration_source": "pcg/manual_review/first30_author_v2.py",
+        "parameters": {
+          "interface": 0,
+          "park": "middle",
+          "route": "outbound",
+          "control": 0,
+          "purpose": "outgoing recoil shot parks a return/reward support",
+          "return_control": {
+            "index": 0,
+            "takeoff_x": 490,
+            "shot_dy": 0.5
+          },
+          "core": "outbound air shot freezes the same carrier later used for direct return or reward detour; choice persists",
+          "external_goal": "destination plus declared persistent carrier park; continuous return is separate fixture"
+        }
+      },
+      "idea_ids": [
+        "PR-D04"
+      ],
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/D04/0",
+        "source_type": "model_authored_challenge_spec",
+        "region": "plains",
+        "required_family": "park-for-return",
+        "objective": {
+          "recipe": "park-for-return",
+          "interface": 0,
+          "physical_layout_sha256": "098c8f8b18a6f9c14944c783af6af1ec85eefd03a53bfc0726f3381fde799eb0",
+          "core": "same outgoing shot leaves carrier at meaningful future parking state",
+          "route_world_outcomes": {
+            "park-middle-and-cross": {
+              "required_carrier_park": {
+                "id": "return-deck",
+                "running": false,
+                "x_range": [
+                  515,
+                  635
+                ]
+              }
+            },
+            "park-reward-and-descend": {
+              "required_carrier_park": {
+                "id": "return-deck",
+                "running": false,
+                "x_range": [
+                  785,
+                  930
+                ]
+              }
+            }
+          },
+          "continuity_fixture_control_domain": [
+            [
+              490,
+              45,
+              0.5
+            ],
+            [
+              500,
+              35,
+              0.65
+            ],
+            [
+              510,
+              25,
+              0.75
+            ],
+            [
+              500,
+              35,
+              0.85
+            ]
+          ],
+          "continuity_fixture_scope": "One selected same-world return control, frozen before held; fixtures are not Module self-loop routes"
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "park-middle-and-cross"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main",
+            "route_id": "park-reward-and-descend"
+          }
+        ],
+        "space": {
+          "max_width": 2200,
+          "max_height": 1800,
+          "max_port_span_x": 1300
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                1110,
+                632
+              ],
+              "region": [
+                1080,
+                627,
+                60,
+                10
+              ],
+              "amount": 12
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported fresh scene at A; every route has identical Cells and parked initial carrier",
+          "exit": "observed stable exit and route-specific carrier park; arbitrary states UNKNOWN"
+        },
+        "return_conditions": "Two exact same-world A-return fixtures; generic return transfer remains UNKNOWN",
+        "budget": {
+          "generator_candidates": 1,
+          "director_revisions": 0
+        }
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 8,
+          "safe_stable": 8,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.3906175873976139,
+            0.8618821601026385
+          ]
+        }
+      },
+      "review_alias": "b30-d04-api3-i0-middle-outbound-c0-r0",
+      "migration_boundary_plans": {
+        "A": {
+          "ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": -488,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -493,
+                  415,
+                  10,
+                  10
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 80,
+              "deadband": 2
+            }
+          ]
+        },
+        "B": {
+          "egress": [
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 0
+              },
+              "aim_cell": {
+                "kind": "bell",
+                "id": "return-control"
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 1
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 225
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 0
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 12
+              }
+            },
+            {
+              "op": "shoot",
+              "trigger": {
+                "after": 6
+              },
+              "aim_cell": {
+                "kind": "bell",
+                "id": "return-control"
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "dynamic": {
+                  "kind": "actor_x",
+                  "direction": "gte",
+                  "value": 646
+                },
+                "timeout": 180
+              }
+            },
+            {
+              "op": "axis",
+              "trigger": {
+                "after": 0
+              },
+              "value": 0
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "timeout": 240
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "after": 8
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  625,
+                  416,
+                  50,
+                  8
+                ],
+                "timeout": 1400
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 724,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  721,
+                  416,
+                  6,
+                  8
+                ],
+                "timeout": 240
+              }
+            },
+            {
+              "op": "drop_through",
+              "trigger": {
+                "after": 1
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 744,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  -400,
+                  977,
+                  2100,
+                  10
+                ],
+                "timeout": 600
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 704.0,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  699.0,
+                  977,
+                  10,
+                  10
+                ],
+                "migration_drop_ready": true,
+                "timeout": 600
+              }
+            },
+            {
+              "op": "drop_through",
+              "trigger": {
+                "after": 1
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 704.0,
+              "deadband": 2
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  696.0,
+                  1069,
+                  16,
+                  10
+                ],
+                "migration_drop_ready": true,
+                "timeout": 600
+              }
+            },
+            {
+              "op": "drop_through",
+              "trigger": {
+                "after": 1
+              }
+            },
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 704.0,
+              "deadband": 2
+            }
+          ],
+          "local_ingress": [
+            {
+              "op": "settle",
+              "trigger": {
+                "after": 0
+              },
+              "target_x": 704.0,
+              "deadband": 2
+            },
+            {
+              "op": "jump",
+              "trigger": {
+                "after": 1
+              }
+            },
+            {
+              "op": "jump_release",
+              "trigger": {
+                "after": 6
+              }
+            },
+            {
+              "op": "wait",
+              "trigger": {
+                "state": "grounded",
+                "migration_goal": [
+                  696.0,
+                  1069,
+                  16,
+                  10
+                ],
+                "timeout": 240
+              }
+            }
+          ]
+        }
+      },
+      "migration_boundary_control_binding": {
+        "caseId": "b30-d04-api3-i0-middle-outbound-c0-r0",
+        "schema": "pcg/boundary-controller-binding/v1",
+        "originalAuthorSource": "pcg/prototype/creative_batches/batch30_d04/api_v3.py",
+        "originalRunner": "pcg/prototype/workshop/runner.gd",
+        "runnerSource": "pcg/migration/boundary_runners/runner_d05abd8a7b18173c.gd",
+        "wrapperSource": "pcg/migration/boundary_runners/binding_dc992d30ebe42264.py",
+        "fullPlansSha256": "01adb6ed6ac37efaf7c571f62a9c2ecf03c5909dda3649955da22994a72dc31c",
+        "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
+      },
+      "wall_platform_indices": [],
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          86
+        ],
+        "cells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            8,
+            4
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "17",
+        "designVersion": "sha256:64b5d57974080a1c26d39f2f6b3408e27fded8e48329ad6c79b36b9bf6c000bf",
+        "rectangle": {
+          "x": 128,
+          "y": 214,
+          "w": 1024,
+          "h": 512
+        },
+        "originalAuthor": "pcg/migration/boundary_runners/binding_dc992d30ebe42264.py"
+      }
+    }
+  ]
+}

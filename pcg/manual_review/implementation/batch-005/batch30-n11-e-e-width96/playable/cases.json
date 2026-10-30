@@ -1,0 +1,6543 @@
+{
+  "cases": [
+    {
+      "id": "approved-first30-23-A-to-B-control-v3-control-v4-control-v5-migration-delivery-canonical",
+      "family": "block128-underledge-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -190,
+          224,
+          446,
+          84
+        ],
+        [
+          -96,
+          480,
+          96,
+          32
+        ],
+        [
+          232,
+          224,
+          152,
+          24
+        ],
+        [
+          -24,
+          480,
+          408,
+          24
+        ]
+      ],
+      "spawn": [
+        360,
+        206
+      ],
+      "entry_port": [
+        360,
+        206
+      ],
+      "exit_port": [
+        360,
+        462
+      ],
+      "goal": [
+        353,
+        458,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -640,
+        -256,
+        1280,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          -384,
+          128,
+          24,
+          384
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-lower-entry-sentry",
+          "definition": "plains_sentry",
+          "position": [
+            294.0,
+            464.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -35,
+            462
+          ],
+          "region": [
+            -65,
+            457,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 1,
+        "width": 96,
+        "control": 0,
+        "mirror": true,
+        "translation": [
+          70,
+          28
+        ],
+        "outward_sign": -1,
+        "upper_lip": -190,
+        "shoot_x": -285,
+        "outward_offset": 95,
+        "upper_before": [
+          -190,
+          208,
+          420,
+          100
+        ],
+        "upper_after": [
+          -190,
+          224,
+          446,
+          84
+        ],
+        "bag_before": [
+          -75,
+          496,
+          100,
+          65
+        ],
+        "bag_after": [
+          -96,
+          480,
+          96,
+          81
+        ],
+        "original_floor": [
+          -930,
+          708,
+          1240,
+          60
+        ],
+        "retained_original_bottoms": true,
+        "bounded_shore_edits": {
+          "A_side_extension": 26,
+          "A_top": 16,
+          "B_outward_trim": 25,
+          "B_top": -16,
+          "B_inward_extension": 21
+        }
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": -285
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 9
+          },
+          "value": 1
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 100,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "after": 36,
+            "timeout": 180,
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 94
+            }
+          },
+          "skip_if_enemy_dead": "design-lower-entry-sentry",
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-lower-entry-sentry"
+          },
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 360,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 354
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/N11",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn11/rules_v1.py",
+        "parameters": {
+          "interface": 1,
+          "width": 96,
+          "control": 0,
+          "mirror": true,
+          "translation": [
+            70,
+            28
+          ],
+          "outward_sign": -1,
+          "upper_lip": -190,
+          "shoot_x": -285,
+          "outward_offset": 95,
+          "upper_before": [
+            -190,
+            208,
+            420,
+            100
+          ],
+          "upper_after": [
+            -190,
+            224,
+            446,
+            84
+          ],
+          "bag_before": [
+            -75,
+            496,
+            100,
+            65
+          ],
+          "bag_after": [
+            -96,
+            480,
+            96,
+            81
+          ],
+          "original_floor": [
+            -930,
+            708,
+            1240,
+            60
+          ],
+          "retained_original_bottoms": true,
+          "bounded_shore_edits": {
+            "A_side_extension": 26,
+            "A_top": 16,
+            "B_outward_trim": 25,
+            "B_top": -16,
+            "B_inward_extension": 21
+          }
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            360,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "B",
+          "position": [
+            360,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        },
+        {
+          "id": "C",
+          "position": [
+            -320,
+            488
+          ],
+          "normal": [
+            0,
+            1
+          ]
+        }
+      ],
+      "interface": 1,
+      "production_recipe": "block128-underledge-brake-return",
+      "challenge_route": true,
+      "expected_reward": 10,
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "idea_ids": [
+        "B31-N11"
+      ],
+      "layout_title": "同侧折返·反冲入檐袋 / 东向镜像",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "block_reservations": [
+        [
+          -512,
+          0,
+          512,
+          708
+        ]
+      ],
+      "layout_uid": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "走出岩唇，身体低于檐底后向外射击，反冲折回袋内取箱。落底后可付费跳射恢复。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "map_shape_demand": {
+        "id": "N11/E_to_E_mirror",
+        "concept_only": true,
+        "units": "proposed_Godot_pixels",
+        "block_size": 128,
+        "bounds": [
+          -1024,
+          0,
+          1408,
+          768
+        ],
+        "ports": [
+          {
+            "id": "A",
+            "cell": [
+              1,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              256,
+              192
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              232,
+              206
+            ],
+            "floor_y": 224,
+            "outward_cell": [
+              2,
+              1
+            ],
+            "role": "upper east ingress"
+          },
+          {
+            "id": "B",
+            "cell": [
+              -1,
+              3
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              0,
+              448
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              -24,
+              462
+            ],
+            "floor_y": 480,
+            "outward_cell": [
+              0,
+              3
+            ],
+            "role": "under-ledge east continuation"
+          }
+        ],
+        "adaptation_class": "bounded_mirror_requires_fresh_physics",
+        "solid_sketch": [
+          {
+            "role": "upper",
+            "rect": [
+              -190,
+              224,
+              446,
+              84
+            ]
+          },
+          {
+            "role": "pocket",
+            "rect": [
+              -75,
+              480,
+              75,
+              81
+            ]
+          },
+          {
+            "role": "originalfloor",
+            "rect": [
+              -930,
+              708,
+              1240,
+              60
+            ]
+          }
+        ],
+        "notes": [
+          "True mirror rules.brake(1), then DX70 DY28. Upperright230→256 extend26; pocketright25→0 trim25.",
+          "Upperfloor+16; pocket468+28→480 -16. Mirror aim/axis/actor_x comparisons and all actualsolids, notgravity.",
+          "Realstart[-110,206], A dock232; B dock-24 vs old-35 shift11."
+        ],
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended": "requested",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended": "not_requested_no_negative_claim",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "B_CSPsameface_shape_requirement_plus_explicitA4currencyadaptation",
+        "registered_normals": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "currency_allocation": {
+          "amount": 10,
+          "status": "preservedparentproposal_requiresactualMapbudgetbinding"
+        },
+        "map_added_terrain": 0,
+        "production_admitted": false,
+        "unresolved": [
+          "ActualMapedgeassignment/allrequiredpairs",
+          "Rewardbudgetbinding",
+          "Arbitraryingress/resources",
+          "Boundarycrossing",
+          "Genericrecovery/seam/fullMap"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b30-blockn11-v1-i1-w96-c0",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            -3,
+            1
+          ],
+          [
+            -3,
+            2
+          ],
+          [
+            -3,
+            3
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -2,
+            2
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "23",
+        "designVersion": "sha256:a9d7019bc4d157ae1ccb157e32ad51ed7b4e153f7a8e3e42128a6b2e7c8528ad",
+        "rectangle": {
+          "x": -384,
+          "y": 128,
+          "w": 768,
+          "h": 384
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "air_port_contracts": [
+        {
+          "id": "C",
+          "position": [
+            -320,
+            512
+          ],
+          "stagingPosition": [
+            -320,
+            488
+          ],
+          "face": "BOTTOM",
+          "surface": "AIR",
+          "permission": "OUTPUT"
+        }
+      ],
+      "module_sha256": "3119d02c9d33d783a6c755c13459b08919b8b5e48713b29b9767637169dcc215",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                -1.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 150,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 169,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 170,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 171,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 172,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 173,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 174,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 175,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 176,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 177,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 178,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 179,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 180,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 181,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 182,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 183,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 184,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 185,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 186,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 187,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 188,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 189,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 190,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 191,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 192,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 193,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 194,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 195,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 196,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 197,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 198,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 199,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 200,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 201,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 202,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 203,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 204,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 205,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 206,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 207,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 208,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 209,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 210,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 211,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 212,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 213,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 214,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 215,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 216,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 217,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 218,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 219,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 220,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 221,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 222,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 223,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 224,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 225,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 226,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 227,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 228,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 229,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 230,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 231,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 232,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 233,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 234,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 235,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 236,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 237,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 238,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 239,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 240,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 241,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 242,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 243,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 244,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 245,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 246,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 247,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.999910473823547,
+                0.0133815472945571
+              ],
+              "plan_index": 7,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 248,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 249,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 250,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 251,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 252,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 253,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 254,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 255,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 256,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 257,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 258,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 259,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 260,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 261,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 262,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 263,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 264,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 265,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 266,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 267,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 268,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 269,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 270,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 271,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 272,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 273,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 274,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 275,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 276,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 277,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 278,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 279,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 280,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 281,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 282,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 283,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.999931633472443,
+                0.0116870328783989
+              ],
+              "plan_index": 8,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 284,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 285,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 286,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 287,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 288,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 289,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 290,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 291,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 292,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 293,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 294,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 295,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 296,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 297,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 298,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 299,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 300,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 301,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 302,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 303,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 304,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 305,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 306,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 307,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 308,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 309,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 310,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 311,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 312,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 313,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 314,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 315,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 316,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 317,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 318,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 319,
+          "axis": 0.0,
+          "requested": [
+            {
+              "direction": [
+                0.999940037727356,
+                0.0109522473067045
+              ],
+              "plan_index": 9,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 320,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 321,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 322,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 323,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 324,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 325,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 326,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 327,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 328,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 329,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 330,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 331,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 332,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 333,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 334,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 335,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 336,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 337,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 338,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 339,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 340,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 341,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 342,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 343,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 344,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 345,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 346,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 347,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 348,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 349,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 350,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 351,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 352,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 353,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 354,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 355,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 356,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 357,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 358,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 359,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 360,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 361,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 362,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 363,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 364,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 365,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 366,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 367,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 368,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 369,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 370,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 371,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 372,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 373,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 374,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 375,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 376,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 377,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 378,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 379,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 380,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 381,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 382,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 383,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 384,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 385,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 386,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 387,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 388,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 389,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 390,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 391,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 392,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 393,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 394,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 395,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 396,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 397,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 398,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 399,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 400,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 401,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 402,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 403,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 404,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 405,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 406,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 407,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 408,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 409,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 410,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 411,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 412,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 413,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 414,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 415,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 416,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 417,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 418,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 419,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 420,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 421,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 422,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 423,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 424,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 425,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 426,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 427,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-first30-23-A-to-C-control-v3-control-v4-control-v5-migration-delivery-canonical",
+      "family": "block128-underledge-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -190,
+          224,
+          446,
+          84
+        ],
+        [
+          -96,
+          480,
+          96,
+          32
+        ],
+        [
+          232,
+          224,
+          152,
+          24
+        ],
+        [
+          -24,
+          480,
+          408,
+          24
+        ]
+      ],
+      "spawn": [
+        360,
+        206
+      ],
+      "entry_port": [
+        360,
+        206
+      ],
+      "exit_port": [
+        -320,
+        488
+      ],
+      "goal": [
+        -327,
+        484,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -640,
+        -256,
+        1280,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          -384,
+          128,
+          24,
+          384
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-lower-entry-sentry",
+          "definition": "plains_sentry",
+          "position": [
+            294.0,
+            464.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -35,
+            462
+          ],
+          "region": [
+            -65,
+            457,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 1,
+        "width": 96,
+        "control": 0,
+        "mirror": true,
+        "translation": [
+          70,
+          28
+        ],
+        "outward_sign": -1,
+        "upper_lip": -190,
+        "shoot_x": -285,
+        "outward_offset": 95,
+        "upper_before": [
+          -190,
+          208,
+          420,
+          100
+        ],
+        "upper_after": [
+          -190,
+          224,
+          446,
+          84
+        ],
+        "bag_before": [
+          -75,
+          496,
+          100,
+          65
+        ],
+        "bag_after": [
+          -96,
+          480,
+          96,
+          81
+        ],
+        "original_floor": [
+          -930,
+          708,
+          1240,
+          60
+        ],
+        "retained_original_bottoms": true,
+        "bounded_shore_edits": {
+          "A_side_extension": 26,
+          "A_top": 16,
+          "B_outward_trim": 25,
+          "B_top": -16,
+          "B_inward_extension": 21
+        }
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": -320,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": -314
+            },
+            "timeout": 180
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/N11",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn11/rules_v1.py",
+        "parameters": {
+          "interface": 1,
+          "width": 96,
+          "control": 0,
+          "mirror": true,
+          "translation": [
+            70,
+            28
+          ],
+          "outward_sign": -1,
+          "upper_lip": -190,
+          "shoot_x": -285,
+          "outward_offset": 95,
+          "upper_before": [
+            -190,
+            208,
+            420,
+            100
+          ],
+          "upper_after": [
+            -190,
+            224,
+            446,
+            84
+          ],
+          "bag_before": [
+            -75,
+            496,
+            100,
+            65
+          ],
+          "bag_after": [
+            -96,
+            480,
+            96,
+            81
+          ],
+          "original_floor": [
+            -930,
+            708,
+            1240,
+            60
+          ],
+          "retained_original_bottoms": true,
+          "bounded_shore_edits": {
+            "A_side_extension": 26,
+            "A_top": 16,
+            "B_outward_trim": 25,
+            "B_top": -16,
+            "B_inward_extension": 21
+          }
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            360,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "B",
+          "position": [
+            360,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        },
+        {
+          "id": "C",
+          "position": [
+            -320,
+            488
+          ],
+          "normal": [
+            0,
+            1
+          ]
+        }
+      ],
+      "interface": 1,
+      "production_recipe": "block128-underledge-brake-return",
+      "challenge_route": true,
+      "expected_reward": 0,
+      "required_rewards": [],
+      "idea_ids": [
+        "B31-N11"
+      ],
+      "layout_title": "同侧折返·反冲入檐袋 / 东向镜像",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "route_spec": {
+        "id": "A-to-C",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "block_reservations": [
+        [
+          -512,
+          0,
+          512,
+          708
+        ]
+      ],
+      "layout_uid": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "走出岩唇，身体低于檐底后向外射击，反冲折回袋内取箱。落底后可付费跳射恢复。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "map_shape_demand": {
+        "id": "N11/E_to_E_mirror",
+        "concept_only": true,
+        "units": "proposed_Godot_pixels",
+        "block_size": 128,
+        "bounds": [
+          -1024,
+          0,
+          1408,
+          768
+        ],
+        "ports": [
+          {
+            "id": "A",
+            "cell": [
+              1,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              256,
+              192
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              232,
+              206
+            ],
+            "floor_y": 224,
+            "outward_cell": [
+              2,
+              1
+            ],
+            "role": "upper east ingress"
+          },
+          {
+            "id": "B",
+            "cell": [
+              -1,
+              3
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              0,
+              448
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              -24,
+              462
+            ],
+            "floor_y": 480,
+            "outward_cell": [
+              0,
+              3
+            ],
+            "role": "under-ledge east continuation"
+          }
+        ],
+        "adaptation_class": "bounded_mirror_requires_fresh_physics",
+        "solid_sketch": [
+          {
+            "role": "upper",
+            "rect": [
+              -190,
+              224,
+              446,
+              84
+            ]
+          },
+          {
+            "role": "pocket",
+            "rect": [
+              -75,
+              480,
+              75,
+              81
+            ]
+          },
+          {
+            "role": "originalfloor",
+            "rect": [
+              -930,
+              708,
+              1240,
+              60
+            ]
+          }
+        ],
+        "notes": [
+          "True mirror rules.brake(1), then DX70 DY28. Upperright230→256 extend26; pocketright25→0 trim25.",
+          "Upperfloor+16; pocket468+28→480 -16. Mirror aim/axis/actor_x comparisons and all actualsolids, notgravity.",
+          "Realstart[-110,206], A dock232; B dock-24 vs old-35 shift11."
+        ],
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended": "requested",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended": "not_requested_no_negative_claim",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "B_CSPsameface_shape_requirement_plus_explicitA4currencyadaptation",
+        "registered_normals": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "currency_allocation": {
+          "amount": 10,
+          "status": "preservedparentproposal_requiresactualMapbudgetbinding"
+        },
+        "map_added_terrain": 0,
+        "production_admitted": false,
+        "unresolved": [
+          "ActualMapedgeassignment/allrequiredpairs",
+          "Rewardbudgetbinding",
+          "Arbitraryingress/resources",
+          "Boundarycrossing",
+          "Genericrecovery/seam/fullMap"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b30-blockn11-v1-i1-w96-c0",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            -3,
+            1
+          ],
+          [
+            -3,
+            2
+          ],
+          [
+            -3,
+            3
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -2,
+            2
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "23",
+        "designVersion": "sha256:a9d7019bc4d157ae1ccb157e32ad51ed7b4e153f7a8e3e42128a6b2e7c8528ad",
+        "rectangle": {
+          "x": -384,
+          "y": 128,
+          "w": 768,
+          "h": 384
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "air_port_contracts": [
+        {
+          "id": "C",
+          "position": [
+            -320,
+            512
+          ],
+          "stagingPosition": [
+            -320,
+            488
+          ],
+          "face": "BOTTOM",
+          "surface": "AIR",
+          "permission": "OUTPUT"
+        }
+      ],
+      "module_sha256": "49163eb554c75f8a94a9c5aae075cbf065a98f1a893ece879c7e7a8b87766aba",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 139,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 140,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 141,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 142,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 143,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 144,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 145,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 146,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 147,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 148,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 149,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 150,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 151,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 152,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 153,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 154,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 155,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 156,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 157,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 158,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 159,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 160,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 161,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 162,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 163,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 164,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 165,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 166,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 167,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 168,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    },
+    {
+      "id": "approved-first30-23-B-to-C-control-v3-control-v4-control-v5-migration-delivery-canonical",
+      "family": "block128-underledge-brake-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -190,
+          224,
+          446,
+          84
+        ],
+        [
+          -96,
+          480,
+          96,
+          32
+        ],
+        [
+          232,
+          224,
+          152,
+          24
+        ],
+        [
+          -24,
+          480,
+          408,
+          24
+        ]
+      ],
+      "spawn": [
+        360,
+        462
+      ],
+      "entry_port": [
+        360,
+        462
+      ],
+      "exit_port": [
+        -320,
+        488
+      ],
+      "goal": [
+        -327,
+        484,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -640,
+        -256,
+        1280,
+        1152
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          -384,
+          128,
+          24,
+          384
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [
+        {
+          "id": "design-lower-entry-sentry",
+          "definition": "plains_sentry",
+          "position": [
+            294.0,
+            464.0
+          ],
+          "initial_idle_cooldown": 0
+        }
+      ],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            -35,
+            462
+          ],
+          "region": [
+            -65,
+            457,
+            60,
+            10
+          ],
+          "amount": 10
+        }
+      ],
+      "max_frames": 2400,
+      "trace_all": false,
+      "rule_parameters": {
+        "interface": 1,
+        "width": 96,
+        "control": 0,
+        "mirror": true,
+        "translation": [
+          70,
+          28
+        ],
+        "outward_sign": -1,
+        "upper_lip": -190,
+        "shoot_x": -285,
+        "outward_offset": 95,
+        "upper_before": [
+          -190,
+          208,
+          420,
+          100
+        ],
+        "upper_after": [
+          -190,
+          224,
+          446,
+          84
+        ],
+        "bag_before": [
+          -75,
+          496,
+          100,
+          65
+        ],
+        "bag_after": [
+          -96,
+          480,
+          96,
+          81
+        ],
+        "original_floor": [
+          -930,
+          708,
+          1240,
+          60
+        ],
+        "retained_original_bottoms": true,
+        "bounded_shore_edits": {
+          "A_side_extension": 26,
+          "A_top": 16,
+          "B_outward_trim": 25,
+          "B_top": -16,
+          "B_inward_extension": 21
+        }
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": -1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            1,
+            0.1
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": -64,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": -58
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": -320,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            1,
+            0.1
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": -314
+            },
+            "timeout": 180
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "batch30/N11",
+        "version": 1,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn11/rules_v1.py",
+        "parameters": {
+          "interface": 1,
+          "width": 96,
+          "control": 0,
+          "mirror": true,
+          "translation": [
+            70,
+            28
+          ],
+          "outward_sign": -1,
+          "upper_lip": -190,
+          "shoot_x": -285,
+          "outward_offset": 95,
+          "upper_before": [
+            -190,
+            208,
+            420,
+            100
+          ],
+          "upper_after": [
+            -190,
+            224,
+            446,
+            84
+          ],
+          "bag_before": [
+            -75,
+            496,
+            100,
+            65
+          ],
+          "bag_after": [
+            -96,
+            480,
+            96,
+            81
+          ],
+          "original_floor": [
+            -930,
+            708,
+            1240,
+            60
+          ],
+          "retained_original_bottoms": true,
+          "bounded_shore_edits": {
+            "A_side_extension": 26,
+            "A_top": 16,
+            "B_outward_trim": 25,
+            "B_top": -16,
+            "B_inward_extension": 21
+          }
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            360,
+            206
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "B",
+          "position": [
+            360,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        },
+        {
+          "id": "C",
+          "position": [
+            -320,
+            488
+          ],
+          "normal": [
+            0,
+            1
+          ]
+        }
+      ],
+      "interface": 1,
+      "production_recipe": "block128-underledge-brake-return",
+      "challenge_route": true,
+      "expected_reward": 0,
+      "required_rewards": [],
+      "idea_ids": [
+        "B31-N11"
+      ],
+      "layout_title": "同侧折返·反冲入檐袋 / 东向镜像",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn11/main_v1.tscn",
+      "route_spec": {
+        "id": "B-to-C",
+        "from_port": "B",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "block_reservations": [
+        [
+          -512,
+          0,
+          512,
+          708
+        ]
+      ],
+      "layout_uid": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "走出岩唇，身体低于檐底后向外射击，反冲折回袋内取箱。落底后可付费跳射恢复。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "batch30/N11/E-E/width96",
+        "source_type": "B_CSP_shape_demand_and_model_registered_A4_adaptation",
+        "region": "plains",
+        "required_family": "block128-underledge-brake-return",
+        "objective": {
+          "recipe": "block128-underledge-brake-return",
+          "interface": 1,
+          "physical_layout_sha256": "55705df874c2603dff43290dc840cc26f671b818899be188c9bd6cf9c6f56006",
+          "sameface_offset_demand": true,
+          "independent_new_family_claim": false,
+          "mirror_requires_freshphysics": true
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main",
+            "route_id": "A-to-B"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1408,
+          "max_height": 768,
+          "max_port_span_x": 256,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "rewards": [
+          {
+            "kind": "currency",
+            "amount": 10,
+            "status": "explicitpreservedallocation_needsMapbudgetbinding"
+          }
+        ],
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": [
+            {
+              "id": "visible-cache",
+              "position": [
+                -35,
+                462
+              ],
+              "region": [
+                -65,
+                457,
+                60,
+                10
+              ],
+              "amount": 10
+            }
+          ]
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "Actualupperdockoriginalfreshresources; no externalingresspromise",
+          "exit": "Observedstablebagdock/reward/originalrenewal"
+        },
+        "return_conditions": "B->A, arbitraryentrystate/genericboundarycrossing/fullMapUNKNOWN; originalfullbottomfloorpreserved",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "map_shape_demand": {
+        "id": "N11/E_to_E_mirror",
+        "concept_only": true,
+        "units": "proposed_Godot_pixels",
+        "block_size": 128,
+        "bounds": [
+          -1024,
+          0,
+          1408,
+          768
+        ],
+        "ports": [
+          {
+            "id": "A",
+            "cell": [
+              1,
+              1
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              256,
+              192
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              232,
+              206
+            ],
+            "floor_y": 224,
+            "outward_cell": [
+              2,
+              1
+            ],
+            "role": "upper east ingress"
+          },
+          {
+            "id": "B",
+            "cell": [
+              -1,
+              3
+            ],
+            "edge": "E",
+            "profile": "ground64/v1",
+            "anchor": [
+              0,
+              448
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "staging": [
+              -24,
+              462
+            ],
+            "floor_y": 480,
+            "outward_cell": [
+              0,
+              3
+            ],
+            "role": "under-ledge east continuation"
+          }
+        ],
+        "adaptation_class": "bounded_mirror_requires_fresh_physics",
+        "solid_sketch": [
+          {
+            "role": "upper",
+            "rect": [
+              -190,
+              224,
+              446,
+              84
+            ]
+          },
+          {
+            "role": "pocket",
+            "rect": [
+              -75,
+              480,
+              75,
+              81
+            ]
+          },
+          {
+            "role": "originalfloor",
+            "rect": [
+              -930,
+              708,
+              1240,
+              60
+            ]
+          }
+        ],
+        "notes": [
+          "True mirror rules.brake(1), then DX70 DY28. Upperright230→256 extend26; pocketright25→0 trim25.",
+          "Upperfloor+16; pocket468+28→480 -16. Mirror aim/axis/actor_x comparisons and all actualsolids, notgravity.",
+          "Realstart[-110,206], A dock232; B dock-24 vs old-35 shift11."
+        ],
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "intended": "requested",
+            "evidence": "UNKNOWN"
+          },
+          {
+            "from_port": "B",
+            "to_port": "A",
+            "intended": "not_requested_no_negative_claim",
+            "evidence": "UNKNOWN"
+          }
+        ],
+        "ownership": "Raster actual terrain/interaction/dynamic/full-body action space, connect while excluding all port outward cells. Bounding rectangle is not a solid outer frame."
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "B_CSPsameface_shape_requirement_plus_explicitA4currencyadaptation",
+        "registered_normals": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "ordered_pairs": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ]
+        ],
+        "currency_allocation": {
+          "amount": 10,
+          "status": "preservedparentproposal_requiresactualMapbudgetbinding"
+        },
+        "map_added_terrain": 0,
+        "production_admitted": false,
+        "unresolved": [
+          "ActualMapedgeassignment/allrequiredpairs",
+          "Rewardbudgetbinding",
+          "Arbitraryingress/resources",
+          "Boundarycrossing",
+          "Genericrecovery/seam/fullMap"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b30-blockn11-v1-i1-w96-c0",
+      "wall_platform_indices": [],
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            -3,
+            1
+          ],
+          [
+            -3,
+            2
+          ],
+          [
+            -3,
+            3
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -2,
+            2
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "approved_first30": {
+        "reviewId": "23",
+        "designVersion": "sha256:a9d7019bc4d157ae1ccb157e32ad51ed7b4e153f7a8e3e42128a6b2e7c8528ad",
+        "rectangle": {
+          "x": -384,
+          "y": 128,
+          "w": 768,
+          "h": 384
+        },
+        "originalAuthor": "pcg/migration/compat_runners/runner_18bcffac97cd.py"
+      },
+      "air_port_contracts": [
+        {
+          "id": "C",
+          "position": [
+            -320,
+            512
+          ],
+          "stagingPosition": [
+            -320,
+            488
+          ],
+          "face": "BOTTOM",
+          "surface": "AIR",
+          "permission": "OUTPUT"
+        }
+      ],
+      "module_sha256": "352b041c4793935e1310dc3ab75bd4bbf589c5da8914ae9665c28d77f3a8ac6a",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 1,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 2,
+              "type": "jump_release"
+            },
+            {
+              "direction": [
+                1.0,
+                0.100000001490116
+              ],
+              "plan_index": 3,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 9,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 31,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 35,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 42,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 8,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 10,
+              "type": "jump_release"
+            },
+            {
+              "direction": [
+                1.0,
+                0.100000001490116
+              ],
+              "plan_index": 11,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 88,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}

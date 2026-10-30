@@ -1,0 +1,171 @@
+{
+  "designVersion": "sha256:236fe6ecd8e6977fa0bc576b1de948d9bd8d5b1952f91c546746c9401e262359",
+  "content": {
+    "platforms": [
+      [
+        384,
+        600,
+        256,
+        40
+      ],
+      [
+        710,
+        344,
+        314,
+        40
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        384,
+        680,
+        640,
+        40
+      ]
+    ],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 610,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              605,
+              578,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "value": 1,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 18
+          },
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 1000,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              995,
+              322,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "exit-to-entry",
+        "from_port": "exit",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 408,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              403,
+              578,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ],
+  "geometry": "exact approved design; native enemy glyph decoding only"
+}

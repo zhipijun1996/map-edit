@@ -1,0 +1,246 @@
+{
+  "content": {
+    "platforms": [
+      [
+        0,
+        224,
+        80,
+        32
+      ],
+      [
+        96,
+        48,
+        160,
+        16
+      ],
+      [
+        288,
+        160,
+        96,
+        12
+      ]
+    ],
+    "one_way_platform_indices": [
+      2
+    ],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [
+      {
+        "surface_id": "eave-under-thorns",
+        "platform_index": 1,
+        "face": "bottom",
+        "start_offset": 0,
+        "length": 160,
+        "depth": 20
+      },
+      {
+        "surface_id": "eave-top-thorns",
+        "platform_index": 1,
+        "face": "top",
+        "start_offset": 0,
+        "length": 160,
+        "depth": 20
+      }
+    ],
+    "saws": [
+      {
+        "source_id": "pit-saw",
+        "origin": [
+          192,
+          200
+        ],
+        "travel": [
+          72,
+          0
+        ],
+        "radius": 20.0,
+        "period": 3.2,
+        "initial_phase": 0.25
+      }
+    ],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "reward",
+        "position": [
+          336,
+          148
+        ],
+        "region": [
+          296,
+          120,
+          80,
+          56
+        ],
+        "amount": 4
+      }
+    ],
+    "approved_hq_cells": []
+  },
+  "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532",
+  "formatMapping": {
+    "designRole": "reward_return",
+    "runtimeRole": "return",
+    "rewardRequired": true,
+    "sameWorldReturn": true
+  },
+  "controls": [
+    {
+      "op": "settle",
+      "target_x": 68,
+      "deadband": 0.6,
+      "source_native_gain": 5.5,
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 1,
+        "state": "grounded",
+        "migration_goal": [
+          64,
+          203,
+          8,
+          6
+        ],
+        "timeout": 600
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 1,
+        "state": "r061_saw_window",
+        "timeout": 1800
+      }
+    },
+    {
+      "op": "settle",
+      "target_x": 336,
+      "deadband": 0.6,
+      "source_native_gain": 5.5,
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump",
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump_release",
+      "trigger": {
+        "after": 1
+      }
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 1
+      },
+      "direction": [
+        -1,
+        0
+      ]
+    },
+    {
+      "op": "settle",
+      "target_x": 336,
+      "deadband": 0.6,
+      "source_native_gain": 5.5,
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 1,
+        "state": "grounded",
+        "migration_goal": [
+          332,
+          139,
+          8,
+          6
+        ],
+        "timeout": 600
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 1,
+        "state": "r061_saw_window",
+        "timeout": 1800
+      }
+    },
+    {
+      "op": "settle",
+      "target_x": 48,
+      "deadband": 0.6,
+      "source_native_gain": 5.5,
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump",
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "jump_release",
+      "trigger": {
+        "after": 1
+      }
+    },
+    {
+      "op": "shoot",
+      "trigger": {
+        "after": 1
+      },
+      "direction": [
+        1,
+        0
+      ]
+    },
+    {
+      "op": "settle",
+      "target_x": 24,
+      "deadband": 0.6,
+      "source_native_gain": 5.5,
+      "trigger": {
+        "after": 0
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 1,
+        "state": "grounded",
+        "migration_goal": [
+          20,
+          203,
+          8,
+          6
+        ],
+        "timeout": 600
+      }
+    },
+    {
+      "op": "wait",
+      "trigger": {
+        "after": 24
+      }
+    }
+  ]
+}

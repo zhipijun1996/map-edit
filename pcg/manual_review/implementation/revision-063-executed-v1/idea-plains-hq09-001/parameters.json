@@ -1,0 +1,408 @@
+{
+  "designVersion": "sha256:313fc0c711815b19e726360dbb0f6b4aabd4e4b21c90aba33a7bc5c939f2cff4",
+  "content": {
+    "platforms": [
+      [
+        0,
+        352,
+        112,
+        160
+      ],
+      [
+        128,
+        32,
+        128,
+        12
+      ],
+      [
+        128,
+        160,
+        96,
+        12
+      ],
+      [
+        128,
+        288,
+        112,
+        12
+      ]
+    ],
+    "one_way_platform_indices": [
+      1,
+      2,
+      3
+    ],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [
+      {
+        "platform_id": "P",
+        "start": [
+          320,
+          432
+        ],
+        "finish": [
+          320,
+          176
+        ],
+        "size": [
+          16,
+          112
+        ],
+        "travel_duration": 3.2,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.3888888888888889,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    ],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "motion-bell",
+        "bell": [
+          72.0,
+          288.0
+        ],
+        "gate": [
+          -4096,
+          -4096,
+          8,
+          8
+        ],
+        "open_seconds": 0,
+        "ferry_id": "P"
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [],
+    "approved_hq_cells": [
+      {
+        "kind": "projectile_barrier",
+        "id": "P"
+      },
+      {
+        "kind": "retract_thorns",
+        "id": "exit-platform-thorns",
+        "bell": [
+          496.0,
+          144.0
+        ],
+        "access": [
+          272.0,
+          16.0
+        ],
+        "hazards": [
+          {
+            "id": "exit-thorns-top",
+            "rect": [
+              128,
+              8,
+              128,
+              24
+            ]
+          },
+          {
+            "id": "exit-thorns-bottom",
+            "rect": [
+              128,
+              44,
+              128,
+              20
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "hit_turret",
+        "id": "fixed-turret",
+        "rect": [
+          154,
+          328,
+          44,
+          48
+        ],
+        "muzzle": [
+          196.1226467912153,
+          338.9202795857101
+        ],
+        "direction": [
+          0.838443616300637,
+          -0.5449883505954141
+        ],
+        "cooldown": 0.6,
+        "delay": 0.05,
+        "speed": 720.0,
+        "lifetime": 1.0,
+        "latch_id": "target-bell"
+      }
+    ]
+  },
+  "authorization": {
+    "path": "feedback/manual-review/implementation-results/revision-063-v1/authorization/request.json",
+    "sha256": "666ec31466b5a2b9318e38d4623bfafee8c5f42cef2ea0e0d4a237fab333fd49"
+  },
+  "previous": {
+    "path": "pcg/manual_review/implementation/revision-060-final-v1/idea-plains-hq09-001/parameters.json",
+    "sha256": "005c927cf78393e00d9f324b61987815cc3c61609361fc9f04d16db9b19f306d"
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "L-to-T",
+        "from_port": "L",
+        "to_port": "T",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 72,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              68,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "native_aim_point": [
+            72,
+            288
+          ],
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r060_barrier_clear",
+            "timeout": 1800
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 100,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              96,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "shoot",
+          "native_aim_point": [
+            176,
+            352
+          ],
+          "trigger": {
+            "after": 1
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r060_bell_open",
+            "timeout": 180
+          },
+          "bell_id": "target-bell"
+        },
+        {
+          "op": "settle",
+          "target_x": 100,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              96,
+              331,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 184,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 184,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              180,
+              267,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 176,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 176,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              172,
+              139,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "designVersion": "sha256:e3990c52ab60a6d4095694b2db6ea39642e62cfcb3f73bac8f0d05a9f76f1adf",
+  "content": {
+    "platforms": [
+      [
+        40,
+        600,
+        1200,
+        80
+      ],
+      [
+        0,
+        600,
+        64,
+        24
+      ],
+      [
+        1216,
+        600,
+        64,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "exit-to-entry",
+        "from_port": "exit",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "C-to-entry",
+        "from_port": "C",
+        "to_port": "entry",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "C-to-exit",
+        "from_port": "C",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "D-to-entry",
+        "from_port": "D",
+        "to_port": "entry",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "D-to-exit",
+        "from_port": "D",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1256,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false
+}

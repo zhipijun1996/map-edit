@@ -1,0 +1,256 @@
+{
+  "designVersion": "sha256:ce1bba997d04e956e14494b5949568ce0c031d58b2fc42207c948c4b05c1c856",
+  "content": {
+    "platforms": [
+      [
+        384,
+        352,
+        128,
+        32
+      ],
+      [
+        1252,
+        224,
+        156,
+        140
+      ],
+      [
+        732,
+        284,
+        35,
+        50
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [
+      {
+        "platform_id": "catch-deck",
+        "start": [
+          632,
+          364
+        ],
+        "finish": [
+          982,
+          364
+        ],
+        "size": [
+          240,
+          22
+        ],
+        "travel_duration": 0.7866666666666666,
+        "dwell_duration": 0.2,
+        "initial_phase": 0
+      }
+    ],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "catch-bell",
+        "bell": [
+          712.0,
+          244.0
+        ],
+        "gate": [
+          -368,
+          -586,
+          10,
+          10
+        ],
+        "open_seconds": 0,
+        "ferry_id": "catch-deck",
+        "carrier_mount": "catch-deck"
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          1366.0,
+          206.0
+        ],
+        "region": [
+          1336.0,
+          200.0,
+          60,
+          12
+        ],
+        "amount": 12
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 387
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 0,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 650
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "catch-bell"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "catch-deck"
+            },
+            "min_after": 6,
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 937
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 16
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "direction": [
+            -0.8,
+            0.6
+          ]
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1384,
+          "deadband": 4
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false
+}

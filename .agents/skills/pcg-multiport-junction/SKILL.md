@@ -1,11 +1,11 @@
 ---
 name: pcg-multiport-junction
-description: 迁移和审查既有多Port内容，保留真实空间选择，认证矩形外边接口、部分连接封口、N×N有向Route及镜像。
+description: 修改、实现及设计获准的多Port Module，保留真实空间选择，按有向路线、封口和镜像的实际证据认证。
 ---
 
 # 范围与依据
 
-按根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）及[迁移skill](../pcg-module-migration/SKILL.md)执行。当前只迁移现有内容，先本仓库再主游戏；新增生产暂停，旧Map生成器退役。本skill不实现新Map、不续写创意批次。Guide的推荐Port数/尺寸/路线数不是硬门槛。
+按根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）及[迁移skill](../pcg-module-migration/SKILL.md)执行。先按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)区分既有修改、确认设计实现与获准新生成；按当前任务授权执行，不能自动恢复暂停生产。旧Map生成器退役，本 skill 不自行开启 Map 工作。Guide的推荐Port数/尺寸/路线数不是硬门槛。
 
 # 接口与可选用途
 
@@ -47,7 +47,7 @@ N口建立N×N矩阵含对角线，每格0或多条Route；逐条写起止、Blo
 
 最终目标为 `modules/`，确定性完全重复非代表/明确排除项按迁移记录去 `modules-recycle/`；近似待审、缺口和失败原处保留。只有目标验证、回读与引用完整后才归档原件。使用实际已实现的迁移CLI；不把工具规划或旧schema pass当新认证。
 
-交付基础ID/版本、矩形、全部Port、N×N多Route、镜像、封口配置、源/物理/失败/留出与影片索引。在线实际图至少区分instance+Port，包含本次配置下全部有效Route及额外捷径；单Module不替代整图。三去向、技术结果、AI审查、人工观感、试玩及生产认可分开，不commit或发布。
+交付基础ID/版本、矩形、全部Port、N×N多Route、镜像、封口配置、源/物理/失败/留出与影片索引。在线实际图至少区分instance+Port，包含本次配置下全部有效Route及额外捷径；单Module不替代整图。三去向、技术结果、AI审查、人工观感、试玩及生产认可分开，提交、推送、发布及合并按当前授权执行。
 
 # 角落Port不是额外分叉
 

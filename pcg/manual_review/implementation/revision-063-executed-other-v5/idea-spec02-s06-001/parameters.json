@@ -1,0 +1,529 @@
+{
+  "designVersion": "sha256:5831f430e8986857d524f8a89d86dfc93410befd38c8b26bd22fe4abaea789d4",
+  "content": {
+    "platforms": [
+      [
+        16,
+        32,
+        96,
+        12
+      ],
+      [
+        400,
+        736,
+        112,
+        12
+      ],
+      [
+        32,
+        416,
+        96,
+        12
+      ]
+    ],
+    "one_way_platform_indices": [
+      0,
+      1,
+      2
+    ],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [
+      {
+        "platform_id": "P",
+        "start": [
+          416,
+          640
+        ],
+        "finish": [
+          112,
+          160
+        ],
+        "size": [
+          112,
+          20
+        ],
+        "travel_duration": 3.6,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.05,
+        "designState": "FROZEN_EXAMPLE"
+      }
+    ],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "under-bell",
+        "bell": [
+          416.0,
+          704.0
+        ],
+        "gate": [
+          -4096,
+          -4096,
+          8,
+          8
+        ],
+        "open_seconds": 0,
+        "ferry_id": "P",
+        "carrier_mount": "P"
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [],
+    "approved_hq_cells": [
+      {
+        "kind": "rigid_mounted_bell",
+        "id": "under-bell",
+        "mount": "P",
+        "offset": [
+          0,
+          64
+        ]
+      }
+    ]
+  },
+  "authorization": {
+    "path": "feedback/manual-review/implementation-results/revision-063-v1/authorization/request.json",
+    "sha256": "666ec31466b5a2b9318e38d4623bfafee8c5f42cef2ea0e0d4a237fab333fd49"
+  },
+  "previous": {
+    "path": "pcg/manual_review/implementation/revision-062-final-v1/idea-spec02-s06-001/parameters.json",
+    "sha256": "1e895244d8aafbac3fadd721f538722e3064aed22ebd44548d8879445684d1be"
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "B-to-T",
+        "from_port": "B",
+        "to_port": "T",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 496,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              492,
+              715,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 416,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "carrier_supported",
+            "timeout": 360
+          },
+          "carrier": "P"
+        },
+        {
+          "op": "settle",
+          "target_x": 344,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "observed_height",
+            "timeout": 180
+          },
+          "observed_y": {
+            "direction": "gte",
+            "value": 643
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0,
+            "state": "r062_mount_corner_shot",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "carrier_supported",
+            "timeout": 360
+          },
+          "carrier": "P"
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r062_height",
+            "timeout": 1800
+          },
+          "carrier": "P",
+          "ymin": 160,
+          "ymax": 178,
+          "up": true,
+          "supported": true
+        },
+        {
+          "op": "settle",
+          "target_x": 64,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 64,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              60,
+              11,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    },
+    {
+      "route": {
+        "id": "T-to-B",
+        "from_port": "T",
+        "to_port": "B",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "drop_through",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 112,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 112,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              108,
+              395,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "axis",
+          "value": 0,
+          "cancel_settle": true,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 1
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "carrier_supported",
+            "timeout": 360
+          },
+          "carrier": "P"
+        },
+        {
+          "op": "settle",
+          "target_x": 344,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "observed_height",
+            "timeout": 180
+          },
+          "observed_y": {
+            "direction": "gte",
+            "value": 643
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0,
+            "state": "r062_mount_corner_shot",
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "carrier_supported",
+            "timeout": 360
+          },
+          "carrier": "P"
+        },
+        {
+          "op": "settle",
+          "target_x": 0,
+          "revision_follow": "P",
+          "carrier_offset": 0,
+          "ring_follow": false,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r062_height",
+            "timeout": 1800
+          },
+          "carrier": "P",
+          "ymin": 620,
+          "ymax": 642,
+          "up": false,
+          "supported": true
+        },
+        {
+          "op": "settle",
+          "target_x": 496,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 448,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              444,
+              715,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ]
+}

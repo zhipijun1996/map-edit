@@ -1,0 +1,141 @@
+{
+  "designVersion": "sha256:bb395a0aa45667c19c5ec56d2579e8e39cffdc0a8e0f364db34c17aad2ad15d7",
+  "geometry": "exact approved design",
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-crown",
+        "from_port": "entry",
+        "to_port": "crown",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              -4,
+              -3,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 1
+          },
+          "aim_target": [
+            200.0,
+            -40.0
+          ]
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 5
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "grapple",
+          "trigger": {
+            "after": 0
+          },
+          "aim_target": [
+            330.0,
+            -170.0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20,
+            "state": "free",
+            "timeout": 220
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 355.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              350.0,
+              -134.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 744,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              740,
+              -131,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ]
+    }
+  ]
+}

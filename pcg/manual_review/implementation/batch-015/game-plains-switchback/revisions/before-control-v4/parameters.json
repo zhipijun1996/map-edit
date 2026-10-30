@@ -1,0 +1,2350 @@
+{
+  "designVersion": "sha256:57bb55d881d733e5e7877e42785699a68c0d368479a91ecfb134919645de5c1d",
+  "content": {
+    "platforms": [
+      [
+        0,
+        1300,
+        100,
+        30
+      ],
+      [
+        125,
+        1225,
+        130,
+        30
+      ],
+      [
+        305,
+        1150,
+        130,
+        30
+      ],
+      [
+        485,
+        1075,
+        130,
+        30
+      ],
+      [
+        665,
+        1000,
+        130,
+        30
+      ],
+      [
+        485,
+        925,
+        130,
+        30
+      ],
+      [
+        305,
+        850,
+        130,
+        30
+      ],
+      [
+        125,
+        775,
+        130,
+        30
+      ],
+      [
+        0,
+        700,
+        100,
+        30
+      ],
+      [
+        125,
+        625,
+        130,
+        30
+      ],
+      [
+        305,
+        550,
+        130,
+        30
+      ],
+      [
+        485,
+        475,
+        130,
+        30
+      ],
+      [
+        665,
+        400,
+        135,
+        30
+      ],
+      [
+        -64,
+        1300,
+        64,
+        24
+      ],
+      [
+        -128,
+        1300,
+        64,
+        24
+      ],
+      [
+        800,
+        400,
+        32,
+        24
+      ],
+      [
+        832,
+        404,
+        64,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [
+      {
+        "id": "design-ground-enemy-1",
+        "definition": "plains_sentry",
+        "position": [
+          370.0,
+          1134.0
+        ],
+        "initial_idle_cooldown": 0
+      },
+      {
+        "id": "design-ground-enemy-2",
+        "definition": "plains_sentry",
+        "position": [
+          550.0,
+          909.0
+        ],
+        "initial_idle_cooldown": 0
+      },
+      {
+        "id": "design-ground-enemy-3",
+        "definition": "plains_sentry",
+        "position": [
+          50.0,
+          684.0
+        ],
+        "initial_idle_cooldown": 0
+      },
+      {
+        "id": "design-ground-enemy-4",
+        "definition": "plains_sentry",
+        "position": [
+          550.0,
+          459.0
+        ],
+        "initial_idle_cooldown": 0
+      }
+    ],
+    "reward_sites": []
+  },
+  "bindings": [
+    {
+      "objectId": "design-ground-enemy-1",
+      "kind": "diagram_glyph_to_original_collision",
+      "diagram": [
+        354.0,
+        1114,
+        32,
+        36
+      ],
+      "actual": [
+        356.0,
+        1118,
+        28,
+        32
+      ],
+      "anchor": "air center / ground foot center",
+      "resource": "plains_sentry"
+    },
+    {
+      "objectId": "design-ground-enemy-2",
+      "kind": "diagram_glyph_to_original_collision",
+      "diagram": [
+        534.0,
+        889,
+        32,
+        36
+      ],
+      "actual": [
+        536.0,
+        893,
+        28,
+        32
+      ],
+      "anchor": "air center / ground foot center",
+      "resource": "plains_sentry"
+    },
+    {
+      "objectId": "design-ground-enemy-3",
+      "kind": "diagram_glyph_to_original_collision",
+      "diagram": [
+        34.0,
+        664,
+        32,
+        36
+      ],
+      "actual": [
+        36.0,
+        668,
+        28,
+        32
+      ],
+      "anchor": "air center / ground foot center",
+      "resource": "plains_sentry"
+    },
+    {
+      "objectId": "design-ground-enemy-4",
+      "kind": "diagram_glyph_to_original_collision",
+      "diagram": [
+        534.0,
+        439,
+        32,
+        36
+      ],
+      "actual": [
+        536.0,
+        443,
+        28,
+        32
+      ],
+      "anchor": "air center / ground foot center",
+      "resource": "plains_sentry"
+    }
+  ],
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 60,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              55,
+              1278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 190.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 1114,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-1"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 1114,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-1"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 1114,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-1"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 1114,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-1"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 1114,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-1"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              1203,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 370.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              1128,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              1128,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 550.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              1053,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 550.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              1053,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 730.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 889,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-2"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 889,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-2"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 889,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-2"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 889,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-2"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 889,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-2"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 730.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              725.0,
+              978,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 550.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              903,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 550.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              903,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 370.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              828,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              828,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 190.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 664,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-3"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 664,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-3"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 664,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-3"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 664,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-3"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 664,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-3"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              753,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 50.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              45.0,
+              678,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 50.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              45.0,
+              678,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 190.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              603,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 190.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              185.0,
+              603,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 370.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 439,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-4"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 439,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-4"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 439,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-4"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 439,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-4"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0,
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 439,
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ground-enemy-4"
+          },
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          },
+          "skip_if_enemy_dead": "design-ground-enemy-4"
+        },
+        {
+          "op": "settle",
+          "target_x": 370.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              365.0,
+              528,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 550.0,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              453,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 550.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              545.0,
+              453,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 595,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              590,
+              453,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 732.5,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 400,
+          "direction": [
+            -0.9682458365518543,
+            0.25
+          ],
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 732.5,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              727.5,
+              378,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 732.5,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              727.5,
+              378,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              867,
+              382,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    }
+  ],
+  "consumerBindings": {},
+  "stagingBoundToCompleteNativeSupport": true
+}

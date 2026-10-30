@@ -1,0 +1,645 @@
+{
+  "designVersion": "sha256:fdc36f9a04905e9a4a1c1cc7e2a7af33261bef2e0d33af14d5c7e64167169055",
+  "content": {
+    "platforms": [
+      [
+        0,
+        300,
+        200,
+        32
+      ],
+      [
+        600,
+        300,
+        168,
+        32
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        200,
+        430,
+        400,
+        24
+      ]
+    ],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [
+      {
+        "platform_id": "bell_ferry",
+        "start": [
+          240,
+          312
+        ],
+        "finish": [
+          560,
+          312
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 2.5,
+        "dwell_duration": 1.2,
+        "initial_phase": 0
+      }
+    ],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "windchime_plains_bell_ferry_control",
+        "bell": [
+          130.0,
+          220.0
+        ],
+        "gate": [
+          740,
+          210,
+          24,
+          90
+        ],
+        "open_seconds": 0,
+        "ferry_id": "bell_ferry",
+        "prompt": "SHOOT TO START / SHOOT TO PARK",
+        "kind": "toggle_ferry",
+        "link_color": "a4dce8",
+        "actuator_id": "bell_ferry"
+      }
+    ],
+    "enemies": [
+      {
+        "id": "design-ferry-guard",
+        "definition": "plains_sentry",
+        "position": [
+          240.0,
+          284.0
+        ],
+        "initial_idle_cooldown": 0
+      }
+    ],
+    "reward_sites": []
+  },
+  "bindings": [],
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ferry-guard"
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ferry-guard"
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "windchime_plains_bell_ferry_control"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 32
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 130,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              125,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "bell_ferry",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 240.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "bell_ferry",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "bell_ferry"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "bell_ferry",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 640,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              635,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 744,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              739,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 2400
+    }
+  ],
+  "consumerBindings": {
+    "refresh_carried_enemies": [
+      {
+        "enemy": "design-ferry-guard",
+        "carrier": "bell_ferry"
+      }
+    ]
+  }
+}

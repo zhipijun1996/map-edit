@@ -1,0 +1,729 @@
+{
+  "schema": "pcg/module-design/v1",
+  "id": "idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3",
+  "reviewId": "创意 003",
+  "title": "错相升井：四台换乘，三道横锯",
+  "summary": "四台三锯保留；左侧新增64px中继台，先落稳再等上层换乘，顶口初始OUTPUT、射铃出井。",
+  "reviewStage": "design",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "blockSize": 128,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "w": 384,
+    "h": 896
+  },
+  "ports": [
+    {
+      "id": "A",
+      "face": "BOTTOM",
+      "normal": [
+        0,
+        1
+      ],
+      "position": [
+        192,
+        896
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "supportObjectId": "start-dock",
+      "stagingPosition": [
+        192,
+        846
+      ],
+      "diagramLabel": "A",
+      "index": 1
+    },
+    {
+      "id": "B",
+      "face": "TOP",
+      "normal": [
+        0,
+        -1
+      ],
+      "position": [
+        192,
+        0
+      ],
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "OUTPUT",
+      "supportObjectId": "goal-dock",
+      "diagramLabel": "B",
+      "stagingPosition": [
+        192,
+        46
+      ],
+      "index": 1
+    }
+  ],
+  "visualObjects": [
+    {
+      "id": "start-dock",
+      "type": "platform",
+      "x": 0,
+      "y": 864,
+      "w": 384,
+      "h": 16,
+      "label": "底台：观察 / 重试"
+    },
+    {
+      "id": "goal-dock",
+      "type": "platform",
+      "x": 128,
+      "y": 64,
+      "w": 128,
+      "h": 12,
+      "label": "上方可穿接岸"
+    },
+    {
+      "id": "optional-chest",
+      "type": "reward",
+      "x": 224,
+      "y": 40,
+      "w": 24,
+      "h": 24,
+      "diagramLabel": "可选宝箱"
+    },
+    {
+      "id": "rail-L1",
+      "type": "trackLine",
+      "x": 104,
+      "y": 512,
+      "w": 0,
+      "h": 272,
+      "points": [
+        {
+          "x": 104,
+          "y": 784
+        },
+        {
+          "x": 104,
+          "y": 512
+        }
+      ],
+      "duration": 3.0,
+      "mode": "pingpong",
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          104,
+          784
+        ],
+        "finish": [
+          104,
+          512
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 0.35,
+        "initial_phase": 0.09701492537313433
+      }
+    },
+    {
+      "id": "L1",
+      "type": "platform",
+      "x": 52,
+      "y": 748.8,
+      "w": 104,
+      "h": 16,
+      "trackId": "rail-L1",
+      "label": "L1 实体载台",
+      "designCollision": "solid_not_one_way",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "rail-R1",
+      "type": "trackLine",
+      "x": 280,
+      "y": 512,
+      "w": 0,
+      "h": 272,
+      "points": [
+        {
+          "x": 280,
+          "y": 784
+        },
+        {
+          "x": 280,
+          "y": 512
+        }
+      ],
+      "duration": 3.6,
+      "mode": "pingpong",
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          280,
+          784
+        ],
+        "finish": [
+          280,
+          512
+        ],
+        "travel_duration": 3.6,
+        "dwell_duration": 0.5,
+        "initial_phase": 0.21463414634146344
+      }
+    },
+    {
+      "id": "R1",
+      "type": "platform",
+      "x": 228,
+      "y": 680.8,
+      "w": 104,
+      "h": 16,
+      "trackId": "rail-R1",
+      "label": "R1 实体载台",
+      "designCollision": "solid_not_one_way",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "rail-L2",
+      "type": "trackLine",
+      "x": 104,
+      "y": 128,
+      "w": 0,
+      "h": 320,
+      "points": [
+        {
+          "x": 104,
+          "y": 448
+        },
+        {
+          "x": 104,
+          "y": 128
+        }
+      ],
+      "duration": 2.8,
+      "mode": "pingpong",
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          104,
+          448
+        ],
+        "finish": [
+          104,
+          128
+        ],
+        "travel_duration": 2.8,
+        "dwell_duration": 0.4,
+        "initial_phase": 0.28125
+      }
+    },
+    {
+      "id": "L2",
+      "type": "platform",
+      "x": 52,
+      "y": 280,
+      "w": 104,
+      "h": 16,
+      "trackId": "rail-L2",
+      "label": "L2 实体载台",
+      "designCollision": "solid_not_one_way",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "rail-R2",
+      "type": "trackLine",
+      "x": 280,
+      "y": 128,
+      "w": 0,
+      "h": 320,
+      "points": [
+        {
+          "x": 280,
+          "y": 448
+        },
+        {
+          "x": 280,
+          "y": 128
+        }
+      ],
+      "duration": 4.0,
+      "mode": "pingpong",
+      "designMotion": {
+        "nativeCell": "ModuleMovingPlatform",
+        "start": [
+          280,
+          448
+        ],
+        "finish": [
+          280,
+          128
+        ],
+        "travel_duration": 4,
+        "dwell_duration": 0.45,
+        "initial_phase": 0.11797752808988764
+      }
+    },
+    {
+      "id": "R2",
+      "type": "platform",
+      "x": 228,
+      "y": 392,
+      "w": 104,
+      "h": 16,
+      "trackId": "rail-R2",
+      "label": "R2 实体载台",
+      "designCollision": "solid_not_one_way",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "sweep-G1",
+      "type": "trackLine",
+      "x": 64,
+      "y": 688,
+      "w": 256,
+      "h": 0,
+      "points": [
+        {
+          "x": 64,
+          "y": 688
+        },
+        {
+          "x": 320,
+          "y": 688
+        }
+      ],
+      "duration": 2.8,
+      "mode": "sine",
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          688
+        ],
+        "travel": [
+          128,
+          0
+        ],
+        "period": 2.8,
+        "initial_phase": 0.15
+      }
+    },
+    {
+      "id": "G1",
+      "type": "hazard",
+      "shape": "gears",
+      "count": 1,
+      "x": 271.5541752799933,
+      "y": 664,
+      "w": 48,
+      "h": 48,
+      "trackId": "sweep-G1",
+      "label": "G1 横移 →",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "sweep-G2",
+      "type": "trackLine",
+      "x": 64,
+      "y": 464,
+      "w": 256,
+      "h": 0,
+      "points": [
+        {
+          "x": 64,
+          "y": 464
+        },
+        {
+          "x": 320,
+          "y": 464
+        }
+      ],
+      "duration": 3.7,
+      "mode": "sine",
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          464
+        ],
+        "travel": [
+          128,
+          0
+        ],
+        "period": 3.7,
+        "initial_phase": 0.85
+      }
+    },
+    {
+      "id": "G2",
+      "type": "hazard",
+      "shape": "gears",
+      "count": 1,
+      "x": 64.44582472000671,
+      "y": 440,
+      "w": 48,
+      "h": 48,
+      "trackId": "sweep-G2",
+      "label": "G2 横移 →",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "sweep-G3",
+      "type": "trackLine",
+      "x": 64,
+      "y": 240,
+      "w": 256,
+      "h": 0,
+      "points": [
+        {
+          "x": 320,
+          "y": 240
+        },
+        {
+          "x": 64,
+          "y": 240
+        }
+      ],
+      "duration": 4.6,
+      "mode": "sine",
+      "designMotion": {
+        "nativeCell": "ModuleSawDefinition",
+        "origin": [
+          192,
+          240
+        ],
+        "travel": [
+          128,
+          0
+        ],
+        "period": 4.6,
+        "initial_phase": 0.5
+      }
+    },
+    {
+      "id": "G3",
+      "type": "hazard",
+      "shape": "gears",
+      "count": 1,
+      "x": 168.00000000000003,
+      "y": 216,
+      "w": 48,
+      "h": 48,
+      "trackId": "sweep-G3",
+      "label": "G3 横移 ←",
+      "designMotionStatus": "PROPOSED_PARAMETERS_NOT_PHYSICS_VERIFIED"
+    },
+    {
+      "id": "air-enemy",
+      "type": "enemy",
+      "definition": "plains_diver",
+      "x": 178,
+      "y": 344,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "空怪：换乘旁 / 可续枪",
+      "designPlacementMeaning": "Example encounter position only. Original patrol, dive, health and damage stay active. It is optional, never a mandatory one-use key."
+    },
+    {
+      "id": "route-ascent",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 896,
+      "points": [
+        {
+          "x": 192,
+          "y": 896
+        },
+        {
+          "x": 192,
+          "y": 832
+        },
+        {
+          "x": 170,
+          "y": 730
+        },
+        {
+          "x": 104,
+          "y": 710
+        },
+        {
+          "x": 104,
+          "y": 580
+        },
+        {
+          "x": 230,
+          "y": 535
+        },
+        {
+          "x": 280,
+          "y": 510
+        },
+        {
+          "x": 190,
+          "y": 425
+        },
+        {
+          "x": 104,
+          "y": 390
+        },
+        {
+          "x": 104,
+          "y": 170
+        },
+        {
+          "x": 192,
+          "y": 65
+        },
+        {
+          "x": 192,
+          "y": 0
+        }
+      ],
+      "reviewShowTrace": true
+    },
+    {
+      "id": "route-retry",
+      "type": "route",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 896,
+      "points": [
+        {
+          "x": 192,
+          "y": 896
+        },
+        {
+          "x": 192,
+          "y": 832
+        },
+        {
+          "x": 104,
+          "y": 730
+        },
+        {
+          "x": 192,
+          "y": 780
+        },
+        {
+          "x": 192,
+          "y": 832
+        },
+        {
+          "x": 192,
+          "y": 896
+        }
+      ],
+      "reviewShowTrace": false
+    },
+    {
+      "id": "revision053-top-gate",
+      "type": "gate",
+      "x": 160,
+      "y": 0,
+      "w": 64,
+      "h": 12,
+      "mechanics": {
+        "kind": "timed_gate",
+        "openSeconds": 4
+      }
+    },
+    {
+      "id": "revision053-top-bell",
+      "type": "bell",
+      "x": 178,
+      "y": 7,
+      "w": 28,
+      "h": 34,
+      "sourceId": "top-exit-bell",
+      "targetId": "revision053-top-gate",
+      "mechanics": {
+        "service": "ShotLatch"
+      }
+    },
+    {
+      "id": "relay-dock",
+      "type": "platform",
+      "x": 0,
+      "y": 544,
+      "w": 64,
+      "h": 12,
+      "label": "中继台：落稳 / 观察 / 换乘重试"
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "id": "A-to-B",
+      "from": "A",
+      "to": "B",
+      "role": "main",
+      "pathObjectId": "route-ascent",
+      "evidenceStatus": "UNKNOWN"
+    },
+    {
+      "id": "A-to-A-retry",
+      "from": "A",
+      "to": "A",
+      "role": "recovery",
+      "pathObjectId": "route-retry",
+      "evidenceStatus": "UNKNOWN"
+    }
+  ],
+  "capabilityRequirements": {
+    "version": 1,
+    "status": "partial",
+    "allOf": [
+      "jump",
+      "shot_recoil"
+    ],
+    "anyOfGroups": [],
+    "note": "仅跳跃/反冲目标，不加钩索或二段跳；移动台真实落地才能恢复。"
+  },
+  "routeMatrix": {
+    "portOrder": [
+      "A",
+      "B"
+    ],
+    "cells": [
+      {
+        "from": "A",
+        "to": "A",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "status": "DESIGN_TARGET"
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "status": "FORBIDDEN_INGRESS"
+      },
+      {
+        "from": "B",
+        "to": "B",
+        "status": "NOT_REQUESTED_SELF_LOOP"
+      }
+    ]
+  },
+  "routeCaption": "初始顶口只出不进；矩阵按初态权限，开门/收刺后的同世界返回另验。",
+  "diagramGhosts": [
+    {
+      "x": 52,
+      "y": 504,
+      "w": 104,
+      "h": 16,
+      "label": "L1 上端"
+    },
+    {
+      "x": 228,
+      "y": 504,
+      "w": 104,
+      "h": 16,
+      "label": "R1 上端"
+    },
+    {
+      "x": 52,
+      "y": 120,
+      "w": 104,
+      "h": 16,
+      "label": "L2 上端"
+    },
+    {
+      "x": 228,
+      "y": 120,
+      "w": 104,
+      "h": 16,
+      "label": "R2 上端"
+    }
+  ],
+  "movementGuides": [
+    {
+      "from": [
+        104,
+        740.8
+      ],
+      "to": [
+        104,
+        678.8
+      ],
+      "role": "current_upstroke"
+    },
+    {
+      "from": [
+        280,
+        672.8
+      ],
+      "to": [
+        280,
+        610.8
+      ],
+      "role": "current_upstroke"
+    },
+    {
+      "from": [
+        104,
+        272.0
+      ],
+      "to": [
+        104,
+        210.0
+      ],
+      "role": "current_upstroke"
+    },
+    {
+      "from": [
+        280,
+        384.0
+      ],
+      "to": [
+        280,
+        322.0
+      ],
+      "role": "current_upstroke"
+    }
+  ],
+  "diagramLegend": "图例：实台＝当前相位　虚框＝上行端点（非额外台）　橙箭头＝当前上行　红＝横移锯",
+  "reviewInstructions": [
+    "① 四台当前向上，到端点会回落；速度/初相各自不同，不是持续上行循环。",
+    "② 三道横锯错相；选择换乘时机与列，示意路线不要求踩遍四台。",
+    "③ 空怪是威胁和续枪机会；击杀后仍需有路。失误/回程/净空都待验。"
+  ],
+  "designNotes": [
+    "原话“两列两行”解释为4个移动载台：低层L1/R1、高层L2/R2。四台图示时刻均在上行；到顶短停后原轨回落，乘客也会被带回，不是空台隐身重生。",
+    "若希望可见载台始终上行并从底部循环补出，现有ModuleMovingPlatform不提供这条规则，需要明确的新Cell/回收行为，不能把图中的往复台冒称单向循环已实现。",
+    "3×7完整矩形，内部不加外墙；两列中心x104/280、平台宽104，中间留72px间隙。低台中心行程784→512，高台448→128，轨迹分区不重叠；同列最近中心相隔64px，实体表面最近约48px，只是静态设计裕量。",
+    "底台与顶台是仅有的两块固定可穿接岸。底口不能用AIR INPUT。四个移动台沿用实体碰撞，需从侧边跳入，不能从正下方穿过；返回也不能按下穿透移动台。",
+    "不同速度/相位使某一列在某一锯窗更合适；示意曲线只画一种左右交接，不要求踩完四台。允许同列换乘、跳台/反冲等真正可行的替代路线。",
+    "三道锯线y688/464/240，中心横扫x64–320，半径24，周期2.8/3.7/4.6秒且初相不同。初相仅示例，玩家入场与重试不会被强制重置成这张图。",
+    "空中怪位于上下层交接旁，真实巡航/俯冲与血量保留。可射击续枪改变落点，但不把敌人当一次性通关钥匙；必须测敌已死状态仍能完成主路与回程。",
+    "失误由原底台接回，按真实落地恢复动作，掉血不自动治疗。高处受伤、扫掠多次命中、落在正在回程的载台及从底口撤离都需原Harness验证。",
+    "回程从顶台下穿，再由列间空隙、侧落或下行载台分段下降；要重新观察三道齿轮，不能把正向策略倒放或给实体台添加虚假下穿。",
+    "反例包括长时间不动乘单台、同列小跳、两次普通跳+反冲越过核心段、贴边绕三锯、击杀空怪后的捷径、故意受伤借位、入场高速度/邻模块高度。发现真实额外路线须保留，图中未请求矩阵格仍未知。",
+    "尺寸与时序只有源码约束和静态布局依据，没有运动求解、Godot通关、操作容错、独立留出或接缝认证。与已有35/122/157属于承载/相位挑战关系，不因增加数量自动算新玩法家族。",
+    "同步最新实现：顶口初态OUTPUT，接岸y64、宝箱y40，原生4秒风铃门向上出；原难度不简化。",
+    "用户确认增加中继台：x0,y544,w64,h12。其余物件、轨道、周期、相位、停留、敌人、宝箱与接口不变。"
+  ],
+  "sourceAnalysis": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/source-analysis.json",
+  "technicalStatus": "UNKNOWN",
+  "implementationAlignment": {
+    "sourceCommit": "5f382eb0354f155846279b8db56eb6264ac15485",
+    "sourceModule": {
+      "path": "pcg/manual_review/implementation/revision-053-final-v1/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/module.mapnote.json",
+      "sha256": "db497f8284f28dd4efca3affb32495624b320981fefa881d6fae5e9e030e1698"
+    },
+    "priorDesign": {
+      "file": "generation/module-workshop/ideas/idea-96ba6bf1-9b60-470a-9128-54ae7ea44af3/16d930fb67a6/design.json",
+      "version": "sha256:16d930fb67a6935af08ba3e59f9db5d2e995a29165f82f26940ff233c33db731",
+      "sha256": "d06d31fef4e274314e5d82db76ebf50dac91d8c7ec64a4a0c192635fd62b987b"
+    },
+    "authorizationReceipt": "feedback/manual-review/spec-sync-r063-receipt.json",
+    "scope": "Specification matches actual implemented layout/interface; not a new technical certificate"
+  },
+  "userRevision": {
+    "receipt": "feedback/manual-review/lift-relay-r065-receipt.json",
+    "verbatim": "好的，加一个中继台",
+    "acceptedProposal": "中层左侧64px等候台，台面y544；不延长停留。",
+    "implementationAuthorized": true,
+    "technicalValidation": "UNKNOWN_FOR_NEW_GEOMETRY"
+  },
+  "connectivityIntent": "initial_permission_compatible_routes",
+  "designVersion": "sha256:9b26d91837d8e139677d8064fbc477aa9f9d2b88d4aa95b8895092eda583694d"
+}

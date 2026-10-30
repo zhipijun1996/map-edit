@@ -1,0 +1,169 @@
+{
+  "designVersion": "sha256:4dd6736946f2258939f238869b97ccec8a5b8525b92c506c155aecdc1019ff90",
+  "content": {
+    "platforms": [
+      [
+        0,
+        300,
+        480,
+        40
+      ],
+      [
+        480,
+        300,
+        32,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "windchime_plains_windchime_lesson",
+        "bell": [
+          170.0,
+          235.0
+        ],
+        "gate": [
+          320,
+          80,
+          24,
+          220
+        ],
+        "open_seconds": 0,
+        "prompt": "SHOOT BELL",
+        "kind": "safe_lesson",
+        "link_color": "e8bd65"
+      }
+    ],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 140,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              135,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "windchime_plains_windchime_lesson"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 30
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 460.0,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              455.0,
+              278.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              448.0,
+              278.0,
+              24,
+              8
+            ],
+            "timeout": 1200
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 488,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              483,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    }
+  ],
+  "notes": [
+    "UNKNOWN permanent gate durations resolved to original permanent 0s for safe_lesson,sequence,shot_recoil_combo; 162 timed gate retains 3s",
+    "175 mounted original ShotLatch follows real carrier; no player/clock/resource writes"
+  ]
+}

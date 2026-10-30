@@ -1,0 +1,259 @@
+{
+  "designVersion": "sha256:34653bc15d65a7b76a9ac45340746ebbe7bf9c277cbb91920a842e4aaef6a9dc",
+  "content": {
+    "platforms": [
+      [
+        128,
+        438,
+        112,
+        32
+      ],
+      [
+        790,
+        310,
+        106,
+        78
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [],
+    "saws": [],
+    "moving_platforms": [
+      {
+        "platform_id": "chase-carrier",
+        "start": [
+          330,
+          450
+        ],
+        "finish": [
+          480,
+          350
+        ],
+        "size": [
+          144,
+          22
+        ],
+        "travel_duration": 1.4,
+        "dwell_duration": 0.15,
+        "initial_phase": 0
+      }
+    ],
+    "hooks": [],
+    "latches": [
+      {
+        "id": "carrier-bell",
+        "bell": [
+          168.0,
+          411.0
+        ],
+        "gate": [
+          -100,
+          100,
+          10,
+          10
+        ],
+        "open_seconds": 0,
+        "ferry_id": "chase-carrier",
+        "return_access": [
+          490.0,
+          290.0
+        ]
+      }
+    ],
+    "enemies": [],
+    "reward_sites": [
+      {
+        "id": "visible-cache",
+        "position": [
+          848,
+          292
+        ],
+        "region": [
+          818,
+          287,
+          60,
+          10
+        ],
+        "amount": 8
+      }
+    ]
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 180,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              175,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 10
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "carrier-bell"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "chase-carrier"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 36
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 520
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 6
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "carrier-bell",
+            "receiver": "access"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 880,
+          "deadband": 4
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              867,
+              288,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    }
+  ],
+  "notes": [
+    "UNKNOWN permanent gate durations resolved to original permanent 0s for safe_lesson,sequence,shot_recoil_combo; 162 timed gate retains 3s",
+    "175 mounted original ShotLatch follows real carrier; no player/clock/resource writes"
+  ]
+}

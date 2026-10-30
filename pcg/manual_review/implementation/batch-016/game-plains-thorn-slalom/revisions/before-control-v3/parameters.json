@@ -1,0 +1,339 @@
+{
+  "designVersion": "sha256:4523d46254ef31cc846ace267fe1007fa50fc876cfcb60874bc0b6754e0291c2",
+  "content": {
+    "platforms": [
+      [
+        0,
+        300,
+        860,
+        32
+      ],
+      [
+        860,
+        300,
+        36,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [],
+    "thorns": [
+      {
+        "surface_id": "slalom_first",
+        "platform_index": 0,
+        "face": "top",
+        "start_offset": 180,
+        "length": 105,
+        "depth": 24
+      },
+      {
+        "surface_id": "slalom_last",
+        "platform_index": 0,
+        "face": "top",
+        "start_offset": 580,
+        "length": 105,
+        "depth": 24
+      }
+    ],
+    "saws": [
+      {
+        "source_id": "slalom_crossing",
+        "origin": [
+          430.0,
+          270.0
+        ],
+        "travel": [
+          25.0,
+          0.0
+        ],
+        "radius": 16.0,
+        "period": 2.6,
+        "initial_phase": 0,
+        "damage": 1,
+        "contact_interval": 0.7
+      }
+    ],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "bindings": [],
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 145,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              140,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "height_threshold": 265,
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 80
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 239,
+          "direction": [
+            -1,
+            0
+          ],
+          "trigger": {
+            "state": "descending_height",
+            "timeout": 100
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 335,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 375,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              370,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "saw_phase",
+              "id": "slalom_crossing",
+              "window": [
+                0.2,
+                0.3
+              ]
+            },
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 500,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "height_threshold": 260,
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              495,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 545,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              540,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "height_threshold": 265,
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 80
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 239,
+          "direction": [
+            -1,
+            0
+          ],
+          "trigger": {
+            "state": "descending_height",
+            "timeout": 100
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 735,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 872,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              867,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 2400
+    }
+  ],
+  "consumerBindings": {},
+  "stagingBoundToCompleteNativeSupport": true
+}

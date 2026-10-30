@@ -1,0 +1,3848 @@
+{
+  "designVersion": "sha256:3877f74f7c79229364ba4758c3735f3da370e8e51ed97dff62746b8fe463627d",
+  "content": {
+    "platforms": [
+      [
+        0,
+        950,
+        180,
+        40
+      ],
+      [
+        620,
+        700,
+        120,
+        40
+      ],
+      [
+        320,
+        398,
+        140,
+        40
+      ],
+      [
+        800,
+        96,
+        200,
+        40
+      ],
+      [
+        1000,
+        96,
+        24,
+        24
+      ],
+      [
+        960,
+        54,
+        64,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        44,
+        1000,
+        912,
+        40
+      ],
+      [
+        920,
+        350,
+        35,
+        500
+      ],
+      [
+        740,
+        700,
+        60,
+        30
+      ]
+    ],
+    "thorns": [],
+    "saws": [
+      {
+        "source_id": "lower_wall_saw",
+        "origin": [
+          130.0,
+          550.0
+        ],
+        "travel": [
+          0.0,
+          130.0
+        ],
+        "radius": 28.0,
+        "period": 4,
+        "initial_phase": 0,
+        "damage": 1,
+        "contact_interval": 0.7
+      }
+    ],
+    "moving_platforms": [
+      {
+        "platform_id": "ascent_0",
+        "start": [
+          250,
+          932
+        ],
+        "finish": [
+          550,
+          792
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 1.5,
+        "initial_phase": 0
+      },
+      {
+        "platform_id": "ascent_1",
+        "start": [
+          830,
+          630
+        ],
+        "finish": [
+          500,
+          490
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 1.5,
+        "initial_phase": 0
+      },
+      {
+        "platform_id": "ascent_2",
+        "start": [
+          260,
+          328
+        ],
+        "finish": [
+          700,
+          188
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 1.5,
+        "initial_phase": 0
+      }
+    ],
+    "hooks": [],
+    "latches": [],
+    "enemies": [
+      {
+        "id": "design-ascent-air-enemy-1",
+        "definition": "plains_diver",
+        "position": [
+          430.0,
+          790.0
+        ],
+        "initial_idle_cooldown": 0
+      },
+      {
+        "id": "design-ascent-air-enemy-2",
+        "definition": "plains_diver",
+        "position": [
+          650.0,
+          480.0
+        ],
+        "initial_idle_cooldown": 0
+      },
+      {
+        "id": "design-ascent-air-enemy-3",
+        "definition": "plains_diver",
+        "position": [
+          520.0,
+          210.0
+        ],
+        "initial_idle_cooldown": 0
+      }
+    ],
+    "reward_sites": []
+  },
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-1"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-1"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-2"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-2"
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              145,
+              928,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 250.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_0",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_0"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              675,
+              678,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 710,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              705,
+              678,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 830.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_1",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_1"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 390,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              385,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "target_x": 400,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded_shot_ready",
+            "migration_goal": [
+              395,
+              376,
+              10,
+              8
+            ],
+            "timeout": 240
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "enemy",
+            "id": "design-ascent-air-enemy-3"
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 4
+          },
+          "skip_if_enemy_dead": "design-ascent-air-enemy-3"
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 360,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              355,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_2",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 260.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_2",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_2"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_2",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 840,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              835,
+              74,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 920,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 914
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1000,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ]
+    }
+  ],
+  "quality": "original regular",
+  "productionApproval": false,
+  "repairSelection": {
+    "path": "pcg/results/approved-b040-35-control-screen-v6/screen.json",
+    "sha256": "35a61fa6ae870f727c344a6b39360637572113ae0317a5ddd1af393338754e5c"
+  }
+}

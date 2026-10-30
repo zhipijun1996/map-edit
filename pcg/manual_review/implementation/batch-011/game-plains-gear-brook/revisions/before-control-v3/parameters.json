@@ -1,0 +1,222 @@
+{
+  "designVersion": "sha256:ca38d74364a0d818580b1a801f9c7bcbd7dcf47c7e38bf426bb10276f0ce533e",
+  "content": {
+    "platforms": [
+      [
+        0,
+        300,
+        260,
+        30
+      ],
+      [
+        -64,
+        300,
+        64,
+        24
+      ],
+      [
+        -128,
+        300,
+        64,
+        24
+      ],
+      [
+        260,
+        300,
+        60,
+        24
+      ],
+      [
+        320,
+        300,
+        64,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        90,
+        280,
+        80,
+        20
+      ]
+    ],
+    "thorns": [],
+    "saws": [
+      {
+        "source_id": "brook_gear",
+        "origin": [
+          130.0,
+          270.0
+        ],
+        "travel": [
+          80.0,
+          0.0
+        ],
+        "radius": 20.0,
+        "period": 3.2,
+        "initial_phase": 0,
+        "damage": 1,
+        "contact_interval": 0.7
+      },
+      {
+        "source_id": "design-central-vertical-gear",
+        "origin": [
+          128.0,
+          186.0
+        ],
+        "travel": [
+          0.0,
+          74.0
+        ],
+        "radius": 20.0,
+        "period": 4,
+        "initial_phase": 0.25,
+        "damage": 1,
+        "contact_interval": 0.7
+      }
+    ],
+    "moving_platforms": [],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "bindings": [],
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": -60,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              -65,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "saw_phase",
+              "id": "design-central-vertical-gear",
+              "window": [
+                0.1,
+                0.2
+              ]
+            },
+            "timeout": 360
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 235,
+          "deadband": 4
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "height_threshold": 145,
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 100
+          }
+        },
+        {
+          "op": "shoot",
+          "direction": [
+            -1,
+            0
+          ],
+          "trigger": {
+            "state": "shot_ready",
+            "timeout": 80
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              230,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 360,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              355,
+              278,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 2400
+    }
+  ],
+  "consumerBindings": {},
+  "stagingBoundToCompleteNativeSupport": true
+}

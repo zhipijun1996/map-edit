@@ -1,0 +1,547 @@
+{
+  "cases": [
+    {
+      "id": "approved-review031-v5-197-entry-to-exit",
+      "family": "low-ray-recoil-return",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          -128,
+          186,
+          368,
+          94
+        ],
+        [
+          320,
+          570,
+          220,
+          80
+        ],
+        [
+          200,
+          280,
+          40,
+          260
+        ],
+        [
+          516,
+          570,
+          124,
+          24
+        ]
+      ],
+      "spawn": [
+        -104,
+        168
+      ],
+      "entry_port": [
+        -104,
+        168
+      ],
+      "exit_port": [
+        616,
+        552
+      ],
+      "goal": [
+        609,
+        548,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -384,
+        -294,
+        1280,
+        1536
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [
+        [
+          -128,
+          842,
+          768,
+          16
+        ]
+      ],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "low-return-key",
+          "bell": [
+            80.0,
+            820.0
+          ],
+          "gate": [
+            320,
+            280,
+            220,
+            290
+          ],
+          "open_seconds": 0
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "visible-cache",
+          "position": [
+            430.0,
+            552.0
+          ],
+          "region": [
+            400.0,
+            547.0,
+            60,
+            10
+          ],
+          "amount": 14
+        }
+      ],
+      "max_frames": 2700,
+      "trace_all": false,
+      "production_recipe": "low-ray-recoil-return",
+      "rule_parameters": {
+        "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+        "pocket_y": 570,
+        "wall_bottom": 540,
+        "low_bell": [
+          80,
+          820
+        ],
+        "landing_x": 430
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 180,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              175,
+              164,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1,
+          "cancel_settle": true
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 265
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 258,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "state": "observed_height",
+            "timeout": 180
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "low-return-key"
+          },
+          "observed_y": {
+            "direction": "gte",
+            "value": 630
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 6
+          },
+          "target_x": 430,
+          "deadband": 4
+        },
+        {
+          "op": "settle",
+          "target_x": 430,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              425,
+              548,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 616,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              611,
+              548,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "generation_rule": {
+        "id": "workshop/low-ray-recoil-return",
+        "version": 1,
+        "parameters": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 570,
+          "wall_bottom": 540,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 430
+        },
+        "source_type": "current_codex_subagent_authored_proposal",
+        "human_fun": "unreviewed",
+        "author_task": "/root/plains50_resources",
+        "registration_source": "pcg/manual_review/review031_author_v2.py"
+      },
+      "interface": 1,
+      "rule_source_path": "pcg/prototype/creative_batches/plains50_resources/lowray_v2.py",
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "plains50/resources/low-ray-recoil-return/i1",
+        "region": "plains",
+        "required_family": "low-ray-recoil-return",
+        "objective": {
+          "relationship": "commit below opaque side lip to expose low projectile ray; same shot opens side pocket and recoils upward to recover it",
+          "pocket_y": 570,
+          "wall_bottom": 540,
+          "low_bell": [
+            80,
+            820
+          ],
+          "landing_x": 430
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 2,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "entry",
+            "to_port": "exit",
+            "role": "reward"
+          }
+        ],
+        "entry_y": 162,
+        "rise": -390,
+        "space": {
+          "max_width": 2400,
+          "max_height": 1800,
+          "max_port_span_x": 1000
+        },
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "risk_reward": {
+          "amount": 14,
+          "mandatory_damage": false
+        },
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "original supported resources",
+          "exit": "observed only"
+        },
+        "return_conditions": "UNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "idea_ids": [
+        "plains50/resources/low-ray-recoil-return/v2"
+      ],
+      "route_spec": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": true
+      },
+      "ports": [
+        {
+          "id": "entry",
+          "position": [
+            -104,
+            168
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "exit",
+          "position": [
+            616,
+            552
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 3
+        }
+      ],
+      "wall_platform_indices": [],
+      "required_rewards": [
+        "visible-cache"
+      ],
+      "expected_reward": 14,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          90
+        ],
+        "cells": [
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            -1,
+            5
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "197",
+        "designVersion": "sha256:55a825da88c0cea19a212cd39562c09f374297b3911cf6df687d698070f9b677",
+        "rectangle": {
+          "x": -128,
+          "y": 90,
+          "w": 768,
+          "h": 768
+        },
+        "originalAuthor": "./modules/generated-769066fe5fa1b2332bd7d35c56fa814f01db2b06eb8c65ef9ecf1e586db3ca0b/module.mapnote.json"
+      }
+    }
+  ]
+}

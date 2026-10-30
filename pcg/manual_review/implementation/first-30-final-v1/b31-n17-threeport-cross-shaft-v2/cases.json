@@ -1,0 +1,5469 @@
+{
+  "cases": [
+    {
+      "id": "approved-first30-final-v1-06-A-to-B",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        24,
+        718
+      ],
+      "entry_port": [
+        24,
+        718
+      ],
+      "exit_port": [
+        1000,
+        462
+      ],
+      "goal": [
+        993,
+        458,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 240
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 560,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 553
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1000,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 592
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "A-to-B",
+        "from_port": "A",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "B",
+        "control": 1,
+        "horizontal_dy": 0,
+        "vertical_hold": 24,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "B",
+          "control": 1,
+          "horizontal_dy": 0,
+          "vertical_hold": 24,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-B-c1",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-first30-final-v1-06-A-to-C",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        24,
+        718
+      ],
+      "entry_port": [
+        24,
+        718
+      ],
+      "exit_port": [
+        24,
+        206
+      ],
+      "goal": [
+        17,
+        202,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 1
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 240
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 560,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 553
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "upper-route-gears"
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 688,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 430,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 592
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 436
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 356,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 362
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_y",
+              "direction": "lte",
+              "value": 156
+            },
+            "timeout": 90
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "A-to-C",
+        "from_port": "A",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "C",
+        "control": 0,
+        "horizontal_dy": 1.0,
+        "vertical_hold": 20,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "C",
+          "control": 0,
+          "horizontal_dy": 1.0,
+          "vertical_hold": 20,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 11,
+          "safe_stable": 11,
+          "rate": 0.9166666666666666,
+          "wilson95": [
+            0.6461140782014047,
+            0.9851352905492264
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-C-c0",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-first30-final-v1-06-B-to-C",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        1000,
+        462
+      ],
+      "entry_port": [
+        1000,
+        462
+      ],
+      "exit_port": [
+        24,
+        206
+      ],
+      "goal": [
+        17,
+        202,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 850,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 856
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "upper-route-gears"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 36
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 850,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 856
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 688,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 430,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 592
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 436
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 356,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 362
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 8
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_y",
+              "direction": "lte",
+              "value": 156
+            },
+            "timeout": 90
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "B-to-C",
+        "from_port": "B",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "B",
+        "control": 1,
+        "horizontal_dy": 0,
+        "vertical_hold": 24,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "B",
+          "control": 1,
+          "horizontal_dy": 0,
+          "vertical_hold": 24,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-B-c1",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-first30-final-v1-06-B-to-A",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        1000,
+        462
+      ],
+      "entry_port": [
+        1000,
+        462
+      ],
+      "exit_port": [
+        24,
+        718
+      ],
+      "goal": [
+        17,
+        714,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 850,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 856
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "aim_cell": {
+            "kind": "bell",
+            "id": "upper-route-gears"
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 36
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 850,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 856
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 688,
+          "deadband": 4
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 20
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 430,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 436
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 30
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "B-to-A",
+        "from_port": "B",
+        "to_port": "A",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "B",
+        "control": 1,
+        "horizontal_dy": 0,
+        "vertical_hold": 24,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "B",
+          "control": 1,
+          "horizontal_dy": 0,
+          "vertical_hold": 24,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-B-c1",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-first30-final-v1-06-C-to-A",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        24,
+        206
+      ],
+      "entry_port": [
+        24,
+        206
+      ],
+      "exit_port": [
+        24,
+        718
+      ],
+      "goal": [
+        17,
+        714,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 330,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 324
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 24,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "lte",
+              "value": 30
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "C-to-A",
+        "from_port": "C",
+        "to_port": "A",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "B",
+        "control": 1,
+        "horizontal_dy": 0,
+        "vertical_hold": 24,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "B",
+          "control": 1,
+          "horizontal_dy": 0,
+          "vertical_hold": 24,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-B-c1",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    },
+    {
+      "id": "approved-first30-final-v1-06-C-to-B",
+      "family": "cross-shaft-direction-fork",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "platforms": [
+        [
+          0,
+          736,
+          256,
+          32
+        ],
+        [
+          320,
+          608,
+          288,
+          48
+        ],
+        [
+          832,
+          480,
+          192,
+          96
+        ],
+        [
+          576,
+          352,
+          192,
+          24
+        ],
+        [
+          352,
+          288,
+          160,
+          48
+        ],
+        [
+          0,
+          224,
+          256,
+          64
+        ]
+      ],
+      "spawn": [
+        24,
+        206
+      ],
+      "entry_port": [
+        24,
+        206
+      ],
+      "exit_port": [
+        1000,
+        462
+      ],
+      "goal": [
+        993,
+        458,
+        14,
+        8
+      ],
+      "world_bounds": [
+        -256,
+        -256,
+        1536,
+        1408
+      ],
+      "one_way_platform_indices": [],
+      "hazards": [],
+      "thorns": [],
+      "saws": [],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "gate": [
+            560.0,
+            488.0,
+            1,
+            1
+          ],
+          "open_seconds": 0,
+          "kind": "retractable_gears/v1"
+        }
+      ],
+      "enemies": [],
+      "reward_sites": [],
+      "max_frames": 2400,
+      "trace_all": false,
+      "ports": [
+        {
+          "id": "A",
+          "position": [
+            24,
+            718
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        },
+        {
+          "id": "B",
+          "position": [
+            1000,
+            462
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "support_index": 2
+        },
+        {
+          "id": "C",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 5
+        }
+      ],
+      "required_rewards": [],
+      "expected_reward": 0,
+      "interface": 0,
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 330,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 324
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 1000,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "actor_x",
+              "direction": "gte",
+              "value": 592
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 24
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 0
+          },
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "timeout": 240
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 20
+          }
+        }
+      ],
+      "production_recipe": "cross-shaft-direction-fork",
+      "challenge_route": true,
+      "idea_ids": [
+        "B31-N17"
+      ],
+      "layout_title": "十字井：横渡保侧门，上穿换顶门",
+      "native_scene": "res://prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "native_block_scene": "pcg/prototype/creative_batches/batch30_blockn17/main_v2.tscn",
+      "route_spec": {
+        "id": "C-to-B",
+        "from_port": "C",
+        "to_port": "B",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "rule_parameters": {
+        "target": "B",
+        "control": 1,
+        "horizontal_dy": 0,
+        "vertical_hold": 24,
+        "first_upper_index": 3,
+        "new_family": false,
+        "interface": 0,
+        "entry": "A",
+        "short_projectile_bell488": true
+      },
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            5
+          ]
+        ]
+      },
+      "block_reservations": [],
+      "layout_uid": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+      "generation_rule": {
+        "id": "B31-N17/cross-shaft-native",
+        "version": 2,
+        "source_path": "pcg/prototype/creative_batches/batch30_blockn17/rules_v2.py",
+        "source_map_contract": "862b736c491502ae9934265bc7415805b4c122b9",
+        "parameters": {
+          "target": "B",
+          "control": 1,
+          "horizontal_dy": 0,
+          "vertical_hold": 24,
+          "first_upper_index": 3,
+          "new_family": false,
+          "interface": 0,
+          "entry": "A",
+          "short_projectile_bell488": true
+        },
+        "registration_source": "pcg/manual_review/first30_author_v2.py"
+      },
+      "map_specification": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "play_hint": "同一中台：向后平射横渡，保留东侧开口；或空中向下击铃，同枪打开顶门、关闭侧门，上穿后落固定高台。经东岸多跳一次也能绕回高廊。",
+      "source_map_request": {
+        "schema": "map-notes/challenge-specification/v1",
+        "id": "B31-N17/threeport-cross-shaft-v2",
+        "source_type": "explicit_model_authored_fork_demand",
+        "region": "plains",
+        "required_family": "cross-shaft-direction-fork",
+        "objective": {
+          "recipe": "cross-shaft-direction-fork",
+          "physical_layout_sha256": "9e7084ce15a006d575450f90a0052f2a67f9d203575e6a78b9de7b16ddc8e6e5",
+          "junction_role": "fork",
+          "core": "SharedMkeepopenhorizontaldoor orshootexchangeceiling/openupwardgateandlandfixedupper",
+          "new_family": false
+        },
+        "capabilities": {
+          "version": 1,
+          "status": "defined",
+          "allOf": [
+            "move",
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": []
+        },
+        "ports": {
+          "count": 3,
+          "required_normals": [
+            [
+              -1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              0
+            ]
+          ]
+        },
+        "relations": [
+          {
+            "from_port": "A",
+            "to_port": "B",
+            "role": "main"
+          },
+          {
+            "from_port": "A",
+            "to_port": "C",
+            "role": "main"
+          }
+        ],
+        "space": {
+          "block_size": 128,
+          "max_width": 1024,
+          "max_height": 1024,
+          "max_port_span_x": 1024,
+          "port_profiles": [
+            "ground64/v1"
+          ]
+        },
+        "rewards": [],
+        "boundary_policy": "open",
+        "enclosing_walls": false,
+        "difficulty": {
+          "intent": "regular",
+          "human_score": null
+        },
+        "risk_reward": {
+          "mandatory_damage": false,
+          "reward_sites": []
+        },
+        "resource_state": {
+          "reset_between_components": false,
+          "entry": "SupportedAoriginalfullresources, Aclosed/Bopen, sameworldforallroutes",
+          "exit": "ActualB/Csupportedstage;particularpairstateobservednotgeneric"
+        },
+        "return_conditions": "Onlyregisteredlowingress->B/C;otherorderedpairs/recovery/seams/fullMapUNKNOWN",
+        "budget": {
+          "generator_candidates": 4,
+          "director_revisions": 0
+        }
+      },
+      "counter_scope_policy": {
+        "id": "N17/paid-internal-A-staged-detour/v1",
+        "nominal_upward_and_body_purpose_strict": true,
+        "allowed": "ActualwithinownedM/B/fixedupper/relay/Cwithfullresources, nofeweractualguns/strictlymorejumps/noearlieroriginalstableC. Onecounterwitnessnotrobustgenericcertificate.",
+        "cheap_D_exemptions": false
+      },
+      "map_request_response": {
+        "status": "requires_physics",
+        "request_origin": "explicit_native_threeport_noreward_cross_fork",
+        "registered_ordered_pairs": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C"
+          ]
+        ],
+        "unknown_ordered_pairs": [
+          [
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "B"
+          ]
+        ],
+        "map_added_terrain": 0,
+        "new_gameplay_family": false,
+        "new_Cell": false,
+        "first_upper": "ActualfixedPlatform3, notclosedsidegatecatch",
+        "fourport_request": "needs_design:cheapDwallcrest/bypassM+pair beatsnominal; two-rulesexhausted. No4portqualificationfrom8clean.",
+        "unresolved": [
+          "ActualMapincidentassignment/allrequiredpairs",
+          "Pairedv3Cellconsumerinstallation",
+          "Genericmiss/floorretry/return/arbitraryentry",
+          "Boundarycrossing/seams/fullMap",
+          "Humanfun/playtest/production"
+        ]
+      },
+      "validation_summary": {
+        "clean": {
+          "trials": 1,
+          "purpose_valid": 1,
+          "safe_stable": 1,
+          "rate": 1.0,
+          "wilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "mild": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        },
+        "moderate": {
+          "trials": 12,
+          "purpose_valid": 12,
+          "safe_stable": 12,
+          "rate": 1.0,
+          "wilson95": [
+            0.7574992425007574,
+            1.0
+          ]
+        }
+      },
+      "review_alias": "b31-blockn17-v2-i0-A-B-c1",
+      "wall_platform_indices": [],
+      "retractable_groups": [
+        {
+          "id": "upper-route-gears",
+          "bell": [
+            560.0,
+            488.0
+          ],
+          "initial_extended": true,
+          "bands": [
+            {
+              "id": "design-P1-retractable-gears",
+              "rect": [
+                352,
+                264,
+                160,
+                24
+              ]
+            },
+            {
+              "id": "design-P2-retractable-gears",
+              "rect": [
+                576,
+                328,
+                192,
+                24
+              ]
+            }
+          ]
+        }
+      ],
+      "approved_first30": {
+        "reviewId": "06",
+        "designVersion": "sha256:56169790a3314c510afb025851515e1a8850c1343c356bb9aedb08b670042b05",
+        "rectangle": {
+          "x": 0,
+          "y": 128,
+          "w": 1024,
+          "h": 640
+        },
+        "originalAuthor": "pcg/prototype/creative_batches/batch30_blockn17/api_v1.py"
+      },
+      "air_port_contracts": [],
+      "block_ports": {
+        "A": {
+          "id": "A",
+          "position": [
+            0,
+            704
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            718
+          ],
+          "grid": {
+            "cell": [
+              0,
+              4
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              718
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            672,
+            64,
+            64
+          ]
+        },
+        "B": {
+          "id": "B",
+          "position": [
+            1024,
+            448
+          ],
+          "normal": [
+            1,
+            0
+          ],
+          "stagingPosition": [
+            1000,
+            462
+          ],
+          "grid": {
+            "cell": [
+              7,
+              2
+            ],
+            "edge": "E",
+            "stagingPosition": [
+              1000,
+              462
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            992,
+            416,
+            64,
+            64
+          ]
+        },
+        "C": {
+          "id": "C",
+          "position": [
+            0,
+            192
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "stagingPosition": [
+            24,
+            206
+          ],
+          "grid": {
+            "cell": [
+              0,
+              0
+            ],
+            "edge": "W",
+            "stagingPosition": [
+              24,
+              206
+            ],
+            "profile": "ground64/v1"
+          },
+          "crossing_offset": [
+            0,
+            14
+          ],
+          "aperture": [
+            -32,
+            160,
+            64,
+            64
+          ]
+        }
+      }
+    }
+  ]
+}

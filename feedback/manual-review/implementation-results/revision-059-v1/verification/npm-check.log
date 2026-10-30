@@ -1,0 +1,31 @@
+
+> precheck
+> node tools/build_module_workshop.mjs
+
+{"counts":{"ARCHIVED":1,"IMPLEMENTED_CANDIDATE":64,"READY_FOR_IMPLEMENTATION":30,"NEEDS_REPAIR":5,"NEEDS_ALIGNMENT":2},"approvedDesigns":102,"newIdeas":22,"sourceCommit":"08012fbaed5c5eba2eca1b94de4823a97967b0b7","physicsRun":false}
+
+> check
+> node --check app.js && node --check model.js && node --check capabilities.js && node --check difficulty.js && node --check library-client.js && node tools/check-library.mjs && node tools/check-revisions.mjs && node tools/check-capabilities.mjs && node tools/check-difficulty.mjs && python3 tools/check_integration.py && node tools/contract-tests/check-contract.mjs && node tools/contract-tests/check-block-grid.mjs && node tools/contract-tests/check-block-staging.mjs && node tools/check-module-contracts.mjs && node --check repository-library-client.js && node tools/check-repository-library.mjs && node tools/contract-tests/check-foundation.mjs && node tools/check-current-module-library.mjs && node tools/check-current-archive.mjs && node --check module-review-overlay.js && node tools/check-module-review.mjs && node tools/check-corner-batch-review.mjs && node --check generation/module-workshop/workshop.js && node tools/check-module-workshop.mjs && python3 -m unittest discover -s tools/tests -p test_module_workshop.py
+
+Library checked: 177 editable documents; 72 authored resources fully covered; original platforms, saw trajectories, links and round trips preserved.
+Revision identity, variant separation, object diffs, immutable library updates and failed-update preservation passed.
+Capability AND/OR groups, uncertainty, legacy drafts, validation and metadata-only revisions passed.
+Difficulty 1–10 bounds, unknown legacy scores, versioned scale, catalog integrity and metadata-only revisions passed.
+Integration entry-chain guards passed; changed consumers fall back to unknown.
+{"contract_tests":43,"passed":43,"scope":"Pure contract tests; trusted evidence test double is not physical validation"}
+{"block_contract_checks":7,"passed":true,"physics":false}
+{"block_staging_checks":7,"passed":true,"physics":false}
+{"contract_documents":9,"scope":"Existing document schema + bound SVG + explicit directed graph. Embedded evidence alone never admits a map interface."}
+{"repository_modules":132,"checks":"static document/SVG hashes, discovery beyond bundled index, immutable editing, atomic failure preservation, withdrawal, pinned reads and capability scopes","passed":true}
+{"foundation_contract_tests":38,"passed":38,"physics":false,"scope":"Pure structural tests and explicit evidence test doubles; no Module certification or migration count increase."}
+{"passed":true,"scope":"Structural client tests only; no Module certification","checks":"v2 documents, SHA256 bytes and pinned catalog Git SHA, catalog authority, no candidate scan, immutable editing, atomic update/rollback, missing catalog, rate limit, legacy rejection and concurrent clicks"}
+{"currentTemplates":82,"declaredRoutes":104,"cornerOptions":64,"passed":true,"physics":false,"scope":"real current JSON, versions, hashes, bounds origin, SVG and corner-option display; no new certification"}
+{"passed":true,"currentModules":82,"logicalPorts":181,"physicalPorts":180,"modulesWithAliases":1,"physics":false,"sourceDocumentsMutated":false}
+{"passed":true,"currentTemplates":82,"mirroredPortViews":181,"previewPhysicsCertification":false,"scope":"Read-only geometry, source-version association, stale/hash rejection and separate progress labels."}
+Module workshop: directed AND/OR filtering, permissions, exact approvals, candidate/archival gates and source bindings pass. No physics run.
+Creative lifecycle filters: text, review, waiting, independent variants and exact-version completed routing pass.
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.010s
+
+OK

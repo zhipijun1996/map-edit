@@ -63,6 +63,22 @@ def _counter_summary(report,run):
     return rows
 
 
+def _boundary_summary(report,run):
+    from . import physics
+    rows=[]
+    for batch in core.read(core.resolve_artifact(report['batches']['path'])):
+        inputs=core.read(run/'physics'/(batch['batch']+'.input.json'))['cases']
+        if not any('migration_probe' in c for c in inputs):continue
+        with gzip.open(run/batch['gzip_path'],'rt')as stream:results=json.load(stream)['results']
+        for i,(case,raw)in enumerate(zip(inputs,results)):
+            if 'migration_probe'not in case:continue
+            observed=physics.crossing(case,raw)
+            if observed.get('observationReanalysis'):
+                rows.append(dict(caseId=case['id'],originalRawOk=raw['ok'],observed=observed,
+                    originalEvidence=dict(batch=batch['batch'],index=i,output=batch['gzip_path'],sha256=core.sha(run/batch['gzip_path']))))
+    return rows
+
+
 def reanalyse(folder,source_report,name='offline-causal-v2'):
     from . import physics,causal_observer,causal_observer_v2,causal_observer_v3,pool_protocols,holdout_guard
     if not hasattr(physics,'causal_observer_v2'):
@@ -74,7 +90,7 @@ def reanalyse(folder,source_report,name='offline-causal-v2'):
     # seam, world goal and counter. The historical passed flag is not admission.
     physics.verify_report(folder,proof,deep=True)
     sources=[Path(physics.__file__),Path(causal_observer.__file__),Path(causal_observer_v2.__file__),Path(causal_observer_v3.__file__),
-             Path(pool_protocols.__file__),Path(holdout_guard.__file__),Path(__file__)]
+             Path(pool_protocols.__file__),Path(holdout_guard.__file__),Path(__file__),Path(__file__).with_name('review_counter_scope_v1.py'),Path(__file__).with_name('review_counter_scope_v2.py'),Path(__file__).with_name('review_counter_scope_v3.py'),Path(__file__).with_name('review_counter_scope_v4.py'),Path(__file__).with_name('review_counter_scope_v5.py'),Path(__file__).with_name('review_counter_scope_v6.py'),Path(__file__).with_name('review_counter_scope_v7.py'),Path(__file__).with_name('review_counter_scope_v8.py'),Path(__file__).with_name('review_counter_scope_v11.py'),Path(__file__).with_name('review_boundary_observer_v1.py'),Path(__file__).with_name('revision058_top_observer_v2.py'),Path(__file__).with_name('review_counter_scope_v12.py')]
     hashes={core.relative(p):core.sha(p)for p in sources};token=digest(dict(sourceReport=proof,analysisSources=hashes))[:24]
     snapshots=run/'offline-analysis'/token
     code=[]
@@ -90,6 +106,7 @@ def reanalyse(folder,source_report,name='offline-causal-v2'):
         kind='specific_actual_causal_episode_attribution_only',newPhysicsAttempts=0,newIndependentHoldout=False,
         geometryControlResourcesAndOriginalTrialsChanged=False,
         originalAttemptCount=original['actualAttempts'],counterReanalysis=_counter_summary(original,run),
+        boundaryReanalysis=_boundary_summary(original,run),
         scope='Original real Godot evidence, unchanged candidate, independently re-derived gates; no new experiment or human approval.')
     validate_lineage(updated,target)
     if target.exists():

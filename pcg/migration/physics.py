@@ -149,7 +149,7 @@ def deduplicate_snapshot(out):
             os.link(target, temporary); temporary.replace(path)
 
 
-def _engine(folder, name, protocol_path):
+def _engine(folder, name, protocol_path, *, extra_sources=()):
     folder = Path(folder).resolve(); core.safe_id(name)
     cases_file = folder/'physics-input-cases.json'
     if not cases_file.exists():cases_file=folder/'cases.json'
@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__).with_name('revision065_boundary_v1.py'),Path(__file__).with_name('revision065_observer_v1.py'),*map(Path,extra_sources), Path(__file__).with_name('revision063_group_sampling_v1.py'), Path(__file__).with_name('revision063_fixture_v2.py'), Path(__file__).with_name('revision063_fixture_lineage_v1.py'), Path(__file__).with_name('revision063_boundary_v1.py'), Path(__file__).with_name('revision063_observer_v1.py'), Path(__file__).with_name('legacy_full_v2_upgrade_v1.py'), Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision062_top_observer_v1.py'), Path(__file__).with_name('revision062_top_reanalysis_v1.py'), Path(__file__).with_name('partial_holdout_exposure_v2.py'), Path(__file__).with_name('partial_holdout_exposure_v1.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -208,6 +208,15 @@ def fresh(case, label):
 
 
 def exterior_floor(case, port):
+    from .revision065_boundary_v1 import neighbor as relay_neighbor
+    relay=relay_neighbor(case,port)
+    if relay is not None:return relay
+    from .revision063_boundary_v1 import neighbor as r063_neighbor
+    existing=r063_neighbor(case,port)
+    if existing is not None:return existing
+    from .revision053_boundary_v1 import neighbor as revision_neighbor
+    existing=revision_neighbor(case,port)
+    if existing is not None:return existing
     support_index = next(p['support_index'] for p in case['ports'] if p['id'] == port['id'])
     source = case['platforms'][support_index]
     x, y = port['position']; nx, ny = port['normal']
@@ -218,7 +227,8 @@ def exterior_floor(case, port):
             raise ValueError('vertical_fixture_requires_real_one_way_surface:'+port['id'])
         # An explicit adjacent Module owns this witness deck. There is no new
         # support inside the tested Module and no runtime seam auto-repair.
-        rect = [x-48, y-32 if ny < 0 else y+40, 96, 12]
+        from .ideas_boundary_v1 import applies as idea_top
+        rect = [x-48, y-(96 if idea_top(case,port)else 32) if ny < 0 else y+40, 96, 12]
     new_index = len(case['platforms']); case['platforms'].append(rect)
     if not nx or support_index in case.get('one_way_platform_indices', []):
         case.setdefault('one_way_platform_indices', []).append(new_index)
@@ -227,6 +237,18 @@ def exterior_floor(case, port):
 
 
 def _vertical_inner_dock(case, port):
+    from .revision063_boundary_v1 import applies as r063_top
+    if r063_top(case,port):return list(port['stagingPosition'])
+    from .revision061_top_boundary_v1 import applies as latest_top
+    if latest_top(case,port):return list(port['stagingPosition'])
+    from .revision060_top_boundary_v1 import applies as newer_top
+    if newer_top(case,port):return list(port['stagingPosition'])
+    from .revision059_top_boundary_v1 import applies as hq_top
+    if hq_top(case,port):return list(port['stagingPosition'])
+    from .revision058_boundary_v1 import applies as revision_top
+    if revision_top(case,port):return list(port['stagingPosition'])
+    from .ideas_boundary_v1 import applies as idea_top
+    if idea_top(case,port):return list(port['stagingPosition'])
     x, y = port['position']; ny = port['normal'][1]
     eligible = [r for r in case['platforms'] if r[0]+12 <= x <= r[0]+r[2]-12
                 and ((r[1]-18 >= y+20) if ny < 0 else (r[1]-18 <= y-20))]
@@ -238,6 +260,9 @@ def _vertical_inner_dock(case, port):
 def seam_cases(case, doc):
     fixtures = []
     for port in doc['generationContract']['ports']:
+        if port.get('surface')=='AIR':
+            from .air_interfaces_v1 import local_cases
+            fixtures.extend(local_cases(case,port));continue
         nx, ny = port['normal']; bx, by = port['position']
         permission = port.get('permission','INOUT')
         directions = (['ingress'] if permission=='INPUT' else ['egress'] if permission=='OUTPUT' else ['ingress','egress'])
@@ -251,6 +276,14 @@ def seam_cases(case, doc):
                     outside, inside = bx+nx*48, bx-nx*48
                     start, target = (outside, inside) if direction == 'ingress' else (inside, outside)
                     value['spawn'] = [start, y+offset]
+                    from .review_oneway_fixture_v1 import repair as repair_oneway_start
+                    repair_oneway_start(value,port,offset)
+                    from .review_oneway_fixture_v2 import repair as repair_final_oneway_start
+                    repair_final_oneway_start(value,port,offset)
+                    from .revision058_boundary_v1 import side_start
+                    side_start(value,port,offset)
+                    from .review_oneway_fixture_v3 import repair as revision_oneway_start
+                    revision_oneway_start(value,port,offset)
                     value['goal'] = [target-9, y-5, 18, 10]
                     value['control_plan'] = [dict(op='settle', trigger=dict(after=0), target_x=target, deadband=3)]
                 else:
@@ -266,6 +299,24 @@ def seam_cases(case, doc):
                 value['migration_probe'] = dict(kind='local_boundary', portId=port['id'],
                     direction=direction, boundary=port['position'], normal=port['normal'],
                     neighbor=neighbor, body=[24,36])
+                from .ideas_boundary_v1 import applies as idea_top,local as idea_local
+                if idea_top(value,port):idea_local(value,port,direction,doc,offset)
+                from .revision053_boundary_v1 import local as revision_local
+                revision_local(value,port,direction,doc,offset)
+                from .revision061_top_boundary_v1 import local as latest_local
+                latest_local(value,port,direction,doc,offset)
+                from .revision060_top_boundary_v1 import local as newer_local
+                newer_local(value,port,direction,doc,offset)
+                from .revision059_top_boundary_v1 import local as hq_local
+                hq_local(value,port,direction,doc,offset)
+                from .revision058_boundary_v1 import local as new_local
+                new_local(value,port,direction,doc,offset)
+                from .revision063_boundary_v1 import local as r063_local
+                r063_local(value,port,direction,doc,offset)
+                from .revision065_boundary_v1 import local as relay_local
+                relay_local(value,port,direction,doc,offset)
+                from .revision063_fixture_v2 import adjust as adjust_r063_fixture
+                adjust_r063_fixture(value)
                 value['module_sha256'] = module_hash(value)
                 fixtures.append(value)
     return fixtures
@@ -290,6 +341,7 @@ def _original_pickups_satisfied(case,raw):
     return all(state.get(key,0)>=amount for key,amount in totals.items())
 
 def crossing(case, raw):
+    from .review_boundary_observer_v1 import observe
     probe = case['migration_probe']; bx, by = probe['boundary']; nx, ny = probe['normal']
     frames = raw.get('frames', [])
     # Entire rectangle must pass the boundary; a center crossing is insufficient.
@@ -321,8 +373,30 @@ def crossing(case, raw):
         claimed={event['id']for event in raw.get('workshop',{}).get('events',[])
                  if event.get('type')=='chest_claim'and event.get('accepted')}
         outcome=required<=claimed and raw.get('workshop',{}).get('coins',0)>=case.get('expected_reward',0)and _original_pickups_satisfied(case,raw)and region_outcomes.satisfied(case,raw)
-    return dict(passed=bool(raw.get('ok') and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
-                stableExit=bool(raw.get('ok')), bodyPassedBothSides=inward and outward,
+    observation=observe(case,raw)
+    if observation is None:
+        from .revision060_top_observer_v1 import observe as observe_newer_top
+        observation=observe_newer_top(case,raw)
+        if observation is None:
+            from .revision061_top_observer_v1 import observe as observe_latest_top
+            observation=observe_latest_top(case,raw)
+        from .revision059_top_observer_v1 import observe as observe_hq_top
+        hq_observation=observe_hq_top(case,raw)
+        if hq_observation:observation=hq_observation
+        from .revision058_top_observer_v2 import observe as observe_top
+        if observation is None:observation=observe_top(case,raw)
+    if observation is None:
+        from .revision062_top_observer_v1 import observe as observed_native_contact
+        observation=observed_native_contact(case,raw)
+    if observation is None:
+        from .revision063_observer_v1 import observe as r063_observe
+        observation=r063_observe(case,raw)
+    if observation is None:
+        from .revision065_observer_v1 import observe as relay_observe
+        observation=relay_observe(case,raw)
+    stable=bool(raw.get('ok')) or bool(observation and observation['stableExit'])
+    result=dict(passed=bool(stable and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
+                stableExit=stable, bodyPassedBothSides=inward and outward,
                 requiredWorldOutcomeSatisfied=outcome,
                 aperture=aperture, apertureViolationFrames=violations,
                 actualCrossingFrames=crossing_segments, directionOrdered=ordered,
@@ -330,19 +404,59 @@ def crossing(case, raw):
                 minimumSignedDistance=min(distances, default=None),
                 maximumSignedDistance=max(distances, default=None),
                 neighbor=probe['neighbor'])
+    if observation:result['observationReanalysis']=observation
+    return result
 
 
 def continuous_exit(case, doc):
+    from .revision065_boundary_v1 import exit as relay_exit
+    relay=relay_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if relay is not None:return relay
+    from .revision063_boundary_v1 import exit as r063_exit
+    special=r063_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision061_top_boundary_v1 import exit as latest_exit
+    special=latest_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision060_top_boundary_v1 import exit as newer_exit
+    special=newer_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision059_top_boundary_v1 import exit as hq_exit
+    special=hq_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision058_boundary_v1 import exit as new_exit
+    special=new_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision053_boundary_v1 import exit as revision_exit
+    special=revision_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .ideas_boundary_v1 import exit as idea_exit
+    special=idea_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     value = fresh(case, 'continuous-exit')
     route = case['route_spec']
     port = next(p for p in doc['generationContract']['ports'] if p['id'] == route['to_port'])
+    if port.get('surface')=='AIR':
+        from .air_interfaces_v1 import exit
+        return exit(case,port)
     neighbor = exterior_floor(value, port)
     settle_indices = [i for i, command in enumerate(value['control_plan']) if command['op'] == 'settle']
     if not settle_indices:
         raise ValueError('continuous_exit_needs_explicit_terminal_settle')
     if port['normal'][0]:
         target = port['position'][0]+port['normal'][0]*48
-        value['control_plan'][settle_indices[-1]]['target_x'] = target
+        origin=next(p for p in doc['generationContract']['ports']if p['id']==route['from_port'])
+        earned_reward_dock=case.get('approved_first30',{}).get('reviewId')=='17'and route['to_port']=='C'
+        approved_drop_dock=case.get('approved_implementation',{}).get('reviewId')=='125' and route['from_port']in('fork_up','C') and route['to_port']in('entry','fork_right')
+        if case.get('approved_implementation'):
+            # Preserve the complete authored landing, waits and terminal dock.
+            # Retargeting it can skip a descent or leave an old goal unreachable.
+            value['control_plan'] += [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)]
+        elif (origin.get('surface')=='AIR' and abs(case['spawn'][0]-case['exit_port'][0])<64) or earned_reward_dock or approved_drop_dock:
+            # First complete the authored downward landing. Retargeting the
+            # only settle while still in the sky crosses the side aperture high.
+            value['control_plan'] += [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='wait',trigger=dict(after=6)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)] if earned_reward_dock else [dict(op='wait',trigger=dict(after=6,state='grounded',timeout=240)),dict(op='settle',trigger=dict(after=0),target_x=target,deadband=2)]
+        else:value['control_plan'][settle_indices[-1]]['target_x'] = target
         value['goal'] = [target-9, port['stagingPosition'][1]-5, 18, 10]
     else:
         # Finish the original reward/core landing before moving to the new
@@ -367,6 +481,8 @@ def continuous_exit(case, doc):
         target=[port['position'][0],neighbor['floor'][1]-18]
         value['goal']=[target[0]-9,target[1]-5,18,10]
     value['max_frames'] += 600 if port['normal'][1] else 180
+    if case.get('approved_implementation'):
+        value['max_frames']=min(3600,value['max_frames'])
     value['migration_probe'] = dict(kind='continuous_exit', portId=port['id'],
         direction='egress', boundary=port['position'], normal=port['normal'],
         neighbor=neighbor, body=[24,36], noIntermediateReset=True,
@@ -377,13 +493,40 @@ def continuous_exit(case, doc):
 
 
 def continuous_entry(case, doc):
+    from .revision063_boundary_v1 import entry as r063_entry
+    special=r063_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:
+        from .revision063_fixture_v2 import adjust
+        adjust(special);special['module_sha256']=module_hash(special)
+        return special
+    from .revision061_top_boundary_v1 import entry as latest_entry
+    special=latest_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision060_top_boundary_v1 import entry as newer_entry
+    special=newer_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision059_top_boundary_v1 import entry as hq_entry
+    special=hq_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
+    from .revision059_boundary_v1 import entry as repair_entry
+    repair=repair_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if repair is not None:return repair
+    from .revision058_boundary_v1 import entry as new_entry
+    special=new_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     """Approach the actual canonical start from an explicit adjacent Module.
 
     This measures entry docking only. It never resets an actor mid-fixture or
     claims the separately replayed interior starts with identical world phase.
     """
+    from .ideas_boundary_v1 import entry as idea_entry
+    special=idea_entry(case,doc,__import__(__name__,fromlist=['unused']))
+    if special is not None:return special
     value=fresh(case,'continuous-entry')
     port=next(p for p in doc['generationContract']['ports']if p['id']==case['route_spec']['from_port'])
+    if port.get('surface')=='AIR':
+        from .air_interfaces_v1 import entry
+        return entry(case,port)
     neighbor=exterior_floor(value,port)
     target=case['spawn'];nx,ny=port['normal']
     if nx:
@@ -400,6 +543,11 @@ def continuous_entry(case, doc):
         boundary=port['position'],normal=port['normal'],neighbor=neighbor,body=[24,36],
         noIntermediateReset=True,originalRouteId=case['route_spec']['id'],
         scope='boundary to canonical starting dock; interior continuation phase not asserted')
+    # Entrance docking must not inherit the original route's AIR exit goal.
+    if case.get('approved_first30') and any(p['id']==case['route_spec']['to_port'] and p.get('surface')=='AIR' for p in doc['generationContract']['ports']):
+        value['route_spec']=dict(case['route_spec'],to_port=case['route_spec']['from_port'])
+    from .revision063_fixture_v2 import adjust
+    adjust(value)
     value['module_sha256']=module_hash(value)
     return value
 
@@ -478,6 +626,38 @@ def _counter_judgment(case,raw,author,baseline=None):
         check=causal_observer_v3.correct(case,raw,check,assertion_source=assertion_source)
     outcome=_same_outcome(case,raw)
     judgment=counter_classification(case,raw,check,outcome,baseline=baseline)
+    from .review_counter_scope_v1 import classify
+    judgment=classify(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v2 import classify as reviewed_exterior
+    judgment=reviewed_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v3 import classify as sky_exterior
+    judgment=sky_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v4 import classify as paid_jump_exterior
+    judgment=paid_jump_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v5 import classify as rejected_exterior
+    judgment=rejected_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v6 import classify as compact_bell_exterior
+    judgment=compact_bell_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v7 import classify as low_return_exterior
+    judgment=low_return_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v8 import classify as approved040_exterior
+    judgment=approved040_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v9 import classify as new_ideas_exterior
+    judgment=new_ideas_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v11 import classify as revised196_exterior
+    judgment=revised196_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v12 import classify as new_exterior
+    judgment=new_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v13 import classify as approved_hq_exterior
+    judgment=approved_hq_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v14 import classify as approved060_exterior
+    judgment=approved060_exterior(case,raw,check,outcome,judgment,baseline)
+    from .review_counter_scope_v15 import classify as approved061_exterior
+    judgment=approved061_exterior(case,raw,check,outcome,judgment,baseline)
+    from .revision063_observer_v1 import classify as approved063_exterior
+    judgment=approved063_exterior(case,raw,check,outcome,judgment,baseline)
+    from .revision065_observer_v1 import classify as relay_exterior
+    judgment=relay_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -495,7 +675,7 @@ def artifact(path):
     return dict(path=core.relative(path), sha256=core.sha(path))
 
 
-def run(folder, name, protocol_path=None):
+def run(folder, name, protocol_path=None, *, sampling_correction=None):
     folder = Path(folder).resolve(); doc = core.read(folder/'module.mapnote.json')
     protocol_path = pool_protocols.runtime_protocol(folder, protocol_path, new_run=True)
     holdout_guard.check(folder,protocol_path=protocol_path)
@@ -503,7 +683,11 @@ def run(folder, name, protocol_path=None):
     protocol = core.read(protocol_path)
     if doc['generationContract']['version'] != 2:
         raise ValueError('migration_requires_v2')
-    engine, cases, authors = _engine(folder, name, protocol_path)
+    sampling_proof=None;evaluate_fn=evaluate
+    if sampling_correction is not None:
+        from . import revision063_group_sampling_v1 as group_sampling
+        sampling_proof=group_sampling.validate(folder,sampling_correction);evaluate_fn=group_sampling.evaluate
+    engine, cases, authors = _engine(folder, name, protocol_path, extra_sources=[core.resolve_artifact(sampling_correction['path'])] if sampling_correction else [])
     run_path = engine.out
     core.write(run_path/'protocol.json', protocol)
     core.write(run_path/'input-binding.json', dict(module=artifact(folder/'module.mapnote.json'),
@@ -513,7 +697,7 @@ def run(folder, name, protocol_path=None):
     for index, (case, author) in enumerate(zip(cases, authors)):
         base = fresh(case, 'interior')
         check = lambda c, r: checked_purpose(author, c, r)
-        calibration = evaluate(engine, [base], protocol['calibrationSeed']+index*1009,
+        calibration = evaluate_fn(engine, [base], protocol['calibrationSeed']+index*1009,
                                12, 'migration-calibration', purpose_fn=check)[0]
         core.write(run_path/f'calibration-{index}.json', calibration)
         if calibration.get('witness'):baselines[case['route_spec']['id']]=calibration['witness']['result']
@@ -526,7 +710,7 @@ def run(folder, name, protocol_path=None):
             calibrationSha256=core.sha(run_path/f'calibration-{index}.json'),
             holdoutSeed=protocol['holdoutSeed']+index*1009, revisions=0))
         pool_protocols.reserve_holdout(folder,protocol_path,name)
-        holdout = evaluate(engine, [base], protocol['holdoutSeed']+index*1009,
+        holdout = evaluate_fn(engine, [base], protocol['holdoutSeed']+index*1009,
                            12, 'migration-holdout', purpose_fn=check)[0]
         core.write(run_path/f'holdout-{index}.json', holdout)
         route_reports.append(dict(routeId=case['route_spec']['id'],
@@ -551,6 +735,7 @@ def run(folder, name, protocol_path=None):
         batches=artifact(run_path/'batches.json'), protocol=artifact(run_path/'protocol.json'),
         unknown=['unsearched port pairs', 'closure combinations', 'mirror', 'arbitrary entry states', 'full Map'],
         humanReview='UNKNOWN', productionAdmitted=False)
+    if sampling_proof is not None:report['samplingCorrection']=sampling_proof
     if extended:report['counterexamples']=artifact(run_path/'counterexamples.json')
     pool_binding=pool_protocols.report_binding(folder,protocol_path,name)
     if pool_binding is not None:report['holdoutPool']=pool_binding
@@ -565,6 +750,40 @@ def verify_report(folder, proof):
     core.verify_artifacts([proof])
     report_path = core.resolve_artifact(proof['path']); run_path = report_path.parent
     report = core.read(report_path)
+    if report.get('samplingCorrection'):
+        from .revision063_group_sampling_v1 import validate_report
+        validate_report(Path(folder),report)
+    if report.get('fixtureCorrection'):
+        from .revision063_fixture_lineage_v1 import validate_lineage
+        validate_lineage(report,report_path)
+    if report.get('protocolCompletion'):
+        from .revision058_protocol_completion_v2 import validate_lineage as validate_completion
+        validate_completion(report,report_path)
+    if report.get('boundaryObservationCorrection'):
+        from .revision062_top_reanalysis_v1 import validate_lineage
+        validate_lineage(report,report_path)
+    lineage_report=report
+    if report.get('metadataCorrection'):
+        from .review_metadata_bindings_v1 import validate_lineage as validate_metadata
+        lineage_report=validate_metadata(report,report_path)
+    if lineage_report.get('boundaryRepair'):
+        if lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v8':
+            from .review_boundary_repair_v8 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v7':
+            from .review_boundary_repair_v7 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v6':
+            from .review_boundary_repair_v6 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v5':
+            from .review_boundary_repair_v5 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v4':
+            from .review_boundary_repair_v4 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v3':
+            from .review_boundary_repair_v3 import validate_lineage
+        elif lineage_report['boundaryRepair']['schema']=='pcg/review-boundary-fixture-repair/v2':
+            from .review_boundary_repair_v2 import validate_lineage
+        else:
+            from .review_boundary_repair_v1 import validate_lineage
+        validate_lineage(lineage_report,report_path)
     doc = core.read(Path(folder)/'module.mapnote.json')
     if report['schema'] != 'pcg/foundation-migration-physics/v1' or report['contentVersion'] != doc['generationContract']['contentVersion']:
         raise ValueError('physics_report_bound_to_another_version')
@@ -578,7 +797,7 @@ def verify_report(folder, proof):
     input_binding = core.read(run_path/'input-binding.json')
     physics_cases_path = Path(folder)/'physics-input-cases.json'
     if not physics_cases_path.exists(): physics_cases_path = Path(folder)/'cases.json'
-    if input_binding['contentVersion'] != doc['generationContract']['contentVersion'] or input_binding['cases']['sha256'] != core.sha(physics_cases_path):
+    if input_binding['contentVersion'] != lineage_report['contentVersion'] or input_binding['cases']['sha256'] != core.sha(physics_cases_path):
         raise ValueError('physics_input_not_bound_to_current_module')
     canonical_cases = core.read(physics_cases_path)['cases']
     playback_cases = core.read(Path(folder)/'cases.json')['cases']
@@ -620,6 +839,8 @@ def verify_report(folder, proof):
         raise ValueError('physics_attempt_count_mismatch')
     from pcg.prototype.factory.core.quality import gate
     from pcg.prototype.workshop.evaluate import instantiate
+    if report.get('samplingCorrection'):
+        from .revision063_group_sampling_v1 import instantiate
     counter_baselines={}
     for route_index, route in enumerate(report['routes']):
         if not isinstance(route['holdout'], dict):
@@ -661,7 +882,7 @@ def verify_report(folder, proof):
     probes = core.read(core.resolve_artifact(report['probes']['path']))
     cases = canonical_cases
     expected_probes = seam_cases(cases[0], doc)+[continuous_exit(case, doc) for case in cases]
-    if protocol.get('schema')=='pcg/module-migration-protocol/v2':
+    if protocol.get('schema')=='pcg/module-migration-protocol/v2'or report.get('protocolCompletion'):
         expected_probes += [continuous_entry(case,doc)for case in cases]
     if {p['id'] for p in probes} != {case['id'] for case in expected_probes} or len(probes) != len(expected_probes):
         raise ValueError('boundary_or_continuous_exit_coverage_missing')
@@ -669,7 +890,7 @@ def verify_report(folder, proof):
         case, raw = by_id[expected['id']]
         if module_hash(case) != module_hash(expected) or not crossing(case, raw)['passed']:
             raise ValueError('actual_boundary_probe_failed:' + expected['id'])
-    if protocol.get('schema')=='pcg/module-migration-protocol/v2':
+    if protocol.get('schema')=='pcg/module-migration-protocol/v2'or report.get('protocolCompletion'):
         if 'counterexamples'not in report:raise ValueError('adaptation_counter_search_missing')
         core.verify_artifacts([report['counterexamples']])
         counters=core.read(core.resolve_artifact(report['counterexamples']['path']))
@@ -710,9 +931,28 @@ def _verification_identity(folder, proof):
         for source in [Path(author.__file__), *getattr(author,'SOURCE_DEPENDENCIES',[])]:
             live_sources[str(source)] = core.sha(source)
     return digest(dict(schema='pcg/deep-physics-verification-cache/v1',
-        verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
+        verifier=core.sha(Path(__file__)),relayBoundary=core.sha(Path(__file__).with_name('revision065_boundary_v1.py')),relayObserver=core.sha(Path(__file__).with_name('revision065_observer_v1.py')), causalObserver=core.sha(Path(causal_observer.__file__)),
         causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), causalObserverV3=core.sha(Path(causal_observer_v3.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
-        holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
+        groupSamplingSource=core.sha(Path(__file__).with_name('revision063_group_sampling_v1.py')), holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
+        reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
+        reviewCounterScopeV2=core.sha(Path(__file__).with_name('review_counter_scope_v2.py')),
+        reviewCounterScopeV3=core.sha(Path(__file__).with_name('review_counter_scope_v3.py')),
+        reviewCounterScopeV4=core.sha(Path(__file__).with_name('review_counter_scope_v4.py')),
+        reviewCounterScopeV5=core.sha(Path(__file__).with_name('review_counter_scope_v5.py')),
+        reviewCounterScopeV6=core.sha(Path(__file__).with_name('review_counter_scope_v6.py')),
+        reviewCounterScopeV7=core.sha(Path(__file__).with_name('review_counter_scope_v7.py')),
+        reviewCounterScopeV9=core.sha(Path(__file__).with_name('review_counter_scope_v9.py')),
+        reviewCounterScopeV8=core.sha(Path(__file__).with_name('review_counter_scope_v8.py')),
+        revision058TopObserver=core.sha(Path(__file__).with_name('revision058_top_observer_v2.py')),
+        revision058Completion=core.sha(Path(__file__).with_name('revision058_protocol_completion_v2.py')),
+        reviewBoundaryObserverV1=core.sha(Path(__file__).with_name('review_boundary_observer_v1.py')),
+        onewayFixtureV1=core.sha(Path(__file__).with_name('review_oneway_fixture_v1.py')),
+        ideasBoundaryV1=core.sha(Path(__file__).with_name('ideas_boundary_v1.py')),
+        onewayFixtureV2=core.sha(Path(__file__).with_name('review_oneway_fixture_v2.py')),
+        reviewBoundaryRepairV5=core.sha(Path(__file__).with_name('review_boundary_repair_v5.py')),
+        metadataBindingCorrection=core.sha(Path(__file__).with_name('review_metadata_bindings_v1.py')),
+        boundaryLineage={v:core.sha(Path(__file__).with_name('review_boundary_repair_'+v+'.py'))for v in ('v1','v2','v3','v4','v5','v6','v7')},
+        airInterfaces=core.sha(Path(__file__).with_name('air_interfaces_v1.py')),
         registeredPool=pool_protocols.cache_identity(folder,core.read(core.resolve_artifact(report['protocol']['path'])),report)if report.get('protocol')else None,
         report=proof, runFiles=files,
         protocolV1=core.sha(PROTOCOL), protocolV2=core.sha(FULL_PROTOCOL),

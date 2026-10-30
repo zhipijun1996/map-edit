@@ -1,0 +1,2912 @@
+{
+  "sourceModule": {
+    "path": "pcg/manual_review/implementation/revision-061-final-v1/idea-spec02-s12-001/module.mapnote.json",
+    "sha256": "5c9c80ada6e741f7c70e9167a4c27f77e2f394c78dbeddf5477e42741408551e"
+  },
+  "physicsCases": {
+    "path": "pcg/manual_review/implementation/revision-061-final-v1/idea-spec02-s12-001/physics-input-cases.json",
+    "sha256": "8cdf15d18b4b942a4d4dca995c8af439d40e19462871e658d264b62e73464ebf"
+  },
+  "rows": [
+    {
+      "route": "R-to-L",
+      "calibration": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/calibration-3.json",
+        "sha256": "f34a6589e34270dde5fe76c563237c4b8c6b13bb309c2e1960f41578228ddac7"
+      },
+      "failedCheck": {
+        "ok": false,
+        "reasons": [
+          "trigger_timeout/8/carrier_supported"
+        ],
+        "causal": {
+          "approvedDesignVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "outsideFrames": [],
+          "actualHookContacts": [],
+          "airborneEnemyHits": [],
+          "nominalDistinctHitIds": [],
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        },
+        "behavior": {
+          "shots": 2,
+          "jumps": 0,
+          "ticks": 394
+        }
+      },
+      "input": {
+        "id": "approved-r061-final-v1-idea-spec02-s12-001-R-to-L-migration-interior-clean-4",
+        "family": "recoil-chain",
+        "capabilities": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "generation_rule": {
+          "registration_source": "pcg/manual_review/revision061_author_v11.py"
+        },
+        "max_frames": 3600,
+        "trace_all": false,
+        "platforms": [
+          [
+            0,
+            352,
+            112,
+            160
+          ],
+          [
+            560,
+            96,
+            80,
+            416
+          ],
+          [
+            128,
+            32,
+            128,
+            12
+          ],
+          [
+            400,
+            480,
+            112,
+            12
+          ]
+        ],
+        "one_way_platform_indices": [
+          2,
+          3
+        ],
+        "wall_platform_indices": [],
+        "hazards": [],
+        "thorns": [],
+        "saws": [],
+        "moving_platforms": [
+          {
+            "platform_id": "P",
+            "start": [
+              176,
+              336
+            ],
+            "finish": [
+              464,
+              336
+            ],
+            "size": [
+              112,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.26963433516662416,
+            "designState": "FROZEN_EXAMPLE"
+          },
+          {
+            "platform_id": "Q",
+            "start": [
+              368,
+              240
+            ],
+            "finish": [
+              368,
+              112
+            ],
+            "size": [
+              96,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.48431318725302097,
+            "designState": "FROZEN_EXAMPLE"
+          }
+        ],
+        "hooks": [],
+        "latches": [],
+        "enemies": [],
+        "reward_sites": [],
+        "approved_hq_cells": [
+          {
+            "kind": "group_motion",
+            "id": "P-bell",
+            "bell": [
+              144.0,
+              384.0
+            ],
+            "access": [
+              [
+                448.0,
+                432.0
+              ]
+            ],
+            "targets": [
+              "P"
+            ]
+          },
+          {
+            "kind": "group_motion",
+            "id": "Q-bell",
+            "bell": [
+              416.0,
+              272.0
+            ],
+            "access": [
+              [
+                192.0,
+                64.0
+              ],
+              [
+                592.0,
+                32.0
+              ]
+            ],
+            "targets": [
+              "Q"
+            ]
+          }
+        ],
+        "control_plan": [
+          {
+            "op": "settle",
+            "target_x": 584,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                580,
+                75,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "settle",
+            "target_x": 368,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "observed_height",
+              "timeout": 120
+            },
+            "observed_y": {
+              "direction": "gte",
+              "value": 100
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 1
+            },
+            "direction": [
+              1,
+              0
+            ]
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": -40,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_q_exit",
+              "timeout": 1800
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": false,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": false
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_transfer_mode",
+              "timeout": 1800
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "P",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            },
+            "route_mode": "farP"
+          },
+          {
+            "op": "jump",
+            "trigger": {
+              "after": 0
+            },
+            "route_mode": "farP"
+          },
+          {
+            "op": "jump_release",
+            "trigger": {
+              "after": 24
+            },
+            "route_mode": "farP"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "P",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            },
+            "route_mode": "farP"
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "P",
+            "route_mode": "farP"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            },
+            "r061_walkoff_q": true,
+            "route_mode": "nearP"
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_below_q",
+              "timeout": 1800
+            },
+            "route_mode": "nearP"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "P",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            },
+            "route_mode": "nearP"
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "P",
+            "route_mode": "nearP"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "P",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            },
+            "r061_p_ring_follow": true
+          },
+          {
+            "op": "shoot",
+            "group_id": "P-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "P-bell",
+            "running": true
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_p_left",
+              "timeout": 1800
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "P-bell",
+            "running": false,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "P-bell",
+            "running": false
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "P",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "P"
+          },
+          {
+            "op": "axis",
+            "value": 0,
+            "cancel_settle": true,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "jump",
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 24,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "jump_release",
+            "trigger": {
+              "after": 24
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 24,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                20,
+                331,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 24
+            }
+          }
+        ],
+        "spawn": [
+          616,
+          78
+        ],
+        "entry_port": [
+          616,
+          78
+        ],
+        "exit_port": [
+          24,
+          334
+        ],
+        "goal": [
+          17,
+          330,
+          14,
+          8
+        ],
+        "ports": [
+          {
+            "id": "L",
+            "position": [
+              24,
+              334
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "support_index": 0
+          },
+          {
+            "id": "R",
+            "position": [
+              616,
+              78
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "support_index": 1
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              14
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "support_index": 2
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              462
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "support_index": 3
+          }
+        ],
+        "route_spec": {
+          "id": "R-to-L",
+          "from_port": "R",
+          "to_port": "L",
+          "role": "main",
+          "via_ports": [],
+          "require_bell": false
+        },
+        "required_rewards": [],
+        "expected_reward": 0,
+        "block_grid": {
+          "schema": "map-notes/block-grid/v1",
+          "size": 128,
+          "origin": [
+            0,
+            0
+          ],
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ]
+        },
+        "approved_implementation": {
+          "reviewId": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "rectangle": {
+            "x": 0,
+            "y": 0,
+            "w": 640,
+            "h": 512
+          },
+          "originalAuthor": "pcg/manual_review/revision061_author_v1.py"
+        },
+        "world_bounds": [
+          -256,
+          -384,
+          1152,
+          1280
+        ],
+        "legal_port_mouths": [
+          {
+            "id": "L",
+            "position": [
+              0,
+              320.0
+            ],
+            "face": "LEFT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "R",
+            "position": [
+              640,
+              64.0
+            ],
+            "face": "RIGHT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              0
+            ],
+            "face": "TOP",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              512
+            ],
+            "face": "BOTTOM",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "layout_title": "S12 · 横台稳住，再择高台去向",
+        "new_idea_scope": {
+          "id": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "familyId": "idea-spec02-s12-001",
+          "formatTemplateOnly": true
+        },
+        "block_ports": {
+          "L": {
+            "id": "L",
+            "position": [
+              0,
+              320
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "stagingPosition": [
+              24,
+              334
+            ],
+            "grid": {
+              "cell": [
+                0,
+                2
+              ],
+              "edge": "W",
+              "stagingPosition": [
+                24,
+                334
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              -32,
+              288,
+              64,
+              64
+            ]
+          },
+          "R": {
+            "id": "R",
+            "position": [
+              640,
+              64
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "stagingPosition": [
+              616,
+              78
+            ],
+            "grid": {
+              "cell": [
+                4,
+                0
+              ],
+              "edge": "E",
+              "stagingPosition": [
+                616,
+                78
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              608,
+              32,
+              64,
+              64
+            ]
+          },
+          "T": {
+            "id": "T",
+            "position": [
+              192,
+              0
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "stagingPosition": [
+              192,
+              14
+            ],
+            "grid": {
+              "cell": [
+                1,
+                0
+              ],
+              "edge": "N",
+              "stagingPosition": [
+                192,
+                14
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              160,
+              -32,
+              64,
+              64
+            ]
+          },
+          "B": {
+            "id": "B",
+            "position": [
+              448,
+              512
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "stagingPosition": [
+              448,
+              462
+            ],
+            "grid": {
+              "cell": [
+                3,
+                3
+              ],
+              "edge": "S",
+              "stagingPosition": [
+                448,
+                462
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              416,
+              480,
+              64,
+              64
+            ]
+          }
+        },
+        "module_sha256": "618af65c9bb98b423821c461431995a2b74c9a66bc2db8fa736c3e6e3799bc2b"
+      },
+      "inputArtifact": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/physics/0012-migration-calibration.input.json",
+        "sha256": "d2f6035d6cc54f0915291a647ad44d957249f4237c1bf6f6479ba0e38f25cfaf"
+      },
+      "evidence": {
+        "batch": "0012-migration-calibration",
+        "index": 4,
+        "output": "physics/0012-migration-calibration.output.json.gz",
+        "raw_output_sha256": "b0018d21290f01375f6d169b9cae5bdb3500a88f0c54303f294745b874c45d97"
+      }
+    },
+    {
+      "route": "R-to-T",
+      "calibration": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/calibration-4.json",
+        "sha256": "f7b340901ee55b5c5ff2cbc63dcb6f8e5e674b325ffd5edaf0077be317e82235"
+      },
+      "failedCheck": {
+        "ok": false,
+        "reasons": [
+          "trigger_timeout/8/carrier_supported"
+        ],
+        "causal": {
+          "approvedDesignVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "outsideFrames": [],
+          "actualHookContacts": [],
+          "airborneEnemyHits": [],
+          "nominalDistinctHitIds": [],
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        },
+        "behavior": {
+          "shots": 2,
+          "jumps": 0,
+          "ticks": 394
+        }
+      },
+      "input": {
+        "id": "approved-r061-final-v1-idea-spec02-s12-001-R-to-T-migration-interior-clean-8",
+        "family": "recoil-chain",
+        "capabilities": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "generation_rule": {
+          "registration_source": "pcg/manual_review/revision061_author_v11.py"
+        },
+        "max_frames": 3600,
+        "trace_all": false,
+        "platforms": [
+          [
+            0,
+            352,
+            112,
+            160
+          ],
+          [
+            560,
+            96,
+            80,
+            416
+          ],
+          [
+            128,
+            32,
+            128,
+            12
+          ],
+          [
+            400,
+            480,
+            112,
+            12
+          ]
+        ],
+        "one_way_platform_indices": [
+          2,
+          3
+        ],
+        "wall_platform_indices": [],
+        "hazards": [],
+        "thorns": [],
+        "saws": [],
+        "moving_platforms": [
+          {
+            "platform_id": "P",
+            "start": [
+              176,
+              336
+            ],
+            "finish": [
+              464,
+              336
+            ],
+            "size": [
+              112,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.33813012872585757,
+            "designState": "FROZEN_EXAMPLE"
+          },
+          {
+            "platform_id": "Q",
+            "start": [
+              368,
+              240
+            ],
+            "finish": [
+              368,
+              112
+            ],
+            "size": [
+              96,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.41693496516429684,
+            "designState": "FROZEN_EXAMPLE"
+          }
+        ],
+        "hooks": [],
+        "latches": [],
+        "enemies": [],
+        "reward_sites": [],
+        "approved_hq_cells": [
+          {
+            "kind": "group_motion",
+            "id": "P-bell",
+            "bell": [
+              144.0,
+              384.0
+            ],
+            "access": [
+              [
+                448.0,
+                432.0
+              ]
+            ],
+            "targets": [
+              "P"
+            ]
+          },
+          {
+            "kind": "group_motion",
+            "id": "Q-bell",
+            "bell": [
+              416.0,
+              272.0
+            ],
+            "access": [
+              [
+                192.0,
+                64.0
+              ],
+              [
+                592.0,
+                32.0
+              ]
+            ],
+            "targets": [
+              "Q"
+            ]
+          }
+        ],
+        "control_plan": [
+          {
+            "op": "settle",
+            "target_x": 584,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                580,
+                75,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "settle",
+            "target_x": 368,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "observed_height",
+              "timeout": 120
+            },
+            "observed_y": {
+              "direction": "gte",
+              "value": 100
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 1
+            },
+            "direction": [
+              1,
+              0
+            ]
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": -40,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_q_exit",
+              "timeout": 1800
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": false,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": false
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "settle",
+            "target_x": 192,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "jump",
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "jump_release",
+            "trigger": {
+              "after": 24
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 1,
+              "state": "r061_top_shot",
+              "timeout": 120
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 192.0,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                188.0,
+                11,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 24
+            }
+          }
+        ],
+        "spawn": [
+          616,
+          78
+        ],
+        "entry_port": [
+          616,
+          78
+        ],
+        "exit_port": [
+          192.0,
+          14
+        ],
+        "goal": [
+          185.0,
+          10,
+          14,
+          8
+        ],
+        "ports": [
+          {
+            "id": "L",
+            "position": [
+              24,
+              334
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "support_index": 0
+          },
+          {
+            "id": "R",
+            "position": [
+              616,
+              78
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "support_index": 1
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              14
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "support_index": 2
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              462
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "support_index": 3
+          }
+        ],
+        "route_spec": {
+          "id": "R-to-T",
+          "from_port": "R",
+          "to_port": "T",
+          "role": "main",
+          "via_ports": [],
+          "require_bell": false
+        },
+        "required_rewards": [],
+        "expected_reward": 0,
+        "block_grid": {
+          "schema": "map-notes/block-grid/v1",
+          "size": 128,
+          "origin": [
+            0,
+            0
+          ],
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ]
+        },
+        "approved_implementation": {
+          "reviewId": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "rectangle": {
+            "x": 0,
+            "y": 0,
+            "w": 640,
+            "h": 512
+          },
+          "originalAuthor": "pcg/manual_review/revision061_author_v1.py"
+        },
+        "world_bounds": [
+          -256,
+          -384,
+          1152,
+          1280
+        ],
+        "legal_port_mouths": [
+          {
+            "id": "L",
+            "position": [
+              0,
+              320.0
+            ],
+            "face": "LEFT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "R",
+            "position": [
+              640,
+              64.0
+            ],
+            "face": "RIGHT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              0
+            ],
+            "face": "TOP",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              512
+            ],
+            "face": "BOTTOM",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "layout_title": "S12 · 横台稳住，再择高台去向",
+        "new_idea_scope": {
+          "id": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "familyId": "idea-spec02-s12-001",
+          "formatTemplateOnly": true
+        },
+        "block_ports": {
+          "L": {
+            "id": "L",
+            "position": [
+              0,
+              320
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "stagingPosition": [
+              24,
+              334
+            ],
+            "grid": {
+              "cell": [
+                0,
+                2
+              ],
+              "edge": "W",
+              "stagingPosition": [
+                24,
+                334
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              -32,
+              288,
+              64,
+              64
+            ]
+          },
+          "R": {
+            "id": "R",
+            "position": [
+              640,
+              64
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "stagingPosition": [
+              616,
+              78
+            ],
+            "grid": {
+              "cell": [
+                4,
+                0
+              ],
+              "edge": "E",
+              "stagingPosition": [
+                616,
+                78
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              608,
+              32,
+              64,
+              64
+            ]
+          },
+          "T": {
+            "id": "T",
+            "position": [
+              192,
+              0
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "stagingPosition": [
+              192,
+              14
+            ],
+            "grid": {
+              "cell": [
+                1,
+                0
+              ],
+              "edge": "N",
+              "stagingPosition": [
+                192,
+                14
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              160,
+              -32,
+              64,
+              64
+            ]
+          },
+          "B": {
+            "id": "B",
+            "position": [
+              448,
+              512
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "stagingPosition": [
+              448,
+              462
+            ],
+            "grid": {
+              "cell": [
+                3,
+                3
+              ],
+              "edge": "S",
+              "stagingPosition": [
+                448,
+                462
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              416,
+              480,
+              64,
+              64
+            ]
+          }
+        },
+        "module_sha256": "ab6bb1f641bd51ed66cf2ff16f2a0f20f02dd820a41bd922f7a6ad7172bdb1c4"
+      },
+      "inputArtifact": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/physics/0014-migration-calibration.input.json",
+        "sha256": "21216fc5c46c4cca9d0cba798244c5c649065dfa6d2e494be375a6828f4a0268"
+      },
+      "evidence": {
+        "batch": "0014-migration-calibration",
+        "index": 8,
+        "output": "physics/0014-migration-calibration.output.json.gz",
+        "raw_output_sha256": "54a6ee431a0061ec089457db8dab9152e5eab693747c3b7fad96196bd268bd9e"
+      }
+    },
+    {
+      "route": "R-to-B",
+      "calibration": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/calibration-5.json",
+        "sha256": "9378923db30e2a1cdc425634e88362b3db3ea440e7fa3acc1626b0d3b46186c7"
+      },
+      "failedCheck": {
+        "ok": false,
+        "reasons": [
+          "actual_body_outside_approved_rectangle",
+          "trigger_timeout/8/carrier_supported"
+        ],
+        "causal": {
+          "approvedDesignVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "outsideFrames": [
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209,
+            210,
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218,
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            260,
+            261,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            290,
+            291,
+            292,
+            293,
+            294,
+            295,
+            296,
+            297,
+            298,
+            299,
+            300,
+            301,
+            302,
+            303,
+            304,
+            305,
+            306,
+            307,
+            308,
+            309,
+            310,
+            311,
+            312,
+            313,
+            314,
+            315,
+            316,
+            317,
+            318,
+            319,
+            320,
+            321,
+            322,
+            323,
+            324,
+            325,
+            326,
+            327,
+            328,
+            329,
+            330,
+            331,
+            332,
+            333,
+            334,
+            335,
+            336,
+            337,
+            338,
+            339,
+            340,
+            341,
+            342,
+            343,
+            344,
+            345,
+            346,
+            347,
+            348,
+            349,
+            350,
+            351,
+            352,
+            353,
+            354,
+            355,
+            356,
+            357,
+            358,
+            359,
+            360,
+            361,
+            362,
+            363,
+            364,
+            365,
+            366,
+            367,
+            368,
+            369,
+            370,
+            371,
+            372,
+            373,
+            374,
+            375,
+            376,
+            377,
+            378,
+            379,
+            380,
+            381,
+            382,
+            383,
+            384,
+            385,
+            386,
+            387,
+            388,
+            389,
+            390,
+            391,
+            392,
+            393
+          ],
+          "actualHookContacts": [],
+          "airborneEnemyHits": [],
+          "nominalDistinctHitIds": [],
+          "observer_interpretation": {
+            "raw_air_jump_events": 0,
+            "recognized_ground_buffer_frames": [],
+            "remaining_unclassified_air_jump_events": 0,
+            "raw_result_changed": false,
+            "physics_changed": false
+          },
+          "paired_gate_invariant_violations": []
+        },
+        "behavior": {
+          "shots": 2,
+          "jumps": 0,
+          "ticks": 394
+        }
+      },
+      "input": {
+        "id": "approved-r061-final-v1-idea-spec02-s12-001-R-to-B-migration-interior-clean-5",
+        "family": "recoil-chain",
+        "capabilities": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "generation_rule": {
+          "registration_source": "pcg/manual_review/revision061_author_v11.py"
+        },
+        "max_frames": 3600,
+        "trace_all": false,
+        "platforms": [
+          [
+            0,
+            352,
+            112,
+            160
+          ],
+          [
+            560,
+            96,
+            80,
+            416
+          ],
+          [
+            128,
+            32,
+            128,
+            12
+          ],
+          [
+            400,
+            480,
+            112,
+            12
+          ]
+        ],
+        "one_way_platform_indices": [
+          2,
+          3
+        ],
+        "wall_platform_indices": [],
+        "hazards": [],
+        "thorns": [],
+        "saws": [],
+        "moving_platforms": [
+          {
+            "platform_id": "P",
+            "start": [
+              176,
+              336
+            ],
+            "finish": [
+              464,
+              336
+            ],
+            "size": [
+              112,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.47033939063315033,
+            "designState": "FROZEN_EXAMPLE"
+          },
+          {
+            "platform_id": "Q",
+            "start": [
+              368,
+              240
+            ],
+            "finish": [
+              368,
+              112
+            ],
+            "size": [
+              96,
+              16
+            ],
+            "travel_duration": 3.2,
+            "dwell_duration": 0.4,
+            "initial_phase": 0.4805019169702719,
+            "designState": "FROZEN_EXAMPLE"
+          }
+        ],
+        "hooks": [],
+        "latches": [],
+        "enemies": [],
+        "reward_sites": [],
+        "approved_hq_cells": [
+          {
+            "kind": "group_motion",
+            "id": "P-bell",
+            "bell": [
+              144.0,
+              384.0
+            ],
+            "access": [
+              [
+                448.0,
+                432.0
+              ]
+            ],
+            "targets": [
+              "P"
+            ]
+          },
+          {
+            "kind": "group_motion",
+            "id": "Q-bell",
+            "bell": [
+              416.0,
+              272.0
+            ],
+            "access": [
+              [
+                192.0,
+                64.0
+              ],
+              [
+                592.0,
+                32.0
+              ]
+            ],
+            "targets": [
+              "Q"
+            ]
+          }
+        ],
+        "control_plan": [
+          {
+            "op": "settle",
+            "target_x": 584,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                580,
+                75,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "settle",
+            "target_x": 368,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "observed_height",
+              "timeout": 120
+            },
+            "observed_y": {
+              "direction": "gte",
+              "value": 100
+            }
+          },
+          {
+            "op": "shoot",
+            "trigger": {
+              "after": 1
+            },
+            "direction": [
+              1,
+              0
+            ]
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": -40,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": true,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": true
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_q_exit",
+              "timeout": 1800
+            }
+          },
+          {
+            "op": "shoot",
+            "group_id": "Q-bell",
+            "running": false,
+            "trigger": {
+              "after": 1,
+              "state": "r061_ring_ready",
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "r061_running",
+              "timeout": 1800
+            },
+            "group_id": "Q-bell",
+            "running": false
+          },
+          {
+            "op": "settle",
+            "target_x": 0,
+            "revision_follow": "Q",
+            "carrier_offset": 0,
+            "ring_follow": false,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "carrier_supported",
+              "timeout": 360
+            },
+            "carrier": "Q"
+          },
+          {
+            "op": "settle",
+            "target_x": 536,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "observed_height",
+              "timeout": 180
+            },
+            "observed_y": {
+              "direction": "gte",
+              "value": 365
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 500,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                496,
+                459,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "settle",
+            "target_x": 448.0,
+            "deadband": 0.6,
+            "source_native_gain": 5.5,
+            "trigger": {
+              "after": 0
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 1,
+              "state": "grounded",
+              "migration_goal": [
+                444.0,
+                459,
+                8,
+                6
+              ],
+              "timeout": 600
+            }
+          },
+          {
+            "op": "wait",
+            "trigger": {
+              "after": 24
+            }
+          }
+        ],
+        "spawn": [
+          616,
+          78
+        ],
+        "entry_port": [
+          616,
+          78
+        ],
+        "exit_port": [
+          448.0,
+          462
+        ],
+        "goal": [
+          441.0,
+          458,
+          14,
+          8
+        ],
+        "ports": [
+          {
+            "id": "L",
+            "position": [
+              24,
+              334
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "support_index": 0
+          },
+          {
+            "id": "R",
+            "position": [
+              616,
+              78
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "support_index": 1
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              14
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "support_index": 2
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              462
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "support_index": 3
+          }
+        ],
+        "route_spec": {
+          "id": "R-to-B",
+          "from_port": "R",
+          "to_port": "B",
+          "role": "main",
+          "via_ports": [],
+          "require_bell": false
+        },
+        "required_rewards": [],
+        "expected_reward": 0,
+        "block_grid": {
+          "schema": "map-notes/block-grid/v1",
+          "size": 128,
+          "origin": [
+            0,
+            0
+          ],
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ]
+        },
+        "approved_implementation": {
+          "reviewId": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "rectangle": {
+            "x": 0,
+            "y": 0,
+            "w": 640,
+            "h": 512
+          },
+          "originalAuthor": "pcg/manual_review/revision061_author_v1.py"
+        },
+        "world_bounds": [
+          -256,
+          -384,
+          1152,
+          1280
+        ],
+        "legal_port_mouths": [
+          {
+            "id": "L",
+            "position": [
+              0,
+              320.0
+            ],
+            "face": "LEFT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "R",
+            "position": [
+              640,
+              64.0
+            ],
+            "face": "RIGHT",
+            "surface": "ROCK",
+            "permission": "INOUT"
+          },
+          {
+            "id": "T",
+            "position": [
+              192.0,
+              0
+            ],
+            "face": "TOP",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          },
+          {
+            "id": "B",
+            "position": [
+              448.0,
+              512
+            ],
+            "face": "BOTTOM",
+            "surface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
+          }
+        ],
+        "layout_title": "S12 · 横台稳住，再择高台去向",
+        "new_idea_scope": {
+          "id": "idea-spec02-s12-001",
+          "designVersion": "sha256:d5a7213383ec21e98acab5299550d34c00165a09d67774b7919d84b54ed5e113",
+          "familyId": "idea-spec02-s12-001",
+          "formatTemplateOnly": true
+        },
+        "block_ports": {
+          "L": {
+            "id": "L",
+            "position": [
+              0,
+              320
+            ],
+            "normal": [
+              -1,
+              0
+            ],
+            "stagingPosition": [
+              24,
+              334
+            ],
+            "grid": {
+              "cell": [
+                0,
+                2
+              ],
+              "edge": "W",
+              "stagingPosition": [
+                24,
+                334
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              -32,
+              288,
+              64,
+              64
+            ]
+          },
+          "R": {
+            "id": "R",
+            "position": [
+              640,
+              64
+            ],
+            "normal": [
+              1,
+              0
+            ],
+            "stagingPosition": [
+              616,
+              78
+            ],
+            "grid": {
+              "cell": [
+                4,
+                0
+              ],
+              "edge": "E",
+              "stagingPosition": [
+                616,
+                78
+              ],
+              "profile": "ground64/v1"
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              608,
+              32,
+              64,
+              64
+            ]
+          },
+          "T": {
+            "id": "T",
+            "position": [
+              192,
+              0
+            ],
+            "normal": [
+              0,
+              -1
+            ],
+            "stagingPosition": [
+              192,
+              14
+            ],
+            "grid": {
+              "cell": [
+                1,
+                0
+              ],
+              "edge": "N",
+              "stagingPosition": [
+                192,
+                14
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              160,
+              -32,
+              64,
+              64
+            ]
+          },
+          "B": {
+            "id": "B",
+            "position": [
+              448,
+              512
+            ],
+            "normal": [
+              0,
+              1
+            ],
+            "stagingPosition": [
+              448,
+              462
+            ],
+            "grid": {
+              "cell": [
+                3,
+                3
+              ],
+              "edge": "S",
+              "stagingPosition": [
+                448,
+                462
+              ]
+            },
+            "crossing_offset": [
+              0,
+              0
+            ],
+            "aperture": [
+              416,
+              480,
+              64,
+              64
+            ]
+          }
+        },
+        "module_sha256": "088c95e0d2842d799eceff671491cf34277a3945cf9052565adbd88d9d5b6218"
+      },
+      "inputArtifact": {
+        "path": "pcg/results/approved-r061-s12-qualified-final-v1/physics/0016-migration-calibration.input.json",
+        "sha256": "1a09bdd5c98584fb02dfbb4711f4c8f98d1e31455f60453daa65789115706c75"
+      },
+      "evidence": {
+        "batch": "0016-migration-calibration",
+        "index": 5,
+        "output": "physics/0016-migration-calibration.output.json.gz",
+        "raw_output_sha256": "8c8b1f4142f7cb56afa0645180e47fc88ce692b5c939b65e6dbba3a5cdb730bf"
+      }
+    }
+  ],
+  "assessment": "Control/driver failure observed; no proven geometric impossibility.",
+  "proposal": "Height-driven right boarding recoil above highest Q; safe top takeoff from Q-left; preserve independent clocks."
+}

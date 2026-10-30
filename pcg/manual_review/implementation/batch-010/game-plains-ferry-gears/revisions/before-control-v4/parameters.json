@@ -1,0 +1,1051 @@
+{
+  "designVersion": "sha256:f63f5498563aa4befc67726033aac3a6df4b8b4b5f3eb44d1c2d56404783960c",
+  "content": {
+    "platforms": [
+      [
+        0,
+        950,
+        180,
+        40
+      ],
+      [
+        620,
+        700,
+        120,
+        40
+      ],
+      [
+        320,
+        398,
+        640,
+        40
+      ],
+      [
+        960,
+        438,
+        64,
+        24
+      ]
+    ],
+    "one_way_platform_indices": [
+      2
+    ],
+    "wall_platform_indices": [],
+    "hazards": [
+      [
+        44,
+        1000,
+        912,
+        40
+      ]
+    ],
+    "thorns": [],
+    "saws": [
+      {
+        "source_id": "relay_gear",
+        "origin": [
+          512.0,
+          710.0
+        ],
+        "travel": [
+          0.0,
+          240.0
+        ],
+        "radius": 20.0,
+        "period": 4.8,
+        "initial_phase": 0,
+        "damage": 1,
+        "contact_interval": 0.7
+      }
+    ],
+    "moving_platforms": [
+      {
+        "platform_id": "ascent_0",
+        "start": [
+          250,
+          932
+        ],
+        "finish": [
+          550,
+          792
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 1.5,
+        "initial_phase": 0
+      },
+      {
+        "platform_id": "ascent_1",
+        "start": [
+          830,
+          630
+        ],
+        "finish": [
+          500,
+          490
+        ],
+        "size": [
+          120,
+          24
+        ],
+        "travel_duration": 3,
+        "dwell_duration": 1.5,
+        "initial_phase": 0
+      }
+    ],
+    "hooks": [],
+    "latches": [],
+    "enemies": [],
+    "reward_sites": []
+  },
+  "bindings": [],
+  "controls": [
+    {
+      "route": {
+        "id": "entry-to-exit",
+        "from_port": "entry",
+        "to_port": "exit",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              145,
+              928.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 250.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_0",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_0"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              675,
+              678.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 710,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              705,
+              678.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          },
+          "requires_saw_phase": {
+            "kind": "saw_phase",
+            "id": "relay_gear",
+            "window": [
+              0.15,
+              0.35
+            ]
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 830.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_1",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_1"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 390,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              385,
+              376.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 1000,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              995,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    },
+    {
+      "route": {
+        "id": "entry-to-C",
+        "from_port": "entry",
+        "to_port": "C",
+        "role": "main",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 150,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              145,
+              928.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 250.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_0",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_0"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_0",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 680,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              675,
+              678.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 710,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 0,
+            "state": "grounded",
+            "migration_goal": [
+              705,
+              678.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0,
+                0.1
+              ]
+            },
+            "timeout": 900
+          },
+          "requires_saw_phase": {
+            "kind": "saw_phase",
+            "id": "relay_gear",
+            "window": [
+              0.15,
+              0.35
+            ]
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 830.0,
+          "source_native_gain": 5.5,
+          "source_carrier_id": "ascent_1",
+          "deadband": 0.6
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "dynamic": {
+              "kind": "on_platform",
+              "id": "ascent_1"
+            },
+            "timeout": 180
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "dynamic": {
+              "kind": "platform_phase",
+              "id": "ascent_1",
+              "window": [
+                0.5,
+                0.6
+              ]
+            },
+            "timeout": 900
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 3
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 390,
+          "deadband": 0.6,
+          "source_native_gain": 5.5
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 6,
+            "state": "grounded",
+            "migration_goal": [
+              385,
+              376.0,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 576,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              571,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    },
+    {
+      "route": {
+        "id": "exit-to-entry",
+        "from_port": "exit",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 976,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              971,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 380,
+          "direction": [
+            1,
+            0
+          ],
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 900,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              895,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              19,
+              928,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    },
+    {
+      "route": {
+        "id": "exit-to-C",
+        "from_port": "exit",
+        "to_port": "C",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 976,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              971,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "axis",
+          "trigger": {
+            "after": 0
+          },
+          "value": 0
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "shoot",
+          "height_threshold": 380,
+          "direction": [
+            1,
+            0
+          ],
+          "trigger": {
+            "state": "height_at_most",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "trigger": {
+            "after": 0
+          },
+          "target_x": 900,
+          "deadband": 4
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              895,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 576,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              571,
+              376,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    },
+    {
+      "route": {
+        "id": "C-to-entry",
+        "from_port": "C",
+        "to_port": "entry",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              19,
+              928,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    },
+    {
+      "route": {
+        "id": "C-to-exit",
+        "from_port": "C",
+        "to_port": "exit",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 1000,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "state": "grounded",
+            "migration_goal": [
+              995,
+              416,
+              10,
+              8
+            ],
+            "timeout": 480
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "max_frames": 3000
+    }
+  ],
+  "consumerBindings": {},
+  "stagingBoundToCompleteNativeSupport": true
+}

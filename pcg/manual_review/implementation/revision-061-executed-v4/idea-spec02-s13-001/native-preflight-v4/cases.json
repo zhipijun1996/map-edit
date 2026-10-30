@@ -1,0 +1,1118 @@
+{
+  "cases": [
+    {
+      "id": "approved-r061-s13-L-to-L-migration-clean-v4",
+      "family": "recoil-chain",
+      "capabilities": [
+        "move",
+        "jump",
+        "shot_recoil"
+      ],
+      "generation_rule": {
+        "registration_source": "pcg/manual_review/revision061_author_v4.py"
+      },
+      "max_frames": 3600,
+      "trace_all": false,
+      "platforms": [
+        [
+          0,
+          224,
+          80,
+          32
+        ],
+        [
+          96,
+          48,
+          160,
+          16
+        ],
+        [
+          288,
+          160,
+          96,
+          12
+        ]
+      ],
+      "one_way_platform_indices": [
+        2
+      ],
+      "wall_platform_indices": [],
+      "hazards": [],
+      "thorns": [
+        {
+          "surface_id": "eave-under-thorns",
+          "platform_index": 1,
+          "face": "bottom",
+          "start_offset": 0,
+          "length": 160,
+          "depth": 20
+        },
+        {
+          "surface_id": "eave-top-thorns",
+          "platform_index": 1,
+          "face": "top",
+          "start_offset": 0,
+          "length": 160,
+          "depth": 20
+        }
+      ],
+      "saws": [
+        {
+          "source_id": "pit-saw",
+          "origin": [
+            192,
+            200
+          ],
+          "travel": [
+            72,
+            0
+          ],
+          "radius": 20.0,
+          "period": 3.2,
+          "initial_phase": 0.25
+        }
+      ],
+      "moving_platforms": [],
+      "hooks": [],
+      "latches": [],
+      "enemies": [],
+      "reward_sites": [
+        {
+          "id": "reward",
+          "position": [
+            336,
+            148
+          ],
+          "region": [
+            296,
+            120,
+            80,
+            56
+          ],
+          "amount": 4
+        }
+      ],
+      "approved_hq_cells": [],
+      "control_plan": [
+        {
+          "op": "settle",
+          "target_x": 68,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              64,
+              203,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r061_saw_window",
+            "timeout": 1800
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump",
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "jump_release",
+          "trigger": {
+            "after": 4
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 1,
+            "state": "r061_low_cross",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 336,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              332,
+              139,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "r061_saw_window",
+            "timeout": 1800
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 292,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              288,
+              139,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 260,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "airborne",
+            "timeout": 120
+          }
+        },
+        {
+          "op": "shoot",
+          "trigger": {
+            "after": 1
+          },
+          "direction": [
+            0.9995498987,
+            0.03
+          ]
+        },
+        {
+          "op": "settle",
+          "target_x": 24,
+          "deadband": 0.6,
+          "source_native_gain": 5.5,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              20,
+              203,
+              8,
+              6
+            ],
+            "timeout": 600
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 24
+          }
+        }
+      ],
+      "spawn": [
+        24,
+        206
+      ],
+      "entry_port": [
+        24,
+        206
+      ],
+      "exit_port": [
+        24,
+        206
+      ],
+      "goal": [
+        17,
+        202,
+        14,
+        8
+      ],
+      "ports": [
+        {
+          "id": "L",
+          "position": [
+            24,
+            206
+          ],
+          "normal": [
+            -1,
+            0
+          ],
+          "support_index": 0
+        }
+      ],
+      "route_spec": {
+        "id": "L-to-L",
+        "from_port": "L",
+        "to_port": "L",
+        "role": "return",
+        "via_ports": [],
+        "require_bell": false
+      },
+      "required_rewards": [
+        "reward"
+      ],
+      "expected_reward": 4,
+      "block_grid": {
+        "schema": "map-notes/block-grid/v1",
+        "size": 128,
+        "origin": [
+          0,
+          0
+        ],
+        "cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "approved_implementation": {
+        "reviewId": "idea-spec02-s13-001",
+        "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        "originalAuthor": "pcg/manual_review/revision061_author_v2.py"
+      },
+      "world_bounds": [
+        -256,
+        -384,
+        896,
+        1024
+      ],
+      "legal_port_mouths": [
+        {
+          "id": "L",
+          "position": [
+            0,
+            192.0
+          ],
+          "face": "LEFT",
+          "surface": "ROCK",
+          "permission": "INOUT"
+        }
+      ],
+      "layout_title": "S07 · 起跳换脚，下一块台才出现",
+      "new_idea_scope": {
+        "id": "idea-spec02-s13-001",
+        "designVersion": "sha256:bea219b40406f2f6baee66350af2f55218e55fefc6ba96abdba298493e386532",
+        "familyId": "idea-spec02-s13-001",
+        "formatTemplateOnly": true
+      },
+      "module_sha256": "a5401af94b4aa04bb542acb536f330478fe63412ed3c4798fcb0ab693b3aa57d",
+      "recorded_frames": [
+        {
+          "frame": 0,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 1,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 2,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 3,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 4,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 5,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 6,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 7,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 8,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 9,
+          "axis": 0.909092296253551,
+          "requested": []
+        },
+        {
+          "frame": 10,
+          "axis": 0.192837801846591,
+          "requested": []
+        },
+        {
+          "frame": 11,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 12,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 13,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 14,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 15,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 16,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 17,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 18,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 19,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 20,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 21,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 22,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 23,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 24,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 25,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 26,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 27,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 28,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 29,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 30,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 4,
+              "type": "jump"
+            }
+          ]
+        },
+        {
+          "frame": 31,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 32,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 33,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 34,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                0.0,
+                0.0
+              ],
+              "plan_index": 5,
+              "type": "jump_release"
+            }
+          ]
+        },
+        {
+          "frame": 35,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 36,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 37,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 38,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 39,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 40,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 41,
+          "axis": 1.0,
+          "requested": [
+            {
+              "direction": [
+                -0.973081707954407,
+                0.230460330843925
+              ],
+              "plan_index": 6,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 42,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 43,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 44,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 45,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 46,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 47,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 48,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 49,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 50,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 51,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 52,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 53,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 54,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 55,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 56,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 57,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 58,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 59,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 60,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 61,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 62,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 63,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 64,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 65,
+          "axis": 1.0,
+          "requested": []
+        },
+        {
+          "frame": 66,
+          "axis": 0.249051180752841,
+          "requested": []
+        },
+        {
+          "frame": 67,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 68,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 69,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 70,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 71,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 72,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 73,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 74,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 75,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 76,
+          "axis": -0.856240012428977,
+          "requested": []
+        },
+        {
+          "frame": 77,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 78,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 79,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 80,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 81,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 82,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 83,
+          "axis": -1.0,
+          "requested": [
+            {
+              "direction": [
+                0.999549925327301,
+                0.0299999993294477
+              ],
+              "plan_index": 14,
+              "type": "shoot_release"
+            }
+          ]
+        },
+        {
+          "frame": 84,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 85,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 86,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 87,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 88,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 89,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 90,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 91,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 92,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 93,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 94,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 95,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 96,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 97,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 98,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 99,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 100,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 101,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 102,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 103,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 104,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 105,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 106,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 107,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 108,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 109,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 110,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 111,
+          "axis": -1.0,
+          "requested": []
+        },
+        {
+          "frame": 112,
+          "axis": -0.436625740744851,
+          "requested": []
+        },
+        {
+          "frame": 113,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 114,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 115,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 116,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 117,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 118,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 119,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 120,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 121,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 122,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 123,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 124,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 125,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 126,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 127,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 128,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 129,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 130,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 131,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 132,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 133,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 134,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 135,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 136,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 137,
+          "axis": 0.0,
+          "requested": []
+        },
+        {
+          "frame": 138,
+          "axis": 0.0,
+          "requested": []
+        }
+      ]
+    }
+  ]
+}

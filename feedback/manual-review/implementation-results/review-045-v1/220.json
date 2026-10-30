@@ -1,0 +1,127 @@
+{
+  "schema": "pcg/approved-design-implementation-result/v10",
+  "reviewId": "220",
+  "moduleId": "junction-j06-0",
+  "design": {
+    "path": "generation/manual-review/designs/batch-028/feedback-002/220.design.json",
+    "sha256": "fb756cbba12385f17429b00819f01a571e8a49a0f9ee127de4d44e3c3935703d"
+  },
+  "designVersion": "sha256:bb1f45bc51e30af2fde130fb2c554949d8a4eca9f86d8444ee0d4d7362a080d0",
+  "authorization": {
+    "path": "feedback/manual-review/implementation-results/review-045-v1/authorization/request.json",
+    "sha256": "0acd8775b5e3cdfa267122684947144d99c66aa41a6cd4c022086117dbf1a687"
+  },
+  "status": "UNQUALIFIED",
+  "implementationVersion": "sha256:c90c7fddf75895e2730a940f274b77f8e057309c8f68e8bf5d53bc876a306412",
+  "module": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/module.mapnote.json",
+    "sha256": "3587b0931c339823e708914d0b0c841b0f744ac492bffdacc541d40803fb139a"
+  },
+  "parameters": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/parameters.json",
+    "sha256": "f67ae1a9e7211af2d18d5325bf3532224cd4c3f05716e1acfe4743fe2c45d3bc"
+  },
+  "physicsCases": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/physics-input-cases.json",
+    "sha256": "c30ae9406190bfe1614265c12226b1f582204b7f3ef03f6527e195c334ca1dce"
+  },
+  "humanPlaytest": "UNKNOWN",
+  "productionApproval": false,
+  "scope": {
+    "orientation": "identity",
+    "mirror": "UNKNOWN",
+    "closureConfigurations": "UNKNOWN",
+    "fullMap": "UNKNOWN"
+  },
+  "formalAttempts": 0,
+  "holdout": "NOT_RUN",
+  "blocker": {
+    "reason": "Four of six final clean and native directions pass; C-to-A/B-to-A time out. Actual airborne hits and shot refunds now work (three diver hits; B route also one ground-enemy hit). The final rise/leftward crossing meets the underside or reaches the A ledge after losing height; no reliable upper landing.",
+    "nextAction": "Next bounded round should align the final recoil outside the solid A platform and reach above its top before moving left. Reuse accepted hit/refund observation; do not grant shots or move enemies. This is a control hypothesis, not proof of impossibility.",
+    "designDefectProven": false
+  },
+  "stoppingRecord": {
+    "path": "feedback/manual-review/implementation-results/review-045-v1/verification/revision-budget.json",
+    "sha256": "fc222954b965b9a756eff2a42498a4ae706cfe61f396f113dff20b81965cc15d"
+  },
+  "budgetExhausted": true,
+  "formalSelectedVersionExhausted": false,
+  "lastControlVersion": "v8",
+  "canonicalDelivery": {
+    "artifact": {
+      "path": "pcg/results/approved-r045-220-partial-delivery-v1/canonical.json",
+      "sha256": "be9e05dbed0a978f263f40878d4334b61e2562b1e7ac559a668087be96ae7f19"
+    },
+    "successfulRoutes": [
+      "A-to-B",
+      "A-to-C",
+      "B-to-C",
+      "C-to-B"
+    ],
+    "failedRoutes": [
+      {
+        "route": "C-to-A",
+        "reasons": [
+          "trigger_timeout/54/grounded"
+        ]
+      },
+      {
+        "route": "B-to-A",
+        "reasons": [
+          "trigger_timeout/30/grounded"
+        ]
+      }
+    ]
+  },
+  "nativePlayable": {
+    "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/playable",
+    "manifest": {
+      "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/playable/godot-package.json",
+      "sha256": "92328e3bdbfd9d573e130521a68d56e936ad0c906da8a819cd4f5e92e06ee491"
+    },
+    "result": {
+      "path": "pcg/manual_review/implementation/review-045-final-v1/junction-j06-0/package-result.json",
+      "sha256": "0fb9196d0dd1f659e5c9f994067593309b31bdb1df4c59513db0ca7ce2088697"
+    },
+    "passed": true,
+    "compiled": true,
+    "replayCases": 4,
+    "wholeModuleQualification": "UNQUALIFIED",
+    "manualCandidateOnly": false
+  },
+  "videos": [
+    {
+      "routeId": "A-to-C",
+      "manifest": {
+        "path": "feedback/manual-review/implementation-results/review-045-v1/videos/220-A-to-C-v1/manifest.json",
+        "sha256": "f2121fff9ea519974a815324fd63d7b742110ccd3307ebc8dd1c62b542a81eb3"
+      },
+      "movie": {
+        "path": "feedback/manual-review/implementation-results/review-045-v1/videos/220-A-to-C-v1/windgap-junction.mp4",
+        "sha256": "4b2c4c6a8138887738a54663dac089d6a80e1d77cd0e90f2bdcc814772cf6502"
+      },
+      "durationSeconds": 7.666667,
+      "comparison": "FAIL; review-only",
+      "differenceFields": {
+        "workshop": 395
+      },
+      "nativeOutcome": {
+        "frame": 395,
+        "hp": 5.0,
+        "id": "approved-review045-final-v1-220-A-to-C-migration-unqualified-partial-delivery",
+        "position": [
+          871.470764160156,
+          445.92529296875
+        ],
+        "safe": true,
+        "stable_frames": 24,
+        "workshop": {
+          "carriers": [],
+          "coins": 0,
+          "events": []
+        }
+      },
+      "failedRouteFootage": false
+    }
+  ]
+}
