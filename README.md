@@ -18,4 +18,4 @@ python3 -m module_pipeline build --version 1.1.0
 
 本地编辑器：`npm run serve` 后打开 `http://localhost:8080/`；工坊位于 `/generation/module-workshop/`。
 
-交付验收见 [`evidence/module-production/final-package.json`](evidence/module-production/final-package.json)。`releases/` 中的 ZIP、校验和与元数据均为固定版本生成物，不在其中编辑 Module；精确复建请先检出包内 `manifest.json.source.commit`，再执行上述构建命令。
+交付验收见 [`evidence/module-production/final-package-1.1.0.json`](evidence/module-production/final-package-1.1.0.json)。`releases/` 中的 ZIP、校验和与元数据均为固定版本生成物，不在其中编辑 Module；精确复建请先检出包内 `manifest.json.source.commit`，再执行上述构建命令。
