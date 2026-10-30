@@ -50,10 +50,10 @@ The admission JSON is a pointer to actual evidence, not a pass flag:
 Commit source/tool/runtime changes before release. Build with:
 
 ```sh
-python3 -m module_pipeline build --version 1.0.0
+python3 -m module_pipeline build --version 1.1.0
 ```
 
-Use a new SemVer when contents change. This creates `releases/map-edit-modules-1.0.0.zip`, `.zip.sha256` and metadata JSON. It validates source/index/version/dependency integrity, refuses an empty release, installs exact upstream host dependencies, extracts a candidate ZIP into a clean directory, imports/runs the pinned real Godot and audits file reads with `strace`. Matching current acceptance evidence can be reused; `--revalidate` forces fresh acceptance. `--host-source PATH` is only an installation cache: every selected host file is hashed and copied into the clean project. Runtime does not read that cache or the authoring checkout.
+Use a new SemVer when contents change. This creates `releases/map-edit-modules-1.1.0.zip`, `.zip.sha256` and metadata JSON. It validates source/index/version/dependency integrity, refuses an empty release, installs exact upstream host dependencies, extracts a candidate ZIP into a clean directory, imports/runs the pinned real Godot and audits file reads with `strace`. Matching current acceptance evidence can be reused; `--revalidate` forces fresh acceptance. `--host-source PATH` is only an installation cache: every selected host file is hashed and copied into the clean project. Runtime does not read that cache or the authoring checkout.
 
 The manifest has a source commit and checksums for every included file. ZIP member order, timestamps and permissions are fixed. A repeated build of the same committed inputs/version yields identical bytes; an existing version cannot be replaced with different bytes. A release built from a source commit remains reproducible by checking out that commit. Generated evidence/status updates can be committed afterward without retroactively changing the release's source identity.
 
@@ -66,3 +66,9 @@ Editor copies now declare `modify_existing`; `update` resolves their local draft
 The native verifier also checks canonical case Cells against the current compiled source before accepting evidence. Additional test-neighbor platforms must be outside the owned rectangle and explicitly declared in the admission's `testNeighborFixtures`, keyed by route ID. They are carried as route validation requirements and never inserted into a module scene. The three-enemy and relay-lift upper-exit cases retain their respective original external upper-platform conditions; arbitrary upper seams are not certified by those fixtures.
 
 Current input policy templates stay under `validation/cases.json` after an update and are explicitly marked as needing a current-source check. Old frozen qualification working copies are removed from the current source. Editing never silently discards the retained input policy, and a stale template cannot qualify different compiled Cells.
+
+## Required export rules for future production
+
+Every build exports all existing native `reward_sites` verbatim and associates them through the existing Route `resourceProfile.requiredRewards`. Missing route metadata may be projected only from exact qualified canonical inputs, never guessed from geography. Unknown associations produce the generated `reward-association-gaps.json` and an identically generated release sidecar, not deleted modules or rewards. New source revisions must keep these native IDs and declare route requirements in their existing native case fields or Route profile.
+
+Do not add `allow_mirror_x`, a mirror eligibility blacklist, mirrored module copies, or a full-Port connection whitelist. `runtime.configurations` / exported `configurations` retain tested witness scope only. map-gen mirrors complete content/Ports/Routes, chooses Port subsets, installs unused-Port gear closures and checks remaining routes. Preserve UNKNOWN for untested placements. This does not loosen physical evidence. Use `purpose` for explicit Boss purpose; derive `entryPortIds` from directed route starts and initial ingress permissions for every Module, without a second Boss route contract. These rules are enforced by the exporter, package verifier and focused production tests.

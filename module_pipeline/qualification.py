@@ -121,9 +121,8 @@ def admit(identifier, evidence):
             portableValidation=None,
             configurations=[
                 dict(
-                    id="original-all-ports",
+                    id="base",
                     orientation="identity",
-                    mirrorX=False,
                     connectedPortIds=[
                         p["id"] for p in doc["generationContract"]["ports"]
                     ],

@@ -166,7 +166,10 @@ def main():
                     shutil.copyfile(temp_out, out)
                 checksum = out.with_suffix(out.suffix + ".sha256")
                 checksum.write_text(digest + "  " + out.name + "\n")
+                audit_out = out.with_name(out.stem + "-reward-association-gaps.json")
+                shutil.copyfile(final / "reward-association-gaps.json", audit_out)
                 result = dict(
+                    rewardAssociationGaps=audit_out.name,
                     package=(
                         str(out.relative_to(l.ROOT))
                         if out.is_relative_to(l.ROOT)

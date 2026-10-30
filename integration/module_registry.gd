@@ -1,4 +1,5 @@
 extends RefCounted
+## Loads authored base scenes. map-gen materializes mirrored content and gear closures.
 ## The host owns the existing PlayerController, wallet, lifetime and damage policy.
 var catalog: Dictionary
 var package_root: String
@@ -12,7 +13,7 @@ func open(root_path: String) -> Dictionary:
  catalog=parsed
  return {"ok":true,"modules":catalog.modules.size()}
 
-func instantiate_module(module_id: String, instance_id: String, origin_blocks: Vector2i, parent: Node2D, player: PlayerController, services: Dictionary, configuration: String="original-all-ports") -> Dictionary:
+func instantiate_module(module_id: String, instance_id: String, origin_blocks: Vector2i, parent: Node2D, player: PlayerController, services: Dictionary, configuration: String="base") -> Dictionary:
  if instance_id.is_empty() or instances.has(instance_id):return {"ok":false,"reason":"empty_or_duplicate_instance_id"}
  var entry: Dictionary={}
  for candidate: Dictionary in catalog.get("modules",[]):
@@ -20,7 +21,7 @@ func instantiate_module(module_id: String, instance_id: String, origin_blocks: V
  if entry.is_empty():return {"ok":false,"reason":"module_not_in_package"}
  if not services.has_all(["policy","lifetime","wallet"]):return {"ok":false,"reason":"explicit_host_services_required"}
  if not parent.global_transform.x.is_equal_approx(Vector2.RIGHT) or not parent.global_transform.y.is_equal_approx(Vector2.DOWN):return {"ok":false,"reason":"uncertified_parent_transform"}
- if not entry.configurations.any(func(c: Dictionary) -> bool:return c.id==configuration):return {"ok":false,"reason":"uncertified_configuration"}
+ if configuration!="base":return {"ok":false,"reason":"unknown_interface_layout"}
  var path:=package_root.path_join(entry.scene)
  var packed: PackedScene=load(path)
  if packed==null:return {"ok":false,"reason":"scene_load_failed"}

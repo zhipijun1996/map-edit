@@ -57,7 +57,7 @@ func run() -> void:
     var actual: Dictionary=instance.world_port(str(port.id))
     check(actual.get("ok",false) and actual.position.is_equal_approx(expected),entry.id+":world_port:"+str(port.id))
    check(not registry.instantiate_module(entry.id,"acceptance/"+entry.id,origin,world,player,services).get("ok",false),entry.id+":duplicate_instance_accepted")
-   check(not registry.instantiate_module(entry.id,"bad/"+entry.id,origin,world,player,services,"mirror-x").get("ok",false),entry.id+":unqualified_configuration_accepted")
+   check(not registry.instantiate_module(entry.id,"bad/"+entry.id,origin,world,player,services,"unknown-layout").get("ok",false),entry.id+":unknown_layout_accepted")
    var count: int=instance.content.platforms.size()
    for index: int in count:
     var body: StaticBody2D=instance.module.get_node_or_null("Platform"+str(index))

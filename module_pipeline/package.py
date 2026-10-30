@@ -3,6 +3,7 @@
 import hashlib, json, re, shutil, subprocess, zipfile
 from pathlib import Path
 from . import library as l
+from . import exports
 
 FILES = (
     "module.mapnote.json",
@@ -148,9 +149,11 @@ def _stage(target, version, source_commit, ready_only=True):
         b = g["space"]["bounds"]
         block = g["foundation"]["blockSize"]
         ports = g["ports"]
+        compiled = l.read(folder / "compiled-content.json")
+        projected = exports.project_routes(folder, doc, r, compiled)
         routes = []
         for rid in r["qualification"]["routeIds"]:
-            route = next((v for v in g["routes"] if v["id"] == rid), None)
+            route = next((v for v in projected if v["id"] == rid), None)
             if route is None:
                 raise ValueError("qualified_route_missing:" + r["id"] + ":" + rid)
             routes.append(
@@ -178,7 +181,9 @@ def _stage(target, version, source_commit, ready_only=True):
             contentVersion=r["source"]["contentVersion"],
             sourceSha256=r["source"]["sha256"],
             region=r.get("region"),
-            purpose=doc.get("summary", doc.get("title")),
+            purpose=exports.purpose(doc, folder),
+            reward_sites=compiled.get("reward_sites", []),
+            entryPortIds=exports.entry_port_ids(ports, routes),
             blockSize=block,
             sizeBlocks=[
                 g["foundation"]["widthBlocks"],
@@ -189,11 +194,10 @@ def _stage(target, version, source_commit, ready_only=True):
             ports=ports,
             routes=routes,
             capabilityRequirements=doc["capabilityRequirements"],
-            configurations=r["runtime"]["configurations"],
-            allowedTransforms=["identity", "translation"],
-            mirrorX=False,
-            relocations=[],
-            closures=[],
+            configurations=[
+                {k: v for k, v in c.items() if k != "mirrorX"}
+                for c in r["runtime"]["configurations"]
+            ],
             initialConfiguration=dict(
                 nativeTuning=l.read(folder / "compiled-content.json").get(
                     "original_tuning_profile"
@@ -276,6 +280,7 @@ def _stage(target, version, source_commit, ready_only=True):
     readme = l.ROOT / "docs/module-package-consumers.md"
     if readme.exists():
         shutil.copyfile(readme, target / "README.md")
+    l.write(target / "reward-association-gaps.json", exports.reward_gaps(entries))
     l.write(
         target / "catalog.json",
         dict(
@@ -284,7 +289,7 @@ def _stage(target, version, source_commit, ready_only=True):
             modules=entries,
             excluded=excluded,
             counts=dict(delivered=len(entries), excluded=len(excluded)),
-            configurationsPolicy="Explicit original configuration only; every listed Port must be connected. No mirror, relocation, closure or arbitrary subset is licensed. Full-map seams/chaining still require downstream qualification.",
+            configurationsPolicy="configurations describe original certification witnesses, not generation eligibility. map-gen mirrors complete content/Ports/routes, selects any Port subset, adds gear closures to unused Ports and checks remaining routes. New placements remain UNKNOWN until checked; original certification scope is unchanged.",
         ),
     )
     l.write(
@@ -364,6 +369,41 @@ def verify(target):
         if entry["id"] in ids:
             raise ValueError("duplicate_delivery_id:" + entry["id"])
         ids.add(entry["id"])
+        compiled = l.read(target / "modules" / entry["id"] / "compiled-content.json")
+        if any(
+            k in entry
+            for k in [
+                "mirrorX",
+                "allow_mirror_x",
+                "allowedTransforms",
+                "closures",
+                "relocations",
+            ]
+        ):
+            raise ValueError("obsolete_generation_gate:" + entry["id"])
+        if entry.get("reward_sites") != compiled.get("reward_sites", []):
+            raise ValueError("incomplete_reward_sites:" + entry["id"])
+        rewards = entry["reward_sites"]
+        reward_ids = [r["id"] for r in rewards]
+        if len(reward_ids) != len(set(reward_ids)) or any(
+            not all(k in r for k in ["id", "position", "region", "amount"])
+            for r in rewards
+        ):
+            raise ValueError("invalid_reward_sites:" + entry["id"])
+        for route in entry["routes"]:
+            required = route.get("resourceProfile", {}).get("requiredRewards", [])
+            if (
+                not isinstance(required, list)
+                or len(required) != len(set(required))
+                or not set(required) <= set(reward_ids)
+            ):
+                raise ValueError(
+                    "unknown_required_reward:" + entry["id"] + ":" + route["id"]
+                )
+        if entry.get("entryPortIds") != exports.entry_port_ids(
+            entry["ports"], entry["routes"]
+        ):
+            raise ValueError("invalid_entry_ports:" + entry["id"])
         d = l.read(target / "modules" / entry["id"] / "module.mapnote.json")
         m = l.read(target / "modules" / entry["id"] / "godot-package.json")
         if (
@@ -377,6 +417,11 @@ def verify(target):
             != entry["sourceSha256"]
         ):
             raise ValueError("delivery_source_mismatch:" + entry["id"])
+    catalog = l.read(target / "catalog.json")
+    if l.read(target / "reward-association-gaps.json") != exports.reward_gaps(
+        catalog["modules"]
+    ):
+        raise ValueError("stale_reward_association_audit")
     imports = re.compile(
         r"(?:\bextends\s*|\b(?:preload|load)\s*\(\s*)[\"']([^\"']+)[\"']"
     )

@@ -145,6 +145,130 @@ class DeliveryIntegrity(unittest.TestCase):
     def tearDownClass(cls):
         shutil.rmtree(cls.temp)
 
+    def test_rewards_boss_and_missing_associations_are_projected_without_gates(self):
+        from integration.map_gen_reader import (
+            read_library,
+            validate_placement,
+            routes_for_abilities,
+        )
+
+        catalog = l.read(self.bundle / "catalog.json")
+        entries = {e["id"]: e for e in catalog["modules"]}
+        templates = read_library(self.bundle)
+        self.assertEqual(
+            sum(len(e["reward_sites"]) for e in entries.values()),
+            sum(
+                len(
+                    l.read(l.MODULES / mid / "compiled-content.json").get(
+                        "reward_sites", []
+                    )
+                )
+                for mid in entries
+            ),
+        )
+        for mid in ["idea-plains-hq04-001", "idea-spec02-s13-001"]:
+            self.assertEqual(
+                entries[mid]["routes"][0]["resourceProfile"]["requiredRewards"],
+                ["reward"],
+            )
+        arena = entries["game-plains-boss-arena"]
+        self.assertEqual(arena["purpose"], "boss_arena")
+        self.assertEqual(arena["entryPortIds"], ["entry"])
+        self.assertEqual({p["id"] for p in arena["ports"]}, {"entry", "exit"})
+        audit = l.read(self.bundle / "reward-association-gaps.json")
+        for gap in audit["modules"]:
+            self.assertIn(gap["id"], entries)
+            self.assertTrue(entries[gap["id"]]["reward_sites"])
+        for mid, t in templates.items():
+            self.assertNotIn("allow_mirror_x", t)
+            self.assertNotIn("allowed_configurations", t)
+            self.assertNotIn("mirrorX", entries[mid])
+        t = templates["game-boss-approach"]
+        self.assertEqual(
+            validate_placement(t, ["C", "exit"], mirror=True, closures=["entry", "D"]),
+            "base",
+        )
+        with self.assertRaisesRegex(ValueError, "unknown_connected_port"):
+            validate_placement(t, ["not-a-port"])
+        with self.assertRaisesRegex(ValueError, "invalid_unused_port_closure"):
+            validate_placement(t, ["entry"], closures=["entry"])
+        route = next(
+            r for r in t["routes"] if r["from_port"] == "C" and r["to_port"] == "exit"
+        )
+        profile = t["initial_configuration"].get("nativeFixture") or t[
+            "initial_configuration"
+        ].get("nativeTuning")
+        remaining = routes_for_abilities(
+            t,
+            route["required_abilities"],
+            profile.get("id") if profile else None,
+            connected_port_ids=["C", "exit"],
+            mirror=True,
+        )
+        self.assertTrue(remaining)
+        self.assertTrue(all(r["validation"]["status"] == "UNKNOWN" for r in remaining))
+        self.assertTrue(
+            all(
+                r["from_port"] in ["C", "exit"] and r["to_port"] in ["C", "exit"]
+                for r in remaining
+            )
+        )
+        self.assertEqual(route["validation"]["status"], "passed_scoped")
+
+    def test_unknown_reward_association_is_reported_and_not_invented(self):
+        import copy
+        from module_pipeline import exports
+
+        f = l.MODULES / "idea-plains-hq04-001"
+        with tempfile.TemporaryDirectory(dir=self.temp) as name:
+            folder = Path(name)
+            cases = copy.deepcopy(l.read(f / "validation/cases.json"))
+            for case in cases["cases"]:
+                case.pop("required_rewards", None)
+            l.write(folder / "validation/cases.json", cases)
+            doc = l.read(f / "module.mapnote.json")
+            routes = exports.project_routes(
+                folder,
+                doc,
+                l.read(f / "record.json"),
+                l.read(f / "compiled-content.json"),
+            )
+            self.assertNotIn("requiredRewards", routes[0]["resourceProfile"])
+            self.assertEqual(len(routes), len(doc["generationContract"]["routes"]))
+
+    def test_reward_loss_and_generation_gate_fail_even_with_rehashed_catalog(self):
+        catalog = self.bundle / "catalog.json"
+        manifest = self.bundle / "manifest.json"
+        raw = catalog.read_bytes()
+        saved = manifest.read_bytes()
+        for mode, message in [
+            ("reward", "incomplete_reward_sites"),
+            ("gate", "obsolete_generation_gate"),
+            ("reference", "unknown_required_reward"),
+        ]:
+            data = json.loads(raw)
+            entry = next(
+                e for e in data["modules"] if e["id"] == "idea-plains-hq04-001"
+            )
+            if mode == "reward":
+                entry["reward_sites"] = []
+            elif mode == "gate":
+                entry["mirrorX"] = False
+            else:
+                entry["routes"][0]["resourceProfile"]["requiredRewards"] = [
+                    "invented-reward"
+                ]
+            l.write(catalog, data)
+            m = json.loads(saved)
+            m["files"]["catalog.json"] = l.sha(catalog)
+            l.write(manifest, m)
+            try:
+                with self.assertRaisesRegex(ValueError, message):
+                    package.verify(self.bundle)
+            finally:
+                catalog.write_bytes(raw)
+                manifest.write_bytes(saved)
+
     def test_archive_is_byte_reproducible(self):
         self.assertEqual(
             package.archive(self.bundle, self.temp / "a.zip"),
