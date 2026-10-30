@@ -14,8 +14,8 @@
   "source": {
     "kind": "module",
     "file": "module.mapnote.json",
-    "sha256": "fb63b6aa4f5b521ac87f2bda1fcad6ae42d3aecb66845a6c3225e764423361cc",
-    "contentVersion": "sha256:c4082bd0cc390677197149e5dca2be2ee3d52d84f86f36877a3af2edb9b604cb"
+    "sha256": "f3c5ff444e2210ce5d56385b47c0ddd39ca4b7b9ee8372650878377dc0988e0a",
+    "contentVersion": "sha256:71b46e7506b58131fff70bd885f78c600d9c8c8426376ae3777dd4579bddd240"
   },
   "aliases": [],
   "qualification": {
@@ -56,6 +56,55 @@
           12
         ]
       ]
+    },
+    "supplementaryEvidence": [
+      {
+        "kind": "actual_reward_claim_and_full_body_exit",
+        "routeId": "A-to-B",
+        "report": {
+          "path": "evidence/module-production/reward-claim-validation.json",
+          "sha256": "baf28c8f04639b829b7ecb1172a55f5600f9fa0dc8b388e49da19175434961d8",
+          "archive": {
+            "manifest": "pcg/archives/reward-claim-validation-v1/manifest.json",
+            "manifestSha256": "8bff6f98d4e51666cad0c5dd990388b9e377e5e15d0b62aa9195424dafe87cbb",
+            "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f",
+            "verifiedFiles": 9193,
+            "parts": [
+              {
+                "file": "reward-claim-validation-v1.zip.part001",
+                "bytes": 8709689,
+                "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f"
+              }
+            ]
+          }
+        },
+        "attempts": 3,
+        "scope": "Nominal plus two fixed input perturbations; actual same-world claim, wallet and subsequent full-body Port exit. Not new independent holdout, phase coverage, enemy replacement or rarity validation."
+      }
+    ],
+    "metadataEquivalence": {
+      "previousContentVersion": "sha256:c4082bd0cc390677197149e5dca2be2ee3d52d84f86f36877a3af2edb9b604cb",
+      "previousSourceSha256": "fb63b6aa4f5b521ac87f2bda1fcad6ae42d3aecb66845a6c3225e764423361cc",
+      "currentContentVersion": "sha256:71b46e7506b58131fff70bd885f78c600d9c8c8426376ae3777dd4579bddd240",
+      "currentSourceSha256": "f3c5ff444e2210ce5d56385b47c0ddd39ca4b7b9ee8372650878377dc0988e0a",
+      "rule": "Only Route.resourceProfile.requiredRewards added from actual claim/exit evidence. Exact native Cells, object properties, Ports, capabilities and physical signature unchanged. Lift test strategy additionally walks into the existing claim region; no runtime gameplay edit.",
+      "evidence": {
+        "path": "evidence/module-production/reward-claim-validation.json",
+        "sha256": "baf28c8f04639b829b7ecb1172a55f5600f9fa0dc8b388e49da19175434961d8",
+        "archive": {
+          "manifest": "pcg/archives/reward-claim-validation-v1/manifest.json",
+          "manifestSha256": "8bff6f98d4e51666cad0c5dd990388b9e377e5e15d0b62aa9195424dafe87cbb",
+          "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f",
+          "verifiedFiles": 9193,
+          "parts": [
+            {
+              "file": "reward-claim-validation-v1.zip.part001",
+              "bytes": 8709689,
+              "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f"
+            }
+          ]
+        }
+      }
     }
   },
   "runtime": {
@@ -85,13 +134,13 @@
       "closures": "UNKNOWN"
     },
     "physicalSignature": "a4a971f437ab1733f1c042759bdd10d5befcb9ba14366981e582382fc9234e30",
-    "compiledSha256": "6ab2300398f4f5ab8be2e280ff282640206f6bcb931603e0759fc74c6f41e739",
-    "thumbnailSha256": "37fb41cb57ec687ecf5cd751577e50ef26138a4769515d1d72e2e2bd5fed35d5",
+    "compiledSha256": "a30b00f187d5c7004caac0fbcafce90417a4a79e6619bdf347c4a44072c36acd",
+    "thumbnailSha256": "b0751bff29fc3a1286e0c086737718870ef08a6cccb4221fc7a65f2d45cf4827",
     "portableValidation": {
-      "sourceSha256": "fb63b6aa4f5b521ac87f2bda1fcad6ae42d3aecb66845a6c3225e764423361cc",
+      "sourceSha256": "f3c5ff444e2210ce5d56385b47c0ddd39ca4b7b9ee8372650878377dc0988e0a",
       "runtimeFingerprint": "434d22271d75a3a95615209568ab6a648ae9889fa7db9faa387dbd347ab216f9",
       "report": "evidence/module-production/portable-runtime.json",
-      "reportSha256": "0719f9cd6f7cd9ff05f9b55fc7381f94efe507e3b16d61aa085663a888912b90",
+      "reportSha256": "c621c4db8f1f143f5ee32d30d4f31988a2aa3536805983d4c6cc5c1c0e611207",
       "engineSha256": "8d106cbe6144c2dc7e881d61d2429c1a8a76e6b22ef48bd5e48dcf934953f71e",
       "hostLockSha256": "c2ef367b28ed198aeea119512da9e695186a9597e8e6e5303aae13b4fc387d75",
       "scope": "Scene load, translated Ports, actual collision shapes, external player/resources, real native bell and reward service integration. Route robustness remains bound to prior physical qualification."
@@ -143,6 +192,27 @@
         "entry_port",
         "exit_port"
       ]
+    },
+    "previousCurrent": {
+      "commit": "47aefebe07f4f0e7471f3d1546214502a6b2aade",
+      "path": "modules/idea-0363f85c-16c0-4b5f-b3b0-461335608db7-enemies-3"
+    },
+    "rewardCollectionEvidence": {
+      "path": "evidence/module-production/reward-claim-validation.json",
+      "sha256": "baf28c8f04639b829b7ecb1172a55f5600f9fa0dc8b388e49da19175434961d8",
+      "archive": {
+        "manifest": "pcg/archives/reward-claim-validation-v1/manifest.json",
+        "manifestSha256": "8bff6f98d4e51666cad0c5dd990388b9e377e5e15d0b62aa9195424dafe87cbb",
+        "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f",
+        "verifiedFiles": 9193,
+        "parts": [
+          {
+            "file": "reward-claim-validation-v1.zip.part001",
+            "bytes": 8709689,
+            "sha256": "38c5bcd0f214377c2b003ade4e705dfd8503be0d39460e918fb88d266c247d9f"
+          }
+        ]
+      }
     }
   },
   "gaps": [

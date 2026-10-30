@@ -50,10 +50,10 @@ The admission JSON is a pointer to actual evidence, not a pass flag:
 Commit source/tool/runtime changes before release. Build with:
 
 ```sh
-python3 -m module_pipeline build --version 1.1.0
+python3 -m module_pipeline build --version 1.1.1
 ```
 
-Use a new SemVer when contents change. This creates `releases/map-edit-modules-1.1.0.zip`, `.zip.sha256` and metadata JSON. It validates source/index/version/dependency integrity, refuses an empty release, installs exact upstream host dependencies, extracts a candidate ZIP into a clean directory, imports/runs the pinned real Godot and audits file reads with `strace`. Matching current acceptance evidence can be reused; `--revalidate` forces fresh acceptance. `--host-source PATH` is only an installation cache: every selected host file is hashed and copied into the clean project. Runtime does not read that cache or the authoring checkout.
+Use a new SemVer when contents change. This creates `releases/map-edit-modules-1.1.1.zip`, `.zip.sha256` and metadata JSON. It validates source/index/version/dependency integrity, refuses an empty release, installs exact upstream host dependencies, extracts a candidate ZIP into a clean directory, imports/runs the pinned real Godot and audits file reads with `strace`. Matching current acceptance evidence can be reused; `--revalidate` forces fresh acceptance. `--host-source PATH` is only an installation cache: every selected host file is hashed and copied into the clean project. Runtime does not read that cache or the authoring checkout.
 
 The manifest has a source commit and checksums for every included file. ZIP member order, timestamps and permissions are fixed. A repeated build of the same committed inputs/version yields identical bytes; an existing version cannot be replaced with different bytes. A release built from a source commit remains reproducible by checking out that commit. Generated evidence/status updates can be committed afterward without retroactively changing the release's source identity.
 

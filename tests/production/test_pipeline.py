@@ -30,6 +30,21 @@ class LibraryTransactions(unittest.TestCase):
         self.override.stop()
         self.root_override.stop()
 
+    def test_native_qualifier_import_does_not_restore_retired_map_sources(self):
+        import subprocess
+
+        result = subprocess.run(
+            [
+                "python3",
+                "-c",
+                "from pcg.migration.physics import verify_report; assert callable(verify_report)",
+            ],
+            cwd=self.actual.parent,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_current_index_matches_and_retirement_is_a_tombstone(self):
         index = l.build_catalog(False)
         self.assertEqual(index, l.read(l.MODULES / "catalog.json"))

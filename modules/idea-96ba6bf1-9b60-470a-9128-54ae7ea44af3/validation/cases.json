@@ -504,6 +504,62 @@
           }
         },
         {
+          "op": "settle",
+          "target_x": 220,
+          "deadband": 0.6,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              216,
+              43,
+              8,
+              6
+            ],
+            "timeout": 300
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
+          "op": "settle",
+          "target_x": 192,
+          "deadband": 0.6,
+          "trigger": {
+            "after": 0
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 1,
+            "state": "grounded",
+            "migration_goal": [
+              188,
+              43,
+              8,
+              6
+            ],
+            "timeout": 300
+          }
+        },
+        {
+          "op": "wait",
+          "trigger": {
+            "after": 12
+          }
+        },
+        {
           "op": "shoot",
           "aim_cell": {
             "kind": "bell",
@@ -617,10 +673,15 @@
         "to_port": "B",
         "role": "main",
         "via_ports": [],
-        "require_bell": true
+        "require_bell": true,
+        "required_rewards": [
+          "reward"
+        ]
       },
-      "required_rewards": [],
-      "expected_reward": 0,
+      "required_rewards": [
+        "reward"
+      ],
+      "expected_reward": 4,
       "block_grid": {
         "schema": "map-notes/block-grid/v1",
         "size": 128,

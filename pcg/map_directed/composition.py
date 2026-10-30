@@ -4,7 +4,8 @@ This first consumer supports a three-port fork and a following ascent. It refuse
 other motifs; it is not a general embedding solver or an inferred port adapter.
 """
 import copy
-from .director import REPO
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]
 from pcg.prototype.factory.core.quality import digest
 
 

@@ -272,6 +272,7 @@ def _stage(target, version, source_commit, ready_only=True):
         "portable-runtime.json",
         "current-game-api.json",
         "map-gen-interface.json",
+        "reward-claim-validation.json",
     ]:
         evidence = l.ROOT / "evidence/module-production" / name
         if evidence.exists():
