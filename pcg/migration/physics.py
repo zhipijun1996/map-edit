@@ -157,7 +157,7 @@ def _engine(folder, name, protocol_path, *, extra_sources=()):
     authors = [author_for(case) for case in cases]
     runners = [runner_for(case, author) for case, author in zip(cases, authors)]
     if len(set(map(str, runners))) != 1:raise ValueError('mixed_runtime_sources')
-    sources = [*map(Path,extra_sources), Path(__file__).with_name('revision063_group_sampling_v1.py'), Path(__file__).with_name('revision063_fixture_v2.py'), Path(__file__).with_name('revision063_fixture_lineage_v1.py'), Path(__file__).with_name('revision063_boundary_v1.py'), Path(__file__).with_name('revision063_observer_v1.py'), Path(__file__).with_name('legacy_full_v2_upgrade_v1.py'), Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision062_top_observer_v1.py'), Path(__file__).with_name('revision062_top_reanalysis_v1.py'), Path(__file__).with_name('partial_holdout_exposure_v2.py'), Path(__file__).with_name('partial_holdout_exposure_v1.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
+    sources = [Path(__file__).with_name('revision065_boundary_v1.py'),Path(__file__).with_name('revision065_observer_v1.py'),*map(Path,extra_sources), Path(__file__).with_name('revision063_group_sampling_v1.py'), Path(__file__).with_name('revision063_fixture_v2.py'), Path(__file__).with_name('revision063_fixture_lineage_v1.py'), Path(__file__).with_name('revision063_boundary_v1.py'), Path(__file__).with_name('revision063_observer_v1.py'), Path(__file__).with_name('legacy_full_v2_upgrade_v1.py'), Path(__file__), Path(core.__file__), Path(causal_observer.__file__), Path(causal_observer_v2.__file__), Path(causal_observer_v3.__file__), Path(region_outcomes.__file__), Path(__file__).with_name('review_counter_scope_v1.py'), Path(__file__).with_name('review_counter_scope_v2.py'), Path(__file__).with_name('review_counter_scope_v3.py'), Path(__file__).with_name('review_counter_scope_v4.py'), Path(__file__).with_name('review_counter_scope_v5.py'), Path(__file__).with_name('review_counter_scope_v6.py'), Path(__file__).with_name('review_counter_scope_v7.py'), Path(__file__).with_name('review_counter_scope_v8.py'), Path(__file__).with_name('review_counter_scope_v9.py'), Path(__file__).with_name('review_counter_scope_v11.py'), Path(__file__).with_name('review_boundary_observer_v1.py'), Path(__file__).with_name('review_boundary_repair_v5.py'), Path(__file__).with_name('review_boundary_repair_v6.py'), Path(__file__).with_name('review_boundary_repair_v7.py'), Path(__file__).with_name('ideas_boundary_v1.py'), Path(__file__).with_name('revision053_boundary_v1.py'), Path(__file__).with_name('revision058_boundary_v1.py'), Path(__file__).with_name('revision059_boundary_v1.py'), Path(__file__).with_name('revision059_top_boundary_v1.py'), Path(__file__).with_name('revision059_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v12.py'), Path(__file__).with_name('review_counter_scope_v13.py'), Path(__file__).with_name('revision062_top_observer_v1.py'), Path(__file__).with_name('revision062_top_reanalysis_v1.py'), Path(__file__).with_name('partial_holdout_exposure_v2.py'), Path(__file__).with_name('partial_holdout_exposure_v1.py'), Path(__file__).with_name('review_counter_scope_v14.py'), Path(__file__).with_name('revision060_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_boundary_v1.py'), Path(__file__).with_name('revision061_top_observer_v1.py'), Path(__file__).with_name('review_counter_scope_v15.py'), Path(__file__).with_name('revision060_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v1.py'), Path(__file__).with_name('revision058_top_observer_v2.py'), Path(__file__).with_name('revision058_protocol_completion_v1.py'), Path(__file__).with_name('revision058_protocol_completion_v2.py'), Path(__file__).with_name('review_oneway_fixture_v2.py'), Path(__file__).with_name('review_oneway_fixture_v3.py'), Path(__file__).with_name('review_oneway_fixture_v1.py'), Path(__file__).with_name('air_interfaces_v1.py'), protocol_path, *pool_protocols.source_dependencies(folder, protocol_path), *author_sources(authors, runners[0])]
     engine = WorkshopEngine(core.REPO/'pcg/results'/name, batch_size=24,
         extra_sources=sources, runner_script=runners[0])
     deduplicate_snapshot(engine.out)
@@ -208,6 +208,9 @@ def fresh(case, label):
 
 
 def exterior_floor(case, port):
+    from .revision065_boundary_v1 import neighbor as relay_neighbor
+    relay=relay_neighbor(case,port)
+    if relay is not None:return relay
     from .revision063_boundary_v1 import neighbor as r063_neighbor
     existing=r063_neighbor(case,port)
     if existing is not None:return existing
@@ -310,6 +313,8 @@ def seam_cases(case, doc):
                 new_local(value,port,direction,doc,offset)
                 from .revision063_boundary_v1 import local as r063_local
                 r063_local(value,port,direction,doc,offset)
+                from .revision065_boundary_v1 import local as relay_local
+                relay_local(value,port,direction,doc,offset)
                 from .revision063_fixture_v2 import adjust as adjust_r063_fixture
                 adjust_r063_fixture(value)
                 value['module_sha256'] = module_hash(value)
@@ -386,6 +391,9 @@ def crossing(case, raw):
     if observation is None:
         from .revision063_observer_v1 import observe as r063_observe
         observation=r063_observe(case,raw)
+    if observation is None:
+        from .revision065_observer_v1 import observe as relay_observe
+        observation=relay_observe(case,raw)
     stable=bool(raw.get('ok')) or bool(observation and observation['stableExit'])
     result=dict(passed=bool(stable and healthy and no_reset and inward and outward and ordered and crossing_segments and not violations and outcome),
                 stableExit=stable, bodyPassedBothSides=inward and outward,
@@ -401,6 +409,9 @@ def crossing(case, raw):
 
 
 def continuous_exit(case, doc):
+    from .revision065_boundary_v1 import exit as relay_exit
+    relay=relay_exit(case,doc,__import__(__name__,fromlist=['unused']))
+    if relay is not None:return relay
     from .revision063_boundary_v1 import exit as r063_exit
     special=r063_exit(case,doc,__import__(__name__,fromlist=['unused']))
     if special is not None:return special
@@ -645,6 +656,8 @@ def _counter_judgment(case,raw,author,baseline=None):
     judgment=approved061_exterior(case,raw,check,outcome,judgment,baseline)
     from .revision063_observer_v1 import classify as approved063_exterior
     judgment=approved063_exterior(case,raw,check,outcome,judgment,baseline)
+    from .revision065_observer_v1 import classify as relay_exterior
+    judgment=relay_exterior(case,raw,check,outcome,judgment,baseline)
     return dict(causalCheck=check,externalOutcome=outcome,adjudication=judgment)
 
 
@@ -918,7 +931,7 @@ def _verification_identity(folder, proof):
         for source in [Path(author.__file__), *getattr(author,'SOURCE_DEPENDENCIES',[])]:
             live_sources[str(source)] = core.sha(source)
     return digest(dict(schema='pcg/deep-physics-verification-cache/v1',
-        verifier=core.sha(Path(__file__)), causalObserver=core.sha(Path(causal_observer.__file__)),
+        verifier=core.sha(Path(__file__)),relayBoundary=core.sha(Path(__file__).with_name('revision065_boundary_v1.py')),relayObserver=core.sha(Path(__file__).with_name('revision065_observer_v1.py')), causalObserver=core.sha(Path(causal_observer.__file__)),
         causalObserverV2=core.sha(Path(causal_observer_v2.__file__)), causalObserverV3=core.sha(Path(causal_observer_v3.__file__)), poolProtocolSource=core.sha(Path(pool_protocols.__file__)),
         groupSamplingSource=core.sha(Path(__file__).with_name('revision063_group_sampling_v1.py')), holdoutGuardSource=core.sha(Path(holdout_guard.__file__)), regionOutcomeSource=core.sha(Path(region_outcomes.__file__)),
         reviewCounterScope=core.sha(Path(__file__).with_name('review_counter_scope_v1.py')),
