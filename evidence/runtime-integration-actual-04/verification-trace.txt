@@ -1,0 +1,1001 @@
+===== default-bad-route-reward.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 681, in validate_local_refs
+    set(route["required_reward_ids"]) <= rewards
+AssertionError: ACTUAL_ROUTE_REWARD_REF_MISMATCH
+
+===== default-bad-seal-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 643, in validate_local_refs
+    len(sealed) == len(set(sealed))
+AssertionError: ACTUAL_SEAL_REFS_MISMATCH
+
+===== default-bindings-body.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 809, in bind_host_records
+    half
+AssertionError: ACTUAL_BINDING_BODY_MISMATCH
+
+===== default-bindings-fingerprint.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 746, in bind_host_records
+    resolution["generation_input_fingerprint"] == fingerprint
+AssertionError: ACTUAL_BINDING_FINGERPRINT_MISMATCH
+
+===== default-bindings-internal-edge.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 777, in bind_host_records
+    assert len(actual_edges) == len(expected_edges) and {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_BINDING_TOPOLOGY_MISMATCH
+
+===== default-bindings-origin.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 761, in bind_host_records
+    assert all(
+           ^^^^
+AssertionError: ACTUAL_BINDING_INSTANCE_MISMATCH
+
+===== default-bindings-root.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 781, in bind_host_records
+    assert root in selected, "ACTUAL_BINDING_ROOT_MISMATCH"
+           ^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_BINDING_ROOT_MISMATCH
+
+===== default-bindings-spawn.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 807, in bind_host_records
+    assert all(v > 0 for v in half) and bindings["spawns"]["seam"] == world
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-content-version.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 943, in run_actual_profile
+    index, groups, instances = extract_inventory(
+                               ^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 157, in extract_inventory
+    i["content_version"] == e["contentVersion"]
+AssertionError
+
+===== default-duplicate-connection.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 931, in run_actual_profile
+    assert len({c["id"] for c in reference["connections"]}) == len(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-duplicate-instance.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 930, in run_actual_profile
+    assert len(instances) == len(reference["instances"]), "DUPLICATE_ACTUAL_INSTANCE_ID"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DUPLICATE_ACTUAL_INSTANCE_ID
+
+===== default-empty-moving-array.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 505, in validate_actual_store
+    assert isinstance(after, list) and len(after) == len(before), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('M02', 'moving_platforms', 'ACTUAL_ARRAY_LENGTH_MISMATCH')
+
+===== default-harness-hash.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 709, in bind_host_records
+    sha(report_bytes) == evidence["harness_report_sha256"]
+AssertionError: ACTUAL_HARNESS_REPORT_HASH_MISMATCH
+
+===== default-input-path-escape.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 874, in run_actual_profile
+    assert not relative.is_absolute() and ".." not in relative.parts
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-invalid-permission.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 634, in validate_local_refs
+    assert all(
+           ^^^^
+AssertionError: ACTUAL_PORT_PERMISSION_INVALID
+
+===== default-missing-content-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 485, in validate_actual_store
+    assert set(store) == refs, "ACTUAL_STORE_REFS_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_STORE_REFS_MISMATCH
+
+===== default-missing-endpoint-instance.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 936, in run_actual_profile
+    instance = instances[end["instance_id"]]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'does_not_exist'
+
+===== default-missing-endpoint-port.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 937, in run_actual_profile
+    assert end["port_id"] in {p["id"] for p in instance["ports"]}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-missing-hazards-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== default-missing-input-file.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 877, in run_actual_profile
+    raw = path.read_bytes()
+          ^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/map-edit-actual-profile-input/verified-final/inputs/missing.json'
+
+===== default-missing-input-role.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 866, in run_actual_profile
+    assert set(profile["files"]) == required, "ACTUAL_INPUT_ROLES_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_INPUT_ROLES_MISMATCH
+
+===== default-missing-moving-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== default-missing-port.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 937, in run_actual_profile
+    assert end["port_id"] in {p["id"] for p in instance["ports"]}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-nested-target-array.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 591, in complete_shape
+    assert before == after, (field, "ACTUAL_STABLE_REFERENCE_CHANGED")
+           ^^^^^^^^^^^^^^^
+AssertionError: ('targets', 'ACTUAL_STABLE_REFERENCE_CHANGED')
+
+===== default-nested-vector-shape.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 607, in complete_shape
+    assert isinstance(after, list) and len(before) == len(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_NESTED_ARRAY_MISMATCH
+
+===== default-old-algorithm.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 923, in run_actual_profile
+    assert reference["generator"]["algorithm"] == algorithm
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== default-orphan-content-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 485, in validate_actual_store
+    assert set(store) == refs, "ACTUAL_STORE_REFS_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_STORE_REFS_MISMATCH
+
+===== default-positive.log =====
+{"instances": 46, "uniqueModules": 21, "connections": 58, "groups": {"safe_lesson": 1, "linear_ferry": 22, "native_one_way_carriers": 4, "enemies": 19, "group_motion": 13, "clockwise_ellipse/v1": 1, "timed_gate": 11, "reward_sites": 12, "thorns": 16, "hooks": 1, "original_region_chests": 1, "saws": 7, "reward_pair": 1}, "scope": "inventory_only_not_host_certification"}
+
+===== default-protocol-payload-newline.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 909, in run_actual_profile
+    fingerprint
+AssertionError
+
+===== default-provider-vector.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 695, in bind_host_records
+    assert snapshot["before"][provider_path] == sha(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_PROVIDER_VECTOR_MISMATCH
+
+===== default-provider-version.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 699, in bind_host_records
+    assert version, "ACTUAL_PROVIDER_VERSION_MISSING"
+           ^^^^^^^
+AssertionError: ACTUAL_PROVIDER_VERSION_MISSING
+
+===== default-receipt-head.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 720, in bind_host_records
+    receipt["head"]
+AssertionError: ACTUAL_EXECUTION_COMMIT_MISMATCH
+
+===== default-receipt-mismatch.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 701, in bind_host_records
+    assert receipt == snapshot["native_receipt"], "ACTUAL_EXECUTION_RECEIPT_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_EXECUTION_RECEIPT_MISMATCH
+
+===== default-request-fingerprint.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 909, in run_actual_profile
+    fingerprint
+AssertionError
+
+===== default-result-schema.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 883, in run_actual_profile
+    result["status"] == "PASS" and result["schema"] == "mapgen/generation-result/v1"
+AssertionError
+
+===== default-result-sha.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 878, in run_actual_profile
+    assert sha(raw) == row["sha256"], (role, "ACTUAL_INPUT_SHA_MISMATCH")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('result', 'ACTUAL_INPUT_SHA_MISMATCH')
+
+===== default-snapshot-commit.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 692, in bind_host_records
+    assert snapshot["commit"] == profile["host_commit"], "ACTUAL_HOST_COMMIT_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_HOST_COMMIT_MISMATCH
+
+===== default-snapshot-source-digest.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 717, in bind_host_records
+    sha(vector_bytes) == receipt["source_" + side + "_sha256"]
+AssertionError: ACTUAL_SOURCE_VECTOR_DIGEST_MISMATCH
+
+===== default-snapshot-source-drift.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 693, in bind_host_records
+    assert snapshot["before"] == snapshot["after"], "ACTUAL_SOURCE_VECTOR_CHANGED"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_SOURCE_VECTOR_CHANGED
+
+===== default-source-sha.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 624, in complete_shape
+    assert after in alternatives, (field, "ACTUAL_LITERAL_CHANGED")
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('source_sha256', 'ACTUAL_LITERAL_CHANGED')
+
+===== default-stable-local-id.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 591, in complete_shape
+    assert before == after, (field, "ACTUAL_STABLE_REFERENCE_CHANGED")
+           ^^^^^^^^^^^^^^^
+AssertionError: ('platform_id', 'ACTUAL_STABLE_REFERENCE_CHANGED')
+
+===== default-unknown-content-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== default-unknown-mechanism.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 624, in complete_shape
+    assert after in alternatives, (field, "ACTUAL_LITERAL_CHANGED")
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('kind', 'ACTUAL_LITERAL_CHANGED')
+
+===== default-unknown-module.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 487, in validate_actual_store
+    entry = catalog[instance["module_id"]]
+            ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'missing-module'
+
+===== existing-output.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 870, in run_actual_profile
+    assert not a.out.exists(), "ACTUAL_OUTPUT_MUST_BE_NEW"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_OUTPUT_MUST_BE_NEW
+
+===== gears-bad-route-reward.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 681, in validate_local_refs
+    set(route["required_reward_ids"]) <= rewards
+AssertionError: ACTUAL_ROUTE_REWARD_REF_MISMATCH
+
+===== gears-bad-seal-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 643, in validate_local_refs
+    len(sealed) == len(set(sealed))
+AssertionError: ACTUAL_SEAL_REFS_MISMATCH
+
+===== gears-bindings-body.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 809, in bind_host_records
+    half
+AssertionError: ACTUAL_BINDING_BODY_MISMATCH
+
+===== gears-bindings-fingerprint.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 746, in bind_host_records
+    resolution["generation_input_fingerprint"] == fingerprint
+AssertionError: ACTUAL_BINDING_FINGERPRINT_MISMATCH
+
+===== gears-bindings-internal-edge.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 777, in bind_host_records
+    assert len(actual_edges) == len(expected_edges) and {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_BINDING_TOPOLOGY_MISMATCH
+
+===== gears-bindings-origin.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 761, in bind_host_records
+    assert all(
+           ^^^^
+AssertionError: ACTUAL_BINDING_INSTANCE_MISMATCH
+
+===== gears-bindings-root.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 781, in bind_host_records
+    assert root in selected, "ACTUAL_BINDING_ROOT_MISMATCH"
+           ^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_BINDING_ROOT_MISMATCH
+
+===== gears-bindings-spawn.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 807, in bind_host_records
+    assert all(v > 0 for v in half) and bindings["spawns"]["seam"] == world
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-content-version.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 943, in run_actual_profile
+    index, groups, instances = extract_inventory(
+                               ^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 157, in extract_inventory
+    i["content_version"] == e["contentVersion"]
+AssertionError
+
+===== gears-duplicate-connection.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 931, in run_actual_profile
+    assert len({c["id"] for c in reference["connections"]}) == len(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-duplicate-instance.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 930, in run_actual_profile
+    assert len(instances) == len(reference["instances"]), "DUPLICATE_ACTUAL_INSTANCE_ID"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DUPLICATE_ACTUAL_INSTANCE_ID
+
+===== gears-empty-moving-array.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 505, in validate_actual_store
+    assert isinstance(after, list) and len(after) == len(before), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('M02', 'moving_platforms', 'ACTUAL_ARRAY_LENGTH_MISMATCH')
+
+===== gears-harness-hash.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 709, in bind_host_records
+    sha(report_bytes) == evidence["harness_report_sha256"]
+AssertionError: ACTUAL_HARNESS_REPORT_HASH_MISMATCH
+
+===== gears-input-path-escape.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 874, in run_actual_profile
+    assert not relative.is_absolute() and ".." not in relative.parts
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-invalid-permission.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 559, in validate_actual_store
+    validate_local_refs(instance, content, entry)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 634, in validate_local_refs
+    assert all(
+           ^^^^
+AssertionError: ACTUAL_PORT_PERMISSION_INVALID
+
+===== gears-missing-content-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 485, in validate_actual_store
+    assert set(store) == refs, "ACTUAL_STORE_REFS_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_STORE_REFS_MISMATCH
+
+===== gears-missing-endpoint-instance.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 936, in run_actual_profile
+    instance = instances[end["instance_id"]]
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'does_not_exist'
+
+===== gears-missing-endpoint-port.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 937, in run_actual_profile
+    assert end["port_id"] in {p["id"] for p in instance["ports"]}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-missing-hazards-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== gears-missing-input-file.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 877, in run_actual_profile
+    raw = path.read_bytes()
+          ^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/map-edit-actual-profile-input/verified-final/inputs/missing.json'
+
+===== gears-missing-input-role.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 866, in run_actual_profile
+    assert set(profile["files"]) == required, "ACTUAL_INPUT_ROLES_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_INPUT_ROLES_MISMATCH
+
+===== gears-missing-moving-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== gears-missing-port.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 937, in run_actual_profile
+    assert end["port_id"] in {p["id"] for p in instance["ports"]}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-nested-target-array.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 591, in complete_shape
+    assert before == after, (field, "ACTUAL_STABLE_REFERENCE_CHANGED")
+           ^^^^^^^^^^^^^^^
+AssertionError: ('targets', 'ACTUAL_STABLE_REFERENCE_CHANGED')
+
+===== gears-nested-vector-shape.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 607, in complete_shape
+    assert isinstance(after, list) and len(before) == len(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_NESTED_ARRAY_MISMATCH
+
+===== gears-old-algorithm.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 923, in run_actual_profile
+    assert reference["generator"]["algorithm"] == algorithm
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== gears-orphan-content-ref.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 485, in validate_actual_store
+    assert set(store) == refs, "ACTUAL_STORE_REFS_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_STORE_REFS_MISMATCH
+
+===== gears-positive.log =====
+{"instances": 43, "uniqueModules": 20, "connections": 55, "groups": {"safe_lesson": 1, "linear_ferry": 24, "group_motion": 11, "native_one_way_carriers": 5, "enemies": 21, "timed_gate": 6, "reward_sites": 11, "hooks": 2, "original_region_chests": 2, "clockwise_ellipse/v1": 1, "hazards": 2, "thorns": 16, "saws": 7, "reward_pair": 1}, "scope": "inventory_only_not_host_certification"}
+
+===== gears-protocol-payload-newline.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 909, in run_actual_profile
+    fingerprint
+AssertionError
+
+===== gears-provider-vector.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 695, in bind_host_records
+    assert snapshot["before"][provider_path] == sha(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_PROVIDER_VECTOR_MISMATCH
+
+===== gears-provider-version.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 699, in bind_host_records
+    assert version, "ACTUAL_PROVIDER_VERSION_MISSING"
+           ^^^^^^^
+AssertionError: ACTUAL_PROVIDER_VERSION_MISSING
+
+===== gears-receipt-head.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 720, in bind_host_records
+    receipt["head"]
+AssertionError: ACTUAL_EXECUTION_COMMIT_MISMATCH
+
+===== gears-receipt-mismatch.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 701, in bind_host_records
+    assert receipt == snapshot["native_receipt"], "ACTUAL_EXECUTION_RECEIPT_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_EXECUTION_RECEIPT_MISMATCH
+
+===== gears-request-fingerprint.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 909, in run_actual_profile
+    fingerprint
+AssertionError
+
+===== gears-result-schema.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 883, in run_actual_profile
+    result["status"] == "PASS" and result["schema"] == "mapgen/generation-result/v1"
+AssertionError
+
+===== gears-result-sha.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 878, in run_actual_profile
+    assert sha(raw) == row["sha256"], (role, "ACTUAL_INPUT_SHA_MISMATCH")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('result', 'ACTUAL_INPUT_SHA_MISMATCH')
+
+===== gears-snapshot-commit.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 692, in bind_host_records
+    assert snapshot["commit"] == profile["host_commit"], "ACTUAL_HOST_COMMIT_MISMATCH"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_HOST_COMMIT_MISMATCH
+
+===== gears-snapshot-source-digest.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 717, in bind_host_records
+    sha(vector_bytes) == receipt["source_" + side + "_sha256"]
+AssertionError: ACTUAL_SOURCE_VECTOR_DIGEST_MISMATCH
+
+===== gears-snapshot-source-drift.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 946, in run_actual_profile
+    assessment = bind_host_records(data, profile, reference, store, fingerprint)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 693, in bind_host_records
+    assert snapshot["before"] == snapshot["after"], "ACTUAL_SOURCE_VECTOR_CHANGED"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_SOURCE_VECTOR_CHANGED
+
+===== gears-source-sha.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 624, in complete_shape
+    assert after in alternatives, (field, "ACTUAL_LITERAL_CHANGED")
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('source_sha256', 'ACTUAL_LITERAL_CHANGED')
+
+===== gears-stable-local-id.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 591, in complete_shape
+    assert before == after, (field, "ACTUAL_STABLE_REFERENCE_CHANGED")
+           ^^^^^^^^^^^^^^^
+AssertionError: ('platform_id', 'ACTUAL_STABLE_REFERENCE_CHANGED')
+
+===== gears-unknown-content-field.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 492, in validate_actual_store
+    assert set(content) == fields | {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACTUAL_CONTENT_FIELDS_MISMATCH
+
+===== gears-unknown-mechanism.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 536, in validate_actual_store
+    complete_shape(before, after, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 611, in complete_shape
+    complete_shape(a, b, field)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 605, in complete_shape
+    complete_shape(before[key], after[key], key)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 624, in complete_shape
+    assert after in alternatives, (field, "ACTUAL_LITERAL_CHANGED")
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('kind', 'ACTUAL_LITERAL_CHANGED')
+
+===== gears-unknown-module.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 942, in run_actual_profile
+    validate_actual_store(reference, store, catalog, package)
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 487, in validate_actual_store
+    entry = catalog[instance["module_id"]]
+            ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'missing-module'
+
+===== old-frozen-output.log =====
+Traceback (most recent call last):
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 1024, in <module>
+    run_actual_profile(actual.parse_args())
+  File "/workspace/map-edit-runtime-audit/tools/runtime_audit/check_930001.py", line 869, in run_actual_profile
+    assert output != frozen and frozen not in output.parents, "REFUSE_FROZEN_OUTPUT"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: REFUSE_FROZEN_OUTPUT
