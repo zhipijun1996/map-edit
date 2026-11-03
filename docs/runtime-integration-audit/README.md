@@ -1,5 +1,7 @@
 # 模块包运行时接入准备审计（2026-11-03）
 
+后续：锁定默认930001与PR127精确head的 [机制覆盖与定向交接](930001-handoff/README.md)（沿用本页证据，不扩认证范围）。
+
 ## 基线与结论
 
 - 工作分支：`audit/runtime-integration-readiness-20261103`；起始/比较 main：`9b712fe814ef228b368c0eb9adf660e39de29e37`。最终审计提交由 PR 固定，不把后续分支内容当 main。
