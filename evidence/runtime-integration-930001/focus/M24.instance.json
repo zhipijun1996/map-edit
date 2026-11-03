@@ -1,0 +1,199 @@
+{
+  "id": "M24",
+  "module_id": "idea-orbit-choice-001",
+  "content_version": "sha256:ee5cdeb5d7672eb1c9fbe9c502273114039a346817b8bf5ea7a7dd65045a1317",
+  "role": "traversal",
+  "origin_blocks": [
+    16,
+    -13
+  ],
+  "size_blocks": [
+    5,
+    4
+  ],
+  "transform": {
+    "mirror_x": false,
+    "content_is_materialized": true
+  },
+  "content_ref": "content/M24.json",
+  "ports": [
+    {
+      "id": "A",
+      "face": "LEFT",
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "local_position_pixels": [
+        0.0,
+        320.0
+      ]
+    },
+    {
+      "id": "B",
+      "face": "RIGHT",
+      "surface": "ROCK",
+      "permission": "INOUT",
+      "local_position_pixels": [
+        640.0,
+        192.0
+      ]
+    },
+    {
+      "id": "C",
+      "face": "TOP",
+      "surface": "ONE_WAY_PLATFORM",
+      "permission": "INOUT",
+      "local_position_pixels": [
+        320.0,
+        0.0
+      ]
+    }
+  ],
+  "connected_port_ids": [
+    "A",
+    "B"
+  ],
+  "seals": [
+    {
+      "port_id": "C",
+      "component": "gear-seal/1",
+      "face": "TOP",
+      "rect_pixels": [
+        256.0,
+        0,
+        128,
+        32
+      ],
+      "opening_pixels": 128,
+      "thickness_pixels": 32,
+      "certified": false,
+      "physical_validation": "NOT_RUN"
+    }
+  ],
+  "routes": [
+    {
+      "id": "A-to-B",
+      "from_port": "A",
+      "to_port": "B",
+      "required_reward_ids": [],
+      "required_abilities": [
+        "jump",
+        "shot_recoil"
+      ],
+      "author_path_pixels": [
+        [
+          0,
+          320
+        ],
+        [
+          80,
+          310
+        ],
+        [
+          240,
+          256
+        ],
+        [
+          400,
+          190
+        ],
+        [
+          560,
+          178
+        ],
+        [
+          640,
+          192
+        ]
+      ],
+      "source_validation": {
+        "status": "passed_scoped",
+        "kind": "original_native_route_qualification",
+        "physicalSignature": "005e90355e13aa8558a178a14b05fb1347172ab894b3ab69719603c382100686",
+        "originalReportSha256": "e1cb0456a33d71631c1da16197d2193ec85e0687859c43b47849c8fec892bc4d",
+        "availableAbilities": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "testNeighborFixtures": [],
+        "scope": "Independently initialized local route; arbitrary seams, alternate configurations, minimal capabilities and chaining remain UNKNOWN."
+      },
+      "capability_requirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+      }
+    },
+    {
+      "id": "B-to-A",
+      "from_port": "B",
+      "to_port": "A",
+      "required_reward_ids": [],
+      "required_abilities": [
+        "jump",
+        "shot_recoil"
+      ],
+      "author_path_pixels": [
+        [
+          640,
+          192
+        ],
+        [
+          560,
+          180
+        ],
+        [
+          400,
+          230
+        ],
+        [
+          240,
+          285
+        ],
+        [
+          80,
+          310
+        ],
+        [
+          0,
+          320
+        ]
+      ],
+      "source_validation": {
+        "status": "passed_scoped",
+        "kind": "original_native_route_qualification",
+        "physicalSignature": "005e90355e13aa8558a178a14b05fb1347172ab894b3ab69719603c382100686",
+        "originalReportSha256": "e1cb0456a33d71631c1da16197d2193ec85e0687859c43b47849c8fec892bc4d",
+        "availableAbilities": [
+          "move",
+          "jump",
+          "shot_recoil"
+        ],
+        "testNeighborFixtures": [],
+        "scope": "Independently initialized local route; arbitrary seams, alternate configurations, minimal capabilities and chaining remain UNKNOWN."
+      },
+      "capability_requirements": {
+        "version": 1,
+        "status": "partial",
+        "allOf": [
+          "jump",
+          "shot_recoil"
+        ],
+        "anyOfGroups": [],
+        "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
+      }
+    }
+  ],
+  "required_services": [
+    "policy",
+    "lifetime",
+    "wallet"
+  ],
+  "source_scene_ref": "module_pack/modules/idea-orbit-choice-001/module.tscn",
+  "source_compiled_ref": "module_pack/modules/idea-orbit-choice-001/compiled-content.json"
+}
