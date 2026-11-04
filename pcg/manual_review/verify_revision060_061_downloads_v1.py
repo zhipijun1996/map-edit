@@ -1,3 +1,5 @@
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,importlib,inspect
 from . import verify_revision059_downloads_v1 as prior
 from pcg.migration import core

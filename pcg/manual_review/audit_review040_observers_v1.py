@@ -1,4 +1,6 @@
 """Actual immutable evidence plus rejecting mutations; no new Godot trials."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json
 from pcg.migration import core,physics,review_boundary_observer_v1 as boundary,review_counter_scope_v8 as counter
 from .prepare_review040_v3 import OUT

@@ -1,4 +1,6 @@
 """Classify from existing calibration; do not select or tune on held-out trials."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from .continue_revision062_v1 import rows,label,AUTH
 from .finalize_revision060_v1 import folder_for as f60

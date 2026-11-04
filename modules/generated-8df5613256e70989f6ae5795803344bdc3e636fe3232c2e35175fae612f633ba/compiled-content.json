@@ -1,10 +1,10 @@
 {
   "platforms": [
     [
-      -160,
+      -128,
       502,
-      400,
-      36
+      368,
+      32
     ],
     [
       -60,
@@ -13,21 +13,9 @@
       80
     ],
     [
-      -500,
-      680,
-      1600,
-      60
-    ],
-    [
-      -512,
-      502,
-      376,
-      24
-    ],
-    [
-      -512,
+      -128,
       118,
-      476,
+      92,
       24
     ]
   ],
@@ -54,8 +42,8 @@
     {
       "id": "visible-cache",
       "position": [
-        30,
-        100
+        30.0,
+        100.0
       ],
       "region": [
         0,
@@ -67,22 +55,27 @@
     }
   ],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "5602080323b5ebac9cae7efb5bc0f52533c7ac9f9702dd792acf77e1a523bc9a",
+  "source_sha256": "d883e5153f0e6aa98a5bb2de35a03b53e1493e095d6b1021c904d1b0cc998ab8",
   "stable_id": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/port-entry",
       "position": [
-        -512,
+        -128,
         470
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -160,
+          "y": 438,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/migration-shore-entry",
+        "objectId": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -149,16 +142,17 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry",
+        "exit-to-entry:exit"
       ],
       "stagingPosition": [
-        -488,
+        -104,
         484
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -173,10 +167,17 @@
           "profileId": null
         },
         "BOTTOM_LEFT": {
-          "applicable": false,
-          "allowed": false,
-          "reason": "port_not_on_this_corner_block_outer_face",
-          "profileId": null
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            -64,
+            534
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
         },
         "BOTTOM_RIGHT": {
           "applicable": false,
@@ -184,18 +185,35 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          4
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          -104,
+          484
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/port-exit",
       "position": [
-        -512,
+        -128,
         86
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -160,
+          "y": 54,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
         "objectId": "generated-8df5613256e70989f6ae5795803344bdc3e636fe3232c2e35175fae612f633ba/migration-shore-exit",
@@ -265,16 +283,17 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit",
+        "exit-to-entry:entry"
       ],
       "stagingPosition": [
-        -488,
+        -104,
         100
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -300,21 +319,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          -104,
+          100
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -1200,
-    -1000,
-    4000,
-    2400
+    -128,
+    -106,
+    384,
+    640
   ],
   "entry_port": [
-    80,
-    484
+    -104.0,
+    484.0
   ],
   "exit_port": [
-    30,
-    100
+    -104.0,
+    100.0
   ]
 }

@@ -9,32 +9,8 @@
     [
       600,
       300,
-      200,
+      168,
       32
-    ],
-    [
-      -64,
-      300,
-      64,
-      24
-    ],
-    [
-      -128,
-      300,
-      64,
-      24
-    ],
-    [
-      800,
-      300,
-      32,
-      24
-    ],
-    [
-      832,
-      300,
-      64,
-      24
     ]
   ],
   "one_way_platform_indices": [],
@@ -53,12 +29,12 @@
     {
       "platform_id": "bell_ferry",
       "start": [
-        240,
-        312
+        240.0,
+        312.0
       ],
       "finish": [
-        560,
-        312
+        560.0,
+        312.0
       ],
       "size": [
         120,
@@ -91,27 +67,50 @@
       "actuator_id": "bell_ferry"
     }
   ],
-  "enemies": [],
+  "enemies": [
+    {
+      "id": "design-ferry-guard",
+      "definition": "plains_sentry",
+      "position": [
+        240.0,
+        284.0
+      ],
+      "initial_idle_cooldown": 0
+    }
+  ],
   "reward_sites": [],
+  "refresh_reopenable_latches": [],
+  "refresh_carried_enemies": [
+    {
+      "enemy": "design-ferry-guard",
+      "carrier": "bell_ferry"
+    }
+  ],
+  "refresh_carrier_warmup_frames": 2,
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "b8f99d9c699d740a98f18d88eedab85c0cf3ddd80db44d125a16debb26d81090",
+  "source_sha256": "04c183492b00da0d99197990591fc0c837736b1f6c7f0739fa6114737727510e",
   "stable_id": "game-plains-bell-ferry-control",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-entry",
       "position": [
-        -128,
+        0,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-entry",
+        "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
         "face": "top",
-        "status": "source_derived"
+        "status": "actual_complete_body_native_standing_support"
       },
       "normal": [
         -1,
@@ -176,7 +175,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -200,13 +199,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         282
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -232,23 +231,40 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-exit",
       "position": [
-        896,
+        768,
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 736,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-exit",
+        "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1",
         "face": "top",
-        "status": "source_derived"
+        "status": "actual_complete_body_native_standing_support"
       },
       "normal": [
         1,
@@ -313,7 +329,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -337,13 +353,13 @@
         ]
       },
       "stagingPosition": [
-        872,
+        744,
         282
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -369,21 +385,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          5,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          744,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    -52.0,
-    1280,
-    640.0
+    0,
+    76,
+    768,
+    384
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    872,
-    282
+    744.0,
+    282.0
   ]
 }

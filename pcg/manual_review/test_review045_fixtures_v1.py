@@ -1,4 +1,6 @@
 """Exact-scope fixture guards and append-only lineage regression checks."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics,review_oneway_fixture_v2 as fixture,review_boundary_repair_v7 as lineage
 from .refresh_review045_v1 import rows,OUT

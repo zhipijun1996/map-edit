@@ -1,4 +1,6 @@
 """Observe which side the real air enemy is on; retain the actual refund."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from pcg.prototype.workshop.rules import cmd
 from .prepare_review040_v3 import rows,height,at,end,jump

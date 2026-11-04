@@ -1,40 +1,16 @@
 {
   "platforms": [
     [
-      40,
+      128,
       600,
-      320,
+      232,
       80
     ],
     [
       1000,
       600,
-      240,
+      152,
       80
-    ],
-    [
-      -64,
-      600,
-      104,
-      24
-    ],
-    [
-      -128,
-      600,
-      64,
-      24
-    ],
-    [
-      1240,
-      600,
-      104,
-      24
-    ],
-    [
-      1344,
-      600,
-      64,
-      24
     ]
   ],
   "one_way_platform_indices": [],
@@ -53,12 +29,12 @@
     {
       "platform_id": "ferry",
       "start": [
-        400,
-        572
+        400.0,
+        572.0
       ],
       "finish": [
-        960,
-        572
+        960.0,
+        572.0
       ],
       "size": [
         160,
@@ -71,25 +47,48 @@
   ],
   "hooks": [],
   "latches": [],
-  "enemies": [],
+  "enemies": [
+    {
+      "id": "design-carrier-enemy",
+      "definition": "plains_sentry",
+      "position": [
+        420.0,
+        544.0
+      ],
+      "initial_idle_cooldown": 0
+    }
+  ],
   "reward_sites": [],
+  "refresh_reopenable_latches": [],
+  "refresh_carried_enemies": [
+    {
+      "enemy": "design-carrier-enemy",
+      "carrier": "ferry"
+    }
+  ],
+  "refresh_carrier_warmup_frames": 2,
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "339afa9d8a8104ad273c4f1451b9db7199e35c5ab2105f0d3c01ec2f1cb71636",
+  "source_sha256": "bf4ef47dead116c89bb12471047b764b49d3184d529a4db05abb274fd2355c19",
   "stable_id": "game-moving-transfer",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/port-entry",
       "position": [
-        -128,
+        128,
         568
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 96,
+          "y": 536,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/replay-independent-dock-entry",
+        "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -156,7 +155,8 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry",
+        "exit-to-entry:exit"
       ],
       "sourceRoles": [
         "entry"
@@ -180,22 +180,22 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        152,
         582
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            -64,
+            192,
             504
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -219,21 +219,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          0
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          152,
+          582
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/port-exit",
       "position": [
-        1408,
+        1152,
         568
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 1120,
+          "y": 536,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/replay-independent-dock-exit",
+        "objectId": "generated-b539be712d5641f902dc1f915008f9a0702a9a01ac691e65d30c6572e61eca15/platform-1",
         "face": "top",
         "status": "source_derived"
       },
@@ -300,7 +317,8 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit",
+        "exit-to-entry:entry"
       ],
       "sourceRoles": [
         "exit"
@@ -324,13 +342,13 @@
         ]
       },
       "stagingPosition": [
-        1384,
+        1128,
         582
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -341,11 +359,11 @@
         "TOP_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            1344,
+            1088,
             504
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -363,21 +381,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          7,
+          0
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          1128,
+          582
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    0.0,
-    1792,
-    888.0
+    128,
+    504,
+    1024,
+    256
   ],
   "entry_port": [
-    120.0,
+    152.0,
     582.0
   ],
   "exit_port": [
-    1384,
-    582
+    1128.0,
+    582.0
   ]
 }

@@ -1,4 +1,6 @@
 """Current supplement for the explicitly authorized 157 top expansion."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,subprocess,hashlib,shutil
 from collections import Counter
 from pathlib import Path

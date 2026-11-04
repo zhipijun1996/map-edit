@@ -1,4 +1,6 @@
 """Bind corrected read-only driver; retain every earlier diagnostic."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import sys
 from pcg.migration import core,godot_package
 from .prepare_review029_v1 import AUTH

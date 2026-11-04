@@ -1,4 +1,6 @@
 """Read-only real-proof validation and tamper rejection; never allocate pools."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,json,shutil
 from pathlib import Path
 from pcg.migration import core,physics,holdout_guard,review_metadata_bindings_v1 as labels,review_boundary_repair_v2 as boundary2,review_boundary_repair_v3 as boundary3

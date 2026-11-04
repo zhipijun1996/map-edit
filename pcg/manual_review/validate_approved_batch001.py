@@ -1,4 +1,6 @@
 """Freeze, qualify and package the five approved candidates with existing tools."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import copy
 import gzip

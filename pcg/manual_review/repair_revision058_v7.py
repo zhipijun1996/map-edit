@@ -1,4 +1,6 @@
 """Correct muzzle-origin aiming and original any-side access; real optional enemy clearing."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import sys
 from pcg.migration import core,godot_package
 from .continue_revision058_v1 import rows,label

@@ -1,4 +1,6 @@
 """Real-time native movies for every qualified route; strict failures retained."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import gzip,json
 from pcg.migration import core,physics
 from pcg.prototype.factory.core.quality import module_hash

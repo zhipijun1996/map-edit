@@ -1,4 +1,6 @@
 """Preserve native rejection when an unqualified manual sample takes damage."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics,godot_package
 from .refresh_review045_v1 import rows
 from .finalize_review045_v1 import folder_for

@@ -1,4 +1,6 @@
 """One actual canonical per approved route; diagnostic, never qualification."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 from pathlib import Path
 from pcg.migration import core,physics

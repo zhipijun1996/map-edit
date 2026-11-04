@@ -1,4 +1,6 @@
 """Read-only exact geometry, real causal events, source and revision audit."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import gzip,json,hashlib,subprocess
 from pcg.migration import core,physics
 from .prepare_review031_v1 import OUT,rows

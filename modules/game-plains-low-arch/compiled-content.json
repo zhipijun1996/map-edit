@@ -5,7 +5,11 @@
       300,
       640,
       32
-    ],
+    ]
+  ],
+  "one_way_platform_indices": [],
+  "wall_platform_indices": [],
+  "hazards": [
     [
       200,
       160,
@@ -13,9 +17,6 @@
       18
     ]
   ],
-  "one_way_platform_indices": [],
-  "wall_platform_indices": [],
-  "hazards": [],
   "thorns": [],
   "saws": [
     {
@@ -25,10 +26,10 @@
         308.0
       ],
       "travel": [
-        0.0,
-        0.0
+        0,
+        0
       ],
-      "radius": 18.0,
+      "radius": 18,
       "period": 4,
       "initial_phase": 0,
       "damage": 1,
@@ -41,7 +42,7 @@
   "enemies": [],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "ec5a70cd37507ab633739276c62f279e685b7f35d05880799737e15088d58d72",
+  "source_sha256": "e09e08c15fa7d26a9e4e7a627fd5faa3ddbb5faa60ef4f6092df69c69e69b73f",
   "stable_id": "game-plains-low-arch",
   "ports": [
     {
@@ -52,8 +53,13 @@
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
         "objectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
@@ -123,7 +129,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -153,7 +159,7 @@
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -170,7 +176,7 @@
         "BOTTOM_LEFT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "BOTTOM",
           "targetPosition": [
@@ -186,6 +192,18 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
@@ -196,8 +214,13 @@
         268
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 608,
+          "y": 236,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
         "objectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
@@ -267,7 +290,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -297,7 +320,7 @@
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -320,7 +343,7 @@
         "BOTTOM_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "BOTTOM",
           "targetPosition": [
@@ -330,21 +353,33 @@
           "proposedSurface": "ONE_WAY_PLATFORM",
           "permission": "INOUT"
         }
+      },
+      "grid": {
+        "cell": [
+          4,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          616,
+          282
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -128,
-    -52.0,
-    896,
-    512.0
+    0,
+    76,
+    640,
+    256
   ],
   "entry_port": [
-    20.0,
+    24.0,
     282.0
   ],
   "exit_port": [
-    620.0,
+    616.0,
     282.0
   ]
 }

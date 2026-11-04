@@ -4,7 +4,7 @@
 
 ## 精确输入
 
-| Module | 历史 1.1.0 内容版本 | 当前 main 内容版本 |
+| Module | 历史 1.1.0 内容版本 | 审计基线 main 9b712fe8 内容版本 |
 |---|---|---|
 | `game-plains-ferry-gears` | `sha256:18e0578b0631239884f0ff9bb598b04867396bcbe3988c036b512ebe32e092b3` | `sha256:08630e9612caa0744812c7cff605f80b8d8fcc14e97c8846cf3294add8118c88` |
 | `game-plains-windchime-lesson` | `sha256:b2ee44df5422a7b4dd9be1358a075c46cefb00992de802607389f6f94ecfa433` | `sha256:9e932540ae915a982f8e0f0f318d5b6b34345c4112f2243f5ab6c9c99a1350b5` |
@@ -13,7 +13,7 @@
 
 - 历史载台/齿轮：[compiled JSON](../../evidence/runtime-integration-audit-20261103/samples/package-1.1.0/game-plains-ferry-gears.compiled.json)，文件 SHA-256 `a590ef1cccac757f6f6949b92048365a8a8d23ee6cf74de9619d48a90d5c3015`。
 - 历史风铃/门：[compiled JSON](../../evidence/runtime-integration-audit-20261103/samples/package-1.1.0/game-plains-windchime-lesson.compiled.json)，文件 SHA-256 `ec162e3811e8cb01df6ecd20a09185bb7fcdf14e57a3e6133c2d8cc4a0d0594f`。
-- main 的完整编译内容分别在 [ferry-gears](../../modules/game-plains-ferry-gears/compiled-content.json)、[windchime-lesson](../../modules/game-plains-windchime-lesson/compiled-content.json)，原件是同目录 `module.mapnote.json`；本文绑定 main `9b712fe814ef228b368c0eb9adf660e39de29e37`，不要混用这些不同内容版本。
+- main 的完整编译内容分别在 [ferry-gears](https://github.com/zhipijun1996/map-edit/blob/9b712fe814ef228b368c0eb9adf660e39de29e37/modules/game-plains-ferry-gears/compiled-content.json)、[windchime-lesson](https://github.com/zhipijun1996/map-edit/blob/9b712fe814ef228b368c0eb9adf660e39de29e37/modules/game-plains-windchime-lesson/compiled-content.json)，原件是同目录 `module.mapnote.json`；本文绑定 main `9b712fe814ef228b368c0eb9adf660e39de29e37`，不要混用这些不同内容版本。
 - 历史包的原件/场景在 ZIP 内 `modules/<ID>/{module.mapnote.json,module.tscn,godot-package.json,compiled-content.json}`；共享运行时 `runtime/module_runtime/`，依赖 `runtime/host-lock.json`。包中 `integration/` 是既有安装/加载示例。
 
 ## 移动平台与环境伤害：ferry-gears

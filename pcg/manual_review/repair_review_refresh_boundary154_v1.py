@@ -1,4 +1,6 @@
 """Only malformed exit fixtures are rerun; all original holdout bytes reused."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,copy,os
 from pcg.migration import core,physics,review_boundary_repair_v4,pool_protocols
 from .probe_review_refresh_v1 import AUTH

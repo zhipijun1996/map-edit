@@ -1,4 +1,6 @@
 """Append current results; historical failures and source versions remain intact."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,subprocess,shutil
 from pathlib import Path
 from collections import Counter

@@ -1,4 +1,6 @@
 """Freeze first unchanged all-gates candidate, qualify once, then native delivery."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,sys
 from pcg.migration import core,physics,godot_package,revision058_runtime_v1,revision058_runtime_v3,revision058_runtime_v4,holdout_guard,pool_protocols
 from . import finalize_first40_v1 as shared,finalize_revision053_v1 as previous

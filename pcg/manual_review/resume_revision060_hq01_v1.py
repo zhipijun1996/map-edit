@@ -1,6 +1,8 @@
 """Continue the same frozen campaign after an original Godot native SIGSEGV.
 No new candidate, seed, pool or observed condition. Completed raw bytes reused.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,inspect,json,os,shutil,types
 from pcg.migration import core,physics,pool_protocols,holdout_guard
 from pcg.prototype.workshop.engine import WorkshopEngine

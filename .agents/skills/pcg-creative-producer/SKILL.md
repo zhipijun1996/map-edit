@@ -3,6 +3,10 @@ name: pcg-creative-producer
 description: 在授权模式下组织 Module 修改、确认设计实现和新创作，记录真实机制、空间因果、Route、缺口和分层质量反馈。
 ---
 
+# Current single-source workflow
+
+For current work read [pcg-module-production](../pcg-module-production/SKILL.md) first. Only `modules/<stable-ID>/record.json` and its current source are authoritative. Use `python3 -m module_pipeline`; source/design previews are generated into that ID, and workshop data is derived from `modules/catalog.json` on `main`. Historical round paths, `tools/module_workshop.py`, candidate libraries, migration catalog/promote and batch production commands below are retired examples, not current write targets. Preserve the native physics, causal/holdout and design-quality principles below. A downstream Map consumer reads the explicit versioned package, never old experiments.
+
 ## 当前图文创作入口（优先于以下历史迁移模式）
 
 用户已授权创意→示意图→人工审核→待实现→实现后归档的工作方式。应用[Module工坊流程](../../../docs/module-workshop.md)，入口`generation/module-workshop/`。本会话可以接收人工或用当前Codex大模型提出创意并画图，不因旧文MIGRATION模式阻止已授权的图文工作；真实Module生产、物理与旧批量任务仍不自动恢复。

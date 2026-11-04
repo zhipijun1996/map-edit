@@ -1,4 +1,6 @@
 """Latest exact approvals and genuine repairs; prior evidence stays immutable."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,subprocess
 from pcg.migration import core,physics
 from .continue_revision058_v1 import label as old_label

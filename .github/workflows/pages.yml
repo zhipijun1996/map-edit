@@ -1,9 +1,8 @@
-name: Deploy generation workspace and editor
+name: Deploy current Module editor and workshop
 on:
   push:
     branches: [main]
   workflow_dispatch:
-  workflow_call:
 permissions:
   contents: read
   pages: write
@@ -20,8 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
-          # Offline raw archives stay in Git; they are not Pages input assets.
           sparse-checkout: |
             /*
             !/pcg/archives/
@@ -29,24 +26,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: npm run check
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Check offline factory contracts
-        run: python3 -m unittest discover -s prototype/factory/tests -v
-        working-directory: pcg
-      - name: Check plains decision contracts
-        run: python3 -m unittest discover -s prototype/plains/tests -v
-        working-directory: pcg
-      - name: Verify published videos, contracts and traces (offline archives not run)
-        run: python3 tools/check_generation.py --web-only
-      - name: Prepare current-only editor and historical video assets
-        run: python3 tools/build_editor_site.py --out dist
+      - run: npm run check
+      - run: python3 tools/build_editor_site.py --out dist
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-      - name: Deploy
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4

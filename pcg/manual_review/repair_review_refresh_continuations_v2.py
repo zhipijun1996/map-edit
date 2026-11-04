@@ -3,6 +3,8 @@
 Replays only the affected horizontal continuations. Reuses every original
 calibration and holdout byte, with strict supplemental lineage and no reroll.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,os
 from pcg.migration import core,physics,review_boundary_repair_v5,pool_protocols
 from .probe_review_refresh_v1 import AUTH

@@ -1,4 +1,6 @@
 """One setup-corrected rerun of the SAME selected S04 candidate and seeds."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from pcg.migration import revision063_group_sampling_v1 as sampling
 from .continue_revision063_v1 import rows,label,AUTH,OUT

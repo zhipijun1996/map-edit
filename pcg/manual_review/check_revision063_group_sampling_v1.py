@@ -1,4 +1,6 @@
 """Verify that the sampling fix preserves all noise and historical sampling."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics,revision063_group_sampling_v1 as current
 from pcg.prototype.workshop import evaluate as legacy

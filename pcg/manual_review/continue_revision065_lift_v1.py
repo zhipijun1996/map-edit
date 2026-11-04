@@ -1,4 +1,6 @@
 """New explicitly approved relay geometry; old065 experiments never overwritten."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,subprocess
 from pcg.migration import core,physics,godot_package
 from .lift_idea_v1 import ID,decode

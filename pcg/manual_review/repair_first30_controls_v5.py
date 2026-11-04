@@ -1,4 +1,6 @@
 """Bounded calibration-only repairs; actual router inputs, unchanged design/physics."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import copy
 import math

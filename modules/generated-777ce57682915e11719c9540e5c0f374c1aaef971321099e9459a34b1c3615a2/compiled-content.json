@@ -1,28 +1,16 @@
 {
   "platforms": [
     [
-      -160,
+      128,
       438,
-      400,
-      100
+      112,
+      32
     ],
     [
       1260,
       438,
-      230,
-      100
-    ],
-    [
-      -256,
-      438,
-      120,
-      24
-    ],
-    [
-      1466,
-      438,
-      70,
-      24
+      148,
+      32
     ]
   ],
   "one_way_platform_indices": [],
@@ -34,12 +22,12 @@
     {
       "platform_id": "carrier",
       "start": [
-        300,
-        448
+        310.0,
+        448.0
       ],
       "finish": [
-        650,
-        448
+        650.0,
+        448.0
       ],
       "size": [
         140,
@@ -52,12 +40,12 @@
     {
       "platform_id": "other",
       "start": [
-        850,
-        448
+        850.0,
+        448.0
       ],
       "finish": [
-        1000,
-        448
+        1000.0,
+        448.0
       ],
       "size": [
         140,
@@ -75,8 +63,8 @@
     {
       "id": "visible-cache",
       "position": [
-        1370,
-        420
+        1370.0,
+        420.0
       ],
       "region": [
         1340,
@@ -88,22 +76,27 @@
     }
   ],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "c39699215ef8bbeea1b88e78c6702a9ff51bd228e90775bd0ae8455c9165fe1a",
+  "source_sha256": "583a94c0c43cc622062f7b40c2265bf9ce3d9a7a050269e9ad8bd9ba05254421",
   "stable_id": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/port-entry",
       "position": [
-        -256,
+        128,
         406
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 96,
+          "y": 374,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/migration-shore-entry",
+        "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -170,16 +163,16 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "stagingPosition": [
-        -232,
+        152,
         420
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -194,10 +187,17 @@
           "profileId": null
         },
         "BOTTOM_LEFT": {
-          "applicable": false,
-          "allowed": false,
-          "reason": "port_not_on_this_corner_block_outer_face",
-          "profileId": null
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            192,
+            470
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
         },
         "BOTTOM_RIGHT": {
           "applicable": false,
@@ -205,21 +205,38 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          1
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          152,
+          420
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/port-exit",
       "position": [
-        1536,
+        1408,
         406
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 1376,
+          "y": 374,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/migration-shore-exit",
+        "objectId": "generated-777ce57682915e11719c9540e5c0f374c1aaef971321099e9459a34b1c3615a2/platform-1",
         "face": "top",
         "status": "source_derived"
       },
@@ -286,16 +303,16 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "stagingPosition": [
-        1512,
+        1384,
         420
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -316,26 +333,45 @@
           "profileId": null
         },
         "BOTTOM_RIGHT": {
-          "applicable": false,
-          "allowed": false,
-          "reason": "port_not_on_this_corner_block_outer_face",
-          "profileId": null
+          "applicable": true,
+          "allowed": "UNKNOWN",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+          "profileId": null,
+          "targetFace": "BOTTOM",
+          "targetPosition": [
+            1344,
+            470
+          ],
+          "proposedSurface": "ONE_WAY_PLATFORM",
+          "permission": "INOUT"
         }
+      },
+      "grid": {
+        "cell": [
+          9,
+          1
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          1384,
+          420
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -1200,
-    -1000,
-    4000,
-    2400
+    128,
+    214,
+    1280,
+    256
   ],
   "entry_port": [
-    80,
-    420
+    152.0,
+    420.0
   ],
   "exit_port": [
-    1370,
-    420
+    1384.0,
+    420.0
   ]
 }

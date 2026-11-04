@@ -1,4 +1,6 @@
 """Download commit-pinned public deliverables anonymously and verify exact bytes."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,concurrent.futures,datetime,hashlib,time,urllib.request
 from pcg.migration import core,physics
 ROOT=core.REPO/'feedback/manual-review/implementation-results/review-029-v1'

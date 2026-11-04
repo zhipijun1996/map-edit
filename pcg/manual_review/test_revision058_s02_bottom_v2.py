@@ -1,4 +1,6 @@
 """One explicit ingress-fixture correction; original route and holdout failures untouched."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from pcg.migration import core,physics
 from .continue_revision058_v1 import rows,label,OUT

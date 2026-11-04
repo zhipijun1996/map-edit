@@ -1,4 +1,6 @@
 """Frozen exact-version scope for the three newly approved idea specifications."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import subprocess
 from pcg.migration import core,physics
 OUT=core.REPO/'feedback/manual-review/implementation-results/new-ideas-v1'

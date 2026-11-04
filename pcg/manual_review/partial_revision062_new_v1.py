@@ -1,4 +1,6 @@
 """Preserve native playable new designs without claiming a failed screen passed."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import shutil,sys
 from pcg.migration import core,physics,godot_package,revision062_runtime_v2 as backend
 from .continue_revision062_v1 import rows,label,OUT,FINAL

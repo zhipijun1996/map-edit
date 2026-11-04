@@ -2,6 +2,8 @@
 
 No geometry selection, threshold changes or automatic retries are performed.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,copy,shutil
 from pcg.migration import core,physics,holdout_guard,godot_package
 from pcg.prototype.factory.core.quality import digest

@@ -1,4 +1,6 @@
 """Record the primary agent's actual inspection of the13 contact-sheet rows."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from .continue_revision063_v1 import rows,label,OUT
 from .record_revision063_native_v1 import folder_for

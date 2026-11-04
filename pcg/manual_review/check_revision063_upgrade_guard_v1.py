@@ -1,4 +1,6 @@
 """Exercise the narrow protocol upgrade and reject retries/changed programs."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 from unittest.mock import patch
 from pcg.migration import core,physics,holdout_guard as guard,legacy_full_v2_upgrade_v1 as upgrade

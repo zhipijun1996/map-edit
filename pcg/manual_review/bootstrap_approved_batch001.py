@@ -2,6 +2,8 @@
 
 Run from a complete checkout. No game files, tuning or import caches are committed.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import hashlib
 import json

@@ -1,6 +1,6 @@
 {
   "schema": "gunman-rush-level-sketch/v1",
-  "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031",
+  "id": "game-plains-bell-ferry-control",
   "title": "风铃控制摆渡",
   "description": "原游戏精确来源迁移候选；原接口、机关和调参保留，尚未取得新地基物理认证。",
   "constraints": "UNKNOWN不得作为有效地图接口。",
@@ -26,20 +26,22 @@
       "label": "",
       "note": "",
       "sourceIndex": 0,
-      "wallClimbable": false
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1",
       "type": "terrain",
       "x": 600,
       "y": 300,
-      "w": 200,
+      "w": 168,
       "h": 32,
       "rotation": 0,
       "label": "",
       "note": "",
       "sourceIndex": 1,
-      "wallClimbable": false
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0",
@@ -50,7 +52,8 @@
       "h": 24,
       "rotation": 0,
       "label": "",
-      "note": ""
+      "note": "",
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
@@ -60,10 +63,15 @@
       "w": 120,
       "h": 24,
       "rotation": 0,
-      "label": "",
+      "label": "风铃摆渡台",
       "note": "",
       "sourceId": "bell_ferry",
-      "trackId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0"
+      "trackId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+      "mechanics": {
+        "control": "original ShotLatch.bind_motion start/pause",
+        "status": "implemented_native"
+      },
+      "diagramLabelBelow": true
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
@@ -88,22 +96,8 @@
       "duration": 2.5,
       "dwell": 1.2,
       "initialPhase": 0,
-      "mode": "pingpong"
-    },
-    {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0",
-      "type": "gate",
-      "x": 740,
-      "y": 210,
-      "w": 24,
-      "h": 90,
-      "rotation": 0,
-      "label": "windchime_plains_bell_ferry_control gate",
-      "note": "",
-      "mechanics": {
-        "kind": "timed_gate",
-        "openSeconds": 0
-      }
+      "mode": "pingpong",
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
@@ -115,7 +109,7 @@
       "rotation": 0,
       "label": "windchime_plains_bell_ferry_control",
       "note": "",
-      "targetId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0",
+      "targetId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
       "sourceId": "windchime_plains_bell_ferry_control",
       "mechanics": {
         "runtimeParameters": {
@@ -131,107 +125,107 @@
           "link_color": "a4dce8",
           "actuator_id": "bell_ferry"
         }
-      }
+      },
+      "targetIds": [
+        "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0"
+      ],
+      "diagramLabel": "启停铃"
     },
     {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/main-route",
+      "id": "design-ferry-guard",
+      "type": "enemy",
+      "definition": "plains_sentry",
+      "x": 226,
+      "y": 268,
+      "w": 28,
+      "h": 32,
+      "label": "摆渡台陆地怪",
+      "placementSupportId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
+      "mechanics": {
+        "status": "implemented_native",
+        "supportPolicy": "Verify original enemy/platform carrying; no scripted teleport attachment",
+        "initialIdleCooldown": 0,
+        "runtimeParameters": {
+          "initial_idle_cooldown": 0
+        },
+        "trackerWarmupPhysicsFrames": 2
+      },
+      "sourceId": "design-ferry-guard"
+    },
+    {
+      "id": "design-route-entry-to-exit",
       "type": "route",
-      "x": 20,
-      "y": 282,
-      "w": 760.000001,
-      "h": 9.999999974752427e-7,
-      "rotation": 0,
-      "label": "设计路线 UNKNOWN",
-      "note": "",
+      "x": 0,
+      "y": 76,
+      "w": 768,
+      "h": 384,
       "points": [
         {
-          "x": 20,
+          "x": 0,
+          "y": 268
+        },
+        {
+          "x": 100,
           "y": 282
         },
         {
-          "x": 780,
+          "x": 210,
+          "y": 240
+        },
+        {
+          "x": 240,
           "y": 282
+        },
+        {
+          "x": 400,
+          "y": 282
+        },
+        {
+          "x": 550,
+          "y": 282
+        },
+        {
+          "x": 650,
+          "y": 250
+        },
+        {
+          "x": 700,
+          "y": 282
+        },
+        {
+          "x": 768,
+          "y": 268
         }
       ],
-      "duration": 0.016666666666666666,
+      "duration": 1,
       "mode": "once",
-      "sourceRoute": "main",
-      "trajectory": "unverified_design"
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-entry",
-      "type": "entry",
-      "x": -140,
+      "type": "exit",
+      "x": -12,
       "y": 250,
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "entry",
-      "note": "原角色身体站位；外边接口等待实际适配"
+      "mechanics": {}
     },
     {
       "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-exit",
       "type": "exit",
-      "x": 884,
+      "x": 756,
       "y": 250,
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "exit",
-      "note": "原角色身体站位；外边接口等待实际适配"
-    },
-    {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-shore-approach-entry",
-      "type": "terrain",
-      "x": -64,
-      "y": 300,
-      "w": 64,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 2
-    },
-    {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-entry",
-      "type": "terrain",
-      "x": -128,
-      "y": 300,
-      "w": 64,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 3
-    },
-    {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-shore-approach-exit",
-      "type": "terrain",
-      "x": 800,
-      "y": 300,
-      "w": 32,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 4
-    },
-    {
-      "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-exit",
-      "type": "terrain",
-      "x": 832,
-      "y": 300,
-      "w": 64,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 5
+      "mechanics": {}
     }
   ],
   "updatedAt": "2026-10-27T13:28:16.368Z",
   "intent": {
-    "operation": "new_module"
+    "operation": "modify_existing",
+    "notes": "Authoritative current Module. Edit objects and declared native bindings here; generated files are not another source library."
   },
   "capabilityRequirements": {
     "version": 1,
@@ -250,513 +244,226 @@
     "note": ""
   },
   "source": {
+    "repository": "zhipijun1996/map-edit",
+    "commit": "9b712fe814ef228b368c0eb9adf660e39de29e37",
+    "path": "modules/game-plains-bell-ferry-control/module.mapnote.json",
+    "moduleId": "game-plains-bell-ferry-control",
+    "kind": "resource",
+    "category": "平原",
     "integration": {
       "isIntegrated": false,
-      "usage": "not_integrated",
-      "label": "未接入 · 研究候选",
-      "reason": "生成与回放证据未写回正式游戏地图消费者。",
-      "checkedCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-      "evidence": [],
-      "verification": "research_output_only"
-    },
-    "repository": "zhipijun1996/gunman-rush",
-    "commit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-    "path": "resources/generation/modules/plains_bell_ferry_control.tres",
-    "moduleId": "plains_bell_ferry_control",
-    "kind": "resource",
-    "original": {
-      "anchors": [
-        [
-          20,
-          282
-        ],
-        [
-          130,
-          282
-        ],
-        [
-          670,
-          282
-        ],
-        [
-          780,
-          282
-        ]
-      ],
-      "branch_routes": [],
-      "danger_bounds": [
-        [
-          200,
-          430,
-          400,
-          24
-        ]
-      ],
-      "definition_version": 1,
-      "entry_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "entry",
-        "position": [
-          20,
-          282
-        ]
-      },
-      "entry_ports": [],
-      "exit_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "exit",
-        "position": [
-          780,
-          282
-        ]
-      },
-      "exit_ports": [],
-      "ferries": [
-        {
-          "dwell_duration": 1.2,
-          "finish": [
-            560,
-            312
-          ],
-          "initial_phase": 0,
-          "platform_id": "bell_ferry",
-          "size": [
-            120,
-            24
-          ],
-          "start": [
-            240,
-            312
-          ],
-          "travel_duration": 2.5
-        }
-      ],
-      "main_route": [],
-      "maximum_shot_cooldown": 0,
-      "min_air_shots": 0,
-      "min_jumps": 1,
-      "minimum_burst_distance": 0,
-      "minimum_ground_speed": 0,
-      "minimum_held_jump_height": 0,
-      "minimum_held_jump_range": 0,
-      "mirrored_horizontal": false,
-      "module_id": "plains_bell_ferry_control",
-      "one_way_platform_indices": [],
-      "platform_pressure": 2,
-      "platforms": [
-        [
-          0,
-          300,
-          200,
-          32
-        ],
-        [
-          600,
-          300,
-          200,
-          32
-        ]
-      ],
-      "requires_burst": false,
-      "saws": [],
-      "surface_thorns": [],
-      "timing_pressure": 0,
-      "world_bounds": [
-        0,
-        0,
-        800,
-        500
-      ]
-    },
-    "method": null,
-    "arguments": []
+      "reason": "Current reviewed source; runtime delivery is separate from production game approval."
+    }
   },
   "generationContract": {
     "version": 2,
     "kind": "module",
-    "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
+    "contentVersion": "sha256:6e0d2d11df0fefa55a6abb3a9bced40df78a68ea4aeee49999cdd0bd34457b39",
     "seed": {
       "status": "UNKNOWN",
       "value": "UNKNOWN",
       "reason": "旧输出未声明生成种子，不用验证种子冒充"
     },
     "generation": {
-      "source": {
-        "cases": {
-          "path": ".cache/migration/game-inputs-v5/game-plains-bell-ferry-control/cases.json",
-          "sha256": "c5c42114c89932b6bfe034567706145d7adc452e591abe036c0e9748b7b36383"
-        },
-        "run": "UNKNOWN",
-        "sourceCaseId": "game-plains_bell_ferry_control",
-        "moduleSha256": "bd30247022323c796cab986ed0305eb0db8d6878e3682784f3f77d81f858c670",
-        "physicsSourceCommit": "UNKNOWN",
-        "sourceManifestSha256": "UNKNOWN"
-      },
       "parameters": {
-        "producerArguments": "UNKNOWN",
-        "family": "original-game-plains_bell_ferry_control",
-        "controlPlan": [
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
+        "runtimeBindings": {
+          "platforms": [
+            {
+              "$bind": "rect",
+              "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0"
             },
-            "target_x": 130,
-            "deadband": 0.6,
-            "source_native_gain": 5.5
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 0,
-              "state": "grounded",
-              "migration_goal": [
-                125,
-                278,
-                10,
-                8
-              ],
-              "timeout": 480
+            {
+              "$bind": "rect",
+              "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1"
             }
-          },
-          {
-            "op": "shoot",
-            "trigger": {
-              "after": 0
-            },
-            "aim_cell": {
-              "kind": "bell",
-              "id": "windchime_plains_bell_ferry_control"
+          ],
+          "one_way_platform_indices": [],
+          "wall_platform_indices": [],
+          "hazards": [
+            {
+              "$bind": "rect",
+              "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0"
             }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 32
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 130,
-            "deadband": 0.6,
-            "source_native_gain": 5.5
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 0,
-              "state": "grounded",
-              "migration_goal": [
-                125,
-                278,
-                10,
-                8
-              ],
-              "timeout": 480
-            }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "dynamic": {
-                "kind": "platform_phase",
-                "id": "bell_ferry",
-                "window": [
-                  0,
-                  0.1
+          ],
+          "thorns": [],
+          "saws": [],
+          "moving_platforms": [
+            {
+              "platform_id": "bell_ferry",
+              "start": {
+                "$bind": "center",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0"
+              },
+              "finish": {
+                "$bind": "relative_point",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
+                "offset": [
+                  320,
+                  0
                 ]
               },
-              "timeout": 900
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 240,
-            "source_native_gain": 5.5,
-            "source_carrier_id": "bell_ferry",
-            "deadband": 0.6
-          },
-          {
-            "op": "jump",
-            "trigger": {
-              "after": 0
-            }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 6,
-              "state": "grounded",
-              "dynamic": {
-                "kind": "on_platform",
-                "id": "bell_ferry"
+              "size": {
+                "$bind": "size",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0"
               },
-              "timeout": 180
-            }
-          },
-          {
-            "op": "jump_release",
-            "trigger": {
-              "after": 0
-            }
-          },
-          {
-            "op": "axis",
-            "trigger": {
-              "after": 0
-            },
-            "value": 0
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "dynamic": {
-                "kind": "platform_phase",
-                "id": "bell_ferry",
-                "window": [
-                  0.5,
-                  0.6
+              "travel_duration": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+                "path": [
+                  "duration"
                 ]
               },
-              "timeout": 900
+              "dwell_duration": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+                "path": [
+                  "dwell"
+                ]
+              },
+              "initial_phase": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
+                "path": [
+                  "initialPhase"
+                ]
+              }
             }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 3
+          ],
+          "hooks": [],
+          "latches": [
+            {
+              "id": "windchime_plains_bell_ferry_control",
+              "bell": {
+                "$bind": "center",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0"
+              },
+              "gate": {
+                "$bind": "relative_rect",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "offset": [
+                  624,
+                  7
+                ],
+                "sizeDelta": [
+                  -4,
+                  56
+                ]
+              },
+              "open_seconds": 0,
+              "ferry_id": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "ferry_id"
+                ]
+              },
+              "prompt": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "prompt"
+                ]
+              },
+              "kind": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "kind"
+                ]
+              },
+              "link_color": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "link_color"
+                ]
+              },
+              "actuator_id": {
+                "$bind": "field",
+                "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "actuator_id"
+                ]
+              }
             }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 640,
-            "deadband": 0.6,
-            "source_native_gain": 5.5
-          },
-          {
-            "op": "jump",
-            "trigger": {
-              "after": 0
+          ],
+          "enemies": [
+            {
+              "id": {
+                "$bind": "field",
+                "object": "design-ferry-guard",
+                "path": [
+                  "id"
+                ]
+              },
+              "definition": {
+                "$bind": "field",
+                "object": "design-ferry-guard",
+                "path": [
+                  "definition"
+                ]
+              },
+              "position": {
+                "$bind": "center",
+                "object": "design-ferry-guard"
+              },
+              "initial_idle_cooldown": {
+                "$bind": "field",
+                "object": "design-ferry-guard",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_idle_cooldown"
+                ]
+              }
             }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 6,
-              "state": "grounded",
-              "migration_goal": [
-                635,
-                278,
-                10,
-                8
-              ],
-              "timeout": 480
+          ],
+          "reward_sites": [],
+          "refresh_reopenable_latches": [],
+          "refresh_carried_enemies": [
+            {
+              "enemy": "design-ferry-guard",
+              "carrier": "bell_ferry"
             }
-          },
-          {
-            "op": "jump_release",
-            "trigger": {
-              "after": 0
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 780,
-            "deadband": 0.6,
-            "source_native_gain": 5.5
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 0,
-              "state": "grounded",
-              "migration_goal": [
-                775,
-                278,
-                10,
-                8
-              ],
-              "timeout": 480
-            }
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "state": "grounded",
-              "migration_goal": [
-                768,
-                278,
-                24,
-                8
-              ],
-              "timeout": 1200
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 796,
-            "deadband": 2
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "state": "grounded",
-              "migration_goal": [
-                792,
-                277,
-                8,
-                10
-              ],
-              "timeout": 360
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 872,
-            "deadband": 2
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "state": "grounded",
-              "migration_goal": [
-                867,
-                277,
-                10,
-                10
-              ],
-              "timeout": 300
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 872,
-            "deadband": 2
-          }
-        ],
-        "challengeRequirements": {
-          "min_shots": 0,
-          "min_ground_jumps": 0
+          ],
+          "refresh_carrier_warmup_frames": 2
         },
-        "synthesis": "UNKNOWN",
-        "originalActionContract": {
-          "minimumShots": 1,
-          "minimumJumps": 2,
-          "sourceRoutines": "Pinned actual original input methods; sourcegeometryunchanged",
-          "variant": 0,
-          "gain": 5.5
+        "nativeAnchors": {
+          "entry": {
+            "$bind": "relative_point",
+            "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
+            "offset": [
+              -76,
+              -34
+            ]
+          },
+          "exit": {
+            "$bind": "relative_point",
+            "object": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
+            "offset": [
+              644,
+              -34
+            ]
+          }
         }
       },
+      "source": {
+        "kind": "current_module_source",
+        "record": "modules/game-plains-bell-ferry-control/record.json"
+      },
       "migration": {
-        "sourcePath": "pcg/migration/game-sources/game-plains-bell-ferry-control",
-        "sourceVersion": "sha256:dbbba65939e546a8f0d0eefc64923c9d1464ad51d1620339c3a659ec4aaff49e",
         "moduleId": "game-plains-bell-ferry-control",
-        "policy": "minimal_actual_shore_adaptation",
-        "sourceDocumentSha256": "31cc2e746f339e95aa62eb09a1ea8b4e18d6515235097bf7d9c535b55a5a6f8c",
-        "corePreservingRepair": {
-          "schema": "pcg/imported-original-core-shore-repair/v1",
-          "originalCoreRectanglesExact": true,
-          "originalEntityAndRewardPositionsExact": true,
-          "sourceReplayInputAuthorityPreserved": [
-            {
-              "caseId": "game-plains_bell_ferry_control",
-              "recordedFrames": 0,
-              "recordedFramesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-              "controlPlanSha256": "4e06040da7bb7bf89972b58c9484070e04590c0afdf1000a481c4b1270d597ee"
-            }
-          ],
-          "boundaryExpansions": [
-            {
-              "face": "LEFT",
-              "blocks": 1,
-              "pixels": 128,
-              "reason": "Fit body-clear independent boundary dock outside original bank and original replay goal."
-            }
-          ],
-          "ports": [
-            {
-              "portId": "entry",
-              "originalSupportIndex": 0,
-              "originalFloor": 300,
-              "dockFloor": 300,
-              "supportIndex": 3,
-              "boundary": [
-                -128,
-                268
-              ],
-              "oldFootprintPreserved": true,
-              "validation": "UNKNOWN"
-            },
-            {
-              "portId": "exit",
-              "originalSupportIndex": 1,
-              "originalFloor": 300,
-              "dockFloor": 300,
-              "supportIndex": 5,
-              "boundary": [
-                896,
-                268
-              ],
-              "oldFootprintPreserved": true,
-              "validation": "UNKNOWN"
-            }
-          ],
-          "validation": "UNKNOWN",
-          "internalGeometryChanged": true
-        },
-        "boundaryControllers": [
-          {
-            "caseId": "game-plains_bell_ferry_control-original-source-v9-0",
-            "schema": "pcg/boundary-controller-binding/v1",
-            "originalAuthorSource": "pcg/migration/resource_original_v9.py",
-            "originalRunner": "pcg/migration/foundry_feedback_runner_v5.gd",
-            "runnerSource": "pcg/migration/boundary_runners/runner_b0e3e5ed314afeae.gd",
-            "wrapperSource": "pcg/migration/boundary_runners/binding_774191e6c2ae482a.py",
-            "fullPlansSha256": "e73eb4c833ecd6200c0ae6948e678b185915ac177dc606c0d5cb9747318bc3c8",
-            "scope": "Continuous entry/exit controls only; no geometry or physics implementation changes."
-          }
-        ]
+        "status": "current_source"
       }
     },
     "designStatus": "declared",
@@ -782,9 +489,9 @@
         }
       },
       "bounds": {
-        "x": -128,
+        "x": 0,
         "y": 76,
-        "w": 1024,
+        "w": 768,
         "h": 384
       },
       "boundsCoverage": "Complete rectangle computed from real Cells and original body action reservations; shore adaptation pending real physics.",
@@ -796,12 +503,8 @@
           "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0",
           "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
           "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
-          "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0",
           "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
-          "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-shore-approach-entry",
-          "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-entry",
-          "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-shore-approach-exit",
-          "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-exit"
+          "design-ferry-guard"
         ],
         "regions": [],
         "coverage": "known cells; full action and projectile reservations UNKNOWN"
@@ -819,40 +522,39 @@
       "dynamicEnvelopes": [
         {
           "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
-          "region": {
-            "x": 180,
-            "y": 300,
-            "w": 440,
-            "h": 24
-          },
-          "status": "source_derived",
-          "coverage": "full_carrier_motion"
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
+        },
+        {
+          "objectId": "design-ferry-guard",
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
         }
       ],
       "seams": [
         {
           "id": "entry-seam",
           "portId": "entry",
+          "allowedOverlap": [],
           "region": {
             "x": -32,
             "y": 236,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         },
         {
           "id": "exit-seam",
           "portId": "exit",
+          "allowedOverlap": [],
           "region": {
-            "x": 864,
+            "x": 736,
             "y": 236,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         }
       ],
       "transforms": [
@@ -939,17 +641,22 @@
         "id": "entry",
         "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-entry",
         "position": [
-          -128,
+          0,
           268
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": -32,
+            "y": 236,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-entry",
+          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
           "face": "top",
-          "status": "source_derived"
+          "status": "actual_complete_body_native_standing_support"
         },
         "normal": [
           -1,
@@ -1014,7 +721,7 @@
           "entry-seam"
         ],
         "routeRoles": [
-          "main:entry"
+          "entry-to-exit:entry"
         ],
         "sourceRoles": [
           "entry"
@@ -1038,13 +745,13 @@
           ]
         },
         "stagingPosition": [
-          -104,
+          24,
           282
         ],
         "face": "LEFT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -1070,23 +777,40 @@
             "reason": "port_not_on_this_corner_block_outer_face",
             "profileId": null
           }
+        },
+        "grid": {
+          "cell": [
+            0,
+            1
+          ],
+          "edge": "W",
+          "stagingPosition": [
+            24,
+            282
+          ],
+          "profile": "ground64/v1"
         }
       },
       {
         "id": "exit",
         "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/port-exit",
         "position": [
-          896,
+          768,
           268
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 736,
+            "y": 236,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/replay-independent-dock-exit",
+          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1",
           "face": "top",
-          "status": "source_derived"
+          "status": "actual_complete_body_native_standing_support"
         },
         "normal": [
           1,
@@ -1151,7 +875,7 @@
           "exit-seam"
         ],
         "routeRoles": [
-          "main:exit"
+          "entry-to-exit:exit"
         ],
         "sourceRoles": [
           "exit"
@@ -1175,13 +899,13 @@
           ]
         },
         "stagingPosition": [
-          872,
+          744,
           282
         ],
         "face": "RIGHT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -1207,6 +931,18 @@
             "reason": "port_not_on_this_corner_block_outer_face",
             "profileId": null
           }
+        },
+        "grid": {
+          "cell": [
+            5,
+            1
+          ],
+          "edge": "E",
+          "stagingPosition": [
+            744,
+            282
+          ],
+          "profile": "ground64/v1"
         }
       }
     ],
@@ -1215,40 +951,40 @@
         "from": "entry",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "entry",
         "to": "exit",
-        "status": "path",
+        "status": "UNKNOWN",
+        "conditions": "UNKNOWN",
         "routeIds": [
-          "main"
-        ],
-        "conditions": "UNKNOWN"
+          "entry-to-exit"
+        ]
       },
       {
         "from": "exit",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "exit",
         "to": "exit",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       }
     ],
     "routes": [
       {
-        "id": "main",
+        "id": "entry-to-exit",
         "from": "entry",
         "to": "exit",
         "role": "main",
-        "pathObjectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/main-route",
+        "pathObjectId": "design-route-entry-to-exit",
         "capabilityRequirements": {
           "version": 1,
           "status": "partial",
@@ -1348,9 +1084,7 @@
           "observedJumps": "UNKNOWN",
           "phaseWaits": []
         },
-        "validationIds": [
-          "migration-main"
-        ],
+        "validationIds": [],
         "requiredAbilities": [
           "move",
           "jump",
@@ -1365,50 +1099,13 @@
           "status": "UNKNOWN"
         },
         "localDisplacementBlocks": [
-          8,
+          6,
           0
-        ]
+        ],
+        "evidenceStatus": "UNKNOWN"
       }
     ],
-    "unlocks": [
-      {
-        "id": "windchime_plains_bell_ferry_control",
-        "trigger": {
-          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
-          "condition": "eligible original player projectile hit committed by ShotLatch"
-        },
-        "changes": {
-          "objectId": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0",
-          "collision": "disabled_while_open",
-          "openSeconds": 0,
-          "automaticClose": "original ShotLatch clock and actor-safe closing rule"
-        },
-        "before": {
-          "from": "entry",
-          "to": "exit",
-          "status": "UNKNOWN",
-          "conditions": [
-            {
-              "field": "mechanisms.windchime_plains_bell_ferry_control.open",
-              "op": "eq",
-              "value": false
-            }
-          ]
-        },
-        "after": {
-          "from": "entry",
-          "to": "exit",
-          "status": "UNKNOWN",
-          "conditions": [
-            {
-              "field": "mechanisms.windchime_plains_bell_ferry_control.open",
-              "op": "eq",
-              "value": true
-            }
-          ]
-        }
-      }
-    ],
+    "unlocks": [],
     "composition": {
       "components": [],
       "connections": [],
@@ -1416,150 +1113,70 @@
       "cells": [
         {
           "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0",
-          "contentVersion": "sha256:1282d4d0bd909c9e8f1321b25cd9d6a39ca1baa85e994ec10af0344b174b884c",
           "objectIds": [
             "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-0"
-          ]
+          ],
+          "contentVersion": "sha256:a74bb2f555a2de26095587e977aecf226eb7d9d6c97918092c49ab765e93f1b2"
         },
         {
           "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1",
-          "contentVersion": "sha256:c484ac9441238508a22b2b7b9dbee28a13850c4cb7f1266e0a502eb4e0660a14",
           "objectIds": [
             "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/platform-1"
-          ]
+          ],
+          "contentVersion": "sha256:71f4d78ba71ad97eacaed4d6f66ecee08013481be62d336c767740e8af14b281"
         },
         {
           "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0",
-          "contentVersion": "sha256:e16df279dd595aff7de83b7fa98ef7a980815645f741ee1d926ebe7e7747e065",
           "objectIds": [
             "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/hazard-0"
-          ]
+          ],
+          "contentVersion": "sha256:c9b0a3b31b3a2db21543415f7029c34d5d2459080cc62e9694768d44f0bd7e4f"
         },
         {
           "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0",
-          "contentVersion": "sha256:6c533825e4263385a6004ee65840b7f7d1ff3086bfff26883409b33789171be2",
           "objectIds": [
             "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-0"
-          ]
+          ],
+          "contentVersion": "sha256:ed6c0948aad5f7cb121a6a9f6876c52c6eeca8d724ca09676325b17bafbc023c"
         },
         {
-          "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0",
-          "contentVersion": "sha256:938bb27a3573ec42da152ae28c470f9b7d0c2505e0a4d1415828e7b3ff8aa947",
+          "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0",
           "objectIds": [
-            "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/gate-0"
-          ]
+            "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/moving-track-0"
+          ],
+          "contentVersion": "sha256:3560a4b545d3ddbe808f2e63be2fd182745d2d12b6259cde901132c1d4fd45bd"
         },
         {
           "id": "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0",
-          "contentVersion": "sha256:344a98c511fce435ee4eb0c718cd7f9084e9506df777dfed67f831c3a771657a",
           "objectIds": [
             "generated-1eaee12800e19ba2dfd7cba9f69cb37a35700d47c8913bf20eda8030074a3031/bell-0"
-          ]
+          ],
+          "contentVersion": "sha256:f37959972b0f62110867b7d2f9af848e7f74839449b7e6500a10a3489a4209f0"
+        },
+        {
+          "id": "design-ferry-guard",
+          "objectIds": [
+            "design-ferry-guard"
+          ],
+          "contentVersion": "sha256:e3f2f052b795f6c495da8cf5f90fb4fd868bc5aac77143addfd53dbe194a6430"
         }
       ]
     },
-    "validations": [
-      {
-        "id": "migration-main",
-        "kind": "physics",
-        "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
-        "routeId": "main",
-        "from": "entry",
-        "to": "exit",
-        "result": "pass",
-        "capabilityConfiguration": {
-          "available": [
-            "move",
-            "jump",
-            "shot_recoil"
-          ],
-          "equipment": "UNKNOWN"
-        },
-        "entryState": {
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "unspecified",
-            "allOf": [],
-            "anyOfGroups": [],
-            "note": ""
-          },
-          "equipment": "UNKNOWN",
-          "grounded": "UNKNOWN",
-          "velocity": "UNKNOWN",
-          "remainingJumps": "UNKNOWN",
-          "airShots": "UNKNOWN",
-          "stamina": "UNKNOWN",
-          "health": "UNKNOWN",
-          "shotCooldown": "UNKNOWN",
-          "traversalState": "UNKNOWN",
-          "mechanisms": "UNKNOWN",
-          "phase": "UNKNOWN",
-          "recoveryConditions": "UNKNOWN"
-        },
-        "method": "actual_godot_fixed_migration_protocol",
-        "coverage": {
-          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
-          "route": {
-            "routeId": "main",
-            "passed": true,
-            "calibration": {
-              "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/calibration-0.json",
-              "sha256": "b509787f71f9d6ae20f261a358d50b714db6e629c7faf54595eeccf8fe2f6e8f"
-            },
-            "holdout": {
-              "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/holdout-0.json",
-              "sha256": "35906d7321636a47260c0a3ecd1c0f81d93adb7d3d606a74e5eb5e559438aff6"
-            }
-          },
-          "arbitraryEntryStates": "UNKNOWN",
-          "fullMap": "UNKNOWN"
-        },
-        "failures": [],
-        "unverified": [
-          "unsearched port pairs",
-          "closure combinations",
-          "mirror",
-          "arbitrary entry states",
-          "full Map"
-        ],
-        "artifacts": [
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/migration-physics.json",
-            "sha256": "41f5106786ac492efb92fe3212a3377a2a7b8df08dab6fa0799d780defbbce85"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/source_binding.json",
-            "sha256": "b9b23cddc8736ebe3369d0d574628cbe7c1866d53ed98807e4ba539e7e7fe999"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/batches.json",
-            "sha256": "da803fad201d900aa3869a91be17992f1bc7150df9512cb4dbab0021b811d995"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/protocol.json",
-            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-bell-ferry-control-source-quality-v9/boundary-probes.json",
-            "sha256": "8cab31c0c5d41723e5aca88c13235a4ed93dfeeabf59d2ae25860f6e3625c6ba"
-          }
-        ]
-      }
-    ],
+    "validations": [],
     "visualization": {
-      "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
+      "contentVersion": "sha256:6e0d2d11df0fefa55a6abb3a9bced40df78a68ea4aeee49999cdd0bd34457b39",
       "path": "thumbnail.svg"
     },
     "staticChecks": {
-      "result": "pass",
-      "contentVersion": "sha256:c100819218cef471c3661a0b36bdd7be9ca8da113b0c356f2d101fed6debf6da",
+      "result": "UNKNOWN",
+      "contentVersion": "sha256:6e0d2d11df0fefa55a6abb3a9bced40df78a68ea4aeee49999cdd0bd34457b39",
       "method": "existing Map Notes validator + output contract structural/geometry checks",
       "scope": "schema, references, actual extents, separate motion envelopes, exhaustive ordered port pairs; not physics"
     },
     "foundation": {
       "version": "1.0",
       "blockSize": 128,
-      "widthBlocks": 8,
+      "widthBlocks": 6,
       "heightBlocks": 3
     },
     "closures": [],

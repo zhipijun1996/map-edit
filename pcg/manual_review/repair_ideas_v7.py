@@ -1,4 +1,6 @@
 """Place the phase-wait dock fully outside the diver's original activation range."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from .new_ideas_v1 import rows,label
 from .prepare_review045_v1 import at

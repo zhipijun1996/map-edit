@@ -1,4 +1,6 @@
 """Current scope, original failures and exact limits; no production admission."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,shutil
 from collections import Counter
 from pathlib import Path

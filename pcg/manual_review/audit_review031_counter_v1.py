@@ -1,4 +1,6 @@
 """Test the narrow correction with actual raw and rejecting mutations."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json
 from pcg.migration import core,physics,review_counter_scope_v7 as scope
 from .prepare_review031_v1 import OUT

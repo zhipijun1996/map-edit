@@ -1,6 +1,6 @@
 {
   "schema": "gunman-rush-level-sketch/v1",
-  "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7",
+  "id": "game-plains-low-arch",
   "title": "低矮拱顶",
   "description": "原游戏精确来源迁移候选；原接口、机关和调参保留，尚未取得新地基物理认证。",
   "constraints": "UNKNOWN不得作为有效地图接口。",
@@ -26,20 +26,23 @@
       "label": "",
       "note": "",
       "sourceIndex": 0,
-      "wallClimbable": false
+      "wallClimbable": false,
+      "mechanics": {}
     },
     {
       "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-1",
-      "type": "terrain",
+      "type": "hazard",
       "x": 200,
       "y": 160,
       "w": 240,
       "h": 18,
       "rotation": 0,
-      "label": "",
+      "label": "顶部朝下尖刺",
       "note": "",
       "sourceIndex": 1,
-      "wallClimbable": false
+      "wallClimbable": false,
+      "orientation": "DOWN",
+      "mechanics": {}
     },
     {
       "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
@@ -49,7 +52,7 @@
       "w": 36,
       "h": 36,
       "rotation": 0,
-      "label": "",
+      "label": "原地面齿轮",
       "note": "",
       "sourceId": "arch_wheel",
       "mechanics": {
@@ -59,43 +62,61 @@
           "period": 4,
           "initial_phase": 0
         }
-      }
+      },
+      "sourceType": "gear",
+      "shape": "gears",
+      "count": 1
     },
     {
-      "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/main-route",
+      "id": "design-route-entry-to-exit",
       "type": "route",
-      "x": 20,
-      "y": 282,
-      "w": 600.000001,
-      "h": 9.999999974752427e-7,
-      "rotation": 0,
-      "label": "设计路线 UNKNOWN",
-      "note": "",
+      "x": 0,
+      "y": 76,
+      "w": 640,
+      "h": 256,
       "points": [
         {
-          "x": 20,
-          "y": 282
+          "x": 0,
+          "y": 268
         },
         {
-          "x": 620,
-          "y": 282
+          "x": 150,
+          "y": 268
+        },
+        {
+          "x": 245,
+          "y": 232
+        },
+        {
+          "x": 320,
+          "y": 224
+        },
+        {
+          "x": 400,
+          "y": 232
+        },
+        {
+          "x": 485,
+          "y": 268
+        },
+        {
+          "x": 640,
+          "y": 268
         }
       ],
-      "duration": 0.016666666666666666,
+      "duration": 1,
       "mode": "once",
-      "sourceRoute": "main",
-      "trajectory": "unverified_design"
+      "mechanics": {}
     },
     {
       "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/port-entry",
-      "type": "entry",
+      "type": "exit",
       "x": -12,
       "y": 250,
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "entry",
-      "note": "原角色身体站位；外边接口等待实际适配"
+      "mechanics": {}
     },
     {
       "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/port-exit",
@@ -105,13 +126,13 @@
       "w": 24,
       "h": 36,
       "rotation": 0,
-      "label": "exit",
-      "note": "原角色身体站位；外边接口等待实际适配"
+      "mechanics": {}
     }
   ],
   "updatedAt": "2026-10-27T13:28:16.470Z",
   "intent": {
-    "operation": "new_module"
+    "operation": "modify_existing",
+    "notes": "Authoritative current Module. Edit objects and declared native bindings here; generated files are not another source library."
   },
   "capabilityRequirements": {
     "version": 1,
@@ -130,237 +151,126 @@
     "note": ""
   },
   "source": {
+    "repository": "zhipijun1996/map-edit",
+    "commit": "9b712fe814ef228b368c0eb9adf660e39de29e37",
+    "path": "modules/game-plains-low-arch/module.mapnote.json",
+    "moduleId": "game-plains-low-arch",
+    "kind": "resource",
+    "category": "平原",
     "integration": {
       "isIntegrated": false,
-      "usage": "not_integrated",
-      "label": "未接入 · 研究候选",
-      "reason": "生成与回放证据未写回正式游戏地图消费者。",
-      "checkedCommit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-      "evidence": [],
-      "verification": "research_output_only"
-    },
-    "repository": "zhipijun1996/gunman-rush",
-    "commit": "879b39eaa869be70cb799dedd1bb6ffc35e0b92f",
-    "path": "resources/generation/modules/plains_low_arch.tres",
-    "moduleId": "plains_low_arch",
-    "kind": "resource",
-    "original": {
-      "anchors": [
-        [
-          20,
-          282
-        ],
-        [
-          230,
-          282
-        ],
-        [
-          410,
-          282
-        ],
-        [
-          620,
-          282
-        ]
-      ],
-      "branch_routes": [],
-      "danger_bounds": [],
-      "definition_version": 2,
-      "entry_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "entry",
-        "position": [
-          20,
-          282
-        ]
-      },
-      "entry_ports": [],
-      "exit_port": {
-        "direction": [
-          1,
-          0
-        ],
-        "max_normal_speed": 330,
-        "max_recoil_speed": 0,
-        "max_shot_cooldown": 0,
-        "min_air_shots": 0,
-        "min_jumps": 0,
-        "minimum_held_jump_height": 0,
-        "minimum_held_jump_range": 0,
-        "port_id": "exit",
-        "position": [
-          620,
-          282
-        ]
-      },
-      "exit_ports": [],
-      "ferries": [],
-      "main_route": [],
-      "maximum_shot_cooldown": 0,
-      "min_air_shots": 0,
-      "min_jumps": 1,
-      "minimum_burst_distance": 0,
-      "minimum_ground_speed": 0,
-      "minimum_held_jump_height": 100,
-      "minimum_held_jump_range": 160,
-      "mirrored_horizontal": false,
-      "module_id": "plains_low_arch",
-      "one_way_platform_indices": [],
-      "platform_pressure": 1,
-      "platforms": [
-        [
-          0,
-          300,
-          640,
-          32
-        ],
-        [
-          200,
-          160,
-          240,
-          18
-        ]
-      ],
-      "requires_burst": false,
-      "saws": [
-        {
-          "contact_interval": 0.7,
-          "damage": 1,
-          "initial_phase": 0,
-          "origin": [
-            320,
-            308
-          ],
-          "period": 4,
-          "radius": 18,
-          "source_id": "arch_wheel",
-          "travel": [
-            0,
-            0
-          ]
-        }
-      ],
-      "surface_thorns": [],
-      "timing_pressure": 1,
-      "world_bounds": [
-        0,
-        0,
-        640,
-        460
-      ]
-    },
-    "method": null,
-    "arguments": []
+      "reason": "Current reviewed source; runtime delivery is separate from production game approval."
+    }
   },
   "generationContract": {
     "version": 2,
     "kind": "module",
-    "contentVersion": "sha256:6d82989e97d89ef82368e5ba223a57b57833a99b1baa65e83a974d026a70f91f",
+    "contentVersion": "sha256:7d210ba1e2cf7cfe227bad5f6ec6d476bd967176d0251ee5deadd825a1a94deb",
     "seed": {
       "status": "UNKNOWN",
       "value": "UNKNOWN",
       "reason": "旧输出未声明生成种子，不用验证种子冒充"
     },
     "generation": {
-      "source": {
-        "cases": {
-          "path": ".cache/migration/game-inputs-v5/game-plains-low-arch/cases.json",
-          "sha256": "f3e7d222993b7d653fb78d388a52d9c146e36634113de0544f4e96496f515ed3"
-        },
-        "run": "UNKNOWN",
-        "sourceCaseId": "game-plains_low_arch-authored-step-h12-r1",
-        "moduleSha256": "b3851558129ba0fa238ba6abe96cfff67fbcd15eb3719e59a98a74f6ab3765c3",
-        "physicsSourceCommit": "UNKNOWN",
-        "sourceManifestSha256": "UNKNOWN"
-      },
       "parameters": {
-        "producerArguments": "UNKNOWN",
-        "family": "original-game-plains_low_arch",
-        "controlPlan": [
-          {
-            "op": "axis",
-            "trigger": {
-              "after": 0
-            },
-            "value": 1
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "dynamic": {
-                "kind": "actor_x",
-                "direction": "gte",
-                "value": 232
+        "runtimeBindings": {
+          "platforms": [
+            {
+              "$bind": "rect",
+              "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0"
+            }
+          ],
+          "one_way_platform_indices": [],
+          "wall_platform_indices": [],
+          "hazards": [
+            {
+              "$bind": "rect",
+              "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-1"
+            }
+          ],
+          "thorns": [],
+          "saws": [
+            {
+              "source_id": "arch_wheel",
+              "origin": {
+                "$bind": "center",
+                "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0"
               },
-              "timeout": 240
+              "travel": [
+                0,
+                0
+              ],
+              "radius": 18,
+              "period": {
+                "$bind": "field",
+                "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "period"
+                ]
+              },
+              "initial_phase": {
+                "$bind": "field",
+                "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_phase"
+                ]
+              },
+              "damage": {
+                "$bind": "field",
+                "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "damage"
+                ]
+              },
+              "contact_interval": {
+                "$bind": "field",
+                "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "contact_interval"
+                ]
+              }
             }
-          },
-          {
-            "op": "jump",
-            "trigger": {
-              "after": 0
-            }
-          },
-          {
-            "op": "jump_release",
-            "trigger": {
-              "after": 12
-            }
-          },
-          {
-            "op": "shoot",
-            "trigger": {
-              "after": 6
-            },
-            "direction": [
-              -0.85,
-              0.5267826876
+          ],
+          "moving_platforms": [],
+          "hooks": [],
+          "latches": [],
+          "enemies": [],
+          "reward_sites": []
+        },
+        "nativeAnchors": {
+          "entry": {
+            "$bind": "relative_point",
+            "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
+            "offset": [
+              -296,
+              -34
             ]
           },
-          {
-            "op": "wait",
-            "trigger": {
-              "after": 12,
-              "state": "grounded",
-              "timeout": 240
-            }
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 620,
-            "deadband": 3
+          "exit": {
+            "$bind": "relative_point",
+            "object": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
+            "offset": [
+              296,
+              -34
+            ]
           }
-        ],
-        "challengeRequirements": {
-          "min_shots": 0,
-          "min_ground_jumps": 0
-        },
-        "synthesis": "UNKNOWN",
-        "originalGameProgramSelection": {
-          "source": "pcg/results/foundation-migration-original-continuation-v2/discovery.json",
-          "sha256": "bb42ebf6be3efaaffcc760f04ce9f6c16ffc71d9953d5448056fbd4a13f3a0e1",
-          "rule": "first clean success among four preregistered source-guided programs; no holdout used"
         }
       },
+      "source": {
+        "kind": "current_module_source",
+        "record": "modules/game-plains-low-arch/record.json"
+      },
       "migration": {
-        "sourcePath": "pcg/migration/game-sources/game-plains-low-arch",
-        "sourceVersion": "sha256:df165c377dd6ae1c2dba9db70d198b04ec4b844d86eabd500a0c84dd42be2130",
         "moduleId": "game-plains-low-arch",
-        "policy": "minimal_actual_shore_adaptation",
-        "sourceDocumentSha256": "cb844dc8b285a4d3eccf668a34e87806e62ad9ca4ea0c0e850a5725fa119e304"
+        "status": "current_source"
       }
     },
     "designStatus": "declared",
@@ -415,40 +325,34 @@
       "dynamicEnvelopes": [
         {
           "objectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
-          "region": {
-            "x": 302,
-            "y": 290,
-            "w": 36,
-            "h": 36
-          },
-          "status": "source_derived",
-          "coverage": "full_sinusoidal_collision_envelope"
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
         }
       ],
       "seams": [
         {
           "id": "entry-seam",
           "portId": "entry",
+          "allowedOverlap": [],
           "region": {
             "x": -32,
             "y": 236,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         },
         {
           "id": "exit-seam",
           "portId": "exit",
+          "allowedOverlap": [],
           "region": {
             "x": 608,
             "y": 236,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         }
       ],
       "transforms": [
@@ -539,8 +443,13 @@
           268
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": -32,
+            "y": 236,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
           "objectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
@@ -610,7 +519,7 @@
           "entry-seam"
         ],
         "routeRoles": [
-          "main:entry"
+          "entry-to-exit:entry"
         ],
         "sourceRoles": [
           "entry"
@@ -640,7 +549,7 @@
         "face": "LEFT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -657,7 +566,7 @@
           "BOTTOM_LEFT": {
             "applicable": true,
             "allowed": "UNKNOWN",
-            "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
             "profileId": null,
             "targetFace": "BOTTOM",
             "targetPosition": [
@@ -673,6 +582,18 @@
             "reason": "port_not_on_this_corner_block_outer_face",
             "profileId": null
           }
+        },
+        "grid": {
+          "cell": [
+            0,
+            1
+          ],
+          "edge": "W",
+          "stagingPosition": [
+            24,
+            282
+          ],
+          "profile": "ground64/v1"
         }
       },
       {
@@ -683,8 +604,13 @@
           268
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 608,
+            "y": 236,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
           "objectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
@@ -754,7 +680,7 @@
           "exit-seam"
         ],
         "routeRoles": [
-          "main:exit"
+          "entry-to-exit:exit"
         ],
         "sourceRoles": [
           "exit"
@@ -784,7 +710,7 @@
         "face": "RIGHT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -807,7 +733,7 @@
           "BOTTOM_RIGHT": {
             "applicable": true,
             "allowed": "UNKNOWN",
-            "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
             "profileId": null,
             "targetFace": "BOTTOM",
             "targetPosition": [
@@ -817,6 +743,18 @@
             "proposedSurface": "ONE_WAY_PLATFORM",
             "permission": "INOUT"
           }
+        },
+        "grid": {
+          "cell": [
+            4,
+            1
+          ],
+          "edge": "E",
+          "stagingPosition": [
+            616,
+            282
+          ],
+          "profile": "ground64/v1"
         }
       }
     ],
@@ -825,40 +763,40 @@
         "from": "entry",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "entry",
         "to": "exit",
-        "status": "path",
+        "status": "UNKNOWN",
+        "conditions": "UNKNOWN",
         "routeIds": [
-          "main"
-        ],
-        "conditions": "UNKNOWN"
+          "entry-to-exit"
+        ]
       },
       {
         "from": "exit",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "exit",
         "to": "exit",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       }
     ],
     "routes": [
       {
-        "id": "main",
+        "id": "entry-to-exit",
         "from": "entry",
         "to": "exit",
         "role": "main",
-        "pathObjectId": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/main-route",
+        "pathObjectId": "design-route-entry-to-exit",
         "capabilityRequirements": {
           "version": 1,
           "status": "partial",
@@ -958,9 +896,7 @@
           "observedJumps": "UNKNOWN",
           "phaseWaits": []
         },
-        "validationIds": [
-          "migration-main"
-        ],
+        "validationIds": [],
         "requiredAbilities": [
           "move",
           "jump",
@@ -982,7 +918,8 @@
         "localDisplacementBlocks": [
           5,
           0
-        ]
+        ],
+        "evidenceStatus": "UNKNOWN"
       }
     ],
     "unlocks": [],
@@ -993,122 +930,35 @@
       "cells": [
         {
           "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0",
-          "contentVersion": "sha256:579a5fd9cd92a0cf86d6e304083fb2440f34beb8346f912cd6d7e6e9d41ca9ae",
           "objectIds": [
             "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-0"
-          ]
+          ],
+          "contentVersion": "sha256:8473dccc031ddc2477c983c2168d5cdff24fb1e6c4223d846f2e14d5b5f36239"
         },
         {
           "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-1",
-          "contentVersion": "sha256:c1eb9f873d6984faab158c29e2bbe216f688e97f9eb5fde101b98379e82fe6bd",
           "objectIds": [
             "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/platform-1"
-          ]
+          ],
+          "contentVersion": "sha256:c32a0964e73739b71dee03d035effb6346a59e510e5431f1109e580e16ca084d"
         },
         {
           "id": "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0",
-          "contentVersion": "sha256:9ec9998dcd9f3fb35f38ca83157849005a5bfcb1d1441202787e94882421ab12",
           "objectIds": [
             "generated-5abeda1741511e64a4af3ee7c074e5870cfb6491f26629da9cb6c245ca9969c7/saw-0"
-          ]
+          ],
+          "contentVersion": "sha256:2471a1d351367c4dc69a22b83b26ac1fe4551ea1620464cb0ae44eacb5bdc0d1"
         }
       ]
     },
-    "validations": [
-      {
-        "id": "migration-main",
-        "kind": "physics",
-        "contentVersion": "sha256:6d82989e97d89ef82368e5ba223a57b57833a99b1baa65e83a974d026a70f91f",
-        "routeId": "main",
-        "from": "entry",
-        "to": "exit",
-        "result": "pass",
-        "capabilityConfiguration": {
-          "available": [
-            "move",
-            "jump",
-            "shot_recoil"
-          ],
-          "equipment": "UNKNOWN"
-        },
-        "entryState": {
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "unspecified",
-            "allOf": [],
-            "anyOfGroups": [],
-            "note": ""
-          },
-          "equipment": "UNKNOWN",
-          "grounded": "UNKNOWN",
-          "velocity": "UNKNOWN",
-          "remainingJumps": "UNKNOWN",
-          "airShots": "UNKNOWN",
-          "stamina": "UNKNOWN",
-          "health": "UNKNOWN",
-          "shotCooldown": "UNKNOWN",
-          "traversalState": "UNKNOWN",
-          "mechanisms": "UNKNOWN",
-          "phase": "UNKNOWN",
-          "recoveryConditions": "UNKNOWN"
-        },
-        "method": "actual_godot_fixed_migration_protocol",
-        "coverage": {
-          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
-          "route": {
-            "routeId": "main",
-            "passed": true,
-            "calibration": {
-              "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/calibration-0.json",
-              "sha256": "f9d31f31c0e6ba726380188213e8b0dc729e9242134f4491c3d916e9c4d65a85"
-            },
-            "holdout": {
-              "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/holdout-0.json",
-              "sha256": "3c90dbd2ba0f35161ab280abc54ba9f7da1a0f09519816bdc10ea43aa2b8f5c7"
-            }
-          },
-          "arbitraryEntryStates": "UNKNOWN",
-          "fullMap": "UNKNOWN"
-        },
-        "failures": [],
-        "unverified": [
-          "unsearched port pairs",
-          "closure combinations",
-          "mirror",
-          "arbitrary entry states",
-          "full Map"
-        ],
-        "artifacts": [
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/migration-physics.json",
-            "sha256": "ed4d2efce0c68110b296088dddbdc4b49655a942d98e2a152f83e7b26593b926"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/source_binding.json",
-            "sha256": "fcbbbdd4af219a99796feececbca65bb008b267620b0415baf1522924f313527"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/batches.json",
-            "sha256": "a15e69f210deee57f044b0d4e3c43227c31514d0479ce6baf4cfb250427a8ac4"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/protocol.json",
-            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
-          },
-          {
-            "path": "pcg/results/foundation-migration-original-game-plains-low-arch-additional-quality-v1/boundary-probes.json",
-            "sha256": "adeea9553e423aebe89c530bb8fc3d15482a55e8347976cb24e495d429c17830"
-          }
-        ]
-      }
-    ],
+    "validations": [],
     "visualization": {
-      "contentVersion": "sha256:6d82989e97d89ef82368e5ba223a57b57833a99b1baa65e83a974d026a70f91f",
+      "contentVersion": "sha256:7d210ba1e2cf7cfe227bad5f6ec6d476bd967176d0251ee5deadd825a1a94deb",
       "path": "thumbnail.svg"
     },
     "staticChecks": {
-      "result": "pass",
-      "contentVersion": "sha256:6d82989e97d89ef82368e5ba223a57b57833a99b1baa65e83a974d026a70f91f",
+      "result": "UNKNOWN",
+      "contentVersion": "sha256:7d210ba1e2cf7cfe227bad5f6ec6d476bd967176d0251ee5deadd825a1a94deb",
       "method": "existing Map Notes validator + output contract structural/geometry checks",
       "scope": "schema, references, actual extents, separate motion envelopes, exhaustive ordered port pairs; not physics"
     },

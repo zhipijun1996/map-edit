@@ -1,4 +1,6 @@
 """Supplement legacy v1 coverage; never rewrite its seeds or claim FULL_v2 admission."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,gzip,json,shutil,sys
 from pcg.migration import core,physics
 from .continue_revision058_v1 import rows,label

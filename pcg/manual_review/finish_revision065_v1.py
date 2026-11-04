@@ -1,4 +1,6 @@
 """Bind the final relay qualification, native samples and exact current scope."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect,zipfile
 from pcg.migration import core,physics
 from pcg.migration.evidence_stream_verify_v1 import verify_report

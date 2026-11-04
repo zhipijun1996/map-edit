@@ -2,6 +2,8 @@
 
 The prior two-geometry/80-control cycle remains failed for the high route. No threshold or past budget changes.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pathlib import Path
 import copy,shutil,json
 from pcg.migration import core,physics,godot_package

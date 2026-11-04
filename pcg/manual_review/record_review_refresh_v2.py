@@ -1,4 +1,6 @@
 """Append the repaired 154 movie; preserve the earlier review-only candidate."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from . import record_review_refresh_v1 as shared
 source=inspect.getsource(shared.run).replace("version='v2'if n=='140'else'v1'", "version='v2'").replace("videos/'+n+'-v1'", "videos/'+n+'-v2'")

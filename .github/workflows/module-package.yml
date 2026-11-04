@@ -1,0 +1,36 @@
+name: Build versioned Module package
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Immutable package SemVer
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /*
+            !/pcg/archives/
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm run check
+      - name: Build from current reviewed records
+        env:
+          PACKAGE_VERSION: ${{ inputs.version }}
+        run: python3 -m module_pipeline build --version "$PACKAGE_VERSION"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: map-edit-modules-${{ inputs.version }}
+          path: releases/*
+          if-no-files-found: error

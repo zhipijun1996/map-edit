@@ -1,4 +1,6 @@
 """Anonymous, commit-pinned SHA checks of selected public delivery artifacts."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,concurrent.futures,datetime,hashlib,json,time,urllib.request
 from pathlib import Path
 from pcg.migration import core,physics

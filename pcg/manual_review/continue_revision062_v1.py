@@ -1,3 +1,5 @@
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,subprocess
 from pcg.migration import core,physics
 OUT=core.REPO/'feedback/manual-review/implementation-results/revision-062-v1';AUTH=OUT/'authorization';ROOT=core.REPO/'pcg/manual_review/implementation/revision-062-drafts-v1';FINAL=core.REPO/'pcg/manual_review/implementation/revision-062-final-v1'

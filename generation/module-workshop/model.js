@@ -1,6 +1,6 @@
 import {evaluateRequirements} from '../../capabilities.js';
 export const FACES={LEFT:'左',RIGHT:'右',TOP:'上',BOTTOM:'下'};
-export const STAGES={ARCHIVED:'已归档',IMPLEMENTED_CANDIDATE:'已实现候选',READY_FOR_IMPLEMENTATION:'待实现',NEEDS_REPAIR:'待修复',NEEDS_ALIGNMENT:'设计版本待对齐',DESIGN_REVIEW:'待设计审核',IDEA:'创意草稿',DISCARDED:'已废弃'};
+export const STAGES={ARCHIVED:'可运行交付',IMPLEMENTED_CANDIDATE:'已实现 · 待交付验证',READY_FOR_IMPLEMENTATION:'待实现',NEEDS_REPAIR:'待修复',NEEDS_ALIGNMENT:'设计版本待对齐',DESIGN_REVIEW:'待设计审核',IDEA:'创意草稿',DISCARDED:'已废弃'};
 export const COMPLETE_STAGES=['ARCHIVED','IMPLEMENTED_CANDIDATE'];
 export function matchingRoutes(module,filter={}){
  const ports=new Map(module.ports.map(p=>[p.id,p]));

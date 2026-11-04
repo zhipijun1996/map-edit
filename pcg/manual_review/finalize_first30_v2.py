@@ -1,4 +1,6 @@
 """Control-only 07/10 revision chosen by the predeclared bounded screens."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,copy
 from pcg.migration import core,physics,holdout_guard,pool_protocols
 from pcg.prototype.factory.core.quality import digest

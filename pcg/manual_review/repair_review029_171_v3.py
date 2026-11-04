@@ -1,3 +1,5 @@
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from pcg.manual_review.prepare_review029_v1 import AUTH
 from pcg.manual_review.repair_review029_v2 import axis

@@ -1,4 +1,6 @@
 """Open an isolated compiled sample; no generation or qualification on launch."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import subprocess
 from pcg.migration import core, godot_package

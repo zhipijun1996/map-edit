@@ -25,25 +25,13 @@
       40
     ],
     [
-      -64,
-      950,
-      64,
-      24
-    ],
-    [
-      -128,
-      950,
-      64,
-      24
-    ],
-    [
       1000,
       96,
-      88,
+      24,
       24
     ],
     [
-      1088,
+      960,
       54,
       64,
       24
@@ -80,10 +68,10 @@
         550.0
       ],
       "travel": [
-        0.0,
-        130.0
+        0,
+        130
       ],
-      "radius": 28.0,
+      "radius": 28,
       "period": 4,
       "initial_phase": 0,
       "damage": 1,
@@ -94,12 +82,12 @@
     {
       "platform_id": "ascent_0",
       "start": [
-        250,
-        932
+        250.0,
+        932.0
       ],
       "finish": [
-        550,
-        792
+        550.0,
+        792.0
       ],
       "size": [
         120,
@@ -112,12 +100,12 @@
     {
       "platform_id": "ascent_1",
       "start": [
-        830,
-        630
+        830.0,
+        630.0
       ],
       "finish": [
-        500,
-        490
+        500.0,
+        490.0
       ],
       "size": [
         120,
@@ -130,12 +118,12 @@
     {
       "platform_id": "ascent_2",
       "start": [
-        260,
-        328
+        260.0,
+        328.0
       ],
       "finish": [
-        700,
-        188
+        700.0,
+        188.0
       ],
       "size": [
         120,
@@ -148,25 +136,58 @@
   ],
   "hooks": [],
   "latches": [],
-  "enemies": [],
+  "enemies": [
+    {
+      "id": "design-ascent-air-enemy-1",
+      "definition": "plains_diver",
+      "position": [
+        430.0,
+        790.0
+      ],
+      "initial_idle_cooldown": 0
+    },
+    {
+      "id": "design-ascent-air-enemy-2",
+      "definition": "plains_diver",
+      "position": [
+        650.0,
+        480.0
+      ],
+      "initial_idle_cooldown": 0
+    },
+    {
+      "id": "design-ascent-air-enemy-3",
+      "definition": "plains_diver",
+      "position": [
+        520.0,
+        210.0
+      ],
+      "initial_idle_cooldown": 0
+    }
+  ],
   "reward_sites": [],
   "schema": "pcg/compiled-module-content/v1",
-  "source_sha256": "1342f462d22216b01d3c5c8e029d3c33732523dc0538af424cd26cbf578b5534",
+  "source_sha256": "4962e7151a4e12c371bab0d833579b16f72fad6adb88b848c722bd0626184df2",
   "stable_id": "game-challenge-ferry-ascent",
   "ports": [
     {
       "id": "entry",
       "objectId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/port-entry",
       "position": [
-        -128,
+        0,
         918
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": -32,
+          "y": 886,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
-        "objectId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/replay-independent-dock-entry",
+        "objectId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/platform-0",
         "face": "top",
         "status": "source_derived"
       },
@@ -233,7 +254,7 @@
         "entry-seam"
       ],
       "routeRoles": [
-        "main:entry"
+        "entry-to-exit:entry"
       ],
       "sourceRoles": [
         "entry"
@@ -257,13 +278,13 @@
         ]
       },
       "stagingPosition": [
-        -104,
+        24,
         932
       ],
       "face": "LEFT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -289,18 +310,35 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          0,
+          7
+        ],
+        "edge": "W",
+        "stagingPosition": [
+          24,
+          932
+        ],
+        "profile": "ground64/v1"
       }
     },
     {
       "id": "exit",
       "objectId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/port-exit",
       "position": [
-        1152,
+        1024,
         22
       ],
       "connection": {
-        "status": "UNKNOWN",
-        "region": "UNKNOWN"
+        "status": "declared",
+        "region": {
+          "x": 992,
+          "y": -10,
+          "w": 64,
+          "h": 64
+        }
       },
       "support": {
         "objectId": "generated-71c31cd353f4d1523740007f6b53db5855521828adc9dd061755b7b74d0a8ead/replay-independent-dock-exit",
@@ -370,7 +408,7 @@
         "exit-seam"
       ],
       "routeRoles": [
-        "main:exit"
+        "entry-to-exit:exit"
       ],
       "sourceRoles": [
         "exit"
@@ -394,13 +432,13 @@
         ]
       },
       "stagingPosition": [
-        1128,
+        1000,
         36
       ],
       "face": "RIGHT",
       "surface": "ROCK",
       "permission": "INOUT",
-      "permissionStatus": "declared_pending_boundary_probe",
+      "permissionStatus": "declared_pending_approved_validation",
       "cornerRelocations": {
         "TOP_LEFT": {
           "applicable": false,
@@ -411,11 +449,11 @@
         "TOP_RIGHT": {
           "applicable": true,
           "allowed": "UNKNOWN",
-          "reason": "rock_vertical_forbidden_requires_local_one_way_platform_adaptation",
+          "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
           "profileId": null,
           "targetFace": "TOP",
           "targetPosition": [
-            1088,
+            960,
             -42
           ],
           "proposedSurface": "ONE_WAY_PLATFORM",
@@ -433,21 +471,33 @@
           "reason": "port_not_on_this_corner_block_outer_face",
           "profileId": null
         }
+      },
+      "grid": {
+        "cell": [
+          7,
+          0
+        ],
+        "edge": "E",
+        "stagingPosition": [
+          1000,
+          36
+        ],
+        "profile": "ground64/v1"
       }
     }
   ],
   "world_bounds": [
-    -256,
-    -170.0,
-    1536,
-    1408.0
+    0,
+    -42,
+    1024,
+    1152
   ],
   "entry_port": [
-    20.0,
+    24.0,
     932.0
   ],
   "exit_port": [
-    1128,
-    36
+    1000.0,
+    36.0
   ]
 }

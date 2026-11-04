@@ -1,4 +1,6 @@
 """Native uncut movie of the authorized 6x2 revision; strict differences retained."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import gzip,json
 from pcg.migration import core,physics
 from pcg.prototype.factory.core.quality import module_hash

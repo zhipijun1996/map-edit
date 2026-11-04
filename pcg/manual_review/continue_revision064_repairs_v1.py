@@ -4,6 +4,8 @@ Round063's selected formal versions and failures stay immutable. This uses
 the pre-existing FULL protocol adaptation cap, with genuinely revised programs
 frozen before new pool allocation. The original task's total case cap remains.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics,holdout_guard,pool_protocols
 from .continue_revision063_v1 import rows,label,OUT as PRIOR_OUT,AUTH as PRIOR_AUTH
 from .record_revision063_native_v1 import folder_for

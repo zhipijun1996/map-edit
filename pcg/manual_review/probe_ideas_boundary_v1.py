@@ -1,4 +1,6 @@
 """Real top-Port fixture preflight, before selecting a formal run."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import sys
 from pcg.migration import core,physics
 from .new_ideas_v1 import rows,label

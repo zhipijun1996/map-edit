@@ -1,7 +1,7 @@
 {
   "schema": "gunman-rush-level-sketch/v1",
   "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
-  "title": "p50-enemy-r2-attack-relay-d1-c0",
+  "title": "窄道中段触发，两侧夹击",
   "description": "内容工坊隔离候选；技术覆盖、视频观感、手动试玩和生产认可分别记录。",
   "constraints": "UNKNOWN不得作为有效地图接口。",
   "canvas": {
@@ -18,10 +18,10 @@
     {
       "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
       "type": "terrain",
-      "x": -160,
+      "x": 384,
       "y": 438,
-      "w": 980,
-      "h": 100,
+      "w": 256,
+      "h": 32,
       "rotation": 0,
       "label": "",
       "note": "",
@@ -29,12 +29,12 @@
       "wallClimbable": false
     },
     {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-1",
+      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2",
       "type": "terrain",
-      "x": 210,
-      "y": 346,
-      "w": 60,
-      "h": 50,
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 182,
       "rotation": 0,
       "label": "",
       "note": "",
@@ -42,1046 +42,157 @@
       "wallClimbable": false
     },
     {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2",
-      "type": "terrain",
-      "x": 300,
-      "y": 80,
-      "w": 470,
-      "h": 316,
-      "rotation": 0,
-      "label": "",
-      "note": "",
-      "sourceIndex": 2,
-      "wallClimbable": false
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0",
-      "type": "gate",
-      "x": 300,
-      "y": 396,
-      "w": 24,
-      "h": 42,
-      "rotation": 0,
-      "label": "attack-gate gate",
-      "note": "",
-      "mechanics": {
-        "kind": "enemy_attack_relay_gate",
-        "enemyObjectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
-        "onNativeState": "attack",
-        "openSeconds": 1,
-        "clockAndAntiPinch": "original ShotLatch unchanged"
-      }
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/bell-0",
+      "id": "design-corridor-middle-trigger",
       "type": "switch",
-      "x": 266,
-      "y": 353,
-      "w": 28,
-      "h": 34,
-      "rotation": 0,
-      "label": "敌人攻击继电器",
-      "note": "真实EnemyAttackBehavior进入attack时驱动；不是可射击风铃",
-      "targetId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0",
-      "sourceId": "attack-gate",
+      "x": 482,
+      "y": 396,
+      "w": 60,
+      "h": 42,
+      "diagramLabel": "中段触发区",
+      "diagramLabelPosition": [
+        512,
+        367
+      ],
+      "targetIds": [
+        "design-ambush-left",
+        "design-ambush-right"
+      ],
       "mechanics": {
-        "service": "AttackRelayLatch v1",
-        "enemyObjectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
-        "onNativeState": "attack",
-        "originalBellBody": {
-          "position": [
-            280,
-            370
-          ],
-          "collisionLayer": 0
-        },
-        "source": "pcg/prototype/creative_batches/enemy_world/attack_relay_v1.gd",
-        "runtimeParameters": {
-          "disabledReceiverPosition": [
-            280,
-            370
-          ],
-          "attack_relay": {
-            "enemy_id": "relay-sentry",
-            "native_state": "attack"
-          }
-        }
+        "kind": "player_enter_spawn_wave",
+        "oneShotPerAttempt": true,
+        "technicalStatus": "UNKNOWN",
+        "speed": 18
       }
     },
     {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
+      "id": "design-ambush-left",
       "type": "enemy",
-      "x": 211,
-      "y": 314,
+      "definition": "plains_sentry",
+      "x": 392,
+      "y": 406,
       "w": 28,
       "h": 32,
-      "rotation": 0,
-      "label": "relay-sentry",
-      "note": "",
-      "sourceId": "relay-sentry",
-      "definition": "plains_sentry",
+      "diagramLabel": "左侧出怪",
+      "spawnCondition": {
+        "triggerId": "design-corridor-middle-trigger",
+        "event": "player_enter",
+        "initialPresent": false
+      },
+      "movementIntent": {
+        "direction": "toward_corridor_center",
+        "targetX": 512,
+        "speed": 18,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "technicalStatus": "UNKNOWN",
+      "sourceId": "design-ambush-left",
       "mechanics": {
+        "initialIdleCooldown": 2,
         "runtimeParameters": {
-          "initial_idle_cooldown": 0.6
+          "initial_idle_cooldown": 2
         }
       }
+    },
+    {
+      "id": "design-ambush-right",
+      "type": "enemy",
+      "definition": "plains_sentry",
+      "x": 596,
+      "y": 406,
+      "w": 28,
+      "h": 32,
+      "diagramLabel": "右侧出怪",
+      "spawnCondition": {
+        "triggerId": "design-corridor-middle-trigger",
+        "event": "player_enter",
+        "initialPresent": false
+      },
+      "movementIntent": {
+        "direction": "toward_corridor_center",
+        "targetX": 512,
+        "speed": 18,
+        "status": "DESIGN_TARGET_ONLY"
+      },
+      "technicalStatus": "UNKNOWN",
+      "sourceId": "design-ambush-right",
+      "mechanics": {
+        "initialIdleCooldown": 2,
+        "runtimeParameters": {
+          "initial_idle_cooldown": 2
+        }
+      }
+    },
+    {
+      "id": "design-route-entry-to-exit",
+      "type": "route",
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 256,
+      "points": [
+        {
+          "x": 384,
+          "y": 406
+        },
+        {
+          "x": 512,
+          "y": 420
+        },
+        {
+          "x": 640,
+          "y": 406
+        }
+      ],
+      "duration": 1,
+      "mode": "once"
+    },
+    {
+      "id": "design-route-exit-to-entry",
+      "type": "route",
+      "x": 384,
+      "y": 214,
+      "w": 256,
+      "h": 256,
+      "points": [
+        {
+          "x": 640,
+          "y": 406
+        },
+        {
+          "x": 512,
+          "y": 417
+        },
+        {
+          "x": 384,
+          "y": 406
+        }
+      ],
+      "duration": 1,
+      "mode": "once"
     },
     {
       "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/port-entry",
-      "type": "entry",
-      "x": -268,
+      "type": "exit",
+      "x": 372,
       "y": 388,
       "w": 24,
       "h": 36,
-      "rotation": 0,
-      "label": "entry",
-      "note": ""
+      "rotation": 0
     },
     {
       "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/port-exit",
       "type": "exit",
-      "x": 884,
+      "x": 628,
       "y": 388,
       "w": 24,
       "h": 36,
-      "rotation": 0,
-      "label": "exit",
-      "note": ""
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/main-route",
-      "type": "route",
-      "x": 110,
-      "y": 419.925262451172,
-      "w": 407.33386330468795,
-      "h": 0.07473854882800879,
-      "rotation": 0,
-      "label": "真实输入见证",
-      "note": "",
-      "points": [
-        {
-          "x": 110,
-          "y": 420
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 110,
-          "y": 420,
-          "action": ""
-        },
-        {
-          "x": 114.333335876465,
-          "y": 419.925262451172,
-          "action": ""
-        },
-        {
-          "x": 118.666664123535,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 123,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 127.333335876465,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 131.66667175293,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 136,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 140.33332824707,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 144.666656494141,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 148.999984741211,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 153.333312988281,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 157.666641235352,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 161.999969482422,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 166.333297729492,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 170.666625976562,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 174.999954223633,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 179.333282470703,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 183.666610717773,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 187.999938964844,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 192.333267211914,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 196.666595458984,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 200.999923706055,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 205.333251953125,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 209.666580200195,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 213.999908447266,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 218.333236694336,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 222.666564941406,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 226.999893188477,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 231.333221435547,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 235.666549682617,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 239.999877929688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 244.333206176758,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 248.666534423828,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 252.999862670898,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 257.333190917969,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 261.666534423828,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 265.999877929688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 270.333221435547,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 274.666564941406,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 278.999908447266,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 283.333251953125,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 287.666595458984,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 291.999938964844,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 296.333282470703,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 300.666625976562,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 304.999969482422,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 309.333312988281,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 313.666656494141,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 318,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 322.333343505859,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 326.666687011719,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 331.000030517578,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 335.333374023438,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 339.666717529297,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 344.000061035156,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 348.333404541016,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 352.666748046875,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 357.000091552734,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 361.333435058594,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 365.666778564453,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 370.000122070312,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 374.333465576172,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 378.666809082031,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 383.000152587891,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 387.33349609375,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 391.666839599609,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 396.000183105469,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 400.333526611328,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 404.666870117188,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 409.000213623047,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 413.333557128906,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 417.666900634766,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 422.000244140625,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 426.333587646484,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 430.666931152344,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 435.000274658203,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 439.333618164062,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 443.666961669922,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 448.000305175781,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 452.333648681641,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 456.6669921875,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 461.000335693359,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 465.333679199219,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 469.667022705078,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 474.000366210938,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 478.333709716797,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 482.667053222656,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 487.000396728516,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 491.333740234375,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 495.667083740234,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 500.000427246094,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 504.333770751953,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 508.667114257812,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 513.00048828125,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        },
-        {
-          "x": 517.333862304688,
-          "y": 419.92529296875,
-          "action": ""
-        }
-      ],
-      "duration": 2.85,
-      "mode": "once",
-      "sourceRoute": "main",
-      "trajectory": "recorded_actual_physics"
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/cache-0",
-      "type": "reward",
-      "x": 502,
-      "y": 402,
-      "w": 36,
-      "h": 36,
-      "rotation": 0,
-      "label": "宝箱 12",
-      "note": "原 SimpleRoomReward 受支持接触后提交金币；可见不等于已领取",
-      "mechanics": {
-        "kind": "chest",
-        "service": "SimpleRoomReward",
-        "amount": 12,
-        "source": {
-          "id": "visible-cache",
-          "position": [
-            520,
-            420
-          ],
-          "region": [
-            490,
-            415,
-            60,
-            10
-          ],
-          "amount": 12
-        }
-      }
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-entry",
-      "type": "terrain",
-      "x": -256,
-      "y": 438,
-      "w": 120,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 3
-    },
-    {
-      "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-exit",
-      "type": "terrain",
-      "x": 796,
-      "y": 438,
-      "w": 100,
-      "h": 24,
-      "rotation": 0,
-      "label": "Local boundary connector",
-      "note": "Offline adaptation; physics pending",
-      "sourceIndex": 4
+      "rotation": 0
     }
   ],
   "updatedAt": "2026-10-26T03:08:17.776Z",
   "intent": {
-    "operation": "new_module"
+    "operation": "modify_existing",
+    "notes": "Authoritative current Module. Edit objects and declared native bindings here; generated files are not another source library."
   },
   "capabilityRequirements": {
     "version": 1,
@@ -1101,205 +212,143 @@
   },
   "source": {
     "repository": "zhipijun1996/map-edit",
-    "commit": "4af6b8bdc9bbd6f36ca8979356e5d34cb7d21020",
-    "path": "pcg/prototype/creative_batches/plains50_enemy/rules_v2.py",
+    "commit": "9b712fe814ef228b368c0eb9adf660e39de29e37",
+    "path": "modules/generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/module.mapnote.json",
     "moduleId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
     "kind": "generated",
     "category": "平原",
-    "method": "actual_flight_and_pressure_relations",
-    "arguments": [],
     "integration": {
       "isIntegrated": false,
-      "usage": "not_integrated",
-      "label": "未接入 · 研究候选",
-      "reason": "生成与回放证据未写回正式游戏地图消费者。",
-      "checkedCommit": "4af6b8bdc9bbd6f36ca8979356e5d34cb7d21020",
-      "evidence": [],
-      "verification": "research_output_only"
+      "reason": "Current reviewed source; runtime delivery is separate from production game approval."
     }
   },
   "generationContract": {
     "version": 2,
     "kind": "module",
-    "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
+    "contentVersion": "sha256:c01133af98647af1ea3d2b09bc24bc4132f70f51574bf98f37648203e904a32b",
     "seed": {
       "status": "not_used",
       "value": null,
       "reason": "Deterministic registered rules; phase/noise seeds are validation only"
     },
     "generation": {
-      "source": {
-        "cases": {
-          "path": "pcg/results/workshop-plains50-enemy-r2-attack-relay/round-00/review_cases.json",
-          "sha256": "9aceba6c7706ca5997199317d779d9914a653bb3ba7ca0612e91921d717da46b"
-        },
-        "run": "pcg/results/workshop-plains50-enemy-r2-attack-relay/round-00",
-        "sourceCaseId": "p50-enemy-r2-attack-relay-d1-c0",
-        "moduleSha256": "6b1bda83adea6535f9d4cafdd5bb11025c1ee4ff808f9748684fc1e5033c6c9d",
-        "physicsSourceCommit": "12f6cb006d7119598e3235f4ca4f7323e4c9d092",
-        "sourceManifestSha256": "4c0ed57464d54a4a769b9faa867720286c5f5f4f7f4f127eb43ff63a0144fd92",
-        "workshopSpecification": {
-          "schema": "map-notes/challenge-specification/v1",
-          "id": "plains50/enemy/attack-relay/d1/r2",
-          "region": "plains",
-          "required_family": "enemy-attack-relay",
-          "objective": {
-            "recipe": "attack-relay",
-            "relationship": "actual native enemy attack commitment supplies a short gate opening",
-            "derived_resource_sha256": "not_used",
-            "spatial_demand": {
-              "entry_x": 110,
-              "exit_x": 520,
-              "floor_width": 980,
-              "ceiling_width": 470
-            },
-            "source_relationship": "existing family, demand adaptation not new family",
-            "campaign": "plains50-v1"
-          },
-          "capabilities": {
-            "version": 1,
-            "status": "defined",
-            "allOf": [
-              "move",
-              "jump",
-              "shot_recoil"
-            ],
-            "anyOfGroups": []
-          },
-          "ports": {
-            "count": 2,
-            "required_normals": [
-              [
-                -1,
-                0
-              ],
-              [
-                1,
-                0
-              ]
-            ]
-          },
-          "relations": [
+      "parameters": {
+        "runtimeBindings": {
+          "platforms": [
             {
-              "from_port": "entry",
-              "to_port": "exit",
-              "role": "reward"
+              "$bind": "rect",
+              "object": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0"
+            },
+            {
+              "$bind": "rect",
+              "object": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2"
             }
           ],
-          "entry_y": 420,
-          "rise": 0,
-          "space": {
-            "max_width": 1500,
-            "max_height": 1000,
-            "max_port_span_x": 900
-          },
-          "boundary_policy": "open",
-          "enclosing_walls": false,
-          "risk_reward": {
-            "amount": 12,
-            "mandatory_damage": false
-          },
-          "difficulty": {
-            "intent": "regular",
-            "human_score": null
-          },
-          "resource_state": {
-            "reset_between_components": false,
-            "entry": "original supported resources",
-            "exit": "observed only"
-          },
-          "return_conditions": "UNKNOWN",
-          "budget": {
-            "generator_candidates": 4,
-            "director_revisions": 0
+          "one_way_platform_indices": [],
+          "wall_platform_indices": [],
+          "hazards": [],
+          "thorns": [],
+          "saws": [],
+          "moving_platforms": [],
+          "hooks": [],
+          "latches": [],
+          "enemies": [
+            {
+              "id": {
+                "$bind": "field",
+                "object": "design-ambush-left",
+                "path": [
+                  "id"
+                ]
+              },
+              "definition": {
+                "$bind": "field",
+                "object": "design-ambush-left",
+                "path": [
+                  "definition"
+                ]
+              },
+              "position": {
+                "$bind": "center",
+                "object": "design-ambush-left"
+              },
+              "initial_idle_cooldown": {
+                "$bind": "field",
+                "object": "design-ambush-left",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_idle_cooldown"
+                ]
+              }
+            },
+            {
+              "id": {
+                "$bind": "field",
+                "object": "design-ambush-right",
+                "path": [
+                  "id"
+                ]
+              },
+              "definition": {
+                "$bind": "field",
+                "object": "design-ambush-right",
+                "path": [
+                  "definition"
+                ]
+              },
+              "position": {
+                "$bind": "center",
+                "object": "design-ambush-right"
+              },
+              "initial_idle_cooldown": {
+                "$bind": "field",
+                "object": "design-ambush-right",
+                "path": [
+                  "mechanics",
+                  "runtimeParameters",
+                  "initial_idle_cooldown"
+                ]
+              }
+            }
+          ],
+          "reward_sites": [],
+          "review029_wave": {
+            "rect": {
+              "$bind": "rect",
+              "object": "design-corridor-middle-trigger"
+            },
+            "targetX": 512,
+            "speed": 18,
+            "oneShot": true
           }
         },
-        "ideaIds": [
-          "plains50/enemy/attack-relay"
-        ],
-        "enemyWorldCells": {
-          "attack_relay": "pcg/prototype/creative_batches/enemy_world/attack_relay_v1.gd",
-          "occupancy": "pcg/prototype/creative_batches/occupancy/occupancy_latch_v1.gd",
-          "guard_definition": "pcg/prototype/creative_batches/enemy_world/guard_charger_v1.tres",
-          "guard_sha256": "b8a44cd25ee62c409aea335dfcdd0667de32b445a4d50cfe213dfd20e2b8a4ee"
+        "nativeAnchors": {
+          "entry": {
+            "$bind": "relative_point",
+            "object": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
+            "offset": [
+              -104,
+              -34
+            ]
+          },
+          "exit": {
+            "$bind": "relative_point",
+            "object": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
+            "offset": [
+              104,
+              -34
+            ]
+          }
         }
       },
-      "parameters": {
-        "producerArguments": {
-          "id": "plains50/enemy/attack-relay",
-          "version": 2,
-          "source_path": "pcg/prototype/creative_batches/plains50_enemy/rules_v2.py",
-          "parameters": {
-            "spatial_demand": {
-              "entry_x": 110,
-              "exit_x": 520,
-              "floor_width": 980,
-              "ceiling_width": 470
-            },
-            "existing_relationship": "attack-relay",
-            "campaign": "plains50-v1",
-            "interface": 1,
-            "control_choice": 0
-          }
-        },
-        "family": "enemy-attack-relay",
-        "controlPlan": [
-          {
-            "op": "axis",
-            "trigger": {
-              "after": 0
-            },
-            "value": 0
-          },
-          {
-            "op": "wait",
-            "trigger": {
-              "state": "grounded",
-              "enemy_state": {
-                "id": "relay-sentry",
-                "state": "attack"
-              },
-              "timeout": 180
-            }
-          },
-          {
-            "op": "axis",
-            "trigger": {
-              "after": 0
-            },
-            "value": 1
-          },
-          {
-            "op": "settle",
-            "trigger": {
-              "after": 0
-            },
-            "target_x": 520,
-            "deadband": 4
-          }
-        ],
-        "challengeRequirements": "UNKNOWN",
-        "synthesis": "UNKNOWN",
-        "workshop": {
-          "spatial_demand": {
-            "entry_x": 110,
-            "exit_x": 520,
-            "floor_width": 980,
-            "ceiling_width": 470
-          },
-          "existing_relationship": "attack-relay",
-          "campaign": "plains50-v1",
-          "interface": 1,
-          "control_choice": 0
-        }
+      "source": {
+        "kind": "current_module_source",
+        "record": "modules/generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/record.json"
       },
       "migration": {
-        "sourcePath": "pcg/map_directed/library/candidates/bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff",
-        "sourceVersion": "sha256:bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff",
-        "sourceDocumentSha256": "841c805f2e6c8e1ca72a9c287e39103d2cf9978a73b646e674d8fbb9f67c42b6",
-        "policy": "minimal_actual_boundary_adaptation",
         "moduleId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b",
-        "legacyEvidencePolicy": "Historical artifacts remain bound to their original content version."
+        "status": "current_source"
       }
     },
     "designStatus": "declared",
@@ -1325,1058 +374,27 @@
         }
       },
       "bounds": {
-        "x": -256,
-        "y": -42,
-        "w": 1152,
-        "h": 640
+        "x": 384,
+        "y": 214,
+        "w": 256,
+        "h": 256
       },
       "boundsCoverage": "Complete rectangular Module footprint; internal geometry preserved.",
       "occupancy": {
         "status": "partial",
         "objectIds": [
           "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-1",
           "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/bell-0",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/cache-0",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-entry",
-          "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-exit"
+          "design-corridor-middle-trigger",
+          "design-ambush-left",
+          "design-ambush-right"
         ],
         "regions": [],
         "coverage": "known cells; full action and projectile reservations UNKNOWN"
       },
       "actionClearance": {
-        "status": "partial",
-        "regions": [
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 402,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 98,
-            "y": 401.925262451172,
-            "w": 28.333335876465,
-            "h": 36.07473754882801
-          },
-          {
-            "x": 102.333335876465,
-            "y": 401.925262451172,
-            "w": 28.33332824707,
-            "h": 36.00003051757801
-          },
-          {
-            "x": 106.666664123535,
-            "y": 401.92529296875,
-            "w": 28.333335876465,
-            "h": 36
-          },
-          {
-            "x": 111,
-            "y": 401.92529296875,
-            "w": 28.333335876465,
-            "h": 36
-          },
-          {
-            "x": 115.333335876465,
-            "y": 401.92529296875,
-            "w": 28.333335876465,
-            "h": 36
-          },
-          {
-            "x": 119.66667175293,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 124,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 128.33332824707,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 132.666656494141,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 136.999984741211,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 141.333312988281,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 145.666641235352,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 149.999969482422,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 154.333297729492,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 158.666625976562,
-            "y": 401.92529296875,
-            "w": 28.333328247071023,
-            "h": 36
-          },
-          {
-            "x": 162.999954223633,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 167.333282470703,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 171.666610717773,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 175.999938964844,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 180.333267211914,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 184.666595458984,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 188.999923706055,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 193.333251953125,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 197.666580200195,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 201.999908447266,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 206.333236694336,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 210.666564941406,
-            "y": 401.92529296875,
-            "w": 28.333328247070995,
-            "h": 36
-          },
-          {
-            "x": 214.999893188477,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 219.333221435547,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 223.666549682617,
-            "y": 401.92529296875,
-            "w": 28.333328247071023,
-            "h": 36
-          },
-          {
-            "x": 227.999877929688,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 232.333206176758,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 236.666534423828,
-            "y": 401.92529296875,
-            "w": 28.33332824707,
-            "h": 36
-          },
-          {
-            "x": 240.999862670898,
-            "y": 401.92529296875,
-            "w": 28.333328247070966,
-            "h": 36
-          },
-          {
-            "x": 245.33319091796898,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 249.666534423828,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 253.999877929688,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 258.333221435547,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 262.666564941406,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 266.999908447266,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 271.333251953125,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 275.666595458984,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 279.999938964844,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 284.333282470703,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 288.666625976562,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 292.999969482422,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 297.333312988281,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 301.666656494141,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 306,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 310.333343505859,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 314.666687011719,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 319.000030517578,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 323.333374023438,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 327.666717529297,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 332.000061035156,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 336.333404541016,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 340.666748046875,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 345.000091552734,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 349.333435058594,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 353.666778564453,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 358.000122070312,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 362.333465576172,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 366.666809082031,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 371.000152587891,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 375.33349609375,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 379.666839599609,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 384.000183105469,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 388.333526611328,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 392.666870117188,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 397.000213623047,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 401.333557128906,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 405.666900634766,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 410.000244140625,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 414.333587646484,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 418.666931152344,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 423.000274658203,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 427.333618164062,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 431.666961669922,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 436.000305175781,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 440.333648681641,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 444.6669921875,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 449.000335693359,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 453.333679199219,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 457.667022705078,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 462.000366210938,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 466.333709716797,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 470.667053222656,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 475.000396728516,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 479.333740234375,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 483.667083740234,
-            "y": 401.92529296875,
-            "w": 28.33334350586,
-            "h": 36
-          },
-          {
-            "x": 488.000427246094,
-            "y": 401.92529296875,
-            "w": 28.333343505859034,
-            "h": 36
-          },
-          {
-            "x": 492.333770751953,
-            "y": 401.92529296875,
-            "w": 28.333343505858977,
-            "h": 36
-          },
-          {
-            "x": 496.667114257812,
-            "y": 401.92529296875,
-            "w": 28.33337402343801,
-            "h": 36
-          },
-          {
-            "x": 501.00048828125,
-            "y": 401.92529296875,
-            "w": 28.333374023437955,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          },
-          {
-            "x": 505.33386230468795,
-            "y": 401.92529296875,
-            "w": 24,
-            "h": 36
-          }
-        ],
+        "status": "UNKNOWN",
+        "regions": [],
         "coverage": "recorded_policy_body_sweep",
         "unverified": [
           "all allowed entry states",
@@ -2386,36 +404,40 @@
       },
       "dynamicEnvelopes": [
         {
-          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
+          "objectId": "design-ambush-left",
           "region": "UNKNOWN",
-          "status": "UNKNOWN",
-          "coverage": "full AI attack/projectile/motion envelope not bounded; observed frames retained"
+          "status": "UNKNOWN"
+        },
+        {
+          "objectId": "design-ambush-right",
+          "region": "UNKNOWN",
+          "status": "UNKNOWN"
         }
       ],
       "seams": [
         {
           "id": "entry-seam",
           "portId": "entry",
+          "allowedOverlap": [],
           "region": {
-            "x": -288,
+            "x": 352,
             "y": 374,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         },
         {
           "id": "exit-seam",
           "portId": "exit",
+          "allowedOverlap": [],
           "region": {
-            "x": 864,
+            "x": 608,
             "y": 374,
             "w": 64,
             "h": 64
           },
-          "status": "UNKNOWN",
-          "allowedOverlap": []
+          "status": "UNKNOWN"
         }
       ],
       "transforms": [
@@ -2502,15 +524,20 @@
         "id": "entry",
         "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/port-entry",
         "position": [
-          -256,
+          384,
           406
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 352,
+            "y": 374,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-entry",
+          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
           "face": "top",
           "status": "source_derived"
         },
@@ -2577,16 +604,17 @@
           "entry-seam"
         ],
         "routeRoles": [
-          "main:entry"
+          "entry-to-exit:entry",
+          "exit-to-entry:exit"
         ],
         "stagingPosition": [
-          -232,
+          408,
           420
         ],
         "face": "LEFT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -2601,10 +629,17 @@
             "profileId": null
           },
           "BOTTOM_LEFT": {
-            "applicable": false,
-            "allowed": false,
-            "reason": "port_not_on_this_corner_block_outer_face",
-            "profileId": null
+            "applicable": true,
+            "allowed": "UNKNOWN",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+            "profileId": null,
+            "targetFace": "BOTTOM",
+            "targetPosition": [
+              448,
+              470
+            ],
+            "proposedSurface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
           },
           "BOTTOM_RIGHT": {
             "applicable": false,
@@ -2612,21 +647,38 @@
             "reason": "port_not_on_this_corner_block_outer_face",
             "profileId": null
           }
+        },
+        "grid": {
+          "cell": [
+            0,
+            1
+          ],
+          "edge": "W",
+          "stagingPosition": [
+            408,
+            420
+          ],
+          "profile": "ground64/v1"
         }
       },
       {
         "id": "exit",
         "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/port-exit",
         "position": [
-          896,
+          640,
           406
         ],
         "connection": {
-          "status": "UNKNOWN",
-          "region": "UNKNOWN"
+          "status": "declared",
+          "region": {
+            "x": 608,
+            "y": 374,
+            "w": 64,
+            "h": 64
+          }
         },
         "support": {
-          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/migration-shore-exit",
+          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
           "face": "top",
           "status": "source_derived"
         },
@@ -2693,16 +745,17 @@
           "exit-seam"
         ],
         "routeRoles": [
-          "main:exit"
+          "entry-to-exit:exit",
+          "exit-to-entry:entry"
         ],
         "stagingPosition": [
-          872,
+          616,
           420
         ],
         "face": "RIGHT",
         "surface": "ROCK",
         "permission": "INOUT",
-        "permissionStatus": "declared_pending_boundary_probe",
+        "permissionStatus": "declared_pending_approved_validation",
         "cornerRelocations": {
           "TOP_LEFT": {
             "applicable": false,
@@ -2723,11 +776,30 @@
             "profileId": null
           },
           "BOTTOM_RIGHT": {
-            "applicable": false,
-            "allowed": false,
-            "reason": "port_not_on_this_corner_block_outer_face",
-            "profileId": null
+            "applicable": true,
+            "allowed": "UNKNOWN",
+            "reason": "Not inherited across current-source normalization; only explicit delivery configurations are allowed.",
+            "profileId": null,
+            "targetFace": "BOTTOM",
+            "targetPosition": [
+              576,
+              470
+            ],
+            "proposedSurface": "ONE_WAY_PLATFORM",
+            "permission": "INOUT"
           }
+        },
+        "grid": {
+          "cell": [
+            1,
+            1
+          ],
+          "edge": "E",
+          "stagingPosition": [
+            616,
+            420
+          ],
+          "profile": "ground64/v1"
         }
       }
     ],
@@ -2736,40 +808,42 @@
         "from": "entry",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       },
       {
         "from": "entry",
         "to": "exit",
-        "status": "path",
+        "status": "UNKNOWN",
+        "conditions": "UNKNOWN",
         "routeIds": [
-          "main"
-        ],
-        "conditions": "UNKNOWN"
+          "entry-to-exit"
+        ]
       },
       {
         "from": "exit",
         "to": "entry",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": [
+          "exit-to-entry"
+        ]
       },
       {
         "from": "exit",
         "to": "exit",
         "status": "UNKNOWN",
-        "routeIds": [],
-        "conditions": "UNKNOWN"
+        "conditions": "UNKNOWN",
+        "routeIds": []
       }
     ],
     "routes": [
       {
-        "id": "main",
+        "id": "entry-to-exit",
         "from": "entry",
         "to": "exit",
         "role": "main",
-        "pathObjectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/main-route",
+        "pathObjectId": "design-route-entry-to-exit",
         "capabilityRequirements": {
           "version": 1,
           "status": "partial",
@@ -2788,7 +862,7 @@
         },
         "availability": "UNKNOWN",
         "transfer": {
-          "status": "observed_only",
+          "status": "UNKNOWN",
           "requires": {
             "capabilityRequirements": {
               "version": 1,
@@ -2869,9 +943,7 @@
           "observedJumps": 0,
           "phaseWaits": []
         },
-        "validationIds": [
-          "migration-main"
-        ],
+        "validationIds": [],
         "requiredAbilities": [
           "jump",
           "move",
@@ -2888,48 +960,140 @@
           "status": "UNKNOWN"
         },
         "localDisplacementBlocks": [
-          9,
+          2,
           0
-        ]
-      }
-    ],
-    "unlocks": [
+        ],
+        "evidenceStatus": "UNKNOWN"
+      },
       {
-        "id": "attack-gate",
-        "trigger": {
-          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
-          "condition": "original EnemyAttackBehavior state_changed attack; native projectile firing remains active"
+        "id": "exit-to-entry",
+        "from": "exit",
+        "to": "entry",
+        "role": "return",
+        "pathObjectId": "design-route-exit-to-entry",
+        "capabilityRequirements": {
+          "version": 1,
+          "status": "partial",
+          "allOf": [
+            "jump",
+            "shot_recoil"
+          ],
+          "anyOfGroups": [],
+          "note": "保留真实测试能力配置；最低必要条件和可替代能力尚未完整验证。"
         },
-        "changes": {
-          "objectId": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0",
-          "collision": "disabled for original timer after actual enemy attack commitment"
+        "difficulty": {
+          "version": 1,
+          "scale": "gunman-rush/module-difficulty/v1",
+          "score": null,
+          "note": ""
         },
-        "before": {
-          "from": "entry",
-          "to": "exit",
+        "availability": "UNKNOWN",
+        "transfer": {
           "status": "UNKNOWN",
-          "conditions": [
-            {
-              "field": "mechanisms.attack-gate.open",
-              "op": "eq",
-              "value": false
-            }
-          ]
+          "requires": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "ensures": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          }
         },
-        "after": {
-          "from": "entry",
-          "to": "exit",
+        "return": {
           "status": "UNKNOWN",
-          "conditions": [
-            {
-              "field": "mechanisms.attack-gate.open",
-              "op": "eq",
-              "value": true
-            }
-          ]
-        }
+          "routeId": "UNKNOWN",
+          "conditions": "UNKNOWN"
+        },
+        "onward": {
+          "status": "UNKNOWN",
+          "target": "UNKNOWN",
+          "requiredState": {
+            "capabilityRequirements": {
+              "version": 1,
+              "status": "unspecified",
+              "allOf": [],
+              "anyOfGroups": [],
+              "note": ""
+            },
+            "equipment": "UNKNOWN",
+            "grounded": "UNKNOWN",
+            "velocity": "UNKNOWN",
+            "remainingJumps": "UNKNOWN",
+            "airShots": "UNKNOWN",
+            "stamina": "UNKNOWN",
+            "health": "UNKNOWN",
+            "shotCooldown": "UNKNOWN",
+            "traversalState": "UNKNOWN",
+            "mechanisms": "UNKNOWN",
+            "phase": "UNKNOWN",
+            "recoveryConditions": "UNKNOWN"
+          },
+          "note": "原见证无伤落地稳定不等于所有进入状态均可恢复"
+        },
+        "resourcePressure": {
+          "status": "partial",
+          "observedShots": 0,
+          "observedJumps": 0,
+          "phaseWaits": []
+        },
+        "validationIds": [],
+        "requiredAbilities": [
+          "jump",
+          "move",
+          "shot_recoil"
+        ],
+        "actionTags": [
+          "settle"
+        ],
+        "durationSeconds": "UNKNOWN",
+        "resourceProfile": {
+          "status": "UNKNOWN"
+        },
+        "initialConditions": {
+          "status": "UNKNOWN"
+        },
+        "localDisplacementBlocks": [
+          -2,
+          0
+        ],
+        "evidenceStatus": "UNKNOWN"
       }
     ],
+    "unlocks": [],
     "composition": {
       "components": [],
       "connections": [],
@@ -2937,473 +1101,57 @@
       "cells": [
         {
           "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0",
-          "contentVersion": "sha256:f54b517b1e31553edc1a4922e93f3825de59cd40f0f320e03c9c17c9f3ea17f1",
           "objectIds": [
             "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-0"
-          ]
-        },
-        {
-          "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-1",
-          "contentVersion": "sha256:2ccd0699bb46ef0f9bb5dcf9d140a8ae77889ad21a41125f4b1e35ae666980d8",
-          "objectIds": [
-            "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-1"
-          ]
+          ],
+          "contentVersion": "sha256:e9d6a1797251b904a8609b70be3d9ffe8340c91e92eb51f81974f071d462b356"
         },
         {
           "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2",
-          "contentVersion": "sha256:892f208155133ca963ea9b00674f2fe4c73abb21f0a6602172471e59847075b9",
           "objectIds": [
             "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/platform-2"
-          ]
+          ],
+          "contentVersion": "sha256:f903ef29aaa930a6d0c1d5e4b50480664b4ebaee7c442d1d2b21b9db6f90b6a4"
         },
         {
-          "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0",
-          "contentVersion": "sha256:85a6541d65762cc4fed96d0f8c12b6e36665f99832e0a20dae4ab158d48a029d",
+          "id": "design-corridor-middle-trigger",
           "objectIds": [
-            "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/gate-0"
-          ]
+            "design-corridor-middle-trigger"
+          ],
+          "contentVersion": "sha256:b8035b1b44e4891cee81b81dd34f23b4806bc79e7cef359cd479fc5990e81d64"
         },
         {
-          "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/bell-0",
-          "contentVersion": "sha256:3b0e333b9decb181e074e04bcf9ae3d00b848e9511156639b4a78f7761feab54",
+          "id": "design-ambush-left",
           "objectIds": [
-            "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/bell-0"
-          ]
+            "design-ambush-left"
+          ],
+          "contentVersion": "sha256:830af142ec4c77d7c76ae6112430c6957903ef549f4bef9db7c0045a7635456f"
         },
         {
-          "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0",
-          "contentVersion": "sha256:2255a09c8e11c173f1bd9d644ab2e4f46cad0fa1e3906a0d12bf947d24d17519",
+          "id": "design-ambush-right",
           "objectIds": [
-            "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/enemy-0"
-          ]
-        },
-        {
-          "id": "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/cache-0",
-          "contentVersion": "sha256:5fe3254df821e8e64cbfa98595ae1026d3e3531d7b697858d873b6c54aca7072",
-          "objectIds": [
-            "generated-011d0a163822daaeea61e2280dbe4b26f7f48fa38d57ac30d06110da0634723b/cache-0"
-          ]
+            "design-ambush-right"
+          ],
+          "contentVersion": "sha256:67a06c791b8bc3a7ac0d5edc29be99e6a6139d415f60ff08005ac4db2b411519"
         }
       ]
     },
-    "validations": [
-      {
-        "id": "migration-main",
-        "kind": "physics",
-        "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
-        "routeId": "main",
-        "from": "entry",
-        "to": "exit",
-        "capabilityConfiguration": {
-          "available": [
-            "move",
-            "jump",
-            "shot_recoil"
-          ],
-          "equipment": "UNKNOWN",
-          "originalSnapshot": {
-            "base_max_air_shots": 1,
-            "declared": [
-              "move",
-              "jump",
-              "shot_recoil"
-            ],
-            "double_enabled": false,
-            "grapple_enabled": false,
-            "hook_range": 231,
-            "jump_enabled": true,
-            "maximum_jumps": 1,
-            "move_enabled": true,
-            "shoot_enabled": true,
-            "wall_enabled": false
-          }
-        },
-        "entryState": {
-          "capabilityRequirements": {
-            "version": 1,
-            "status": "defined",
-            "allOf": [
-              "jump",
-              "shot_recoil"
-            ],
-            "anyOfGroups": [],
-            "note": "Actual sampled configuration, not a minimum-ability proof"
-          },
-          "equipment": "UNKNOWN",
-          "grounded": true,
-          "velocity": {
-            "x": [
-              0,
-              0
-            ],
-            "y": [
-              0,
-              0
-            ]
-          },
-          "remainingJumps": [
-            1,
-            1
-          ],
-          "airShots": [
-            1,
-            1
-          ],
-          "stamina": [
-            100,
-            100
-          ],
-          "health": [
-            5,
-            5
-          ],
-          "shotCooldown": [
-            0,
-            0
-          ],
-          "traversalState": "free",
-          "mechanisms": {
-            "bells": [
-              {
-                "id": "attack-gate",
-                "open": false,
-                "open_count": 0,
-                "sequence_step": 0
-              }
-            ],
-            "enemies": [
-              {
-                "dead": false,
-                "hp": 3,
-                "id": "plains_sentry",
-                "state": "idle",
-                "x": 225,
-                "y": 330
-              }
-            ],
-            "events": [],
-            "player_damage": []
-          },
-          "phase": {
-            "moduleClock": 0.0833333333333333,
-            "saws": [],
-            "movingPlatforms": []
-          },
-          "recoveryConditions": "UNKNOWN"
-        },
-        "method": "actual_godot_fixed_migration_protocol",
-        "coverage": {
-          "policy": "Original interior quality gates plus full-body boundary and continuous exit",
-          "route": {
-            "routeId": "main",
-            "passed": true,
-            "calibration": {
-              "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/calibration-0.json",
-              "sha256": "72c35155602444e95796138d572103afe548a0aedf8cca14d2c54683192a684b"
-            },
-            "holdout": {
-              "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/holdout-0.json",
-              "sha256": "280e916629d70ad9646437a7a9a5a58f14d176d55f8427fad2e016673e282048"
-            }
-          },
-          "arbitraryEntryStates": "UNKNOWN",
-          "fullMap": "UNKNOWN"
-        },
-        "result": "pass",
-        "failures": [],
-        "unverified": [
-          "unsearched port pairs",
-          "closure combinations",
-          "mirror",
-          "arbitrary entry states",
-          "full Map"
-        ],
-        "artifacts": [
-          {
-            "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/migration-physics.json",
-            "sha256": "919cef7cf6006cf61661a2c2f8d50e58d87ca747467f94fb3525473c61193e9c"
-          },
-          {
-            "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/source_binding.json",
-            "sha256": "9b82a6efae46b827d28d8523975f78a8faa08d595448b6632c2a876122f2f3e8"
-          },
-          {
-            "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/batches.json",
-            "sha256": "f27912475c6210ced8fcb6a72eb0a8e88f20a34f2d044dcc6ae67225b523e362"
-          },
-          {
-            "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/protocol.json",
-            "sha256": "78871fbf52100e80efa2090dc10154acaf9e58dcb700eabbc18688829724bd57"
-          },
-          {
-            "path": "pcg/results/foundation-migration-full-quality-v1-bee87fe2de0b/boundary-probes.json",
-            "sha256": "3027f2175e1aa1deaf8dea5e64edd1f9d9245c1cbc5a997a26e06ddc89ae2cf9"
-          }
-        ],
-        "sourceCaseSha256": "6b1bda83adea6535f9d4cafdd5bb11025c1ee4ff808f9748684fc1e5033c6c9d",
-        "sourceCaseId": "p50-enemy-r2-attack-relay-d1-c0",
-        "observedEntry": {
-          "position": [
-            110,
-            420
-          ],
-          "grounded": true,
-          "velocity": {
-            "x": [
-              0,
-              0
-            ],
-            "y": [
-              0,
-              0
-            ]
-          },
-          "remainingJumps": [
-            1,
-            1
-          ],
-          "airShots": [
-            1,
-            1
-          ],
-          "stamina": [
-            100,
-            100
-          ],
-          "health": [
-            5,
-            5
-          ],
-          "shotCooldown": [
-            0,
-            0
-          ],
-          "traversalState": "free",
-          "mechanisms": {
-            "bells": [
-              {
-                "id": "attack-gate",
-                "open": false,
-                "open_count": 0,
-                "sequence_step": 0
-              }
-            ],
-            "enemies": [
-              {
-                "dead": false,
-                "hp": 3,
-                "id": "plains_sentry",
-                "state": "idle",
-                "x": 225,
-                "y": 330
-              }
-            ],
-            "events": [],
-            "player_damage": []
-          },
-          "phase": {
-            "moduleClock": 0.0833333333333333,
-            "saws": [],
-            "movingPlatforms": []
-          },
-          "body": [
-            24,
-            36
-          ]
-        },
-        "observedExit": {
-          "position": [
-            517.333862304688,
-            419.92529296875
-          ],
-          "grounded": true,
-          "velocity": {
-            "x": [
-              0,
-              0
-            ],
-            "y": [
-              0,
-              0
-            ]
-          },
-          "remainingJumps": [
-            1,
-            1
-          ],
-          "airShots": [
-            1,
-            1
-          ],
-          "stamina": [
-            100,
-            100
-          ],
-          "health": [
-            5,
-            5
-          ],
-          "shotCooldown": [
-            0,
-            0
-          ],
-          "traversalState": "free",
-          "mechanisms": {
-            "bells": [
-              {
-                "id": "attack-gate",
-                "open": false,
-                "open_count": 1,
-                "sequence_step": 0
-              }
-            ],
-            "enemies": [
-              {
-                "dead": false,
-                "hp": 3,
-                "id": "plains_sentry",
-                "state": "idle",
-                "x": 225,
-                "y": 330
-              }
-            ],
-            "events": [
-              {
-                "frame": 31,
-                "id": "relay-sentry",
-                "state": "telegraph",
-                "type": "enemy_state"
-              },
-              {
-                "frame": 70,
-                "id": "relay-sentry",
-                "state": "attack",
-                "type": "enemy_state"
-              },
-              {
-                "enemy_id": "relay-sentry",
-                "frame": 70,
-                "id": "attack-gate",
-                "native_state": "attack",
-                "type": "enemy_attack_relay_open"
-              },
-              {
-                "count": 1,
-                "frame": 70,
-                "id": "attack-gate",
-                "type": "bell_open"
-              },
-              {
-                "frame": 77,
-                "id": "relay-sentry",
-                "state": "recovery",
-                "type": "enemy_state"
-              },
-              {
-                "frame": 137,
-                "id": "relay-sentry",
-                "state": "idle",
-                "type": "enemy_state"
-              }
-            ],
-            "player_damage": []
-          },
-          "phase": {
-            "moduleClock": 2.91666666666666,
-            "saws": [],
-            "movingPlatforms": []
-          },
-          "body": [
-            24,
-            36
-          ]
-        },
-        "observedFirstPostAction": {
-          "position": [
-            110,
-            420
-          ],
-          "grounded": true,
-          "velocity": {
-            "x": [
-              0,
-              0
-            ],
-            "y": [
-              0,
-              0
-            ]
-          },
-          "remainingJumps": [
-            1,
-            1
-          ],
-          "airShots": [
-            1,
-            1
-          ],
-          "stamina": [
-            100,
-            100
-          ],
-          "health": [
-            5,
-            5
-          ],
-          "shotCooldown": [
-            0,
-            0
-          ],
-          "traversalState": "free",
-          "mechanisms": {
-            "bells": [
-              {
-                "id": "attack-gate",
-                "open": false,
-                "open_count": 0,
-                "sequence_step": 0
-              }
-            ],
-            "enemies": [
-              {
-                "dead": false,
-                "hp": 3,
-                "id": "plains_sentry",
-                "state": "idle",
-                "x": 225,
-                "y": 330
-              }
-            ],
-            "events": [],
-            "player_damage": []
-          },
-          "phase": {
-            "moduleClock": 0.0833333333333333,
-            "saws": [],
-            "movingPlatforms": []
-          },
-          "body": [
-            24,
-            36
-          ]
-        }
-      }
-    ],
+    "validations": [],
     "visualization": {
-      "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
+      "contentVersion": "sha256:c01133af98647af1ea3d2b09bc24bc4132f70f51574bf98f37648203e904a32b",
       "path": "thumbnail.svg"
     },
     "staticChecks": {
-      "result": "pass",
-      "contentVersion": "sha256:98512e0d8e73fe3d18a1efa2f436e84f747124dcb3d0c93be4e4fdb273eccca4",
+      "result": "UNKNOWN",
+      "contentVersion": "sha256:c01133af98647af1ea3d2b09bc24bc4132f70f51574bf98f37648203e904a32b",
       "method": "existing Map Notes validator + output contract structural/geometry checks",
       "scope": "schema, references, actual extents, separate motion envelopes, exhaustive ordered port pairs; not physics"
     },
     "foundation": {
       "version": "1.0",
       "blockSize": 128,
-      "widthBlocks": 9,
-      "heightBlocks": 5
+      "widthBlocks": 2,
+      "heightBlocks": 2
     },
     "legacyCertification": {
       "contentVersion": "sha256:bee87fe2de0bb251e57eca7f0eedf828bd232a7e4c365c0249c83c23f7208dff",

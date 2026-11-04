@@ -3,6 +3,8 @@
 Prepare is deterministic and refuses to replace candidates. Experiments never
 edit design files, the review queue, formal modules or human decisions.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse
 import copy
 import json

@@ -1,4 +1,6 @@
 """Earlier safe ferry departure and combat takeoffs inside existing banks."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from .repair_review_refresh_v6 import *
 IDS={'122','159'}
 def prepare(row):

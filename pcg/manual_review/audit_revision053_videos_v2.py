@@ -1,4 +1,6 @@
 """Decode actual normal-speed movies for explicitly limited frame review."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import json,subprocess
 from PIL import Image,ImageDraw
 from .continue_revision053_v1 import OUT

@@ -3,6 +3,10 @@ name: pcg-multiport-junction
 description: 修改、实现及设计获准的多Port Module，保留真实空间选择，按有向路线、封口和镜像的实际证据认证。
 ---
 
+# Current single-source workflow
+
+For current work read [pcg-module-production](../pcg-module-production/SKILL.md) first. Only `modules/<stable-ID>/record.json` and its current source are authoritative. Use `python3 -m module_pipeline`; source/design previews are generated into that ID, and workshop data is derived from `modules/catalog.json` on `main`. Historical round paths, `tools/module_workshop.py`, candidate libraries, migration catalog/promote and batch production commands below are retired examples, not current write targets. Preserve the native physics, causal/holdout and design-quality principles below. A downstream Map consumer reads the explicit versioned package, never old experiments.
+
 # 范围与依据
 
 按根 [MAP_FOUNDATION.md](../../../MAP_FOUNDATION.md)（规范）、[MAP_GENERATION_GUIDE.md](../../../MAP_GENERATION_GUIDE.md)（推荐）及[迁移skill](../pcg-module-migration/SKILL.md)执行。先按[Module 共用工作流程](../pcg-module-factory/references/module-workflow.md)区分既有修改、确认设计实现与获准新生成；按当前任务授权执行，不能自动恢复暂停生产。旧Map生成器退役，本 skill 不自行开启 Map 工作。Guide的推荐Port数/尺寸/路线数不是硬门槛。

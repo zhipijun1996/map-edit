@@ -1,4 +1,6 @@
 """Append four failed ingress fixtures; canonical/held-out evidence is untouched."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,sys,shutil
 from pcg.migration import core,physics,pool_protocols
 from pcg.migration.revision063_fixture_v2 import adjust

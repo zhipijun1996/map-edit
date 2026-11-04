@@ -1,4 +1,6 @@
 """Observe height and stop horizontal drift before the refund ascent."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,godot_package
 from pcg.prototype.workshop.rules import cmd
 from .prepare_review031_v1 import rows,axis

@@ -1,4 +1,6 @@
 """Index only completed existing evidence; never starts simulation or holdout."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 from pcg.migration import core,physics
 from .probe_review_refresh_v1 import AUTH
 ROOT=AUTH.parent

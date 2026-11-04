@@ -1,4 +1,6 @@
 """Final S09 calibration repair; keep both earlier samples and formal history."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import inspect
 from pcg.migration import core
 from . import repaired_samples_revision063_v2 as previous,finalize_revision063_v1 as final

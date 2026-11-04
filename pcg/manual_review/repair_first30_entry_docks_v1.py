@@ -1,4 +1,6 @@
 """Rerun only the two incorrectly labelled docking fixtures, preserving history."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy,os,shutil
 from pcg.migration import core,physics,review_boundary_repair_v1
 from .finalize_first30_v1 import AUTH,folder_for

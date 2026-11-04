@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
-from .director import REPO
+REPO = Path(__file__).resolve().parents[2]
 from .composition import rect_bounds
 from pcg.prototype.factory.core.engine import file_sha
 from pcg.prototype.factory.core.quality import POLICY, digest,module_hash

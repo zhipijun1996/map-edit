@@ -1,4 +1,6 @@
 """Certify the outbound and the actual earned-return loop without fresh-C claims."""
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,copy
 from pcg.migration import core,physics,holdout_guard
 from pcg.prototype.factory.core.quality import digest

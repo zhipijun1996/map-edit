@@ -5,17 +5,17 @@ import {validateDocument} from './model.js';
 import {validateGenerationContract,canonical} from './module-contract.js';
 import {renderContractSvg} from './module-contract-render.js';
 
-export const CURRENT_MODULES_REF='content/task-a-workshop';
+export const CURRENT_MODULES_REF='main';
 export const CURRENT_CATALOG_PATH='modules/catalog.json';
 export const CORNER_ASSESSMENT_PATH='pcg/migration/foundation-v1/corner-port-inventory-v1.json';
 const SHA=/^[a-f0-9]{40}$/,HASH=/^[a-f0-9]{64}$/,ID=/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,159}$/;
 
 export function validateCurrentModuleCatalog(data){
-  if(data?.schema!=='map-notes/module-archive/v1'||data.foundationVersion!=='1.0'||!Array.isArray(data.modules)||data.modules.length>10000)throw Error('当前 Module 目录格式不兼容，保留现有库');
+  if(data?.schema!=='map-notes/module-archive/v1'||data.foundationVersion!=='1.0'||data.updateRef!=='main'||!Array.isArray(data.modules)||data.modules.length>10000)throw Error('当前 Module 目录格式不兼容，保留现有库');
   if(data.sourceCommit!==undefined&&!SHA.test(data.sourceCommit))throw Error('当前 Module 目录来源版本无效');
   const ids=new Set(),moduleIds=new Set();
   for(const m of data.modules){
-    if(!m||typeof m.id!=='string'||!ID.test(m.id)||ids.has(m.id)||typeof m.moduleId!=='string'||!m.moduleId||moduleIds.has(m.moduleId)||typeof m.title!=='string'||typeof m.category!=='string'||!/^sha256:[a-f0-9]{64}$/.test(m.contentVersion)||!HASH.test(m.contentSha256)||m.file!==`./modules/${m.id}/module.mapnote.json`||m.thumbnail!==`./modules/${m.id}/thumbnail.svg`||!Number.isInteger(m.portCount)||m.portCount<1||typeof m.humanReview!=='string'||m.technicalStatus!=='passed_scoped'||typeof m.mapReady!=='boolean')throw Error('当前 Module 条目校验失败，保留现有库');
+    if(!m||typeof m.id!=='string'||!ID.test(m.id)||ids.has(m.id)||typeof m.moduleId!=='string'||!m.moduleId||moduleIds.has(m.moduleId)||typeof m.title!=='string'||typeof m.category!=='string'||!/^sha256:[a-f0-9]{64}$/.test(m.contentVersion)||!HASH.test(m.contentSha256)||m.file!==`./modules/${m.id}/module.mapnote.json`||m.thumbnail!==`./modules/${m.id}/thumbnail.svg`||!Number.isInteger(m.portCount)||m.portCount<1||typeof m.humanReview!=='string'||!['passed_scoped','needs_validation'].includes(m.technicalStatus)||typeof m.mapReady!=='boolean')throw Error('当前 Module 条目校验失败，保留现有库');
     validateRequirements(m.capabilityRequirements);validateDifficulty(m.difficulty);
     if(m.cornerConfigurationReceipts!==undefined&&(!Array.isArray(m.cornerConfigurationReceipts)||m.cornerConfigurationReceipts.some(a=>!a||!HASH.test(a.sha256)||typeof a.path!=='string'||!a.path.replace(/^\.\//,'').startsWith(`modules/${m.id}/port-configurations/`)||a.path.replace(/^\.\//,'').split('/').some(p=>!p||p==='.'||p==='..')||/[?#\\]/.test(a.path))))throw Error('当前 Module 换边配置引用无效');
     ids.add(m.id);moduleIds.add(m.moduleId);
@@ -80,18 +80,8 @@ export class CurrentModuleLibraryClient extends LibraryClient{
     return entry.category;
   }
   async cornerAssessment(entry){
-    // Optional discovery data must never block an otherwise valid Module.
-    // The selected commit and exact document identity bind this assessment.
-    try{
-      if(!this.cornerInventory){
-        const response=await this.response(this.url(CORNER_ASSESSMENT_PATH),true);
-        this.cornerInventory=response?await response.json():{rows:[]};
-      }
-      const report=this.cornerInventory;
-      if(report.schema!=='pcg/corner-port-inventory/v1'||!Array.isArray(report.rows))return null;
-      const row=report.rows.find(r=>r.scope==='current'&&r.documentSha256===entry.contentSha256&&r.contentVersion===entry.contentVersion&&r.moduleDocumentId===entry.moduleId);
-      return row?structuredClone(row):null;
-    }catch{return null;}
+    // Alternative interfaces are read from the current document/configuration receipts only.
+    return null;
   }
   configurationPath(path,entry){
     const clean=typeof path==='string'?path.replace(/^\.\//,''):'';

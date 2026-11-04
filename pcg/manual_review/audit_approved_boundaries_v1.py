@@ -3,6 +3,8 @@
 No collision, spawn, control, resource, or geometry value is changed. The first
 N06 qualifier's budget violation remains invalid, even when observations pass.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import copy
 import gzip
 import json

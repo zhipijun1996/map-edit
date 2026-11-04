@@ -1,6 +1,8 @@
 """Anonymous byte verification of current delivery plus Git symlink objects.
 Physical targets of aliases are supplied by the independently verified archive.
 """
+if __name__ == "__main__":
+    raise SystemExit("Retired round-specific production entrypoint; use python3 -m module_pipeline and current stable-ID validation inputs.")
 import argparse,inspect,os,hashlib
 from . import verify_revision059_downloads_v1 as prior
 from .continue_revision062_v1 import OUT
