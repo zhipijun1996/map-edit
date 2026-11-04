@@ -2,6 +2,8 @@
 
 本次比较 main 固定为 `9b712fe814ef228b368c0eb9adf660e39de29e37`，不是执行时重新抓一个会变化的 main。运行审计分支中的工具，生产 `modules/` 必须仍等于该基线。工具只读原件，向指定 `--out`/外部临时目录写审计结果。需要 Python 3、Node、Git；原生探针另需 Linux、strace、包锁定 Godot。外部只读核对使用已授权的 `gh`。
 
+合入统一源库后，当前 `modules/` 已不等于此历史基线。复现本页的 main 对比时，请使用审计提交 `2ec243842567a56a49b84fc93ce4aa750b11ff5f` 的独立 worktree；不要将旧 82 项断言用于当前目录。actual-profile producer 的独立回归仍可在当前树执行，见 [整合记录](../main-integration-20261104.md)。
+
 ## 输入与静态检查
 
 在仓库根目录执行，`AUDIT_WORK` 是独立临时目录，不能指向当前生产目录或历史包目录：
